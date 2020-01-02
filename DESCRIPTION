@@ -1,0 +1,26 @@
+Package: caracas
+Version: 0.0.0.9001
+Title: Computer Algebra in 'R'
+Authors@R: c(
+    person(given = "Mikkel Meyer", family = "Andersen",
+        email = "mikl@math.aau.dk", role = c("aut", "cre", "cph")),
+    person(given = "Søren", family = "Højsgaard",
+        email = "sorenh@math.aau.dk", role = c("aut", "cph"))
+  )
+Maintainer: Mikkel Meyer Andersen <mikl@math.aau.dk>
+Encoding: UTF-8
+Description: Tools for using symbolic math in Shiny apps.
+Depends: R (>= 3.0)
+Imports:
+    reticulate (>= 1.14)
+Suggests: 
+    testthat (>= 2.1.0),
+    knitr,
+    rmarkdown
+License: GPL
+SystemRequirements: Python
+URL: https://github.com/r-cas/caracas
+BugReports: https://github.com/r-cas/caracas/issues
+Roxygen: list(markdown = TRUE, roclets = c("rd", "collate", "namespace"))
+RoxygenNote: 7.0.2
+VignetteBuilder: knitr
