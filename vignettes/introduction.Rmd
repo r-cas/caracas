@@ -26,10 +26,9 @@ Please keep an eye out at the development site at <https://github.com/r-cas/cara
 
 ## Elaborate example
 
-Given a container, how can we minimise the material used? 
-Here we assume that the container is a cylinder with a bottom but without a lid. 
-The cylinder has diameter $d$ and height $h$. 
-We assume that the volumne should be 1 (e.g. litre). 
+How can we minimise the amount of material used to produce a cylindric
+tin can that contains 1 litre.  The cylinder has diameter $d$ and
+height $h$. The question is therefore: What is $d$ and $h$?
 
 First we get the `SymPy` object:
 
@@ -44,7 +43,9 @@ d <- sympy$symbols('d')
 h <- sympy$symbols('h')
 ```
 
-The problem is a constrained optimisation problem, and we solve it by a Lagrange multiplier, and therefore we introduce `lam` (the Lagrange multiplier):
+The problem is a constrained optimisation problem, and we solve it by
+a Lagrange multiplier, and therefore we introduce `lam` (the Lagrange
+multiplier):
 
 ```{r}
 lam <- sympy$symbols('lam')
@@ -80,7 +81,9 @@ We take the one with the real solution:
 sol[[1]]
 ```
 
-We now have a short helper function to help getting appropriate `R` expressions (such a function will be included in later versions of this package):
+We now have a short helper function to help getting appropriate `R`
+expressions (such a function will be included in later versions of
+this package):
 
 ```{r}
 to_r <- function(x) {
