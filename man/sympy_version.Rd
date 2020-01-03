@@ -9,3 +9,7 @@ sympy_version()
 \description{
 Get 'SymPy' version
 }
+\examples{
+sympy_version()
+
+}

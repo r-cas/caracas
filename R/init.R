@@ -8,8 +8,12 @@ ensure_sympy <- function() {
 }
 
 #' Get 'SymPy' version
+#' 
+#' @examples 
+#' sympy_version()
 #'
 #' @importFrom reticulate import
+#' @export
 sympy_version <- function() {
   ensure_sympy()
   
@@ -55,9 +59,14 @@ install_sympy <- function(method = "auto", conda = "auto") {
 
 #' Access 'SymPy' directly
 #' 
-#' Note that this gives you extra responsibility 
+#' Get the 'SymPy' object.  
+#' Note that it gives you extra responsibilities
 #' when you choose to access the 'SymPy' object directly.
 #'
+#' @examples 
+#' sympy <- get_sympy()
+#' sympy$solve("x**2-1", "x")
+#' 
 #' @export
 get_sympy <- function() {
   return(sympy)

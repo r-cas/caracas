@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -98,7 +98,7 @@
 <div id="elaborate-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#elaborate-example" class="anchor"></a>Elaborate example</h2>
-<p>Given a container, how can we minimise the material used? Here we assume that the container is a cylinder with a bottom but without a lid. The cylinder has diameter <span class="math inline">\(d\)</span> and height <span class="math inline">\(h\)</span>. We assume that the volumne should be 1 (e.g. litre).</p>
+<p>How can we minimise the amount of material used to produce a cylindric tin can that contains 1 litre. The cylinder has diameter <span class="math inline">\(d\)</span> and height <span class="math inline">\(h\)</span>. The question is therefore: What is <span class="math inline">\(d\)</span> and <span class="math inline">\(h\)</span>?</p>
 <p>First we get the <code>SymPy</code> object:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">sympy &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_sympy.html">get_sympy</a></span>()</a></code></pre></div>
 <p>Then we introduce the variables <code>d</code> (diameter) and <code>h</code> (height):</p>
@@ -179,7 +179,7 @@
 <a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; expression(2^(2/3)/pi^(1/3))</span></a>
 <a class="sourceLine" id="cb9-17" data-line-number="17"><span class="kw"><a href="https://rdrr.io/r/base/eval.html">eval</a></span>(sol_h)</a>
 <a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; [1] 1.083852</span></a></code></pre></div>
-<p>(It is left as an exercise to the reader to show that the critical point indeed is a minimum.) de</p>
+<p>(It is left as an exercise to the reader to show that the critical point indeed is a minimum.)</p>
 </div>
   </div>
 

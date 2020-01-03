@@ -36,7 +36,8 @@
 
 
 <meta property="og:title" content="Access 'SymPy' directly — get_sympy" />
-<meta property="og:description" content="Note that this gives you extra responsibility
+<meta property="og:description" content="Get the 'SymPy' object.
+Note that it gives you extra responsibilities
 when you choose to access the 'SymPy' object directly." />
 <meta name="twitter:card" content="summary" />
 
@@ -70,7 +71,7 @@ when you choose to access the 'SymPy' object directly." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -124,7 +125,8 @@ when you choose to access the 'SymPy' object directly." />
     </div>
 
     <div class="ref-description">
-    <p>Note that this gives you extra responsibility
+    <p>Get the 'SymPy' object.
+Note that it gives you extra responsibilities
 when you choose to access the 'SymPy' object directly.</p>
     </div>
 
@@ -132,10 +134,20 @@ when you choose to access the 'SymPy' object directly.</p>
 
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>sympy</span> <span class='kw'>&lt;-</span> <span class='fu'>get_sympy</span>()
+<span class='no'>sympy</span>$<span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span>(<span class='st'>"x**2-1"</span>, <span class='st'>"x"</span>)</div><div class='output co'>#&gt; [[1]]
+#&gt; -1
+#&gt; 
+#&gt; [[2]]
+#&gt; 1
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

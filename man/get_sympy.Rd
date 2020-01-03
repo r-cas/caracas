@@ -7,6 +7,12 @@
 get_sympy()
 }
 \description{
-Note that this gives you extra responsibility
+Get the 'SymPy' object.
+Note that it gives you extra responsibilities
 when you choose to access the 'SymPy' object directly.
+}
+\examples{
+sympy <- get_sympy()
+sympy$solve("x**2-1", "x")
+
 }
