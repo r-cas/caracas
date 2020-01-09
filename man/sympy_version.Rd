@@ -10,6 +10,10 @@ sympy_version()
 Get 'SymPy' version
 }
 \examples{
-sympy_version()
+\dontrun{
+if (have_sympy()) {
+  sympy_version()
+}
+}
 
 }

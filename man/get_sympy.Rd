@@ -12,7 +12,11 @@ Note that it gives you extra responsibilities
 when you choose to access the 'SymPy' object directly.
 }
 \examples{
-sympy <- get_sympy()
-sympy$solve("x**2-1", "x")
+\dontrun{
+if (have_sympy()) {
+  sympy <- get_sympy()
+  sympy$solve("x**2-1", "x")
+}
+}
 
 }

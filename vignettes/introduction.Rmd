@@ -14,8 +14,15 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r}
 library(caracas)
+```
+
+```{r, include = FALSE}
+if (!have_sympy()) {
+  # SymPy not available, so the chunks shall not be evaluated
+  knitr::opts_chunk$set(eval = FALSE)
+}
 ```
 
 ## Road-map
@@ -57,8 +64,9 @@ We now set up the problem:
 area_str <- "Pi/2 * d**2 + Pi * h * d"
 vol_str <- "Pi/4 * d**2 * h"
 lap_str <- paste0("(", area_str, ") - lam*((", vol_str, ") - 1)")
-lap <- sympy$parsing$sympy_parser$parse_expr(lap_str,
-                                             local_dict = list('d' = d, 'h' = h, 'lam' = lam))
+lap <- sympy$parsing$sympy_parser$parse_expr(
+  lap_str,
+  local_dict = list('d' = d, 'h' = h, 'lam' = lam))
 ```
 
 We can now find the gradient:
