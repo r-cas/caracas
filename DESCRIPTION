@@ -17,12 +17,6 @@ Suggests:
     testthat (>= 2.1.0),
     knitr,
     rmarkdown
-Config/reticulate:
-  list(
-    packages = list(
-      list(package = "sympy")
-    )
-  )
 License: GPL
 SystemRequirements: Python (>= 3.6.0)
 URL: https://github.com/r-cas/caracas

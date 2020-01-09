@@ -2,8 +2,10 @@
 
 export(get_sympy)
 export(have_sympy)
+export(install_sympy)
 export(sympy_version)
 importFrom(reticulate,configure_environment)
 importFrom(reticulate,import)
+importFrom(reticulate,py_install)
 importFrom(reticulate,py_module_available)
 importFrom(reticulate,py_run_string)

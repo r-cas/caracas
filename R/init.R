@@ -1,4 +1,7 @@
-# devtools::check_win()
+# devtools::check_win_devel()
+# devtools::check_rhub() (rhub::check_for_cran())
+# reticulate::conda_remove('r-reticulate')
+# reticulate::py_module_available("sympy")
 
 # global reference to sympy (will be initialized in .onLoad)
 sympy <- NULL
@@ -64,12 +67,13 @@ sympy_version <- function() {
   }
   
   if (!have_sympy()) {
-    packageStartupMessage("'SymPy' not available")
+    packageStartupMessage("'SymPy' not available, please run this command:\ncaracas::install_sympy()")
     return()
   } 
   
   # else: wrong version:
-  packageStartupMessage("'SymPy' version >= 1.4 not available")
+  packageStartupMessage("Only 'SymPy' version < 1.4 available, and version >= 1.4 is needed.\n", 
+                        "Please run this command:\ncaracas::install_sympy()")
 }
 
 #' Access 'SymPy' directly
@@ -91,3 +95,26 @@ get_sympy <- function() {
   return(sympy)
 }
 
+#' Install 'SymPy'
+#' 
+#' Install the 'SymPy' Python package into a 
+#' virtual environment or Conda environment.
+#' 
+#' @param method Installation method. 
+#' By default, "auto" automatically finds a method that will work 
+#' in the local environment. 
+#' Change the default to force a specific installation method. 
+#' Note that the "virtualenv" method is not available on Windows.
+#' @param conda Path to conda executable (or "auto" to find conda 
+#' using the PATH and other conventional install locations).
+#' 
+#' @importFrom reticulate py_install py_module_available
+#' @export
+install_sympy <- function(method = "auto", conda = "auto") {
+  reticulate::py_install("sympy", method = method, conda = conda)
+  message("Please check output above to verify that 'SymPy' was installed correctly. ", 
+          "If so, please load 'caracas' again. And have fun!", 
+          "\n\nIf for some reason it still does not work, try updating conda\n", 
+          "with this R command:\nreticulate::miniconda_update()")
+  
+}
