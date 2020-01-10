@@ -17,8 +17,11 @@ ensure_sympy <- function() {
 #' @importFrom reticulate py_module_available
 #' @export
 have_sympy <- function() {
-  # ~/.local/share/r-miniconda/envs/r-reticulate/lib/python3.6/site-packages
-  return(reticulate::py_module_available("sympy"))
+  if (is.null(sympy)) {
+    return(FALSE)
+  }
+  
+  return(TRUE)
 }
 
 #' Get 'SymPy' version
@@ -43,9 +46,9 @@ sympy_version <- function() {
 
 #' @importFrom reticulate configure_environment import py_run_string
 .onLoad <- function(libname, pkgname) {
-  reticulate::configure_environment(pkgname)
+  #reticulate::configure_environment(pkgname)
   
-  if (have_sympy()) {
+  if (reticulate::py_module_available("sympy")) {
     local_sympy <- reticulate::import("sympy", delay_load = TRUE)
     
     if (base::numeric_version(local_sympy$`__version__`) >= "1.4") {
@@ -62,18 +65,13 @@ sympy_version <- function() {
 }
 
 .onAttach <- function(libname, pkgname) {
-  if (!is.null(sympy)) {
+  if (have_sympy()) {
     return() # SymPy loaded
   }
   
-  if (!have_sympy()) {
-    packageStartupMessage("'SymPy' not available, please run this command:\ncaracas::install_sympy()")
-    return()
-  } 
-  
-  # else: wrong version:
-  packageStartupMessage("Only 'SymPy' version < 1.4 available, and version >= 1.4 is needed.\n", 
-                        "Please run this command:\ncaracas::install_sympy()")
+  packageStartupMessage("'SymPy' >= 1.4 not available.\n", 
+  "Please run this command:\n", 
+  "caracas::install_sympy()")
 }
 
 #' Access 'SymPy' directly
@@ -92,6 +90,8 @@ sympy_version <- function() {
 #' 
 #' @export
 get_sympy <- function() {
+  ensure_sympy()
+  
   return(sympy)
 }
 
