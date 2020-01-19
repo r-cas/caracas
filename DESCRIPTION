@@ -1,6 +1,6 @@
 Package: caracas
 Version: 0.0.1
-Title: Computer Algebra in 'R'
+Title: Computer Algebra
 Authors@R: c(
     person(given = "Mikkel Meyer", family = "Andersen",
         email = "mikl@math.aau.dk", role = c("aut", "cre", "cph")),
@@ -9,14 +9,16 @@ Authors@R: c(
   )
 Maintainer: Mikkel Meyer Andersen <mikl@math.aau.dk>
 Encoding: UTF-8
-Description: Computer algebra in 'R' via the 'SymPy' library (<https://www.sympy.org/>).
+Description: Computer algebra via the 'SymPy' library (<https://www.sympy.org/>). 
+  This makes it possible to solve equations symbolically, 
+  find symbolic integrals, symbolic sums and other important quantities. 
 Depends: R (>= 3.0)
 Imports:
-    reticulate (>= 1.14)
+  reticulate (>= 1.14)
 Suggests: 
-    testthat (>= 2.1.0),
-    knitr,
-    rmarkdown
+  testthat (>= 2.1.0),
+  knitr,
+  rmarkdown
 License: GPL
 SystemRequirements: Python (>= 3.6.0)
 URL: https://github.com/r-cas/caracas

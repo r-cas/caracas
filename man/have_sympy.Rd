@@ -6,6 +6,13 @@
 \usage{
 have_sympy()
 }
+\value{
+\code{TRUE} if 'SymPy' is available, else \code{FALSE}
+}
 \description{
 Check if 'SymPy' is available
+}
+\examples{
+have_sympy()
+
 }

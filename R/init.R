@@ -14,23 +14,24 @@ ensure_sympy <- function() {
 
 #' Check if 'SymPy' is available
 #' 
+#' @return `TRUE` if 'SymPy' is available, else `FALSE`
+#' 
+#' @examples 
+#' have_sympy()
+#' 
 #' @importFrom reticulate py_module_available
 #' @export
 have_sympy <- function() {
-  if (is.null(sympy)) {
-    return(FALSE)
-  }
-  
-  return(TRUE)
+  return(!is.null(sympy))
 }
 
 #' Get 'SymPy' version
 #' 
+#' @return The version of the 'SymPy' available
+#' 
 #' @examples 
-#' \dontrun{
 #' if (have_sympy()) {
 #'   sympy_version()
-#' }
 #' }
 #'
 #' @importFrom reticulate import
@@ -80,12 +81,12 @@ sympy_version <- function() {
 #' Note that it gives you extra responsibilities
 #' when you choose to access the 'SymPy' object directly.
 #'
+#' @return The 'SymPy' object with direct access to the library.
+#'
 #' @examples 
-#' \dontrun{
 #' if (have_sympy()) {
 #'   sympy <- get_sympy()
 #'   sympy$solve("x**2-1", "x")
-#' }
 #' }
 #' 
 #' @export
@@ -108,6 +109,8 @@ get_sympy <- function() {
 #' @param conda Path to conda executable (or "auto" to find conda 
 #' using the PATH and other conventional install locations).
 #' 
+#' @return None
+#' 
 #' @importFrom reticulate py_install py_module_available
 #' @export
 install_sympy <- function(method = "auto", conda = "auto") {
@@ -116,5 +119,5 @@ install_sympy <- function(method = "auto", conda = "auto") {
           "If so, please load 'caracas' again. And have fun!", 
           "\n\nIf for some reason it still does not work, try updating conda\n", 
           "with this R command:\nreticulate::miniconda_update()")
-  
+  return(invisible(NULL))
 }

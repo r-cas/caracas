@@ -6,17 +6,18 @@
 \usage{
 get_sympy()
 }
+\value{
+The 'SymPy' object with direct access to the library.
+}
 \description{
 Get the 'SymPy' object.
 Note that it gives you extra responsibilities
 when you choose to access the 'SymPy' object directly.
 }
 \examples{
-\dontrun{
 if (have_sympy()) {
   sympy <- get_sympy()
   sympy$solve("x**2-1", "x")
-}
 }
 
 }

@@ -6,14 +6,15 @@
 \usage{
 sympy_version()
 }
+\value{
+The version of the 'SymPy' available
+}
 \description{
 Get 'SymPy' version
 }
 \examples{
-\dontrun{
 if (have_sympy()) {
   sympy_version()
-}
 }
 
 }

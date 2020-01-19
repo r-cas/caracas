@@ -16,6 +16,9 @@ Note that the "virtualenv" method is not available on Windows.}
 \item{conda}{Path to conda executable (or "auto" to find conda
 using the PATH and other conventional install locations).}
 }
+\value{
+None
+}
 \description{
 Install the 'SymPy' Python package into a
 virtual environment or Conda environment.
