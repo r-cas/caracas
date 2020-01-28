@@ -31,83 +31,22 @@ Currently only a `SymPy` object is available.
 More functionality will be added shortly. 
 Please keep an eye out at the development site at <https://github.com/r-cas/caracas>.
 
-## Elaborate example
+## Notes
 
-How can we minimise the amount of material used to produce a cylindric
-tin can that contains 1 litre.  The cylinder has diameter $d$ and
-height $h$. The question is therefore: What is $d$ and $h$?
+* Python syntax is used, which means that there are a few differences to R's syntax:
+  + Power is `**` not `^` (see below)
 
-First we get the `SymPy` object:
+## Quick start
 
 ```{r}
 sympy <- get_sympy()
 ```
 
-Then we introduce the variables `d` (diameter) and `h` (height):
-
 ```{r}
-d <- sympy$symbols('d')
-h <- sympy$symbols('h')
+sympy$diff("2*a*x", "x")
+sympy$solve("x**2 - 1", "x")
 ```
 
-The problem is a constrained optimisation problem, and we solve it by
-a Lagrange multiplier, and therefore we introduce `lam` (the Lagrange
-multiplier):
+## More examples
 
-```{r}
-lam <- sympy$symbols('lam')
-```
-
-We now set up the problem:
-
-```{r}
-area_str <- "Pi/2 * d**2 + Pi * h * d"
-vol_str <- "Pi/4 * d**2 * h"
-lap_str <- paste0("(", area_str, ") - lam*((", vol_str, ") - 1)")
-lap <- sympy$parsing$sympy_parser$parse_expr(
-  lap_str,
-  local_dict = list('d' = d, 'h' = h, 'lam' = lam))
-```
-
-We can now find the gradient:
-
-```{r}
-grad <- sympy$derive_by_array(lap, list(d, h, lam))
-grad
-```
-
-And find the critical points:
-
-```{r}
-sol <- sympy$solve(grad, list(d, h, lam), dict = TRUE)
-sol
-```
-
-We take the one with the real solution:
-
-```{r}
-sol[[1]]
-```
-
-We now have a short helper function to help getting appropriate `R`
-expressions (such a function will be included in later versions of
-this package):
-
-```{r}
-to_r <- function(x) {
-  x <- as.character(x)
-  x <- gsub("Pi", "pi", x, fixed = TRUE)
-  x <- gsub("**", "^", x, fixed = TRUE)
-  x <- parse(text = x)
-  return(x)
-}
-
-sol_d <- to_r(sol[[1]]$d)
-sol_d
-eval(sol_d)
-sol_h <- to_r(sol[[1]]$h)
-sol_h
-eval(sol_h)
-```
-
-(It is left as an exercise to the reader to show that the critical point indeed is a minimum.)
+Please find more examples in the other vignettes.
