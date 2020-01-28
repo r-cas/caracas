@@ -2,12 +2,24 @@
 
 ## Installation
 
-`caracas` is (soon) available on CRAN and can be installed with `install.packages('caracas')`. 
-You can install the development version directly from <http://github.com> using `devtools`:
+`caracas` is available on CRAN and can be installed as usual:
+
+```
+install.packages('caracas')
+```
+
+To build and install from Github with vignettes run this command from within `R` (please install `devtools` first if not already installed):
 
 ```
 # install.packages('devtools')
-devtools::install_github('r-cas/caracas')
+devtools::install_github("r-cas/caracas", 
+                         build_opts = c("--no-resave-data", "--no-manual"))
+```
+
+You can also install the package without vignettes if needed as follows:
+
+```
+devtools::install_github("r-cas/caracas")
 ```
 
 ## Development site
