@@ -18,6 +18,10 @@ See <https://github.com/r-cas/caracas>.
 
 See <https://r-cas.github.io/caracas/>.
 
+## Origin of name
+
+The name "caracas" is intended to mean "(inter)face to computer algebra system(s)" - notice that "cara" is Spanish (Castellano to be precise) for "face".
+
 ## Code of conduct
 
 Please note that the `caracas` project is released with a Contributor Code of Conduct (available in `CODE_OF_CONDUCT.md`). By contributing to this project, you agree to abide by its terms.
