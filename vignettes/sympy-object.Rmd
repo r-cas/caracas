@@ -106,7 +106,7 @@ eval(sol_h)
 
 (It is left as an exercise to the reader to show that the critical point indeed is a minimum.)
 
-## Elaborate example with assumptions
+## Simple example with assumptions
 
 ```{r}
 x <- sympy$symbols('x')
@@ -115,5 +115,18 @@ x <- sympy$symbols('x', positive = TRUE)
 x$assumptions0
 eq <- sympy$parsing$sympy_parser$parse_expr("x**2 - 1",
                                             local_dict = list('x' = x))
-sympy$solve(eq, list(x), dict = TRUE)
+sympy$solve(eq, x, dict = TRUE)
 ```
+
+## Another example with assumptions
+
+```{r}
+x <- sympy$symbols('x', positive = TRUE)
+eq <- sympy$parsing$sympy_parser$parse_expr("x**3/3 - x",
+                                            local_dict = list('x' = x))
+eq
+grad <- sympy$derive_by_array(eq, x)
+grad
+sympy$solve(grad, x, dict = TRUE)
+```
+
