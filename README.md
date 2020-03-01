@@ -1,5 +1,9 @@
 # `caracas`: Computer algebra in R
 
+<!-- badges: start -->
+  [![R build status](https://github.com/r-cas/caracas/workflows/R-CMD-check/badge.svg)](https://github.com/r-cas/caracas/actions)
+  <!-- badges: end -->
+  
 ## Installation
 
 `caracas` is available on CRAN and can be installed as usual:
