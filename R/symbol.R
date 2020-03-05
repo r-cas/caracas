@@ -14,6 +14,15 @@ construct_symbol_from_pyobj <- function(pyobj) {
   return(y)
 }
 
+#' Create a symbol from a string
+#'
+#' @param x String to evaluate
+#'
+#' @return A `caracas_symbol`
+#'
+#' @concept lowlevel
+#' @importFrom reticulate py_eval
+#' @export
 eval_to_symbol <- function(x) {
   s <- reticulate::py_eval(x, convert = FALSE)
   y <- construct_symbol_from_pyobj(s)

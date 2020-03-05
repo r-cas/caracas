@@ -11,8 +11,8 @@ test_that("derivative", {
   x <- symbol("x")
   y <- symbol("y")
   f <- 3*x^2 + x*y^2
-  d(f, "x")
-  d(f, x)
-  d(f, c("x", "y"))
-  d(f, c(x, y))
+  dd(f, "x")
+  dd(f, x)
+  dd(f, c("x", "y"))
+  dd(f, c(x, y))
 })

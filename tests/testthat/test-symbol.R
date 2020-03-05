@@ -11,3 +11,11 @@ test_that("init", {
   expect_s3_class(x$pyobj, 'sympy.core.symbol.Symbol')
 })
 
+test_that("eval_to_symbol", {
+  expect_error(eval_to_symbol(''))
+  expect_error(eval_to_symbol('2*w'))
+  x <- symbol('x')
+  expr <- eval_to_symbol('2*x')
+  expect_s3_class(expr, 'caracas_symbol')
+  expect_equal(as.character(expr), "2*x")
+})
