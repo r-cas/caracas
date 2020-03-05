@@ -31,13 +31,13 @@ if (!have_sympy()) {
 ```{r}
 x <- symbol('x')
 x
-set_print_type('pretty_utf8')
-x
-set_print_type('pretty_ascii')
-x
-set_print_type('string')
-x
-set_print_type('pretty_utf8')
-x
+# set_print_type('pretty_utf8')
+# x
+# set_print_type('pretty_ascii')
+# x
+# set_print_type('string')
+# x
+# set_print_type('pretty_utf8')
+# x
 tex(x)
 ```

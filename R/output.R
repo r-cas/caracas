@@ -1,14 +1,14 @@
 print_type <- 'pretty_utf8'
 
-#' Set how printing is done
-#'
-#' @param type 'pretty_utf8', 'string'
-#'
-#' @export
-set_print_type <- function(type = c('pretty_utf8', 
-                                    'string')) {
-  print_type <<- match.arg(type)
-}
+# #' Set how printing is done
+# #'
+# #' @param type 'pretty_utf8', 'string'
+# #'
+# #' @export
+# set_print_type <- function(type = c('pretty_utf8', 
+#                                     'string')) {
+#   print_type <<- match.arg(type)
+# }
 
 #' @export
 print.caracas_symbol <- function(x, ...) {
