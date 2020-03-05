@@ -54,8 +54,8 @@ jobs:
       - name: Install python3-venv
         if: runner.os == 'Linux'
         run: |
-          sudo apt-get install -y python3-venv python3-pip
-          sudo pip3 install virtualenv
+          sudo apt-get install -y python3-venv python3-pip python3-setuptools
+          sudo -H pip3 install virtualenv
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
