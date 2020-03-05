@@ -51,6 +51,10 @@ jobs:
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('depends.Rds') }}
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
 
+      - name: Install python3-venv
+        if: runner.os == 'Linux'
+        run: sudo apt-get install python3-venv
+
       - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
@@ -59,7 +63,6 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
-          sudo -s apt-get install python3-venv
 
       - name: Install dependencies
         run: |
