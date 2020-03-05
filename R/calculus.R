@@ -28,10 +28,12 @@ bound_to_str <- function(b) {
 #' @param \dots Not used.
 #'
 #' @examples 
-#' x <- symbol("x")
-#' lim(sin(x)/x, "x", 0)
-#' lim(1/x, "x", 0, dir = '+')
-#' lim(1/x, "x", 0, dir = '-')
+#' if (have_sympy()) {
+#'   x <- symbol("x")
+#'   lim(sin(x)/x, "x", 0)
+#'   lim(1/x, "x", 0, dir = '+')
+#'   lim(1/x, "x", 0, dir = '-')
+#' }
 #' 
 #' @concept caracas_symbol
 #' 
