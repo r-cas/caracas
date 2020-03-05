@@ -39,6 +39,97 @@ Please keep an eye out at the development site at <https://github.com/r-cas/cara
 ## Quick start
 
 ```{r}
+x <- symbol('x')
+as.character(x)
+x
+as_r(x)
+```
+
+
+```{r}
+2*x
+y <- symbol('y')
+sqrt(3*x^y)
+```
+
+```{r}
+z <- cos(x)^2 + sin(x)^2
+z
+simplify(z)
+tex(z)
+```
+
+```{r}
+z <- cos(x)*cos(y) - sin(x)*sin(y)
+z
+simplify(z)
+z <- cos(x + y)
+z
+expand(z)
+expand_trig(z)
+```
+
+
+### Limits
+
+
+```{r}
+x <- symbol("x")
+lim(sin(x)/x, "x", 0)
+lim(1/x, "x", 0, dir = '+')
+lim(1/x, "x", 0, dir = '-')
+```
+
+We can also postpone evaluation:
+
+```{r}
+res <- lim(sin(x)/x, "x", 0, doit = FALSE)
+res
+as.character(res)
+tex(res)
+doit(res)
+as_r(res)
+```
+
+### Derivatives
+
+Note that the function is called `d()` and not `deriv()`.
+
+```{r}
+x <- symbol("x")
+y <- symbol("y")
+f <- 3*x^2 + x*y^2
+f
+as_r(f)
+dd(f, "x")
+dd(f, x)
+dd(f, c("x", "y"))
+dd(f, c(x, y))
+f1 <- dd(f, c(x, y))
+f1
+as.character(f1)
+as_r(f1)
+eval(as_r(f1), list(x = 1, y = 2))
+dd(f1, c(x, y))
+f2 <- dd2(f, c(x, y))
+f2
+as_r(f2)
+eval(as_r(f2), list(x = 1, y = 2))
+```
+
+
+```{r}
+x <- symbol("x")
+y <- symbol("y")
+f <- eval_to_symbol("[3*x**2 + x*y**2, 2*x, 5*y]")
+f
+dd(f, c(x, y))
+```
+
+
+## Using `SymPy` directly
+
+```{r}
 sympy <- get_sympy()
 ```
 
@@ -50,3 +141,9 @@ sympy$solve("x**2 - 1", "x")
 ## More examples
 
 Please find more examples in the other vignettes.
+
+
+<!---
+L = product(Indexed(x, i), (i, 1, n))
+expand_log(log(L), force = True)
+--->

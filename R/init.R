@@ -57,7 +57,7 @@ sympy_version <- function() {
       
       sympy <<- local_sympy # update global reference
       
-      #reticulate::py_run_string("from sympy import *")
+      reticulate::py_run_string("from sympy import *")
       #reticulate::py_run_string("from sympy.parsing.sympy_parser import parse_expr")
     } 
     
