@@ -161,9 +161,76 @@ prodf <- function(f, var, lower, upper, doit = TRUE) {
   return(z)
 }
 
-# TODO
-int <- function(f) {
+#' Integrate a function
+#' 
+#' If no limits are provided, the 
+#' indefinite integral is calculated. 
+#' Otherwise, if both limits are provided, 
+#' the definite integral is calculated.
+#'
+#' @param f Function to integrate
+#' @param var Variable to integrate with respect to (either string or `caracas_symbol`)
+#' @param lower Lower limit
+#' @param upper Upper limit
+#' @param doit Evaluate the integral immediately (or later with [doit()])
+#'
+#' @examples 
+#' if (have_sympy()) {
+#'   x <- symbol("x")
+#'   
+#'   intf(1/x, x, 1, 10)
+#'   intf(1/x, x, 1, 10, doit = FALSE)
+#'   intf(1/x, x)
+#'   intf(1/x, x, doit = FALSE)
+#' }
+#' 
+#' @concept calculus
+#' 
+#' @export
+intf <- function(f, var, lower, upper, doit = TRUE) {
+  calc_verify_func(f)
+  ensure_sympy()
+  var <- as.character(var)
+  verify_variable_name(var)
   
+  with_limits <- FALSE
+  
+  if (missing(lower) && missing(upper)) {
+  } else if (!missing(lower) && !missing(upper)) {
+    with_limits <- TRUE
+  } else {
+    stop("Either both lower and upper must be given or neither must be given")
+  }
+  
+  if (with_limits) {
+    lwr_str <- bound_to_str(lower)
+    upr_str <- bound_to_str(upper)
+    
+    y <- if (doit) {
+      sympy$integrate(f$pyobj, c(var, lwr_str, upr_str))
+    } else {
+      sympy$Integral(f$pyobj, c(var, lwr_str, upr_str))
+    }
+    
+    z <- construct_symbol_from_pyobj(y)
+    
+    return(z)
+  }
+  
+  # No limits:
+  
+  # Potentially replacing existing symbol:
+  var_symb <- reticulate::py_eval(paste0("symbols('", var, "')"), convert = FALSE)
+  
+  y <- if (doit) {
+    sympy$integrate(f$pyobj, var_symb)
+  } else {
+    sympy$Integral(f$pyobj, var_symb)
+  }
+  
+  z <- construct_symbol_from_pyobj(y)
+  
+  return(z)
 }
 
 

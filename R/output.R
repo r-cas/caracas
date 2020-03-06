@@ -40,7 +40,7 @@ print.caracas_symbol <- function(x, ...) {
     out <- gsub("\n", paste0("\n", spaces), out)
   } 
   
-  cat("[caracas]: ", out, sep = "")
+  cat("[caracas]: ", out, "\n", sep = "")
   
   return(invisible(x))
 }

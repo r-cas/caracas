@@ -4,7 +4,9 @@ python_strings_to_r <- function(xstr) {
   xstr <- gsub("**", "^", xstr, fixed = TRUE)
 
   # I but not in Inf
-  xstr <- gsub("I(?!nf)", "1i", xstr, ignore.case = FALSE, perl = TRUE)
+  #xstr <- gsub("I(?!nf)", "1i", xstr, ignore.case = FALSE, perl = TRUE)
+  # I but not followed by another character
+  xstr <- gsub("I[^a-z]+", "1i", xstr, ignore.case = FALSE, perl = TRUE)
 
   # Inf
   xstr <- gsub("oo", "Inf", xstr, fixed = TRUE)

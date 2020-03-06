@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a symbol from a string — eval_to_symbol • caracas</title>
+<title>Integrate a function — intf • caracas</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,11 @@
 
 
 
-<meta property="og:title" content="Create a symbol from a string — eval_to_symbol" />
-<meta property="og:description" content="Create a symbol from a string" />
+<meta property="og:title" content="Integrate a function — intf" />
+<meta property="og:description" content="If no limits are provided, the
+indefinite integral is calculated.
+Otherwise, if both limits are provided,
+the definite integral is calculated." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,43 +126,65 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a symbol from a string</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/symbol.R'><code>R/symbol.R</code></a></small>
-    <div class="hidden name"><code>eval_to_symbol.Rd</code></div>
+    <h1>Integrate a function</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/calculus.R'><code>R/calculus.R</code></a></small>
+    <div class="hidden name"><code>intf.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a symbol from a string</p>
+    <p>If no limits are provided, the
+indefinite integral is calculated.
+Otherwise, if both limits are provided,
+the definite integral is calculated.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>eval_to_symbol</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>intf</span>(<span class='no'>f</span>, <span class='no'>var</span>, <span class='no'>lower</span>, <span class='no'>upper</span>, <span class='kw'>doit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>String to evaluate</p></td>
+      <th>f</th>
+      <td><p>Function to integrate</p></td>
+    </tr>
+    <tr>
+      <th>var</th>
+      <td><p>Variable to integrate with respect to (either string or <code>caracas_symbol</code>)</p></td>
+    </tr>
+    <tr>
+      <th>lower</th>
+      <td><p>Lower limit</p></td>
+    </tr>
+    <tr>
+      <th>upper</th>
+      <td><p>Upper limit</p></td>
+    </tr>
+    <tr>
+      <th>doit</th>
+      <td><p>Evaluate the integral immediately (or later with <code>doit()</code>)</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code>caracas_symbol</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'>have_sympy</span>()) {
-   <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/plotmath.html'>symbol</a></span>(<span class='st'>'x'</span>)
-   (<span class='fl'>1</span>+<span class='fl'>1</span>)*<span class='no'>x</span>^<span class='fl'>2</span>
-   <span class='fu'>lim</span>(<span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span>(<span class='no'>x</span>)/<span class='no'>x</span>, <span class='st'>"x"</span>, <span class='fl'>0</span>)
-}</div><div class='output co'>#&gt; [caracas]: 1</div><div class='input'>
+  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/plotmath.html'>symbol</a></span>(<span class='st'>"x"</span>)
+
+  <span class='fu'>intf</span>(<span class='fl'>1</span>/<span class='no'>x</span>, <span class='no'>x</span>, <span class='fl'>1</span>, <span class='fl'>10</span>)
+  <span class='fu'>intf</span>(<span class='fl'>1</span>/<span class='no'>x</span>, <span class='no'>x</span>, <span class='fl'>1</span>, <span class='fl'>10</span>, <span class='kw'>doit</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'>intf</span>(<span class='fl'>1</span>/<span class='no'>x</span>, <span class='no'>x</span>)
+  <span class='fu'>intf</span>(<span class='fl'>1</span>/<span class='no'>x</span>, <span class='no'>x</span>, <span class='kw'>doit</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+}</div><div class='output co'>#&gt; [caracas]: ⌠     
+#&gt;            ⎮ 1   
+#&gt;            ⎮ ─ dx
+#&gt;            ⎮ x   
+#&gt;            ⌡</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

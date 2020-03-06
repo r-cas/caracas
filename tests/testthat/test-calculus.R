@@ -59,5 +59,37 @@ test_that("prodf", {
   expect_equal(as_r(p), prod(1/(1:10)))
 })
 
+test_that("intf", {
+  x <- symbol("x")
+  
+  # Limits
+  expect_equal(as.character(intf(1/x, "x", 1, 10)), "log(10)")
+  expect_equal(as.character(intf(1/x, x, 1, 10)), "log(10)")
+  
+  i1 <- intf(1/x, "x", 1, 10, doit = FALSE)
+  expect_equal(as.character(i1), "Integral(1/x, (x, 1, 10))")
+  expect_equal(tex(i1), "\\int\\limits_{1}^{10} \\frac{1}{x}\\, dx")
+  expect_equal(as.character(doit(i1)), "log(10)")
+  
+  i1 <- intf(1/x, x, 1, 10, doit = FALSE)
+  expect_equal(as.character(i1), "Integral(1/x, (x, 1, 10))")
+  expect_equal(tex(i1), "\\int\\limits_{1}^{10} \\frac{1}{x}\\, dx")
+  expect_equal(as.character(doit(i1)), "log(10)")
 
+  
+  ## No limits
+  z <- symbol('z')
+  expect_equal(as.character(intf(1/z, "z")), "log(z)")
+  expect_equal(as.character(intf(1/z, z)), "log(z)")
+  
+  i1 <- intf(1/x, "x", doit = FALSE)
+  expect_equal(as.character(i1), "Integral(1/x, x)")
+  expect_equal(tex(i1), "\\int \\frac{1}{x}\\, dx")
+  expect_equal(as.character(doit(i1)), "log(x)")
+  
+  i1 <- intf(1/x, x, doit = FALSE)
+  expect_equal(as.character(i1), "Integral(1/x, x)")
+  expect_equal(tex(i1), "\\int \\frac{1}{x}\\, dx")
+  expect_equal(as.character(doit(i1)), "log(x)")
+})
 

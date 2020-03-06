@@ -105,6 +105,23 @@ prodf(x, x, 1, n)
 ```
 
 
+### Integrals
+
+```{r}
+x <- symbol("x")
+
+intf(1/x, x, 1, 10)
+i1 <- intf(1/x, x, 1, 10, doit = FALSE)
+i1
+tex(i1)
+doit(i1)
+intf(1/x, x)
+i1 <- intf(1/x, x, doit = FALSE)
+i1
+tex(i1)
+doit(i1)
+```
+
 ### Limits
 
 
