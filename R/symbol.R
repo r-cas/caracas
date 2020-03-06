@@ -1,3 +1,7 @@
+TXT_NOT_CARACAS_SYMBOL <- paste0("must be a caracas_symbol, ", 
+                                 "e.g. constructed by symbol() ", 
+                                 "followed by elementary operations")
+
 verify_variable_name <- function(x) {
   if (length(x) != 1L) {
     stop("The name must have length 1")
@@ -17,7 +21,14 @@ construct_symbol_from_pyobj <- function(pyobj) {
 #' Create a symbol from a string
 #'
 #' @param x String to evaluate
-#'
+#' 
+#' @examples 
+#' if (have_sympy()) {
+#'    x <- symbol('x')
+#'    (1+1)*x^2
+#'    lim(sin(x)/x, "x", 0)
+#' }
+#' 
 #' @return A `caracas_symbol`
 #'
 #' @concept lowlevel
@@ -52,16 +63,34 @@ symbol <- function(x) {
   return(y)
 }
 
-
 #' Perform calculations setup previously
 #'
 #' @param x A `caracas_symbol`
+#' 
+#' @examples 
+#' if (have_sympy()) {
+#'    x <- symbol('x')
+#'    res <- lim(sin(x)/x, "x", 0, doit = FALSE)
+#'    res 
+#'    doit(res)
+#' }
 #'
 #' @concept caracas_symbol
 #'
 #' @export
 doit <- function(x) {
-  UseMethod("doit")
+  if (!inherits(x, "caracas_symbol")) {
+    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+  
+  ensure_sympy()
+  
+  if (!is.null(x$pyobj) && !is.null(x$pyobj$doit)) {
+    y <- construct_symbol_from_pyobj(x$pyobj$doit())
+    return(y)
+  }
+  
+  stop("Coult not doit()")
 }
 
 try_doit <- function(x) {
@@ -73,17 +102,6 @@ try_doit <- function(x) {
   return(x)
 }
 
-#' @export
-doit.caracas_symbol <- function(x) {
-  ensure_sympy()
-  
-  if (!is.null(x$pyobj) && !is.null(x$pyobj$doit)) {
-    y <- construct_symbol_from_pyobj(x$pyobj$doit())
-    return(y)
-  }
-  
-  stop("Coult not doit()")
-}
 
 #' @export
 c.caracas_symbol <- function(...) {

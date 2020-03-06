@@ -18,3 +18,4 @@ if (have_sympy()) {
 }
 
 }
+\concept{sympy}

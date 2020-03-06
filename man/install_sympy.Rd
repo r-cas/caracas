@@ -23,3 +23,4 @@ None
 Install the 'SymPy' Python package into a
 virtual environment or Conda environment.
 }
+\concept{sympy}

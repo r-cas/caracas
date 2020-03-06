@@ -2,15 +2,14 @@
 #'
 #' @param x A `caracas_symbol`
 #'
-#' @concept caracas_symbol
+#' @concept simplify
 #'
 #' @export
 simplify <- function(x) {
-  UseMethod("simplify")
-}
-
-#' @export
-simplify.caracas_symbol <- function(x) {
+  if (!inherits(x, "caracas_symbol")) {
+    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+  
   ensure_sympy()
   
   z <- sympy$simplify(x$pyobj)
@@ -25,15 +24,14 @@ simplify.caracas_symbol <- function(x) {
 #'
 #' @param x A `caracas_symbol`
 #'
-#' @concept caracas_symbol
+#' @concept simplify
 #'
 #' @export
 expand <- function(x) {
-  UseMethod("expand")
-}
-
-#' @export
-expand.caracas_symbol <- function(x) {
+  if (!inherits(x, "caracas_symbol")) {
+    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+  
   ensure_sympy()
   
   z <- sympy$expand(x$pyobj)
@@ -47,15 +45,14 @@ expand.caracas_symbol <- function(x) {
 #'
 #' @param x A `caracas_symbol`
 #'
-#' @concept caracas_symbol
+#' @concept simplify
 #'
 #' @export
 expand_trig <- function(x) {
-  UseMethod("expand_trig")
-}
-
-#' @export
-expand_trig.caracas_symbol <- function(x) {
+  if (!inherits(x, "caracas_symbol")) {
+    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+  
   ensure_sympy()
   
   z <- sympy$expand_trig(x$pyobj)
@@ -63,3 +60,39 @@ expand_trig.caracas_symbol <- function(x) {
   
   return(v)
 }
+
+
+
+#' Expand a logarithmic expression
+#' 
+#' Note that `force` as described at 
+#' <https://docs.sympy.org/latest/tutorial/simplification.html#expand-log> is used 
+#' meaning that some assumptions are taken.
+#' 
+#' @param x A `caracas_symbol`
+#' 
+#' @examples 
+#' if (have_sympy()) {
+#'   x <- symbol('x')
+#'   y <- symbol('y')
+#'   z <- log(x*y)
+#'   z
+#'   expand_log(z)
+#' }
+#' 
+#' @concept simplify
+#' 
+#' @export
+expand_log <- function(x) {
+  if (!inherits(x, "caracas_symbol")) {
+    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+  
+  ensure_sympy()
+  
+  z <- sympy$expand_log(x$pyobj, force = TRUE)
+  v <- construct_symbol_from_pyobj(z)
+  
+  return(v)
+}
+

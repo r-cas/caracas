@@ -12,4 +12,4 @@ simplify(x)
 \description{
 Simplify expression
 }
-\concept{caracas_symbol}
+\concept{simplify}

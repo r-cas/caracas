@@ -1,1 +1,37 @@
-destination: docs
+reference:
+- title: Main functions
+  desc: >    
+    Main functions.
+  contents:
+  - has_concept("caracas_symbol")
+- title: Simplifcation
+  desc: > 
+    Functions related to simplifying and expanding expressions.
+  contents:
+  - has_concept("simplify")
+- title: Calculus
+  desc: > 
+    Functions related to calculus.
+  contents:
+  - has_concept("calculus")
+- title: Output
+  desc: > 
+    Functions related to output.
+  contents:
+  - has_concept("output")
+- title: Low level functions
+  desc: > 
+    These are various utility functions that are normally only called by 
+    advanced users.
+  contents:
+  - has_concept("lowlevel")
+- title: SymPy
+  desc: > 
+    These are functions to interact with SymPy, including installation 
+    and getting SymPy version.
+  contents:
+  - has_concept("sympy")
+- title: Complete reference
+  desc: ~
+  contents:
+  - matches(".*")

@@ -12,4 +12,4 @@ expand_trig(x)
 \description{
 Expand a trigonometric expression
 }
-\concept{caracas_symbol}
+\concept{simplify}

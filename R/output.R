@@ -10,6 +10,13 @@ print_type <- 'pretty_utf8'
 #   print_type <<- match.arg(type)
 # }
 
+#' Print symbol
+#' 
+#' @param x A `caracas_symbol`
+#' @param \dots not used
+#'
+#' @concept output
+#' 
 #' @export
 print.caracas_symbol <- function(x, ...) {
   ensure_sympy()
@@ -43,7 +50,7 @@ print.caracas_symbol <- function(x, ...) {
 #'
 #' @param x A `caracas_symbol`
 #'
-#' @concept caracas_symbol
+#' @concept output
 #'
 #' @export
 tex <- function(x) {
@@ -59,4 +66,18 @@ tex.caracas_symbol <- function(x) {
   }
   
   return(x$content)
+}
+
+#' Convert symbol to character
+#'
+#' @param x A `caracas_symbol`
+#' @param \dots not used
+#'
+#' @concept output
+#'
+#' @export
+as.character.caracas_symbol <- function(x, ...) {
+  y <- as.character(x$pyobj)
+  y <- python_strings_to_r(y)
+  return(y)
 }

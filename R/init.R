@@ -19,6 +19,8 @@ ensure_sympy <- function() {
 #' @examples 
 #' have_sympy()
 #' 
+#' @concept sympy
+#' 
 #' @importFrom reticulate py_module_available
 #' @export
 have_sympy <- function() {
@@ -33,6 +35,8 @@ have_sympy <- function() {
 #' if (have_sympy()) {
 #'   sympy_version()
 #' }
+#' 
+#' @concept sympy
 #'
 #' @importFrom reticulate import
 #' @export
@@ -89,6 +93,8 @@ sympy_version <- function() {
 #'   sympy$solve("x**2-1", "x")
 #' }
 #' 
+#' @concept sympy
+#' 
 #' @export
 get_sympy <- function() {
   ensure_sympy()
@@ -110,6 +116,8 @@ get_sympy <- function() {
 #' using the PATH and other conventional install locations).
 #' 
 #' @return None
+#' 
+#' @concept sympy
 #' 
 #' @importFrom reticulate py_install py_module_available
 #' @export

@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9011</span>
       </span>
     </div>
 
@@ -91,6 +91,9 @@
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/introduction.html">Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/output.html">Output formats</a>
     </li>
     <li>
       <a href="../articles/sympy-object.html">Using the 'SymPy' object directly</a>
@@ -132,8 +135,132 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-main-functions" class="hasAnchor"><a href="#section-main-functions" class="anchor"></a>Main functions</h2>
+          <p class="section-desc"><p>Main functions.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="doit.html">doit()</a></code> </p>
+        </td>
+        <td><p>Perform calculations setup previously</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="symbol.html">symbol()</a></code> </p>
+        </td>
+        <td><p>Create a symbol</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-simplifcation" class="hasAnchor"><a href="#section-simplifcation" class="anchor"></a>Simplifcation</h2>
+          <p class="section-desc"><p>Functions related to simplifying and expanding expressions.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="expand.html">expand()</a></code> </p>
+        </td>
+        <td><p>Expand expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="expand_log.html">expand_log()</a></code> </p>
+        </td>
+        <td><p>Expand a logarithmic expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="expand_trig.html">expand_trig()</a></code> </p>
+        </td>
+        <td><p>Expand a trigonometric expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="simplify.html">simplify()</a></code> </p>
+        </td>
+        <td><p>Simplify expression</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-calculus" class="hasAnchor"><a href="#section-calculus" class="anchor"></a>Calculus</h2>
+          <p class="section-desc"><p>Functions related to calculus.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="dd.html">dd()</a></code> </p>
+        </td>
+        <td><p>Symbolic differentiation of an expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dd2.html">dd2()</a></code> </p>
+        </td>
+        <td><p>Symbolic differentiation of second order of an expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="lim.html">lim()</a></code> </p>
+        </td>
+        <td><p>Limit of a function</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sumf.html">sumf()</a></code> </p>
+        </td>
+        <td><p>Sum of a function</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-output" class="hasAnchor"><a href="#section-output" class="anchor"></a>Output</h2>
+          <p class="section-desc"><p>Functions related to output.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="as.character.caracas_symbol.html">as.character(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Convert symbol to character</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print.caracas_symbol.html">print(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print symbol</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tex.html">tex()</a></code> </p>
+        </td>
+        <td><p>Export object to TeX</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-low-level-functions" class="hasAnchor"><a href="#section-low-level-functions" class="anchor"></a>Low level functions</h2>
+          <p class="section-desc"><p>These are various utility functions that are normally only called by advanced users.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="eval_to_symbol.html">eval_to_symbol()</a></code> </p>
+        </td>
+        <td><p>Create a symbol from a string</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-sympy" class="hasAnchor"><a href="#section-sympy" class="anchor"></a>SymPy</h2>
+          <p class="section-desc"><p>These are functions to interact with SymPy, including installation and getting SymPy version.</p></p>
         </th>
       </tr>
       <tr>
@@ -161,6 +288,140 @@
         </td>
         <td><p>Get 'SymPy' version</p></td>
       </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-complete-reference" class="hasAnchor"><a href="#section-complete-reference" class="anchor"></a>Complete reference</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="Math.caracas_symbol.html">Math(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Math functions</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Ops.caracas_symbol.html">Ops(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Math operators</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as.character.caracas_symbol.html">as.character(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Convert symbol to character</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as_r.html">as_r()</a></code> </p>
+        </td>
+        <td><p>Convert symr object to R</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dd.html">dd()</a></code> </p>
+        </td>
+        <td><p>Symbolic differentiation of an expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dd2.html">dd2()</a></code> </p>
+        </td>
+        <td><p>Symbolic differentiation of second order of an expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="doit.html">doit()</a></code> </p>
+        </td>
+        <td><p>Perform calculations setup previously</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="eval_to_symbol.html">eval_to_symbol()</a></code> </p>
+        </td>
+        <td><p>Create a symbol from a string</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="expand.html">expand()</a></code> </p>
+        </td>
+        <td><p>Expand expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="expand_log.html">expand_log()</a></code> </p>
+        </td>
+        <td><p>Expand a logarithmic expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="expand_trig.html">expand_trig()</a></code> </p>
+        </td>
+        <td><p>Expand a trigonometric expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_sympy.html">get_sympy()</a></code> </p>
+        </td>
+        <td><p>Access 'SymPy' directly</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="have_sympy.html">have_sympy()</a></code> </p>
+        </td>
+        <td><p>Check if 'SymPy' is available</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="install_sympy.html">install_sympy()</a></code> </p>
+        </td>
+        <td><p>Install 'SymPy'</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="lim.html">lim()</a></code> </p>
+        </td>
+        <td><p>Limit of a function</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print.caracas_symbol.html">print(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print symbol</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="simplify.html">simplify()</a></code> </p>
+        </td>
+        <td><p>Simplify expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sumf.html">sumf()</a></code> </p>
+        </td>
+        <td><p>Sum of a function</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="symbol.html">symbol()</a></code> </p>
+        </td>
+        <td><p>Create a symbol</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sympy_version.html">sympy_version()</a></code> </p>
+        </td>
+        <td><p>Get 'SymPy' version</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tex.html">tex()</a></code> </p>
+        </td>
+        <td><p>Export object to TeX</p></td>
+      </tr>
     </tbody>
     </table>
   </div>
@@ -168,7 +429,13 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-main-functions">Main functions</a></li>
+      <li><a href="#section-simplifcation">Simplifcation</a></li>
+      <li><a href="#section-calculus">Calculus</a></li>
+      <li><a href="#section-output">Output</a></li>
+      <li><a href="#section-low-level-functions">Low level functions</a></li>
+      <li><a href="#section-sympy">SymPy</a></li>
+      <li><a href="#section-complete-reference">Complete reference</a></li>
     </ul>
   </div>
 </div>

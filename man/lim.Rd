@@ -2,25 +2,23 @@
 % Please edit documentation in R/calculus.R
 \name{lim}
 \alias{lim}
-\title{Limits}
+\title{Limit of a function}
 \usage{
-lim(f, var, val, dir, doit = TRUE, ...)
+lim(f, var, val, dir = NULL, doit = TRUE)
 }
 \arguments{
 \item{f}{Function to take limit of}
 
-\item{var}{Variable to take limit for}
+\item{var}{Variable to take limit for (either string or \code{caracas_symbol})}
 
 \item{val}{Value for \code{var} to approach}
 
 \item{dir}{Direction from where \code{var} should approach \code{val}: \code{'+'} or \code{'-'}}
 
 \item{doit}{Evaluate the limit immediately (or later with \code{\link[=doit]{doit()}})}
-
-\item{\dots}{Not used.}
 }
 \description{
-Limits
+Limit of a function
 }
 \examples{
 if (have_sympy()) {
@@ -31,4 +29,4 @@ if (have_sympy()) {
 }
 
 }
-\concept{caracas_symbol}
+\concept{calculus}

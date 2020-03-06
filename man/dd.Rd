@@ -14,4 +14,4 @@ dd(expr, vars)
 \description{
 Symbolic differentiation of an expression
 }
-\concept{caracas_symbol}
+\concept{calculus}

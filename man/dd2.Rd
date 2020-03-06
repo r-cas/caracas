@@ -14,4 +14,4 @@ dd2(expr, vars)
 \description{
 Symbolic differentiation of second order of an expression
 }
-\concept{caracas_symbol}
+\concept{calculus}

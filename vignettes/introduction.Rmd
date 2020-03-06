@@ -69,6 +69,41 @@ expand(z)
 expand_trig(z)
 ```
 
+```{r}
+x <- symbol('x')
+y <- symbol('y')
+z <- log(x*y)
+z
+expand_log(z)
+```
+
+
+### Sums
+
+```{r}
+x <- symbol("x")
+sumf(1/x, "x", 1, 10)
+sumf(1/x, x, 1, 10)
+s <- sumf(1/x, "x", 1, 10)
+as_r(s)
+sum(1/(1:10))
+n <- symbol("n")
+simplify(sumf(x, x, 1, n))
+```
+
+
+### Products
+
+```{r}
+x <- symbol("x")
+p <- prodf(1/x, "x", 1, 10)
+p
+as_r(p)
+prod(1/(1:10))
+n <- symbol("n")
+prodf(x, x, 1, n)
+```
+
 
 ### Limits
 
@@ -81,6 +116,12 @@ lim(1/x, "x", 0, dir = '-')
 ```
 
 We can also postpone evaluation:
+
+```{r}
+x <- symbol("x")
+lim(sin(x)/x, "x", 0)
+lim(sin(x)/x, x, 0)
+```
 
 ```{r}
 res <- lim(sin(x)/x, "x", 0, doit = FALSE)

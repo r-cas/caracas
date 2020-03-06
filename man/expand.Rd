@@ -12,4 +12,4 @@ expand(x)
 \description{
 Expand expression
 }
-\concept{caracas_symbol}
+\concept{simplify}

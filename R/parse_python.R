@@ -12,20 +12,6 @@ python_strings_to_r <- function(xstr) {
   return(xstr)
 }
 
-#' Convert symbol to character
-#'
-#' @param x A `caracas_symbol`
-#' @param \dots not used
-#'
-#' @concept caracas_symbol
-#'
-#' @export
-as.character.caracas_symbol <- function(x, ...) {
-  y <- as.character(x$pyobj)
-  y <- python_strings_to_r(y)
-  return(y)
-}
-
 stop_parse_error <- function(x) {
   print(x)
   print(str(x))

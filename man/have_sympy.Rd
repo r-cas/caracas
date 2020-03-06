@@ -16,3 +16,4 @@ Check if 'SymPy' is available
 have_sympy()
 
 }
+\concept{sympy}

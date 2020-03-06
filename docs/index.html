@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9011</span>
       </span>
     </div>
 
@@ -57,6 +57,9 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="articles/introduction.html">Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="articles/output.html">Output formats</a>
     </li>
     <li>
       <a href="articles/sympy-object.html">Using the 'SymPy' object directly</a>
@@ -86,17 +89,19 @@
 <div id="caracas-computer-algebra-in-r" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#caracas-computer-algebra-in-r" class="anchor"></a><code>caracas</code>: Computer algebra in R</h1></div>
+<!-- badges: start -->
+
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p><code>caracas</code> is available on CRAN and can be installed as usual:</p>
 <pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages('caracas')</a></code></pre>
 <p>To build and install from Github with vignettes run this command from within <code>R</code> (please install <code>devtools</code> first if not already installed):</p>
-<pre><code><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html"># install.packages('devtools')
+<pre><code><a href="https://devtools.r-lib.org//reference/remote-reexports.html"># install.packages('devtools')
 devtools::install_github("r-cas/caracas", 
                          build_opts = c("--no-resave-data", "--no-manual"))</a></code></pre>
 <p>You can also install the package without vignettes if needed as follows:</p>
-<pre><code><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">devtools::install_github("r-cas/caracas")</a></code></pre>
+<pre><code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">devtools::install_github("r-cas/caracas")</a></code></pre>
 </div>
 <div id="development-site" class="section level2">
 <h2 class="hasAnchor">
@@ -153,7 +158,14 @@ devtools::install_github("r-cas/caracas",
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/r-cas/caracas/actions"><img src="https://github.com/r-cas/caracas/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/r-cas/caracas?branch=master"><img src="https://codecov.io/gh/r-cas/caracas/branch/master/graphs/badge.svg" alt="codecov.io"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
