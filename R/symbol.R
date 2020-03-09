@@ -2,12 +2,16 @@ TXT_NOT_CARACAS_SYMBOL <- paste0("must be a caracas_symbol, ",
                                  "e.g. constructed by symbol() ", 
                                  "followed by elementary operations")
 
+PATTERN_PYHTON_VARIABLE <- "[a-zA-Z]+[a-zA-Z0-9_]*"
+
 verify_variable_name <- function(x) {
   if (length(x) != 1L) {
     stop("The name must have length 1")
   }
   
-  if (!grepl("^[a-zA-Z]+[a-zA-Z_]*$", x)) {
+  pattern <- paste0("^", PATTERN_PYHTON_VARIABLE, "$")
+  
+  if (!grepl(pattern, x)) {
     stop(paste0("'", x, "' is not a valid variable name"))
   }
 }
@@ -61,6 +65,14 @@ symbol <- function(x) {
   y <- construct_symbol_from_pyobj(res)
 
   return(y)
+}
+
+is_atomic <- function(x) {
+  xstr <- as.character(x)
+  
+  pattern <- paste0("^", PATTERN_PYHTON_VARIABLE, "$")
+  
+  return(grepl(pattern, x))
 }
 
 #' Perform calculations setup previously

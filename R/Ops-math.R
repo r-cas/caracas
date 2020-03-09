@@ -27,8 +27,6 @@ Ops.caracas_symbol = function(e1, e2) {
     return(s)
   }
 
-  # Both e1 and e2 given:
-
   # LHS may be constant, e.g. 2*x: e1 is a number 2
   o1 <- get_pyobj(e1, .Method[1L])
   
@@ -39,6 +37,33 @@ Ops.caracas_symbol = function(e1, e2) {
     "**"
   } else {
     .Generic
+  }
+  
+  e1_is_mat <- symbol_is_matrix(as.character(o1))
+  e2_is_mat <- symbol_is_matrix(as.character(o2))
+  
+  if (e1_is_mat && e2_is_mat) {
+    dim_e1 <- dim(e1)
+    
+    if (isTRUE(all.equal(dim_e1, dim(e2))) && any(dim_e1 == 1L)) {
+      # Component wise operation
+      if (.Generic == "*") {
+        z <- sympy$matrix_multiply_elementwise(o1, o2)
+        return(construct_symbol_from_pyobj(z))
+      }
+    } else if (!(.Generic %in% c("+", "-"))) {
+      stop("Only +, - and %*% are valid for matrix-matrix/matrix-vector operations")
+    }
+  }
+  
+  if (.Generic %in% c("+", "-")) {
+    if (e1_is_mat && !e2_is_mat) {
+      e2 <- as_symbol(scalar_to_matrix(as.character(e2), dim(e1)))
+      o2 <- e2$pyobj
+    } else if (!e1_is_mat && e2_is_mat) {
+      e1 <- as_symbol(scalar_to_matrix(as.character(e1), dim(e2)))
+      o1 <- e1$pyobj
+    }
   }
   
   cmd <- paste0("(", as.character(o1), ")", op, 
@@ -70,6 +95,8 @@ colnames(Math_transtab) <- c("R", "Python")
 #paste0(Math_transtab[, 1], "()", collapse = ", ")
 
 #' Math functions
+#' 
+#' If `x` is a matrix, the function is applied component-wise.
 #'
 #' @param x `caracas_symbol`.
 #' @param \dots further arguments passed to methods
@@ -90,8 +117,74 @@ Math.caracas_symbol = function(x, ...) {
     stop(paste0("Could not find function '", fn, "' in Python"))
   }
 
+  if (symbol_is_matrix(x)) {
+    y <- x$pyobj$applyfunc(sympy[fn])
+    z <- construct_symbol_from_pyobj(y)
+    return(z)
+  }
+  
   y <- sympy[fn](x$pyobj)
   z <- construct_symbol_from_pyobj(y)
 
   return(z)
+}
+
+
+#' Matrix multiplication
+#'
+#' @param x Object `x`
+#' @param y Object `y`
+#'
+#' @export
+`%*%` <- function(x, y) {
+  UseMethod("%*%")
+}
+
+#' @export
+`%*%.default` <- function(x, y) {
+  return(base::`%*%`(x, y))
+}
+
+#' Matrix multiplication
+#' 
+#' @param x Object `x`
+#' @param y Object `y`
+#' 
+#' @concept linalg
+#' 
+#' @export
+`%*%.caracas_symbol` <- function(x, y) {
+  ensure_sympy()
+  
+  if (!inherits(x, "caracas_symbol")) {
+    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+  
+  if (!inherits(y, "caracas_symbol")) {
+    stop(paste0("'y' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+  
+  z <- paste0("(", as.character(x$pyobj), ") * (", as.character(y$pyobj), ")")
+  y <- eval_to_symbol(z)
+  
+  return(y)
+}
+
+
+#' Transpose of matrix
+#'
+#' @param x If `caracas_symbol` treat as such, else
+#' call [base::t()].
+#'
+#' @concept linalg
+#' @export
+t.caracas_symbol <- function(x) {
+  ensure_sympy()
+  
+  if (!symbol_is_matrix(x)) {
+    stop("'x' must be a matrix")
+  }
+  
+  xT <- x$pyobj$T
+  return(construct_symbol_from_pyobj(xT))
 }

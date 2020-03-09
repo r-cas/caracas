@@ -12,5 +12,5 @@
 \item{\dots}{further arguments passed to methods}
 }
 \description{
-Math functions
+If \code{x} is a matrix, the function is applied component-wise.
 }

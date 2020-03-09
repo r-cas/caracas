@@ -26,7 +26,7 @@ print.caracas_symbol <- function(x, ...) {
   }
   
   out <- if (print_type == 'pretty_utf8') {
-    reticulate:::py_capture_output(sympy$pprint(x$pyobj))
+    reticulate::py_capture_output(sympy$pprint(x$pyobj))
   } else {
     # 'string'
     python_strings_to_r(sympy$sstr(x$pyobj))

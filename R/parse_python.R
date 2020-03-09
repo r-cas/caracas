@@ -6,8 +6,10 @@ python_strings_to_r <- function(xstr) {
   # I but not in Inf
   #xstr <- gsub("I(?!nf)", "1i", xstr, ignore.case = FALSE, perl = TRUE)
   # I but not followed by another character
+  xstr <- gsub("^I$", "1i", xstr, ignore.case = FALSE, perl = TRUE)
+  xstr <- gsub("^-I$", "-1i", xstr, ignore.case = FALSE, perl = TRUE)
   xstr <- gsub("I[^a-z]+", "1i", xstr, ignore.case = FALSE, perl = TRUE)
-
+  
   # Inf
   xstr <- gsub("oo", "Inf", xstr, fixed = TRUE)
 
@@ -43,13 +45,13 @@ from_sy_mat <- function(x) {
 }
 
 remove_mat_prefix <- function(x) {
-  z <- gsub("^Matrix\\(.*\\)$", "\\1", x)
+  z <- gsub("^Matrix\\((.*)\\)$", "\\1", x)
   return(z)
 }
 
 
 as_r_symr_worker <- function(x) {
-  if (!is(x, "caracas_symbol")) {
+  if (!inherits(x, "caracas_symbol")) {
     stop("x must be a caracas_symbol")
   }
   

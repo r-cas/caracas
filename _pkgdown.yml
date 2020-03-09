@@ -14,6 +14,16 @@ reference:
     Functions related to calculus.
   contents:
   - has_concept("calculus")
+- title: Linear algebra
+  desc: > 
+    Functions related to linear algebra.
+  contents:
+  - has_concept("linalg")
+- title: Solve
+  desc: > 
+    Functions related to solving equations
+  contents:
+  - has_concept("solve")
 - title: Output
   desc: > 
     Functions related to output.
