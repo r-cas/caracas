@@ -8,10 +8,10 @@ test_that("eigenvalues and eigenvectors", {
   eval_order <- order(unlist(lapply(eval, function(l) l$eigmult)))
   eval <- eval[eval_order]
   
-  expect_equal(as.character(eval[[1L]]$eigval), "a")
-  expect_equal(eval[[1L]]$eigmult, 2L)
-  expect_equal(as.character(eval[[2L]]$eigval), "0")
-  expect_equal(eval[[2L]]$eigmult, 1L)
+  expect_equal(as.character(eval[[1L]]$eigval), "0")
+  expect_equal(eval[[1L]]$eigmult, 1L)
+  expect_equal(as.character(eval[[2L]]$eigval), "a")
+  expect_equal(eval[[2L]]$eigmult, 2L)
   
   
   evec <- eigenvects(B)
