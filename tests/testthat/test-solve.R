@@ -64,10 +64,10 @@ test_that("rootsolve", {
   sol1 <- sol1[sol1_ord]
   
   expect_equal(length(sol1), 2L)
-  expect_equal(names(sol1[[1L]]), c("x", "y"))
+  expect_equal(sort(names(sol1[[1L]])), c("x", "y"))
   expect_equal(as.character(sol1[[1L]]$x), "-1i")
   expect_equal(as.character(sol1[[1L]]$y), "-3")
-  expect_equal(names(sol1[[2L]]), c("x", "y"))
+  expect_equal(sort(names(sol1[[2L]])), c("x", "y"))
   expect_equal(as.character(sol1[[2L]]$x), "1i")
   expect_equal(as.character(sol1[[2L]]$y), "-3")
   
@@ -77,10 +77,10 @@ test_that("rootsolve", {
   sol2 <- sol2[sol2_ord]
   
   expect_equal(length(sol2), 2L)
-  expect_equal(names(sol2[[1L]]), c("x", "y"))
+  expect_equal(sort(names(sol2[[1L]])), c("x", "y"))
   expect_equal(as.character(sol2[[1L]]$x), "-1i")
   expect_equal(as.character(sol2[[1L]]$y), "-3")
-  expect_equal(names(sol2[[2L]]), c("x", "y"))
+  expect_equal(sort(names(sol2[[2L]])), c("x", "y"))
   expect_equal(as.character(sol2[[2L]]$x), "1i")
   expect_equal(as.character(sol2[[2L]]$y), "-3")
 })
