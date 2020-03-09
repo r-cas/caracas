@@ -13,11 +13,13 @@ eigenvects(x)
 Eigenvectors and eigenvalues
 }
 \examples{
-A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-B <- as_symbol(A)
-eigenvals(B)
-eigenvects(B)
-eigen(eval(as_r(B), list(a = 2)))
+if (have_sympy()) {
+  A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
+  B <- as_symbol(A)
+  eigenvals(B)
+  eigenvects(B)
+  eigen(eval(as_r(B), list(a = 2)))
+}
 
 }
 \concept{linalg}

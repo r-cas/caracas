@@ -21,14 +21,16 @@ Default is to declare used variables. Alternatively, the user
 must declare them first, e.g. by \code{\link[=symbol]{symbol()}}.
 }
 \examples{
-x <- symbol("x")
-A <- matrix(c("x", 0, 0, "2*x"), 2, 2)
-A
-B <- as_symbol(A)
-B
-2*B
-dim(B)
-sqrt(B)
+if (have_sympy()) {
+  x <- symbol("x")
+  A <- matrix(c("x", 0, 0, "2*x"), 2, 2)
+  A
+  B <- as_symbol(A)
+  B
+  2*B
+  dim(B)
+  sqrt(B)
+}
 
 }
 \concept{linalg}
