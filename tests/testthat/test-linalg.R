@@ -5,6 +5,9 @@ test_that("eigenvalues and eigenvectors", {
   B <- as_symbol(A)
   
   eval <- eigenvals(B)
+  eval_order <- order(unlist(lapply(eval, function(l) l$eigmult)))
+  eval <- eval[eval_order]
+  
   expect_equal(as.character(eval[[1L]]$eigval), "a")
   expect_equal(eval[[1L]]$eigmult, 2L)
   expect_equal(as.character(eval[[2L]]$eigval), "0")
@@ -12,6 +15,9 @@ test_that("eigenvalues and eigenvectors", {
   
   
   evec <- eigenvects(B)
+  evec_order <- order(unlist(lapply(eval, function(l) l$eigmult)))
+  evec <- evec[evec_order]
+  
   expect_equal(as.character(evec[[1L]]$eigval), "0")
   expect_equal(evec[[1L]]$eigmult, 1L)
   expect_equal(as.character(evec[[1L]]$eigvec), "Matrix([[-1], [0], [1]])")
