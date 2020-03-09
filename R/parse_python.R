@@ -16,6 +16,7 @@ python_strings_to_r <- function(xstr) {
   return(xstr)
 }
 
+#' @importFrom utils str 
 stop_parse_error <- function(x) {
   print(x)
   print(str(x))
@@ -131,7 +132,7 @@ as_r.caracas_symbol <- function(x) {
                   w
                 })
   
-  if (is(y, "error") || is(y, "warning")) {
+  if (inherits(y, "error") || inherits(y, "warning")) {
     stop_parse_error(x)
   }
   

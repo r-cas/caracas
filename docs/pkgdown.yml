@@ -3,6 +3,7 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   introduction: introduction.html
+  naive-bayes: naive-bayes.html
   output: output.html
   sympy-object: sympy-object.html
 

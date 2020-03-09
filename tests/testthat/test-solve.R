@@ -106,7 +106,7 @@ test_that("solve system of non-linear equations", {
   
   expect_equal(length(sol), 1L)
   
-  expect_equal(names(sol[[1L]]), c("p1", "p2", "p3", "a"))
+  expect_equal(sort(names(sol[[1L]])), sort(c("p1", "p2", "p3", "a")))
   expect_equal(as.character(sol[[1L]]$p1), "y1/(y1 + y2 + y3)")
   expect_equal(as.character(sol[[1L]]$p2), "y2/(y1 + y2 + y3)")
   expect_equal(as.character(sol[[1L]]$p3), "y3/(y1 + y2 + y3)")
