@@ -60,6 +60,9 @@ test_that("rootsolve", {
   # Must be as a row vector (1 x m matrix), not a list....
   lhs <- t(as_symbol(matrix(c("x**2 + 1", "y+3"))))
   sol1 <- rootsolve(lhs, c("x", "y"))
+  sol1_ord <- order(unlist(lapply(sol1, function(l) Arg(as_r(l$x)))))
+  sol1 <- sol1[sol1_ord]
+  
   expect_equal(length(sol1), 2L)
   expect_equal(names(sol1[[1L]]), c("x", "y"))
   expect_equal(as.character(sol1[[1L]]$x), "-1i")
@@ -70,6 +73,9 @@ test_that("rootsolve", {
   
   y <- symbol("y")
   sol2 <- rootsolve(lhs, c(x, y))
+  sol2_ord <- order(unlist(lapply(sol2, function(l) Arg(as_r(l$x)))))
+  sol2 <- sol2[sol2_ord]
+  
   expect_equal(length(sol2), 2L)
   expect_equal(names(sol2[[1L]]), c("x", "y"))
   expect_equal(as.character(sol2[[1L]]$x), "-1i")
