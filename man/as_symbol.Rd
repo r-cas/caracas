@@ -33,4 +33,4 @@ if (have_sympy()) {
 }
 
 }
-\concept{linalg}
+\concept{caracas_symbol}

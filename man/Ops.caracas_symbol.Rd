@@ -14,3 +14,4 @@
 \description{
 Math operators
 }
+\concept{simple_algebra}

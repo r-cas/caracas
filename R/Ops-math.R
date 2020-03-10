@@ -13,6 +13,8 @@ get_pyobj <- function(e, method) {
 #' @param e1 A `caracas_symbol`.
 #' @param e2 A `caracas_symbol`.
 #'
+#' @concept simple_algebra
+#' 
 #' @export
 Ops.caracas_symbol = function(e1, e2) {
   if (!(.Generic %in% c("+", "-", "*", "/", "^"))) {
@@ -101,6 +103,8 @@ colnames(Math_transtab) <- c("R", "Python")
 #' @param x `caracas_symbol`.
 #' @param \dots further arguments passed to methods
 #'
+#' @concept simple_algebra
+#' 
 #' @export
 Math.caracas_symbol = function(x, ...) {
   ensure_sympy()

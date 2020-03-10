@@ -62,7 +62,7 @@ as_py_string <- function(x) {
 #'   sqrt(B)
 #' }
 #' 
-#' @concept linalg
+#' @concept caracas_symbol
 #' 
 #' @export
 as_symbol <- function(x, declare_variables = TRUE) {

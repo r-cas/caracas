@@ -14,4 +14,4 @@
 \description{
 Summation
 }
-\concept{caracas_symbol}
+\concept{vectors}

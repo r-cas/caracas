@@ -11,7 +11,7 @@
 #' @param \dots Elements to sum
 #' @param na.rm Not used
 #'
-#' @concept caracas_symbol
+#' @concept vectors
 #'
 #' @export
 sum.caracas_symbol <- function(..., na.rm = FALSE) {

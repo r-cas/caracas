@@ -4,7 +4,17 @@ reference:
     Main functions.
   contents:
   - has_concept("caracas_symbol")
-- title: Simplifcation
+- title: Basic algebra
+  desc: > 
+    Functions related to simple operations.
+  contents:
+  - has_concept("simple_algebra")
+- title: Vector
+  desc: > 
+    Functions related to vectors.
+  contents:
+  - has_concept("vectors")
+- title: Simplification
   desc: > 
     Functions related to simplifying and expanding expressions.
   contents:
