@@ -20,9 +20,10 @@ jobs:
         config:
           - {os: windows-latest, r: '3.6'}
           - {os: macOS-latest, r: '3.6'}
-#          - {os: macOS-latest, r: 'devel'}
+          - {os: macOS-latest, r: 'devel'}
           - {os: ubuntu-16.04, r: '3.5', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
           - {os: ubuntu-16.04, r: '3.6', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {os: ubuntu-16.04, r: 'devel', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -105,6 +106,11 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
+      - name: Prepare test coverage
+        if: matrix.config.os == 'ubuntu-16.04' && matrix.config.r == '3.6'
+        run: |
+          sudo apt-get install -y libcurl4-openssl-dev
+          
       - name: Test coverage
         if: matrix.config.os == 'ubuntu-16.04' && matrix.config.r == '3.6'
         run: |
