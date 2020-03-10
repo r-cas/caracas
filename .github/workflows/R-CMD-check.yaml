@@ -89,6 +89,11 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
+      - name: Update pip
+        if: runner.os == 'macOS'
+        run: |
+          python3 -m pip install --upgrade pip
+
       - name: Install SymPy
         run: |
           library(reticulate)
