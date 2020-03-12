@@ -43,6 +43,8 @@ convert_to_r_mat <- function(x) {
 #'   B[2, , drop = FALSE]
 #' }
 #' 
+#' @concept vectors
+#' 
 #' @export
 `[.caracas_symbol` <- function(x, i, j, ..., drop = TRUE) {
   ensure_sympy()

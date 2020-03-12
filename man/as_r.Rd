@@ -12,4 +12,4 @@ as_r(x)
 \description{
 Potentially calls \code{\link[=doit]{doit()}}.
 }
-\concept{helper}
+\concept{caracas_symbol}

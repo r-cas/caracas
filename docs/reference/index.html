@@ -18,8 +18,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9023</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9025</span>
       </span>
     </div>
 
@@ -143,6 +143,12 @@
         </th>
       </tr>
       <tr>
+        
+        <td>
+          <p><code><a href="as_r.html">as_r()</a></code> </p>
+        </td>
+        <td><p>Convert symr object to R</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="as_symbol.html">as_symbol()</a></code> </p>
@@ -305,6 +311,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="grapes-times-grapes.html">`%*%`</a></code> </p>
+        </td>
+        <td><p>Matrix multiplication</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="t.caracas_symbol.html">t(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
         </td>
         <td><p>Transpose of matrix</p></td>
@@ -412,6 +424,20 @@
           <p><code><a href="sympy_version.html">sympy_version()</a></code> </p>
         </td>
         <td><p>Get 'SymPy' version</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-others" class="hasAnchor"><a href="#section-others" class="anchor"></a>Others</h2>
+          <p class="section-desc"><p>These are functions not mentioned above.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="sub-.caracas_symbol.html">`[`(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Extract or replace parts of an object</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -591,6 +617,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="sub-.caracas_symbol.html">`[`(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Extract or replace parts of an object</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="sum.caracas_symbol.html">sum(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
         </td>
         <td><p>Summation</p></td>
@@ -635,7 +667,7 @@
     </table>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-main-functions">Main functions</a></li>
@@ -648,6 +680,7 @@
       <li><a href="#section-output">Output</a></li>
       <li><a href="#section-low-level-functions">Low level functions</a></li>
       <li><a href="#section-sympy">SymPy</a></li>
+      <li><a href="#section-others">Others</a></li>
       <li><a href="#section-complete-reference">Complete reference</a></li>
     </ul>
   </div>
@@ -660,7 +693,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
 </div>
 
       </footer>

@@ -26,3 +26,4 @@ if (have_sympy()) {
 }
 
 }
+\concept{vectors}

@@ -14,3 +14,4 @@ x \%*\% y
 \description{
 Matrix multiplication
 }
+\concept{linalg}

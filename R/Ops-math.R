@@ -138,7 +138,9 @@ Math.caracas_symbol = function(x, ...) {
 #'
 #' @param x Object `x`
 #' @param y Object `y`
-#'
+#' 
+#' @concept linalg
+#' 
 #' @export
 `%*%` <- function(x, y) {
   UseMethod("%*%")

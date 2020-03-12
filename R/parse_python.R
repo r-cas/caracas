@@ -102,7 +102,7 @@ expr_has_vars <- function(x) {
 #'
 #' @param x caracas_symbol
 #'
-#' @concept helper
+#' @concept caracas_symbol
 #'
 #' @export
 as_r <- function(x) {
