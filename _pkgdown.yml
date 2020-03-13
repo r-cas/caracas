@@ -51,12 +51,12 @@ reference:
     and getting SymPy version.
   contents:
   - has_concept("sympy")
-- title: Others
-  desc: > 
-    These are functions not mentioned above.
-  contents:
-  - lacks_concepts(c("caracas_symbol", "simple_algebra", "vectors", "simplify", 
-                     "calculus", "linalg", "solve", "output", "lowlevel", "sympy"))
+#- title: Others
+#  desc: > 
+#    These are functions not mentioned above.
+#  contents:
+#  - lacks_concepts(c("caracas_symbol", "simple_algebra", "vectors", "simplify", 
+#                     "calculus", "linalg", "solve", "output", "lowlevel", "sympy"))
 - title: Complete reference
   desc: ~
   contents:

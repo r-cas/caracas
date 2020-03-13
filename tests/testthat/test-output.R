@@ -1,6 +1,8 @@
 context("output")
 
 test_that("as.character / tex", {
+  skip_if_no_sympy()
+  
   x <- symbol('x')
   z <- cos(x)^2 + sin(x)^2
   

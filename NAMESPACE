@@ -3,6 +3,7 @@
 S3method("%*%",caracas_symbol)
 S3method("%*%",default)
 S3method("[",caracas_symbol)
+S3method("[<-",caracas_symbol)
 S3method(Math,caracas_symbol)
 S3method(Ops,caracas_symbol)
 S3method(as.character,caracas_symbol)

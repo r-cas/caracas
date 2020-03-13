@@ -1,6 +1,8 @@
 context("symbol")
 
 test_that("init", {
+  skip_if_no_sympy()
+  
   expect_error(symbol(''))
   expect_error(symbol('2*x'))
   x <- symbol('x')
@@ -12,6 +14,8 @@ test_that("init", {
 })
 
 test_that("variable names", {
+  skip_if_no_sympy()
+  
   expect_s3_class(symbol('x0'), 'caracas_symbol')
   expect_error(symbol('0x'))
   expect_s3_class(symbol('xa_0'), 'caracas_symbol')
@@ -19,6 +23,8 @@ test_that("variable names", {
 })
 
 test_that("eval_to_symbol", {
+  skip_if_no_sympy()
+  
   expect_error(eval_to_symbol(''))
   expect_error(eval_to_symbol('2*w'))
   x <- symbol('x')

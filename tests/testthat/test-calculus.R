@@ -1,6 +1,8 @@
 context("calculus")
 
 test_that("derivative", {
+  skip_if_no_sympy()
+  
   x <- symbol("x")
   y <- symbol("y")
   f <- 3*x^2 + x*y^2
@@ -16,6 +18,8 @@ test_that("derivative", {
 })
 
 test_that("limit", {
+  skip_if_no_sympy()
+  
   x <- symbol("x")
   
   expect_equal(as.character(lim(sin(x)/x, "x", 0)), "1")
@@ -40,6 +44,8 @@ test_that("limit", {
 })
 
 test_that("sumf", {
+  skip_if_no_sympy()
+  
   x <- symbol("x")
   s <- sumf(1/x, "x", 1, 10)
   
@@ -52,6 +58,8 @@ test_that("sumf", {
 })
 
 test_that("prodf", {
+  skip_if_no_sympy()
+  
   x <- symbol("x")
   p <- prodf(1/x, "x", 1, 10)
   
@@ -60,6 +68,8 @@ test_that("prodf", {
 })
 
 test_that("intf", {
+  skip_if_no_sympy()
+  
   x <- symbol("x")
   
   # Limits

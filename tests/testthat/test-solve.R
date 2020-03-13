@@ -4,6 +4,8 @@
 # systemsolve
 
 test_that("inverse + linsolve", {
+  skip_if_no_sympy()
+  
   A <- as_symbol(matrix(c(1, "x", 0, 2, -1, 3, 4, 2, 5), nrow = 3, ncol = 3))
   b <- as_symbol(c(4, 1, 7))
   x <- A %*% b
@@ -23,6 +25,7 @@ test_that("inverse + linsolve", {
 })
 
 test_that("rootsolve", {
+  skip_if_no_sympy()
   
   ###################################################################
   # Single variable
@@ -86,6 +89,8 @@ test_that("rootsolve", {
 })
 
 test_that("systemsolve", {
+  skip_if_no_sympy()
+  
   sol1 <- systemsolve(as_symbol("x**2"), as_symbol("-1"), "x")
   #sol1
   
@@ -100,6 +105,8 @@ test_that("systemsolve", {
 
 
 test_that("solve system of non-linear equations", {
+  skip_if_no_sympy()
+  
   # Multinomial likelihood
   p <- as_symbol(paste0("p", 1:3))
   y <- as_symbol(paste0("y", 1:3))

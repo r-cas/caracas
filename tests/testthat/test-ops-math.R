@@ -1,6 +1,8 @@
 context("Ops and math")
 
 test_that("Ops", {
+  skip_if_no_sympy()
+  
   x <- symbol('x')
   
   res <- -x
@@ -16,6 +18,8 @@ test_that("Ops", {
 })
 
 test_that("Math", {
+  skip_if_no_sympy()
+  
   x <- symbol('x')
   
   res <- -cos(3*x)

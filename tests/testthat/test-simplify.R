@@ -1,6 +1,8 @@
 context("simplify")
 
 test_that("simplify", {
+  skip_if_no_sympy()
+  
   x <- symbol('x')
   z <- cos(x)^2 + sin(x)^2
   
@@ -14,6 +16,8 @@ test_that("simplify", {
 })
 
 test_that("expand", {
+  skip_if_no_sympy()
+  
   x <- symbol('x')
   z <- (x-3)*(x+4)
   expect_equal(as.character(z), "(x - 3)*(x + 4)")
@@ -21,6 +25,8 @@ test_that("expand", {
 })
 
 test_that("expand_trig", {
+  skip_if_no_sympy()
+  
   x <- symbol('x')
   y <- symbol('y')
   z <- cos(x + y)
@@ -30,6 +36,8 @@ test_that("expand_trig", {
 })
 
 test_that("expand_log", {
+  skip_if_no_sympy()
+  
   x <- symbol('x')
   y <- symbol('y')
   z <- log(x*y)

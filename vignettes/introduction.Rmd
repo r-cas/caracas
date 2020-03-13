@@ -233,6 +233,17 @@ sol
 tex(sol[[1L]]$p1)
 ```
 
+## Subsetting
+
+```{r}
+A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
+B <- as_symbol(A)
+B[, 2]
+B[, -2]
+B[1, ]
+B[, 2] <- "x"
+B
+```
 
 
 ## Using `SymPy` directly

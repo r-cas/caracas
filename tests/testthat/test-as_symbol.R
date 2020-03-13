@@ -26,6 +26,8 @@ test_that("smoke", {
 })
 
 test_that("multiplication", {
+  skip_if_no_sympy()
+  
   x <- symbol("x")
   A <- matrix(c("x", 1, 1, "2*x", "x+2", 1), 3, 2)
   B <- as_symbol(A)

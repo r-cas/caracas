@@ -12,15 +12,15 @@ symbol_is_matrix <- function(x) {
   return(FALSE)
 }
 
-symbol_is_vector <- function(x) {
-  xstr <- as.character(x)
-  
-  if (grepl("^\\[", xstr)) {
-    return(TRUE)
-  }
-  
-  return(FALSE)
-}
+# symbol_is_vector <- function(x) {
+#   xstr <- as.character(x)
+#   
+#   if (grepl("^\\[", xstr)) {
+#     return(TRUE)
+#   }
+#   
+#   return(FALSE)
+# }
 
 scalar_to_matrix <- function(scalar, dims) {
   matrix(rep(scalar, prod(dims)), nrow = dims[1L], ncol = dims[2L])
