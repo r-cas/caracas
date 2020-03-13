@@ -12,6 +12,10 @@
 \item{i}{row indices specifying elements to extract or replace}
 
 \item{j}{column indices specifying elements to extract or replace}
+
+\item{\dots}{Not used}
+
+\item{value}{Replacement value}
 }
 \description{
 Extract or replace parts of an object
@@ -20,9 +24,8 @@ Extract or replace parts of an object
 if (have_sympy()) {
   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
   B <- as_symbol(A)
-  B[1:2, ]
-  B[, 2]
-  B[2, , drop = FALSE]
+  B[, 2] <- "x"
+  B
 }
 
 }

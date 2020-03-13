@@ -152,6 +152,14 @@
       <th>j</th>
       <td><p>column indices specifying elements to extract or replace</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Not used</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>Replacement value</p></td>
+    </tr>
     </table>
 
 
@@ -159,10 +167,13 @@
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='have_sympy.html'>have_sympy</a></span>()) {
   <span class='no'>A</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='fl'>3</span>, <span class='fl'>3</span>)
   <span class='no'>B</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_symbol.html'>as_symbol</a></span>(<span class='no'>A</span>)
-  <span class='no'>B</span>[<span class='fl'>1</span>:<span class='fl'>2</span>, ]
-  <span class='no'>B</span>[, <span class='fl'>2</span>]
-  <span class='no'>B</span>[<span class='fl'>2</span>, , <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]
-}</div><div class='output co'>#&gt; [caracas]: [0  a  0]</div><div class='input'>
+  <span class='no'>B</span>[, <span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='st'>"x"</span>
+  <span class='no'>B</span>
+}</div><div class='output co'>#&gt; [caracas]: ⎡a  x  a⎤
+#&gt;            ⎢       ⎥
+#&gt;            ⎢0  x  0⎥
+#&gt;            ⎢       ⎥
+#&gt;            ⎣0  x  0⎦</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

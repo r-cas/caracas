@@ -12,6 +12,10 @@
 \item{i}{row indices specifying elements to extract or replace}
 
 \item{j}{column indices specifying elements to extract or replace}
+
+\item{\dots}{Not used}
+
+\item{drop}{Simplify dimensions of resulting object}
 }
 \description{
 Extract or replace parts of an object

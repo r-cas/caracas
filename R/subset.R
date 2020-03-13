@@ -33,6 +33,8 @@ convert_to_r_mat <- function(x) {
 #' @param x A `caracas_symbol`.
 #' @param i row indices specifying elements to extract or replace
 #' @param j column indices specifying elements to extract or replace
+#' @param \dots Not used
+#' @param drop Simplify dimensions of resulting object
 #' 
 #' @examples 
 #' if (have_sympy()) {
@@ -72,6 +74,8 @@ convert_to_r_mat <- function(x) {
 #' @param x A `caracas_symbol`.
 #' @param i row indices specifying elements to extract or replace
 #' @param j column indices specifying elements to extract or replace
+#' @param \dots Not used
+#' @param value Replacement value
 #' 
 #' @examples 
 #' if (have_sympy()) {
