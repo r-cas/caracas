@@ -13,18 +13,17 @@
 install.packages('caracas')
 ```
 
-To build and install from Github with vignettes run this command from within `R` (please install `devtools` first if not already installed):
+To build and install from Github with vignettes run this command from within `R` (please install `remotes` first if not already installed):
 
 ```
-# install.packages('devtools')
-devtools::install_github("r-cas/caracas", 
-                         build_opts = c("--no-resave-data", "--no-manual"))
+# install.packages('remotes')
+remotes::install_github("r-cas/caracas", build_vignettes = TRUE)
 ```
 
 You can also install the package without vignettes if needed as follows:
 
 ```
-devtools::install_github("r-cas/caracas")
+remotes::install_github("r-cas/caracas")
 ```
 
 ## Development site
