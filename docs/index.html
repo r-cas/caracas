@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9031</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9041</span>
       </span>
     </div>
 
@@ -55,6 +55,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/fastest-route.html">Fastest route through the forest</a>
+    </li>
+    <li>
       <a href="articles/introduction.html">Introduction to 'caracas'</a>
     </li>
     <li>
@@ -98,12 +101,11 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p><code>caracas</code> is available on CRAN and can be installed as usual:</p>
 <pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages('caracas')</a></code></pre>
-<p>To build and install from Github with vignettes run this command from within <code>R</code> (please install <code>devtools</code> first if not already installed):</p>
-<pre><code><a href="https://devtools.r-lib.org//reference/remote-reexports.html"># install.packages('devtools')
-devtools::install_github("r-cas/caracas", 
-                         build_opts = c("--no-resave-data", "--no-manual"))</a></code></pre>
+<p>To build and install from Github with vignettes run this command from within <code>R</code> (please install <code>remotes</code> first if not already installed):</p>
+<pre><code><a href="https://remotes.r-lib.org/reference/install_github.html"># install.packages('remotes')
+remotes::install_github("r-cas/caracas", build_vignettes = TRUE)</a></code></pre>
 <p>You can also install the package without vignettes if needed as follows:</p>
-<pre><code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">devtools::install_github("r-cas/caracas")</a></code></pre>
+<pre><code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github("r-cas/caracas")</a></code></pre>
 </div>
 <div id="development-site" class="section level2">
 <h2 class="hasAnchor">

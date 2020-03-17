@@ -52,3 +52,15 @@ test_that("multiplication", {
   expect_equal(D %*% t(D), eval(as_r(B %*% t(B)), list(x = 42)))
 })
 
+
+
+test_that("fraction", {
+  skip_if_no_sympy()
+  
+  #https://docs.sympy.org/latest/gotchas.html#python-numbers-vs-sympy-numbers
+  x <- as_symbol("120000/7")
+  y <- as_symbol("20")
+  
+  expect_equal(as.character(x + y), "120140/7")
+})
+

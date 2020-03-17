@@ -39,6 +39,11 @@ construct_symbol_from_pyobj <- function(pyobj) {
 #' @importFrom reticulate py_eval
 #' @export
 eval_to_symbol <- function(x) {
+  # https://docs.sympy.org/latest/gotchas.html#python-numbers-vs-sympy-numbers
+  if (grepl("[0-9-.]+/[0-9-.]+", x, perl = TRUE)) {
+    x <- gsub("([0-9-.]+)/([0-9-.]+)", "S(\\1)/S(\\2)", x, perl = TRUE)
+  }
+  
   s <- reticulate::py_eval(x, convert = FALSE)
   y <- construct_symbol_from_pyobj(s)
   return(y)
@@ -106,7 +111,7 @@ doit <- function(x) {
 }
 
 try_doit <- function(x) {
-  if (!is.null(x$pyobj) && !is.null(x$pyobj$doit)) {
+  if (!is.null(x$pyobj) && "doit" %in% names(x$pyobj)) {
     y <- construct_symbol_from_pyobj(x$pyobj$doit())
     return(y)
   }
@@ -126,4 +131,32 @@ c.caracas_symbol <- function(...) {
   return(x)
 }
 
+
+#' Substitute symbol for value
+#' 
+#' @param s Expression
+#' @param x Name of symbol (character)
+#' @param v Value for `x`
+#' 
+#' @examples 
+#' if (have_sympy()) {
+#'    x <- symbol('x')
+#'    e <- 2*x^2
+#'    e
+#'    subs(e, "x", "2")
+#'    y <- as_symbol("2")
+#'    subs(e, "x", y)
+#' }
+#' 
+#' @export
+subs <- function(s, x, v) {
+  val <- if (is(v, "caracas_symbol")) {
+    v$pyobj
+  } else {
+    v
+  }
+  
+  y <- construct_symbol_from_pyobj(s$pyobj$subs(x, val))
+  return(y)
+}
 
