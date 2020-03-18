@@ -66,9 +66,7 @@ tex(eq)
 #> [1] "2 x^{2} - x"
 ```
 
-\[
-  2 x^{2} - x
-\]
+\[2 x^{2} - x\]
 
 ``` r
 rootsolve(eq, x)
@@ -108,9 +106,7 @@ tex(Binv)
 #> [1] "\\left[\\begin{matrix}\\frac{1}{x} & 0\\\\- \\frac{1}{x^{2}} & \\frac{1}{2 x}\\end{matrix}\\right]"
 ```
 
-\[
-  \left[\begin{matrix}\frac{1}{x} & 0\\- \frac{1}{x^{2}} & \frac{1}{2 x}\end{matrix}\right]
-\]
+\[\left[\begin{matrix}\frac{1}{x} & 0\\- \frac{1}{x^{2}} & \frac{1}{2 x}\end{matrix}\right]\]
 
 ``` r
 eigenvals(Binv)

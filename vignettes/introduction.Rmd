@@ -36,9 +36,7 @@ as_r(eq)
 tex(eq)
 ```
 
-\[
-  `r tex(eq)`
-\]
+$$`r tex(eq)`$$
 
 ```{r}
 rootsolve(eq, x)
@@ -57,9 +55,7 @@ Binv
 tex(Binv)
 ```
 
-\[
-  `r tex(Binv)`
-\]
+$$`r tex(Binv)`$$
 
 ```{r}
 eigenvals(Binv)
