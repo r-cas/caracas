@@ -78,8 +78,6 @@ as_r(eq)
 tex(eq)
 ```
 
-$$`r tex(eq)`$$
-
 ```{r}
 rootsolve(eq, x)
 dd(eq, x)
@@ -94,8 +92,6 @@ Binv <- inverse(B)
 Binv
 tex(Binv)
 ```
-
-$$`r tex(Binv)`$$
 
 ```{r}
 eigenvals(Binv)
