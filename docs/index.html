@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9042</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9051</span>
       </span>
     </div>
 
@@ -55,6 +55,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/elaborate-reference.html">Elaborate reference</a>
+    </li>
+    <li>
       <a href="articles/fastest-route.html">Fastest route through the forest</a>
     </li>
     <li>
@@ -62,9 +65,6 @@
     </li>
     <li>
       <a href="articles/naive-bayes.html">The structure of the concentration and covariance matrix in a naive Bayes model</a>
-    </li>
-    <li>
-      <a href="articles/output.html">Output formats</a>
     </li>
     <li>
       <a href="articles/sympy-object.html">Using the 'SymPy' object directly</a>
@@ -100,12 +100,12 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p><code>caracas</code> is available on CRAN and can be installed as usual:</p>
-<pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages('caracas')</a></code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'caracas'</span>)</a></code></pre></div>
 <p>To build and install from Github with vignettes run this command from within <code>R</code> (please install <code>remotes</code> first if not already installed):</p>
-<pre><code><a href="https://remotes.r-lib.org/reference/install_github.html"># install.packages('remotes')
-remotes::install_github("r-cas/caracas", build_vignettes = TRUE)</a></code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages('remotes')</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"r-cas/caracas"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>You can also install the package without vignettes if needed as follows:</p>
-<pre><code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github("r-cas/caracas")</a></code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"r-cas/caracas"</span>)</a></code></pre></div>
 </div>
 <div id="development-site" class="section level2">
 <h2 class="hasAnchor">
@@ -126,6 +126,78 @@ remotes::install_github("r-cas/caracas", build_vignettes = TRUE)</a></code></pre
 <h2 class="hasAnchor">
 <a href="#code-of-conduct" class="anchor"></a>Code of conduct</h2>
 <p>Please note that the <code>caracas</code> project is released with a Contributor Code of Conduct (available in <code>CODE_OF_CONDUCT.md</code>). By contributing to this project, you agree to abide by its terms.</p>
+</div>
+<div id="brief-introduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#brief-introduction" class="anchor"></a>Brief introduction</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(caracas)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw"><a href="reference/symbol.html">symbol</a></span>(<span class="st">'x'</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">eq &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>x<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span>x</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">eq</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; [caracas]:    2    </span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;            2⋅x  - x</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(eq)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; [1] "2*x^2 - x"</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw"><a href="reference/as_r.html">as_r</a></span>(eq)</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; expression(2 * x^2 - x)</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="kw"><a href="reference/tex.html">tex</a></span>(eq)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; [1] "2 x^{2} - x"</span></a></code></pre></div>
+<p><br><span class="math display">2<em>x</em><sup>2</sup> − <em>x</em></span><br></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/rootsolve.html">rootsolve</a></span>(eq, x)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; [[1]]$x</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; [caracas]: 0</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; [[2]]</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; [[2]]$x</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; [caracas]: 1/2</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="kw"><a href="reference/dd.html">dd</a></span>(eq, x)</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; [caracas]: 4⋅x - 1</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="kw"><a href="reference/subs.html">subs</a></span>(eq, x, <span class="st">"y"</span>)</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; [caracas]:    2    </span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt;            2⋅y  - y</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">A &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="st">"2*x"</span>), <span class="dv">2</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">B &lt;-<span class="st"> </span><span class="kw"><a href="reference/as_symbol.html">as_symbol</a></span>(A)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">B</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; [caracas]: ⎡x   0 ⎤</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;            ⎢      ⎥</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;            ⎣2  2⋅x⎦</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">Binv &lt;-<span class="st"> </span><span class="kw"><a href="reference/inverse.html">inverse</a></span>(B)</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">Binv</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; [caracas]: ⎡ 1      ⎤</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt;            ⎢ ─    0 ⎥</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;            ⎢ x      ⎥</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;            ⎢        ⎥</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt;            ⎢-1    1 ⎥</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt;            ⎢───  ───⎥</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt;            ⎢  2  2⋅x⎥</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt;            ⎣ x      ⎦</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="kw"><a href="reference/tex.html">tex</a></span>(Binv)</a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; [1] "\\left[\\begin{matrix}\\frac{1}{x} &amp; 0\\\\- \\frac{1}{x^{2}} &amp; \\frac{1}{2 x}\\end{matrix}\\right]"</span></a></code></pre></div>
+<p><br><span class="math display">$$
+  \left[\begin{matrix}\frac{1}{x} &amp; 0\\- \frac{1}{x^{2}} &amp; \frac{1}{2 x}\end{matrix}\right]
+$$</span><br></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/eigenvals.html">eigenvals</a></span>(Binv)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; [[1]]$eigval</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; [caracas]: 1</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;            ─</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;            x</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; [[1]]$eigmult</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; [1] 1</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; [[2]]</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; [[2]]$eigval</span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; [caracas]:  1 </span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt;            ───</span></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt;            2⋅x</span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; [[2]]$eigmult</span></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; [1] 1</span></a></code></pre></div>
+<p>Please find more examples in the other vignettes available at <a href="https://r-cas.github.io/caracas/" class="uri">https://r-cas.github.io/caracas/</a>.</p>
 </div>
 </div>
   </div>

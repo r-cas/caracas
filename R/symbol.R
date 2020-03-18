@@ -150,13 +150,15 @@ c.caracas_symbol <- function(...) {
 #' 
 #' @export
 subs <- function(s, x, v) {
+  sym <- as.character(x)
+  
   val <- if (is(v, "caracas_symbol")) {
     v$pyobj
   } else {
     v
   }
   
-  y <- construct_symbol_from_pyobj(s$pyobj$subs(x, val))
+  y <- construct_symbol_from_pyobj(s$pyobj$subs(sym, val))
   return(y)
 }
 

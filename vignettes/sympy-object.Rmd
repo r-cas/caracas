@@ -25,11 +25,7 @@ if (!have_sympy()) {
 }
 ```
 
-## Elaborate example
-
-How can we minimise the amount of material used to produce a cylindric
-tin can that contains 1 litre.  The cylinder has diameter $d$ and
-height $h$. The question is therefore: What is $d$ and $h$?
+## Using `SymPy` directly
 
 First we get the `SymPy` object:
 
@@ -37,7 +33,18 @@ First we get the `SymPy` object:
 sympy <- get_sympy()
 ```
 
-Then we introduce the variables `d` (diameter) and `h` (height):
+```{r}
+sympy$diff("2*a*x", "x")
+sympy$solve("x**2 - 1", "x")
+```
+
+## Elaborate example
+
+How can we minimise the amount of material used to produce a cylindric
+tin can that contains 1 litre.  The cylinder has diameter $d$ and
+height $h$. The question is therefore: What is $d$ and $h$?
+
+We introduce the variables `d` (diameter) and `h` (height):
 
 ```{r}
 d <- sympy$symbols('d')

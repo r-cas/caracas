@@ -1,0 +1,257 @@
+---
+title: "Elaborate reference"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Elaborate reference}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, message=FALSE}
+library(caracas)
+```
+
+```{r, include = FALSE}
+if (!have_sympy()) {
+  # SymPy not available, so the chunks shall not be evaluated
+  knitr::opts_chunk$set(eval = FALSE)
+}
+```
+
+
+## Quick start
+
+```{r}
+x <- symbol('x')
+as.character(x)
+x
+as_r(x)
+```
+
+
+```{r}
+2*x
+y <- symbol('y')
+sqrt(3*x^y)
+```
+
+```{r}
+z <- cos(x)^2 + sin(x)^2
+z
+simplify(z)
+tex(z)
+```
+
+```{r}
+z <- cos(x)*cos(y) - sin(x)*sin(y)
+z
+simplify(z)
+z <- cos(x + y)
+z
+expand(z)
+expand_trig(z)
+```
+
+```{r}
+x <- symbol('x')
+y <- symbol('y')
+z <- log(x*y)
+z
+expand_log(z)
+```
+
+
+### Sums
+
+```{r}
+x <- symbol("x")
+sumf(1/x, "x", 1, 10)
+sumf(1/x, x, 1, 10)
+s <- sumf(1/x, "x", 1, 10)
+as_r(s)
+sum(1/(1:10))
+n <- symbol("n")
+simplify(sumf(x, x, 1, n))
+```
+
+
+### Products
+
+```{r}
+x <- symbol("x")
+p <- prodf(1/x, "x", 1, 10)
+p
+as_r(p)
+prod(1/(1:10))
+n <- symbol("n")
+prodf(x, x, 1, n)
+```
+
+
+### Integrals
+
+```{r}
+x <- symbol("x")
+
+intf(1/x, x, 1, 10)
+i1 <- intf(1/x, x, 1, 10, doit = FALSE)
+i1
+tex(i1)
+doit(i1)
+intf(1/x, x)
+i1 <- intf(1/x, x, doit = FALSE)
+i1
+tex(i1)
+doit(i1)
+```
+
+### Limits
+
+
+```{r}
+x <- symbol("x")
+lim(sin(x)/x, "x", 0)
+lim(1/x, "x", 0, dir = '+')
+lim(1/x, "x", 0, dir = '-')
+```
+
+We can also postpone evaluation:
+
+```{r}
+x <- symbol("x")
+lim(sin(x)/x, "x", 0)
+lim(sin(x)/x, x, 0)
+```
+
+```{r}
+res <- lim(sin(x)/x, "x", 0, doit = FALSE)
+res
+as.character(res)
+tex(res)
+doit(res)
+as_r(res)
+```
+
+### Derivatives
+
+Note that the function is called `d()` and not `deriv()`.
+
+```{r}
+x <- symbol("x")
+y <- symbol("y")
+f <- 3*x^2 + x*y^2
+f
+as_r(f)
+dd(f, "x")
+dd(f, x)
+dd(f, c("x", "y"))
+dd(f, c(x, y))
+f1 <- dd(f, c(x, y))
+f1
+as.character(f1)
+as_r(f1)
+eval(as_r(f1), list(x = 1, y = 2))
+dd(f1, c(x, y))
+f2 <- dd2(f, c(x, y))
+f2
+as_r(f2)
+eval(as_r(f2), list(x = 1, y = 2))
+```
+
+
+```{r}
+x <- symbol("x")
+y <- symbol("y")
+f <- eval_to_symbol("[3*x**2 + x*y**2, 2*x, 5*y]")
+f
+dd(f, c(x, y))
+```
+
+
+## Linear algebra
+
+```{r}
+A <- matrix(c("x", 0, 0, "2*x"), 2, 2)
+A
+B <- as_symbol(A)
+B
+2*B
+dim(B)
+sqrt(B)
+log(B)
+B %*% t(B)
+```
+
+```{r}
+A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
+B <- as_symbol(A)
+eigenvals(B)
+eigenvects(B)
+eigen(eval(as_r(B), list(a = 2)))
+```
+
+
+
+## Solve
+
+* `inverse()`
+* `linsolve()`
+* `rootsolve()`
+* `systemsolve()`
+
+```{r}
+# Multinomial likelihood
+p <- as_symbol(paste0("p", 1:3))
+y <- as_symbol(paste0("y", 1:3))
+a <- as_symbol("a")
+l <- sum(y*log(p))
+l
+L <- -l + a*(sum(p) - 1)
+L
+tex(L)
+g <- dd(L, c("a", paste0("p", 1:3)))
+g
+sol <- rootsolve(g, c("p1", "p2", "p3", "a"))
+sol
+tex(sol[[1L]]$p1)
+```
+
+## Substitution
+
+```{r}
+x <- symbol('x')
+eq <- 2*x^2 - x
+eq
+subs(eq, x, "y")
+```
+
+## Subsetting
+
+```{r}
+A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
+B <- as_symbol(A)
+B[, 2]
+B[, -2]
+B[1, ]
+B[, 2] <- "x"
+B
+```
+
+
+## Using `SymPy` directly
+
+```{r}
+sympy <- get_sympy()
+```
+
+```{r}
+sympy$diff("2*a*x", "x")
+sympy$solve("x**2 - 1", "x")
+```

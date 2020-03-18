@@ -1,0 +1,110 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit only README.Rmd! -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE
+)
+```
+
+# `caracas`: Computer algebra in R
+
+<!-- badges: start -->
+[![R build status](https://github.com/r-cas/caracas/workflows/R-CMD-check/badge.svg)](https://github.com/r-cas/caracas/actions) 
+[![codecov.io](https://codecov.io/gh/r-cas/caracas/branch/master/graphs/badge.svg)](https://codecov.io/gh/r-cas/caracas?branch=master)
+<!-- badges: end -->
+  
+## Installation
+
+`caracas` is available on CRAN and can be installed as usual:
+
+```
+install.packages('caracas')
+```
+
+To build and install from Github with vignettes run this command from within `R` (please install `remotes` first if not already installed):
+
+```
+# install.packages('remotes')
+remotes::install_github("r-cas/caracas", build_vignettes = TRUE)
+```
+
+You can also install the package without vignettes if needed as follows:
+
+```
+remotes::install_github("r-cas/caracas")
+```
+
+## Development site
+
+See <https://github.com/r-cas/caracas>.
+
+## Online documentation
+
+See <https://r-cas.github.io/caracas/>.
+
+## Origin of name
+
+The name "caracas" is intended to mean "(inter)face to computer algebra system(s)" - notice that "cara" is Spanish (Castellano to be precise) for "face".
+
+## Code of conduct
+
+Please note that the `caracas` project is released with a Contributor Code of Conduct (available in `CODE_OF_CONDUCT.md`). By contributing to this project, you agree to abide by its terms.
+
+## Brief introduction
+
+```{r, message=FALSE}
+library(caracas)
+```
+
+```{r, include = FALSE}
+if (!have_sympy()) {
+  # SymPy not available, so the chunks shall not be evaluated
+  knitr::opts_chunk$set(eval = FALSE)
+}
+```
+
+```{r}
+x <- symbol('x')
+eq <- 2*x^2 - x
+eq
+as.character(eq)
+as_r(eq)
+tex(eq)
+```
+
+\[
+  `r tex(eq)`
+\]
+
+```{r}
+rootsolve(eq, x)
+dd(eq, x)
+subs(eq, x, "y")
+```
+
+```{r}
+A <- matrix(c("x", 2, 0, "2*x"), 2, 2)
+B <- as_symbol(A)
+B
+Binv <- inverse(B)
+Binv
+tex(Binv)
+```
+
+\[
+  `r tex(Binv)`
+\]
+
+```{r}
+eigenvals(Binv)
+```
+
+
+Please find more examples in the other vignettes available at <https://r-cas.github.io/caracas/>.
+
