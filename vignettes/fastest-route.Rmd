@@ -208,6 +208,9 @@ lines(c(pA[1], pC[1]), c(pA[2], pC[2]), type = "l", col = "black", lty = 2)
 lines(c(pB[1], pC[1]), c(pB[2], pC[2]), type = "l", col = "black", lwd = 3)
 lines(c(pA[1], pD[1]), c(pA[2], pD[2]), type = "l", col = "black", lty = 2)
 
+lines(c(pA[1], pD[1]), c(pA[2], pD[2]), type = "l", col = "red", lwd = 2.5)
+lines(c(pD[1], pC[1]), c(pD[2], pC[2]), type = "l", col = "red", lwd = 2.5)
+
 legend(1000-200, A, 
        legend = c("5 m/s", "2 m/s"), 
        lty = c(1, 2), 
