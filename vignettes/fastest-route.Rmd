@@ -27,12 +27,11 @@ if (!have_sympy()) {
 
 A [problem](https://ing.dk/artikel/taenkeboks-hurtigste-vej-mellem-a-b-1150-m-lang-232871) was posted by the Danish newspaper, *Ingeniøren*, and it goes like this:
 
-You are in a forest located at $A$. 
-You need to get to $B$ in the fastest way possible. 
-But you can only change direction once. 
-You can take the longer walking path ($AC$ and $CB$) where you can walk fast, 
-the direct path through the forest ($AB$) where you have to walk slower, 
-or first take the fast walking path some distance, $k$, and then cross through the forest ($AD$, $DB$).
+You are in the middle of a dense forest located at $A$. 
+You need to get to $C$ in the fastest way possible, and you can only change direction once. 
+You can walk directly via $AB$ to the dedicated walking path $BC$ where you can walk fast, 
+you can take the direct path through the forest ($AC$) where you have to walk slower, 
+or cross through the forest to the dedicated walking path ($AD$ and then $DC$).
 
 ```{r, echo = FALSE, fig.width=8, fig.height=5}
 old_mar <- par("mar")
@@ -40,31 +39,37 @@ par(mar = c(0, 0, 0, 0))
 A <- 300
 kat <- sqrt(1000^2 - A^2)
 
-pA <- c(0, 0)
-pB <- c(kat, A)
+pA <- c(0, A)
+pB <- c(0, 0)
 pC <- c(kat, 0)
 
 D <- 400
 pD <- c(D, 0)
 
-plot(0, type = 'n', axes = FALSE, ann = FALSE, xlim = c(0, 1075), ylim = c(-50, 350))
+pad <- 40
+plot(0, type = 'n', axes = FALSE, ann = FALSE, 
+     xlim = c(-pad, 1000+pad), 
+     ylim = c(-pad, A+pad))
 
-polygon(c(pA[1], pB[1], pC[1]), c(pA[2], pB[2], pC[2]), border = NA, col = "green")
+polygon(c(pA[1]-pad, pB[1]-pad, pC[1]+pad, pC[1]+pad), 
+        c(pA[2]+pad, pB[2]-pad, pC[2]-pad, pA[2]+pad), border = NA, col = "green")
 
 points(pA[1], pA[2], type = "p"); text(pA[1], pA[2], labels = "A", pos = 2)
-points(pB[1], pB[2], type = "p"); text(pB[1], pB[2], labels = "B", pos = 3)
+points(pB[1], pB[2], type = "p"); text(pB[1], pB[2], labels = "B", pos = 2)
 points(pC[1], pC[2], type = "p"); text(pC[1], pC[2], labels = "C", pos = 4)
 points(pD[1], pD[2], type = "p"); text(pD[1], pD[2], labels = "D", pos = 1)
 
-lines(c(pA[1], pB[1]), c(pA[2], pB[2]), type = "l", col = "green")
-lines(c(pA[1], pC[1]), c(pA[2], pC[2]), type = "l", col = "black")
-lines(c(pB[1], pC[1]), c(pB[2], pC[2]), type = "l", col = "black")
-lines(c(pD[1], pB[1]), c(pD[2], pB[2]), type = "l", col = "black", lty = 2)
+lines(c(pA[1], pB[1]), c(pA[2], pB[2]), type = "l", col = "black", lty = 2)
+lines(c(pA[1], pC[1]), c(pA[2], pC[2]), type = "l", col = "black", lty = 2)
+lines(c(pB[1], pC[1]), c(pB[2], pC[2]), type = "l", col = "black", lwd = 3)
+lines(c(pA[1], pD[1]), c(pA[2], pD[2]), type = "l", col = "black", lty = 2)
 
-text(kat/5, 0, labels = "v1 = 5 m/s", pos = 1)
-text(kat, A/2, labels = "d1 = 300 m\nv1 = 5 m/s", pos = 4)
-
-text(kat/2, A/1.8, labels = "d2 = 1,000 m\nv2 = 2 m/s", pos = 3)
+legend(1000-200, A, 
+       legend = c("5 m/s", "2 m/s"), 
+       lty = c(1, 2), 
+       lwd = c(3, 1))
+text(-pad/3, A/2, labels = "|AB| = 300 m", pos = 3, srt = 90)
+text(kat/2, A/1.7, labels = "|AC| = 1,000 m", pos = 3)
 
 par(mar = old_mar)
 ```
@@ -72,68 +77,57 @@ par(mar = old_mar)
 ## Information given
 
 * Distances
-  * $|CB| =$ 300 m
-  * $|AB| =$ 1,000 m
+  * $|AB| =$ 300 m
+  * $|AC| =$ 1,000 m
 * Velocities
-  * $v_{AC} = 5$ m/s
-  * $v_{CB} = 5$ m/s
   * $v_{AB} = 2$ m/s
-  * $v_{DB} = 2$ m/s
+  * $v_{AD} = 2$ m/s
+  * $v_{AC} = 2$ m/s
+  * $v_{BC} = 5$ m/s
 
 ### Length of line segments
 
-We parameterise with $k = |AD|$, the distance between $A$ and $D$. 
+We parameterise with $k = |BD|$, the distance between $B$ and $D$. 
 That is, how much to walk on fast walking path before crossing into 
 the forest.
 
 Formulating using `caracas`:
 
 ```{r}
-CB <- as_symbol('300')
-CB
-AB <- as_symbol('1000')
+AB <- as_symbol('300')
 AB
-AC <- sqrt(AB^2 - CB^2)
+AC <- as_symbol('1000')
 AC
-k <- symbol('k') # AD
-DC <- AC - k
-DB <- sqrt(DC^2 + CB^2)
-DB
+BC <- sqrt(AC^2 - AB^2)
+BC
+k <- symbol('k') # |BD|
+DC <- BC - k
+AD <- sqrt(AB^2 + k^2)
+AD
 ```
 
-So for a distance of $k$, you travel by 5 m/s, and then for a distance of 
-$`r tex(DB)`$ you travel by 2 m/s. 
-Thus it takes $k/5$ to travel $AD$ and $`r tex(DB/2)`$ to travel $DB$.
+So for a distance of $|AD|$, you travel by 5 m/s, and then for a distance of 
+$`r tex(DC)`$ you travel by 2 m/s. 
+Thus it takes $`r tex(AD/2)`$ to travel $AD$ and $`r tex(DC/5)`$ to travel $DC$.
 
-At the two extreme values for $k = 0$ and $k = |AC|$ we get:
-
-```{r}
-# k = 0: route is AB
-as_r(AB)/2
-# k = |AC|: route is AC + CB
-(as_r(AC) + as_r(CB))/5
-```
-
-The question is: Can we do better?
+The question is: What is the fastest way to get from $A$ to $C$?
 
 First, the total duration of the route is:
 
 ```{r}
-l <- k/5 + DB/2
+l <- AD/2 + DC/5
 l
 ```
 
-(The discontinuity at $k = |AC|$ is ignored.)
-
-```{r, fig.width=4, fig.height=4}
+```{r, fig.width=7, fig.height=5}
 lfun <- as_r(l)
 lfun
 ks <- seq(0, as_r(AC), length.out = 100)
 ls <- eval(lfun, list(k = ks))
-plot(ks, ls, type = "l")
+plot(ks, ls, type = "l", xlab = "k", ylab = "Time A to C")
 ```
 
-It looks like a minimum around $k = 800$.
+It looks like a minimum around $k = 150$.
 
 We find the analytical solution by first finding critical points:
 
@@ -160,10 +154,10 @@ The fastest route is thus obtained for
 \]
 It has a length of (in meters)
 ```{r}
-DC_best <- AC - best_k
-DB_best <- sqrt(DC_best^2 + CB^2)
-DB_best
-best_route <- best_k + DB_best
+DC_best <- BC - best_k
+AD_best <- sqrt(AB^2 + best_k^2)
+AD_best
+best_route <- AD_best + DC_best
 best_route
 as_r(best_route)
 ```
@@ -182,48 +176,44 @@ as_r(best_l)
 
 The best route can be illustrated, too:
 
+
 ```{r, echo = FALSE, fig.width=8, fig.height=5}
 old_mar <- par("mar")
 par(mar = c(0, 0, 0, 0))
 A <- 300
 kat <- sqrt(1000^2 - A^2)
 
-pA <- c(0, 0)
-pB <- c(kat, A)
+pA <- c(0, A)
+pB <- c(0, 0)
 pC <- c(kat, 0)
 
 D <- as_r(best_k)
 pD <- c(D, 0)
 
-plot(0, type = 'n', axes = FALSE, ann = FALSE, xlim = c(0, 1075), ylim = c(-50, 350))
+pad <- 40
+plot(0, type = 'n', axes = FALSE, ann = FALSE, 
+     xlim = c(-pad, 1000+pad), 
+     ylim = c(-pad, A+pad))
 
-polygon(c(pA[1], pB[1], pC[1]), c(pA[2], pB[2], pC[2]), border = NA, col = "green")
+polygon(c(pA[1]-pad, pB[1]-pad, pC[1]+pad, pC[1]+pad), 
+        c(pA[2]+pad, pB[2]-pad, pC[2]-pad, pA[2]+pad), border = NA, col = "green")
 
 points(pA[1], pA[2], type = "p"); text(pA[1], pA[2], labels = "A", pos = 2)
-points(pB[1], pB[2], type = "p"); text(pB[1], pB[2], labels = "B", pos = 3)
+points(pB[1], pB[2], type = "p"); text(pB[1], pB[2], labels = "B", pos = 2)
 points(pC[1], pC[2], type = "p"); text(pC[1], pC[2], labels = "C", pos = 4)
 points(pD[1], pD[2], type = "p"); text(pD[1], pD[2], labels = "D", pos = 1)
 
-lines(c(pA[1], pB[1]), c(pA[2], pB[2]), type = "l", col = "green")
-lines(c(pA[1], pC[1]), c(pA[2], pC[2]), type = "l", col = "black")
-lines(c(pB[1], pC[1]), c(pB[2], pC[2]), type = "l", col = "black")
+lines(c(pA[1], pB[1]), c(pA[2], pB[2]), type = "l", col = "black", lty = 2)
+lines(c(pA[1], pC[1]), c(pA[2], pC[2]), type = "l", col = "black", lty = 2)
+lines(c(pB[1], pC[1]), c(pB[2], pC[2]), type = "l", col = "black", lwd = 3)
+lines(c(pA[1], pD[1]), c(pA[2], pD[2]), type = "l", col = "black", lty = 2)
 
-lines(c(pA[1], pD[1]), c(pA[2], pD[2]), type = "l", col = "red", lwd = 2)
-lines(c(pD[1], pB[1]), c(pD[2], pB[2]), type = "l", col = "red", lwd = 2)
-
-text(kat/5, 0, labels = "v1 = 5 m/s", pos = 1)
-text(kat, A/2, labels = "d1 = 300 m\nv1 = 5 m/s", pos = 4)
-
-text(kat/2, A/1.8, labels = "d2 = 1,000 m\nv2 = 2 m/s", pos = 3)
+legend(1000-200, A, 
+       legend = c("5 m/s", "2 m/s"), 
+       lty = c(1, 2), 
+       lwd = c(3, 1))
+text(-pad/3, A/2, labels = "|AB| = 300 m", pos = 3, srt = 90)
+text(kat/2, A/1.7, labels = "|AC| = 1,000 m", pos = 3)
 
 par(mar = old_mar)
 ```
-
-We end up concluding that the above is the best route if forced to 
-go through forest. 
-But if one can choose to use the dedicated walking path the entire way, 
-then that is actually the fastest. 
-In contrast to what the [answer](https://ing.dk/artikel/taenkeboks-hurtigste-vej-mellem-a-b-1150-m-lang-232871) originally says.
-
-
-
