@@ -26,7 +26,7 @@ test_that("eval_to_symbol", {
   skip_if_no_sympy()
   
   expect_error(eval_to_symbol(''))
-  expect_error(eval_to_symbol('2*w'))
+  expect_error(eval_to_symbol('2*q'))
   x <- symbol('x')
   expr <- eval_to_symbol('2*x')
   expect_s3_class(expr, 'caracas_symbol')

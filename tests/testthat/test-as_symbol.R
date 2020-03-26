@@ -1,12 +1,16 @@
 context("as_symbol()")
 
 test_that("var detect", {
-  A <- matrix(c("zzzzzzz", 1, 1, "2*zzzzzzz", "zzzzzzz+2", 1), 3, 2)
+  skip_if_no_sympy()
+  
+  A <- matrix(c("w", 1, 1, "2*w", "w+2", 1), 3, 2)
   expect_error(as_symbol(A, declare_variables = FALSE))
   expect_s3_class(as_symbol(A, declare_variables = TRUE), "caracas_symbol")
 })
 
 test_that("smoke", {
+  skip_if_no_sympy()
+  
   A <- matrix(c("x", 1, 1, "2*x", "x+2", 1), 3, 2)
   B <- as_symbol(A)
   expect_equal(dim(B), c(3L, 2L))
