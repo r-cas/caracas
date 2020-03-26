@@ -2,13 +2,40 @@
 # devtools::check_rhub() (rhub::check_for_cran())
 # reticulate::conda_remove('r-reticulate')
 # reticulate::py_module_available("sympy")
+# reticulate::use_python('/usr/bin/python3')
 
 # global reference to sympy (will be initialized in .onLoad)
 sympy <- NULL
 
+#' @importFrom reticulate import py_run_string py_module_available
+silent_prepare_sympy <- function() {
+  if (!is.null(sympy)) {
+    return(NULL)
+  }
+  
+  if (reticulate::py_module_available("sympy")) {
+    local_sympy <- reticulate::import("sympy")
+    
+    if (base::numeric_version(local_sympy$`__version__`) >= "1.4") {
+      # All okay:
+      
+      sympy <<- local_sympy # update global reference
+      
+      reticulate::py_run_string("from sympy import *")
+      #reticulate::py_run_string("from sympy.parsing.sympy_parser import parse_expr")
+    } 
+    
+    # else handled in .onAttach()
+  }
+}
+
 ensure_sympy <- function() {
+  silent_prepare_sympy()
+  
   if (is.null(sympy)) {
-    stop("'SymPy' was not available")
+    stop("'SymPy' >= 1.4 not available.\n", 
+         "Please run this command:\n", 
+         "caracas::install_sympy()")
   }
 }
 
@@ -21,9 +48,10 @@ ensure_sympy <- function() {
 #' 
 #' @concept sympy
 #' 
-#' @importFrom reticulate py_module_available
 #' @export
 have_sympy <- function() {
+  silent_prepare_sympy()
+  
   return(!is.null(sympy))
 }
 
@@ -46,37 +74,6 @@ sympy_version <- function() {
   sympy_version <- base::numeric_version(sympy$`__version__`)
   
   return(sympy_version)
-}
-
-
-#' @importFrom reticulate configure_environment import py_run_string
-.onLoad <- function(libname, pkgname) {
-  #reticulate::configure_environment(pkgname)
-  
-  if (reticulate::py_module_available("sympy")) {
-    local_sympy <- reticulate::import("sympy", delay_load = TRUE)
-    
-    if (base::numeric_version(local_sympy$`__version__`) >= "1.4") {
-      # All okay:
-      
-      sympy <<- local_sympy # update global reference
-      
-      reticulate::py_run_string("from sympy import *")
-      #reticulate::py_run_string("from sympy.parsing.sympy_parser import parse_expr")
-    } 
-    
-    # else handled in .onAttach()
-  }
-}
-
-.onAttach <- function(libname, pkgname) {
-  if (have_sympy()) {
-    return() # SymPy loaded
-  }
-  
-  packageStartupMessage("'SymPy' >= 1.4 not available.\n", 
-  "Please run this command:\n", 
-  "caracas::install_sympy()")
 }
 
 #' Access 'SymPy' directly
@@ -119,7 +116,7 @@ get_sympy <- function() {
 #' 
 #' @concept sympy
 #' 
-#' @importFrom reticulate py_install py_module_available
+#' @importFrom reticulate py_install
 #' @export
 install_sympy <- function(method = "auto", conda = "auto") {
   reticulate::py_install("sympy", method = method, conda = conda)
