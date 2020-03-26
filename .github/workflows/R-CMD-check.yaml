@@ -92,13 +92,10 @@ jobs:
           deps[["installed"]] <- vapply(deps[["package"]], remotes:::local_sha, character(1))
           update(deps)
           remotes::install_cran("rcmdcheck")
+          reticulate::install_miniconda()
+          reticulate::conda_create('r-reticulate', packages = c('python==3.6.9'))
+          reticulate::py_install('sympy')
         shell: Rscript {0}
-
-      - name: Install Python and SymPy
-        run: |
-          Rscript -e "reticulate::install_miniconda()"
-          Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.6.9'))"
-          Rscript -e "reticulate::py_install('sympy')"
 
       - name: Check
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "warning", check_dir = "check")
