@@ -50,7 +50,7 @@ Ops.caracas_symbol = function(e1, e2) {
     if (isTRUE(all.equal(dim_e1, dim(e2))) && any(dim_e1 == 1L)) {
       # Component wise operation
       if (.Generic == "*") {
-        z <- sympy$matrix_multiply_elementwise(o1, o2)
+        z <- get_sympy()$matrix_multiply_elementwise(o1, o2)
         return(construct_symbol_from_pyobj(z))
       }
     } else if (!(.Generic %in% c("+", "-"))) {
@@ -116,6 +116,8 @@ Math.caracas_symbol = function(x, ...) {
   }
 
   fn <- Math_transtab[i, 1L]
+  
+  sympy <- get_sympy()
 
   if (is.null(sympy[fn])) {
     stop(paste0("Could not find function '", fn, "' in Python"))

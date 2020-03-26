@@ -26,10 +26,10 @@ print.caracas_symbol <- function(x, ...) {
   }
   
   out <- if (print_type == 'pretty_utf8') {
-    reticulate::py_capture_output(sympy$pprint(x$pyobj))
+    reticulate::py_capture_output(get_sympy()$pprint(x$pyobj))
   } else {
     # 'string'
-    python_strings_to_r(sympy$sstr(x$pyobj))
+    python_strings_to_r(get_sympy()$sstr(x$pyobj))
   }
 
   out <- gsub("[ \n]+$", "", out)
@@ -62,7 +62,7 @@ tex.caracas_symbol <- function(x) {
   ensure_sympy()
   
   if (!is.null(x$pyobj)) {
-    return(sympy$latex(x$pyobj))
+    return(get_sympy()$latex(x$pyobj))
   }
   
   return(x$content)

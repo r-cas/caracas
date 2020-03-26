@@ -12,7 +12,7 @@ simplify <- function(x) {
   
   ensure_sympy()
   
-  z <- sympy$simplify(x$pyobj)
+  z <- get_sympy()$simplify(x$pyobj)
   v <- construct_symbol_from_pyobj(z)
   
   return(v)
@@ -34,7 +34,7 @@ expand <- function(x) {
   
   ensure_sympy()
   
-  z <- sympy$expand(x$pyobj)
+  z <- get_sympy()$expand(x$pyobj)
   v <- construct_symbol_from_pyobj(z)
   
   return(v)
@@ -55,7 +55,7 @@ expand_trig <- function(x) {
   
   ensure_sympy()
   
-  z <- sympy$expand_trig(x$pyobj)
+  z <- get_sympy()$expand_trig(x$pyobj)
   v <- construct_symbol_from_pyobj(z)
   
   return(v)
@@ -90,7 +90,7 @@ expand_log <- function(x) {
   
   ensure_sympy()
   
-  z <- sympy$expand_log(x$pyobj, force = TRUE)
+  z <- get_sympy()$expand_log(x$pyobj, force = TRUE)
   v <- construct_symbol_from_pyobj(z)
   
   return(v)

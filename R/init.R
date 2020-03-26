@@ -2,15 +2,17 @@
 # devtools::check_rhub() (rhub::check_for_cran())
 # reticulate::conda_remove('r-reticulate')
 # reticulate::py_module_available("sympy")
+# reticulate::miniconda_update()
 # reticulate::use_python('/usr/bin/python3')
 
 # global reference to sympy (will be initialized in .onLoad)
-sympy <- NULL
+pkg_globals <- new.env()
+pkg_globals$internal_sympy <- NULL
 
 #' @importFrom reticulate import py_run_string py_module_available
 silent_prepare_sympy <- function() {
-  if (!is.null(sympy)) {
-    return(NULL)
+  if (!is.null(pkg_globals$internal_sympy)) {
+    return()
   }
   
   if (reticulate::py_module_available("sympy")) {
@@ -19,7 +21,7 @@ silent_prepare_sympy <- function() {
     if (base::numeric_version(local_sympy$`__version__`) >= "1.4") {
       # All okay:
       
-      sympy <<- local_sympy # update global reference
+      pkg_globals$internal_sympy <- local_sympy # update global reference
       
       reticulate::py_run_string("from sympy import *")
       #reticulate::py_run_string("from sympy.parsing.sympy_parser import parse_expr")
@@ -32,7 +34,7 @@ silent_prepare_sympy <- function() {
 ensure_sympy <- function() {
   silent_prepare_sympy()
   
-  if (is.null(sympy)) {
+  if (is.null(pkg_globals$internal_sympy)) {
     stop("'SymPy' >= 1.4 not available.\n", 
          "Please run this command:\n", 
          "caracas::install_sympy()")
@@ -52,7 +54,7 @@ ensure_sympy <- function() {
 have_sympy <- function() {
   silent_prepare_sympy()
   
-  return(!is.null(sympy))
+  return(!is.null(pkg_globals$internal_sympy))
 }
 
 #' Get 'SymPy' version
@@ -71,7 +73,7 @@ have_sympy <- function() {
 sympy_version <- function() {
   ensure_sympy()
   
-  sympy_version <- base::numeric_version(sympy$`__version__`)
+  sympy_version <- base::numeric_version(pkg_globals$internal_sympy$`__version__`)
   
   return(sympy_version)
 }
@@ -96,7 +98,7 @@ sympy_version <- function() {
 get_sympy <- function() {
   ensure_sympy()
   
-  return(sympy)
+  return(pkg_globals$internal_sympy)
 }
 
 #' Install 'SymPy'
@@ -121,8 +123,8 @@ get_sympy <- function() {
 install_sympy <- function(method = "auto", conda = "auto") {
   reticulate::py_install("sympy", method = method, conda = conda)
   message("Please check output above to verify that 'SymPy' was installed correctly. ", 
-          "If so, please load 'caracas' again. And have fun!", 
-          "\n\nIf for some reason it still does not work, try updating conda\n", 
+          "If so, please have fun!", 
+          "\n\nIf for some reason it does not work, try updating conda\n", 
           "with this R command:\nreticulate::miniconda_update()")
   return(invisible(NULL))
 }

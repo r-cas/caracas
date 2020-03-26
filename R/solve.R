@@ -80,7 +80,7 @@ rootsolve <- function(lhs, vars) {
     }))
   }
   
-  y <- sympy$solve(lhs$pyobj, vars, dict = TRUE, set = FALSE)
+  y <- get_sympy()$solve(lhs$pyobj, vars, dict = TRUE, set = FALSE)
   solset <- sol_to_r_symbol_list(y)
   
   return(solset)

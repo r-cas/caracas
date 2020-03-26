@@ -57,15 +57,15 @@ lim <- function(f, var, val, dir = NULL, doit = TRUE) {
   
   y <- if (!is.null(dir) && length(dir) == 1L && dir %in% c('+', '-')) {
     if (doit) {
-      sympy$limit(f$pyobj, var, val_str, dir)
+      get_sympy()$limit(f$pyobj, var, val_str, dir)
     } else {
-      sympy$Limit(f$pyobj, var, val_str, dir)
+      get_sympy()$Limit(f$pyobj, var, val_str, dir)
     }
   } else {
     if (doit) {
-      sympy$limit(f$pyobj, var, val_str)
+      get_sympy()$limit(f$pyobj, var, val_str)
     } else {
-      sympy$Limit(f$pyobj, var, val_str)
+      get_sympy()$Limit(f$pyobj, var, val_str)
     }
   }
   
@@ -109,9 +109,9 @@ sumf <- function(f, var, lower, upper, doit = TRUE) {
   upr_str <- bound_to_str(upper)
   
   y <- if (doit) {
-    sympy$summation(f$pyobj, c(var, lwr_str, upr_str))
+    get_sympy()$summation(f$pyobj, c(var, lwr_str, upr_str))
   } else {
-    sympy$Sum(f$pyobj, c(var, lwr_str, upr_str))
+    get_sympy()$Sum(f$pyobj, c(var, lwr_str, upr_str))
   }
   
   z <- construct_symbol_from_pyobj(y)
@@ -151,9 +151,9 @@ prodf <- function(f, var, lower, upper, doit = TRUE) {
   upr_str <- bound_to_str(upper)
   
   y <- if (doit) {
-    sympy$product(f$pyobj, c(var, lwr_str, upr_str))
+    get_sympy()$product(f$pyobj, c(var, lwr_str, upr_str))
   } else {
-    sympy$Product(f$pyobj, c(var, lwr_str, upr_str))
+    get_sympy()$Product(f$pyobj, c(var, lwr_str, upr_str))
   }
   
   z <- construct_symbol_from_pyobj(y)
@@ -207,9 +207,9 @@ intf <- function(f, var, lower, upper, doit = TRUE) {
     upr_str <- bound_to_str(upper)
     
     y <- if (doit) {
-      sympy$integrate(f$pyobj, c(var, lwr_str, upr_str))
+      get_sympy()$integrate(f$pyobj, c(var, lwr_str, upr_str))
     } else {
-      sympy$Integral(f$pyobj, c(var, lwr_str, upr_str))
+      get_sympy()$Integral(f$pyobj, c(var, lwr_str, upr_str))
     }
     
     z <- construct_symbol_from_pyobj(y)
@@ -223,9 +223,9 @@ intf <- function(f, var, lower, upper, doit = TRUE) {
   var_symb <- reticulate::py_eval(paste0("symbols('", var, "')"), convert = FALSE)
   
   y <- if (doit) {
-    sympy$integrate(f$pyobj, var_symb)
+    get_sympy()$integrate(f$pyobj, var_symb)
   } else {
-    sympy$Integral(f$pyobj, var_symb)
+    get_sympy()$Integral(f$pyobj, var_symb)
   }
   
   z <- construct_symbol_from_pyobj(y)
@@ -262,11 +262,11 @@ dd <- function(expr, vars) {
   # they are known as symbols on the Python side
   
   if (length(py_vars) == 1L) {
-    z <- sympy$diff(expr$pyobj, py_vars[[1L]])
+    z <- get_sympy()$diff(expr$pyobj, py_vars[[1L]])
     v <- construct_symbol_from_pyobj(z)
     return(v)
   } else {
-    z <- sympy$derive_by_array(expr$pyobj, py_vars)
+    z <- get_sympy()$derive_by_array(expr$pyobj, py_vars)
     v <- construct_symbol_from_pyobj(z)
     return(v)
   }
