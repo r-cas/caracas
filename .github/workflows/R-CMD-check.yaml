@@ -99,7 +99,7 @@ jobs:
           Rscript -e "remotes::install_github('rstudio/reticulate')"
           Rscript -e "reticulate::install_miniconda()"
           Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.6.9'))"
-          Rscript -e "reticulate::py_install("sympy", method = "auto", conda = "auto")"
+          Rscript -e "reticulate::py_install('sympy')"
 
       - name: Check
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "warning", check_dir = "check")
