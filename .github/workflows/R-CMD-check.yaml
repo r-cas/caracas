@@ -49,7 +49,6 @@ jobs:
           echo 'MAKE=make -j2' >> .Renviron
           mkdir ~/R_LIB
           echo 'R_LIBS=~/R_LIB' >> .Renviron
-#          echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' >> .Rprofile
           echo 'options(repos = c(CRAN = "https://mirrors.dotsrc.org/cran/"))' >> .Rprofile
 
       - name: Query dependencies
