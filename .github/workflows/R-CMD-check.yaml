@@ -102,7 +102,7 @@ jobs:
 
       - name: Install SymPy
         run: |
-          Rscript -e "remotes::install_github('rstudio/reticulate')"
+          remotes::install_github('rstudio/reticulate')
           library(reticulate)
           reticulate::py_install("sympy", method = "auto", conda = "auto")
         shell: Rscript {0}
