@@ -65,7 +65,7 @@ tex.caracas_symbol <- function(x) {
     return(get_sympy()$latex(x$pyobj))
   }
   
-  return(x$content)
+  stop("Unexpected")
 }
 
 #' Convert symbol to character

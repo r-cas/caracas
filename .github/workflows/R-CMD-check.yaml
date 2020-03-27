@@ -121,7 +121,7 @@ jobs:
         if: matrix.config.os == 'ubuntu-16.04' && matrix.config.r == '3.6'
         run: |
           install.packages('covr')
-          covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")
+          covr::codecov(function_exclusions = '^install_sympy$', token = "${{secrets.CODECOV_TOKEN}}")
         shell: Rscript {0}
 
       - name: Fix path for Windows caching

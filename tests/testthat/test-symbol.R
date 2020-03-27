@@ -32,3 +32,13 @@ test_that("eval_to_symbol", {
   expect_s3_class(expr, 'caracas_symbol')
   expect_equal(as.character(expr), "2*x")
 })
+
+test_that("subs", {
+  skip_if_no_sympy()
+  
+  x <- symbol('x')
+  e <- 2*x^2
+  e2 <- subs(e, "x", "y^2")
+  expect_equal(as.character(e2), "2*y^4")
+})
+
