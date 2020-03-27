@@ -94,12 +94,6 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
-#      - name: Install Python
-#        run: |
-#          Rscript -e "remotes::install_github('rstudio/reticulate')"
-#          Rscript -e "reticulate::install_miniconda()"
-#          Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.6.9'))"
-
       - name: Install SymPy
         run: |
           remotes::install_github('rstudio/reticulate')

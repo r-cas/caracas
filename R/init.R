@@ -1,9 +1,14 @@
 # devtools::check_win_devel()
 # devtools::check_rhub() (rhub::check_for_cran())
-# reticulate::conda_remove('r-reticulate')
+
 # reticulate::py_module_available("sympy")
 # reticulate::miniconda_update()
+
+
+# reticulate::conda_remove('r-reticulate')
 # reticulate::use_python('/usr/bin/python3')
+# reticulate::conda_create('r-reticulate')
+# install_sympy(method = "conda")
 
 # global reference to sympy (will be initialized in .onLoad)
 pkg_globals <- new.env()
