@@ -47,7 +47,7 @@ tex(eq)
 $$`r inline_code(tex(eq))`$$
 
 ```{r}
-rootsolve(eq, x)
+solve_sys(eq, x)
 dd(eq, x)
 subs(eq, x, "y")
 ```
@@ -58,7 +58,7 @@ subs(eq, x, "y")
 A <- matrix(c("x", 2, 0, "2*x"), 2, 2)
 B <- as_symbol(A)
 B
-Binv <- inverse(B)
+Binv <- inv(B) # or solve_lin(B)
 Binv
 tex(Binv)
 ```

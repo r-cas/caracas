@@ -56,7 +56,7 @@ L1
 If error terms have variance $1$ then $\mathbf{Var}(e)=L \mathbf{Var}(x) L'$ so the covariance matrix is $V1=\mathbf{Var}(x) = L^- (L^-)'$ while the concentration matrix (the inverse covariances matrix) is $K=L' L$.
 
 ```{r}
-L1inv <- inverse(L1)
+L1inv <- inv(L1)
 K1 <- t(L1) %*% L1
 V1 <- L1inv %*% t(L1inv)
 ```
@@ -83,8 +83,8 @@ Ve
 ```
 
 ```{r}
-L2inv <- inverse(L2)
-K2 <- t(L2) %*% inverse(Ve) %*% L2
+L2inv <- inv(L2)
+K2 <- t(L2) %*% inv(Ve) %*% L2
 V2 <- L2inv %*% Ve %*% t(L2inv)
 ```
 

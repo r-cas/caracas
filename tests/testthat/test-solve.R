@@ -1,9 +1,8 @@
-# inverse
-# linsolve
-# rootsolve
-# systemsolve
+# inv
+# solve_lin
+# solve_sys
 
-test_that("inverse + linsolve", {
+test_that("inv/solve_lin", {
   skip_if_no_sympy()
   
   A <- as_symbol(matrix(c(1, "x", 0, 2, -1, 3, 4, 2, 5), nrow = 3, ncol = 3))
@@ -11,27 +10,33 @@ test_that("inverse + linsolve", {
   x <- A %*% b
   
   # -------------------------
-  # inverse(A)
+  # inv(A)
   # -------------------------
-  Ai <- inverse(A)
+  Ai <- inv(A)
   maybe_b <- simplify(Ai %*% x)
   expect_equal(as.character(b), as.character(maybe_b))
+
+  # -------------------------
+  # solve_lin(A)
+  # -------------------------
+  Ai2 <- solve_lin(A)
+  expect_equal(as.character(Ai), as.character(Ai2))
   
   # -------------------------
-  # linsolve(a, x)
+  # solve_lin(A, x)
   # -------------------------
-  maybe_b <- simplify(linsolve(A, x))
+  maybe_b <- simplify(solve_lin(A, x))
   expect_equal(as.character(b), as.character(maybe_b))
 })
 
-test_that("rootsolve", {
+test_that("solve_sys(lhs, vars)", {
   skip_if_no_sympy()
   
   ###################################################################
   # Single variable
   ###################################################################
   #------------------------------------------------------------------
-  sol1 <- rootsolve(as_symbol("x**2 + 1"), "x")
+  sol1 <- solve_sys(as_symbol("x**2 + 1"), "x")
   
   expect_equal(length(sol1), 2L)
   expect_equal(unname(unlist(lapply(sol1, lapply, as.character))), 
@@ -44,7 +49,7 @@ test_that("rootsolve", {
   
   #------------------------------------------------------------------
   x <- symbol("x")
-  sol2 <- rootsolve(as_symbol("x**2 + 1"), x)
+  sol2 <- solve_sys(as_symbol("x**2 + 1"), x)
   
   expect_equal(as.character(sol1), as.character(sol2))
   
@@ -62,7 +67,7 @@ test_that("rootsolve", {
   ###################################################################
   # Must be as a row vector (1 x m matrix), not a list....
   lhs <- t(as_symbol(matrix(c("x**2 + 1", "y+3"))))
-  sol1 <- rootsolve(lhs, c("x", "y"))
+  sol1 <- solve_sys(lhs, c("x", "y"))
   sol1_ord <- order(unlist(lapply(sol1, function(l) Arg(as_r(l$x)))))
   sol1 <- sol1[sol1_ord]
   
@@ -75,7 +80,7 @@ test_that("rootsolve", {
   expect_equal(as.character(sol1[[2L]]$y), "-3")
   
   y <- symbol("y")
-  sol2 <- rootsolve(lhs, c(x, y))
+  sol2 <- solve_sys(lhs, c(x, y))
   sol2_ord <- order(unlist(lapply(sol2, function(l) Arg(as_r(l$x)))))
   sol2 <- sol2[sol2_ord]
   
@@ -88,10 +93,10 @@ test_that("rootsolve", {
   expect_equal(as.character(sol2[[2L]]$y), "-3")
 })
 
-test_that("systemsolve", {
+test_that("solve_sys(lhs, rhs, vars)", {
   skip_if_no_sympy()
   
-  sol1 <- systemsolve(as_symbol("x**2"), as_symbol("-1"), "x")
+  sol1 <- solve_sys(as_symbol("x**2"), as_symbol("-1"), "x")
   #sol1
   
   expect_equal(length(sol1), 2L)
@@ -102,7 +107,6 @@ test_that("systemsolve", {
   expect_equal(names(sol1[[2L]]), "x")
   expect_equal(as.character(sol1[[2L]]$x), "1i")
 })
-
 
 test_that("solve system of non-linear equations", {
   skip_if_no_sympy()
@@ -115,7 +119,7 @@ test_that("solve system of non-linear equations", {
   L <- -l + a*(sum(p) - 1)
   g <- dd(L, c("a", paste0("p", 1:3)))
   
-  sol <- rootsolve(g, c("p1", "p2", "p3", "a"))
+  sol <- solve_sys(g, c("p1", "p2", "p3", "a"))
   
   expect_equal(length(sol), 1L)
   

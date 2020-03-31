@@ -142,7 +142,7 @@ We find the analytical solution by first finding critical points:
 ```{r}
 dl <- dd(l, k)
 dl
-crit_points <- rootsolve(dl, k)
+crit_points <- solve_sys(dl, k)
 crit_points
 best_k <- crit_points[[1]]$k
 best_k

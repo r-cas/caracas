@@ -16,7 +16,7 @@ sol_to_r_symbol_list <- function(x) {
 #' @concept solve
 #' 
 #' @export
-inverse <- function(A) {
+inv <- function(A) {
   ensure_sympy()
   
   if (!symbol_is_matrix(A)) {
@@ -29,7 +29,8 @@ inverse <- function(A) {
 
 #' Solve a linear system of equations
 #' 
-#' Find `x` in `Ax = b`
+#' Find `x` in `Ax = b`. If `b` not supplied, 
+#' the inverse of `A` is returned.
 #' 
 #' @param A matrix
 #' @param b vector
@@ -37,20 +38,19 @@ inverse <- function(A) {
 #' @concept solve
 #' 
 #' @export
-linsolve <- function(A, b) {
-  Ainv <- inverse(A)
+solve_lin <- function(A, b) {
+  Ainv <- inv(A)
+  
+  if (missing(b)) {
+    return(Ainv)
+  }
+  
   x <- Ainv %*% b
   return(x)
 }
 
-#' Find the roots in a system of non-linear equations
-#' 
-#' @param lhs Equation (or equations as row vector/1xn matrix)
-#' @param vars vector of variable names or symbols
-#' 
-#' @concept solve
-#' 
-#' @export
+
+
 rootsolve <- function(lhs, vars) {
   if (!is.null(dim(lhs))) {
     if (nrow(lhs) != 1L) {
@@ -86,9 +86,13 @@ rootsolve <- function(lhs, vars) {
   return(solset)
 }
 
+
 #' Solves a system of non-linear equations
 #' 
-#' Finds roots in `lhs - rhs`.
+#' If called as `solve_sys(lhs, vars)` 
+#' the roots are found. 
+#' If called as `solve_sys(lhs, rhs, vars)` 
+#' the solutions to `lhs = rhs` for `vars` are found.
 #' 
 #' @param lhs Equation (or equations as row vector/1xn matrix)
 #' @param rhs Equation (or equations as row vector/1xn matrix)
@@ -97,9 +101,17 @@ rootsolve <- function(lhs, vars) {
 #' @concept solve
 #' 
 #' @export
-systemsolve <- function(lhs, rhs, vars) {
-  eqs <- lhs - rhs # LHS = RHS <=> LHS - RHS = 0
+solve_sys <- function(lhs, rhs, vars) {
+  if (missing(vars)) {
+    # roots:
+    vars <- rhs
+    sol <- rootsolve(lhs, vars)
+    return(sol)
+  }
   
-  return(rootsolve(eqs, vars))
+  lhs <- lhs - rhs # LHS = RHS <=> LHS - RHS = 0
+  sol <- rootsolve(lhs, vars)
+  return(sol)
 }
+
 
