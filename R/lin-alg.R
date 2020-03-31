@@ -90,8 +90,8 @@ dim.caracas_symbol <- function(x) {
 #' if (have_sympy()) {
 #'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
 #'   B <- as_symbol(A)
-#'   eigenvals(B)
-#'   eigenvects(B)
+#'   eigen_val(B)
+#'   eigen_vec(B)
 #'   eigen(eval(as_r(B), list(a = 2)))
 #' }
 #' 
@@ -99,7 +99,7 @@ dim.caracas_symbol <- function(x) {
 #' 
 #' @importFrom reticulate py_to_r
 #' @export
-eigenvals <- function(x) {
+eigen_val <- function(x) {
   ensure_sympy()
   
   if (!inherits(x, "caracas_symbol")) {
@@ -135,8 +135,8 @@ eigenvals <- function(x) {
 #' if (have_sympy()) {
 #'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
 #'   B <- as_symbol(A)
-#'   eigenvals(B)
-#'   eigenvects(B)
+#'   eigen_val(B)
+#'   eigen_vec(B)
 #'   eigen(eval(as_r(B), list(a = 2)))
 #' }
 #' 
@@ -144,7 +144,7 @@ eigenvals <- function(x) {
 #' 
 #' @importFrom reticulate py_to_r
 #' @export
-eigenvects <- function(x) {
+eigen_vec <- function(x) {
   ensure_sympy()
   
   if (!inherits(x, "caracas_symbol")) {
