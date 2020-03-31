@@ -29,6 +29,14 @@ test_that("smoke", {
   expect_equal(as.character(t(t(B))), as.character(B))
 })
 
+test_that("matrix", {
+  skip_if_no_sympy()
+  
+  D <- as_symbol("[[1, 4, 5], [-5, 8, 9]]")
+  expect_equal(as.character(D), "Matrix([[1, 4, 5], [-5, 8, 9]])")
+  expect_equal(as.character(t(D)), "Matrix([[1, -5], [4, 8], [5, 9]])")
+})
+
 test_that("multiplication", {
   skip_if_no_sympy()
   

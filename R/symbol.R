@@ -39,6 +39,8 @@ construct_symbol_from_pyobj <- function(pyobj) {
 #' @importFrom reticulate py_eval
 #' @export
 eval_to_symbol <- function(x) {
+  ensure_sympy()
+  
   # https://docs.sympy.org/latest/gotchas.html#python-numbers-vs-sympy-numbers
   # 1/3 should be caught
   # y1/3 should not be caught

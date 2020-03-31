@@ -19,6 +19,9 @@ character, number or underscore.
 \details{
 Default is to declare used variables. Alternatively, the user
 must declare them first, e.g. by \code{\link[=symbol]{symbol()}}.
+
+Note that matrices can be defined by specifying a Python matrix,
+see below in examples.
 }
 \examples{
 if (have_sympy()) {
@@ -30,6 +33,8 @@ if (have_sympy()) {
   2*B
   dim(B)
   sqrt(B)
+  D <- as_symbol("[[1, 4, 5], [-5, 8, 9]]")
+  D
 }
 
 }

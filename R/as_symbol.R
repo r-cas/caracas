@@ -47,6 +47,9 @@ as_py_string <- function(x) {
 #' Default is to declare used variables. Alternatively, the user 
 #' must declare them first, e.g. by [symbol()].
 #' 
+#' Note that matrices can be defined by specifying a Python matrix, 
+#' see below in examples.
+#' 
 #' @param x R object to convert to a symbol
 #' @param declare_variables declare detected variables automatically
 #' 
@@ -60,6 +63,8 @@ as_py_string <- function(x) {
 #'   2*B
 #'   dim(B)
 #'   sqrt(B)
+#'   D <- as_symbol("[[1, 4, 5], [-5, 8, 9]]")
+#'   D
 #' }
 #' 
 #' @concept caracas_symbol
@@ -82,6 +87,14 @@ as_symbol <- function(x, declare_variables = TRUE) {
     }
   }
   
+  # Defining a matrix by hand with '[[1], [2]]' syntax
+  if (is.character(x) && length(x) == 1L && grepl("^\\[\\[", x)) {
+    x <- paste0("Matrix(", x, ")")
+    y <- eval_to_symbol(x)
+    return(y)    
+  } 
+  
+  # else 
   cmd <- as_py_string(x)
   y <- eval_to_symbol(cmd)
   
