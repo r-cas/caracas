@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert symbol to character — as.character.caracas_symbol • caracas</title>
+<title>Eigenvalues — eigen_val • caracas</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Convert symbol to character — as.character.caracas_symbol" />
-<meta property="og:description" content="Convert symbol to character" />
+<meta property="og:title" content="Eigenvalues — eigen_val" />
+<meta property="og:description" content="Eigenvalues" />
 
 
 
@@ -128,37 +128,51 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert symbol to character</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/output.R'><code>R/output.R</code></a></small>
-    <div class="hidden name"><code>as.character.caracas_symbol.Rd</code></div>
+    <h1>Eigenvalues</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/lin-alg.R'><code>R/lin-alg.R</code></a></small>
+    <div class="hidden name"><code>eigen_val.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Convert symbol to character</p>
+    <p>Eigenvalues</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for caracas_symbol</span>
-<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>eigen_val</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>caracas_symbol</code></p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>not used</p></td>
+      <td><p>Matrix to find eigenvalues for</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='have_sympy.html'>have_sympy</a></span>()) {
+  <span class='no'>A</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='fl'>3</span>, <span class='fl'>3</span>)
+  <span class='no'>B</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_symbol.html'>as_symbol</a></span>(<span class='no'>A</span>)
+  <span class='fu'>eigen_val</span>(<span class='no'>B</span>)
+  <span class='fu'><a href='eigen_vec.html'>eigen_vec</a></span>(<span class='no'>B</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/eigen.html'>eigen</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/eval.html'>eval</a></span>(<span class='fu'><a href='as_r.html'>as_r</a></span>(<span class='no'>B</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>2</span>)))
+}</div><div class='output co'>#&gt; eigen() decomposition
+#&gt; $values
+#&gt; [1] 2 2 0
+#&gt; 
+#&gt; $vectors
+#&gt;      [,1]          [,2]       [,3]
+#&gt; [1,]    1 -1.000000e+00 -0.7071068
+#&gt; [2,]    0  2.220446e-16  0.0000000
+#&gt; [3,]    0  2.220446e-16  0.7071068
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
