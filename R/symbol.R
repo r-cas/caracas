@@ -40,8 +40,18 @@ construct_symbol_from_pyobj <- function(pyobj) {
 #' @export
 eval_to_symbol <- function(x) {
   # https://docs.sympy.org/latest/gotchas.html#python-numbers-vs-sympy-numbers
+  # 1/3 should be caught
+  # y1/3 should not be caught
   if (grepl("[0-9-.]+/[0-9-.]+", x, perl = TRUE)) {
-    x <- gsub("([0-9-.]+)/([0-9-.]+)", "S(\\1)/S(\\2)", x, perl = TRUE)
+    # Not there is a fraction that looks like '1/3'; 
+    # we need to be sure that there are no characters in front of the 
+    # number in the numerator
+    
+    if (grepl("[a-zA-Z]+[0-9-.]+/[0-9-.]+", x, perl = TRUE)) {
+      # There was a character (e.g. 'x1/2'), do nothing
+    } else {
+      x <- gsub("([0-9-.]+)/([0-9-.]+)", "S(\\1)/S(\\2)", x, perl = TRUE)
+    }
   }
   
   s <- reticulate::py_eval(x, convert = FALSE)

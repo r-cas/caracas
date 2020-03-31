@@ -66,6 +66,7 @@ as_py_string <- function(x) {
 #' 
 #' @export
 as_symbol <- function(x, declare_variables = TRUE) {
+  ensure_sympy()
   
   if (declare_variables) {
     xele <- as.vector(x)

@@ -31,6 +31,13 @@ test_that("eval_to_symbol", {
   expr <- eval_to_symbol('2*x')
   expect_s3_class(expr, 'caracas_symbol')
   expect_equal(as.character(expr), "2*x")
+  
+  expect_equal(as.character(eval_to_symbol("1/3")), "1/3")
+  x <- symbol('x')
+  expect_equal(as.character(eval_to_symbol("x*1/3")), "x/3")
+  
+  x1 <- symbol('x1')
+  expect_equal(as.character(eval_to_symbol("x1/3")), "x1/3")
 })
 
 test_that("subs", {
