@@ -191,10 +191,11 @@ A
 B <- as_symbol(A)
 B
 2*B
-B*B # Component-wise
+B*B # Component-wise / Hadamard product
 dim(B)
 sqrt(B)
 log(B)
+sum(B)
 B %*% t(B)
 ```
 

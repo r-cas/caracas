@@ -24,9 +24,21 @@ sum.caracas_symbol <- function(..., na.rm = FALSE) {
   expr <- expr[[1L]]
   expr_dim <- dim(expr)
   
-  ones <- as_symbol(matrix(1, nrow = expr_dim[2L], ncol = expr_dim[1L]))
-  z <- ones %*% expr
-  z <- remove_mat_prefix(z)
+  if (is.null(expr_dim)) {
+    return(expr)
+  }
+  
+  if (!symbol_is_matrix(expr)) {
+    stop("Unexpected")
+  }
+  
+  ones1 <- as_symbol(matrix(1, nrow = 1L, ncol = expr_dim[1L]))
+  z1 <- ones1 %*% expr
+  
+  ones2 <- as_symbol(matrix(1, nrow = expr_dim[2L], ncol = 1L))
+  z2 <- z1 %*% ones2
+  
+  z <- remove_mat_prefix(z2)
   z <- gsub("^\\[\\[(.*)\\]\\]$", "\\1", z)
   z <- eval_to_symbol(z)
   
