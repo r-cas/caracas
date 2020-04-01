@@ -177,3 +177,91 @@ eigen_vec <- function(x) {
   return(eig_info)
 }
 
+
+#' Transpose of matrix
+#'
+#' @param x If `caracas_symbol` treat as such, else
+#' call [base::t()].
+#'
+#' @concept linalg
+#' @export
+t.caracas_symbol <- function(x) {
+  ensure_sympy()
+  
+  if (!symbol_is_matrix(x)) {
+    stop("'x' must be a matrix")
+  }
+  
+  xT <- x$pyobj$T
+  return(construct_symbol_from_pyobj(xT))
+}
+
+#' Calculate the Determinant of a Matrix
+#' 
+#' Note that there is no argument for `logarithm` as with the generic
+#' method.
+#'
+#' @param x A `caracas_symbol`
+#' @param \dots Not used
+#'
+#' @concept linalg
+#' @export
+determinant.caracas_symbol <- function(x, ...) {
+  ensure_sympy()
+  
+  if (!symbol_is_matrix(x)) {
+    stop("'x' must be a matrix")
+  }
+  
+  xdet <- x$pyobj$det()
+  
+  return(construct_symbol_from_pyobj(xdet))
+}
+
+
+
+
+
+
+#' Matrix diagonal
+#'
+#' @param x Object `x`
+#' @param \dots Passed on
+#' 
+#' @concept linalg
+#' 
+#' @export
+diag <- function(x, ...) {
+  UseMethod("diag")
+}
+
+#' @export
+diag.default <- function(x, ...) {
+  return(base::diag(x, ...))
+}
+
+#' Matrix diagonal
+#' 
+#' @param x Object `x`
+#' @param \dots Not used
+#' 
+#' @concept linalg
+#' 
+#' @export
+diag.caracas_symbol <- function(x, ...) {
+  ensure_sympy()
+  
+  if (!inherits(x, "caracas_symbol")) {
+    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+  
+  if (!symbol_is_matrix(x)) {
+    stop(paste0("'x' is not a matrix"))
+  }
+  
+  y <- eval_to_symbol(x$pyobj$diagonal())
+  
+  return(y)
+}
+
+

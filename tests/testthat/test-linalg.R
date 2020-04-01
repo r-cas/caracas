@@ -21,6 +21,17 @@ test_that("determinant", {
   expect_equal(as.character(determinant(B)), "x^3 - 2")
 })
 
+test_that("diag", {
+  skip_if_no_sympy()
+  
+  B <- as_symbol("[[x, 1], [2, x**2]]")
+  expect_equal(as.character(diag(B)), "Matrix([[x, x^2]])")
+  
+  A <- matrix(c("a", 4, 2, 1, "a", "a"), 2, 3)
+  B <- as_symbol(A)
+  expect_equal(as.character(diag(B)), "Matrix([[a, 1]])")
+})
+
 
 
 test_that("eigenvalues and eigenvectors", {
