@@ -52,9 +52,6 @@ test_that("multiplication", {
   expect_equal(as.character(3*B), "Matrix([[3*x, 6*x], [3, 3*x + 6], [3, 3]])")
   expect_equal(as.character(2*B - B - B), "Matrix([[0, 0], [0, 0], [0, 0]])")
   
-  expect_error(B*B, regexp = paste0("Only \\+, \\- and %\\*% are valid ", 
-                                    "for matrix-matrix/matrix-vector operations"))
-  
   expect_equal(dim(B), c(3L, 2L))
   expect_equal(dim(t(B) %*% B), c(2L, 2L))
   expect_equal(dim(B %*% t(B)), c(3L, 3L))

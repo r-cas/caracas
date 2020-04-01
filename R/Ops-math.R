@@ -17,6 +17,8 @@ get_pyobj <- function(e, method) {
 #' 
 #' @export
 Ops.caracas_symbol = function(e1, e2) {
+  ensure_sympy()
+  
   if (!(.Generic %in% c("+", "-", "*", "/", "^"))) {
     stop("Function '", .Generic, "' not yet implemented for caracas_symbol")
   }
@@ -53,18 +55,28 @@ Ops.caracas_symbol = function(e1, e2) {
         z <- get_sympy()$matrix_multiply_elementwise(o1, o2)
         return(construct_symbol_from_pyobj(z))
       }
-    } else if (!(.Generic %in% c("+", "-"))) {
-      stop("Only +, - and %*% are valid for matrix-matrix/matrix-vector operations")
+    } else if (!(.Generic %in% c("+", "-", "*"))) {
+      stop("Only +, -, * (component-wise) and %*% are valid for matrix-matrix/matrix-vector operations")
     }
   }
   
-  if (.Generic %in% c("+", "-")) {
+  if (.Generic %in% c("+", "-", "*", "/")) {
     if (e1_is_mat && !e2_is_mat) {
       e2 <- as_symbol(scalar_to_matrix(as.character(e2), dim(e1)))
       o2 <- e2$pyobj
     } else if (!e1_is_mat && e2_is_mat) {
       e1 <- as_symbol(scalar_to_matrix(as.character(e1), dim(e2)))
       o1 <- e1$pyobj
+    } 
+  }
+  
+  # Component-wise * and / for matrices
+  # +/- is handles with normal operators
+  if ((e1_is_mat || e2_is_mat) && .Generic %in% c("*")){
+    if (.Generic == "*") {
+      z <- get_sympy()$matrix_multiply_elementwise(o1, o2)
+      w <- construct_symbol_from_pyobj(z)
+      return(w) 
     }
   }
   

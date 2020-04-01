@@ -1,5 +1,18 @@
 context("linalg")
 
+test_that("Math", {
+  skip_if_no_sympy()
+  
+  A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
+  B <- as_symbol(A)
+  
+  expect_equal(as.character(B), "Matrix([[a, 0, a], [0, a, 0], [0, a, 0]])")
+  expect_equal(as.character(2*B), "Matrix([[2*a, 0, 2*a], [0, 2*a, 0], [0, 2*a, 0]])")
+  expect_equal(as.character(B + B), "Matrix([[2*a, 0, 2*a], [0, 2*a, 0], [0, 2*a, 0]])")
+  expect_equal(as.character(B - B), "Matrix([[0, 0, 0], [0, 0, 0], [0, 0, 0]])")
+  expect_equal(as.character(B*B), "Matrix([[a^2, 0, a^2], [0, a^2, 0], [0, a^2, 0]])")
+})
+
 test_that("eigenvalues and eigenvectors", {
   skip_if_no_sympy()
   
@@ -27,3 +40,4 @@ test_that("eigenvalues and eigenvectors", {
   expect_equal(evec[[2L]]$eigmult, 2L)
   expect_equal(as.character(evec[[2L]]$eigvec), "Matrix([[1], [0], [0]])")
 })
+
