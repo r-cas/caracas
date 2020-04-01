@@ -58,6 +58,18 @@ number_cols <- function(x) {
   return(cols)
 }
 
+#' Get matrix as character matrix
+#' 
+#' @param x caracas symbol
+#' 
+#' @concept linalg
+#' 
+#' @export
+as_character_matrix <- function(x) {
+  eval(parse(text = as_r_symr_worker(x, as_character = TRUE)))
+}
+
+
 #' Dimensions of a caracas symbol
 #' 
 #' @param x caracas symbol

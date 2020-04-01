@@ -62,3 +62,15 @@ test_that("eigenvalues and eigenvectors", {
   expect_equal(as.character(evec[[2L]]$eigvec), "Matrix([[1], [0], [0]])")
 })
 
+
+test_that("as_character_matrix", {
+  b <- as_symbol(1:3)
+  
+  expect_equal(as_character_matrix(b), 
+               structure(c("1", "2", "3"), .Dim = c(3L, 1L)))
+  
+  expect_equal(as_character_matrix(t(b)), 
+               structure(c("1", "2", "3"), .Dim = c(1L, 3L)))
+})
+
+

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Symbolic differentiation of an expression — dd • caracas</title>
+<title>Calculate the Determinant of a Matrix — determinant.caracas_symbol • caracas</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Symbolic differentiation of an expression — dd" />
-<meta property="og:description" content="Symbolic differentiation of an expression" />
+<meta property="og:title" content="Calculate the Determinant of a Matrix — determinant.caracas_symbol" />
+<meta property="og:description" content="Note that there is no argument for logarithm as with the generic
+method." />
 
 
 
@@ -128,27 +129,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Symbolic differentiation of an expression</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/calculus.R'><code>R/calculus.R</code></a></small>
-    <div class="hidden name"><code>dd.Rd</code></div>
+    <h1>Calculate the Determinant of a Matrix</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/lin-alg.R'><code>R/lin-alg.R</code></a></small>
+    <div class="hidden name"><code>determinant.caracas_symbol.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Symbolic differentiation of an expression</p>
+    <p>Note that there is no argument for <code>logarithm</code> as with the generic
+method.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dd</span>(<span class='no'>expr</span>, <span class='no'>vars</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for caracas_symbol</span>
+<span class='fu'><a href='https://rdrr.io/r/base/det.html'>determinant</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>expr</th>
+      <th>x</th>
       <td><p>A <code>caracas_symbol</code></p></td>
     </tr>
     <tr>
-      <th>vars</th>
-      <td><p>variables to take derivate with respect to</p></td>
+      <th>...</th>
+      <td><p>Not used</p></td>
     </tr>
     </table>
 

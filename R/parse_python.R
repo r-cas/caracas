@@ -40,18 +40,29 @@ stop_parse_error <- function(x) {
 }
 
 
-from_sy_vec <- function(x) {
+from_sy_vec <- function(x, as_character = FALSE) {
   y <- gsub("^\\[(.*)\\]$", "\\1", x)
   z <- strsplit(y, ",")
+
+  if (as_character) {
+    z[[1L]] <- paste0("'", z[[1L]], "'")
+  }
+  
   u <- paste0("cbind(", paste0(z[[1L]], collapse = ", "), ")")
+  
   return(u)
 }
 
-from_sy_mat <- function(x) {
+from_sy_mat <- function(x, as_character = FALSE) {
   z <- strsplit(x, "\\][ ]*,[ ]*\\[")
   z <- z[[1L]]
   z[1L] <- gsub("^\\[[ ]*\\[", "", z[1L])
   z[length(z)] <- gsub("\\][ ]*\\]$", "", z[length(z)])
+  
+  if (as_character) {
+    z <- strsplit(z, ",")
+    z <- lapply(z, function(zi) paste0("'", trimws(zi, "both"), "'", collapse = ", "))
+  }
   
   u <- paste0("rbind(", paste0("cbind(", z, ")", collapse = ", "), ")")
   
@@ -64,7 +75,7 @@ remove_mat_prefix <- function(x) {
 }
 
 
-as_r_symr_worker <- function(x) {
+as_r_symr_worker <- function(x, as_character = FALSE) {
   if (!inherits(x, "caracas_symbol")) {
     stop("x must be a caracas_symbol")
   }
@@ -77,18 +88,16 @@ as_r_symr_worker <- function(x) {
   
   if (grepl("^Matrix\\(\\[\\[.*\\]\\]\\)$", xstr)) {
     z <- remove_mat_prefix(xstr)
-    return(from_sy_mat(z))
+    return(from_sy_mat(z, as_character))
   }
   
   if (grepl("^\\[\\[.*\\]\\]$", xstr)) {
-    return(from_sy_mat(xstr))
+    return(from_sy_mat(xstr, as_character))
   }
   
   if (grepl("^\\[.*\\]$", xstr)) {
-    return(from_sy_vec(xstr))
+    return(from_sy_vec(xstr, as_character))
   }
-  
-  
   
   return(xstr)
 }

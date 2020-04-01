@@ -44,3 +44,26 @@ sum.caracas_symbol <- function(..., na.rm = FALSE) {
   
   return(z)
 }
+
+
+#' @export
+cbind.caracas_symbol <- function(..., deparse.level = 1) {
+  expr <- list(...)
+  
+  z <- lapply(expr, as_character_matrix)
+  z <- do.call(cbind, z)
+  z <- as_symbol(z)
+  
+  return(z)
+}
+
+#' @export
+rbind.caracas_symbol <- function(..., deparse.level = 1) {
+  expr <- list(...)
+  
+  z <- lapply(expr, as_character_matrix)
+  z <- do.call(rbind, z)
+  z <- as_symbol(z)
+  
+  return(z)
+}

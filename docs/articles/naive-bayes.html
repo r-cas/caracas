@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9110</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9121</span>
       </span>
     </div>
 
@@ -106,7 +106,7 @@ x_i = a x_0 + e_i, \quad i=1, \dots, 4
 \]</span> and <span class="math inline">\(x_0=e_0\)</span>. All terms <span class="math inline">\(e_0, \dots, e_3\)</span> are independent and <span class="math inline">\(N(0,1)\)</span> distributed. Let <span class="math inline">\(e=(e_0, \dots, e_3)\)</span> and <span class="math inline">\(x=(x_0, \dots x_3)\)</span>. Isolating error terms gives that <span class="math display">\[
  e = L_1 x
 \]</span> where <span class="math inline">\(L_1\)</span> has the form</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">L1chr &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/diag.html">diag</a></span>(<span class="dv">4</span>)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">L1chr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/diag.html">diag</a></span>(<span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">L1chr[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span>] &lt;-<span class="st"> "-a"</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">L1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as_symbol.html">as_symbol</a></span>(L1chr)</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">L1</a>
@@ -131,7 +131,7 @@ x_i = a x_0 + e_i, \quad i=1, \dots, 4
    V_1 &amp;= \left[\begin{matrix}1 &amp; a &amp; a &amp; a\\a &amp; a^{2} + 1 &amp; a^{2} &amp; a^{2}\\a &amp; a^{2} &amp; a^{2} + 1 &amp; a^{2}\\a &amp; a^{2} &amp; a^{2} &amp; a^{2} + 1\end{matrix}\right] 
   \end{align}\]</span></p>
 <p>Slightly more elaborate:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">L2chr &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/diag.html">diag</a></span>(<span class="dv">4</span>)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">L2chr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/diag.html">diag</a></span>(<span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">L2chr[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"-a1"</span>, <span class="st">"-a2"</span>, <span class="st">"-a3"</span>)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">L2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as_symbol.html">as_symbol</a></span>(L2chr)</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">L2</a>
@@ -142,7 +142,7 @@ x_i = a x_0 + e_i, \quad i=1, \dots, 4
 <a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;            ⎢-a₂  0  1  0⎥</span></a>
 <a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;            ⎢            ⎥</span></a>
 <a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;            ⎣-a₃  0  0  1⎦</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12">Vechr &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/diag.html">diag</a></span>(<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">Vechr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/diag.html">diag</a></span>(<span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb5-13" data-line-number="13">Vechr[<span class="kw"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"w1"</span>, <span class="st">"w2"</span>, <span class="st">"w2"</span>, <span class="st">"w2"</span>)</a>
 <a class="sourceLine" id="cb5-14" data-line-number="14">Ve &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as_symbol.html">as_symbol</a></span>(Vechr)</a>
 <a class="sourceLine" id="cb5-15" data-line-number="15">Ve</a>
