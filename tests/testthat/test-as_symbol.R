@@ -35,6 +35,11 @@ test_that("matrix", {
   D <- as_symbol("[[1, 4, 5], [-5, 8, 9]]")
   expect_equal(as.character(D), "Matrix([[1, 4, 5], [-5, 8, 9]])")
   expect_equal(as.character(t(D)), "Matrix([[1, -5], [4, 8], [5, 9]])")
+  
+  D <- as_symbol("[[x, 1], [Inf, x^2]]")
+  expect_equal(as.character(D), "Matrix([[x, 1], [Inf, x^2]])")
+  
+  expect_equal(as.character(eval_to_symbol(as.character(D))), as.character(D))
 })
 
 test_that("multiplication", {

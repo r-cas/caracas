@@ -89,7 +89,7 @@ as_symbol <- function(x, declare_variables = TRUE) {
   
   # Defining a matrix by hand with '[[1], [2]]' syntax
   if (is.character(x) && length(x) == 1L && grepl("^\\[\\[", x)) {
-    x <- paste0("Matrix(", x, ")")
+    x <- paste0("Matrix(", r_strings_to_python(x), ")")
     y <- eval_to_symbol(x)
     return(y)    
   } 

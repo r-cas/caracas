@@ -56,6 +56,7 @@ eval_to_symbol <- function(x) {
     }
   }
   
+  x <- r_strings_to_python(x)
   s <- reticulate::py_eval(x, convert = FALSE)
   y <- construct_symbol_from_pyobj(s)
   return(y)

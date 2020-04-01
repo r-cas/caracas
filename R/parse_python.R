@@ -16,6 +16,19 @@ python_strings_to_r <- function(xstr) {
   return(xstr)
 }
 
+r_strings_to_python <- function(xstr) {
+  # Python syntax:
+  # power() function
+  xstr <- gsub("^", "**", xstr, fixed = TRUE)
+  
+  # I but not in Inf
+
+  # Inf
+  xstr <- gsub("Inf", "oo", xstr, fixed = TRUE)
+  
+  return(xstr)
+}
+
 #' @importFrom utils str 
 stop_parse_error <- function(x) {
   print(x)
