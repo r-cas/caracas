@@ -16,6 +16,18 @@ test_that("sum", {
 })
 
 test_that("cbind/rbind", {
+  x <- symbol("x")
+  
+  expect_equal(as.character(cbind(x, x, x)), "Matrix([[x, x, x]])")
+  expect_equal(as_character_matrix(cbind(x, x, x)), 
+               structure(c("x", "x", "x"), .Dim = c(1L, 3L)))
+  
+  expect_equal(as.character(rbind(x, x, x)), "Matrix([[x], [x], [x]])")
+  expect_equal(as_character_matrix(rbind(x, x, x)), 
+               structure(c("x", "x", "x"), .Dim = c(3L, 1L)))
+  
+  
+  
   a <- c("x", "x^2")
   b <- as_symbol(a)
   

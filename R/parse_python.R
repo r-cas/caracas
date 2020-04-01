@@ -99,6 +99,10 @@ as_r_symr_worker <- function(x, as_character = FALSE) {
     return(from_sy_vec(xstr, as_character))
   }
   
+  if (as_character) {
+    return(paste0("'", xstr, "'"))
+  }
+  
   return(xstr)
 }
 

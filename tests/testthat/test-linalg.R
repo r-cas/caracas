@@ -64,6 +64,10 @@ test_that("eigenvalues and eigenvectors", {
 
 
 test_that("as_character_matrix", {
+  x <- as_symbol(1)
+  expect_equal(as_character_matrix(x), "1")
+  
+  
   b <- as_symbol(1:3)
   
   expect_equal(as_character_matrix(b), 
