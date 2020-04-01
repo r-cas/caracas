@@ -13,6 +13,16 @@ test_that("Math", {
   expect_equal(as.character(B*B), "Matrix([[a^2, 0, a^2], [0, a^2, 0], [0, a^2, 0]])")
 })
 
+test_that("determinant", {
+  skip_if_no_sympy()
+  
+  B <- as_symbol("[[x, 1], [2, x**2]]")
+  
+  expect_equal(as.character(determinant(B)), "x^3 - 2")
+})
+
+
+
 test_that("eigenvalues and eigenvectors", {
   skip_if_no_sympy()
   

@@ -208,3 +208,26 @@ t.caracas_symbol <- function(x) {
   xT <- x$pyobj$T
   return(construct_symbol_from_pyobj(xT))
 }
+
+#' Calculate the Determinant of a Matrix
+#' 
+#' Note that there is no argument for `logarithm` as with the generic
+#' method.
+#'
+#' @param x A `caracas_symbol`
+#' @param \dots Not used
+#'
+#' @concept linalg
+#' @export
+determinant.caracas_symbol <- function(x, ...) {
+  ensure_sympy()
+
+  if (!symbol_is_matrix(x)) {
+    stop("'x' must be a matrix")
+  }
+
+  xdet <- x$pyobj$det()
+  
+  return(construct_symbol_from_pyobj(xdet))
+}
+
