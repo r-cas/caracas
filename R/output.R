@@ -1,15 +1,3 @@
-print_type <- 'pretty_utf8'
-
-# #' Set how printing is done
-# #'
-# #' @param type 'pretty_utf8', 'string'
-# #'
-# #' @export
-# set_print_type <- function(type = c('pretty_utf8', 
-#                                     'string')) {
-#   print_type <<- match.arg(type)
-# }
-
 #' Print symbol
 #' 
 #' @param x A `caracas_symbol`
@@ -24,14 +12,14 @@ print.caracas_symbol <- function(x, ...) {
   if (is.null(x$pyobj)) {
     stop("Unexpected")
   }
-  
-  out <- if (print_type == 'pretty_utf8') {
-    reticulate::py_capture_output(get_sympy()$pprint(x$pyobj))
-  } else {
+
+  out <- if (as.logical(getOption("caracas.out.string", default = FALSE))) {
     # 'string'
     python_strings_to_r(get_sympy()$sstr(x$pyobj))
+  } else {
+    reticulate::py_capture_output(get_sympy()$pprint(x$pyobj))
   }
-
+  
   out <- gsub("[ \n]+$", "", out)
   
   # If newline, multiple lines:

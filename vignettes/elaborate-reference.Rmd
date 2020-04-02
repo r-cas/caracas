@@ -267,3 +267,17 @@ sympy <- get_sympy()
 sympy$diff("2*a*x", "x")
 sympy$solve("x**2 - 1", "x")
 ```
+
+
+## Output
+
+```{r}
+x <- symbol("x") 
+eq <- x^2 + 3*x
+eq
+options(caracas.out.string = TRUE) # default is FALSE
+eq
+options(caracas.out.string = FALSE)
+eq
+```
+

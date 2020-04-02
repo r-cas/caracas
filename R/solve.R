@@ -12,7 +12,6 @@ sol_to_r_symbol_list <- function(x) {
 #' 
 #' @param A matrix
 #' 
-#' 
 #' @concept solve
 #' 
 #' @export
