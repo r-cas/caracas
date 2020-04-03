@@ -26,21 +26,17 @@ test_that("print ascii", {
   x <- symbol("x") 
   eq <- x^2 + 3*x
   eq_print <- paste0(capture.output(print(eq)), collapse = "")
-  expect_true(grepl("⋅", eq_print, fixed = TRUE))
   expect_false(grepl("^", eq_print, fixed = TRUE))
   
   options(caracas.print.ascii = TRUE) # default is FALSE
   eq_print <- paste0(capture.output(print(eq)), collapse = "")
-  expect_false(grepl("⋅", eq_print, fixed = TRUE))
   expect_true(grepl("^", eq_print, fixed = TRUE))
   
   options(caracas.print.ascii = FALSE)
   
   eq_print <- paste0(capture.output(print(eq, ascii = TRUE)), collapse = "")
-  expect_false(grepl("⋅", eq_print, fixed = TRUE))
   expect_true(grepl("^", eq_print, fixed = TRUE))
   
   eq_print <- paste0(capture.output(print(eq, ascii = FALSE)), collapse = "")
-  expect_true(grepl("⋅", eq_print, fixed = TRUE))
   expect_false(grepl("^", eq_print, fixed = TRUE))
 })
