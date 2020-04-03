@@ -1,19 +1,22 @@
 #' Print symbol
 #' 
 #' @param x A `caracas_symbol`
+#' @param ascii `TRUE` to print in ASCII format rather than in utf8
 #' @param \dots not used
 #'
 #' @concept output
 #' 
 #' @export
-print.caracas_symbol <- function(x, ...) {
+print.caracas_symbol <- function(x, 
+                                 ascii = getOption("caracas.print.ascii", default = FALSE), 
+                                 ...) {
   ensure_sympy()
   
   if (is.null(x$pyobj)) {
     stop("Unexpected")
   }
-
-  out <- if (as.logical(getOption("caracas.out.string", default = FALSE))) {
+  
+  out <- if (!is.null(ascii) && as.logical(ascii) == TRUE) {
     # 'string'
     python_strings_to_r(get_sympy()$sstr(x$pyobj))
   } else {

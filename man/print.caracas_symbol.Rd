@@ -4,10 +4,12 @@
 \alias{print.caracas_symbol}
 \title{Print symbol}
 \usage{
-\method{print}{caracas_symbol}(x, ...)
+\method{print}{caracas_symbol}(x, ascii = getOption("caracas.print.ascii", default = FALSE), ...)
 }
 \arguments{
 \item{x}{A \code{caracas_symbol}}
+
+\item{ascii}{\code{TRUE} to print in ASCII format rather than in utf8}
 
 \item{\dots}{not used}
 }
