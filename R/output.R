@@ -83,6 +83,8 @@ print.caracas_solve_sys_sol <- function(x,
       #print(i)
       
       nms <- names(x[[i]])
+      nms <- sprintf(paste0("%-", max(nchar(nms)), "s"), nms)
+      
       vals <- lapply(x[[i]], get_caracas_out, caracas_prefix = FALSE, ...)
       
       prefix <- "  "
@@ -90,11 +92,11 @@ print.caracas_solve_sys_sol <- function(x,
       
       #vals <- lapply(vals, function(l) paste0(prefix, l))
       vals <- lapply(seq_along(vals), function(j) {
-        indent_not_first_line(vals[[j]], nchar(paste0(nms[j])))
+        indent_not_first_line(vals[[j]], nchar(nms[j]))
       })
       
       for (j in seq_along(nms)) {
-        cat(nms[j], vals[[j]], "\n")
+        cat(nms[j], vals[[j]], "\n", sep =)
       }
       
       # xi <- paste0(nms, " = ", vals)

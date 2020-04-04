@@ -47,7 +47,9 @@ test_that("print solve_sys:", {
   sol <- solve_sys(lhs, rhs, c(x, y))
   
   out <- paste0(capture.output(print(sol)), collapse = "")
-  expect_equal(out, "Solution 1:  x =  2/3   y =  -10/3 Solution 2:  x =  2   y =  -2 ")
+  expect_match(out, "Solution")
+  expect_match(out, "x[ =]+2/3")
+  expect_match(out, "y[ =]+-10/3")
 
   out <- paste0(capture.output(print(sol, simplify = FALSE)), collapse = "")
   expect_true(grepl("[[1]]$x", out, fixed = TRUE))
@@ -56,7 +58,9 @@ test_that("print solve_sys:", {
   
   options(caracas.print.sol.simplify = TRUE) # default is TRUE
   out <- paste0(capture.output(print(sol)), collapse = "")
-  expect_equal(out, "Solution 1:  x =  2/3   y =  -10/3 Solution 2:  x =  2   y =  -2 ")
+  expect_match(out, "Solution")
+  expect_match(out, "x[ =]+2/3")
+  expect_match(out, "y[ =]+-10/3")
   
   options(caracas.print.sol.simplify = FALSE) # default is TRUE
   out <- paste0(capture.output(print(sol)), collapse = "")

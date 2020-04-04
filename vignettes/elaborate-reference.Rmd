@@ -218,8 +218,9 @@ eigen(eval(as_r(B), list(a = 2)))
 * Linear system of equations: `inv()` / `solve_lin()`
 * Non-linear system of equations: `solve_sys()`
 
+Below find an example with maximising the multinomial likelihood.
+
 ```{r}
-# Multinomial likelihood
 p <- as_symbol(paste0("p", 1:3))
 y <- as_symbol(paste0("y", 1:3))
 a <- as_symbol("a")
@@ -232,11 +233,7 @@ g <- dd(L, c("a", paste0("p", 1:3)))
 g
 sol <- solve_sys(g, c("p1", "p2", "p3", "a"))
 sol
-print(sol, simplify = FALSE)
-options(caracas.print.sol.simplify = FALSE)
-sol
-options(caracas.print.sol.simplify = NULL)
-sol
+sol[[1L]]$p1
 tex(sol[[1L]]$p1)
 ```
 
@@ -277,13 +274,42 @@ sympy$solve("x**2 - 1", "x")
 ## Output
 
 ```{r}
-x <- symbol("x") 
-eq <- x^2 + 3*x
-eq
-options(caracas.print.ascii = TRUE) # default is FALSE
-eq
-options(caracas.print.ascii = FALSE)
-eq
-print(eq, ascii = TRUE)
+# Multinomial likelihood
+p <- as_symbol(paste0("p", 1:3))
+y <- as_symbol(paste0("y", 1:3))
+a <- as_symbol("a")
+l <- sum(y*log(p))
+L <- -l + a*(sum(p) - 1)
+L
+print(L, ascii = TRUE)
+g <- dd(L, c("a", paste0("p", 1:3)))
+sol <- solve_sys(g, c("p1", "p2", "p3", "a"))
+sol
+print(sol, simplify = FALSE)
 ```
+
+### Options
+
+The following options are available:
+
+* `caracas.print.ascii`
+* `caracas.print.sol.simplify`
+
+```{r}
+sol
+L
+options(caracas.print.ascii = TRUE) # or TRUE
+sol
+L
+options(caracas.print.ascii = NULL) # reset to default (FALSE)
+```
+
+```{r}
+sol
+options(caracas.print.sol.simplify = FALSE)
+sol
+options(caracas.print.sol.simplify = NULL) # reset to default (TRUE)
+```
+
+
 
