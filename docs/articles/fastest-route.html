@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9133</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9141</span>
       </span>
     </div>
 
@@ -178,16 +178,15 @@
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;            2⋅╲╱  k  + 90000</span></a>
 <a class="sourceLine" id="cb5-8" data-line-number="8">crit_points &lt;-<span class="st"> </span><span class="kw"><a href="../reference/solve_sys.html">solve_sys</a></span>(dl, k)</a>
 <a class="sourceLine" id="cb5-9" data-line-number="9">crit_points</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; [[1]]$k</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; [caracas]: 200⋅√21</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;            ───────</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;               7</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15">best_k &lt;-<span class="st"> </span>crit_points[[<span class="dv">1</span>]]<span class="op">$</span>k</a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">best_k</a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; [caracas]: 200⋅√21</span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt;            ───────</span></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt;               7</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; Solution 1:</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;   k =  200⋅√21</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;       ───────</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;          7</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">best_k &lt;-<span class="st"> </span>crit_points[[<span class="dv">1</span>]]<span class="op">$</span>k</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">best_k</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; [caracas]: 200⋅√21</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt;            ───────</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt;               7</span></a></code></pre></div>
 <p>The type of the critical point is found by considering the Hessian:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/eval.html">eval</a></span>(<span class="kw"><a href="../reference/as_r.html">as_r</a></span>(<span class="kw"><a href="../reference/dd.html">dd</a></span>(dl, k)), <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">k =</span> <span class="kw"><a href="../reference/as_r.html">as_r</a></span>(best_k)))</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; [1] 0.001283121</span></a></code></pre></div>

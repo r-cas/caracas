@@ -13,6 +13,11 @@ solve_sys(lhs, rhs, vars)
 
 \item{vars}{vector of variable names or symbols}
 }
+\value{
+A list with solutions (with class \code{caracas_solve_sys_sol}
+for compact printing), each element containing a named
+list of the variables' values.
+}
 \description{
 If called as \code{solve_sys(lhs, vars)}
 the roots are found.

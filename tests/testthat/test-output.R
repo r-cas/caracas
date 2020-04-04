@@ -18,6 +18,51 @@ test_that("print", {
   
   expect_equal(paste0(capture.output(print(z)), collapse = ""), 
                "[caracas]:    2         2              sin (x) + cos (x)")
+  
+  x <- symbol('x')
+  y <- symbol('y')
+  eq <- x^2 + 3*x + 4*y + y^4
+  #dd(eq, x) # eq = x^2+3*x+4*y+y^4
+  H <- dd2(eq, c(x, y)) # Hessian
+  expect_false(grepl("[caracas]", 
+                     paste0(capture.output(print(H, caracas_prefix = FALSE)), collapse = ""),
+                     fixed = TRUE))
+})
+
+test_that("util:", {
+  expect_equal(indent_not_first_line("test"), "test")
+  expect_equal(indent_not_first_line("test1\ntest2"), "test1\ntest2")
+  
+  expect_equal(indent_not_first_line("test", 2), "test")
+  expect_equal(indent_not_first_line("test1\ntest2", 2), "test1\n  test2")
+})
+
+test_that("print solve_sys:", {
+  skip_if_no_sympy()
+  
+  x <- symbol("x")
+  y <- symbol("y")
+  lhs <- cbind(3*x*y - y, x)
+  rhs <- cbind(-5*x, y+4)
+  sol <- solve_sys(lhs, rhs, c(x, y))
+  
+  out <- paste0(capture.output(print(sol)), collapse = "")
+  expect_equal(out, "Solution 1:  x =  2/3   y =  -10/3 Solution 2:  x =  2   y =  -2 ")
+
+  out <- paste0(capture.output(print(sol, simplify = FALSE)), collapse = "")
+  expect_true(grepl("[[1]]$x", out, fixed = TRUE))
+  
+  ###
+  
+  options(caracas.print.sol.simplify = TRUE) # default is TRUE
+  out <- paste0(capture.output(print(sol)), collapse = "")
+  expect_equal(out, "Solution 1:  x =  2/3   y =  -10/3 Solution 2:  x =  2   y =  -2 ")
+  
+  options(caracas.print.sol.simplify = FALSE) # default is TRUE
+  out <- paste0(capture.output(print(sol)), collapse = "")
+  expect_true(grepl("[[1]]$x", out, fixed = TRUE))
+  
+  options(caracas.print.sol.simplify = NULL)
 })
 
 test_that("print ascii", {
@@ -39,4 +84,6 @@ test_that("print ascii", {
   
   eq_print <- paste0(capture.output(print(eq, ascii = FALSE)), collapse = "")
   expect_false(grepl("^", eq_print, fixed = TRUE))
+  
+  options(caracas.print.ascii = NULL)
 })

@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9133</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9141</span>
       </span>
     </div>
 
@@ -117,19 +117,15 @@
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; [1] "2 x^{2} - x"</span></a></code></pre></div>
 <p><span class="math display">\[2 x^{2} - x\]</span></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/solve_sys.html">solve_sys</a></span>(eq, x)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; [[1]]$x</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; [caracas]: 0</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; [[2]]</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; [[2]]$x</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; [caracas]: 1/2</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw"><a href="../reference/dd.html">dd</a></span>(eq, x)</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; [caracas]: 4⋅x - 1</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="kw"><a href="../reference/subs.html">subs</a></span>(eq, x, <span class="st">"y"</span>)</a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; [caracas]:    2    </span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;            2⋅y  - y</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; Solution 1:</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;   x =  0 </span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; Solution 2:</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;   x =  1/2</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw"><a href="../reference/dd.html">dd</a></span>(eq, x)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; [caracas]: 4⋅x - 1</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw"><a href="../reference/subs.html">subs</a></span>(eq, x, <span class="st">"y"</span>)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; [caracas]:    2    </span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;            2⋅y  - y</span></a></code></pre></div>
 </div>
 <div id="linear-algebra" class="section level2">
 <h2 class="hasAnchor">

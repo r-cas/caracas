@@ -82,6 +82,8 @@ rootsolve <- function(lhs, vars) {
   y <- get_sympy()$solve(lhs$pyobj, vars, dict = TRUE, set = FALSE)
   solset <- sol_to_r_symbol_list(y)
   
+  class(solset) <- c("caracas_solve_sys_sol", class(solset))
+  
   return(solset)
 }
 
@@ -96,6 +98,10 @@ rootsolve <- function(lhs, vars) {
 #' @param lhs Equation (or equations as row vector/1xn matrix)
 #' @param rhs Equation (or equations as row vector/1xn matrix)
 #' @param vars vector of variable names or symbols
+#' 
+#' @return A list with solutions (with class `caracas_solve_sys_sol` 
+#' for compact printing), each element containing a named 
+#' list of the variables' values.
 #' 
 #' @concept solve
 #' 
