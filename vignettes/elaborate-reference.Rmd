@@ -232,9 +232,9 @@ l
 L <- -l + a*(sum(p) - 1)
 L
 tex(L)
-g <- dd(L, c("a", paste0("p", 1:3)))
+g <- dd(L, c(p, a))
 g
-sol <- solve_sys(g, c("p1", "p2", "p3", "a"))
+sol <- solve_sys(g, c(p, a))
 sol
 sol[[1L]]$p1
 tex(sol[[1L]]$p1)
@@ -285,8 +285,8 @@ l <- sum(y*log(p))
 L <- -l + a*(sum(p) - 1)
 L
 print(L, ascii = TRUE)
-g <- dd(L, c("a", paste0("p", 1:3)))
-sol <- solve_sys(g, c("p1", "p2", "p3", "a"))
+g <- dd(L, c(p, a))
+sol <- solve_sys(g, c(p, a))
 sol
 print(sol, simplify = FALSE)
 ```
