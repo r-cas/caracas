@@ -117,9 +117,10 @@ test_that("solve system of non-linear equations", {
   a <- as_symbol("a")
   l <- sum(y*log(p))
   L <- -l + a*(sum(p) - 1)
-  g <- dd(L, c("a", paste0("p", 1:3)))
+  g <- dd(L, c(a, p))
+  expect_equal(as.character(g), "[p1 + p2 + p3 - 1, a - y1/p1, a - y2/p2, a - y3/p3]")
   
-  sol <- solve_sys(g, c("p1", "p2", "p3", "a"))
+  sol <- solve_sys(g, c(a, p))
   
   expect_equal(length(sol), 1L)
   
