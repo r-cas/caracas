@@ -254,8 +254,8 @@ dd <- function(expr, vars) {
     # vars actually just a single caracas_symbol
     vars
   } else {
-    #vars a list of caracas_symbols
-    lapply(vars, function(v) v$pyobj)
+    lapply(as.vector(as_character_matrix(do.call(rbind, vars))), 
+           function(v) symbol(v)$pyobj)
   }
 
   # vars should already be in expr, so

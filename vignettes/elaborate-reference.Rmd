@@ -197,6 +197,9 @@ sqrt(B)
 log(B)
 sum(B)
 B %*% t(B)
+diag(B)
+cbind(B, B)
+rbind(B, B)
 ```
 
 ```{r}
@@ -287,6 +290,12 @@ sol <- solve_sys(g, c("p1", "p2", "p3", "a"))
 sol
 print(sol, simplify = FALSE)
 ```
+
+```{r}
+as.character(g)
+as_character_matrix(g)
+```
+
 
 ### Options
 

@@ -69,7 +69,10 @@ rootsolve <- function(lhs, vars) {
     vars <- unlist(lapply(vars, function(x) {
       if (inherits(x, "caracas_symbol")) {
         if (!is_atomic(x)) {
-          stop("Variable is not atomic")
+          #stop("Variable is not atomic")
+          
+          y <- as.vector(as_character_matrix(do.call(rbind, vars)))
+          return(y)
         }
         
         return(as.character(x))
