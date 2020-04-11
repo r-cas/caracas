@@ -267,6 +267,7 @@ dd <- function(expr, vars) {
     return(v)
   } else {
     z <- get_sympy()$derive_by_array(expr$pyobj, py_vars)
+    # FIXME: Add 'Matrix' prefix?
     v <- construct_symbol_from_pyobj(z)
     return(v)
   }

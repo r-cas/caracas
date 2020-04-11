@@ -5,9 +5,10 @@ symbol_is_matrix <- function(x) {
     return(TRUE)
   }
   
-  if (grepl("^\\[\\[", xstr)) {
-    return(TRUE)
-  }
+  # FIXME: From dd() and dd2()
+  # if (grepl("^\\[\\[", xstr)) {
+  #   return(TRUE)
+  # }
   
   return(FALSE)
 }

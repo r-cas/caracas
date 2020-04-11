@@ -91,3 +91,11 @@ test_that("print ascii", {
   
   options(caracas.print.ascii = NULL)
 })
+
+
+test_that("print vector", {
+  skip_if_no_sympy()
+  
+  B <- as_symbol(1:3)
+  expect_equal(capture.output(print(B)), "[caracas]: [1  2  3]ᵀ")
+})

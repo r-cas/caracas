@@ -6,17 +6,18 @@
 \usage{
 \method{print}{caracas_symbol}(
   x,
-  ascii = getOption("caracas.print.ascii", default = FALSE),
   caracas_prefix = TRUE,
+  ascii = getOption("caracas.print.ascii", default = FALSE),
+  colvec_transposed = getOption("caracas.print.colvec.transposed", default = TRUE),
   ...
 )
 }
 \arguments{
 \item{x}{A \code{caracas_symbol}}
 
-\item{ascii}{\code{TRUE} to print in ASCII format rather than in utf8}
-
 \item{caracas_prefix}{Print 'caracas' prefix}
+
+\item{ascii}{\code{TRUE} to print in ASCII format rather than in utf8}
 
 \item{\dots}{not used}
 }

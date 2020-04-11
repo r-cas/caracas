@@ -302,15 +302,23 @@ as_character_matrix(g)
 The following options are available:
 
 * `caracas.print.ascii`
+* `caracas.print.colvec.transposed`
 * `caracas.print.sol.simplify`
 
 ```{r}
 sol
 L
-options(caracas.print.ascii = TRUE) # or TRUE
+options(caracas.print.ascii = TRUE) 
 sol
 L
 options(caracas.print.ascii = NULL) # reset to default (FALSE)
+```
+
+```{r}
+p
+options(caracas.print.colvec.transposed = FALSE)
+p
+options(caracas.print.colvec.transposed = NULL) # reset to default (TRUE)
 ```
 
 ```{r}

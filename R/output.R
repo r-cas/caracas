@@ -13,19 +13,30 @@ indent_not_first_line <- function(x, indent = 0) {
 }
 
 get_caracas_out <- function(x, 
-                            ascii = getOption("caracas.print.ascii", default = FALSE), 
-                            caracas_prefix = TRUE) {
+                            caracas_prefix = TRUE, 
+                            ascii = getOption("caracas.print.ascii", 
+                                              default = FALSE),
+                            colvec_transposed = getOption("caracas.print.colvec.transposed", 
+                                                default = TRUE)) {
   ensure_sympy()
   
   if (is.null(x$pyobj)) {
     stop("Unexpected")
   }
   
+  suffix <- ""
+  
   out <- if (!is.null(ascii) && as.logical(ascii) == TRUE) {
-    # 'string'
+    # 'ascii'
     python_strings_to_r(get_sympy()$sstr(x$pyobj))
   } else {
-    reticulate::py_capture_output(get_sympy()$pprint(x$pyobj))
+    # 'utf8'
+    if (colvec_transposed && symbol_is_matrix(x) && ncol(x) == 1L && nrow(x) > 1L) {
+      suffix <- "ᵀ"
+      reticulate::py_capture_output(get_sympy()$pprint(t(x)$pyobj))
+    } else {
+      reticulate::py_capture_output(get_sympy()$pprint(x$pyobj))
+    }
   }
   
   out <- gsub("[ \n]+$", "", out)
@@ -36,27 +47,32 @@ get_caracas_out <- function(x,
     out <- paste0(prefix, out)
   }
   
+  out <- paste0(out, suffix)
+  
   return(out)
 }
 
 #' Print symbol
 #' 
 #' @param x A `caracas_symbol`
-#' @param ascii `TRUE` to print in ASCII format rather than in utf8
 #' @param caracas_prefix Print 'caracas' prefix
+#' @param ascii `TRUE` to print in ASCII format rather than in utf8
 #' @param \dots not used
 #'
 #' @concept output
 #' 
 #' @export
 print.caracas_symbol <- function(x, 
-                                 ascii = getOption("caracas.print.ascii", default = FALSE), 
                                  caracas_prefix = TRUE, 
+                                 ascii = getOption("caracas.print.ascii", default = FALSE), 
+                                 colvec_transposed = getOption("caracas.print.colvec.transposed", 
+                                                               default = TRUE),
                                  ...) {
   
   out <- get_caracas_out(x, 
+                         caracas_prefix = caracas_prefix,
                          ascii = ascii, 
-                         caracas_prefix = caracas_prefix)
+                         colvec_transposed = colvec_transposed)
   out <- paste0(out, "\n")
   cat(out)
   
