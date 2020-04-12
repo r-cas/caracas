@@ -97,5 +97,6 @@ test_that("print vector", {
   skip_if_no_sympy()
   
   B <- as_symbol(1:3)
-  expect_equal(capture.output(print(B)), "[caracas]: [1  2  3]ᵀ")
+  str <- paste0("[caracas]: [1  2  3]", intToUtf8(7488L)) # 7488 -> transpose utf-8
+  expect_equal(capture.output(print(B)), str)
 })

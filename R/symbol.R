@@ -165,7 +165,7 @@ c.caracas_symbol <- function(...) {
 subs <- function(s, x, v) {
   sym <- as.character(x)
   
-  val <- if (is(v, "caracas_symbol")) {
+  val <- if (inherits(v, "caracas_symbol")) {
     v$pyobj
   } else {
     v

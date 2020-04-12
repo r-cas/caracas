@@ -32,7 +32,7 @@ get_caracas_out <- function(x,
   } else {
     # 'utf8'
     if (colvec_transposed && symbol_is_matrix(x) && ncol(x) == 1L && nrow(x) > 1L) {
-      suffix <- "ᵀ"
+      suffix <- intToUtf8(7488L) # T utf-8
       reticulate::py_capture_output(get_sympy()$pprint(t(x)$pyobj))
     } else {
       reticulate::py_capture_output(get_sympy()$pprint(x$pyobj))
@@ -57,6 +57,7 @@ get_caracas_out <- function(x,
 #' @param x A `caracas_symbol`
 #' @param caracas_prefix Print 'caracas' prefix
 #' @param ascii `TRUE` to print in ASCII format rather than in utf8
+#' @param colvec_transposed `FALSE` to print column vectors as is
 #' @param \dots not used
 #'
 #' @concept output

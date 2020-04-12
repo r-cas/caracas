@@ -19,6 +19,8 @@
 
 \item{ascii}{\code{TRUE} to print in ASCII format rather than in utf8}
 
+\item{colvec_transposed}{\code{FALSE} to print column vectors as is}
+
 \item{\dots}{not used}
 }
 \description{
