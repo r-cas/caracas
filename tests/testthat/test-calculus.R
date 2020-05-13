@@ -10,11 +10,18 @@ test_that("derivative", {
   expect_equal(as.character(der(f, "x")), "6*x + y^2")
   expect_equal(as.character(der(f, x)), "6*x + y^2")
   
+  expect_equal(as.character(der2(f, "x")), "6")
+  expect_equal(as.character(der2(f, x)), "6")
+  
   expect_equal(as.character(der(f, c("x", "y"))), "[6*x + y^2, 2*x*y]")
   expect_equal(as.character(der(f, c(x, y))), "[6*x + y^2, 2*x*y]")
   
-  expect_equal(as.character(der2(f, c("x", "y"))), "[[6, 2*y], [2*y, 2*x]]")
-  expect_equal(as.character(der2(f, c(x, y))), "[[6, 2*y], [2*y, 2*x]]")
+  expect_match(as.character(der2(f, c("x", "y"))), 
+               "[[6, 2*y], [2*y, 2*x]]", 
+               fixed = TRUE)
+  expect_match(as.character(der2(f, c(x, y))), 
+               "[[6, 2*y], [2*y, 2*x]]", 
+               fixed = TRUE)
   
   p <- as_symbol(paste0("p", 1:3))
   y <- as_symbol(paste0("y", 1:3))
@@ -22,7 +29,24 @@ test_that("derivative", {
   l <- sum(y*log(p))
   L <- -l + a*(sum(p) - 1)
   gL <- der(L, c(p, a)) 
-  expect_equal(as.character(gL), "[a - y1/p1, a - y2/p2, a - y3/p3, p1 + p2 + p3 - 1]")
+  expect_match(as.character(gL), 
+               "[a - y1/p1, a - y2/p2, a - y3/p3, p1 + p2 + p3 - 1]", 
+               fixed = TRUE)
+  
+  
+  expect_match(as.character(der(L, p)), 
+               "[a - y1/p1, a - y2/p2, a - y3/p3]",
+               fixed = TRUE)
+  expect_match(as.character(der(L, c(p, a))), 
+               "[a - y1/p1, a - y2/p2, a - y3/p3, p1 + p2 + p3 - 1]",
+               fixed = TRUE)
+  
+  expect_match(as.character(der2(L, p)), 
+               "[[y1/p1^2, 0, 0], [0, y2/p2^2, 0], [0, 0, y3/p3^2]]",
+               fixed = TRUE)
+  expect_match(as.character(der2(L, c(p, a))), 
+               "[[y1/p1^2, 0, 0, 1], [0, y2/p2^2, 0, 1], [0, 0, y3/p3^2, 1], [1, 1, 1, 0]]",
+               fixed = TRUE)
 })
 
 test_that("limit", {

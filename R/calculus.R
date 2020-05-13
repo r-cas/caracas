@@ -233,8 +233,61 @@ intf <- function(f, var, lower, upper, doit = TRUE) {
   return(z)
 }
 
+# expr: caracas symbol
+# vars: array of symbols (potentially just 1)
+der_worker <- function(expr, vars) {
+  # vars <- vars_to_array(vars)
+  ensure_sympy()
+  stopifnot(inherits(vars, "caracas_symbol"))
+  
+  multi_var <- grepl("^\\[", as.character(vars))
+  
+  if (!multi_var) {
+    z <- get_sympy()$diff(expr$pyobj, vars$pyobj)
+    v <- construct_symbol_from_pyobj(z)
+    return(v)
+  }
+  
+  z <- get_sympy()$derive_by_array(expr$pyobj, vars$pyobj)
+  v <- construct_symbol_from_pyobj(z)
+  return(v)
+}
 
-
+# Convert vars to array; vars can be many different things...
+vars_to_array <- function(vars) {
+  # vars should already be in expr, so
+  # they are known as symbols on the Python side
+  
+  vars_chr <- if (is.character(vars)) {
+    # character vector
+    vars
+  } else if (inherits(vars, "caracas_symbol")) {
+    # A single caracas_symbol
+    as.vector(as_character_matrix(vars))
+  } else if (inherits(vars, "list")) {
+    # A list of caracas_symbols
+    for (i in seq_along(vars)) {
+      v <- vars[[i]]
+      
+      if (!inherits(v, "caracas_symbol")) {
+        stop("Element in vars had wrong type (expected caracas_symbol)")
+      }
+    }
+    
+    unlist(lapply(vars, function(l) as.vector(as_character_matrix(l))))
+  } else {
+    stop("Unexpected vars type")
+  }
+  
+  if (length(vars_chr) == 1L) {
+    v <- eval_to_symbol(vars_chr)
+    return(v)
+  }
+  
+  # > 1 variable:
+  v <- eval_to_symbol(paste0("[", paste0(vars_chr, collapse = ", "), "]"))
+  return(v)
+}
 
 #' Symbolic differentiation of an expression
 #'
@@ -253,30 +306,10 @@ intf <- function(f, var, lower, upper, doit = TRUE) {
 der <- function(expr, vars) {
   ensure_sympy()
   
-  py_vars <- if (is.character(vars)) {
-    # vars a character vector
-    lapply(vars, function(v) symbol(v)$pyobj)
-  } else if (inherits(vars, "caracas_symbol")) {
-    # vars actually just a single caracas_symbol
-    vars
-  } else {
-    lapply(as.vector(as_character_matrix(do.call(rbind, vars))), 
-           function(v) symbol(v)$pyobj)
-  }
-
-  # vars should already be in expr, so
-  # they are known as symbols on the Python side
+  new_vars <- vars_to_array(vars)
+  d <- der_worker(expr, new_vars)
   
-  if (length(py_vars) == 1L) {
-    z <- get_sympy()$diff(expr$pyobj, py_vars[[1L]])
-    v <- construct_symbol_from_pyobj(z)
-    return(v)
-  } else {
-    z <- get_sympy()$derive_by_array(expr$pyobj, py_vars)
-    # FIXME: Add 'Matrix' prefix?
-    v <- construct_symbol_from_pyobj(z)
-    return(v)
-  }
+  return(d)
 }
 
 #' Symbolic differentiation of second order of an expression

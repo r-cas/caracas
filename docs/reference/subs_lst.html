@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Expand expression — expand • caracas</title>
+<title>Substitute symbol for of value given by a list — subs_lst • caracas</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Expand expression — expand" />
-<meta property="og:description" content="Expand expression" />
+<meta property="og:title" content="Substitute symbol for of value given by a list — subs_lst" />
+<meta property="og:description" content="Useful for substituting solutions into expressions." />
 
 
 
@@ -132,27 +132,63 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Expand expression</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/simplify.R'><code>R/simplify.R</code></a></small>
-    <div class="hidden name"><code>expand.Rd</code></div>
+    <h1>Substitute symbol for of value given by a list</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/symbol.R'><code>R/symbol.R</code></a></small>
+    <div class="hidden name"><code>subs_lst.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Expand expression</p>
+    <p>Useful for substituting solutions into expressions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>expand</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>subs_lst</span>(<span class='no'>s</span>, <span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>s</th>
+      <td><p>Expression</p></td>
+    </tr>
+    <tr>
       <th>x</th>
-      <td><p>A <code>caracas_symbol</code></p></td>
+      <td><p>Named list of values</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='have_sympy.html'>have_sympy</a></span>()) {
+     <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_symbol.html'>as_symbol</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"p"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>))
+     <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_symbol.html'>as_symbol</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"y"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>))
+     <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_symbol.html'>as_symbol</a></span>(<span class='st'>"a"</span>)
+     <span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>y</span>*<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>p</span>))
+     <span class='no'>L</span> <span class='kw'>&lt;-</span> -<span class='no'>l</span> + <span class='no'>a</span>*(<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>p</span>) - <span class='fl'>1</span>)
+     <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='der.html'>der</a></span>(<span class='no'>L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>, <span class='no'>p</span>))
+     <span class='no'>sols</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='solve_sys.html'>solve_sys</a></span>(<span class='no'>g</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>, <span class='no'>p</span>))
+     <span class='no'>sol</span> <span class='kw'>&lt;-</span> <span class='no'>sols</span><span class='kw'>[[</span><span class='fl'>1L</span>]]
+     <span class='no'>sol</span>
+     <span class='no'>H</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='der2.html'>der2</a></span>(<span class='no'>L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>p</span>, <span class='no'>a</span>))
+     <span class='no'>H</span>
+     <span class='no'>H_sol</span> <span class='kw'>&lt;-</span> <span class='fu'>subs_lst</span>(<span class='no'>H</span>, <span class='no'>sol</span>)
+     <span class='no'>H_sol</span>
+}</div><div class='output co'>#&gt; [caracas]: ⎡              2                                     ⎤
+#&gt;            ⎢(y₁ + y₂ + y₃)                                      ⎥
+#&gt;            ⎢───────────────         0                0         1⎥
+#&gt;            ⎢       y₁                                           ⎥
+#&gt;            ⎢                                                    ⎥
+#&gt;            ⎢                               2                    ⎥
+#&gt;            ⎢                 (y₁ + y₂ + y₃)                     ⎥
+#&gt;            ⎢       0         ───────────────         0         1⎥
+#&gt;            ⎢                        y₂                          ⎥
+#&gt;            ⎢                                                    ⎥
+#&gt;            ⎢                                                2   ⎥
+#&gt;            ⎢                                  (y₁ + y₂ + y₃)    ⎥
+#&gt;            ⎢       0                0         ───────────────  1⎥
+#&gt;            ⎢                                         y₃         ⎥
+#&gt;            ⎢                                                    ⎥
+#&gt;            ⎣       1                1                1         0⎦</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

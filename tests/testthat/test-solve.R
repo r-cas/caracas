@@ -118,15 +118,23 @@ test_that("solve system of non-linear equations", {
   l <- sum(y*log(p))
   L <- -l + a*(sum(p) - 1)
   g <- der(L, c(a, p))
-  expect_equal(as.character(g), "[p1 + p2 + p3 - 1, a - y1/p1, a - y2/p2, a - y3/p3]")
+  expect_match(as.character(g), 
+               "[p1 + p2 + p3 - 1, a - y1/p1, a - y2/p2, a - y3/p3]", 
+               fixed = TRUE)
   
-  sol <- solve_sys(g, c(a, p))
+  sols <- solve_sys(g, c(a, p))
+  expect_equal(length(sols), 1L)
   
-  expect_equal(length(sol), 1L)
+  sol <- sols[[1L]]
+  expect_equal(sort(names(sol)), sort(c("p1", "p2", "p3", "a")), fixed = TRUE)
+  expect_match(as.character(sol$p1), "y1/(y1 + y2 + y3)", fixed = TRUE)
+  expect_match(as.character(sol$p2), "y2/(y1 + y2 + y3)", fixed = TRUE)
+  expect_match(as.character(sol$p3), "y3/(y1 + y2 + y3)", fixed = TRUE)
+  expect_match(as.character(sol$a), "y1 + y2 + y3", fixed = TRUE)
   
-  expect_equal(sort(names(sol[[1L]])), sort(c("p1", "p2", "p3", "a")))
-  expect_equal(as.character(sol[[1L]]$p1), "y1/(y1 + y2 + y3)")
-  expect_equal(as.character(sol[[1L]]$p2), "y2/(y1 + y2 + y3)")
-  expect_equal(as.character(sol[[1L]]$p3), "y3/(y1 + y2 + y3)")
-  expect_equal(as.character(sol[[1L]]$a), "y1 + y2 + y3")
+  H <- der2(L, c(p, a))
+  H_sol <- subs_lst(H, sol)
+  expect_match(as.character(H_sol), 
+               "[[(y1 + y2 + y3)^2/y1, 0, 0, 1], [0, (y1 + y2 + y3)^2/y2, 0, 1], [0, 0, (y1 + y2 + y3)^2/y3, 1], [1, 1, 1, 0]]", 
+               fixed = TRUE)
 })

@@ -13,6 +13,14 @@ symbol_is_matrix <- function(x) {
   return(FALSE)
 }
 
+symbol_is_list_of_lists_matrix <- function(x) {
+  if (grepl("^\\[\\[", as.character(x))) {
+    return(TRUE)
+  } 
+  
+  return(FALSE)
+}
+
 # symbol_is_vector <- function(x) {
 #   xstr <- as.character(x)
 #   
@@ -120,6 +128,11 @@ eigen_val <- function(x) {
     stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
   }
   
+  if (symbol_is_list_of_lists_matrix(x)) {
+    x <- as_symbol(as_character_matrix(x), 
+                   declare_variables = FALSE)
+  }
+  
   if (!symbol_is_matrix(x)) {
     return(NULL)
   }
@@ -163,6 +176,11 @@ eigen_vec <- function(x) {
   
   if (!inherits(x, "caracas_symbol")) {
     stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+  
+  if (symbol_is_list_of_lists_matrix(x)) {
+    x <- as_symbol(as_character_matrix(x), 
+                   declare_variables = FALSE)
   }
   
   if (!symbol_is_matrix(x)) {

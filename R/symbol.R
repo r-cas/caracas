@@ -175,3 +175,38 @@ subs <- function(s, x, v) {
   return(y)
 }
 
+#' Substitute symbol for of value given by a list
+#' 
+#' Useful for substituting solutions into expressions.
+#' 
+#' @param s Expression
+#' @param x Named list of values
+#' 
+#' @examples 
+#' if (have_sympy()) {
+#'      p <- as_symbol(paste0("p", 1:3))
+#'      y <- as_symbol(paste0("y", 1:3))
+#'      a <- as_symbol("a")
+#'      l <- sum(y*log(p))
+#'      L <- -l + a*(sum(p) - 1)
+#'      g <- der(L, c(a, p))
+#'      sols <- solve_sys(g, c(a, p))
+#'      sol <- sols[[1L]]
+#'      sol
+#'      H <- der2(L, c(p, a))
+#'      H
+#'      H_sol <- subs_lst(H, sol)
+#'      H_sol
+#' }
+#' 
+#' @export
+subs_lst <- function(s, x) {
+  new_s <- s
+  
+  for (i in seq_along(x)) {
+    new_s <- subs(new_s, names(x)[i], x[[i]])
+  }
+  
+  return(new_s)
+}
+
