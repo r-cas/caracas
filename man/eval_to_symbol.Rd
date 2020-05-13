@@ -19,7 +19,7 @@ Create a symbol from a string
 if (have_sympy()) {
    x <- symbol('x')
    (1+1)*x^2
-   lim(sin(x)/x, "x", 0)
+   limf(sin(x)/x, "x", 0)
 }
 
 }

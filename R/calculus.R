@@ -39,15 +39,15 @@ calc_verify_func <- function(f) {
 #' @examples 
 #' if (have_sympy()) {
 #'   x <- symbol("x")
-#'   lim(sin(x)/x, "x", 0)
-#'   lim(1/x, "x", 0, dir = '+')
-#'   lim(1/x, "x", 0, dir = '-')
+#'   limf(sin(x)/x, "x", 0)
+#'   limf(1/x, "x", 0, dir = '+')
+#'   limf(1/x, "x", 0, dir = '-')
 #' }
 #' 
 #' @concept calculus
 #' 
 #' @export
-lim <- function(f, var, val, dir = NULL, doit = TRUE) {
+limf <- function(f, var, val, dir = NULL, doit = TRUE) {
   calc_verify_func(f)
   ensure_sympy()
   var <- as.character(var)

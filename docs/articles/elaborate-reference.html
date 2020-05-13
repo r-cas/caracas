@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9146</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9147</span>
       </span>
     </div>
 
@@ -572,7 +572,7 @@
 <p>The following options are available:</p>
 <ul>
 <li><code>caracas.print.ascii</code></li>
-<li><code>caracas.print.colvec.transposed</code></li>
+<li><code>caracas.print.rowvec</code></li>
 <li><code>caracas.print.sol.simplify</code></li>
 </ul>
 <div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="no">sol</span>
@@ -601,14 +601,14 @@
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">caracas.print.ascii</span> <span class="kw">=</span> <span class="kw">NULL</span>) <span class="co"># reset to default (FALSE)</span></pre></body></html></div>
 <div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">p</span>
 <span class="co">#&gt; [caracas]: [p₁  p₂  p₃]ᵀ</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">caracas.print.colvec.transposed</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">caracas.print.rowvec</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="no">p</span>
 <span class="co">#&gt; [caracas]: ⎡p₁⎤</span>
 <span class="co">#&gt;            ⎢  ⎥</span>
 <span class="co">#&gt;            ⎢p₂⎥</span>
 <span class="co">#&gt;            ⎢  ⎥</span>
 <span class="co">#&gt;            ⎣p₃⎦</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">caracas.print.colvec.transposed</span> <span class="kw">=</span> <span class="kw">NULL</span>) <span class="co"># reset to default (TRUE)</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">caracas.print.rowvec</span> <span class="kw">=</span> <span class="kw">NULL</span>) <span class="co"># reset to default (TRUE)</span></pre></body></html></div>
 <div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="no">sol</span>
 <span class="co">#&gt; Solution 1:</span>
 <span class="co">#&gt;   p1 =       y₁     </span>

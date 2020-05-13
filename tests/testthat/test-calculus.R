@@ -30,25 +30,25 @@ test_that("limit", {
   
   x <- symbol("x")
   
-  expect_equal(as.character(lim(sin(x)/x, "x", 0)), "1")
-  expect_equal(as.character(lim(sin(x)/x, x, 0)), "1")
-  expect_equal(as_r(lim(sin(x)/x, "x", 0)), 1)
-  expect_equal(as_r(lim(sin(x)/x, x, 0)), 1)
+  expect_equal(as.character(limf(sin(x)/x, "x", 0)), "1")
+  expect_equal(as.character(limf(sin(x)/x, x, 0)), "1")
+  expect_equal(as_r(limf(sin(x)/x, "x", 0)), 1)
+  expect_equal(as_r(limf(sin(x)/x, x, 0)), 1)
   
-  expect_equal(as.character(lim(1/x, "x", 0, dir = '+')), "Inf")
-  expect_equal(as.character(lim(1/x, x, 0, dir = '+')), "Inf")
-  expect_equal(as_r(lim(1/x, "x", 0, dir = '+')), Inf)
-  expect_equal(as_r(lim(1/x, x, 0, dir = '+')), Inf)
+  expect_equal(as.character(limf(1/x, "x", 0, dir = '+')), "Inf")
+  expect_equal(as.character(limf(1/x, x, 0, dir = '+')), "Inf")
+  expect_equal(as_r(limf(1/x, "x", 0, dir = '+')), Inf)
+  expect_equal(as_r(limf(1/x, x, 0, dir = '+')), Inf)
   
-  expect_equal(as.character(lim(1/x, "x", 0, dir = '-')), "-Inf")
-  expect_equal(as.character(lim(1/x, x, 0, dir = '-')), "-Inf")
-  expect_equal(as_r(lim(1/x, "x", 0, dir = '-')), -Inf)
-  expect_equal(as_r(lim(1/x, x, 0, dir = '-')), -Inf)
+  expect_equal(as.character(limf(1/x, "x", 0, dir = '-')), "-Inf")
+  expect_equal(as.character(limf(1/x, x, 0, dir = '-')), "-Inf")
+  expect_equal(as_r(limf(1/x, "x", 0, dir = '-')), -Inf)
+  expect_equal(as_r(limf(1/x, x, 0, dir = '-')), -Inf)
   
   
   a <- symbol("a")
-  expect_equal(as.character(a*lim(sin(x)/x, "x", 0)), "a")
-  expect_equal(as.character(a*lim(sin(x)/x, x, 0)), "a")
+  expect_equal(as.character(a*limf(sin(x)/x, "x", 0)), "a")
+  expect_equal(as.character(a*limf(sin(x)/x, x, 0)), "a")
 })
 
 test_that("sumf", {
