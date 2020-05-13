@@ -138,7 +138,7 @@ c.caracas_symbol <- function(...) {
   ensure_sympy()
   
   # FIXME: To Python vector?
-  #        In that case, see dd() too.
+  #        In that case, see der() too.
   x <- list(...)
 
   return(x)

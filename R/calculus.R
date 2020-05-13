@@ -241,10 +241,16 @@ intf <- function(f, var, lower, upper, doit = TRUE) {
 #' @param expr A `caracas_symbol`
 #' @param vars variables to take derivate with respect to
 #'
+#' @examples 
+#' x <- symbol("x")
+#' y <- symbol("y")
+#' f <- 3*x^2 + x*y^2
+#' der(f, x)
+#' 
 #' @concept calculus
 #'
 #' @export
-dd <- function(expr, vars) {
+der <- function(expr, vars) {
   ensure_sympy()
   
   py_vars <- if (is.character(vars)) {
@@ -277,15 +283,21 @@ dd <- function(expr, vars) {
 #'
 #' @param expr A `caracas_symbol`
 #' @param vars variables to take derivate with respect to
-#'
+#' 
+#' @examples 
+#' x <- symbol("x")
+#' y <- symbol("y")
+#' f <- 3*x^2 + x*y^2
+#' der2(f, x)
+#' 
 #' @concept calculus
 #'
 #' @export
-dd2 <- function(expr, vars) {
+der2 <- function(expr, vars) {
   ensure_sympy()
   
-  d1 <- dd(expr, vars)
-  d2 <- dd(d1, vars)
+  d1 <- der(expr, vars)
+  d2 <- der(d1, vars)
   
   return(d2)
 }

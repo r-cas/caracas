@@ -48,7 +48,7 @@ $$`r inline_code(tex(eq))`$$
 
 ```{r}
 solve_sys(eq, x)
-dd(eq, x)
+der(eq, x)
 subs(eq, x, "y")
 ```
 

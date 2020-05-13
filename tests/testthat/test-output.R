@@ -22,8 +22,8 @@ test_that("print", {
   x <- symbol('x')
   y <- symbol('y')
   eq <- x^2 + 3*x + 4*y + y^4
-  #dd(eq, x) # eq = x^2+3*x+4*y+y^4
-  H <- dd2(eq, c(x, y)) # Hessian
+  #der(eq, x) # eq = x^2+3*x+4*y+y^4
+  H <- der2(eq, c(x, y)) # Hessian
   expect_false(grepl("[caracas]", 
                      paste0(capture.output(print(H, caracas_prefix = FALSE)), collapse = ""),
                      fixed = TRUE))

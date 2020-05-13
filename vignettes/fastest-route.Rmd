@@ -140,7 +140,7 @@ It looks like a minimum around $k = 150$.
 We find the analytical solution by first finding critical points:
 
 ```{r}
-dl <- dd(l, k)
+dl <- der(l, k)
 dl
 crit_points <- solve_sys(dl, k)
 crit_points
@@ -151,7 +151,7 @@ best_k
 The type of the critical point is found by considering the Hessian:
 
 ```{r}
-eval(as_r(dd(dl, k)), list(k = as_r(best_k)))
+eval(as_r(der(dl, k)), list(k = as_r(best_k)))
 ```
 
 Thus the critical point is indeed a minimum as suggested by the plot.

@@ -5,7 +5,7 @@ symbol_is_matrix <- function(x) {
     return(TRUE)
   }
   
-  # FIXME: From dd() and dd2()
+  # FIXME: From der() and der2()
   # if (grepl("^\\[\\[", xstr)) {
   #   return(TRUE)
   # }

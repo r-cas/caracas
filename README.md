@@ -67,16 +67,12 @@ tex(eq)
 ```
 
 ``` r
-rootsolve(eq, x)
-#> [[1]]
-#> [[1]]$x
-#> [caracas]: 0
-#> 
-#> 
-#> [[2]]
-#> [[2]]$x
-#> [caracas]: 1/2
-dd(eq, x)
+solve_sys(eq, x)
+#> Solution 1:
+#>   x =  0 
+#> Solution 2:
+#>   x =  1/2
+der(eq, x)
 #> [caracas]: 4⋅x - 1
 subs(eq, x, "y")
 #> [caracas]:    2    
@@ -90,7 +86,7 @@ B
 #> [caracas]: ⎡x   0 ⎤
 #>            ⎢      ⎥
 #>            ⎣2  2⋅x⎦
-Binv <- inverse(B)
+Binv <- inv(B)
 Binv
 #> [caracas]: ⎡ 1      ⎤
 #>            ⎢ ─    0 ⎥
@@ -105,7 +101,7 @@ tex(Binv)
 ```
 
 ``` r
-eigenvals(Binv)
+eigen_val(Binv)
 #> [[1]]
 #> [[1]]$eigval
 #> [caracas]: 1
