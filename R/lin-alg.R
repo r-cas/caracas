@@ -67,7 +67,7 @@ number_cols <- function(x) {
 #' 
 #' @export
 as_character_matrix <- function(x) {
-  y <- as_r_symr_worker(x, as_character = TRUE)
+  y <- as_r_worker(x, as_character = TRUE)
   return(eval(parse(text = y)))
 }
 

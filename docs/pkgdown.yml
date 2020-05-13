@@ -2,10 +2,10 @@ pandoc: '2.5'
 pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
-  elaborate-reference: elaborate-reference.html
   fastest-route: fastest-route.html
   introduction: introduction.html
   naive-bayes: naive-bayes.html
+  reference: reference.html
   sympy-object: sympy-object.html
-last_built: 2020-05-13T09:09Z
+last_built: 2020-05-13T11:23Z
 

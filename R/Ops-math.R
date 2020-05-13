@@ -103,7 +103,9 @@ Math_transtab <- matrix( c(
 
   "exp", 	  	"Exp",
   "log", 	  	"Ln",
-  "sqrt", 	  "Sqrt"
+  "sqrt", 	  "Sqrt",
+  
+  "gamma",    "gamma"
 ), byrow = TRUE, ncol = 2)
 colnames(Math_transtab) <- c("R", "Python")
 #paste0(Math_transtab[, 1], "()", collapse = ", ")

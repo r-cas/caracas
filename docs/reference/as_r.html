@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert symr object to R — as_r • caracas</title>
+<title>Convert caracas object to R — as_r • caracas</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Convert symr object to R — as_r" />
+<meta property="og:title" content="Convert caracas object to R — as_r" />
 <meta property="og:description" content="Potentially calls doit()." />
 
 
@@ -95,9 +95,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/elaborate-reference.html">Elaborate reference</a>
-    </li>
-    <li>
       <a href="../articles/fastest-route.html">Fastest route through the forest</a>
     </li>
     <li>
@@ -105,6 +102,9 @@
     </li>
     <li>
       <a href="../articles/naive-bayes.html">The structure of the concentration and covariance matrix in a naive Bayes model</a>
+    </li>
+    <li>
+      <a href="../articles/reference.html">Reference</a>
     </li>
     <li>
       <a href="../articles/sympy-object.html">Using the 'SymPy' object directly</a>
@@ -132,7 +132,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert symr object to R</h1>
+    <h1>Convert caracas object to R</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/parse_python.R'><code>R/parse_python.R</code></a></small>
     <div class="hidden name"><code>as_r.Rd</code></div>
     </div>
@@ -141,7 +141,7 @@
     <p>Potentially calls <code><a href='doit.html'>doit()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_r</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>as_r</span>(<span class='no'>x</span>, <span class='kw'>first_doit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,6 +149,10 @@
     <tr>
       <th>x</th>
       <td><p>caracas_symbol</p></td>
+    </tr>
+    <tr>
+      <th>first_doit</th>
+      <td><p>Try <code><a href='doit.html'>doit()</a></code> first</p></td>
     </tr>
     </table>
 

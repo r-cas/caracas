@@ -75,12 +75,14 @@ remove_mat_prefix <- function(x) {
 }
 
 
-as_r_symr_worker <- function(x, as_character = FALSE) {
+as_r_worker <- function(x, as_character = FALSE, first_doit = TRUE) {
   if (!inherits(x, "caracas_symbol")) {
     stop("x must be a caracas_symbol")
   }
   
-  x <- try_doit(x)
+  if (first_doit) {
+    x <- try_doit(x)
+  }
   
   xstr <- as.character(x$pyobj)
   
@@ -122,30 +124,31 @@ expr_has_vars <- function(x) {
 
 
 
-#' Convert symr object to R
+#' Convert caracas object to R
 #'
 #' Potentially calls [doit()].
 #'
 #' @param x caracas_symbol
+#' @param first_doit Try `doit()` first
 #'
 #' @concept caracas_symbol
 #'
 #' @export
-as_r <- function(x) {
+as_r <- function(x, first_doit = TRUE) {
   UseMethod("as_r")
 }
 
 
 #' @export
-as_r.default <- function(x) {
+as_r.default <- function(x, first_doit = TRUE) {
   return(x)
 }
 
 #' @export
-as_r.caracas_symbol <- function(x) {
+as_r.caracas_symbol <- function(x, first_doit = TRUE) {
   ensure_sympy()
   
-  ychr <- as_r_symr_worker(x)
+  ychr <- as_r_worker(x, first_doit = first_doit)
   
   # FIXME:
   #    Catch Matrix([]) ...

@@ -2,12 +2,14 @@
 % Please edit documentation in R/parse_python.R
 \name{as_r}
 \alias{as_r}
-\title{Convert symr object to R}
+\title{Convert caracas object to R}
 \usage{
-as_r(x)
+as_r(x, first_doit = TRUE)
 }
 \arguments{
 \item{x}{caracas_symbol}
+
+\item{first_doit}{Try \code{doit()} first}
 }
 \description{
 Potentially calls \code{\link[=doit]{doit()}}.
