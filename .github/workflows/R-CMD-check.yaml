@@ -100,7 +100,8 @@ jobs:
           remotes::install_github('rstudio/reticulate')
           library(reticulate)
           reticulate::py_discover_config()
-          reticulate::py_install("sympy", method = "auto", conda = "auto")
+          reticulate::py_install("sympy", pip = TRUE)
+          #reticulate::py_install("sympy", method = "auto", conda = "auto")
         shell: Rscript {0}
 
       - name: Check
