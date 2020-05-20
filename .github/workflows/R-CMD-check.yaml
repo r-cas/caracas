@@ -99,6 +99,7 @@ jobs:
         run: |
           remotes::install_github('rstudio/reticulate')
           library(reticulate)
+          reticulate::use_condaenv("r-reticulate")
           reticulate::py_discover_config()
           reticulate::py_install("sympy", pip = TRUE)
           #reticulate::py_install("sympy", method = "auto", conda = "auto")
