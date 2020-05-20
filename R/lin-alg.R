@@ -345,7 +345,13 @@ diag.caracas_symbol <- function(x, ...) {
   }
   
   xmat <- convert_to_r_mat(x)
+  
+  if (inherits(value, "caracas_symbol")) {
+    value <- c(as_character_matrix(value))
+  }
+  
   diag(xmat) <- value
+  
   y <- as_symbol(xmat)
   return(y)
 }

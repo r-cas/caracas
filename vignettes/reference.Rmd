@@ -216,7 +216,10 @@ eigen(eval(as_r(B), list(a = 2)))
 
 ```{r}
 B
+diag(B)
 diag(B) <- "b"
+B
+diag(B)[-2] <- "a"
 B
 ```
 

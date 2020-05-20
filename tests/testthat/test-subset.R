@@ -70,3 +70,15 @@ test_that("diag", {
                as.character(Ve2))
   
 })
+
+
+test_that("diag subassignment", {
+  Aorg <- diag(5)
+  B <- as_symbol(Aorg)
+  
+  expect_equal(as.character(diag(B)), "Matrix([[1, 1, 1, 1, 1]])")
+  
+  diag(B)[2:4] <- 4
+  expect_equal(as.character(diag(B)), "Matrix([[1, 4, 4, 4, 1]])")
+  expect_equal(as.character(B), "Matrix([[1, 0, 0, 0, 0], [0, 4, 0, 0, 0], [0, 0, 4, 0, 0], [0, 0, 0, 4, 0], [0, 0, 0, 0, 1]])")
+})

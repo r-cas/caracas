@@ -100,7 +100,13 @@ convert_to_r_mat <- function(x) {
   }
   
   xmat <- convert_to_r_mat(x)
-  xmat_mod <- base::`[<-`(xmat, i, j, ..., value = value)
+  
+  xmat_mod <- if (missing(j)) {
+    base::`[<-`(xmat, i, ..., value = value)
+  } else {
+    base::`[<-`(xmat, i, j, ..., value = value)
+  }
+  
   y <- as_symbol(xmat_mod)
   return(y)
 }
