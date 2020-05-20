@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9150</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9151</span>
       </span>
     </div>
 
@@ -69,6 +69,9 @@
       <a href="../articles/sympy-object.html">Using the 'SymPy' object directly</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -417,6 +420,19 @@
 <span class="co">#&gt; [1,]    1 -1.000000e+00 -0.7071068</span>
 <span class="co">#&gt; [2,]    0  2.220446e-16  0.0000000</span>
 <span class="co">#&gt; [3,]    0  2.220446e-16  0.7071068</span></pre></body></html></div>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">B</span>
+<span class="co">#&gt; [caracas]: ⎡a  0  a⎤</span>
+<span class="co">#&gt;            ⎢       ⎥</span>
+<span class="co">#&gt;            ⎢0  a  0⎥</span>
+<span class="co">#&gt;            ⎢       ⎥</span>
+<span class="co">#&gt;            ⎣0  a  0⎦</span>
+<span class="fu"><a href="../reference/diag.html">diag</a></span>(<span class="no">B</span>) <span class="kw">&lt;-</span> <span class="st">"b"</span>
+<span class="no">B</span>
+<span class="co">#&gt; [caracas]: ⎡b  0  a⎤</span>
+<span class="co">#&gt;            ⎢       ⎥</span>
+<span class="co">#&gt;            ⎢0  b  0⎥</span>
+<span class="co">#&gt;            ⎢       ⎥</span>
+<span class="co">#&gt;            ⎣0  a  b⎦</span></pre></body></html></div>
 </div>
 <div id="solve" class="section level2">
 <h2 class="hasAnchor">
@@ -428,7 +444,7 @@
 </li>
 </ul>
 <p>Below find an example with maximising the multinomial likelihood.</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"p"</span>, <span class="fl">1</span>:<span class="fl">3</span>))
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"p"</span>, <span class="fl">1</span>:<span class="fl">3</span>))
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"y"</span>, <span class="fl">1</span>:<span class="fl">3</span>))
 <span class="no">a</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="st">"a"</span>)
 <span class="no">l</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">y</span>*<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="no">p</span>))
@@ -467,7 +483,7 @@
 <div id="substitution" class="section level2">
 <h2 class="hasAnchor">
 <a href="#substitution" class="anchor"></a>Substitution</h2>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span>(<span class="st">'x'</span>)
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span>(<span class="st">'x'</span>)
 <span class="no">eq</span> <span class="kw">&lt;-</span> <span class="fl">2</span>*<span class="no">x</span>^<span class="fl">2</span> - <span class="no">x</span>
 <span class="no">eq</span>
 <span class="co">#&gt; [caracas]:    2    </span>
@@ -475,7 +491,7 @@
 <span class="fu"><a href="../reference/subs.html">subs</a></span>(<span class="no">eq</span>, <span class="no">x</span>, <span class="st">"y"</span>)
 <span class="co">#&gt; [caracas]:    2    </span>
 <span class="co">#&gt;            2⋅y  - y</span></pre></body></html></div>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"p"</span>, <span class="fl">1</span>:<span class="fl">3</span>))
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"p"</span>, <span class="fl">1</span>:<span class="fl">3</span>))
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"y"</span>, <span class="fl">1</span>:<span class="fl">3</span>))
 <span class="no">a</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="st">"a"</span>)
 <span class="no">l</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">y</span>*<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="no">p</span>))
@@ -542,7 +558,7 @@
 <h2 class="hasAnchor">
 <a href="#subsetting" class="anchor"></a>Subsetting</h2>
 <p>Note that all vectors in <code>caracas</code> are column vectors.</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">A</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="fl">0</span>, <span class="fl">0</span>), <span class="fl">3</span>, <span class="fl">3</span>)
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="no">A</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="fl">0</span>, <span class="fl">0</span>), <span class="fl">3</span>, <span class="fl">3</span>)
 <span class="no">B</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="no">A</span>)
 <span class="no">B</span>[, <span class="fl">2</span>]
 <span class="co">#&gt; [caracas]: [0  a  a]ᵀ</span>
@@ -567,8 +583,8 @@
 <div id="using-sympy-directly" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-sympy-directly" class="anchor"></a>Using <code>SymPy</code> directly</h2>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="no">sympy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_sympy.html">get_sympy</a></span>()</pre></body></html></div>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">sympy</span>$<span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span>(<span class="st">"2*a*x"</span>, <span class="st">"x"</span>)
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">sympy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_sympy.html">get_sympy</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">sympy</span>$<span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span>(<span class="st">"2*a*x"</span>, <span class="st">"x"</span>)
 <span class="co">#&gt; 2*a</span>
 <span class="no">sympy</span>$<span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span>(<span class="st">"x**2 - 1"</span>, <span class="st">"x"</span>)
 <span class="co">#&gt; [[1]]</span>
@@ -580,7 +596,7 @@
 <div id="output" class="section level2">
 <h2 class="hasAnchor">
 <a href="#output" class="anchor"></a>Output</h2>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="co"># Multinomial likelihood</span>
+<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="co"># Multinomial likelihood</span>
 <span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"p"</span>, <span class="fl">1</span>:<span class="fl">3</span>))
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"y"</span>, <span class="fl">1</span>:<span class="fl">3</span>))
 <span class="no">a</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="st">"a"</span>)
@@ -623,7 +639,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[1]]$a</span>
 <span class="co">#&gt; [caracas]: y₁ + y₂ + y₃</span></pre></body></html></div>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">g</span>)
+<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">g</span>)
 <span class="co">#&gt; [1] "[a - y1/p1, a - y2/p2, a - y3/p3, p1 + p2 + p3 - 1]"</span>
 <span class="fu"><a href="../reference/as_character_matrix.html">as_character_matrix</a></span>(<span class="no">g</span>)
 <span class="co">#&gt;      [,1]        [,2]         [,3]         [,4]               </span>
@@ -633,11 +649,42 @@
 <a href="#options" class="anchor"></a>Options</h3>
 <p>The following options are available:</p>
 <ul>
+<li><code>caracas.print.prettyascii</code></li>
 <li><code>caracas.print.ascii</code></li>
 <li><code>caracas.print.rowvec</code></li>
 <li><code>caracas.print.sol.simplify</code></li>
 </ul>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">sol</span>
+<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="no">sol</span>
+<span class="co">#&gt; Solution 1:</span>
+<span class="co">#&gt;   p1 =       y₁     </span>
+<span class="co">#&gt;        ────────────</span>
+<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
+<span class="co">#&gt;   p2 =       y₂     </span>
+<span class="co">#&gt;        ────────────</span>
+<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
+<span class="co">#&gt;   p3 =       y₃     </span>
+<span class="co">#&gt;        ────────────</span>
+<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
+<span class="co">#&gt;   a  =  y₁ + y₂ + y₃</span>
+<span class="no">L</span>
+<span class="co">#&gt; [caracas]: a⋅(p₁ + p₂ + p₃ - 1) - y₁⋅log(p₁) - y₂⋅log(p₂) - y₃⋅log(p₃)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">caracas.print.prettyascii</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="no">sol</span>
+<span class="co">#&gt; Solution 1:</span>
+<span class="co">#&gt;   p1 =       y1     </span>
+<span class="co">#&gt;        ------------</span>
+<span class="co">#&gt;        y1 + y2 + y3 </span>
+<span class="co">#&gt;   p2 =       y2     </span>
+<span class="co">#&gt;        ------------</span>
+<span class="co">#&gt;        y1 + y2 + y3 </span>
+<span class="co">#&gt;   p3 =       y3     </span>
+<span class="co">#&gt;        ------------</span>
+<span class="co">#&gt;        y1 + y2 + y3 </span>
+<span class="co">#&gt;   a  =  y1 + y2 + y3</span>
+<span class="no">L</span>
+<span class="co">#&gt; [caracas]: a*(p1 + p2 + p3 - 1) - y1*log(p1) - y2*log(p2) - y3*log(p3)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">caracas.print.prettyascii</span> <span class="kw">=</span> <span class="kw">NULL</span>) <span class="co"># reset to default (FALSE)</span></pre></body></html></div>
+<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">sol</span>
 <span class="co">#&gt; Solution 1:</span>
 <span class="co">#&gt;   p1 =       y₁     </span>
 <span class="co">#&gt;        ────────────</span>
@@ -661,7 +708,7 @@
 <span class="no">L</span>
 <span class="co">#&gt; [caracas]: a*(p1 + p2 + p3 - 1) - y1*log(p1) - y2*log(p2) - y3*log(p3)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">caracas.print.ascii</span> <span class="kw">=</span> <span class="kw">NULL</span>) <span class="co"># reset to default (FALSE)</span></pre></body></html></div>
-<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="no">p</span>
+<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="no">p</span>
 <span class="co">#&gt; [caracas]: [p₁  p₂  p₃]ᵀ</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">caracas.print.rowvec</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="no">p</span>
@@ -671,7 +718,7 @@
 <span class="co">#&gt;            ⎢  ⎥</span>
 <span class="co">#&gt;            ⎣p₃⎦</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">caracas.print.rowvec</span> <span class="kw">=</span> <span class="kw">NULL</span>) <span class="co"># reset to default (TRUE)</span></pre></body></html></div>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">sol</span>
+<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">sol</span>
 <span class="co">#&gt; Solution 1:</span>
 <span class="co">#&gt;   p1 =       y₁     </span>
 <span class="co">#&gt;        ────────────</span>

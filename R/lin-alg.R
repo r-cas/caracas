@@ -297,3 +297,55 @@ diag.caracas_symbol <- function(x, ...) {
 }
 
 
+#' Replace matrix diagonal
+#'
+#' @param x Object `x`
+#' @param value Replacement value
+#' 
+#' @concept linalg
+#' 
+#' @export
+`diag<-` <- function(x, value) {
+  UseMethod("diag<-")
+}
+
+#' @export
+`diag<-.default` <- function(x, value) {
+  return(base::`diag<-`(x, value))
+}
+
+#' Replace diagonal
+#' 
+#' @param x A `caracas_symbol`.
+#' @param value Replacement value
+#' 
+#' @examples 
+#' if (have_sympy()) {
+#'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
+#'   B <- as_symbol(A)
+#'   B
+#'   diag(B)
+#'   diag(B) <- "b"
+#'   B
+#'   diag(B)
+#' }
+#' 
+#' @concept vectors
+#' 
+#' @export
+`diag<-.caracas_symbol` <- function(x, value) {
+  ensure_sympy()
+  
+  if (!inherits(x, "caracas_symbol")) {
+    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+  
+  if (!symbol_is_matrix(x)) {
+    stop("'x' must be a matrix")
+  }
+  
+  xmat <- convert_to_r_mat(x)
+  diag(xmat) <- value
+  y <- as_symbol(xmat)
+  return(y)
+}

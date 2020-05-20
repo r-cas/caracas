@@ -14,6 +14,8 @@ indent_not_first_line <- function(x, indent = 0) {
 
 get_caracas_out <- function(x, 
                             caracas_prefix = TRUE, 
+                            prettyascii = getOption("caracas.print.prettyascii", 
+                                                    default = FALSE),
                             ascii = getOption("caracas.print.ascii", 
                                               default = FALSE),
                             rowvec = getOption("caracas.print.rowvec", 
@@ -26,7 +28,15 @@ get_caracas_out <- function(x,
   
   suffix <- ""
   
-  out <- if (!is.null(ascii) && as.logical(ascii) == TRUE) {
+  out <- if (!is.null(prettyascii) && as.logical(prettyascii) == TRUE) {
+    # 'prettyascii'
+    if (rowvec && symbol_is_matrix(x) && ncol(x) == 1L && nrow(x) > 1L) {
+      suffix <- intToUtf8(7488L) # T utf-8
+      reticulate::py_capture_output(get_sympy()$pprint(t(x)$pyobj, use_unicode = FALSE))
+    } else {
+      reticulate::py_capture_output(get_sympy()$pprint(x$pyobj, use_unicode = FALSE))
+    }
+  } else if (!is.null(ascii) && as.logical(ascii) == TRUE) {
     # 'ascii'
     python_strings_to_r(get_sympy()$sstr(x$pyobj))
   } else {
@@ -56,6 +66,7 @@ get_caracas_out <- function(x,
 #' 
 #' @param x A `caracas_symbol`
 #' @param caracas_prefix Print 'caracas' prefix
+#' @param prettyascii `TRUE` to print in pretty ASCII format rather than in utf8
 #' @param ascii `TRUE` to print in ASCII format rather than in utf8
 #' @param rowvec `FALSE` to print column vectors as is
 #' @param \dots not used
@@ -65,6 +76,7 @@ get_caracas_out <- function(x,
 #' @export
 print.caracas_symbol <- function(x, 
                                  caracas_prefix = TRUE, 
+                                 prettyascii = getOption("caracas.print.prettyascii", default = FALSE),
                                  ascii = getOption("caracas.print.ascii", default = FALSE), 
                                  rowvec = getOption("caracas.print.rowvec", 
                                                                default = TRUE),
@@ -72,6 +84,7 @@ print.caracas_symbol <- function(x,
   
   out <- get_caracas_out(x, 
                          caracas_prefix = caracas_prefix,
+                         prettyascii = prettyascii,
                          ascii = ascii, 
                          rowvec = rowvec)
   out <- paste0(out, "\n")

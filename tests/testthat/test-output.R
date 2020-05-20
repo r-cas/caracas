@@ -92,6 +92,29 @@ test_that("print ascii", {
   options(caracas.print.ascii = NULL)
 })
 
+test_that("print prettyascii", {
+  skip_if_no_sympy()
+  
+  x <- symbol("x") 
+  eq <- x^2 + 3*x
+  eq_print <- paste0(capture.output(print(eq)), collapse = "")
+  expect_false(grepl("^", eq_print, fixed = TRUE))
+  
+  options(caracas.print.prettyascii = TRUE) # default is FALSE
+  eq_print <- paste0(capture.output(print(eq)), collapse = "")
+  expect_true(grepl("*", eq_print, fixed = TRUE))
+  
+  options(caracas.print.prettyascii = FALSE)
+  
+  eq_print <- paste0(capture.output(print(eq, prettyascii = TRUE)), collapse = "")
+  expect_true(grepl("*", eq_print, fixed = TRUE))
+  
+  eq_print <- paste0(capture.output(print(eq, prettyascii = FALSE)), collapse = "")
+  expect_false(grepl("*", eq_print, fixed = TRUE))
+  
+  options(caracas.print.prettyascii = NULL)
+})
+
 
 test_that("print vector", {
   skip_if_no_sympy()

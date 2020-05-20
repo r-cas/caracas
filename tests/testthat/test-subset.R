@@ -49,3 +49,24 @@ test_that("set", {
   a[1] <- "x"
   expect_equal(as.character(b), as.character(as_symbol(a)))
 })
+
+test_that("diag", {
+  A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
+  x <- as_symbol(A)
+  diag(x) <- "b"
+  expect_equal(as.character(x), 
+               "Matrix([[b, 0, a], [0, b, 0], [0, a, b]])")
+  
+  
+  Ve1 <- as_symbol(matrix(
+    c(1,   0,   0,   0,  0,
+      0, "v2",  0,   0,  0,
+      0,   0, "v2",  0,  0,
+      0,   0,   0, "v2", 0,
+      0,   0,   0,  0, "v2"), nrow=5, byrow = TRUE))
+  Ve2 <- as_symbol(diag(5))
+  diag(Ve2) <- c("1", rep("v2", 4))
+  expect_equal(as.character(Ve1), 
+               as.character(Ve2))
+  
+})
