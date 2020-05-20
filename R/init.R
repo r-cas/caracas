@@ -10,7 +10,7 @@
 # reticulate::conda_create('r-reticulate')
 # install_sympy(method = "conda")
 
-# global reference to sympy (will be initialized in .onLoad)
+# global reference to sympy
 pkg_globals <- new.env()
 pkg_globals$internal_sympy <- NULL
 
