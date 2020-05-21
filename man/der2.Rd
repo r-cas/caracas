@@ -15,10 +15,12 @@ der2(expr, vars)
 Symbolic differentiation of second order of an expression
 }
 \examples{
-x <- symbol("x")
-y <- symbol("y")
-f <- 3*x^2 + x*y^2
-der2(f, x)
+if (have_sympy()) {
+  x <- symbol("x")
+  y <- symbol("y")
+  f <- 3*x^2 + x*y^2
+  der2(f, x)
+}
 
 }
 \concept{calculus}

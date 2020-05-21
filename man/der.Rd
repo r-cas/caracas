@@ -15,10 +15,12 @@ der(expr, vars)
 Symbolic differentiation of an expression
 }
 \examples{
-x <- symbol("x")
-y <- symbol("y")
-f <- 3*x^2 + x*y^2
-der(f, x)
+if (have_sympy()) {
+  x <- symbol("x")
+  y <- symbol("y")
+  f <- 3*x^2 + x*y^2
+  der(f, x)
+}
 
 }
 \concept{calculus}

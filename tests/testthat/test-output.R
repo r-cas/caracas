@@ -109,9 +109,6 @@ test_that("print prettyascii", {
   eq_print <- paste0(capture.output(print(eq, prettyascii = TRUE)), collapse = "")
   expect_true(grepl("*", eq_print, fixed = TRUE))
   
-  eq_print <- paste0(capture.output(print(eq, prettyascii = FALSE)), collapse = "")
-  expect_false(grepl("*", eq_print, fixed = TRUE))
-  
   options(caracas.print.prettyascii = NULL)
 })
 

@@ -295,10 +295,12 @@ vars_to_array <- function(vars) {
 #' @param vars variables to take derivate with respect to
 #'
 #' @examples 
-#' x <- symbol("x")
-#' y <- symbol("y")
-#' f <- 3*x^2 + x*y^2
-#' der(f, x)
+#' if (have_sympy()) {
+#'   x <- symbol("x")
+#'   y <- symbol("y")
+#'   f <- 3*x^2 + x*y^2
+#'   der(f, x)
+#' }
 #' 
 #' @concept calculus
 #'
@@ -318,10 +320,12 @@ der <- function(expr, vars) {
 #' @param vars variables to take derivate with respect to
 #' 
 #' @examples 
-#' x <- symbol("x")
-#' y <- symbol("y")
-#' f <- 3*x^2 + x*y^2
-#' der2(f, x)
+#' if (have_sympy()) {
+#'   x <- symbol("x")
+#'   y <- symbol("y")
+#'   f <- 3*x^2 + x*y^2
+#'   der2(f, x)
+#' }
 #' 
 #' @concept calculus
 #'
