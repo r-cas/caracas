@@ -2,7 +2,7 @@
 title: "Fastest route through the forest"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{fastest-route}
+  %\VignetteIndexEntry{Fastest route through the forest}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
