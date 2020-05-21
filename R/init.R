@@ -20,8 +20,12 @@ silent_prepare_sympy <- function() {
     return()
   }
   
-  cfg <- reticulate::py_config()
-  py_ver <- base::numeric_version(cfg$version)
+  py_ver <- tryCatch({
+    cfg <- reticulate::py_config()
+    base::numeric_version(cfg$version)
+  }, error = function(e) {
+    base::numeric_version("1")
+  })
   
   if (py_ver >= "3" && reticulate::py_module_available("sympy")) {
     local_sympy <- reticulate::import("sympy")

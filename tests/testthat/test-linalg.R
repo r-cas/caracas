@@ -64,6 +64,8 @@ test_that("eigenvalues and eigenvectors", {
 
 
 test_that("as_character_matrix", {
+  skip_if_no_sympy()
+  
   x <- as_symbol(1)
   expect_equal(as_character_matrix(x), "1")
   

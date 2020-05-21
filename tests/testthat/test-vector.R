@@ -1,4 +1,6 @@
 test_that("sum", {
+  skip_if_no_sympy()
+  
   a <- c("x", "x^2")
   b <- as_symbol(a)
   expect_equal(as.character(sum(b)), "x^2 + x")
@@ -16,6 +18,8 @@ test_that("sum", {
 })
 
 test_that("cbind/rbind", {
+  skip_if_no_sympy()
+  
   x <- symbol("x")
   
   expect_equal(as.character(cbind(x, x, x)), "Matrix([[x, x, x]])")

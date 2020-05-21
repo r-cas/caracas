@@ -51,6 +51,8 @@ test_that("set", {
 })
 
 test_that("diag", {
+  skip_if_no_sympy()
+  
   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
   x <- as_symbol(A)
   diag(x) <- "b"
@@ -73,6 +75,8 @@ test_that("diag", {
 
 
 test_that("diag subassignment", {
+  skip_if_no_sympy()
+  
   Aorg <- diag(5)
   B <- as_symbol(Aorg)
   
