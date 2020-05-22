@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9002</span>
       </span>
     </div>
 
@@ -56,6 +56,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/arbitrary-precision-arithmetic.html">Arbitrary precision arithmetic</a>
+    </li>
+    <li>
       <a href="articles/fastest-route.html">Fastest route through the forest</a>
     </li>
     <li>
@@ -110,6 +113,11 @@
 <a class="sourceLine" id="cb2-2" title="2">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"r-cas/caracas"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>You can also install the package without vignettes if needed as follows:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"r-cas/caracas"</span>)</a></code></pre></div>
+</div>
+<div id="configuring-the-python-environment" class="section level2">
+<h2 class="hasAnchor">
+<a href="#configuring-the-python-environment" class="anchor"></a>Configuring the Python environment</h2>
+<p>The <code>caracas</code> package uses the <a href="https://github.com/rstudio/reticulate"><code>reticulate</code></a> package (to run Python code). Thus, if you wish to configure your Python environment, you need to 1) load <code>reticulate</code>, 2) configure the Python environment, and 3) load <code>caracas</code>. The Python environment can be configured as described <a href="https://rstudio.github.io/reticulate/articles/versions.html">here</a>. Again, this need to be done <em>before</em> loading <code>caracas</code>.</p>
 </div>
 <div id="development-site" class="section level2">
 <h2 class="hasAnchor">

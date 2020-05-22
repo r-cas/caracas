@@ -26,6 +26,17 @@ You can also install the package without vignettes if needed as follows:
 
     remotes::install_github("r-cas/caracas")
 
+## Configuring the Python environment
+
+The `caracas` package uses the
+[`reticulate`](https://github.com/rstudio/reticulate) package (to run
+Python code). Thus, if you wish to configure your Python environment,
+you need to 1) load `reticulate`, 2) configure the Python environment,
+and 3) load `caracas`. The Python environment can be configured as
+described
+[here](https://rstudio.github.io/reticulate/articles/versions.html).
+Again, this need to be done *before* loading `caracas`.
+
 ## Development site
 
 See <https://github.com/r-cas/caracas>.

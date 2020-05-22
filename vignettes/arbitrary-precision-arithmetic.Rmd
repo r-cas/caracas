@@ -1,0 +1,48 @@
+---
+title: "Arbitrary precision arithmetic"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Arbitrary precision arithmetic}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, message=FALSE}
+library(caracas)
+```
+
+```{r, include = FALSE}
+inline_code <- function(x) {
+  x
+}
+
+if (!have_sympy()) {
+  # SymPy not available, so the chunks shall not be evaluated
+  knitr::opts_chunk$set(eval = FALSE)
+  
+  inline_code <- inline_code <- function(x) {
+    deparse(substitute(x))
+  }
+}
+```
+
+## An example
+
+```{r}
+n_2 <- as_symbol("2")
+n_pi <- as_symbol("pi", declare_variables = FALSE)
+x <- sqrt(n_2) * n_pi
+x
+N(x)
+N(x, 5)
+N(x, 50)
+as.character(N(x, 50))
+```
+

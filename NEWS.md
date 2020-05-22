@@ -1,3 +1,7 @@
+# caracas 1.0.2
+
+* Arbitrary precision arithmetic: `N()` function and vignette on "Arbitrary precision arithmetic"
+
 # caracas 1.0.1
 
 * Require Python 3
