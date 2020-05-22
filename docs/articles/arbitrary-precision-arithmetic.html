@@ -125,6 +125,21 @@
 <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="fu"><a href="../reference/N.html">N</a></span>(<span class="no">x</span>, <span class="fl">50</span>))
 <span class="co">#&gt; [1] "4.4428829381583662470158809900606936986146216893757"</span></pre></body></html></div>
 </div>
+<div id="another-example" class="section level2">
+<h2 class="hasAnchor">
+<a href="#another-example" class="anchor"></a>Another example</h2>
+<p>As <code>SymPy</code> requires <a href="http://mpmath.org/"><code>mpmath</code></a> this can be used directly, for example like this (example due to Hans W Borchers, thanks!):</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">mpmath</span> <span class="kw">&lt;-</span> <span class="kw pkg">reticulate</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import</a></span>(<span class="st">'mpmath'</span>)
+<span class="no">mpmath</span>$<span class="no">mp</span>$<span class="no">dps</span> <span class="kw">&lt;-</span> <span class="fl">30</span>
+<span class="no">z</span> <span class="kw">&lt;-</span> <span class="no">mpmath</span>$<span class="fu">mpc</span>(<span class="kw">real</span> <span class="kw">=</span> <span class="st">'1.0'</span>, <span class="kw">imag</span> <span class="kw">=</span> <span class="st">'63.453'</span>)
+<span class="no">zeta_z</span> <span class="kw">&lt;-</span> <span class="no">mpmath</span>$<span class="fu">zeta</span>(<span class="no">z</span>)
+<span class="no">zeta_z</span>
+<span class="co">#&gt; (2.3454640626800434588582100226 - 0.641476965582898402371607967236j)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">zeta_z</span>$<span class="no">real</span>)
+<span class="co">#&gt; [1] "2.3454640626800434588582100226"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">zeta_z</span>$<span class="no">imag</span>)
+<span class="co">#&gt; [1] "-0.641476965582898402371607967236"</span></pre></body></html></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

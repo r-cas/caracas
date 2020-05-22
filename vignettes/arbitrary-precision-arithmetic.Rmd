@@ -46,3 +46,17 @@ N(x, 50)
 as.character(N(x, 50))
 ```
 
+## Another example
+
+As `SymPy` requires [`mpmath`](http://mpmath.org/) this can be used directly, for example like this (example due to Hans W Borchers, thanks!):
+
+```{r}
+mpmath <- reticulate::import('mpmath')
+mpmath$mp$dps <- 30
+z <- mpmath$mpc(real = '1.0', imag = '63.453')
+zeta_z <- mpmath$zeta(z)
+zeta_z
+as.character(zeta_z$real)
+as.character(zeta_z$imag)
+```
+
