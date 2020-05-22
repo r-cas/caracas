@@ -78,3 +78,11 @@ test_that("fraction", {
   expect_equal(as.character(x + y), "120140/7")
 })
 
+
+test_that("eigval", {
+  skip_if_no_sympy()
+
+  str <- "a - sqrt(3)*sqrt(b*c)"
+  eig <- as_symbol(str)
+  expect_equal(as.character(eig), str)
+})

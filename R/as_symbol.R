@@ -73,14 +73,17 @@ as_py_string <- function(x) {
 as_symbol <- function(x, declare_variables = TRUE) {
   ensure_sympy()
   
+  varnames_exclude <- c("sqrt", "log")
+
   if (declare_variables) {
     xele <- as.vector(x)
     m <- gregexpr(pattern = PATTERN_PYHTON_VARIABLE, 
                   text = xele)
     varnames <- regmatches(x = xele, m = m, invert = FALSE)
     varnames <- unique(unlist(varnames[unlist(lapply(varnames, length)) > 0]))
+    varnames <- setdiff(varnames, varnames_exclude)
     varnames
-    
+
     for (varname in varnames) {
       cmd <- paste0(varname, " = symbols('", varname, "')")
       reticulate::py_run_string(cmd, convert = FALSE)
