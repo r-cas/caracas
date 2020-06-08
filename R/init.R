@@ -49,6 +49,7 @@ ensure_sympy <- function() {
   if (is.null(pkg_globals$internal_sympy)) {
     stop("Both Python3 and 'SymPy' >= 1.4 must be available.\n", 
          "Please verify Python version with 'reticulate::py_config()'.\n", 
+         "Remember to configure reticulate (e.g. 'reticulate::use_condaenv(\"anaconda3\")') before loading caracas.\n",
          "To install SymPy, please run this command:\n", 
          "caracas::install_sympy()")
   }
