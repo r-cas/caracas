@@ -15,9 +15,10 @@ bound_to_str <- function(b) {
     }
   }
   
-  bnd <- deparse(eval(substitute(substitute(b)), parent.frame()))
+  bnd <- as.character(b)
+  #bnd <- deparse(eval(substitute(substitute(b)), parent.frame()))
   #bnd <- gsub("pi", "Pi", bnd, fixed = TRUE)
-  
+
   return(bnd)
 }
 
