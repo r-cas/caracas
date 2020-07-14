@@ -102,6 +102,14 @@ rootsolve <- function(lhs, vars) {
 #' @param rhs Equation (or equations as row vector/1xn matrix)
 #' @param vars vector of variable names or symbols
 #' 
+#' @examples 
+#' if (have_sympy()) {
+#'   x <- symbol('x')
+#'   exp1 <- 2*x + 2
+#'   exp2 <- x
+#'   solve_sys(cbind(exp1), cbind(exp2), x)
+#' }
+#' 
 #' @return A list with solutions (with class `caracas_solve_sys_sol` 
 #' for compact printing), each element containing a named 
 #' list of the variables' values.
