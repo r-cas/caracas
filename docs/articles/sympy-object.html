@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9004</span>
       </span>
     </div>
 
@@ -54,6 +54,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/ar-ssm.html">Concentration and covariance matrix in an autoregressive model and in a dynamic linear model</a>
+    </li>
+    <li>
       <a href="../articles/arbitrary-precision-arithmetic.html">Arbitrary precision arithmetic</a>
     </li>
     <li>
@@ -61,9 +64,6 @@
     </li>
     <li>
       <a href="../articles/introduction.html">Introduction to 'caracas'</a>
-    </li>
-    <li>
-      <a href="../articles/naive-bayes.html">The structure of the concentration and covariance matrix in a naive Bayes model</a>
     </li>
     <li>
       <a href="../articles/reference.html">Reference</a>
@@ -219,58 +219,58 @@
 <span class="co">#&gt; $positive</span>
 <span class="co">#&gt; [1] TRUE</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; $extended_positive</span>
-<span class="co">#&gt; [1] TRUE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $extended_nonpositive</span>
-<span class="co">#&gt; [1] FALSE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $zero</span>
-<span class="co">#&gt; [1] FALSE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $nonnegative</span>
-<span class="co">#&gt; [1] TRUE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $infinite</span>
-<span class="co">#&gt; [1] FALSE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $imaginary</span>
-<span class="co">#&gt; [1] FALSE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $real</span>
-<span class="co">#&gt; [1] TRUE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $nonpositive</span>
-<span class="co">#&gt; [1] FALSE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $extended_nonnegative</span>
-<span class="co">#&gt; [1] TRUE</span>
-<span class="co">#&gt; </span>
 <span class="co">#&gt; $extended_nonzero</span>
 <span class="co">#&gt; [1] TRUE</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; $extended_real</span>
+<span class="co">#&gt; $extended_positive</span>
 <span class="co">#&gt; [1] TRUE</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; $nonzero</span>
-<span class="co">#&gt; [1] TRUE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $finite</span>
-<span class="co">#&gt; [1] TRUE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $hermitian</span>
+<span class="co">#&gt; $complex</span>
 <span class="co">#&gt; [1] TRUE</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $negative</span>
 <span class="co">#&gt; [1] FALSE</span>
 <span class="co">#&gt; </span>
+<span class="co">#&gt; $extended_nonnegative</span>
+<span class="co">#&gt; [1] TRUE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $finite</span>
+<span class="co">#&gt; [1] TRUE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $nonzero</span>
+<span class="co">#&gt; [1] TRUE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $zero</span>
+<span class="co">#&gt; [1] FALSE</span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; $extended_negative</span>
 <span class="co">#&gt; [1] FALSE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $extended_real</span>
+<span class="co">#&gt; [1] TRUE</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $commutative</span>
 <span class="co">#&gt; [1] TRUE</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; $complex</span>
+<span class="co">#&gt; $imaginary</span>
+<span class="co">#&gt; [1] FALSE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $nonpositive</span>
+<span class="co">#&gt; [1] FALSE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $extended_nonpositive</span>
+<span class="co">#&gt; [1] FALSE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $infinite</span>
+<span class="co">#&gt; [1] FALSE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hermitian</span>
+<span class="co">#&gt; [1] TRUE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $real</span>
+<span class="co">#&gt; [1] TRUE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $nonnegative</span>
 <span class="co">#&gt; [1] TRUE</span>
 <span class="no">eq</span> <span class="kw">&lt;-</span> <span class="no">sympy</span>$<span class="no">parsing</span>$<span class="no">sympy_parser</span>$<span class="fu">parse_expr</span>(<span class="st">"x**2 - 1"</span>,
                                             <span class="kw">local_dict</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'x'</span> <span class="kw">=</span> <span class="no">x</span>))

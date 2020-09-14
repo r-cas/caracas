@@ -1,0 +1,147 @@
+---
+title: "Concentration and covariance matrix in an autoregressive model and in a dynamic linear model"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Concentration and covariance matrix in an autoregressive model and in a dynamic linear model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, message=FALSE}
+library(caracas)
+```
+
+```{r, include = FALSE}
+inline_code <- function(x) {
+  x
+}
+
+if (!have_sympy()) {
+  # SymPy not available, so the chunks shall not be evaluated
+  knitr::opts_chunk$set(eval = FALSE)
+  
+  inline_code <- inline_code <- function(x) {
+    deparse(substitute(x))
+  }
+}
+```
+
+## Autoregressive model ($AR(1)$)
+
+Consider this model: 
+$$
+x_i = a x_0 + e_i, \quad i=1, \dots, 4
+$$ 
+and $x_0=e_0$. All terms $e_0, \dots, e_3$ are independent and $N(0,1)$ distributed. 
+Let $e=(e_0, \dots, e_3)$ and $x=(x_0, \dots x_3)$.
+Isolating error terms gives that
+$$
+ e = L_1 x
+$$
+where $L_1$ has the form
+```{r}
+L1chr <- diag(4)
+L1chr[2:4, 1] <- "-a"
+L1 <- as_symbol(L1chr)
+L1
+```
+
+If error terms have variance $1$ then $\mathbf{Var}(e)=L \mathbf{Var}(x) L'$ so the covariance matrix is $V1=\mathbf{Var}(x) = L^- (L^-)'$ while the concentration matrix (the inverse covariances matrix) is $K=L' L$.
+
+```{r}
+L1inv <- inv(L1)
+K1 <- t(L1) %*% L1
+V1 <- L1inv %*% t(L1inv)
+```
+
+```{r, results="asis"}
+cat(
+  "\\begin{align} 
+    K_1 &= ", tex(K1), " \\\\ 
+   V_1 &= ", tex(V1), " 
+  \\end{align}", sep = "")
+```
+
+
+## Dynamic linear model
+
+Augment the $AR(1)$ process above with $y_i=b x_i + u_i$. Then
+$(e,u)$ can be expressed in terms of $(x,y)$ as
+$$
+(e,u) = L_2(x,y)
+$$
+where
+```{r}
+N <- 3
+L2chr <- diag("1", 1 + 2*N)
+L2chr[cbind(1 + (1:N), 1:N)] <- "-a"
+L2chr[cbind(1 + N + (1:N), 1 + 1:N)] <- "-b"
+L2 <- as_symbol(L2chr)
+L2
+```
+
+```{r}
+K2 <- L2 %*% t(L2)
+V2 <- simplify(inv(K2))
+```
+
+```{r, results="asis"}
+cat(
+  "\\begin{align} K_2 &= ", tex(K2), " \\\\ 
+                  V_2 &= ", tex(V2), " \\end{align}", sep = "")
+```
+
+
+## Numerical evalation in R
+
+```{r}
+sparsify <- function(x) {
+  if (requireNamespace("Matrix", quietly = TRUE)) {
+    library(Matrix)
+    
+    return(Matrix::Matrix(x, sparse = TRUE))
+  }
+  
+  return(x)
+}
+
+alpha <- 0.5
+beta <- -0.3
+
+## AR(1)
+N <- 3
+L1 <- diag(1, 1 + N)
+L1[cbind(1+(1:N), 1:N)] <- -alpha
+K1 <- L1 %*% t(L1)
+V1 <- solve(K1)
+sparsify(K1)
+sparsify(V1)
+
+## Dynamic linear models
+N <- 3
+L2 <- diag(1, 1 + 2*N)
+L2[cbind(1+(1:N), 1:N)] <- -alpha
+L2[cbind(1 + N + (1:N), 1 + 1:N)] <- -beta
+K2 <- L2 %*% t(L2)
+V2 <- solve(K2)
+sparsify(K2)
+sparsify(V2)
+```
+
+Comparing with results calculated by `caracas`:
+
+```{r}
+V1_eval <- eval(as_r(V1), list(a = alpha))
+V2_eval <- eval(as_r(V2, first_doit = FALSE), list(a = alpha, b = beta))
+all.equal(V1, V1_eval)
+all.equal(V2, V2_eval)
+```
+

@@ -75,7 +75,7 @@ the solutions to lhs = rhs for vars are found." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9004</span>
       </span>
     </div>
 
@@ -98,6 +98,9 @@ the solutions to lhs = rhs for vars are found." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/ar-ssm.html">Concentration and covariance matrix in an autoregressive model and in a dynamic linear model</a>
+    </li>
+    <li>
       <a href="../articles/arbitrary-precision-arithmetic.html">Arbitrary precision arithmetic</a>
     </li>
     <li>
@@ -105,9 +108,6 @@ the solutions to lhs = rhs for vars are found." />
     </li>
     <li>
       <a href="../articles/introduction.html">Introduction to 'caracas'</a>
-    </li>
-    <li>
-      <a href="../articles/naive-bayes.html">The structure of the concentration and covariance matrix in a naive Bayes model</a>
     </li>
     <li>
       <a href="../articles/reference.html">Reference</a>
@@ -178,6 +178,15 @@ the solutions to <code>lhs = rhs</code> for <code>vars</code> are found.</p>
 for compact printing), each element containing a named
 list of the variables' values.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='have_sympy.html'>have_sympy</a></span>()) {
+  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='symbol.html'>symbol</a></span>(<span class='st'>'x'</span>)
+  <span class='no'>exp1</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span>*<span class='no'>x</span> + <span class='fl'>2</span>
+  <span class='no'>exp2</span> <span class='kw'>&lt;-</span> <span class='no'>x</span>
+  <span class='fu'>solve_sys</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>exp1</span>), <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>exp2</span>), <span class='no'>x</span>)
+}</div><div class='output co'>#&gt; Solution 1:
+#&gt;   x =  -2 </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
