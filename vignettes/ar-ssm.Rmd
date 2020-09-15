@@ -105,8 +105,6 @@ cat(
 ```{r}
 sparsify <- function(x) {
   if (requireNamespace("Matrix", quietly = TRUE)) {
-    library(Matrix)
-    
     return(Matrix::Matrix(x, sparse = TRUE))
   }
   
