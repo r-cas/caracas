@@ -209,8 +209,8 @@ determinant(B)
 ```{r}
 A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
 B <- as_symbol(A)
-eigen_val(B)
-eigen_vec(B)
+eigenval(B)
+eigenvec(B)
 eigen(eval(as_r(B), list(a = 2)))
 ```
 

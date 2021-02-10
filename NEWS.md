@@ -1,6 +1,7 @@
 # caracas 1.0.2
 
 * Arbitrary precision arithmetic: `N()` function and vignette on "Arbitrary precision arithmetic"
+* Rename `eigen_val()`/`eigen_vec()` to `eigenval()`/`eigenvec()`
 
 # caracas 1.0.1
 

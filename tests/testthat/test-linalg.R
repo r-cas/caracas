@@ -40,7 +40,7 @@ test_that("eigenvalues and eigenvectors", {
   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
   B <- as_symbol(A)
   
-  eval <- eigen_val(B)
+  eval <- eigenval(B)
   eval_order <- order(unlist(lapply(eval, function(l) l$eigmult)))
   eval <- eval[eval_order]
   
@@ -50,7 +50,7 @@ test_that("eigenvalues and eigenvectors", {
   expect_equal(eval[[2L]]$eigmult, 2L)
   
   
-  evec <- eigen_vec(B)
+  evec <- eigenvec(B)
   evec_order <- order(unlist(lapply(eval, function(l) l$eigmult)))
   evec <- evec[evec_order]
   

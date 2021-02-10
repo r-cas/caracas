@@ -31,6 +31,8 @@ if (have_sympy()) {
   intf(1/x, x, 1, 10, doit = FALSE)
   intf(1/x, x)
   intf(1/x, x, doit = FALSE)
+  intf(exp(-x^2/2), x, -Inf, Inf)
+  intf(exp(-x^2/2), x, -Inf, Inf, doit = FALSE)
 }
 
 }
