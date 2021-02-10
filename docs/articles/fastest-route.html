@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9010</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -80,7 +80,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/r-cas/caracas/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -107,7 +107,8 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">caracas</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas">caracas</a></span><span class="op">)</span></code></pre></div>
 <p>A <a href="https://ing.dk/artikel/taenkeboks-hurtigste-vej-mellem-a-b-1150-m-lang-232871">problem</a> was posted by the Danish newspaper, <em>Ingeniøren</em>, and it goes like this:</p>
 <p>You are in the middle of a dense forest located at <span class="math inline">\(A\)</span>. You need to get to <span class="math inline">\(C\)</span> in the fastest way possible, and you can only change direction once. You can walk directly via <span class="math inline">\(AB\)</span> to the dedicated walking path <span class="math inline">\(BC\)</span> where you can walk fast, you can take the direct path through the forest (<span class="math inline">\(AC\)</span>) where you have to walk slower, or cross through the forest to the dedicated walking path (<span class="math inline">\(AD\)</span> and then <span class="math inline">\(DC\)</span>).</p>
 <p><img src="fastest-route_files/figure-html/unnamed-chunk-4-1.png" width="768"></p>
@@ -141,87 +142,94 @@
 <a href="#length-of-line-segments" class="anchor"></a>Length of line segments</h3>
 <p>We parameterise with <span class="math inline">\(k = |BD|\)</span>, the distance between <span class="math inline">\(B\)</span> and <span class="math inline">\(D\)</span>. That is, how much to walk on fast walking path before crossing into the forest.</p>
 <p>Formulating using <code>caracas</code>:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">AB</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="st">'300'</span>)
-<span class="no">AB</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">AB</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span><span class="op">(</span><span class="st">'300'</span><span class="op">)</span>
+<span class="va">AB</span>
 <span class="co">#&gt; [caracas]: 300</span>
-<span class="no">AC</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span>(<span class="st">'1000'</span>)
-<span class="no">AC</span>
+<span class="va">AC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span><span class="op">(</span><span class="st">'1000'</span><span class="op">)</span>
+<span class="va">AC</span>
 <span class="co">#&gt; [caracas]: 1000</span>
-<span class="no">BC</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="no">AC</span>^<span class="fl">2</span> - <span class="no">AB</span>^<span class="fl">2</span>)
-<span class="no">BC</span>
+<span class="va">BC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">AC</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">AB</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">BC</span>
 <span class="co">#&gt; [caracas]: 100⋅√91</span>
-<span class="no">k</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span>(<span class="st">'k'</span>) <span class="co"># |BD|</span>
-<span class="no">DC</span> <span class="kw">&lt;-</span> <span class="no">BC</span> - <span class="no">k</span>
-<span class="no">AD</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="no">AB</span>^<span class="fl">2</span> + <span class="no">k</span>^<span class="fl">2</span>)
-<span class="no">AD</span>
+<span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'k'</span><span class="op">)</span> <span class="co"># |BD|</span>
+<span class="va">DC</span> <span class="op">&lt;-</span> <span class="va">BC</span> <span class="op">-</span> <span class="va">k</span>
+<span class="va">AD</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">AB</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">k</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">AD</span>
 <span class="co">#&gt; [caracas]:    ____________</span>
 <span class="co">#&gt;              ╱  2         </span>
-<span class="co">#&gt;            ╲╱  k  + 90000</span></pre></body></html></div>
+<span class="co">#&gt;            ╲╱  k  + 90000</span></code></pre></div>
 <p>So for a distance of <span class="math inline">\(|AD|\)</span>, you travel by 5 m/s, and then for a distance of <span class="math inline">\(- k + 100 \sqrt{91}\)</span> you travel by 2 m/s. Thus it takes <span class="math inline">\(\frac{\sqrt{k^{2} + 90000}}{2}\)</span> to travel <span class="math inline">\(AD\)</span> and <span class="math inline">\(- \frac{k}{5} + 20 \sqrt{91}\)</span> to travel <span class="math inline">\(DC\)</span>.</p>
 <p>The question is: What is the fastest way to get from <span class="math inline">\(A\)</span> to <span class="math inline">\(C\)</span>?</p>
 <p>First, the total duration of the route is:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">l</span> <span class="kw">&lt;-</span> <span class="no">AD</span>/<span class="fl">2</span> + <span class="no">DC</span>/<span class="fl">5</span>
-<span class="no">l</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">l</span> <span class="op">&lt;-</span> <span class="va">AD</span><span class="op">/</span><span class="fl">2</span> <span class="op">+</span> <span class="va">DC</span><span class="op">/</span><span class="fl">5</span>
+<span class="va">l</span>
 <span class="co">#&gt; [caracas]:          ____________         </span>
 <span class="co">#&gt;                    ╱  2                  </span>
 <span class="co">#&gt;              k   ╲╱  k  + 90000          </span>
 <span class="co">#&gt;            - ─ + ─────────────── + 20⋅√91</span>
-<span class="co">#&gt;              5          2</span></pre></body></html></div>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">lfun</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/as_r.html">as_r</a></span>(<span class="no">l</span>)
-<span class="no">lfun</span>
+<span class="co">#&gt;              5          2</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lfun</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_r.html">as_r</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span>
+<span class="va">lfun</span>
 <span class="co">#&gt; expression(-k/5 + sqrt(k^2 + 90000)/2 + 20 * sqrt(91))</span>
-<span class="no">ks</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fu"><a href="../reference/as_r.html">as_r</a></span>(<span class="no">AC</span>), <span class="kw">length.out</span> <span class="kw">=</span> <span class="fl">100</span>)
-<span class="no">ls</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span>(<span class="no">lfun</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">k</span> <span class="kw">=</span> <span class="no">ks</span>))
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">ks</span>, <span class="no">ls</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"l"</span>, <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"k"</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Time A to C"</span>)</pre></body></html></div>
+<span class="va">ks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="../reference/as_r.html">as_r</a></span><span class="op">(</span><span class="va">AC</span><span class="op">)</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
+<span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="va">lfun</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="va">ks</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ks</span>, <span class="va">ls</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"k"</span>, ylab <span class="op">=</span> <span class="st">"Time A to C"</span><span class="op">)</span></code></pre></div>
 <p><img src="fastest-route_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 <p>It looks like a minimum around <span class="math inline">\(k = 150\)</span>.</p>
 <p>We find the analytical solution by first finding critical points:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">dl</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span>(<span class="no">l</span>, <span class="no">k</span>)
-<span class="no">dl</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">l</span>, <span class="va">k</span><span class="op">)</span>
+<span class="va">dl</span>
 <span class="co">#&gt; [caracas]:         k           1</span>
 <span class="co">#&gt;            ───────────────── - ─</span>
 <span class="co">#&gt;                 ____________   5</span>
 <span class="co">#&gt;                ╱  2             </span>
 <span class="co">#&gt;            2⋅╲╱  k  + 90000</span>
-<span class="no">crit_points</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/solve_sys.html">solve_sys</a></span>(<span class="no">dl</span>, <span class="no">k</span>)
-<span class="no">crit_points</span>
+<span class="va">crit_points</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">dl</span>, <span class="va">k</span><span class="op">)</span>
+<span class="va">crit_points</span>
 <span class="co">#&gt; Solution 1:</span>
 <span class="co">#&gt;   k =  200⋅√21</span>
 <span class="co">#&gt;       ───────</span>
 <span class="co">#&gt;          7</span>
-<span class="no">best_k</span> <span class="kw">&lt;-</span> <span class="no">crit_points</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">k</span>
-<span class="no">best_k</span>
+<span class="va">best_k</span> <span class="op">&lt;-</span> <span class="va">crit_points</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">k</span>
+<span class="va">best_k</span>
 <span class="co">#&gt; [caracas]: 200⋅√21</span>
 <span class="co">#&gt;            ───────</span>
-<span class="co">#&gt;               7</span></pre></body></html></div>
+<span class="co">#&gt;               7</span></code></pre></div>
 <p>The type of the critical point is found by considering the Hessian:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span>(<span class="fu"><a href="../reference/as_r.html">as_r</a></span>(<span class="fu"><a href="../reference/der.html">der</a></span>(<span class="no">dl</span>, <span class="no">k</span>)), <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">k</span> <span class="kw">=</span> <span class="fu"><a href="../reference/as_r.html">as_r</a></span>(<span class="no">best_k</span>)))
-<span class="co">#&gt; [1] 0.001283121</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_r.html">as_r</a></span><span class="op">(</span><span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">dl</span>, <span class="va">k</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fu"><a href="../reference/as_r.html">as_r</a></span><span class="op">(</span><span class="va">best_k</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.001283121</span></code></pre></div>
 <p>Thus the critical point is indeed a minimum as suggested by the plot.</p>
 <p>The fastest route is thus obtained for <span class="math display">\[
   k = \frac{200 \sqrt{21}}{7} \approx 130.93 .
 \]</span> It has a length of (in meters)</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">DC_best</span> <span class="kw">&lt;-</span> <span class="no">BC</span> - <span class="no">best_k</span>
-<span class="no">AD_best</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="no">AB</span>^<span class="fl">2</span> + <span class="no">best_k</span>^<span class="fl">2</span>)
-<span class="no">AD_best</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">DC_best</span> <span class="op">&lt;-</span> <span class="va">BC</span> <span class="op">-</span> <span class="va">best_k</span>
+<span class="va">AD_best</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">AB</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">best_k</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">AD_best</span>
 <span class="co">#&gt; [caracas]: 500⋅√21</span>
 <span class="co">#&gt;            ───────</span>
 <span class="co">#&gt;               7</span>
-<span class="no">best_route</span> <span class="kw">&lt;-</span> <span class="no">AD_best</span> + <span class="no">DC_best</span>
-<span class="no">best_route</span>
+<span class="va">best_route</span> <span class="op">&lt;-</span> <span class="va">AD_best</span> <span class="op">+</span> <span class="va">DC_best</span>
+<span class="va">best_route</span>
 <span class="co">#&gt; [caracas]: 300⋅√21          </span>
 <span class="co">#&gt;            ─────── + 100⋅√91</span>
 <span class="co">#&gt;               7</span>
-<span class="fu"><a href="../reference/as_r.html">as_r</a></span>(<span class="no">best_route</span>)
-<span class="co">#&gt; [1] 1150.335</span></pre></body></html></div>
+<span class="fu"><a href="../reference/as_r.html">as_r</a></span><span class="op">(</span><span class="va">best_route</span><span class="op">)</span>
+<span class="co">#&gt; [1] 1150.335</span></code></pre></div>
 <p><span class="math display">\[
   \frac{300 \sqrt{21}}{7} + 100 \sqrt{91} \approx 1150.34
 \]</span> and takes (in seconds)</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">best_l</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/subs.html">subs</a></span>(<span class="no">l</span>, <span class="st">"k"</span>, <span class="no">best_k</span>)
-<span class="no">best_l</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">best_l</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/subs.html">subs</a></span><span class="op">(</span><span class="va">l</span>, <span class="st">"k"</span>, <span class="va">best_k</span><span class="op">)</span>
+<span class="va">best_l</span>
 <span class="co">#&gt; [caracas]: 30⋅√21 + 20⋅√91</span>
-<span class="fu"><a href="../reference/as_r.html">as_r</a></span>(<span class="no">best_l</span>)
-<span class="co">#&gt; [1] 328.2651</span></pre></body></html></div>
+<span class="fu"><a href="../reference/as_r.html">as_r</a></span><span class="op">(</span><span class="va">best_l</span><span class="op">)</span>
+<span class="co">#&gt; [1] 328.2651</span></code></pre></div>
 <p><span class="math display">\[
   30 \sqrt{21} + 20 \sqrt{91} \approx 328.27
 \]</span></p>
@@ -246,7 +254,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

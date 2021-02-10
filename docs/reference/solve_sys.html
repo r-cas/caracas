@@ -75,7 +75,7 @@ the solutions to lhs = rhs for vars are found." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9010</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ the solutions to lhs = rhs for vars are found." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,7 +124,7 @@ the solutions to lhs = rhs for vars are found." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-cas/caracas/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -153,7 +153,7 @@ If called as <code>solve_sys(lhs, rhs, vars)</code>
 the solutions to <code>lhs = rhs</code> for <code>vars</code> are found.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>solve_sys</span>(<span class='no'>lhs</span>, <span class='no'>rhs</span>, <span class='no'>vars</span>)</pre>
+    <pre class="usage"><span class='fu'>solve_sys</span><span class='op'>(</span><span class='va'>lhs</span>, <span class='va'>rhs</span>, <span class='va'>vars</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,12 +179,13 @@ for compact printing), each element containing a named
 list of the variables' values.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='have_sympy.html'>have_sympy</a></span>()) {
-  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='symbol.html'>symbol</a></span>(<span class='st'>'x'</span>)
-  <span class='no'>exp1</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span>*<span class='no'>x</span> + <span class='fl'>2</span>
-  <span class='no'>exp2</span> <span class='kw'>&lt;-</span> <span class='no'>x</span>
-  <span class='fu'>solve_sys</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>exp1</span>), <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>exp2</span>), <span class='no'>x</span>)
-}</div><div class='output co'>#&gt; Solution 1:
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='have_sympy.html'>have_sympy</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='symbol.html'>symbol</a></span><span class='op'>(</span><span class='st'>'x'</span><span class='op'>)</span>
+  <span class='va'>exp1</span> <span class='op'>&lt;-</span> <span class='fl'>2</span><span class='op'>*</span><span class='va'>x</span> <span class='op'>+</span> <span class='fl'>2</span>
+  <span class='va'>exp2</span> <span class='op'>&lt;-</span> <span class='va'>x</span>
+  <span class='fu'>solve_sys</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>exp1</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>exp2</span><span class='op'>)</span>, <span class='va'>x</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; Solution 1:
 #&gt;   x =  -2 </div><div class='input'>
 </div></pre>
   </div>
@@ -202,7 +203,7 @@ list of the variables' values.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

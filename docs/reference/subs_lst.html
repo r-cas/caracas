@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9010</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -121,7 +121,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-cas/caracas/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -147,7 +147,7 @@
     <p>Useful for substituting solutions into expressions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>subs_lst</span>(<span class='no'>s</span>, <span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>subs_lst</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,21 +164,22 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='have_sympy.html'>have_sympy</a></span>()) {
-     <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_symbol.html'>as_symbol</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"p"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>))
-     <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_symbol.html'>as_symbol</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"y"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>))
-     <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_symbol.html'>as_symbol</a></span>(<span class='st'>"a"</span>)
-     <span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>y</span>*<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>p</span>))
-     <span class='no'>L</span> <span class='kw'>&lt;-</span> -<span class='no'>l</span> + <span class='no'>a</span>*(<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>p</span>) - <span class='fl'>1</span>)
-     <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='der.html'>der</a></span>(<span class='no'>L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>, <span class='no'>p</span>))
-     <span class='no'>sols</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='solve_sys.html'>solve_sys</a></span>(<span class='no'>g</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>, <span class='no'>p</span>))
-     <span class='no'>sol</span> <span class='kw'>&lt;-</span> <span class='no'>sols</span><span class='kw'>[[</span><span class='fl'>1L</span>]]
-     <span class='no'>sol</span>
-     <span class='no'>H</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='der2.html'>der2</a></span>(<span class='no'>L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>p</span>, <span class='no'>a</span>))
-     <span class='no'>H</span>
-     <span class='no'>H_sol</span> <span class='kw'>&lt;-</span> <span class='fu'>subs_lst</span>(<span class='no'>H</span>, <span class='no'>sol</span>)
-     <span class='no'>H_sol</span>
-}</div><div class='output co'>#&gt; [caracas]: ⎡              2                                     ⎤
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='have_sympy.html'>have_sympy</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+     <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as_symbol.html'>as_symbol</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"p"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+     <span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as_symbol.html'>as_symbol</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"y"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+     <span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as_symbol.html'>as_symbol</a></span><span class='op'>(</span><span class='st'>"a"</span><span class='op'>)</span>
+     <span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>y</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span><span class='op'>)</span>
+     <span class='va'>L</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='va'>l</span> <span class='op'>+</span> <span class='va'>a</span><span class='op'>*</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span>
+     <span class='va'>g</span> <span class='op'>&lt;-</span> <span class='fu'><a href='der.html'>der</a></span><span class='op'>(</span><span class='va'>L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>p</span><span class='op'>)</span><span class='op'>)</span>
+     <span class='va'>sols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='solve_sys.html'>solve_sys</a></span><span class='op'>(</span><span class='va'>g</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>p</span><span class='op'>)</span><span class='op'>)</span>
+     <span class='va'>sol</span> <span class='op'>&lt;-</span> <span class='va'>sols</span><span class='op'>[[</span><span class='fl'>1L</span><span class='op'>]</span><span class='op'>]</span>
+     <span class='va'>sol</span>
+     <span class='va'>H</span> <span class='op'>&lt;-</span> <span class='fu'><a href='der2.html'>der2</a></span><span class='op'>(</span><span class='va'>L</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>p</span>, <span class='va'>a</span><span class='op'>)</span><span class='op'>)</span>
+     <span class='va'>H</span>
+     <span class='va'>H_sol</span> <span class='op'>&lt;-</span> <span class='fu'>subs_lst</span><span class='op'>(</span><span class='va'>H</span>, <span class='va'>sol</span><span class='op'>)</span>
+     <span class='va'>H_sol</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; [caracas]: ⎡              2                                     ⎤
 #&gt;            ⎢(y₁ + y₂ + y₃)                                      ⎥
 #&gt;            ⎢───────────────         0                0         1⎥
 #&gt;            ⎢       y₁                                           ⎥
@@ -210,7 +211,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
