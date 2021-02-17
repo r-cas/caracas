@@ -40,7 +40,7 @@ if (!have_sympy()) {
 x <- symbol('x')
 as.character(x)
 x
-as_r(x)
+as_expr(x)
 ```
 
 
@@ -83,7 +83,7 @@ x <- symbol("x")
 sumf(1/x, "x", 1, 10)
 sumf(1/x, x, 1, 10)
 s <- sumf(1/x, "x", 1, 10)
-as_r(s)
+as_expr(s)
 sum(1/(1:10))
 n <- symbol("n")
 simplify(sumf(x, x, 1, n))
@@ -96,7 +96,7 @@ simplify(sumf(x, x, 1, n))
 x <- symbol("x")
 p <- prodf(1/x, "x", 1, 10)
 p
-as_r(p)
+as_expr(p)
 prod(1/(1:10))
 n <- symbol("n")
 prodf(x, x, 1, n)
@@ -144,7 +144,7 @@ res
 as.character(res)
 tex(res)
 doit(res)
-as_r(res)
+as_expr(res)
 ```
 
 ### Derivatives
@@ -156,7 +156,7 @@ x <- symbol("x")
 y <- symbol("y")
 f <- 3*x^2 + x*y^2
 f
-as_r(f)
+as_expr(f)
 der(f, "x")
 der(f, x)
 der(f, c("x", "y"))
@@ -164,13 +164,13 @@ der(f, c(x, y))
 f1 <- der(f, c(x, y))
 f1
 as.character(f1)
-as_r(f1)
-eval(as_r(f1), list(x = 1, y = 2))
+as_expr(f1)
+eval(as_expr(f1), list(x = 1, y = 2))
 der(f1, c(x, y))
 f2 <- der2(f, c(x, y))
 f2
-as_r(f2)
-eval(as_r(f2), list(x = 1, y = 2))
+as_expr(f2)
+eval(as_expr(f2), list(x = 1, y = 2))
 ```
 
 
@@ -188,7 +188,7 @@ der(f, c(x, y))
 ```{r}
 A <- matrix(c("x", 0, 0, "2*x"), 2, 2)
 A
-B <- as_symbol(A)
+B <- as_sym(A)
 B
 2*B
 B*B # Component-wise / Hadamard product
@@ -208,10 +208,10 @@ determinant(B)
 
 ```{r}
 A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-B <- as_symbol(A)
+B <- as_sym(A)
 eigenval(B)
 eigenvec(B)
-eigen(eval(as_r(B), list(a = 2)))
+eigen(eval(as_expr(B), list(a = 2)))
 ```
 
 ```{r}
@@ -232,9 +232,9 @@ B
 Below find an example with maximising the multinomial likelihood.
 
 ```{r}
-p <- as_symbol(paste0("p", 1:3))
-y <- as_symbol(paste0("y", 1:3))
-a <- as_symbol("a")
+p <- as_sym(paste0("p", 1:3))
+y <- as_sym(paste0("y", 1:3))
+a <- as_sym("a")
 l <- sum(y*log(p))
 l
 L <- -l + a*(sum(p) - 1)
@@ -258,9 +258,9 @@ subs(eq, x, "y")
 ```
 
 ```{r}
-p <- as_symbol(paste0("p", 1:3))
-y <- as_symbol(paste0("y", 1:3))
-a <- as_symbol("a")
+p <- as_sym(paste0("p", 1:3))
+y <- as_sym(paste0("y", 1:3))
+a <- as_sym("a")
 l <- sum(y*log(p))
 L <- -l + a*(sum(p) - 1)
 g <- der(L, c(a, p))
@@ -280,7 +280,7 @@ Note that all vectors in `caracas` are column vectors.
 
 ```{r}
 A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-B <- as_symbol(A)
+B <- as_sym(A)
 B[, 2]
 B[, -2]
 B[1, ]
@@ -306,9 +306,9 @@ sympy$solve("x**2 - 1", "x")
 
 ```{r}
 # Multinomial likelihood
-p <- as_symbol(paste0("p", 1:3))
-y <- as_symbol(paste0("y", 1:3))
-a <- as_symbol("a")
+p <- as_sym(paste0("p", 1:3))
+y <- as_sym(paste0("y", 1:3))
+a <- as_sym("a")
 l <- sum(y*log(p))
 L <- -l + a*(sum(p) - 1)
 L

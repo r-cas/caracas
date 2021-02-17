@@ -23,9 +23,9 @@ test_that("derivative", {
                "[[6, 2*y], [2*y, 2*x]]", 
                fixed = TRUE)
   
-  p <- as_symbol(paste0("p", 1:3))
-  y <- as_symbol(paste0("y", 1:3))
-  a <- as_symbol("a")
+  p <- as_sym(paste0("p", 1:3))
+  y <- as_sym(paste0("y", 1:3))
+  a <- as_sym("a")
   l <- sum(y*log(p))
   L <- -l + a*(sum(p) - 1)
   gL <- der(L, c(p, a)) 
@@ -56,26 +56,26 @@ test_that("limit", {
   
   expect_equal(as.character(limf(sin(x)/x, "x", 0)), "1")
   expect_equal(as.character(limf(sin(x)/x, x, 0)), "1")
-  expect_equal(as_r(limf(sin(x)/x, "x", 0)), 1)
-  expect_equal(as_r(limf(sin(x)/x, x, 0)), 1)
+  expect_equal(as_expr(limf(sin(x)/x, "x", 0)), 1)
+  expect_equal(as_expr(limf(sin(x)/x, x, 0)), 1)
   
   expect_equal(as.character(limf(1/x, "x", 0, dir = '+')), "Inf")
   expect_equal(as.character(limf(1/x, x, 0, dir = '+')), "Inf")
-  expect_equal(as_r(limf(1/x, "x", 0, dir = '+')), Inf)
-  expect_equal(as_r(limf(1/x, x, 0, dir = '+')), Inf)
+  expect_equal(as_expr(limf(1/x, "x", 0, dir = '+')), Inf)
+  expect_equal(as_expr(limf(1/x, x, 0, dir = '+')), Inf)
   
   expect_equal(as.character(limf(1/x, "x", 0, dir = '-')), "-Inf")
   expect_equal(as.character(limf(1/x, x, 0, dir = '-')), "-Inf")
-  expect_equal(as_r(limf(1/x, "x", 0, dir = '-')), -Inf)
-  expect_equal(as_r(limf(1/x, x, 0, dir = '-')), -Inf)
+  expect_equal(as_expr(limf(1/x, "x", 0, dir = '-')), -Inf)
+  expect_equal(as_expr(limf(1/x, x, 0, dir = '-')), -Inf)
   
   expect_equal(as.character(limf((1 + 1/x)^x, x, Inf)), "exp(1)")
-  expect_equal(as_r(limf((1 + 1/x)^x, x, Inf)), exp(1))
-  expect_equal(as_r(-limf((1 + 1/x)^x, x, Inf)), -exp(1))
-  expect_equal(as_r(2*limf((1 + 1/x)^x, x, Inf)), 2*exp(1))
-  expect_equal(as_r(2^limf((1 + 1/x)^x, x, Inf)), 2^exp(1))
-  expect_equal(as_r(limf((1 + 1/x)^x, x, Inf)^3), exp(1)^3)
-  expect_equal(as_r(2*limf((1 + 1/x)^x, x, Inf)^3), 2*exp(1)^3)
+  expect_equal(as_expr(limf((1 + 1/x)^x, x, Inf)), exp(1))
+  expect_equal(as_expr(-limf((1 + 1/x)^x, x, Inf)), -exp(1))
+  expect_equal(as_expr(2*limf((1 + 1/x)^x, x, Inf)), 2*exp(1))
+  expect_equal(as_expr(2^limf((1 + 1/x)^x, x, Inf)), 2^exp(1))
+  expect_equal(as_expr(limf((1 + 1/x)^x, x, Inf)^3), exp(1)^3)
+  expect_equal(as_expr(2*limf((1 + 1/x)^x, x, Inf)^3), 2*exp(1)^3)
   
   a <- symbol("a")
   expect_equal(as.character(a*limf(sin(x)/x, "x", 0)), "a")
@@ -89,7 +89,7 @@ test_that("sumf", {
   s <- sumf(1/x, "x", 1, 10)
   
   expect_equal(as.character(s), "7381/2520")
-  expect_equal(as_r(s), sum(1/(1:10)))
+  expect_equal(as_expr(s), sum(1/(1:10)))
                
   n <- symbol("n")
   s <- simplify(sumf(x, x, 1, n))
@@ -103,7 +103,7 @@ test_that("prodf", {
   p <- prodf(1/x, "x", 1, 10)
   
   expect_equal(as.character(p), "1/3628800")
-  expect_equal(as_r(p), prod(1/(1:10)))
+  expect_equal(as_expr(p), prod(1/(1:10)))
 })
 
 test_that("intf", {

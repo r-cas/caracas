@@ -32,10 +32,10 @@ sum.caracas_symbol <- function(..., na.rm = FALSE) {
     stop("Unexpected")
   }
   
-  ones1 <- as_symbol(matrix(1, nrow = 1L, ncol = expr_dim[1L]))
+  ones1 <- as_sym(matrix(1, nrow = 1L, ncol = expr_dim[1L]))
   z1 <- ones1 %*% expr
   
-  ones2 <- as_symbol(matrix(1, nrow = expr_dim[2L], ncol = 1L))
+  ones2 <- as_sym(matrix(1, nrow = expr_dim[2L], ncol = 1L))
   z2 <- z1 %*% ones2
   
   z <- remove_mat_prefix(z2)
@@ -52,7 +52,7 @@ cbind.caracas_symbol <- function(..., deparse.level = 1) {
   
   z <- lapply(expr, as_character_matrix)
   z <- do.call(cbind, z)
-  z <- as_symbol(z)
+  z <- as_sym(z)
   
   return(z)
 }
@@ -63,7 +63,7 @@ rbind.caracas_symbol <- function(..., deparse.level = 1) {
   
   z <- lapply(expr, as_character_matrix)
   z <- do.call(rbind, z)
-  z <- as_symbol(z)
+  z <- as_sym(z)
   
   return(z)
 }

@@ -15,10 +15,10 @@ Eigenvalues
 \examples{
 if (have_sympy()) {
   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-  B <- as_symbol(A)
+  B <- as_sym(A)
   eigenval(B)
   eigenvec(B)
-  eigen(eval(as_r(B), list(a = 2)))
+  eigen(eval(as_expr(B), list(a = 2)))
 }
 
 }

@@ -25,7 +25,7 @@ if (have_sympy()) {
   x <- symbol("x")
   p <- prodf(1/x, "x", 1, 10)
   p
-  as_r(p)
+  as_expr(p)
   prod(1/(1:10))
   n <- symbol("n")
   prodf(x, x, 1, n)

@@ -116,7 +116,7 @@ test_that("print prettyascii", {
 test_that("print vector", {
   skip_if_no_sympy()
   
-  B <- as_symbol(1:3)
+  B <- as_sym(1:3)
   expect_true(grepl("^\\[caracas\\]: \\[1  2  3\\].+$", 
                     capture.output(print(B)))) # .{1} == transpose 
 })

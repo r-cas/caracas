@@ -22,7 +22,7 @@ if (have_sympy()) {
    e <- 2*x^2
    e
    subs(e, "x", "2")
-   y <- as_symbol("2")
+   y <- as_sym("2")
    subs(e, "x", y)
 }
 

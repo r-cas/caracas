@@ -50,7 +50,7 @@ where $L_1$ has the form
 ```{r}
 L1chr <- diag(4)
 L1chr[2:4, 1] <- "-a"
-L1 <- as_symbol(L1chr)
+L1 <- as_sym(L1chr)
 L1
 ```
 
@@ -84,7 +84,7 @@ N <- 3
 L2chr <- diag("1", 1 + 2*N)
 L2chr[cbind(1 + (1:N), 1:N)] <- "-a"
 L2chr[cbind(1 + N + (1:N), 1 + 1:N)] <- "-b"
-L2 <- as_symbol(L2chr)
+L2 <- as_sym(L2chr)
 L2
 ```
 
@@ -137,8 +137,8 @@ sparsify(V2)
 Comparing with results calculated by `caracas`:
 
 ```{r}
-V1_eval <- eval(as_r(V1), list(a = alpha))
-V2_eval <- eval(as_r(V2, first_doit = FALSE), list(a = alpha, b = beta))
+V1_eval <- eval(as_expr(V1), list(a = alpha))
+V2_eval <- eval(as_expr(V2, first_doit = FALSE), list(a = alpha, b = beta))
 all.equal(V1, V1_eval)
 all.equal(V2, V2_eval)
 ```

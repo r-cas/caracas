@@ -40,7 +40,7 @@ x <- symbol('x')
 eq <- 2*x^2 - x
 eq
 as.character(eq)
-as_r(eq)
+as_expr(eq)
 tex(eq)
 ```
 
@@ -56,7 +56,7 @@ subs(eq, x, "y")
 
 ```{r}
 A <- matrix(c("x", 2, 0, "2*x"), 2, 2)
-B <- as_symbol(A)
+B <- as_sym(A)
 B
 Binv <- inv(B) # or solve_lin(B)
 Binv

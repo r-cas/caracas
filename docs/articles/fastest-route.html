@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9010</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9023</span>
       </span>
     </div>
 
@@ -143,10 +143,10 @@
 <p>We parameterise with <span class="math inline">\(k = |BD|\)</span>, the distance between <span class="math inline">\(B\)</span> and <span class="math inline">\(D\)</span>. That is, how much to walk on fast walking path before crossing into the forest.</p>
 <p>Formulating using <code>caracas</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">AB</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span><span class="op">(</span><span class="st">'300'</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">AB</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">'300'</span><span class="op">)</span>
 <span class="va">AB</span>
 <span class="co">#&gt; [caracas]: 300</span>
-<span class="va">AC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_symbol.html">as_symbol</a></span><span class="op">(</span><span class="st">'1000'</span><span class="op">)</span>
+<span class="va">AC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">'1000'</span><span class="op">)</span>
 <span class="va">AC</span>
 <span class="co">#&gt; [caracas]: 1000</span>
 <span class="va">BC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">AC</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">AB</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
@@ -171,10 +171,10 @@
 <span class="co">#&gt;            - ─ + ─────────────── + 20⋅√91</span>
 <span class="co">#&gt;              5          2</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lfun</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_r.html">as_r</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">lfun</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span>
 <span class="va">lfun</span>
 <span class="co">#&gt; expression(-k/5 + sqrt(k^2 + 90000)/2 + 20 * sqrt(91))</span>
-<span class="va">ks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="../reference/as_r.html">as_r</a></span><span class="op">(</span><span class="va">AC</span><span class="op">)</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
+<span class="va">ks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">AC</span><span class="op">)</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
 <span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="va">lfun</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="va">ks</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ks</span>, <span class="va">ls</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"k"</span>, ylab <span class="op">=</span> <span class="st">"Time A to C"</span><span class="op">)</span></code></pre></div>
 <p><img src="fastest-route_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
@@ -201,7 +201,7 @@
 <span class="co">#&gt;               7</span></code></pre></div>
 <p>The type of the critical point is found by considering the Hessian:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_r.html">as_r</a></span><span class="op">(</span><span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">dl</span>, <span class="va">k</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fu"><a href="../reference/as_r.html">as_r</a></span><span class="op">(</span><span class="va">best_k</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">dl</span>, <span class="va">k</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">best_k</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.001283121</span></code></pre></div>
 <p>Thus the critical point is indeed a minimum as suggested by the plot.</p>
 <p>The fastest route is thus obtained for <span class="math display">\[
@@ -219,7 +219,7 @@
 <span class="co">#&gt; [caracas]: 300⋅√21          </span>
 <span class="co">#&gt;            ─────── + 100⋅√91</span>
 <span class="co">#&gt;               7</span>
-<span class="fu"><a href="../reference/as_r.html">as_r</a></span><span class="op">(</span><span class="va">best_route</span><span class="op">)</span>
+<span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">best_route</span><span class="op">)</span>
 <span class="co">#&gt; [1] 1150.335</span></code></pre></div>
 <p><span class="math display">\[
   \frac{300 \sqrt{21}}{7} + 100 \sqrt{91} \approx 1150.34
@@ -228,7 +228,7 @@
 <code class="sourceCode R"><span class="va">best_l</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/subs.html">subs</a></span><span class="op">(</span><span class="va">l</span>, <span class="st">"k"</span>, <span class="va">best_k</span><span class="op">)</span>
 <span class="va">best_l</span>
 <span class="co">#&gt; [caracas]: 30⋅√21 + 20⋅√91</span>
-<span class="fu"><a href="../reference/as_r.html">as_r</a></span><span class="op">(</span><span class="va">best_l</span><span class="op">)</span>
+<span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">best_l</span><span class="op">)</span>
 <span class="co">#&gt; [1] 328.2651</span></code></pre></div>
 <p><span class="math display">\[
   30 \sqrt{21} + 20 \sqrt{91} \approx 328.27

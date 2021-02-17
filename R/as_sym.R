@@ -58,19 +58,19 @@ as_py_string <- function(x) {
 #'   x <- symbol("x")
 #'   A <- matrix(c("x", 0, 0, "2*x"), 2, 2)
 #'   A
-#'   B <- as_symbol(A)
+#'   B <- as_sym(A)
 #'   B
 #'   2*B
 #'   dim(B)
 #'   sqrt(B)
-#'   D <- as_symbol("[[1, 4, 5], [-5, 8, 9]]")
+#'   D <- as_sym("[[1, 4, 5], [-5, 8, 9]]")
 #'   D
 #' }
 #' 
 #' @concept caracas_symbol
 #' 
 #' @export
-as_symbol <- function(x, declare_variables = TRUE) {
+as_sym <- function(x, declare_variables = TRUE) {
   ensure_sympy()
   
   varnames_exclude <- c("sqrt", "log")

@@ -75,7 +75,7 @@ number_cols <- function(x) {
 #' 
 #' @export
 as_character_matrix <- function(x) {
-  y <- as_r_worker(x, as_character = TRUE)
+  y <- as_expr_worker(x, as_character = TRUE)
   return(eval(parse(text = y)))
 }
 
@@ -111,10 +111,10 @@ dim.caracas_symbol <- function(x) {
 #' @examples 
 #' if (have_sympy()) {
 #'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-#'   B <- as_symbol(A)
+#'   B <- as_sym(A)
 #'   eigenval(B)
 #'   eigenvec(B)
-#'   eigen(eval(as_r(B), list(a = 2)))
+#'   eigen(eval(as_expr(B), list(a = 2)))
 #' }
 #' 
 #' @concept linalg
@@ -129,8 +129,8 @@ eigenval <- function(x) {
   }
   
   if (symbol_is_list_of_lists_matrix(x)) {
-    x <- as_symbol(as_character_matrix(x), 
-                   declare_variables = FALSE)
+    x <- as_sym(as_character_matrix(x), 
+                declare_variables = FALSE)
   }
   
   if (!symbol_is_matrix(x)) {
@@ -146,7 +146,7 @@ eigenval <- function(x) {
   
   for (i in seq_along(vals_lst)) {
     eig_info[[i]] <- list(
-      eigval = as_symbol(names(vals_lst)[i]),
+      eigval = as_sym(names(vals_lst)[i]),
       eigmult = as.integer(vals_lst[i])
     )
   }
@@ -161,10 +161,10 @@ eigenval <- function(x) {
 #' @examples 
 #' if (have_sympy()) {
 #'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-#'   B <- as_symbol(A)
+#'   B <- as_sym(A)
 #'   eigenval(B)
 #'   eigenvec(B)
-#'   eigen(eval(as_r(B), list(a = 2)))
+#'   eigen(eval(as_expr(B), list(a = 2)))
 #' }
 #' 
 #' @concept linalg
@@ -179,7 +179,7 @@ eigenvec <- function(x) {
   }
   
   if (symbol_is_list_of_lists_matrix(x)) {
-    x <- as_symbol(as_character_matrix(x), 
+    x <- as_sym(as_character_matrix(x), 
                    declare_variables = FALSE)
   }
   
@@ -322,7 +322,7 @@ diag.caracas_symbol <- function(x, ...) {
 #' @examples 
 #' if (have_sympy()) {
 #'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-#'   B <- as_symbol(A)
+#'   B <- as_sym(A)
 #'   B
 #'   diag(B)
 #'   diag(B) <- "b"
@@ -352,6 +352,6 @@ diag.caracas_symbol <- function(x, ...) {
   
   diag(xmat) <- value
   
-  y <- as_symbol(xmat)
+  y <- as_sym(xmat)
   return(y)
 }

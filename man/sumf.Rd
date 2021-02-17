@@ -24,7 +24,7 @@ Sum of a function
 if (have_sympy()) {
   x <- symbol("x")
   s <- sumf(1/x, "x", 1, 10)
-  as_r(s)
+  as_expr(s)
   sum(1/(1:10))
   n <- symbol("n")
   simplify(sumf(x, x, 1, n))

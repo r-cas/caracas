@@ -5,8 +5,8 @@
 test_that("inv/solve_lin", {
   skip_if_no_sympy()
   
-  A <- as_symbol(matrix(c(1, "x", 0, 2, -1, 3, 4, 2, 5), nrow = 3, ncol = 3))
-  b <- as_symbol(c(4, 1, 7))
+  A <- as_sym(matrix(c(1, "x", 0, 2, -1, 3, 4, 2, 5), nrow = 3, ncol = 3))
+  b <- as_sym(c(4, 1, 7))
   x <- A %*% b
   
   # -------------------------
@@ -36,7 +36,7 @@ test_that("solve_sys(lhs, vars)", {
   # Single variable
   ###################################################################
   #------------------------------------------------------------------
-  sol1 <- solve_sys(as_symbol("x**2 + 1"), "x")
+  sol1 <- solve_sys(as_sym("x**2 + 1"), "x")
   
   expect_equal(length(sol1), 2L)
   expect_equal(unname(unlist(lapply(sol1, lapply, as.character))), 
@@ -49,7 +49,7 @@ test_that("solve_sys(lhs, vars)", {
   
   #------------------------------------------------------------------
   x <- symbol("x")
-  sol2 <- solve_sys(as_symbol("x**2 + 1"), x)
+  sol2 <- solve_sys(as_sym("x**2 + 1"), x)
   
   expect_equal(as.character(sol1), as.character(sol2))
   
@@ -66,9 +66,9 @@ test_that("solve_sys(lhs, vars)", {
   # Multiple variables
   ###################################################################
   # Must be as a row vector (1 x m matrix), not a list....
-  lhs <- t(as_symbol(matrix(c("x**2 + 1", "y+3"))))
+  lhs <- t(as_sym(matrix(c("x**2 + 1", "y+3"))))
   sol1 <- solve_sys(lhs, c("x", "y"))
-  sol1_ord <- order(unlist(lapply(sol1, function(l) Arg(as_r(l$x)))))
+  sol1_ord <- order(unlist(lapply(sol1, function(l) Arg(as_expr(l$x)))))
   sol1 <- sol1[sol1_ord]
   
   expect_equal(length(sol1), 2L)
@@ -81,7 +81,7 @@ test_that("solve_sys(lhs, vars)", {
   
   y <- symbol("y")
   sol2 <- solve_sys(lhs, c(x, y))
-  sol2_ord <- order(unlist(lapply(sol2, function(l) Arg(as_r(l$x)))))
+  sol2_ord <- order(unlist(lapply(sol2, function(l) Arg(as_expr(l$x)))))
   sol2 <- sol2[sol2_ord]
   
   expect_equal(length(sol2), 2L)
@@ -96,7 +96,7 @@ test_that("solve_sys(lhs, vars)", {
 test_that("solve_sys(lhs, rhs, vars)", {
   skip_if_no_sympy()
   
-  sol1 <- solve_sys(as_symbol("x**2"), as_symbol("-1"), "x")
+  sol1 <- solve_sys(as_sym("x**2"), as_sym("-1"), "x")
   #sol1
   
   expect_equal(length(sol1), 2L)
@@ -112,9 +112,9 @@ test_that("solve system of non-linear equations", {
   skip_if_no_sympy()
   
   # Multinomial likelihood
-  p <- as_symbol(paste0("p", 1:3))
-  y <- as_symbol(paste0("y", 1:3))
-  a <- as_symbol("a")
+  p <- as_sym(paste0("p", 1:3))
+  y <- as_sym(paste0("y", 1:3))
+  a <- as_sym("a")
   l <- sum(y*log(p))
   L <- -l + a*(sum(p) - 1)
   g <- der(L, c(a, p))

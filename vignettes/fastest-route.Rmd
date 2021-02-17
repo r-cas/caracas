@@ -102,9 +102,9 @@ the forest.
 Formulating using `caracas`:
 
 ```{r}
-AB <- as_symbol('300')
+AB <- as_sym('300')
 AB
-AC <- as_symbol('1000')
+AC <- as_sym('1000')
 AC
 BC <- sqrt(AC^2 - AB^2)
 BC
@@ -128,9 +128,9 @@ l
 ```
 
 ```{r, fig.width=7, fig.height=5}
-lfun <- as_r(l)
+lfun <- as_expr(l)
 lfun
-ks <- seq(0, as_r(AC), length.out = 100)
+ks <- seq(0, as_expr(AC), length.out = 100)
 ls <- eval(lfun, list(k = ks))
 plot(ks, ls, type = "l", xlab = "k", ylab = "Time A to C")
 ```
@@ -151,14 +151,14 @@ best_k
 The type of the critical point is found by considering the Hessian:
 
 ```{r}
-eval(as_r(der(dl, k)), list(k = as_r(best_k)))
+eval(as_expr(der(dl, k)), list(k = as_expr(best_k)))
 ```
 
 Thus the critical point is indeed a minimum as suggested by the plot.
 
 The fastest route is thus obtained for 
 \[
-  k = `r inline_code(tex(best_k))` \approx `r inline_code(round(as_r(best_k), 2))` .
+  k = `r inline_code(tex(best_k))` \approx `r inline_code(round(as_expr(best_k), 2))` .
 \]
 It has a length of (in meters)
 ```{r}
@@ -167,19 +167,19 @@ AD_best <- sqrt(AB^2 + best_k^2)
 AD_best
 best_route <- AD_best + DC_best
 best_route
-as_r(best_route)
+as_expr(best_route)
 ```
 \[
-  `r inline_code(tex(best_route))` \approx `r inline_code(round(as_r(best_route), 2))`
+  `r inline_code(tex(best_route))` \approx `r inline_code(round(as_expr(best_route), 2))`
 \]
 and takes (in seconds)
 ```{r}
 best_l <- subs(l, "k", best_k)
 best_l
-as_r(best_l)
+as_expr(best_l)
 ```
 \[
-  `r inline_code(tex(best_l))` \approx `r inline_code(round(as_r(best_l), 2))`
+  `r inline_code(tex(best_l))` \approx `r inline_code(round(as_expr(best_l), 2))`
 \]
 
 The best route can be illustrated, too:
@@ -195,7 +195,7 @@ pA <- c(0, A)
 pB <- c(0, 0)
 pC <- c(kat, 0)
 
-D <- as_r(best_k)
+D <- as_expr(best_k)
 pD <- c(D, 0)
 
 pad <- 40

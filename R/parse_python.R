@@ -81,7 +81,7 @@ remove_mat_prefix <- function(x) {
 }
 
 
-as_r_worker <- function(x, as_character = FALSE, first_doit = TRUE) {
+as_expr_worker <- function(x, as_character = FALSE, first_doit = TRUE) {
   if (!inherits(x, "caracas_symbol")) {
     stop("x must be a caracas_symbol")
   }
@@ -140,21 +140,21 @@ expr_has_vars <- function(x) {
 #' @concept caracas_symbol
 #'
 #' @export
-as_r <- function(x, first_doit = TRUE) {
-  UseMethod("as_r")
+as_expr <- function(x, first_doit = TRUE) {
+  UseMethod("as_expr")
 }
 
 
 #' @export
-as_r.default <- function(x, first_doit = TRUE) {
+as_expr.default <- function(x, first_doit = TRUE) {
   return(x)
 }
 
 #' @export
-as_r.caracas_symbol <- function(x, first_doit = TRUE) {
+as_expr.caracas_symbol <- function(x, first_doit = TRUE) {
   ensure_sympy()
   
-  ychr <- as_r_worker(x, first_doit = first_doit)
+  ychr <- as_expr_worker(x, first_doit = first_doit)
   
   # FIXME:
   #    Catch Matrix([]) ...

@@ -157,7 +157,7 @@ c.caracas_symbol <- function(...) {
 #'    e <- 2*x^2
 #'    e
 #'    subs(e, "x", "2")
-#'    y <- as_symbol("2")
+#'    y <- as_sym("2")
 #'    subs(e, "x", y)
 #' }
 #' 
@@ -185,9 +185,9 @@ subs <- function(s, x, v) {
 #' 
 #' @examples 
 #' if (have_sympy()) {
-#'      p <- as_symbol(paste0("p", 1:3))
-#'      y <- as_symbol(paste0("y", 1:3))
-#'      a <- as_symbol("a")
+#'      p <- as_sym(paste0("p", 1:3))
+#'      y <- as_sym(paste0("y", 1:3))
+#'      a <- as_sym("a")
 #'      l <- sum(y*log(p))
 #'      L <- -l + a*(sum(p) - 1)
 #'      g <- der(L, c(a, p))

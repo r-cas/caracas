@@ -62,10 +62,10 @@ Ops.caracas_symbol = function(e1, e2) {
   
   if (.Generic %in% c("+", "-", "*", "/")) {
     if (e1_is_mat && !e2_is_mat) {
-      e2 <- as_symbol(scalar_to_matrix(as.character(e2), dim(e1)))
+      e2 <- as_sym(scalar_to_matrix(as.character(e2), dim(e1)))
       o2 <- e2$pyobj
     } else if (!e1_is_mat && e2_is_mat) {
-      e1 <- as_symbol(scalar_to_matrix(as.character(e1), dim(e2)))
+      e1 <- as_sym(scalar_to_matrix(as.character(e1), dim(e2)))
       o1 <- e1$pyobj
     } 
   }

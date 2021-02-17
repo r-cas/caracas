@@ -39,7 +39,7 @@ convert_to_r_mat <- function(x) {
 #' @examples 
 #' if (have_sympy()) {
 #'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-#'   B <- as_symbol(A)
+#'   B <- as_sym(A)
 #'   B[1:2, ]
 #'   B[, 2]
 #'   B[2, , drop = FALSE]
@@ -65,7 +65,7 @@ convert_to_r_mat <- function(x) {
   
   xmat <- convert_to_r_mat(x)
   xmat_subset <- base::`[`(xmat, i, j, ..., drop = drop)
-  y <- as_symbol(xmat_subset)
+  y <- as_sym(xmat_subset)
   return(y)
 }
 
@@ -80,7 +80,7 @@ convert_to_r_mat <- function(x) {
 #' @examples 
 #' if (have_sympy()) {
 #'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-#'   B <- as_symbol(A)
+#'   B <- as_sym(A)
 #'   B[, 2] <- "x"
 #'   B
 #' }
@@ -107,7 +107,7 @@ convert_to_r_mat <- function(x) {
     base::`[<-`(xmat, i, j, ..., value = value)
   }
   
-  y <- as_symbol(xmat_mod)
+  y <- as_sym(xmat_mod)
   return(y)
 }
 

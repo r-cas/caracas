@@ -71,7 +71,7 @@ eq
 #>            2⋅x  - x
 as.character(eq)
 #> [1] "2*x^2 - x"
-as_r(eq)
+as_expr(eq)
 #> expression(2 * x^2 - x)
 tex(eq)
 #> [1] "2 x^{2} - x"
@@ -92,7 +92,7 @@ subs(eq, x, "y")
 
 ``` r
 A <- matrix(c("x", 2, 0, "2*x"), 2, 2)
-B <- as_symbol(A)
+B <- as_sym(A)
 B
 #> [caracas]: ⎡x   0 ⎤
 #>            ⎢      ⎥
@@ -112,7 +112,7 @@ tex(Binv)
 ```
 
 ``` r
-eigen_val(Binv)
+eigenval(Binv)
 #> [[1]]
 #> [[1]]$eigval
 #> [caracas]: 1

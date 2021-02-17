@@ -91,7 +91,7 @@ limf <- function(f, var, val, dir = NULL, doit = TRUE) {
 #' if (have_sympy()) {
 #'   x <- symbol("x")
 #'   s <- sumf(1/x, "x", 1, 10)
-#'   as_r(s)
+#'   as_expr(s)
 #'   sum(1/(1:10))
 #'   n <- symbol("n")
 #'   simplify(sumf(x, x, 1, n))
@@ -133,7 +133,7 @@ sumf <- function(f, var, lower, upper, doit = TRUE) {
 #'   x <- symbol("x")
 #'   p <- prodf(1/x, "x", 1, 10)
 #'   p
-#'   as_r(p)
+#'   as_expr(p)
 #'   prod(1/(1:10))
 #'   n <- symbol("n")
 #'   prodf(x, x, 1, n)

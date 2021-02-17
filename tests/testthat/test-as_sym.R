@@ -1,29 +1,29 @@
-context("as_symbol()")
+context("as_sym()")
 
 test_that("var detect", {
   skip_if_no_sympy()
   
   A <- matrix(c("w", 1, 1, "2*w", "w+2", 1), 3, 2)
-  expect_error(as_symbol(A, declare_variables = FALSE))
-  expect_s3_class(as_symbol(A, declare_variables = TRUE), "caracas_symbol")
+  expect_error(as_sym(A, declare_variables = FALSE))
+  expect_s3_class(as_sym(A, declare_variables = TRUE), "caracas_symbol")
 })
 
 test_that("smoke", {
   skip_if_no_sympy()
   
   A <- matrix(c("x", 1, 1, "2*x", "x+2", 1), 3, 2)
-  B <- as_symbol(A)
+  B <- as_sym(A)
   expect_equal(dim(B), c(3L, 2L))
   expect_equal(nrow(B), 3L)
   expect_equal(ncol(B), 2L)
   
   expect_equal(as.character(log(B)), "Matrix([[log(x), log(2*x)], [0, log(x + 2)], [0, 0]])")
   
-  expect_equal(eval(as_r(log(B)), list(x = 42)), 
+  expect_equal(eval(as_expr(log(B)), list(x = 42)), 
                log(matrix(c(42, 1, 1, 2*42, 42+2, 1), 3, 2)))
   
   expect_equal(as.character(2*B - sqrt(B)), "Matrix([[-sqrt(x) + 2*x, -sqrt(2)*sqrt(x) + 4*x], [1, 2*x - sqrt(x + 2) + 4], [1, 1]])")
-  expect_equal(as_r(2*B - B - B), matrix(0, 3, 2))
+  expect_equal(as_expr(2*B - B - B), matrix(0, 3, 2))
   
   expect_equal(as.character(t(B)), "Matrix([[x, 1, 1], [2*x, x + 2, 1]])")
   expect_equal(as.character(t(t(B))), as.character(B))
@@ -32,11 +32,11 @@ test_that("smoke", {
 test_that("matrix", {
   skip_if_no_sympy()
   
-  D <- as_symbol("[[1, 4, 5], [-5, 8, 9]]")
+  D <- as_sym("[[1, 4, 5], [-5, 8, 9]]")
   expect_equal(as.character(D), "Matrix([[1, 4, 5], [-5, 8, 9]])")
   expect_equal(as.character(t(D)), "Matrix([[1, -5], [4, 8], [5, 9]])")
   
-  D <- as_symbol("[[x, 1], [Inf, x^2]]")
+  D <- as_sym("[[x, 1], [Inf, x^2]]")
   expect_equal(as.character(D), "Matrix([[x, 1], [Inf, x^2]])")
   
   expect_equal(as.character(eval_to_symbol(as.character(D))), as.character(D))
@@ -47,12 +47,12 @@ test_that("multiplication", {
   
   x <- symbol("x")
   A <- matrix(c("x", 1, 1, "2*x", "x+2", 1), 3, 2)
-  B <- as_symbol(A)
+  B <- as_sym(A)
 
   expect_equal(as.character(B+1), 
-               as.character(as_symbol(matrix(paste0(A, "+1"), 3, 2))))
+               as.character(as_sym(matrix(paste0(A, "+1"), 3, 2))))
   expect_equal(as.character(B-2), 
-               as.character(as_symbol(matrix(paste0(A, "-2"), 3, 2))))
+               as.character(as_sym(matrix(paste0(A, "-2"), 3, 2))))
   
   expect_equal(as.character(3*B), "Matrix([[3*x, 6*x], [3, 3*x + 6], [3, 3]])")
   expect_equal(as.character(2*B - B - B), "Matrix([[0, 0], [0, 0], [0, 0]])")
@@ -61,9 +61,9 @@ test_that("multiplication", {
   expect_equal(dim(t(B) %*% B), c(2L, 2L))
   expect_equal(dim(B %*% t(B)), c(3L, 3L))
   
-  D <- unname(eval(as_r(B), list(x = 42)))
-  expect_equal(t(D) %*% D, eval(as_r(t(B) %*% B), list(x = 42)))
-  expect_equal(D %*% t(D), eval(as_r(B %*% t(B)), list(x = 42)))
+  D <- unname(eval(as_expr(B), list(x = 42)))
+  expect_equal(t(D) %*% D, eval(as_expr(t(B) %*% B), list(x = 42)))
+  expect_equal(D %*% t(D), eval(as_expr(B %*% t(B)), list(x = 42)))
 })
 
 
@@ -72,8 +72,8 @@ test_that("fraction", {
   skip_if_no_sympy()
   
   #https://docs.sympy.org/latest/gotchas.html#python-numbers-vs-sympy-numbers
-  x <- as_symbol("120000/7")
-  y <- as_symbol("20")
+  x <- as_sym("120000/7")
+  y <- as_sym("20")
   
   expect_equal(as.character(x + y), "120140/7")
 })
@@ -83,6 +83,6 @@ test_that("eigval", {
   skip_if_no_sympy()
 
   str <- "a - sqrt(3)*sqrt(b*c)"
-  eig <- as_symbol(str)
+  eig <- as_sym(str)
   expect_equal(as.character(eig), str)
 })

@@ -1,4 +1,4 @@
-# caracas 1.0.2
+# caracas 1.1.0
 
 * Arbitrary precision arithmetic: `N()` function and vignette on 
   "Arbitrary precision arithmetic"

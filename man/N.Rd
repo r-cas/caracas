@@ -16,8 +16,8 @@ Numerical evaluation
 }
 \examples{
 if (have_sympy()) {
-  n_2 <- as_symbol("2")
-  n_pi <- as_symbol("pi", declare_variables = FALSE)
+  n_2 <- as_sym("2")
+  n_pi <- as_sym("pi", declare_variables = FALSE)
   x <- sqrt(n_2) * n_pi
   x
   N(x)

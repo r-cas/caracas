@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9010</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9023</span>
       </span>
     </div>
 
@@ -152,7 +152,7 @@
 <span class="co">#&gt;            2⋅x  - x</span>
 <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
 <span class="co">#&gt; [1] "2*x^2 - x"</span>
-<span class="fu"><a href="reference/as_r.html">as_r</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
+<span class="fu"><a href="reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
 <span class="co">#&gt; expression(2 * x^2 - x)</span>
 <span class="fu"><a href="reference/tex.html">tex</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
 <span class="co">#&gt; [1] "2 x^{2} - x"</span></code></pre></div>
@@ -169,7 +169,7 @@
 <span class="co">#&gt;            2⋅y  - y</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="st">"2*x"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/as_symbol.html">as_symbol</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
+<span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
 <span class="va">B</span>
 <span class="co">#&gt; [caracas]: ⎡x   0 ⎤</span>
 <span class="co">#&gt;            ⎢      ⎥</span>
@@ -187,7 +187,7 @@
 <span class="fu"><a href="reference/tex.html">tex</a></span><span class="op">(</span><span class="va">Binv</span><span class="op">)</span>
 <span class="co">#&gt; [1] "\\left[\\begin{matrix}\\frac{1}{x} &amp; 0\\\\- \\frac{1}{x^{2}} &amp; \\frac{1}{2 x}\\end{matrix}\\right]"</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">eigen_val</span><span class="op">(</span><span class="va">Binv</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="reference/eigenval.html">eigenval</a></span><span class="op">(</span><span class="va">Binv</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; [[1]]$eigval</span>
 <span class="co">#&gt; [caracas]: 1</span>
