@@ -69,6 +69,13 @@ test_that("limit", {
   expect_equal(as_r(limf(1/x, "x", 0, dir = '-')), -Inf)
   expect_equal(as_r(limf(1/x, x, 0, dir = '-')), -Inf)
   
+  expect_equal(as.character(limf((1 + 1/x)^x, x, Inf)), "exp(1)")
+  expect_equal(as_r(limf((1 + 1/x)^x, x, Inf)), exp(1))
+  expect_equal(as_r(-limf((1 + 1/x)^x, x, Inf)), -exp(1))
+  expect_equal(as_r(2*limf((1 + 1/x)^x, x, Inf)), 2*exp(1))
+  expect_equal(as_r(2^limf((1 + 1/x)^x, x, Inf)), 2^exp(1))
+  expect_equal(as_r(limf((1 + 1/x)^x, x, Inf)^3), exp(1)^3)
+  expect_equal(as_r(2*limf((1 + 1/x)^x, x, Inf)^3), 2*exp(1)^3)
   
   a <- symbol("a")
   expect_equal(as.character(a*limf(sin(x)/x, "x", 0)), "a")

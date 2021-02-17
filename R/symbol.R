@@ -163,6 +163,7 @@ c.caracas_symbol <- function(...) {
 #' 
 #' @export
 subs <- function(s, x, v) {
+  
   sym <- as.character(x)
   
   val <- if (inherits(v, "caracas_symbol")) {

@@ -8,7 +8,13 @@ python_strings_to_r <- function(xstr) {
   # I but not followed by another character
   xstr <- gsub("^I$", "1i", xstr, ignore.case = FALSE, perl = TRUE)
   xstr <- gsub("^-I$", "-1i", xstr, ignore.case = FALSE, perl = TRUE)
-  xstr <- gsub("I[^a-z]+", "1i", xstr, ignore.case = FALSE, perl = TRUE)
+  xstr <- gsub("I([^a-z]+)", "1i \\1", xstr, ignore.case = FALSE, perl = TRUE)
+  
+  # Exponential
+  xstr <- gsub("^E$", "exp(1)", xstr, ignore.case = FALSE, perl = TRUE)
+  xstr <- gsub("^-E$", "-exp(1)", xstr, ignore.case = FALSE, perl = TRUE)
+  xstr <- gsub("E([^a-z]+)", "exp(1) \\1", xstr, ignore.case = FALSE, perl = TRUE)
+  xstr <- gsub("([^a-z]+)E$", "\\1 exp(1)", xstr, ignore.case = FALSE, perl = TRUE)
   
   # Inf
   xstr <- gsub("oo", "Inf", xstr, fixed = TRUE)

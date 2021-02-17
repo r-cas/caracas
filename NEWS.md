@@ -1,7 +1,12 @@
 # caracas 1.0.2
 
-* Arbitrary precision arithmetic: `N()` function and vignette on "Arbitrary precision arithmetic"
+* Arbitrary precision arithmetic: `N()` function and vignette on 
+  "Arbitrary precision arithmetic"
 * Rename `eigen_val()`/`eigen_vec()` to `eigenval()`/`eigenvec()`
+* More clear naming convention: R has expressions and caracas has symbols; 
+  in this connection `as_r()` was renamed to `as_expr()` and 
+  `as_symbol()` to `as_sym()`.
+* Minor bugs fixed
 
 # caracas 1.0.1
 
