@@ -4,7 +4,7 @@
 #' @param digits Number of digits 
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   n_2 <- as_sym("2")
 #'   n_pi <- as_sym("pi", declare_variables = FALSE)
 #'   x <- sqrt(n_2) * n_pi

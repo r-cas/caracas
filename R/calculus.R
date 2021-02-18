@@ -38,7 +38,7 @@ calc_verify_func <- function(f) {
 #' @param doit Evaluate the limit immediately (or later with [doit()])
 #'
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   x <- symbol("x")
 #'   limf(sin(x)/x, "x", 0)
 #'   limf(1/x, "x", 0, dir = '+')
@@ -88,7 +88,7 @@ limf <- function(f, var, val, dir = NULL, doit = TRUE) {
 #' @param doit Evaluate the sum immediately (or later with [doit()])
 #'
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   x <- symbol("x")
 #'   s <- sumf(1/x, "x", 1, 10)
 #'   as_expr(s)
@@ -129,7 +129,7 @@ sumf <- function(f, var, lower, upper, doit = TRUE) {
 #' @param doit Evaluate the product immediately (or later with [doit()])
 #'
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   x <- symbol("x")
 #'   p <- prodf(1/x, "x", 1, 10)
 #'   p
@@ -176,7 +176,7 @@ prodf <- function(f, var, lower, upper, doit = TRUE) {
 #' @param doit Evaluate the integral immediately (or later with [doit()])
 #'
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   x <- symbol("x")
 #'   
 #'   intf(1/x, x, 1, 10)
@@ -298,7 +298,7 @@ vars_to_array <- function(vars) {
 #' @param vars variables to take derivate with respect to
 #'
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   x <- symbol("x")
 #'   y <- symbol("y")
 #'   f <- 3*x^2 + x*y^2
@@ -323,7 +323,7 @@ der <- function(expr, vars) {
 #' @param vars variables to take derivate with respect to
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   x <- symbol("x")
 #'   y <- symbol("y")
 #'   f <- 3*x^2 + x*y^2

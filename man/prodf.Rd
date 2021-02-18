@@ -21,7 +21,7 @@ prodf(f, var, lower, upper, doit = TRUE)
 Product of a function
 }
 \examples{
-if (have_sympy()) {
+if (has_sympy()) {
   x <- symbol("x")
   p <- prodf(1/x, "x", 1, 10)
   p

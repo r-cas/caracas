@@ -15,7 +15,7 @@ Note that \code{force} as described at
 meaning that some assumptions are taken.
 }
 \examples{
-if (have_sympy()) {
+if (has_sympy()) {
   x <- symbol('x')
   y <- symbol('y')
   z <- log(x*y)

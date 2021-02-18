@@ -24,7 +24,7 @@ inline_code <- function(x) {
   x
 }
 
-if (!have_sympy()) {
+if (!has_sympy()) {
   # SymPy not available, so the chunks shall not be evaluated
   knitr::opts_chunk$set(eval = FALSE)
   

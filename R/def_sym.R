@@ -8,7 +8,7 @@
 #' @return Names of declared variables (invisibly)
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   ls()
 #'   global_symbols(n1, n2, n3)
 #'   ls()

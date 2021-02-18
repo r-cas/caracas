@@ -25,7 +25,7 @@ If called as \code{solve_sys(lhs, rhs, vars)}
 the solutions to \code{lhs = rhs} for \code{vars} are found.
 }
 \examples{
-if (have_sympy()) {
+if (has_sympy()) {
   x <- symbol('x')
   exp1 <- 2*x + 2
   exp2 <- x

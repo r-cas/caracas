@@ -24,7 +24,7 @@ Otherwise, if both limits are provided,
 the definite integral is calculated.
 }
 \examples{
-if (have_sympy()) {
+if (has_sympy()) {
   x <- symbol("x")
   
   intf(1/x, x, 1, 10)

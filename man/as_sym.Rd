@@ -24,7 +24,7 @@ Note that matrices can be defined by specifying a Python matrix,
 see below in examples.
 }
 \examples{
-if (have_sympy()) {
+if (has_sympy()) {
   x <- symbol("x")
   A <- matrix(c("x", 0, 0, "2*x"), 2, 2)
   A

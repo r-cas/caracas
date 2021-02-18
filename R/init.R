@@ -60,12 +60,12 @@ ensure_sympy <- function() {
 #' @return `TRUE` if 'SymPy' is available, else `FALSE`
 #' 
 #' @examples 
-#' have_sympy()
+#' has_sympy()
 #' 
 #' @concept sympy
 #' 
 #' @export
-have_sympy <- function() {
+has_sympy <- function() {
   silent_prepare_sympy()
   
   return(!is.null(pkg_globals$internal_sympy))
@@ -76,7 +76,7 @@ have_sympy <- function() {
 #' @return The version of the 'SymPy' available
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   sympy_version()
 #' }
 #' 
@@ -101,7 +101,7 @@ sympy_version <- function() {
 #' @return The 'SymPy' object with direct access to the library.
 #'
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   sympy <- get_sympy()
 #'   sympy$solve("x**2-1", "x")
 #' }

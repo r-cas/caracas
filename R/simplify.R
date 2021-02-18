@@ -72,7 +72,7 @@ expand_trig <- function(x) {
 #' @param x A `caracas_symbol`
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   x <- symbol('x')
 #'   y <- symbol('y')
 #'   z <- log(x*y)

@@ -21,7 +21,7 @@ limf(f, var, val, dir = NULL, doit = TRUE)
 Limit of a function
 }
 \examples{
-if (have_sympy()) {
+if (has_sympy()) {
   x <- symbol("x")
   limf(sin(x)/x, "x", 0)
   limf(1/x, "x", 0, dir = '+')

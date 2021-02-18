@@ -15,7 +15,7 @@ der(expr, vars)
 Symbolic differentiation of an expression
 }
 \examples{
-if (have_sympy()) {
+if (has_sympy()) {
   x <- symbol("x")
   y <- symbol("y")
   f <- 3*x^2 + x*y^2

@@ -13,7 +13,7 @@ The version of the 'SymPy' available
 Get 'SymPy' version
 }
 \examples{
-if (have_sympy()) {
+if (has_sympy()) {
   sympy_version()
 }
 

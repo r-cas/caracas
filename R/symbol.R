@@ -27,7 +27,7 @@ construct_symbol_from_pyobj <- function(pyobj) {
 #' @param x String to evaluate
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'    x <- symbol('x')
 #'    (1+1)*x^2
 #'    limf(sin(x)/x, "x", 0)
@@ -98,7 +98,7 @@ is_atomic <- function(x) {
 #' @param x A `caracas_symbol`
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'    x <- symbol('x')
 #'    res <- limf(sin(x)/x, "x", 0, doit = FALSE)
 #'    res 
@@ -152,7 +152,7 @@ c.caracas_symbol <- function(...) {
 #' @param v Value for `x`
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'    x <- symbol('x')
 #'    e <- 2*x^2
 #'    e
@@ -184,7 +184,7 @@ subs <- function(s, x, v) {
 #' @param x Named list of values
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'      p <- as_sym(paste0("p", 1:3))
 #'      y <- as_sym(paste0("y", 1:3))
 #'      a <- as_sym("a")

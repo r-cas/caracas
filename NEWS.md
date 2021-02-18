@@ -1,5 +1,6 @@
 # caracas 1.1.0
 
+* Global symbol assignment by `def_sym()` (#18)
 * Arbitrary precision arithmetic: `N()` function and vignette on 
   "Arbitrary precision arithmetic"
 * Rename `eigen_val()`/`eigen_vec()` to `eigenval()`/`eigenvec()`

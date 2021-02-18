@@ -13,7 +13,7 @@ eigenval(x)
 Eigenvalues
 }
 \examples{
-if (have_sympy()) {
+if (has_sympy()) {
   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
   B <- as_sym(A)
   eigenval(B)

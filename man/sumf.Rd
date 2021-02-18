@@ -21,7 +21,7 @@ sumf(f, var, lower, upper, doit = TRUE)
 Sum of a function
 }
 \examples{
-if (have_sympy()) {
+if (has_sympy()) {
   x <- symbol("x")
   s <- sumf(1/x, "x", 1, 10)
   as_expr(s)

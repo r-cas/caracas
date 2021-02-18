@@ -54,7 +54,7 @@ as_py_string <- function(x) {
 #' @param declare_variables declare detected variables automatically
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   x <- symbol("x")
 #'   A <- matrix(c("x", 0, 0, "2*x"), 2, 2)
 #'   A

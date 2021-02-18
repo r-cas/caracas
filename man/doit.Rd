@@ -13,7 +13,7 @@ doit(x)
 Perform calculations setup previously
 }
 \examples{
-if (have_sympy()) {
+if (has_sympy()) {
    x <- symbol('x')
    res <- limf(sin(x)/x, "x", 0, doit = FALSE)
    res 

@@ -37,7 +37,7 @@ convert_to_r_mat <- function(x) {
 #' @param drop Simplify dimensions of resulting object
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
 #'   B <- as_sym(A)
 #'   B[1:2, ]
@@ -78,7 +78,7 @@ convert_to_r_mat <- function(x) {
 #' @param value Replacement value
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
 #'   B <- as_sym(A)
 #'   B[, 2] <- "x"

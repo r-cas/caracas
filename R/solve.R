@@ -103,7 +103,7 @@ rootsolve <- function(lhs, vars) {
 #' @param vars vector of variable names or symbols
 #' 
 #' @examples 
-#' if (have_sympy()) {
+#' if (has_sympy()) {
 #'   x <- symbol('x')
 #'   exp1 <- 2*x + 2
 #'   exp2 <- x

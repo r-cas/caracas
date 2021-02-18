@@ -17,7 +17,7 @@ subs(s, x, v)
 Substitute symbol for value
 }
 \examples{
-if (have_sympy()) {
+if (has_sympy()) {
    x <- symbol('x')
    e <- 2*x^2
    e
