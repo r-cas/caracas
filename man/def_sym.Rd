@@ -10,6 +10,8 @@ def_sym(..., warn = FALSE, env = parent.frame())
 \item{...}{Names for new symbols, also supports non-standard evaluation}
 
 \item{warn}{Warn if existing variable names are overwritten}
+
+\item{env}{Environment to assign variable in}
 }
 \value{
 Names of declared variables (invisibly)

@@ -4,6 +4,7 @@
 #' 
 #' @param ... Names for new symbols, also supports non-standard evaluation
 #' @param warn Warn if existing variable names are overwritten
+#' @param env Environment to assign variable in
 #' 
 #' @return Names of declared variables (invisibly)
 #' 
