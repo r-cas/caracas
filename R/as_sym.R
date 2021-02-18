@@ -73,6 +73,10 @@ as_py_string <- function(x) {
 as_sym <- function(x, declare_variables = TRUE) {
   ensure_sympy()
   
+  if (is.expression(x)) {
+    x <- as.character(x)
+  }
+  
   varnames_exclude <- c("sqrt", "log")
 
   if (declare_variables) {
