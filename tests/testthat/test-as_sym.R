@@ -86,3 +86,14 @@ test_that("eigval", {
   eig <- as_sym(str)
   expect_equal(as.character(eig), str)
 })
+
+
+
+test_that("expression", {
+  skip_if_no_sympy()
+  
+  x <- expression(a - sqrt(3)*sqrt(b*c))
+  y <- as_sym(x)
+  expect_equal(as.character(y), "a - sqrt(3)*sqrt(b*c)")
+})
+
