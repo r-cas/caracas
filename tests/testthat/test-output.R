@@ -120,3 +120,31 @@ test_that("print vector", {
   expect_true(grepl("^\\[caracas\\]: \\[1  2  3\\].+$", 
                     capture.output(print(B)))) # .{1} == transpose 
 })
+
+
+test_that("custom printer: exp", {
+  skip_if_no_sympy()
+  
+  
+  reticulate::py_eval("print_caracas(exp(1))")
+
+  
+  print_caracas(exp(1))
+  
+  n <- symbol('n')
+  f <- (1 + 1/n)^n
+  lim_f <- limf(f, n, Inf)
+  
+  print_caracas(lim_f)
+  
+  #
+  # e
+  print.caracas_symbol(lim_f, prettyascii = FALSE, ascii = FALSE)
+  # E
+  print.caracas_symbol(lim_f, prettyascii = TRUE, ascii = FALSE)
+  # exp(1)
+  print.caracas_symbol(lim_f, prettyascii = FALSE, ascii = TRUE)
+  
+  expect_equal(as.character(z), "sin(x)^2 + cos(x)^2")
+  expect_equal(tex(z), "\\sin^{2}{\\left(x \\right)} + \\cos^{2}{\\left(x \\right)}")
+})

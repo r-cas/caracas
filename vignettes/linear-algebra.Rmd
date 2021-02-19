@@ -1,0 +1,45 @@
+---
+title: "Linear algebra"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Linear algebra}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, message=FALSE}
+library(caracas)
+```
+
+```{r, include = FALSE}
+inline_code <- function(x) {
+  x
+}
+
+if (!has_sympy()) {
+  # SymPy not available, so the chunks shall not be evaluated
+  knitr::opts_chunk$set(eval = FALSE)
+  
+  inline_code <- inline_code <- function(x) {
+    deparse(substitute(x))
+  }
+}
+```
+
+
+### QR decomposition
+
+```{r}
+A <- matrix(c("a", "0", "0", "1"), 2, 2) %>% as_sym()
+qr_res <- QRdecomposition(A)
+qr_res$Q
+qr_res$R
+```
+

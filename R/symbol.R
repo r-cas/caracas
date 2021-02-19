@@ -120,15 +120,20 @@ doit <- function(x) {
     return(y)
   }
   
-  stop("Coult not doit()")
+  stop("Could not doit()")
 }
 
 try_doit <- function(x) {
-  if (!is.null(x$pyobj) && "doit" %in% names(x$pyobj)) {
+  # if (!is.null(x$pyobj) && "doit" %in% names(x$pyobj)) {
+  #   y <- construct_symbol_from_pyobj(x$pyobj$doit())
+  #   return(y)
+  # }
+  
+  try({
     y <- construct_symbol_from_pyobj(x$pyobj$doit())
     return(y)
-  }
-  
+  })
+
   return(x)
 }
 

@@ -9,16 +9,25 @@ eigenvec(x)
 \arguments{
 \item{x}{Matrix to find eigenvectors and eigenvalues for}
 }
+\value{
+Returns a list of eigenvectors where each entry
+contains the eigenvector, eigenvalue and multiplicity
+}
 \description{
 Eigenvectors and eigenvalues
 }
 \examples{
 if (has_sympy()) {
-  A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-  B <- as_sym(A)
-  eigenval(B)
-  eigenvec(B)
-  eigen(eval(as_expr(B), list(a = 2)))
+  A <- matrix(c("a", "b", "c", "d"), 2, 2) \%>\% as_sym()
+  evec <- eigenvec(A)
+  evec
+  evec1 <- evec[[1]]$eigvec
+  evec1
+  simplify(evec1)
+  
+  lapply(evec, function(l) simplify(l$eigvec))
+  
+  eigenval(A)
 }
 
 }
