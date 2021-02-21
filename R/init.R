@@ -12,6 +12,7 @@
 
 # global reference to sympy
 pkg_globals <- new.env()
+pkg_globals$internal_py <- NULL
 pkg_globals$internal_sympy <- NULL
 
 
@@ -19,32 +20,6 @@ define_printers <- function() {
   fl <- system.file("define_printers.py", package = "caracas")
   reticulate::py_run_file(fl)
   #reticulate::source_python(fl)
-  
-#   reticulate::py_run_string("
-# from sympy import Symbol
-# from sympy.printing.pretty.pretty import PrettyPrinter, prettyForm, pretty_atom
-# 
-# class CaracasPrettyPrinter(PrettyPrinter):
-#     _default_settings = {
-#         'use_unicode': False,
-#     }
-# 
-#     def __init__(self, settings={}):
-#         super(PrettyPrinter, self).__init__(settings)
-# 
-#     def _print_ExpBase(self, e):
-#         # TODO should exp_polar be printed differently?
-#         #      what about exp_polar(0), exp_polar(1)?
-#         base = prettyForm(pretty_atom('Exp1', 'e'))
-#         return base ** self._print(e.args[0])
-# 
-#     def _print_Exp1(self, e):
-#         return prettyForm(pretty_atom('Exp1', 'e'))
-# 
-# 
-# def print_caracas(expr):
-#     print(CaracasPrettyPrinter().doprint(expr))
-#                             ")
 }
 
 
@@ -67,6 +42,7 @@ silent_prepare_sympy <- function() {
     if (base::numeric_version(local_sympy$`__version__`) >= "1.4") {
       # All okay:
       
+      pkg_globals$internal_py <- reticulate::py # update global reference
       pkg_globals$internal_sympy <- local_sympy # update global reference
       
       reticulate::py_run_string("from sympy import *")
@@ -126,6 +102,28 @@ sympy_version <- function() {
   sympy_version <- base::numeric_version(pkg_globals$internal_sympy$`__version__`)
   
   return(sympy_version)
+}
+
+#' Access 'py' object
+#' 
+#' Get the 'py' object.  
+#' Note that it gives you extra responsibilities
+#' when you choose to access the 'py' object directly.
+#'
+#' @return The 'py' object with direct access to the library.
+#'
+#' @examples 
+#' if (has_sympy()) {
+#'   py <- get_py()
+#' }
+#' 
+#' @concept sympy
+#' 
+#' @export
+get_py <- function() {
+  ensure_sympy()
+  
+  return(pkg_globals$internal_py)
 }
 
 #' Access 'SymPy' directly

@@ -26,17 +26,19 @@ get_caracas_out <- function(x,
     stop("Unexpected")
   }
   
+  py <- get_py()
+  
   suffix <- ""
   
   out <- if (!is.null(prettyascii) && as.logical(prettyascii) == TRUE) {
     # 'prettyascii'
     if (rowvec && symbol_is_matrix(x) && ncol(x) == 1L && nrow(x) > 1L) {
       suffix <- intToUtf8(7488L) # T utf-8
-      reticulate::py_capture_output(get_sympy()$pprint(t(x)$pyobj, use_unicode = FALSE))
-      #reticulate::py_capture_output(print_caracas(t(x)$pyobj, use_unicode = FALSE))
+      #reticulate::py_capture_output(get_sympy()$pprint(t(x)$pyobj, use_unicode = FALSE))
+      reticulate::py_capture_output(py$print_caracas(t(x)$pyobj))
     } else {
-      reticulate::py_capture_output(get_sympy()$pprint(x$pyobj, use_unicode = FALSE))
-      #reticulate::py_capture_output(print_caracas(x$pyobj, use_unicode = FALSE))
+      #reticulate::py_capture_output(get_sympy()$pprint(x$pyobj, use_unicode = FALSE))
+      reticulate::py_capture_output(py$print_caracas(x$pyobj))
     }
   } else if (!is.null(ascii) && as.logical(ascii) == TRUE) {
     # 'ascii'
@@ -45,9 +47,11 @@ get_caracas_out <- function(x,
     # 'utf8'
     if (rowvec && symbol_is_matrix(x) && ncol(x) == 1L && nrow(x) > 1L) {
       suffix <- intToUtf8(7488L) # T utf-8
-      reticulate::py_capture_output(get_sympy()$pprint(t(x)$pyobj))
+      #reticulate::py_capture_output(get_sympy()$pprint(t(x)$pyobj))
+      reticulate::py_capture_output(py$print_caracas_unicode(t(x)$pyobj))
     } else {
-      reticulate::py_capture_output(get_sympy()$pprint(x$pyobj))
+      #reticulate::py_capture_output(get_sympy()$pprint(x$pyobj))
+      reticulate::py_capture_output(py$print_caracas_unicode(x$pyobj))
     }
   }
   

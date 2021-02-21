@@ -132,7 +132,7 @@ try_doit <- function(x) {
   try({
     y <- construct_symbol_from_pyobj(x$pyobj$doit())
     return(y)
-  })
+  }, silent = TRUE)
 
   return(x)
 }

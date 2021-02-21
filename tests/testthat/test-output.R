@@ -125,26 +125,33 @@ test_that("print vector", {
 test_that("custom printer: exp", {
   skip_if_no_sympy()
   
-  
-  reticulate::py_eval("print_caracas(exp(1))")
-
-  
-  print_caracas(exp(1))
-  
   n <- symbol('n')
+  
+  expect_output(print(exp(2*n), prettyascii = FALSE, ascii = FALSE), "exp(2⋅n)", fixed = TRUE)
+  expect_output(print(exp(2*n), prettyascii = TRUE, ascii = FALSE), "exp(2*n)", fixed = TRUE)
+  expect_output(print(exp(2*n), prettyascii = FALSE, ascii = TRUE), "exp(2*n)", fixed = TRUE)
+  
+  
   f <- (1 + 1/n)^n
   lim_f <- limf(f, n, Inf)
   
-  print_caracas(lim_f)
+  expect_output(print(lim_f, prettyascii = FALSE, ascii = FALSE), "exp(1)", fixed = TRUE)
+  expect_output(print(lim_f, prettyascii = TRUE, ascii = FALSE), "exp(1)", fixed = TRUE)
+  expect_output(print(lim_f, prettyascii = FALSE, ascii = TRUE), "exp(1)", fixed = TRUE)
   
-  #
-  # e
-  print.caracas_symbol(lim_f, prettyascii = FALSE, ascii = FALSE)
-  # E
-  print.caracas_symbol(lim_f, prettyascii = TRUE, ascii = FALSE)
-  # exp(1)
-  print.caracas_symbol(lim_f, prettyascii = FALSE, ascii = TRUE)
   
-  expect_equal(as.character(z), "sin(x)^2 + cos(x)^2")
-  expect_equal(tex(z), "\\sin^{2}{\\left(x \\right)} + \\cos^{2}{\\left(x \\right)}")
+  lim_f_sym <- limf(f, n, Inf, doit = FALSE)
+  
+  outstr <- function(x) {
+    paste0(capture.output(x), collapse = "")
+  }
+  
+  o1 <- outstr(print(lim_f_sym, prettyascii = FALSE, ascii = FALSE))
+  o2 <- outstr(print(lim_f_sym, prettyascii = TRUE, ascii = FALSE))
+  o3 <- outstr(print(lim_f_sym, prettyascii = FALSE, ascii = TRUE))
+  
+  expect_equal(o1, "[caracas]:            n               ⎛    1⎞            lim ⎜1 + ─⎟            n─→∞⎝    n⎠")
+  expect_equal(o2, "[caracas]:             n                /    1\\             lim |1 + -|            n->oo\\    n/")
+  expect_equal(o3, "[caracas]: Limit((1 + 1/n)^n, n, Inf, dir='-')")
+  
 })
