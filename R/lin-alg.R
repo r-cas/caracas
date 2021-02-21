@@ -217,52 +217,6 @@ eigenvec <- function(x) {
   return(eig_info)
 }
 
-#' QR decomposition
-#' 
-#' @param x Matrix to find QR decomposition for
-#' 
-#' @examples 
-#' if (has_sympy()) {
-#'   A <- matrix(c("a", "0", "0", "1"), 2, 2) %>% as_sym()
-#'   qr_res <- QRdecomposition(A)
-#'   qr_res$Q
-#'   qr_res$R
-#' }
-#' 
-#' @return Returns a list of eigenvectors where each entry 
-#' contains the eigenvector, eigenvalue and multiplicity
-#' 
-#' @concept linalg
-#' 
-#' @importFrom reticulate py_to_r
-#' @export
-QRdecomposition <- function(x) {
-  ensure_sympy()
-  
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
-  
-  if (symbol_is_list_of_lists_matrix(x)) {
-    x <- as_sym(as_character_matrix(x), 
-                declare_variables = FALSE)
-  }
-  
-  if (!symbol_is_matrix(x)) {
-    return(NULL)
-  }
-  
-  vals <- x$pyobj$QRdecomposition()
-
-  vals_lst <- reticulate::py_to_r(vals)
-  
-  qr_info <- list(
-    Q = construct_symbol_from_pyobj(vals_lst[[1L]]),
-    R = construct_symbol_from_pyobj(vals_lst[[2L]])
-  )
-  
-  return(qr_info)
-}
 
 
 #' Transpose of matrix
@@ -274,11 +228,9 @@ QRdecomposition <- function(x) {
 #' @export
 t.caracas_symbol <- function(x) {
   ensure_sympy()
-  
-  if (!symbol_is_matrix(x)) {
-    stop("'x' must be a matrix")
-  }
-  
+  is_caracas_check(x)
+  is_matrix_check(x)
+    
   xT <- x$pyobj$T
   return(construct_symbol_from_pyobj(xT))
 }
@@ -390,6 +342,7 @@ diag.caracas_symbol <- function(x, ...) {
 #' @export
 `diag<-.caracas_symbol` <- function(x, value) {
   ensure_sympy()
+
   
   if (!inherits(x, "caracas_symbol")) {
     stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
@@ -409,4 +362,48 @@ diag.caracas_symbol <- function(x, ...) {
   
   y <- as_sym(xmat)
   return(y)
+}
+
+
+
+
+#' QR decomposition
+#' 
+#' @param x Matrix to find QR decomposition for
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   A <- matrix(c("a", "0", "0", "1"), 2, 2) %>% as_sym()
+#'   qr_res <- QRdecomposition(A)
+#'   qr_res$Q
+#'   qr_res$R
+#' }
+#' 
+#' @return Returns a list of eigenvectors where each entry 
+#' contains the eigenvector, eigenvalue and multiplicity
+#' 
+#' @concept linalg
+#' 
+#' @importFrom reticulate py_to_r
+#' @export
+QRdecomposition <- function(x) {
+  ensure_sympy()
+  is_caracas_check(x)
+  
+  if (symbol_is_list_of_lists_matrix(x)) { ## FIXME Whats that?
+    x <- as_sym(as_character_matrix(x), 
+                declare_variables = FALSE)
+  }
+  is_matrix_check(x)
+  
+  vals <- x$pyobj$QRdecomposition()
+
+  vals_lst <- reticulate::py_to_r(vals)
+  
+  qr_info <- list(
+    Q = construct_symbol_from_pyobj(vals_lst[[1L]]),
+    R = construct_symbol_from_pyobj(vals_lst[[2L]])
+  )
+  
+  return(qr_info)
 }
