@@ -1,8 +1,14 @@
 ---
-title: "Linear algebra"
-output: rmarkdown::html_vignette
+title: "Linear algebra in `caracas`"
+author: Mikkel Meyer Andersen and Søren Højsgaard
+date: "`r date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+    number_sections: true
 vignette: >
-  %\VignetteIndexEntry{Linear algebra}
+  %\VignetteIndexEntry{Linear algebra in `caracas`}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,8 +20,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, message=FALSE}
+# Introduction
+
+
+```{r, message=FALSE, echo=FALSE}
 library(caracas)
+##packageVersion("caracas")
 ```
 
 ```{r, include = FALSE}
@@ -34,12 +44,93 @@ if (!has_sympy()) {
 ```
 
 
-### QR decomposition
+This vignette is based on `caracas` version `r packageVersion("caracas")`.
+Bla bla
+
+`getLA` short for "get Linear Algebra"
+
+# Elementary matrix operations
+
+## Creating matrices / vectors
+
+## Addition / multiplication of matrices / vectors
+
+## Solving systems of linear equations
+
+
+# More special linear algebra functionality
+
+
+## QR decomposition
 
 ```{r}
 A <- matrix(c("a", "0", "0", "1"), 2, 2) %>% as_sym()
-qr_res <- QRdecomposition(A)
+A
+qr_res <- getLA(A, "QRdecomposition")
 qr_res$Q
 qr_res$R
 ```
 
+## Eigenvectors and eigenvalues
+
+```{r}
+getLA(A, "eigenvec")
+getLA(A, "eigenvals")
+```
+
+
+```{r}
+A <- matrix(c("a", "b", "0", "1"), 2, 2) %>% as_sym()
+A
+```
+
+## Inverse
+
+```{r}
+getLA(A, "inv")
+inv(A)
+```
+
+## Characteristic polynomium
+
+```{r}
+getLA(A, "charpoly") ## Strange output
+```
+
+## Rank
+
+```{r}
+getLA(A, "rank")
+```
+
+## Cofactor
+
+```{r}
+getLA(A, "cofactor", 0, 1)
+getLA(A, "cofactor_matrix")
+```
+
+## Echelon form
+
+```{r}
+getLA(A, "echelon_form")
+```
+
+## Cholesky factorisation
+
+```{r}
+##getLA(x, "cholesky")
+```
+
+## Gram Schmidt
+
+```{r}
+##getLA(A, "GramSchmidt") ## FIXME duer ikke.
+```
+
+
+## rref (reduced row-echelon form)
+
+```{r}
+getLA(A, "rref") ## A warning 
+```
