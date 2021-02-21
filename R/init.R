@@ -1,4 +1,11 @@
-# devtools::check_win_devel()
+#### FIXME: Is this where it is suppose to be?
+
+#' @importFrom magrittr   "%>%"
+#' @export "%>%"
+
+
+
+                                        # devtools::check_win_devel()
 # devtools::check_rhub() (rhub::check_for_cran())
 
 # reticulate::py_module_available("sympy")

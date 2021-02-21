@@ -1,5 +1,5 @@
 Package: caracas
-Version: 1.0.1.9030
+Version: 1.0.1.9031
 Title: Computer Algebra
 Authors@R: c(
     person(given = "Mikkel Meyer", family = "Andersen",
@@ -14,7 +14,8 @@ Description: Computer algebra via the 'SymPy' library (<https://www.sympy.org/>)
   find symbolic integrals, symbolic sums and other important quantities. 
 Depends: R (>= 3.0)
 Imports:
-  reticulate (>= 1.14)
+  reticulate (>= 1.14),
+  magrittr
 Suggests: 
   testthat (>= 2.1.0),
   knitr,

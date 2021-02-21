@@ -14,7 +14,7 @@ is_matrix_check <- function(x){
 #' 
 #' @param x A matrix for which a property is requested
 #' @param slot The property requested
-#' @param aux1,aux2 Auxillary arguments
+#' @param ... Auxillary arguments
 #' 
 #' @examples 
 #' if (has_sympy()) {
