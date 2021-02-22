@@ -27,3 +27,4 @@
 ^\.github/workflows/R-CMD-check\.yaml$
 ^\.github
 ^\.github$
+^pkgdown$
