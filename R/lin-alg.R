@@ -1,3 +1,15 @@
+is_symbol_check <- function(x){
+  if (!inherits(x, "caracas_symbol")) {
+    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+}
+
+is_matrix_check <- function(x){
+    if (!symbol_is_matrix(x)) {
+        stop("'x' must be a matrix")
+    }
+}
+
 symbol_is_matrix <- function(x) {
   xstr <- as.character(x)
   
@@ -34,6 +46,7 @@ symbol_is_list_of_lists_matrix <- function(x) {
 scalar_to_matrix <- function(scalar, dims) {
   matrix(rep(scalar, prod(dims)), nrow = dims[1L], ncol = dims[2L])
 }
+
 
 # ensure_symbol_is_matrix <- function(x) {
 #   if (!inherits(x, "caracas_symbol")) {
@@ -89,11 +102,8 @@ as_character_matrix <- function(x) {
 #' @export
 dim.caracas_symbol <- function(x) {
   ensure_sympy()
-  
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
-  
+  is_symbol_check(x)
+    
   if (!symbol_is_matrix(x)) {
     return(NULL)
   }
@@ -123,11 +133,8 @@ dim.caracas_symbol <- function(x) {
 #' @export
 eigenval <- function(x) {
   ensure_sympy()
-  
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
-  
+  is_symbol_check(x)
+    
   if (symbol_is_list_of_lists_matrix(x)) {
     x <- as_sym(as_character_matrix(x), 
                 declare_variables = FALSE)
@@ -181,10 +188,7 @@ eigenval <- function(x) {
 #' @export
 eigenvec <- function(x) {
   ensure_sympy()
-  
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
+  is_symbol_check(x)
   
   if (symbol_is_list_of_lists_matrix(x)) {
     x <- as_sym(as_character_matrix(x), 
@@ -228,7 +232,7 @@ eigenvec <- function(x) {
 #' @export
 t.caracas_symbol <- function(x) {
   ensure_sympy()
-  is_caracas_check(x)
+  is_symbol_check(x)
   is_matrix_check(x)
     
   xT <- x$pyobj$T
@@ -247,11 +251,8 @@ t.caracas_symbol <- function(x) {
 #' @export
 determinant.caracas_symbol <- function(x, ...) {
   ensure_sympy()
-  
-  if (!symbol_is_matrix(x)) {
-    stop("'x' must be a matrix")
-  }
-  
+  is_matrix_check(x)
+    
   xdet <- x$pyobj$det()
   
   return(construct_symbol_from_pyobj(xdet))
@@ -289,14 +290,8 @@ diag.default <- function(x, ...) {
 #' @export
 diag.caracas_symbol <- function(x, ...) {
   ensure_sympy()
-  
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
-  
-  if (!symbol_is_matrix(x)) {
-    stop(paste0("'x' is not a matrix"))
-  }
+  is_symbol_check(x)
+  is_matrix_check(x)  
   
   y <- eval_to_symbol(x$pyobj$diagonal())
   
@@ -342,15 +337,8 @@ diag.caracas_symbol <- function(x, ...) {
 #' @export
 `diag<-.caracas_symbol` <- function(x, value) {
   ensure_sympy()
-
-  
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
-  
-  if (!symbol_is_matrix(x)) {
-    stop("'x' must be a matrix")
-  }
+  is_symbol_check(x)
+  is_matrix_check(x)
   
   xmat <- convert_to_r_mat(x)
   
@@ -388,7 +376,7 @@ diag.caracas_symbol <- function(x, ...) {
 #' @export
 QRdecomposition <- function(x) {
   ensure_sympy()
-  is_caracas_check(x)
+  is_symbol_check(x)
   
   if (symbol_is_list_of_lists_matrix(x)) { ## FIXME Whats that?
     x <- as_sym(as_character_matrix(x), 

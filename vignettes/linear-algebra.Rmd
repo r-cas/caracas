@@ -22,7 +22,6 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-
 ```{r, message=FALSE, echo=FALSE}
 library(caracas)
 ##packageVersion("caracas")
@@ -43,22 +42,66 @@ if (!has_sympy()) {
 }
 ```
 
-
-This vignette is based on `caracas` version `r packageVersion("caracas")`.
-Bla bla
-
-`getLA` short for "get Linear Algebra"
+This vignette is based on `caracas` version `r packageVersion("caracas")`. `caracas` is avavailable on CRAN at [https://cran.r-project.org/package=caracas] and on github at
+[https://github.com/r-cas/caracas].
 
 # Elementary matrix operations
 
+
+
 ## Creating matrices / vectors
+
+```{r}
+A <- matrix(c("a", "b", "0", "1"), 2, 2) %>% as_sym()
+A
+
+A2 <- matrix(c("a", "b", "c", "1"), 2, 2) %>% as_sym()
+A2
+
+B <- matrix(c("a", "b", "0", 
+              "c", "c", "a"), 2, 3) %>% as_sym()
+B
+
+b <- matrix(c("b1", "b2"), nrow=2) %>% as_sym()
+```
+
+Note that a vector is a matrix in which one of the dimensions is one. 
+
 
 ## Addition / multiplication of matrices / vectors
 
-## Solving systems of linear equations
+## Matrix-matrix sum and product; 
+```{r}
+A + A2
+A %*% B
+```
+
+## Hadamard (elementwise) product
+```{r}
+A * A2 
+```
+
+## Matrix inverse; solve system of linear equations
+
+Solve $Ax=b$ for $x$:
+
+```{r}
+inv(A)
+x <- solve_lin(A, b)
+x
+A %*% x ## Sanity check
+```
+
+## Generalized inverse; left and right inverse [TBW]
 
 
 # More special linear algebra functionality
+
+
+`getLA` short for "get Linear Algebra"
+```{r}
+args(getLA)
+```
 
 
 ## QR decomposition
@@ -76,6 +119,8 @@ qr_res$R
 ```{r}
 getLA(A, "eigenvec")
 getLA(A, "eigenvals")
+eigenvec(A) ## Convenience function
+eigenval(A) ## Convenience function
 ```
 
 
@@ -88,7 +133,7 @@ A
 
 ```{r}
 getLA(A, "inv")
-inv(A)
+inv(A)  ## Convenience function
 ```
 
 ## Characteristic polynomium
@@ -116,21 +161,22 @@ getLA(A, "cofactor_matrix")
 getLA(A, "echelon_form")
 ```
 
-## Cholesky factorisation
+## Cholesky factorisation [FIXME]
 
 ```{r}
-##getLA(x, "cholesky")
+#AH <- matrix(c("a^2", 0, 0, "b^2"), nrow=2) %>% as_sym()
+#XSgetLA(AH, "cholesky")
 ```
 
-## Gram Schmidt
+## Gram Schmidt [FIXME]
 
 ```{r}
 ##getLA(A, "GramSchmidt") ## FIXME duer ikke.
 ```
 
 
-## rref (reduced row-echelon form)
+## rref (reduced row-echelon form)[FIXME]
 
 ```{r}
-getLA(A, "rref") ## A warning 
+##getLA(A, "rref") ## A warning 
 ```

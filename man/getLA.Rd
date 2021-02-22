@@ -22,13 +22,13 @@ getLA
 \examples{
 if (has_sympy()) {
   A <- matrix(c("a", "0", "0", "1"), 2, 2) \%>\% as_sym()
-  getLA("QR")
-  getLA("eigenval")
-  getLA("eigenvec")
-  getLA("inv")
-  getLA("echelon_form")
-  getLA("rank")
-  getLA("det")
+  getLA(A, "QR")
+  getLA(A, "eigenval")
+  getLA(A, "eigenvec")
+  getLA(A, "inv")
+  getLA(A, "echelon_form")
+  getLA(A, "rank")
+  getLA(A, "det")
 }
 
 }

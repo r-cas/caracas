@@ -16,7 +16,8 @@ Depends: R (>= 3.0)
 Imports:
   reticulate (>= 1.14),
   magrittr
-Suggests: 
+Suggests:
+  Matrix,
   testthat (>= 2.1.0),
   knitr,
   rmarkdown

@@ -1,14 +1,3 @@
-is_caracas_check <- function(x){
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
-}
-
-is_matrix_check <- function(x){
-    if (!symbol_is_matrix(x)) {
-        stop("'x' must be a matrix")
-    }
-}
 
 #' getLA
 #' 
@@ -19,13 +8,13 @@ is_matrix_check <- function(x){
 #' @examples 
 #' if (has_sympy()) {
 #'   A <- matrix(c("a", "0", "0", "1"), 2, 2) %>% as_sym()
-#'   getLA("QR")
-#'   getLA("eigenval")
-#'   getLA("eigenvec")
-#'   getLA("inv")
-#'   getLA("echelon_form")
-#'   getLA("rank")
-#'   getLA("det")
+#'   getLA(A, "QR")
+#'   getLA(A, "eigenval")
+#'   getLA(A, "eigenvec")
+#'   getLA(A, "inv")
+#'   getLA(A, "echelon_form")
+#'   getLA(A, "rank")
+#'   getLA(A, "det")
 #' }
 #' 
 #' @return Returns the requested property of a matrix.
@@ -58,7 +47,7 @@ getLA <- function(x, slot, ...) {
 getLA_worker <- function(x, slot, ...) {
 
     ensure_sympy()
-    is_caracas_check(x)
+    is_symbol_check(x)
     is_matrix_check(x)
     dots <- list(...)
 
@@ -104,3 +93,4 @@ do_QR <- function(vals){
     )  
     return(qr_info)    
 }
+

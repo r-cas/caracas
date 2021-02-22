@@ -22,11 +22,11 @@ Define caracas symbols in global environment
 \examples{
 if (has_sympy()) {
   ls()
-  global_symbols(n1, n2, n3)
+  def_sym(n1, n2, n3)
   ls()
-  global_symbols("x1", "x2", "x3")
+  def_sym("x1", "x2", "x3")
   ls()
-  global_symbols("x1", "x2", "x3", warn = TRUE)
+  def_sym("x1", "x2", "x3", warn = TRUE)
   ls()
 }
 
