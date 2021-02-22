@@ -1,6 +1,7 @@
 # caracas 1.1.0
 
 * Global symbol assignment by `def_sym()` (#18)
+* Linear algebra: New `do_la()` function with convinience functions like `eigenval()`, `eigenvec()`, `QRdecomposition()`. New vignette demonstrating these.
 * Arbitrary precision arithmetic: `N()` function and vignette on 
   "Arbitrary precision arithmetic"
 * Rename `eigen_val()`/`eigen_vec()` to `eigenval()`/`eigenvec()`
