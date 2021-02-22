@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9026</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9051</span>
       </span>
     </div>
 
@@ -64,6 +64,9 @@
     </li>
     <li>
       <a href="../articles/introduction.html">Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/linear-algebra.html">Linear algebra in `caracas`</a>
     </li>
     <li>
       <a href="../articles/reference.html">Reference</a>
@@ -147,7 +150,7 @@
 <span class="co">#&gt; [caracas]: ⎡x   0 ⎤</span>
 <span class="co">#&gt;            ⎢      ⎥</span>
 <span class="co">#&gt;            ⎣2  2⋅x⎦</span>
-<span class="va">Binv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/inv.html">inv</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span> <span class="co"># or solve_lin(B)</span>
+<span class="va">Binv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span> <span class="co"># or solve_lin(B)</span>
 <span class="va">Binv</span>
 <span class="co">#&gt; [caracas]: ⎡ 1      ⎤</span>
 <span class="co">#&gt;            ⎢ ─    0 ⎥</span>
@@ -161,7 +164,7 @@
 <span class="co">#&gt; [1] "\\left[\\begin{matrix}\\frac{1}{x} &amp; 0\\\\- \\frac{1}{x^{2}} &amp; \\frac{1}{2 x}\\end{matrix}\\right]"</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}\frac{1}{x} &amp; 0\\- \frac{1}{x^{2}} &amp; \frac{1}{2 x}\end{matrix}\right]\]</span></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/eigenval.html">eigenval</a></span><span class="op">(</span><span class="va">Binv</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/linalg.html">eigenval</a></span><span class="op">(</span><span class="va">Binv</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; [[1]]$eigval</span>
 <span class="co">#&gt; [caracas]: 1</span>
@@ -179,7 +182,34 @@
 <span class="co">#&gt;            2⋅x</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]$eigmult</span>
-<span class="co">#&gt; [1] 1</span></code></pre></div>
+<span class="co">#&gt; [1] 1</span>
+<span class="fu"><a href="../reference/linalg.html">eigenvec</a></span><span class="op">(</span><span class="va">Binv</span><span class="op">)</span>
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [[1]]$eigval</span>
+<span class="co">#&gt; [caracas]:  1 </span>
+<span class="co">#&gt;            ───</span>
+<span class="co">#&gt;            2⋅x</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[1]]$eigmult</span>
+<span class="co">#&gt; [1] 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[1]]$eigvec</span>
+<span class="co">#&gt; [caracas]: [0  1]ᵀ</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; [[2]]$eigval</span>
+<span class="co">#&gt; [caracas]: 1</span>
+<span class="co">#&gt;            ─</span>
+<span class="co">#&gt;            x</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]$eigmult</span>
+<span class="co">#&gt; [1] 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]$eigvec</span>
+<span class="co">#&gt; [caracas]: ⎡-x    ⎤</span>
+<span class="co">#&gt;            ⎢───  1⎥</span>
+<span class="co">#&gt;            ⎣ 2    ⎦ᵀ</span></code></pre></div>
 </div>
 <div id="more-examples" class="section level2">
 <h2 class="hasAnchor">

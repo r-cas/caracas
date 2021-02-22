@@ -75,7 +75,7 @@ the definite integral is calculated." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9026</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9051</span>
       </span>
     </div>
 
@@ -108,6 +108,9 @@ the definite integral is calculated." />
     </li>
     <li>
       <a href="../articles/introduction.html">Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/linear-algebra.html">Linear algebra in `caracas`</a>
     </li>
     <li>
       <a href="../articles/reference.html">Reference</a>
@@ -192,14 +195,13 @@ the definite integral is calculated.</p>
   <span class='fu'>intf</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>x</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>/</span><span class='fl'>2</span><span class='op'>)</span>, <span class='va'>x</span>, <span class='op'>-</span><span class='cn'>Inf</span>, <span class='cn'>Inf</span><span class='op'>)</span>
   <span class='fu'>intf</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>x</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>/</span><span class='fl'>2</span><span class='op'>)</span>, <span class='va'>x</span>, <span class='op'>-</span><span class='cn'>Inf</span>, <span class='cn'>Inf</span>, doit <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; [caracas]: ∞          
-#&gt;            ⌠          
-#&gt;            ⎮     2    
-#&gt;            ⎮   -x     
-#&gt;            ⎮   ────   
-#&gt;            ⎮    2     
-#&gt;            ⎮  ℯ     dx
-#&gt;            ⌡          
+</div><div class='output co'>#&gt; [caracas]: ∞              
+#&gt;            ⌠              
+#&gt;            ⎮     ⎛  2 ⎞   
+#&gt;            ⎮     ⎜-x  ⎟   
+#&gt;            ⎮  exp⎜────⎟ dx
+#&gt;            ⎮     ⎝ 2  ⎠   
+#&gt;            ⌡              
 #&gt;            -∞</div><div class='input'>
 </div></pre>
   </div>

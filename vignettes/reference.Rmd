@@ -203,7 +203,8 @@ rbind(B, B)
 ```
 
 ```{r}
-determinant(B)
+det(B)
+QRdecomposition(B)
 ```
 
 ```{r}

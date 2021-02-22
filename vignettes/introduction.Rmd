@@ -67,6 +67,7 @@ $$`r inline_code(tex(Binv))`$$
 
 ```{r}
 eigenval(Binv)
+eigenvec(Binv)
 ```
 
 

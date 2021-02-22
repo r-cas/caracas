@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9026</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9051</span>
       </span>
     </div>
 
@@ -104,6 +104,9 @@
     </li>
     <li>
       <a href="../articles/introduction.html">Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/linear-algebra.html">Linear algebra in `caracas`</a>
     </li>
     <li>
       <a href="../articles/reference.html">Reference</a>
@@ -360,12 +363,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="determinant.caracas_symbol.html">determinant(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Calculate the Determinant of a Matrix</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="diag-set.html">`diag&lt;-`()</a></code> </p>
         </td>
         <td><p>Replace matrix diagonal</p></td>
@@ -390,15 +387,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="eigenval.html">eigenval()</a></code> </p>
+          <p><code><a href="do_la.html">do_la()</a></code> </p>
         </td>
-        <td><p>Eigenvalues</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="eigenvec.html">eigenvec()</a></code> </p>
-        </td>
-        <td><p>Eigenvectors and eigenvalues</p></td>
+        <td><p>Do linear algebra operation</p></td>
       </tr><tr>
         
         <td>
@@ -411,6 +402,12 @@
           <p><code><a href="grapes-times-grapes.html">`%*%`</a></code> </p>
         </td>
         <td><p>Matrix multiplication</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> </p>
+        </td>
+        <td><p>Do linear algebra operation</p></td>
       </tr><tr>
         
         <td>
@@ -431,12 +428,6 @@
       
       
       <tr>
-        
-        <td>
-          <p><code><a href="inv.html">inv()</a></code> </p>
-        </td>
-        <td><p>Find inverse of matrix</p></td>
-      </tr><tr>
         
         <td>
           <p><code><a href="solve_lin.html">solve_lin()</a></code> </p>
@@ -518,6 +509,12 @@
       
       
       <tr>
+        
+        <td>
+          <p><code><a href="get_py.html">get_py()</a></code> </p>
+        </td>
+        <td><p>Access 'py' object</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="get_sympy.html">get_sympy()</a></code> </p>
@@ -617,12 +614,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="determinant.caracas_symbol.html">determinant(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Calculate the Determinant of a Matrix</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="diag-set-.caracas_symbol.html">`diag&lt;-`(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
         </td>
         <td><p>Replace diagonal</p></td>
@@ -653,21 +644,15 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="do_la.html">do_la()</a></code> </p>
+        </td>
+        <td><p>Do linear algebra operation</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="doit.html">doit()</a></code> </p>
         </td>
         <td><p>Perform calculations setup previously</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="eigenval.html">eigenval()</a></code> </p>
-        </td>
-        <td><p>Eigenvalues</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="eigenvec.html">eigenvec()</a></code> </p>
-        </td>
-        <td><p>Eigenvectors and eigenvalues</p></td>
       </tr><tr>
         
         <td>
@@ -692,6 +677,12 @@
           <p><code><a href="expand_trig.html">expand_trig()</a></code> </p>
         </td>
         <td><p>Expand a trigonometric expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_py.html">get_py()</a></code> </p>
+        </td>
+        <td><p>Access 'py' object</p></td>
       </tr><tr>
         
         <td>
@@ -731,15 +722,21 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="inv.html">inv()</a></code> </p>
-        </td>
-        <td><p>Find inverse of matrix</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="limf.html">limf()</a></code> </p>
         </td>
         <td><p>Limit of a function</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> </p>
+        </td>
+        <td><p>Do linear algebra operation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="pipe.html">%>%</a></code> </p>
+        </td>
+        <td><p>Pipe</p></td>
       </tr><tr>
         
         <td>

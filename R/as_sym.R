@@ -77,7 +77,7 @@ as_sym <- function(x, declare_variables = TRUE) {
     x <- as.character(x)
   }
   
-  varnames_exclude <- c("sqrt", "log")
+  varnames_exclude <- c("sqrt", "log", "I")
 
   if (declare_variables) {
     xele <- as.vector(x)

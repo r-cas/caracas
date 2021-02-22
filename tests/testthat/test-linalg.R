@@ -18,7 +18,7 @@ test_that("determinant", {
   
   B <- as_sym("[[x, 1], [2, x**2]]")
   
-  expect_equal(as.character(determinant(B)), "x^3 - 2")
+  expect_equal(as.character(det(B)), "x^3 - 2")
 })
 
 test_that("diag", {
@@ -51,7 +51,7 @@ test_that("eigenvalues and eigenvectors", {
   
   
   evec <- eigenvec(B)
-  evec_order <- order(unlist(lapply(eval, function(l) l$eigmult)))
+  evec_order <- order(unlist(lapply(evec, function(l) l$eigmult)))
   evec <- evec[evec_order]
   
   expect_equal(as.character(evec[[1L]]$eigval), "0")
@@ -60,6 +60,39 @@ test_that("eigenvalues and eigenvectors", {
   expect_equal(as.character(evec[[2L]]$eigval), "a")
   expect_equal(evec[[2L]]$eigmult, 2L)
   expect_equal(as.character(evec[[2L]]$eigvec), "Matrix([[1], [0], [0]])")
+})
+
+
+test_that("eigenvalues and eigenvectors 2", {
+  skip_if_no_sympy()
+  
+  A <- matrix(c("x", 2, 0, "2*x"), 2, 2)
+  B <- as_sym(A)
+  Binv <- inv(B) 
+  
+  eval <- eigenval(Binv)
+  eval_order <- order(unlist(lapply(eval, function(l) as.character(l$eigval))))
+  eval <- eval[eval_order]
+  
+  expect_equal(as.character(eval[[1L]]$eigval), "1/(2*x)")
+  expect_equal(eval[[1L]]$eigmult, 1L)
+  expect_equal(as.character(eval[[2L]]$eigval), "1/x")
+  expect_equal(eval[[2L]]$eigmult, 1L)
+  
+  
+  
+  evec <- eigenvec(Binv)
+  expect_equal(length(evec), 2L)
+  
+  evec_order <- order(unlist(lapply(evec, function(l) as.character(l$eigval))))
+  evec <- evec[evec_order]
+  
+  expect_equal(as.character(evec[[1L]]$eigval), "1/(2*x)")
+  expect_equal(evec[[1L]]$eigmult, 1L)
+  expect_equal(as.character(evec[[1L]]$eigvec), "Matrix([[0], [1]])")
+  expect_equal(as.character(evec[[2L]]$eigval), "1/x")
+  expect_equal(evec[[2L]]$eigmult, 1L)
+  expect_equal(as.character(evec[[2L]]$eigvec), "Matrix([[-x/2], [1]])")
 })
 
 
@@ -79,4 +112,54 @@ test_that("as_character_matrix", {
                structure(c("1", "2", "3"), .Dim = c(1L, 3L)))
 })
 
+
+test_that("do_la", {
+  skip_if_no_sympy()
+  
+  A <- matrix(c("a", "0", "0", "1"), 2, 2) %>% as_sym()
+  
+  
+  res <- QRdecomposition(A)
+  expect_equal(as.character(res$Q), "Matrix([[a/Abs(a), 0], [0, 1]])")
+  expect_equal(as.character(res$R), "Matrix([[Abs(a), 0], [0, 1]])")
+  
+  
+  res <- inv(A)
+  expect_equal(as.character(res), "Matrix([[1/a, 0], [0, 1]])")
+
+  res <- det(A)
+  expect_equal(as.character(res), "a")
+
+  res <- eigenval(A)
+  expect_equal(as.character(res[[1]]$eigval), "a")
+  expect_equal(res[[1]]$eigmult, 1)
+  expect_equal(as.character(res[[2]]$eigval), "1")
+  expect_equal(res[[2]]$eigmult, 1)
+  
+  
+  p <- do_la(A, "charpoly")
+  expect_equal(as.character(p), "a + lambda^2 + lambda*(-a - 1)")
+  expect_equal(as.character(as_expr(p)), "a + lambda^2 + lambda * (-a - 1)")
+  
+  expect_equal(as_expr(do_la(A, "rank")), 2L)
+  
+  expect_equal(as_expr(do_la(A, "cofactor", 0, 1)), 0L)
+  
+  expect_equal(as.character(do_la(A, "echelon_form")), "Matrix([[a, 0], [0, 1]])")
+  
+  
+  B <- as_sym("[[9, 3*I], [-3*I, 5]]")
+  expect_equal(as_expr(do_la(B, "cholesky")), 
+               structure(c(3+0i, 0-1i, 0+0i, 2+0i), .Dim = c(2L, 2L)))
+  
+  B <- t(as_sym("[[ 2, 3, 5 ], [3, 6, 2], [8, 3, 6]]"))
+  expect_equal(as.character(do_la(B, "GramSchmidt")), 
+               "Matrix([[2, 23/19, 1692/353], [3, 63/19, -1551/706], [5, -47/19, -423/706]])")
+  
+  B_rref <- do_la(B, "rref")
+  expect_equal(as.character(B_rref$mat), 
+               "Matrix([[1, 0, 0], [0, 1, 0], [0, 0, 1]])")
+  expect_equal(B_rref$pivot_vars, c(1L, 2L, 3L))
+  
+})
 

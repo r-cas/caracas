@@ -97,3 +97,15 @@ test_that("expression", {
   expect_equal(as.character(y), "a - sqrt(3)*sqrt(b*c)")
 })
 
+
+
+test_that("matrix", {
+  skip_if_no_sympy()
+  
+  A <- as_sym("[[9, 3*I], [-3*I, 5]]")
+  expect_equal(as_character_matrix(A), 
+               structure(c("9", "-3*1i", "3*1i", "5"), .Dim = c(2L, 2L)))
+  expect_equal(as_expr(A), 
+               structure(c(9+0i, 0-3i, 0+3i, 5+0i), .Dim = c(2L, 2L)))
+})
+

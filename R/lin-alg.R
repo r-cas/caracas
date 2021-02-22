@@ -1,10 +1,10 @@
-is_symbol_check <- function(x){
+stopifnot_symbol <- function(x){
   if (!inherits(x, "caracas_symbol")) {
     stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
   }
 }
 
-is_matrix_check <- function(x){
+stopifnot_matrix <- function(x){
     if (!symbol_is_matrix(x)) {
         stop("'x' must be a matrix")
     }
@@ -25,13 +25,14 @@ symbol_is_matrix <- function(x) {
   return(FALSE)
 }
 
-symbol_is_list_of_lists_matrix <- function(x) {
-  if (grepl("^\\[\\[", as.character(x))) {
-    return(TRUE)
-  } 
-  
-  return(FALSE)
-}
+# Still needed?
+#symbol_is_list_of_lists_matrix <- function(x) {
+#   if (grepl("^\\[\\[", as.character(x))) {
+#     return(TRUE)
+#   } 
+#   
+#   return(FALSE)
+# }
 
 # symbol_is_vector <- function(x) {
 #   xstr <- as.character(x)
@@ -102,123 +103,14 @@ as_character_matrix <- function(x) {
 #' @export
 dim.caracas_symbol <- function(x) {
   ensure_sympy()
-  is_symbol_check(x)
+  stopifnot_symbol(x)
     
-  if (!symbol_is_matrix(x)) {
-    return(NULL)
-  }
+  if (!symbol_is_matrix(x)) { return(NULL) }
   
   rows <- number_rows(x$pyobj)
   cols <- number_cols(x$pyobj)
   
   return(c(rows, cols))
-}
-
-#' Eigenvalues
-#' 
-#' @param x Matrix to find eigenvalues for
-#' 
-#' @examples 
-#' if (has_sympy()) {
-#'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-#'   B <- as_sym(A)
-#'   eigenval(B)
-#'   eigenvec(B)
-#'   eigen(eval(as_expr(B), list(a = 2)))
-#' }
-#' 
-#' @concept linalg
-#' 
-#' @importFrom reticulate py_to_r
-#' @export
-eigenval <- function(x) {
-  ensure_sympy()
-  is_symbol_check(x)
-    
-  if (symbol_is_list_of_lists_matrix(x)) {
-    x <- as_sym(as_character_matrix(x), 
-                declare_variables = FALSE)
-  }
-  
-  if (!symbol_is_matrix(x)) {
-    return(NULL)
-  }
-  
-  vals <- x$pyobj$eigenvals()
-  stopifnot(inherits(vals, "python.builtin.dict"))
-  
-  vals_lst <- reticulate::py_to_r(vals)
-  
-  eig_info <- vector("list", length(vals_lst))
-  
-  for (i in seq_along(vals_lst)) {
-    eig_info[[i]] <- list(
-      eigval = as_sym(names(vals_lst)[i]),
-      eigmult = as.integer(vals_lst[i])
-    )
-  }
-  
-  return(eig_info)
-}
-
-#' Eigenvectors and eigenvalues
-#' 
-#' @param x Matrix to find eigenvectors and eigenvalues for
-#' 
-#' @examples 
-#' if (has_sympy()) {
-#'   A <- matrix(c("a", "b", "c", "d"), 2, 2) %>% as_sym()
-#'   evec <- eigenvec(A)
-#'   evec
-#'   evec1 <- evec[[1]]$eigvec
-#'   evec1
-#'   simplify(evec1)
-#'   
-#'   lapply(evec, function(l) simplify(l$eigvec))
-#'   
-#'   eigenval(A)
-#' }
-#' 
-#' @return Returns a list of eigenvectors where each entry 
-#' contains the eigenvector, eigenvalue and multiplicity
-#' 
-#' @concept linalg
-#' 
-#' @importFrom reticulate py_to_r
-#' @export
-eigenvec <- function(x) {
-  ensure_sympy()
-  is_symbol_check(x)
-  
-  if (symbol_is_list_of_lists_matrix(x)) {
-    x <- as_sym(as_character_matrix(x), 
-                   declare_variables = FALSE)
-  }
-  
-  if (!symbol_is_matrix(x)) {
-    return(NULL)
-  }
-  
-  vals <- x$pyobj$eigenvects()
-  stopifnot(inherits(vals, "python.builtin.list"))
-  
-  vals_lst <- reticulate::py_to_r(vals)
-  
-  eig_info <- vector("list", length(vals_lst))
-  
-  for (i in seq_along(vals_lst)) {
-    eigvalvec <- vals_lst[[i]]
-    
-    res <- list(
-      eigval = construct_symbol_from_pyobj(eigvalvec[[1L]]),
-      eigmult = as.integer(eigvalvec[[2L]]),
-      eigvec = construct_symbol_from_pyobj(eigvalvec[[3L]][[1L]])
-    )
-    
-    eig_info[[i]] <- res
-  }
-
-  return(eig_info)
 }
 
 
@@ -232,30 +124,11 @@ eigenvec <- function(x) {
 #' @export
 t.caracas_symbol <- function(x) {
   ensure_sympy()
-  is_symbol_check(x)
-  is_matrix_check(x)
+  stopifnot_symbol(x)
+  stopifnot_matrix(x)
     
   xT <- x$pyobj$T
   return(construct_symbol_from_pyobj(xT))
-}
-
-#' Calculate the Determinant of a Matrix
-#' 
-#' Note that there is no argument for `logarithm` as with the generic
-#' method.
-#'
-#' @param x A `caracas_symbol`
-#' @param \dots Not used
-#'
-#' @concept linalg
-#' @export
-determinant.caracas_symbol <- function(x, ...) {
-  ensure_sympy()
-  is_matrix_check(x)
-    
-  xdet <- x$pyobj$det()
-  
-  return(construct_symbol_from_pyobj(xdet))
 }
 
 
@@ -290,8 +163,8 @@ diag.default <- function(x, ...) {
 #' @export
 diag.caracas_symbol <- function(x, ...) {
   ensure_sympy()
-  is_symbol_check(x)
-  is_matrix_check(x)  
+  stopifnot_symbol(x)
+  stopifnot_matrix(x)  
   
   y <- eval_to_symbol(x$pyobj$diagonal())
   
@@ -337,8 +210,8 @@ diag.caracas_symbol <- function(x, ...) {
 #' @export
 `diag<-.caracas_symbol` <- function(x, value) {
   ensure_sympy()
-  is_symbol_check(x)
-  is_matrix_check(x)
+  stopifnot_symbol(x)
+  stopifnot_matrix(x)
   
   xmat <- convert_to_r_mat(x)
   
@@ -354,44 +227,3 @@ diag.caracas_symbol <- function(x, ...) {
 
 
 
-
-#' QR decomposition
-#' 
-#' @param x Matrix to find QR decomposition for
-#' 
-#' @examples 
-#' if (has_sympy()) {
-#'   A <- matrix(c("a", "0", "0", "1"), 2, 2) %>% as_sym()
-#'   qr_res <- QRdecomposition(A)
-#'   qr_res$Q
-#'   qr_res$R
-#' }
-#' 
-#' @return Returns a list of eigenvectors where each entry 
-#' contains the eigenvector, eigenvalue and multiplicity
-#' 
-#' @concept linalg
-#' 
-#' @importFrom reticulate py_to_r
-#' @export
-QRdecomposition <- function(x) {
-  ensure_sympy()
-  is_symbol_check(x)
-  
-  if (symbol_is_list_of_lists_matrix(x)) { ## FIXME Whats that?
-    x <- as_sym(as_character_matrix(x), 
-                declare_variables = FALSE)
-  }
-  is_matrix_check(x)
-  
-  vals <- x$pyobj$QRdecomposition()
-
-  vals_lst <- reticulate::py_to_r(vals)
-  
-  qr_info <- list(
-    Q = construct_symbol_from_pyobj(vals_lst[[1L]]),
-    R = construct_symbol_from_pyobj(vals_lst[[2L]])
-  )
-  
-  return(qr_info)
-}

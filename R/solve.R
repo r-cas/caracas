@@ -8,23 +8,6 @@ sol_to_r_symbol_list <- function(x) {
   return(sols)
 }
 
-#' Find inverse of matrix
-#' 
-#' @param A matrix
-#' 
-#' @concept solve
-#' 
-#' @export
-inv <- function(A) {
-  ensure_sympy()
-  
-  if (!symbol_is_matrix(A)) {
-    stop("'A' must be a matrix")
-  }
-  
-  Ainv <- A$pyobj$inv()
-  return(construct_symbol_from_pyobj(Ainv))
-}
 
 #' Solve a linear system of equations
 #' 

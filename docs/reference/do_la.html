@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • caracas</title>
+<title>Do linear algebra operation — do_la • caracas</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Do linear algebra operation — do_la" />
+<meta property="og:description" content="Do linear algebra operation" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -140,55 +141,68 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/r-cas/caracas/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Do linear algebra operation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/lin-alg-advanced.R'><code>R/lin-alg-advanced.R</code></a></small>
+    <div class="hidden name"><code>do_la.Rd</code></div>
     </div>
 
-    <div id="caracas-110" class="section level1">
-<h1 class="page-header" data-toc-text="1.1.0">
-<a href="#caracas-110" class="anchor"></a>caracas 1.1.0<small> Unreleased </small>
-</h1>
-<ul>
-<li>Global symbol assignment by <code><a href="../reference/def_sym.html">def_sym()</a></code> (<a href='https://github.com/r-cas/caracas/issues/18'>#18</a>)</li>
-<li>Arbitrary precision arithmetic: <code><a href="../reference/N.html">N()</a></code> function and vignette on “Arbitrary precision arithmetic”</li>
-<li>Rename <code>eigen_val()</code>/<code>eigen_vec()</code> to <code><a href="../reference/linalg.html">eigenval()</a></code>/<code><a href="../reference/linalg.html">eigenvec()</a></code>
-</li>
-<li>More clear naming convention: R has expressions and caracas has symbols; in this connection <code>as_r()</code> was renamed to <code><a href="../reference/as_expr.html">as_expr()</a></code> and <code>as_symbol()</code> to <code><a href="../reference/as_sym.html">as_sym()</a></code>.</li>
-<li>Minor bugs fixed</li>
-</ul>
-</div>
-    <div id="caracas-101" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.1">
-<a href="#caracas-101" class="anchor"></a>caracas 1.0.1<small> 2020-05-21 </small>
-</h1>
-<ul>
-<li>Require Python 3</li>
-</ul>
-</div>
-    <div id="caracas-100" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.0">
-<a href="#caracas-100" class="anchor"></a>caracas 1.0.0<small> 2020-05-21 </small>
-</h1>
-<ul>
-<li>An entire new interface for using SymPy, including symbols, symbolic matrices, solving equations, limits and lots of other functionality.</li>
-</ul>
-</div>
-    <div id="caracas-001" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.1">
-<a href="#caracas-001" class="anchor"></a>caracas 0.0.1<small> 2020-01-26 </small>
-</h1>
-<ul>
-<li>Initial release</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Do linear algebra operation</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>do_la</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>slot</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>A matrix for which a property is requested</p></td>
+    </tr>
+    <tr>
+      <th>slot</th>
+      <td><p>The property requested</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Auxillary arguments</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Returns the requested property of a matrix.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='has_sympy.html'>has_sympy</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"0"</span>, <span class='st'>"0"</span>, <span class='st'>"1"</span><span class='op'>)</span>, <span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='as_sym.html'>as_sym</a></span><span class='op'>(</span><span class='op'>)</span>
+  
+  <span class='fu'>do_la</span><span class='op'>(</span><span class='va'>A</span>, <span class='st'>"QR"</span><span class='op'>)</span>
+  <span class='fu'><a href='linalg.html'>QRdecomposition</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
+  
+  <span class='fu'>do_la</span><span class='op'>(</span><span class='va'>A</span>, <span class='st'>"eigenval"</span><span class='op'>)</span>
+  <span class='fu'><a href='linalg.html'>eigenval</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
+  
+  <span class='fu'>do_la</span><span class='op'>(</span><span class='va'>A</span>, <span class='st'>"eigenvec"</span><span class='op'>)</span>
+  <span class='fu'><a href='linalg.html'>eigenvec</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
+  
+  <span class='fu'>do_la</span><span class='op'>(</span><span class='va'>A</span>, <span class='st'>"inv"</span><span class='op'>)</span>
+  <span class='fu'><a href='linalg.html'>inv</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
+  
+  <span class='fu'>do_la</span><span class='op'>(</span><span class='va'>A</span>, <span class='st'>"echelon_form"</span><span class='op'>)</span>
+  <span class='fu'>do_la</span><span class='op'>(</span><span class='va'>A</span>, <span class='st'>"rank"</span><span class='op'>)</span>
+  
+  <span class='fu'>do_la</span><span class='op'>(</span><span class='va'>A</span>, <span class='st'>"det"</span><span class='op'>)</span> <span class='co'># Determinant</span>
+  <span class='fu'><a href='linalg.html'>det</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; [caracas]: a</div><div class='input'>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 

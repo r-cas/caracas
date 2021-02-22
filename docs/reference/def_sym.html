@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9026</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9051</span>
       </span>
     </div>
 
@@ -105,6 +105,9 @@
     </li>
     <li>
       <a href="../articles/introduction.html">Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/linear-algebra.html">Linear algebra in `caracas`</a>
     </li>
     <li>
       <a href="../articles/reference.html">Reference</a>
@@ -176,14 +179,14 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='has_sympy.html'>has_sympy</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='fu'><a href='https://rdrr.io/r/base/ls.html'>ls</a></span><span class='op'>(</span><span class='op'>)</span>
-  <span class='fu'>global_symbols</span><span class='op'>(</span><span class='va'>n1</span>, <span class='va'>n2</span>, <span class='va'>n3</span><span class='op'>)</span>
+  <span class='fu'>def_sym</span><span class='op'>(</span><span class='va'>n1</span>, <span class='va'>n2</span>, <span class='va'>n3</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/ls.html'>ls</a></span><span class='op'>(</span><span class='op'>)</span>
-  <span class='fu'>global_symbols</span><span class='op'>(</span><span class='st'>"x1"</span>, <span class='st'>"x2"</span>, <span class='st'>"x3"</span><span class='op'>)</span>
+  <span class='fu'>def_sym</span><span class='op'>(</span><span class='st'>"x1"</span>, <span class='st'>"x2"</span>, <span class='st'>"x3"</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/ls.html'>ls</a></span><span class='op'>(</span><span class='op'>)</span>
-  <span class='fu'>global_symbols</span><span class='op'>(</span><span class='st'>"x1"</span>, <span class='st'>"x2"</span>, <span class='st'>"x3"</span>, warn <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+  <span class='fu'>def_sym</span><span class='op'>(</span><span class='st'>"x1"</span>, <span class='st'>"x2"</span>, <span class='st'>"x3"</span>, warn <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/ls.html'>ls</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in global_symbols(n1, n2, n3): could not find function "global_symbols"</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The following names were overwritten: x1, x2, x3</span></div><div class='output co'>#&gt; [1] "n1" "n2" "n3" "x1" "x2" "x3"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

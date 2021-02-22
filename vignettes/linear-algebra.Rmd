@@ -62,7 +62,7 @@ B <- matrix(c("a", "b", "0",
               "c", "c", "a"), 2, 3) %>% as_sym()
 B
 
-b <- matrix(c("b1", "b2"), nrow=2) %>% as_sym()
+b <- matrix(c("b1", "b2"), nrow = 2) %>% as_sym()
 ```
 
 Note that a vector is a matrix in which one of the dimensions is one. 
@@ -71,12 +71,14 @@ Note that a vector is a matrix in which one of the dimensions is one.
 ## Addition / multiplication of matrices / vectors
 
 ## Matrix-matrix sum and product; 
+
 ```{r}
 A + A2
 A %*% B
 ```
 
 ## Hadamard (elementwise) product
+
 ```{r}
 A * A2 
 ```
@@ -95,88 +97,114 @@ A %*% x ## Sanity check
 ## Generalized inverse; left and right inverse [TBW]
 
 
+
 # More special linear algebra functionality
 
-
-`getLA` short for "get Linear Algebra"
-```{r}
-args(getLA)
-```
-
+Below we present convience functions for performing linear algebra operations. 
+If you need a function in SymPy for which we have not supplied a convinience function (see <https://docs.sympy.org/latest/modules/matrices/matrices.html>), 
+you can 
+still call it with the `do_la()` function presented at the end of this section.
 
 ## QR decomposition
 
 ```{r}
 A <- matrix(c("a", "0", "0", "1"), 2, 2) %>% as_sym()
 A
-qr_res <- getLA(A, "QRdecomposition")
+qr_res <- QRdecomposition(A)
 qr_res$Q
 qr_res$R
 ```
 
-## Eigenvectors and eigenvalues
+## Eigenvalues and eigenvectors
 
 ```{r}
-getLA(A, "eigenvec")
-getLA(A, "eigenvals")
-eigenvec(A) ## Convenience function
-eigenval(A) ## Convenience function
+eigenval(A)
 ```
-
 
 ```{r}
-A <- matrix(c("a", "b", "0", "1"), 2, 2) %>% as_sym()
-A
+evec <- eigenvec(A)
+evec
+evec1 <- evec[[1]]$eigvec
+evec1
+simplify(evec1)
+
+lapply(evec, function(l) simplify(l$eigvec))
 ```
+
 
 ## Inverse
 
 ```{r}
-getLA(A, "inv")
-inv(A)  ## Convenience function
+inv(A)
 ```
 
-## Characteristic polynomium
+
+## Additional
+
+`do_la` short for "do linear algebra"
 
 ```{r}
-getLA(A, "charpoly") ## Strange output
+args(do_la)
 ```
 
-## Rank
+The above functions can be called:
 
 ```{r}
-getLA(A, "rank")
+do_la(A, "QRdecomposition") # == QRdecomposition(A)
+do_la(A, "inv") # == inv(A)
+do_la(A, "eigenvec") # == eigenvec(A)
+do_la(A, "eigenvals") #  == eigenval(A)
 ```
 
-## Cofactor
+
+### Characteristic polynomium
 
 ```{r}
-getLA(A, "cofactor", 0, 1)
-getLA(A, "cofactor_matrix")
+p <- do_la(A, "charpoly")
+p
+as_expr(p)
 ```
 
-## Echelon form
+### Rank
 
 ```{r}
-getLA(A, "echelon_form")
+do_la(A, "rank")
 ```
 
-## Cholesky factorisation [FIXME]
+### Cofactor
 
 ```{r}
-#AH <- matrix(c("a^2", 0, 0, "b^2"), nrow=2) %>% as_sym()
-#XSgetLA(AH, "cholesky")
+do_la(A, "cofactor", 0, 1)
+do_la(A, "cofactor_matrix")
 ```
 
-## Gram Schmidt [FIXME]
+### Echelon form
 
 ```{r}
-##getLA(A, "GramSchmidt") ## FIXME duer ikke.
+do_la(A, "echelon_form")
 ```
 
-
-## rref (reduced row-echelon form)[FIXME]
+### Cholesky factorisation
 
 ```{r}
-##getLA(A, "rref") ## A warning 
+B <- as_sym("[[9, 3*I], [-3*I, 5]]")
+B
+do_la(B, "cholesky")
 ```
+
+### Gram Schmidt
+
+```{r}
+B <- t(as_sym("[[ 2, 3, 5 ], [3, 6, 2], [8, 3, 6]]"))
+do_la(B, "GramSchmidt")
+```
+
+
+### Reduced row-echelon form (rref)
+
+```{r}
+B_rref <- do_la(B, "rref")
+B_rref
+```
+
+
