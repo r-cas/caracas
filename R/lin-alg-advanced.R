@@ -182,6 +182,9 @@ finalise_rref <- function(vals) {
 #'   simplify(evec1)
 #'   
 #'   lapply(evec, function(l) simplify(l$eigvec))
+#'
+#'   A <- as_sym("[[1, 2, 3], [4, 5, 6]]")
+#'   pinv(A)
 #' }
 #' 
 #' @return Returns the requested property of a matrix.
@@ -189,6 +192,31 @@ finalise_rref <- function(vals) {
 #' @concept linalg
 #' @name linalg
 NULL
+
+
+#' @rdname linalg
+#' @export
+columnspace <- function(x) {
+    return(do_la(x, "columnspace"))
+}
+
+#' @rdname linalg
+#' @export
+nullspace <- function(x) {
+    return(do_la(x, "nullspace"))
+}
+
+#' @rdname linalg
+#' @export
+rowspace <- function(x) {
+    return(do_la(x, "rowspace"))
+}
+
+#' @rdname linalg
+#' @export
+singular_values <- function(x) {
+    return(do_la(x, "singular_values"))
+}
 
 
 #' @rdname linalg
@@ -207,6 +235,19 @@ eigenval <- function(x) {
 #' @export
 eigenvec <- function(x) {
     return(do_la(x, "eigenvects"))
+}
+
+#' @rdname linalg
+#' @export
+GramSchmidt <- function(x) {
+    return(do_la(x, "GramSchmidt"))
+}
+
+
+#' @rdname linalg
+#' @export
+pinv <- function(x) {
+    return(do_la(x, "pinv"))
 }
 
 

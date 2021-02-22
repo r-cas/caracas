@@ -2,18 +2,36 @@
 % Please edit documentation in R/lin-alg-advanced.R
 \name{linalg}
 \alias{linalg}
+\alias{columnspace}
+\alias{nullspace}
+\alias{rowspace}
+\alias{singular_values}
 \alias{inv}
 \alias{eigenval}
 \alias{eigenvec}
+\alias{GramSchmidt}
+\alias{pinv}
 \alias{QRdecomposition}
 \alias{det}
 \title{Do linear algebra operation}
 \usage{
+columnspace(x)
+
+nullspace(x)
+
+rowspace(x)
+
+singular_values(x)
+
 inv(x)
 
 eigenval(x)
 
 eigenvec(x)
+
+GramSchmidt(x)
+
+pinv(x)
 
 QRdecomposition(x)
 
@@ -50,6 +68,9 @@ if (has_sympy()) {
   simplify(evec1)
   
   lapply(evec, function(l) simplify(l$eigvec))
+
+  A <- as_sym("[[1, 2, 3], [4, 5, 6]]")
+  pinv(A)
 }
 
 }
