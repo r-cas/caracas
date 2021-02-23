@@ -15,6 +15,8 @@
 #'   as.character(N(x, 50))
 #' }
 #' 
+#' @concept caracas_symbol
+#' 
 #' @export
 N <- function(x, digits = 15) {
   if (!inherits(x, "caracas_symbol")) {

@@ -62,8 +62,18 @@ Ops.caracas_symbol = function(e1, e2) {
   
   if (.Generic %in% c("+", "-", "*", "/")) {
     if (e1_is_mat && !e2_is_mat) {
-      e2 <- as_sym(scalar_to_matrix(as.character(e2), dim(e1)))
-      o2 <- e2$pyobj
+      
+      if (.Generic == "/") {
+        e2 <- as_sym(scalar_to_matrix(paste0("1/(", as.character(e2), ")"), dim(e1)))
+        o2 <- e2$pyobj
+        .Generic <- "*"
+      } else {
+        e2 <- as_sym(scalar_to_matrix(as.character(e2), dim(e1)))
+        o2 <- e2$pyobj
+      }
+      
+      # e2 <- as_sym(scalar_to_matrix(as.character(e2), dim(e1)))
+      # o2 <- e2$pyobj
     } else if (!e1_is_mat && e2_is_mat) {
       e1 <- as_sym(scalar_to_matrix(as.character(e1), dim(e2)))
       o1 <- e1$pyobj
@@ -72,12 +82,12 @@ Ops.caracas_symbol = function(e1, e2) {
   
   # Component-wise * and / for matrices
   # +/- is handles with normal operators
-  if ((e1_is_mat || e2_is_mat) && .Generic %in% c("*")){
+  if ((e1_is_mat || e2_is_mat) && .Generic %in% c("*")) {
     if (.Generic == "*") {
       z <- get_sympy()$matrix_multiply_elementwise(o1, o2)
       w <- construct_symbol_from_pyobj(z)
       return(w) 
-    }
+    } 
   }
   
   cmd <- paste0("(", as.character(o1), ")", op, 

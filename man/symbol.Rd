@@ -15,7 +15,8 @@ symbol(x, ...)
 A \code{caracas_symbol}
 }
 \description{
-Create a symbol
+Find available assumptions at
+\url{https://docs.sympy.org/latest/modules/core.html#module-sympy.core.assumptions}.
 }
 \examples{
 if (has_sympy()) {

@@ -60,6 +60,12 @@ do_la <- function(x, slot, ...) {
            "rref"={
                out <- do_la_worker(x, "rref", ...)
                return(finalise_rref(out))
+           },          
+           "nullspace"=,"columnspace"=,"rowspace"=, "singular_values"={
+               out <- do_la_worker(x, slot, ...)
+               out <- reticulate::py_to_r(out)
+               out <- lapply(out, construct_symbol_from_pyobj)
+               return(out)
            },
            {
                out <- do_la_worker(x, slot, ...)
@@ -77,6 +83,14 @@ do_la_worker <- function(x, slot, ...) {
     dots <- list(...)
 
     if (length(dots) > 3L) stop("Too many dot arguments")
+    
+    dots <- lapply(dots, function(l) {
+        if (inherits(l, "caracas_symbol")) {
+            return(l$pyobj)
+        }
+        
+        return(l)
+    })
 
     vals <- if (length(dots) == 0L) { 
         x$pyobj[[slot]]() 
@@ -248,6 +262,12 @@ GramSchmidt <- function(x) {
 #' @export
 pinv <- function(x) {
     return(do_la(x, "pinv"))
+}
+
+#' @rdname linalg
+#' @export
+rref <- function(x) {
+    return(do_la(x, "rref"))
 }
 
 

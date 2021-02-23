@@ -11,6 +11,7 @@
 \alias{eigenvec}
 \alias{GramSchmidt}
 \alias{pinv}
+\alias{rref}
 \alias{QRdecomposition}
 \alias{det}
 \title{Do linear algebra operation}
@@ -32,6 +33,8 @@ eigenvec(x)
 GramSchmidt(x)
 
 pinv(x)
+
+rref(x)
 
 QRdecomposition(x)
 

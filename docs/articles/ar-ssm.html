@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9051</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9110</span>
       </span>
     </div>
 
@@ -117,146 +117,134 @@
 <h2 class="hasAnchor">
 <a href="#autoregressive-model-ar1" class="anchor"></a>Autoregressive model (<span class="math inline">\(AR(1)\)</span>)</h2>
 <p>Consider this model: <span class="math display">\[
-x_i = a x_0 + e_i, \quad i=1, \dots, 4
-\]</span> and <span class="math inline">\(x_0=e_0\)</span>. All terms <span class="math inline">\(e_0, \dots, e_3\)</span> are independent and <span class="math inline">\(N(0,1)\)</span> distributed. Let <span class="math inline">\(e=(e_0, \dots, e_3)\)</span> and <span class="math inline">\(x=(x_0, \dots x_3)\)</span>. Isolating error terms gives that <span class="math display">\[
- e = L_1 x
-\]</span> where <span class="math inline">\(L_1\)</span> has the form</p>
+x_i = a x_{i-1} + e_i, \quad i=1, \dots, 3
+\]</span> and <span class="math inline">\(x_0=e_0\)</span>. All terms <span class="math inline">\(e_0, \dots, e_3\)</span> are independent and <span class="math inline">\(N(0,v^2)\)</span> distributed. Let <span class="math inline">\(e=(e_0, \dots, e_3)\)</span> and <span class="math inline">\(x=(x_0, \dots x_3)\)</span>. Hence <span class="math inline">\(e \sim N(0, v^2 I)\)</span>. Isolating error terms gives <span class="math display">\[
+e= \left[\begin{matrix}e_{0}\\e_{1}\\e_{2}\\e_{3}\end{matrix}\right] = \left[\begin{matrix}1 &amp; 0 &amp; 0 &amp; 0\\- a &amp; 1 &amp; 0 &amp; 0\\0 &amp; - a &amp; 1 &amp; 0\\0 &amp; 0 &amp; - a &amp; 1\end{matrix}\right] \left[\begin{matrix}x_{0}\\x_{1}\\x_{2}\\x_{3}\end{matrix}\right] = L_1 x
+\]</span></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">L1chr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>
-<span class="va">L1chr</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"-a"</span>
-<span class="va">L1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">L1chr</span><span class="op">)</span>
-<span class="va">L1</span>
-<span class="co">#&gt; [caracas]: ⎡1   0  0  0⎤</span>
-<span class="co">#&gt;            ⎢           ⎥</span>
-<span class="co">#&gt;            ⎢-a  1  0  0⎥</span>
-<span class="co">#&gt;            ⎢           ⎥</span>
-<span class="co">#&gt;            ⎢-a  0  1  0⎥</span>
-<span class="co">#&gt;            ⎢           ⎥</span>
-<span class="co">#&gt;            ⎣-a  0  0  1⎦</span></code></pre></div>
-<p>If error terms have variance <span class="math inline">\(1\)</span> then <span class="math inline">\(\mathbf{Var}(e)=L \mathbf{Var}(x) L'\)</span> so the covariance matrix is <span class="math inline">\(V1=\mathbf{Var}(x) = L^- (L^-)'\)</span> while the concentration matrix (the inverse covariances matrix) is <span class="math inline">\(K=L' L\)</span>.</p>
+<code class="sourceCode R"><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">3</span>
+<span class="va">L1chr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>
+<span class="va">L1chr</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"-a"</span>
+<span class="va">L1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">L1chr</span><span class="op">)</span></code></pre></div>
+<p>Since <span class="math inline">\(\mathbf{Var}(e)=v^2 I\)</span> we have <span class="math inline">\(\mathbf{Var}(e)=v^2 I=L \mathbf{Var}(x) L'\)</span> so the covariance matrix of <span class="math inline">\(x\)</span> is <span class="math inline">\(V_1=\mathbf{Var}(x) = v^2 L^- (L^-)'\)</span> while the concentration matrix (the inverse covariances matrix) is <span class="math inline">\(K=v^{-2}L' L\)</span>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">L1inv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">L1</span><span class="op">)</span>
-<span class="va">K1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">L1</span><span class="op">)</span> <span class="op">%*%</span> <span class="va">L1</span>
-<span class="va">V1</span> <span class="op">&lt;-</span> <span class="va">L1inv</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">L1inv</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span>
-  <span class="st">"\\begin{align} 
-    K_1 &amp;= "</span>, <span class="fu"><a href="../reference/tex.html">tex</a></span><span class="op">(</span><span class="va">K1</span><span class="op">)</span>, <span class="st">" \\\\ 
-   V_1 &amp;= "</span>, <span class="fu"><a href="../reference/tex.html">tex</a></span><span class="op">(</span><span class="va">V1</span><span class="op">)</span>, <span class="st">" 
-  \\end{align}"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/def_sym.html">def_sym</a></span><span class="op">(</span><span class="va">v2</span><span class="op">)</span>
+<span class="va">L1inv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">L1</span><span class="op">)</span>
+<span class="va">V1</span> <span class="op">&lt;-</span> <span class="va">v2</span> <span class="op">*</span> <span class="va">L1inv</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">L1inv</span><span class="op">)</span>
+<span class="va">K1</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">L1</span><span class="op">)</span> <span class="op">%*%</span> <span class="va">L1</span><span class="op">)</span> <span class="op">/</span> <span class="va">v2</span></code></pre></div>
 <p><span class="math display">\[\begin{align} 
-    K_1 &amp;= \left[\begin{matrix}3 a^{2} + 1 &amp; - a &amp; - a &amp; - a\\- a &amp; 1 &amp; 0 &amp; 0\\- a &amp; 0 &amp; 1 &amp; 0\\- a &amp; 0 &amp; 0 &amp; 1\end{matrix}\right] \\ 
-   V_1 &amp;= \left[\begin{matrix}1 &amp; a &amp; a &amp; a\\a &amp; a^{2} + 1 &amp; a^{2} &amp; a^{2}\\a &amp; a^{2} &amp; a^{2} + 1 &amp; a^{2}\\a &amp; a^{2} &amp; a^{2} &amp; a^{2} + 1\end{matrix}\right] 
+    K_1 &amp;= \left[\begin{matrix}\frac{a^{2} + 1}{v_{2}} &amp; - \frac{a}{v_{2}} &amp; 0 &amp; 0\\- \frac{a}{v_{2}} &amp; \frac{a^{2} + 1}{v_{2}} &amp; - \frac{a}{v_{2}} &amp; 0\\0 &amp; - \frac{a}{v_{2}} &amp; \frac{a^{2} + 1}{v_{2}} &amp; - \frac{a}{v_{2}}\\0 &amp; 0 &amp; - \frac{a}{v_{2}} &amp; \frac{1}{v_{2}}\end{matrix}\right] \\ 
+   V_1 &amp;= \left[\begin{matrix}v_{2} &amp; a v_{2} &amp; a^{2} v_{2} &amp; a^{3} v_{2}\\a v_{2} &amp; v_{2} \left(a^{2} + 1\right) &amp; v_{2} \left(a^{3} + a\right) &amp; v_{2} \left(a^{4} + a^{2}\right)\\a^{2} v_{2} &amp; v_{2} \left(a^{3} + a\right) &amp; v_{2} \left(a^{4} + a^{2} + 1\right) &amp; v_{2} \left(a^{5} + a^{3} + a\right)\\a^{3} v_{2} &amp; v_{2} \left(a^{4} + a^{2}\right) &amp; v_{2} \left(a^{5} + a^{3} + a\right) &amp; v_{2} \left(a^{6} + a^{4} + a^{2} + 1\right)\end{matrix}\right] 
   \end{align}\]</span></p>
 </div>
 <div id="dynamic-linear-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dynamic-linear-model" class="anchor"></a>Dynamic linear model</h2>
-<p>Augment the <span class="math inline">\(AR(1)\)</span> process above with <span class="math inline">\(y_i=b x_i + u_i\)</span>. Then <span class="math inline">\((e,u)\)</span> can be expressed in terms of <span class="math inline">\((x,y)\)</span> as <span class="math display">\[
-(e,u) = L_2(x,y)
+<p>Augment the <span class="math inline">\(AR(1)\)</span> process above with <span class="math inline">\(y_i=b x_i + u_i\)</span> for <span class="math inline">\(i=1,2,3\)</span>. Suppose <span class="math inline">\(u_i\sim N(0, w^2)\)</span> and all <span class="math inline">\(u_i\)</span> are independent and inpendent of <span class="math inline">\(e\)</span>. Then <span class="math inline">\((e,u)\)</span> can be expressed in terms of <span class="math inline">\((x,y)\)</span> as <span class="math display">\[
+(e,u) = \left[\begin{matrix}e_{0}\\e_{1}\\e_{2}\\e_{3}\\u_{1}\\u_{2}\\u_{3}\end{matrix}\right] = \left[\begin{matrix}1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\- a &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; - a &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 0 &amp; - a &amp; 1 &amp; 0 &amp; 0 &amp; 0\\0 &amp; - b &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\0 &amp; 0 &amp; - b &amp; 0 &amp; 0 &amp; 1 &amp; 0\\0 &amp; 0 &amp; 0 &amp; - b &amp; 0 &amp; 0 &amp; 1\end{matrix}\right] \left[\begin{matrix}x_{0}\\x_{1}\\x_{2}\\x_{3}\\y_{1}\\y_{2}\\y_{3}\end{matrix}\right] = L_2 (x,y)
 \]</span> where</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">3</span>
 <span class="va">L2chr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="fl">1</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">N</span><span class="op">)</span>
 <span class="va">L2chr</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"-a"</span>
 <span class="va">L2chr</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">N</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span>, <span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"-b"</span>
-<span class="va">L2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">L2chr</span><span class="op">)</span>
-<span class="va">L2</span>
-<span class="co">#&gt; [caracas]: ⎡1   0   0   0   0  0  0⎤</span>
-<span class="co">#&gt;            ⎢                       ⎥</span>
-<span class="co">#&gt;            ⎢-a  1   0   0   0  0  0⎥</span>
-<span class="co">#&gt;            ⎢                       ⎥</span>
-<span class="co">#&gt;            ⎢0   -a  1   0   0  0  0⎥</span>
-<span class="co">#&gt;            ⎢                       ⎥</span>
-<span class="co">#&gt;            ⎢0   0   -a  1   0  0  0⎥</span>
-<span class="co">#&gt;            ⎢                       ⎥</span>
-<span class="co">#&gt;            ⎢0   -b  0   0   1  0  0⎥</span>
-<span class="co">#&gt;            ⎢                       ⎥</span>
-<span class="co">#&gt;            ⎢0   0   -b  0   0  1  0⎥</span>
-<span class="co">#&gt;            ⎢                       ⎥</span>
-<span class="co">#&gt;            ⎣0   0   0   -b  0  0  1⎦</span></code></pre></div>
+<span class="va">L2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">L2chr</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">Veu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">7</span><span class="op">)</span>
+<span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="va">Veu</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"v2"</span>
+<span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="va">Veu</span><span class="op">)</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"w2"</span>
+<span class="va">Veu</span>
+<span class="co">#&gt;      [,1] [,2] [,3] [,4] [,5] [,6] [,7]</span>
+<span class="co">#&gt; [1,] "v2" "0"  "0"  "0"  "0"  "0"  "0" </span>
+<span class="co">#&gt; [2,] "0"  "v2" "0"  "0"  "0"  "0"  "0" </span>
+<span class="co">#&gt; [3,] "0"  "0"  "v2" "0"  "0"  "0"  "0" </span>
+<span class="co">#&gt; [4,] "0"  "0"  "0"  "v2" "0"  "0"  "0" </span>
+<span class="co">#&gt; [5,] "0"  "0"  "0"  "0"  "w2" "0"  "0" </span>
+<span class="co">#&gt; [6,] "0"  "0"  "0"  "0"  "0"  "w2" "0" </span>
+<span class="co">#&gt; [7,] "0"  "0"  "0"  "0"  "0"  "0"  "w2"</span>
+<span class="va">Veu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">Veu</span><span class="op">)</span>
+<span class="va">Veu</span>
+<span class="co">#&gt; [caracas]: ⎡v₂  0   0   0   0   0   0 ⎤</span>
+<span class="co">#&gt;            ⎢                          ⎥</span>
+<span class="co">#&gt;            ⎢0   v₂  0   0   0   0   0 ⎥</span>
+<span class="co">#&gt;            ⎢                          ⎥</span>
+<span class="co">#&gt;            ⎢0   0   v₂  0   0   0   0 ⎥</span>
+<span class="co">#&gt;            ⎢                          ⎥</span>
+<span class="co">#&gt;            ⎢0   0   0   v₂  0   0   0 ⎥</span>
+<span class="co">#&gt;            ⎢                          ⎥</span>
+<span class="co">#&gt;            ⎢0   0   0   0   w₂  0   0 ⎥</span>
+<span class="co">#&gt;            ⎢                          ⎥</span>
+<span class="co">#&gt;            ⎢0   0   0   0   0   w₂  0 ⎥</span>
+<span class="co">#&gt;            ⎢                          ⎥</span>
+<span class="co">#&gt;            ⎣0   0   0   0   0   0   w₂⎦</span>
+<span class="va">L2inv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">L2</span><span class="op">)</span> 
+<span class="va">V2</span> <span class="op">&lt;-</span> <span class="va">L2inv</span> <span class="op">%*%</span> <span class="va">Veu</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">L2inv</span><span class="op">)</span> 
+<span class="va">K2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">L2</span><span class="op">)</span> <span class="op">%*%</span> <span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">Veu</span><span class="op">)</span> <span class="op">%*%</span> <span class="va">L2</span></code></pre></div>
+<p><span class="math display">\[\begin{align} K_2 &amp;= \left[\begin{matrix}\frac{a^{2}}{v_{2}} + \frac{1}{v_{2}} &amp; - \frac{a}{v_{2}} &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\- \frac{a}{v_{2}} &amp; \frac{a^{2}}{v_{2}} + \frac{b^{2}}{w_{2}} + \frac{1}{v_{2}} &amp; - \frac{a}{v_{2}} &amp; 0 &amp; - \frac{b}{w_{2}} &amp; 0 &amp; 0\\0 &amp; - \frac{a}{v_{2}} &amp; \frac{a^{2}}{v_{2}} + \frac{b^{2}}{w_{2}} + \frac{1}{v_{2}} &amp; - \frac{a}{v_{2}} &amp; 0 &amp; - \frac{b}{w_{2}} &amp; 0\\0 &amp; 0 &amp; - \frac{a}{v_{2}} &amp; \frac{b^{2}}{w_{2}} + \frac{1}{v_{2}} &amp; 0 &amp; 0 &amp; - \frac{b}{w_{2}}\\0 &amp; - \frac{b}{w_{2}} &amp; 0 &amp; 0 &amp; \frac{1}{w_{2}} &amp; 0 &amp; 0\\0 &amp; 0 &amp; - \frac{b}{w_{2}} &amp; 0 &amp; 0 &amp; \frac{1}{w_{2}} &amp; 0\\0 &amp; 0 &amp; 0 &amp; - \frac{b}{w_{2}} &amp; 0 &amp; 0 &amp; \frac{1}{w_{2}}\end{matrix}\right] \\ 
+                  V_2 &amp;= \left[\begin{matrix}v_{2} &amp; a v_{2} &amp; a^{2} v_{2} &amp; a^{3} v_{2} &amp; a b v_{2} &amp; a^{2} b v_{2} &amp; a^{3} b v_{2}\\a v_{2} &amp; a^{2} v_{2} + v_{2} &amp; a^{3} v_{2} + a v_{2} &amp; a^{4} v_{2} + a^{2} v_{2} &amp; a^{2} b v_{2} + b v_{2} &amp; a^{3} b v_{2} + a b v_{2} &amp; a^{4} b v_{2} + a^{2} b v_{2}\\a^{2} v_{2} &amp; a^{3} v_{2} + a v_{2} &amp; a^{4} v_{2} + a^{2} v_{2} + v_{2} &amp; a^{5} v_{2} + a^{3} v_{2} + a v_{2} &amp; a^{3} b v_{2} + a b v_{2} &amp; a^{4} b v_{2} + a^{2} b v_{2} + b v_{2} &amp; a^{5} b v_{2} + a^{3} b v_{2} + a b v_{2}\\a^{3} v_{2} &amp; a^{4} v_{2} + a^{2} v_{2} &amp; a^{5} v_{2} + a^{3} v_{2} + a v_{2} &amp; a^{6} v_{2} + a^{4} v_{2} + a^{2} v_{2} + v_{2} &amp; a^{4} b v_{2} + a^{2} b v_{2} &amp; a^{5} b v_{2} + a^{3} b v_{2} + a b v_{2} &amp; a^{6} b v_{2} + a^{4} b v_{2} + a^{2} b v_{2} + b v_{2}\\a b v_{2} &amp; a^{2} b v_{2} + b v_{2} &amp; a^{3} b v_{2} + a b v_{2} &amp; a^{4} b v_{2} + a^{2} b v_{2} &amp; a^{2} b^{2} v_{2} + b^{2} v_{2} + w_{2} &amp; a^{3} b^{2} v_{2} + a b^{2} v_{2} &amp; a^{4} b^{2} v_{2} + a^{2} b^{2} v_{2}\\a^{2} b v_{2} &amp; a^{3} b v_{2} + a b v_{2} &amp; a^{4} b v_{2} + a^{2} b v_{2} + b v_{2} &amp; a^{5} b v_{2} + a^{3} b v_{2} + a b v_{2} &amp; a^{3} b^{2} v_{2} + a b^{2} v_{2} &amp; a^{4} b^{2} v_{2} + a^{2} b^{2} v_{2} + b^{2} v_{2} + w_{2} &amp; a^{5} b^{2} v_{2} + a^{3} b^{2} v_{2} + a b^{2} v_{2}\\a^{3} b v_{2} &amp; a^{4} b v_{2} + a^{2} b v_{2} &amp; a^{5} b v_{2} + a^{3} b v_{2} + a b v_{2} &amp; a^{6} b v_{2} + a^{4} b v_{2} + a^{2} b v_{2} + b v_{2} &amp; a^{4} b^{2} v_{2} + a^{2} b^{2} v_{2} &amp; a^{5} b^{2} v_{2} + a^{3} b^{2} v_{2} + a b^{2} v_{2} &amp; a^{6} b^{2} v_{2} + a^{4} b^{2} v_{2} + a^{2} b^{2} v_{2} + b^{2} v_{2} + w_{2}\end{matrix}\right] \end{align}\]</span></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">K2</span> <span class="op">&lt;-</span> <span class="va">L2</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">L2</span><span class="op">)</span>
-<span class="va">V2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simplify.html">simplify</a></span><span class="op">(</span><span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">K2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span>
-  <span class="st">"\\begin{align} K_2 &amp;= "</span>, <span class="fu"><a href="../reference/tex.html">tex</a></span><span class="op">(</span><span class="va">K2</span><span class="op">)</span>, <span class="st">" \\\\ 
-                  V_2 &amp;= "</span>, <span class="fu"><a href="../reference/tex.html">tex</a></span><span class="op">(</span><span class="va">V2</span><span class="op">)</span>, <span class="st">" \\end{align}"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></code></pre></div>
-<p><span class="math display">\[\begin{align} K_2 &amp;= \left[\begin{matrix}1 &amp; - a &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\- a &amp; a^{2} + 1 &amp; - a &amp; 0 &amp; - b &amp; 0 &amp; 0\\0 &amp; - a &amp; a^{2} + 1 &amp; - a &amp; a b &amp; - b &amp; 0\\0 &amp; 0 &amp; - a &amp; a^{2} + 1 &amp; 0 &amp; a b &amp; - b\\0 &amp; - b &amp; a b &amp; 0 &amp; b^{2} + 1 &amp; 0 &amp; 0\\0 &amp; 0 &amp; - b &amp; a b &amp; 0 &amp; b^{2} + 1 &amp; 0\\0 &amp; 0 &amp; 0 &amp; - b &amp; 0 &amp; 0 &amp; b^{2} + 1\end{matrix}\right] \\ 
-                  V_2 &amp;= \left[\begin{matrix}a^{6} b^{2} + a^{6} + a^{4} b^{2} + a^{4} + a^{2} b^{2} + a^{2} + 1 &amp; a \left(a^{4} b^{2} + a^{4} + a^{2} b^{2} + a^{2} + b^{2} + 1\right) &amp; a^{2} \left(a^{2} b^{2} + a^{2} + b^{2} + 1\right) &amp; a^{3} \left(b^{2} + 1\right) &amp; a b &amp; a^{2} b &amp; a^{3} b\\a \left(a^{4} b^{2} + a^{4} + a^{2} b^{2} + a^{2} + b^{2} + 1\right) &amp; a^{4} b^{2} + a^{4} + a^{2} b^{2} + a^{2} + b^{2} + 1 &amp; a \left(a^{2} b^{2} + a^{2} + b^{2} + 1\right) &amp; a^{2} \left(b^{2} + 1\right) &amp; b &amp; a b &amp; a^{2} b\\a^{2} \left(a^{2} b^{2} + a^{2} + b^{2} + 1\right) &amp; a \left(a^{2} b^{2} + a^{2} + b^{2} + 1\right) &amp; a^{2} b^{2} + a^{2} + b^{2} + 1 &amp; a \left(b^{2} + 1\right) &amp; 0 &amp; b &amp; a b\\a^{3} \left(b^{2} + 1\right) &amp; a^{2} \left(b^{2} + 1\right) &amp; a \left(b^{2} + 1\right) &amp; b^{2} + 1 &amp; 0 &amp; 0 &amp; b\\a b &amp; b &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\a^{2} b &amp; a b &amp; b &amp; 0 &amp; 0 &amp; 1 &amp; 0\\a^{3} b &amp; a^{2} b &amp; a b &amp; b &amp; 0 &amp; 0 &amp; 1\end{matrix}\right] \end{align}\]</span></p>
-</div>
-<div id="numerical-evalation-in-r" class="section level2">
-<h2 class="hasAnchor">
-<a href="#numerical-evalation-in-r" class="anchor"></a>Numerical evalation in R</h2>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sparsify</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"Matrix"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-      <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu">Matrix</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html">Matrix</a></span><span class="op">(</span><span class="va">x</span>, sparse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
-      <span class="co">##return(Matrix(x, sparse = TRUE))</span>
-  <span class="op">}</span>
-  
-  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.5</span>
-<span class="va">beta</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.3</span>
-
-<span class="co">## AR(1)</span>
-<span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">3</span>
-<span class="va">L1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span> <span class="op">+</span> <span class="va">N</span><span class="op">)</span>
-<span class="va">L1</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">alpha</span>
-<span class="va">K1</span> <span class="op">&lt;-</span> <span class="va">L1</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">L1</span><span class="op">)</span>
-<span class="va">V1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">K1</span><span class="op">)</span>
-<span class="fu">sparsify</span><span class="op">(</span><span class="va">K1</span><span class="op">)</span>
-<span class="co">#&gt; 4 x 4 sparse Matrix of class "dsCMatrix"</span>
-<span class="co">#&gt;                            </span>
-<span class="co">#&gt; [1,]  1.0 -0.50  .     .   </span>
-<span class="co">#&gt; [2,] -0.5  1.25 -0.50  .   </span>
-<span class="co">#&gt; [3,]  .   -0.50  1.25 -0.50</span>
-<span class="co">#&gt; [4,]  .    .    -0.50  1.25</span>
-<span class="fu">sparsify</span><span class="op">(</span><span class="va">V1</span><span class="op">)</span>
-<span class="co">#&gt; 4 x 4 sparse Matrix of class "dsCMatrix"</span>
-<span class="co">#&gt;                                   </span>
-<span class="co">#&gt; [1,] 1.328125 0.65625 0.3125 0.125</span>
-<span class="co">#&gt; [2,] 0.656250 1.31250 0.6250 0.250</span>
-<span class="co">#&gt; [3,] 0.312500 0.62500 1.2500 0.500</span>
-<span class="co">#&gt; [4,] 0.125000 0.25000 0.5000 1.000</span>
-
-<span class="co">## Dynamic linear models</span>
-<span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">3</span>
-<span class="va">L2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">N</span><span class="op">)</span>
-<span class="va">L2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">alpha</span>
-<span class="va">L2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">N</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span>, <span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">beta</span>
-<span class="va">K2</span> <span class="op">&lt;-</span> <span class="va">L2</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">L2</span><span class="op">)</span>
-<span class="va">V2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">K2</span><span class="op">)</span>
-<span class="fu">sparsify</span><span class="op">(</span><span class="va">K2</span><span class="op">)</span>
-<span class="co">#&gt; 7 x 7 sparse Matrix of class "dsCMatrix"</span>
-<span class="co">#&gt;                                             </span>
-<span class="co">#&gt; [1,]  1.0 -0.50  .     .     .     .    .   </span>
-<span class="co">#&gt; [2,] -0.5  1.25 -0.50  .     0.30  .    .   </span>
-<span class="co">#&gt; [3,]  .   -0.50  1.25 -0.50 -0.15  0.30 .   </span>
-<span class="co">#&gt; [4,]  .    .    -0.50  1.25  .    -0.15 0.30</span>
-<span class="co">#&gt; [5,]  .    0.30 -0.15  .     1.09  .    .   </span>
-<span class="co">#&gt; [6,]  .    .     0.30 -0.15  .     1.09 .   </span>
-<span class="co">#&gt; [7,]  .    .     .     0.30  .     .    1.09</span>
-<span class="fu">sparsify</span><span class="op">(</span><span class="va">V2</span><span class="op">)</span>
-<span class="co">#&gt; 7 x 7 sparse Matrix of class "dsCMatrix"</span>
-<span class="co">#&gt;                                                                   </span>
-<span class="co">#&gt; [1,]  1.3576563  0.7153125  0.340625  0.13625 -0.15 -0.075 -0.0375</span>
-<span class="co">#&gt; [2,]  0.7153125  1.4306250  0.681250  0.27250 -0.30 -0.150 -0.0750</span>
-<span class="co">#&gt; [3,]  0.3406250  0.6812500  1.362500  0.54500  .    -0.300 -0.1500</span>
-<span class="co">#&gt; [4,]  0.1362500  0.2725000  0.545000  1.09000  .     .     -0.3000</span>
-<span class="co">#&gt; [5,] -0.1500000 -0.3000000  .         .        1.00  .      .     </span>
-<span class="co">#&gt; [6,] -0.0750000 -0.1500000 -0.300000  .        .     1.000  .     </span>
-<span class="co">#&gt; [7,] -0.0375000 -0.0750000 -0.150000 -0.30000  .     .      1.0000</span></code></pre></div>
-<p>Comparing with results calculated by <code>caracas</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">V1_eval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">V1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span><span class="op">)</span>
-<span class="va">V2_eval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">V2</span>, first_doit <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="va">alpha</span>, b <span class="op">=</span> <span class="va">beta</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">V1</span>, <span class="va">V1_eval</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span>
-<span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">V2</span>, <span class="va">V2_eval</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># &lt;!-- ```{r} --&gt;</span>
+<span class="co"># &lt;!-- x_index &lt;- 1:4 --&gt;</span>
+<span class="co"># &lt;!-- Kxx &lt;- K2[x_index, x_index] --&gt;</span>
+<span class="co"># &lt;!-- Kxy &lt;- K2[x_index, -x_index] --&gt;</span>
+<span class="co"># &lt;!-- Kyx &lt;- K2[-x_index, x_index] --&gt;</span>
+<span class="co"># &lt;!-- Kyy &lt;- K2[-x_index, -x_index] --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- S &lt;- Kyy - Kyx %*% inv(Kxx) %*% Kxy --&gt;</span>
+<span class="co"># &lt;!-- Si &lt;- inv(S) --&gt;</span>
+<span class="co"># &lt;!-- ``` --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- $$ --&gt;</span>
+<span class="co"># &lt;!--  S^{-1} = `r tex(Si)` --&gt;</span>
+<span class="co"># &lt;!-- $$ --&gt;</span>
+<span class="co">#    </span>
+<span class="co">#    </span>
+<span class="co">#    </span>
+<span class="co">#    </span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- ## Numerical evalation in R --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- ```{r} --&gt;</span>
+<span class="co"># &lt;!-- sparsify &lt;- function(x) { --&gt;</span>
+<span class="co"># &lt;!--   if (requireNamespace("Matrix", quietly = TRUE)) { --&gt;</span>
+<span class="co"># &lt;!--       return(Matrix::Matrix(x, sparse = TRUE)) --&gt;</span>
+<span class="co"># &lt;!--       ##return(Matrix(x, sparse = TRUE)) --&gt;</span>
+<span class="co"># &lt;!--   } --&gt;</span>
+<span class="co">#   </span>
+<span class="co"># &lt;!--   return(x) --&gt;</span>
+<span class="co"># &lt;!-- } --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- alpha &lt;- 0.5 --&gt;</span>
+<span class="co"># &lt;!-- beta &lt;- -0.3 --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- ## AR(1) --&gt;</span>
+<span class="co"># &lt;!-- N &lt;- 3 --&gt;</span>
+<span class="co"># &lt;!-- L1 &lt;- diag(1, 1 + N) --&gt;</span>
+<span class="co"># &lt;!-- L1[cbind(1+(1:N), 1:N)] &lt;- -alpha --&gt;</span>
+<span class="co"># &lt;!-- K1 &lt;- L1 %*% t(L1) --&gt;</span>
+<span class="co"># &lt;!-- V1 &lt;- solve(K1) --&gt;</span>
+<span class="co"># &lt;!-- sparsify(K1) --&gt;</span>
+<span class="co"># &lt;!-- sparsify(V1) --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- ## Dynamic linear models --&gt;</span>
+<span class="co"># &lt;!-- N &lt;- 3 --&gt;</span>
+<span class="co"># &lt;!-- L2 &lt;- diag(1, 1 + 2*N) --&gt;</span>
+<span class="co"># &lt;!-- L2[cbind(1+(1:N), 1:N)] &lt;- -alpha --&gt;</span>
+<span class="co"># &lt;!-- L2[cbind(1 + N + (1:N), 1 + 1:N)] &lt;- -beta --&gt;</span>
+<span class="co"># &lt;!-- K2 &lt;- L2 %*% t(L2) --&gt;</span>
+<span class="co"># &lt;!-- V2 &lt;- solve(K2) --&gt;</span>
+<span class="co"># &lt;!-- sparsify(K2) --&gt;</span>
+<span class="co"># &lt;!-- sparsify(V2) --&gt;</span>
+<span class="co"># &lt;!-- ``` --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- Comparing with results calculated by `caracas`: --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- ```{r} --&gt;</span>
+<span class="co"># &lt;!-- V1_eval &lt;- eval(as_expr(V1), list(a = alpha)) --&gt;</span>
+<span class="co"># &lt;!-- V2_eval &lt;- eval(as_expr(V2, first_doit = FALSE), list(a = alpha, b = beta)) --&gt;</span>
+<span class="co"># &lt;!-- all.equal(V1, V1_eval) --&gt;</span>
+<span class="co"># &lt;!-- all.equal(V2, V2_eval) --&gt;</span>
+<span class="co"># &lt;!-- ```  --&gt;</span></code></pre></div>
 </div>
   </div>
 

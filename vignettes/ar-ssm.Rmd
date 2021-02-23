@@ -42,6 +42,7 @@ L1chr <- diag(4)
 L1chr[cbind(1 + (1:N), 1:N)] <- "-a"
 L1 <- as_sym(L1chr)
 ```
+
 ```{r, echo=F}
 e <- as_sym(paste0("e", 0:3))
 x <- as_sym(paste0("x", 0:3))
@@ -72,14 +73,10 @@ $\mathbf{Var}(e)=v^2 I=L \mathbf{Var}(x) L'$ so the covariance matrix of $x$ is 
  while the concentration matrix (the inverse covariances matrix) is $K=v^{-2}L' L$.
 
 ```{r}
-def_sym("v2")   
-Ve <- diag(1, 4)
-diag(Ve) <- "v2" ## FIXME Can't I multiply v2 and L1inv???
-Ve <- as_sym(Ve)
-Ve
+def_sym(v2)
 L1inv <- inv(L1)
-K1 <- t(L1) %*% inv(Ve) %*% L1 
-V1 <- L1inv %*% Ve %*% t(L1inv)
+V1 <- v2 * L1inv %*% t(L1inv)
+K1 <- (t(L1) %*% L1) / v2
 ```
 
 ```{r, echo=F, results="asis"}
@@ -122,10 +119,9 @@ diag(Veu)[5:7] <- "w2"
 Veu
 Veu <- as_sym(Veu)
 Veu
-## K2 <- t(L2) %*% solve(Veu) %*% L2 ## FIXME: What is wrong here??
-K2 <- t(L2) %*% L2
 L2inv <- inv(L2) 
 V2 <- L2inv %*% Veu %*% t(L2inv) 
+K2 <- t(L2) %*% inv(Veu) %*% L2
 ```
 
 ```{r, results="asis", echo=F}
@@ -134,68 +130,72 @@ cat(
                   V_2 &= ", tex(V2), " \\end{align}", sep = "")
 ```
 
-<!-- ```{r} -->
-<!-- x_index <- 1:4 -->
-<!-- Kxx <- K2[x_index, x_index] -->
-<!-- Kxy <- K2[x_index, -x_index] -->
-<!-- Kyx <- K2[-x_index, x_index] -->
-<!-- Kyy <- K2[-x_index, -x_index] -->
 
-<!-- S <- Kyy - Kyx %*% inv(Kxx) %*% Kxy -->
-<!-- Si <- inv(S) -->
-<!-- ``` -->
+```{r}
+# <!-- ```{r} -->
+# <!-- x_index <- 1:4 -->
+# <!-- Kxx <- K2[x_index, x_index] -->
+# <!-- Kxy <- K2[x_index, -x_index] -->
+# <!-- Kyx <- K2[-x_index, x_index] -->
+# <!-- Kyy <- K2[-x_index, -x_index] -->
+# 
+# <!-- S <- Kyy - Kyx %*% inv(Kxx) %*% Kxy -->
+# <!-- Si <- inv(S) -->
+# <!-- ``` -->
+# 
+# <!-- $$ -->
+# <!--  S^{-1} = `r tex(Si)` -->
+# <!-- $$ -->
+#    
+#    
+#    
+#    
+# 
+# <!-- ## Numerical evalation in R -->
+# 
+# <!-- ```{r} -->
+# <!-- sparsify <- function(x) { -->
+# <!--   if (requireNamespace("Matrix", quietly = TRUE)) { -->
+# <!--       return(Matrix::Matrix(x, sparse = TRUE)) -->
+# <!--       ##return(Matrix(x, sparse = TRUE)) -->
+# <!--   } -->
+#   
+# <!--   return(x) -->
+# <!-- } -->
+# 
+# <!-- alpha <- 0.5 -->
+# <!-- beta <- -0.3 -->
+# 
+# <!-- ## AR(1) -->
+# <!-- N <- 3 -->
+# <!-- L1 <- diag(1, 1 + N) -->
+# <!-- L1[cbind(1+(1:N), 1:N)] <- -alpha -->
+# <!-- K1 <- L1 %*% t(L1) -->
+# <!-- V1 <- solve(K1) -->
+# <!-- sparsify(K1) -->
+# <!-- sparsify(V1) -->
+# 
+# <!-- ## Dynamic linear models -->
+# <!-- N <- 3 -->
+# <!-- L2 <- diag(1, 1 + 2*N) -->
+# <!-- L2[cbind(1+(1:N), 1:N)] <- -alpha -->
+# <!-- L2[cbind(1 + N + (1:N), 1 + 1:N)] <- -beta -->
+# <!-- K2 <- L2 %*% t(L2) -->
+# <!-- V2 <- solve(K2) -->
+# <!-- sparsify(K2) -->
+# <!-- sparsify(V2) -->
+# <!-- ``` -->
+# 
+# <!-- Comparing with results calculated by `caracas`: -->
+# 
+# <!-- ```{r} -->
+# <!-- V1_eval <- eval(as_expr(V1), list(a = alpha)) -->
+# <!-- V2_eval <- eval(as_expr(V2, first_doit = FALSE), list(a = alpha, b = beta)) -->
+# <!-- all.equal(V1, V1_eval) -->
+# <!-- all.equal(V2, V2_eval) -->
+# <!-- ```  -->
+```
 
-<!-- $$ -->
-<!--  S^{-1} = `r tex(Si)` -->
-<!-- $$ -->
-   
-   
-   
-   
-
-<!-- ## Numerical evalation in R -->
-
-<!-- ```{r} -->
-<!-- sparsify <- function(x) { -->
-<!--   if (requireNamespace("Matrix", quietly = TRUE)) { -->
-<!--       return(Matrix::Matrix(x, sparse = TRUE)) -->
-<!--       ##return(Matrix(x, sparse = TRUE)) -->
-<!--   } -->
-  
-<!--   return(x) -->
-<!-- } -->
-
-<!-- alpha <- 0.5 -->
-<!-- beta <- -0.3 -->
-
-<!-- ## AR(1) -->
-<!-- N <- 3 -->
-<!-- L1 <- diag(1, 1 + N) -->
-<!-- L1[cbind(1+(1:N), 1:N)] <- -alpha -->
-<!-- K1 <- L1 %*% t(L1) -->
-<!-- V1 <- solve(K1) -->
-<!-- sparsify(K1) -->
-<!-- sparsify(V1) -->
-
-<!-- ## Dynamic linear models -->
-<!-- N <- 3 -->
-<!-- L2 <- diag(1, 1 + 2*N) -->
-<!-- L2[cbind(1+(1:N), 1:N)] <- -alpha -->
-<!-- L2[cbind(1 + N + (1:N), 1 + 1:N)] <- -beta -->
-<!-- K2 <- L2 %*% t(L2) -->
-<!-- V2 <- solve(K2) -->
-<!-- sparsify(K2) -->
-<!-- sparsify(V2) -->
-<!-- ``` -->
-
-<!-- Comparing with results calculated by `caracas`: -->
-
-<!-- ```{r} -->
-<!-- V1_eval <- eval(as_expr(V1), list(a = alpha)) -->
-<!-- V2_eval <- eval(as_expr(V2, first_doit = FALSE), list(a = alpha, b = beta)) -->
-<!-- all.equal(V1, V1_eval) -->
-<!-- all.equal(V2, V2_eval) -->
-<!-- ```  -->
 
 
 

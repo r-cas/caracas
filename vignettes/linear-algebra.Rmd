@@ -51,10 +51,12 @@ packageVersion("caracas")`. `caracas` is avavailable on CRAN at
 
 ## Creating matrices / vectors
 
-FIXME: Need caracas form as well.
+We now show different ways to create a symbolic matrix:
 
 ```{r}
 A <- matrix(c("a", "b", "0", "1"), 2, 2) %>% as_sym()
+A
+A <- as_sym("[[a, 0], [b, 1]]")
 A
 
 A2 <- matrix(c("a", "b", "c", "1"), 2, 2) %>% as_sym()
@@ -99,8 +101,10 @@ A %*% x ## Sanity check
 ```{r}
 M <- as_sym("[[1, 2, 3], [4, 5, 6]]")
 pinv(M)
-#B <- as_sym("[[7], [8]]")  ## FIXME
-#do_la(M, "pinv_solve", B)  ## FIXME
+B <- as_sym("[[7], [8]]") 
+B
+z <- do_la(M, "pinv_solve", B)
+print(z, rowvec = FALSE) # Do not print column vectors as transposed row vectors
 ```
 
 
@@ -145,7 +149,7 @@ lapply(evec, function(l) simplify(l$eigvec))
 
 ```{r}
 inv(A)
-pinv(cbind(A, A))
+pinv(cbind(A, A)) # pseudo inverse
 ```
 
 
@@ -212,28 +216,69 @@ do_la(B, "GramSchmidt")
 ```
 
 
-### Reduced row-echelon form (rref); FIXME: What is this doing?
+### Reduced row-echelon form (rref)
 
 ```{r}
+B <- t(as_sym("[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6] ]"))
+B
 B_rref <- do_la(B, "rref")
 B_rref
 ```
 
-
-### Column space, row space and null space [FIXME]
+### Column space, row space and null space
 
 ```{r}
-##B <- as_sym("3, 3, [1, 3, 0, -2, -6, 0, 3, 9, 6]") ## FIXME ???
-B <- matrix(c(1, 3, 0, -2, -6, 0, 3, 9, 6), nrow=3) %>% as_sym()
+B <- matrix(c(1, 3, 0, -2, -6, 0, 3, 9, 6), nrow = 3) %>% as_sym()
 B
 columnspace(B)
 rowspace(B)
-nullspace(B)
+x <- nullspace(B)
+x
+rref(B)
+B %*% x[[1]]
 ```
 
-### Singular values, svd [FIXME]
+### Singular values, svd
 
 ```{r}
+B <- t(as_sym("[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6], [8, 3, 6] ]"))
+B
 singular_values(B)
 ##svd(B) FIXME
 ```
+
+```{r}
+# # FIXME
+# B <- t(as_sym("[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6], [8, 3, 6] ]"))
+# B
+# 
+# #do_la(B %*% t(B), "left_eigenvects")
+# 
+# U <- eigenvec(B %*% t(B)) %>% lapply(function(v) v$eigvec) %>% do.call(cbind, .)
+# V <- eigenvec(t(B) %*% B) %>% lapply(function(v) v$eigvec) %>% do.call(cbind, .)
+# 
+# d <- singular_values(B)[seq_len(ncol(U))]
+# D <- diag(ncol(U)) %>% as_sym()
+# for (i in seq_along(d)) {
+#   D[i, i] <- as.character(d[[i]])
+# }
+# 
+# d <- singular_values(B) %>% do.call(cbind, .)
+# D <- as_diag(d)
+# 
+# 
+# r_svd <- as_expr(B) %>% svd()
+# 
+# r_svd$d
+# d %>% as_expr()
+# 
+# r_svd$u
+# U %>% as_expr()
+# 
+# r_svd$v
+# V %>% as_expr()
+# 
+# r_svd$u %*% diag(r_svd$d) %*% t(r_svd$v)
+# U %*% D %*% t(V) %>% as_expr()
+```
+

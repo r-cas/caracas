@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9051</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9110</span>
       </span>
     </div>
 
@@ -152,10 +152,13 @@
 </h1>
 <ul>
 <li>Global symbol assignment by <code><a href="../reference/def_sym.html">def_sym()</a></code> (<a href='https://github.com/r-cas/caracas/issues/18'>#18</a>)</li>
+<li>Linear algebra: New <code><a href="../reference/do_la.html">do_la()</a></code> function with convinience functions like <code><a href="../reference/linalg.html">eigenval()</a></code>, <code><a href="../reference/linalg.html">eigenvec()</a></code>, <code><a href="../reference/linalg.html">QRdecomposition()</a></code>; new vignette demonstrating these</li>
+<li>Assumptions being made available, see e.g. <code><a href="../reference/symbol.html">symbol()</a></code> and <code><a href="../reference/ask.html">ask()</a></code>
+</li>
 <li>Arbitrary precision arithmetic: <code><a href="../reference/N.html">N()</a></code> function and vignette on “Arbitrary precision arithmetic”</li>
 <li>Rename <code>eigen_val()</code>/<code>eigen_vec()</code> to <code><a href="../reference/linalg.html">eigenval()</a></code>/<code><a href="../reference/linalg.html">eigenvec()</a></code>
 </li>
-<li>More clear naming convention: R has expressions and caracas has symbols; in this connection <code>as_r()</code> was renamed to <code><a href="../reference/as_expr.html">as_expr()</a></code> and <code>as_symbol()</code> to <code><a href="../reference/as_sym.html">as_sym()</a></code>.</li>
+<li>More clear naming convention: R has expressions and caracas has symbols; in this connection <code>as_r()</code> was renamed to <code><a href="../reference/as_expr.html">as_expr()</a></code> and <code>as_symbol()</code> to <code><a href="../reference/as_sym.html">as_sym()</a></code>. Also, <code><a href="../reference/as_sym.html">as_sym()</a></code> changed argument from <code>declare_variables</code> to <code>declare_symbols</code>.</li>
 <li>Minor bugs fixed</li>
 </ul>
 </div>

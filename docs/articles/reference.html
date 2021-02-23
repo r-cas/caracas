@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9051</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9110</span>
       </span>
     </div>
 
@@ -647,10 +647,58 @@
 <span class="co">#&gt; [[2]]</span>
 <span class="co">#&gt; 1</span></code></pre></div>
 </div>
+<div id="assumptions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#assumptions" class="anchor"></a>Assumptions</h2>
+<p>Below we give a brief example of assumptions. First consider the Cholesky decomposition of a matrix:</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x+1"</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">A</span>
+<span class="co">#&gt; [caracas]: ⎡x + 1  1⎤</span>
+<span class="co">#&gt;            ⎢        ⎥</span>
+<span class="co">#&gt;            ⎣  1    1⎦</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"cholesky"</span><span class="op">)</span>
+<span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): ValueError: Matrix must be Hermitian.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Detailed traceback: </span>
+<span class="co">#&gt;   File "/home/mikl/.local/share/r-miniconda/envs/r-reticulate/lib/python3.9/site-packages/sympy/matrices/dense.py", line 260, in cholesky</span>
+<span class="co">#&gt;     return _cholesky(self, hermitian=hermitian)</span>
+<span class="co">#&gt;   File "/home/mikl/.local/share/r-miniconda/envs/r-reticulate/lib/python3.9/site-packages/sympy/matrices/decompositions.py", line 256, in _cholesky</span>
+<span class="co">#&gt;     raise ValueError("Matrix must be Hermitian.")</span></code></pre></div>
+<p>This fails as <code>A</code> is not positive (semi-)definite.</p>
+<p>To ensure this, we need to impose restrictions on <code>x</code>. This is done by defining a symbol with an assumption about positivity:</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">"y"</span>, positive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>We continue and define <code>B</code>, where it is important that <code>declare_symbols = FALSE</code> or else a new <code>y</code> will automatically be defined by <code>caracas</code> overwriting the above definition:</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[y + 1, 1], [1, 1]]"</span>, declare_symbols <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">B</span>
+<span class="co">#&gt; [caracas]: ⎡y + 1  1⎤</span>
+<span class="co">#&gt;            ⎢        ⎥</span>
+<span class="co">#&gt;            ⎣  1    1⎦</span>
+<span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">B</span>, <span class="st">"cholesky"</span><span class="op">)</span>
+<span class="co">#&gt; [caracas]: ⎡  _______                 ⎤</span>
+<span class="co">#&gt;            ⎢╲╱ y + 1          0       ⎥</span>
+<span class="co">#&gt;            ⎢                          ⎥</span>
+<span class="co">#&gt;            ⎢               ___________⎥</span>
+<span class="co">#&gt;            ⎢    1         ╱       1   ⎥</span>
+<span class="co">#&gt;            ⎢─────────    ╱  1 - ───── ⎥</span>
+<span class="co">#&gt;            ⎢  _______  ╲╱       y + 1 ⎥</span>
+<span class="co">#&gt;            ⎣╲╱ y + 1                  ⎦</span></code></pre></div>
+<p>It is possible to ask for properties (see <a href="https://docs.sympy.org/latest/modules/assumptions/ask.html" class="uri">https://docs.sympy.org/latest/modules/assumptions/ask.html</a>):</p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ask.html">ask</a></span><span class="op">(</span><span class="va">y</span>, <span class="st">"positive"</span><span class="op">)</span>
+<span class="co">#&gt; [1] TRUE</span>
+<span class="fu"><a href="../reference/ask.html">ask</a></span><span class="op">(</span><span class="va">B</span>, <span class="st">"hermitian"</span><span class="op">)</span>
+<span class="co">#&gt; [1] TRUE</span>
+<span class="fu"><a href="../reference/ask.html">ask</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"hermitian"</span><span class="op">)</span>
+<span class="co">#&gt; [1] NA</span></code></pre></div>
+</div>
 <div id="output" class="section level2">
 <h2 class="hasAnchor">
 <a href="#output" class="anchor"></a>Output</h2>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Multinomial likelihood</span>
 <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
@@ -694,7 +742,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[1]]$a</span>
 <span class="co">#&gt; [caracas]: y₁ + y₂ + y₃</span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
 <span class="co">#&gt; [1] "[a - y1/p1, a - y2/p2, a - y3/p3, p1 + p2 + p3 - 1]"</span>
 <span class="fu"><a href="../reference/as_character_matrix.html">as_character_matrix</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
@@ -710,7 +758,7 @@
 <li><code>caracas.print.rowvec</code></li>
 <li><code>caracas.print.sol.simplify</code></li>
 </ul>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sol</span>
 <span class="co">#&gt; Solution 1:</span>
 <span class="co">#&gt;   p1 =       y₁     </span>
@@ -741,7 +789,7 @@
 <span class="va">L</span>
 <span class="co">#&gt; [caracas]: a*(p1 + p2 + p3 - 1) - y1*log(p1) - y2*log(p2) - y3*log(p3)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.prettyascii <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (FALSE)</span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sol</span>
 <span class="co">#&gt; Solution 1:</span>
 <span class="co">#&gt;   p1 =       y₁     </span>
@@ -766,7 +814,7 @@
 <span class="va">L</span>
 <span class="co">#&gt; [caracas]: a*(p1 + p2 + p3 - 1) - y1*log(p1) - y2*log(p2) - y3*log(p3)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.ascii <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (FALSE)</span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p</span>
 <span class="co">#&gt; [caracas]: [p₁  p₂  p₃]ᵀ</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.rowvec <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
@@ -777,7 +825,7 @@
 <span class="co">#&gt;            ⎢  ⎥</span>
 <span class="co">#&gt;            ⎣p₃⎦</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.rowvec <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (TRUE)</span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sol</span>
 <span class="co">#&gt; Solution 1:</span>
 <span class="co">#&gt;   p1 =       y₁     </span>

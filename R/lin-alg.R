@@ -225,5 +225,42 @@ diag.caracas_symbol <- function(x, ...) {
   return(y)
 }
 
-
+#' Construct diagonal matrix from vector
+#' 
+#' @param x Matrix with 1 row or 1 column that is the 
+#' diagonal in a new diagonal matrix
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   d <- as_sym(c("a", "b", "c"))
+#'   D <- as_diag(d)
+#'   D
+#' }
+#' 
+#' @concept linalg
+#' 
+#' @export
+as_diag <- function(x) {
+  ensure_sympy()
+  stopifnot_symbol(x)
+  stopifnot_matrix(x)
+  
+  if (!(nrow(x) == 1L || ncol(x) == 1L)) {
+    stop("Either supply a row vector or a column vector with at least one element")
+  }
+  
+  if (nrow(x) > 1L) {
+    x <- t(x)
+  }
+  
+  n <- ncol(x)
+  
+  D <- as_sym(diag(n))
+  
+  for (i in seq_len(n)) {
+    D[i, i] <- as.character(x[1L, i])
+  }
+  
+  return(D)
+}
 

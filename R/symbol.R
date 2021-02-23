@@ -63,6 +63,9 @@ eval_to_symbol <- function(x) {
 }
 
 #' Create a symbol
+#' 
+#' Find available assumptions at 
+#' <https://docs.sympy.org/latest/modules/core.html#module-sympy.core.assumptions>.
 #'
 #' @param x Name to turn into symbol
 #' @param \dots Assumptions like `positive = TRUE`
@@ -191,6 +194,8 @@ c.caracas_symbol <- function(...) {
 #'    subs(e, "x", y)
 #' }
 #' 
+#' @concept caracas_symbol
+#' 
 #' @export
 subs <- function(s, x, v) {
   
@@ -229,6 +234,8 @@ subs <- function(s, x, v) {
 #'      H_sol <- subs_lst(H, sol)
 #'      H_sol
 #' }
+#' 
+#' @concept caracas_symbol
 #' 
 #' @export
 subs_lst <- function(s, x) {
