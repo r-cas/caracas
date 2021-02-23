@@ -1,24 +1,25 @@
 context("assumptions")
 
-test_that("ls_sym", {
-  skip_if_no_sympy()
-  
-  expect_length(ls_sym(), 0L)
-  
-  x <- symbol("x")
-  expect_length(ls_sym(), 1L)
-})
+# test_that("ls_sym", {
+#   skip_if_no_sympy()
+#   
+#   n <- length(ls_sym())
+#   zzzzzzzzzzzzzzzzz <- symbol("zzzzzzzzzzzzzzzzz")
+#   expect_length(ls_sym(), n+1L)
+# })
 
 test_that("ask", {
   skip_if_no_sympy()
   
+  y <- symbol("y")
+  expect_equal(ask(y, "positive"), NA)
+  
   B <- as_sym("[[y + 1, 1], [1, 1]]")
-  y <- as_sym("y", declare_symbols = FALSE)
+  expect_equal(ask(B, "hermitian"), NA)
   
-  reticulate::py_run_string("w = Symbol('w', positive = True)")
-  w <- as_sym("w", declare_symbols = FALSE)
   
-  expect_null(ask(y, "positive"))
+  w <- symbol("w", positive = TRUE)
+  D <- as_sym("[[w + 1, 1], [1, 1]]", declare_symbols = FALSE)
   expect_true(ask(w, "positive"))
-  expect_false(ask(B, "positive"))
+  expect_true(ask(D, "hermitian"))
 })

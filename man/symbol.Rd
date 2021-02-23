@@ -4,15 +4,30 @@
 \alias{symbol}
 \title{Create a symbol}
 \usage{
-symbol(x)
+symbol(x, ...)
 }
 \arguments{
 \item{x}{Name to turn into symbol}
+
+\item{\dots}{Assumptions like \code{positive = TRUE}}
 }
 \value{
 A \code{caracas_symbol}
 }
 \description{
 Create a symbol
+}
+\examples{
+if (has_sympy()) {
+  x <- symbol("x")
+  2*x
+  
+  x <- symbol("x", positive = TRUE)
+  ask(x, "positive")
+}
+
+}
+\seealso{
+\code{\link[=as_sym]{as_sym()}}
 }
 \concept{caracas_symbol}

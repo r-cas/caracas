@@ -319,13 +319,12 @@ do_la(A, "cholesky")
 This fails as `A` is not positive (semi-)definite.
 
 To ensure this, we need to impose restrictions on `x`. 
-This is done by manually defining a symbol:
+This is done by defining a symbol with an assumption about positivity:
 
 ```{r}
-reticulate::py_run_string("y = Symbol('y', positive = True)")
+y <- symbol("y", positive = TRUE)
 ```
 
-Note that the variable `y` exists in Python but not in `R`.
 We continue and define `B`, where it is important that 
 `declare_symbols = FALSE` or else a new `y` will automatically 
 be defined by `caracas` overwriting the above definition:
@@ -336,16 +335,12 @@ B
 do_la(B, "cholesky")
 ```
 
-We can get a handle on `y` as follows:
-
-```{r}
-y <- as_sym("y", declare_symbols = FALSE)
-```
-
 It is possible to ask for properties (see <https://docs.sympy.org/latest/modules/assumptions/ask.html>):
 
 ```{r}
 ask(y, "positive")
+ask(B, "hermitian")
+ask(A, "hermitian")
 ```
 
 

@@ -65,17 +65,42 @@ eval_to_symbol <- function(x) {
 #' Create a symbol
 #'
 #' @param x Name to turn into symbol
+#' @param \dots Assumptions like `positive = TRUE`
 #'
+#' @examples 
+#' if (has_sympy()) {
+#'   x <- symbol("x")
+#'   2*x
+#'   
+#'   x <- symbol("x", positive = TRUE)
+#'   ask(x, "positive")
+#' }
+#' 
 #' @return A `caracas_symbol`
 #'
+#' @seealso [as_sym()]
 #' @concept caracas_symbol
 #' @importFrom reticulate py_run_string
 #' @export
-symbol <- function(x) {
+symbol <- function(x, ...) {
   ensure_sympy()
   verify_variable_name(x)
   
-  cmd <- paste0(x, " = symbols('", x, "')")
+  dots <- list(...)
+  
+  extra_cmd <- ""
+  if (length(dots) > 0L) {
+    arg_nm <- names(dots)
+    
+    arg_val <- rep("None", length(dots))
+    arg_val[unlist(lapply(dots, function(l) is.logical(l) && isTRUE(l)))] <- "True"
+    arg_val[unlist(lapply(dots, function(l) is.logical(l) && isFALSE(l)))] <- "False"
+    
+    extra_cmd <- paste0(arg_nm, " = ", arg_val, collapse = ", ")
+  }
+  
+  cmd <- paste0(x, " = symbols('", x, "', ", extra_cmd, ")")
+  
   # py_run_string instead of py_eval because we need to assign inside Python
   s <- reticulate::py_run_string(cmd, convert = FALSE)
   res <- s[[x]]

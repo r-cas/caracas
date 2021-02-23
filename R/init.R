@@ -21,7 +21,6 @@ pkg_globals$internal_globals_length <- NULL
 define_printers <- function() {
   fl <- system.file("define_printers.py", package = "caracas")
   reticulate::py_run_file(fl)
-  #reticulate::source_python(fl)
 }
 
 
@@ -48,14 +47,13 @@ silent_prepare_sympy <- function() {
       pkg_globals$internal_sympy <- local_sympy # update global reference
       
       reticulate::py_run_string("from sympy import *")
-      #reticulate::py_run_string("from sympy.parsing.sympy_parser import parse_expr")
       
       define_printers()
-      
-      # Save number of existing symbols to later being able to discard those first n items
-      glb_syms <- reticulate::py_eval("globals()")
-      pkg_globals$internal_globals_length <- length(glb_syms)
     } 
+    
+    # # Save number of existing symbols to later being able to discard those first n items
+    # glb_syms <- reticulate::py_eval("globals()")
+    # pkg_globals$internal_globals_length <- length(glb_syms)
     
     # else handled in .onAttach()
   }

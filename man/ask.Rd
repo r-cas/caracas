@@ -14,4 +14,11 @@ ask(x, property)
 \description{
 Ask for a symbol's property
 }
+\examples{
+if (has_sympy()) {
+  x <- symbol("x", positive = TRUE)
+  ask(x, "positive")
+}
+
+}
 \concept{assumptions}
