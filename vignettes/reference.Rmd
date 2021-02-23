@@ -302,6 +302,52 @@ sympy$diff("2*a*x", "x")
 sympy$solve("x**2 - 1", "x")
 ```
 
+## Assumptions
+
+Below we give a brief example of assumptions.
+First consider the Cholesky decomposition of a matrix:
+
+```{r}
+A <- matrix(c("x+1", 1, 1, 1), 2, 2) %>% as_sym()
+A
+```
+
+```{r, error=TRUE}
+do_la(A, "cholesky")
+```
+
+This fails as `A` is not positive (semi-)definite.
+
+To ensure this, we need to impose restrictions on `x`. 
+This is done by manually defining a symbol:
+
+```{r}
+reticulate::py_run_string("y = Symbol('y', positive = True)")
+```
+
+Note that the variable `y` exists in Python but not in `R`.
+We continue and define `B`, where it is important that 
+`declare_symbols = FALSE` or else a new `y` will automatically 
+be defined by `caracas` overwriting the above definition:
+
+```{r}
+B <- as_sym("[[y + 1, 1], [1, 1]]", declare_symbols = FALSE)
+B
+do_la(B, "cholesky")
+```
+
+We can get a handle on `y` as follows:
+
+```{r}
+y <- as_sym("y", declare_symbols = FALSE)
+```
+
+It is possible to ask for properties (see <https://docs.sympy.org/latest/modules/assumptions/ask.html>):
+
+```{r}
+ask(y, "positive")
+```
+
 
 ## Output
 
@@ -324,6 +370,7 @@ print(sol, simplify = FALSE)
 as.character(g)
 as_character_matrix(g)
 ```
+
 
 
 ### Options

@@ -51,7 +51,7 @@ as_py_string <- function(x) {
 #' see below in examples.
 #' 
 #' @param x R object to convert to a symbol
-#' @param declare_variables declare detected variables automatically
+#' @param declare_symbols declare detected symbols automatically
 #' 
 #' @examples 
 #' if (has_sympy()) {
@@ -70,7 +70,8 @@ as_py_string <- function(x) {
 #' @concept caracas_symbol
 #' 
 #' @export
-as_sym <- function(x, declare_variables = TRUE) {
+as_sym <- function(x, 
+                   declare_symbols = TRUE) {
   ensure_sympy()
   
   if (is.expression(x)) {
@@ -79,15 +80,15 @@ as_sym <- function(x, declare_variables = TRUE) {
   
   varnames_exclude <- c("sqrt", "log", "I")
 
-  if (declare_variables) {
+  if (declare_symbols) {
     xele <- as.vector(x)
     m <- gregexpr(pattern = PATTERN_PYHTON_VARIABLE, 
                   text = xele)
     varnames <- regmatches(x = xele, m = m, invert = FALSE)
     varnames <- unique(unlist(varnames[unlist(lapply(varnames, length)) > 0]))
     varnames <- setdiff(varnames, varnames_exclude)
-    varnames
-
+    #varnames
+    
     for (varname in varnames) {
       cmd <- paste0(varname, " = symbols('", varname, "')")
       reticulate::py_run_string(cmd, convert = FALSE)
@@ -107,4 +108,3 @@ as_sym <- function(x, declare_variables = TRUE) {
   
   return(y)
 }
-

@@ -4,12 +4,12 @@
 \alias{as_sym}
 \title{Convert object to symbol}
 \usage{
-as_sym(x, declare_variables = TRUE)
+as_sym(x, declare_symbols = TRUE)
 }
 \arguments{
 \item{x}{R object to convert to a symbol}
 
-\item{declare_variables}{declare detected variables automatically}
+\item{declare_symbols}{declare detected symbols automatically}
 }
 \description{
 Variables are detected as a

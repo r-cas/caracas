@@ -15,6 +15,7 @@
 pkg_globals <- new.env()
 pkg_globals$internal_py <- NULL
 pkg_globals$internal_sympy <- NULL
+pkg_globals$internal_globals_length <- NULL
 
 
 define_printers <- function() {
@@ -50,6 +51,10 @@ silent_prepare_sympy <- function() {
       #reticulate::py_run_string("from sympy.parsing.sympy_parser import parse_expr")
       
       define_printers()
+      
+      # Save number of existing symbols to later being able to discard those first n items
+      glb_syms <- reticulate::py_eval("globals()")
+      pkg_globals$internal_globals_length <- length(glb_syms)
     } 
     
     # else handled in .onAttach()

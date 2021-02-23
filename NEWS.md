@@ -7,7 +7,7 @@
 * Rename `eigen_val()`/`eigen_vec()` to `eigenval()`/`eigenvec()`
 * More clear naming convention: R has expressions and caracas has symbols; 
   in this connection `as_r()` was renamed to `as_expr()` and 
-  `as_symbol()` to `as_sym()`.
+  `as_symbol()` to `as_sym()`. Also, `as_sym()` changed argument from `declare_variables` to `declare_symbols`.
 * Minor bugs fixed
 
 # caracas 1.0.1

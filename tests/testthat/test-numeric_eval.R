@@ -2,7 +2,7 @@ test_that("smoke", {
   skip_if_no_sympy()
   
   n_2 <- as_sym("2")
-  n_pi <- as_sym("pi", declare_variables = FALSE)
+  n_pi <- as_sym("pi", declare_symbols = FALSE)
   x <- sqrt(n_2) * n_pi
   
   expect_equal(as.character(N(x)), "4.44288293815837")

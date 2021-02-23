@@ -45,6 +45,11 @@ reference:
     advanced users.
   contents:
   - has_concept("lowlevel")
+- title: Assumptions
+  desc: > 
+    These are functions to deal with symbol assumptions.
+  contents:
+  - has_concept("assumptions")
 - title: SymPy
   desc: > 
     These are functions to interact with SymPy, including installation 
