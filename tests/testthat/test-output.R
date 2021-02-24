@@ -10,6 +10,17 @@ test_that("as.character / tex", {
   expect_equal(tex(z), "\\sin^{2}{\\left(x \\right)} + \\cos^{2}{\\left(x \\right)}")
 })
 
+test_that("tex exp", {
+  skip_if_no_sympy()
+  
+  n <- symbol("n")
+  f <- (1 + 1/n)^n
+  lim_f <- limf(f, n, Inf)
+  tex(lim_f)
+  get_py()$print_caracas_latex(lim_f$pyobj)
+  
+})
+
 test_that("print", {
   skip_if_no_sympy()
   

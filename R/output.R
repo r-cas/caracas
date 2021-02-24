@@ -166,9 +166,14 @@ tex <- function(x) {
 tex.caracas_symbol <- function(x) {
   ensure_sympy()
   
-  if (!is.null(x$pyobj)) {
-    return(get_sympy()$latex(x$pyobj))
+   if (!is.null(x$pyobj)) {
+     return(get_sympy()$latex(x$pyobj))
   }
+  # if (!is.null(x$pyobj)) {
+  #   py <- get_py()
+  #   o <- reticulate::py_capture_output(py$print_caracas_latex(x$pyobj))
+  #   return(o)
+  # }
   
   stop("Unexpected")
 }

@@ -2,11 +2,17 @@ convert_to_r_mat <- function(x) {
   xmat <- matrix(NA_character_, nrow = nrow(x), ncol = ncol(x))
   xlst <- x$pyobj$tolist()
   
+  offset <- 0L # R lists do not change
+  
+  if (inherits(xlst, "python.builtin.list")) {
+    offset <- 1L # A Python list has offset 0
+  }
+  
   for (i in seq_along(xlst)) {
-    row_i <- xlst[[i-1L]] # 0-based
+    row_i <- xlst[[i - offset]] 
     
     for (j in seq_along(row_i)) {
-      xmat[i, j] <- as.character(row_i[[j - 1L]]) # 0-based
+      xmat[i, j] <- as.character(row_i[[j - offset]])
     }
   }
   

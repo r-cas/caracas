@@ -21,3 +21,4 @@ if (has_sympy()) {
 }
 
 }
+\concept{linalg}

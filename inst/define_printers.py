@@ -3,6 +3,7 @@ from sympy import *
 from sympy.printing.pretty.pretty import PrettyPrinter
 from sympy.printing.pretty.pretty_symbology import pretty_use_unicode
 from sympy.printing.pretty.stringpict import prettyForm
+from sympy.printing.latex import LatexPrinter, print_latex
 
 class CaracasPrettyPrinter(PrettyPrinter):
     def _print_ExpBase(self, e):
@@ -39,3 +40,31 @@ def print_caracas(expr, **settings):
     finally:
         pretty_use_unicode(uflag)
         
+
+
+
+
+
+
+class CaracasLatexPrinter(LatexPrinter):
+    def __init__(self, settings={}):
+        super(LatexPrinter, self).__init__(settings)
+        #print("C")
+        
+    def _print_ExpBase(self, expr, exp=None):
+        #print("D")
+        tex = r"\exp\left(%s\right)" % self._print(expr.args[0])
+        return tex
+
+    def _print_Exp1(self, expr, exp=None):
+        #print("E")
+        return r"\exp(1)"
+
+
+def print_caracas_latex(expr, **settings):
+    #print("A")
+    cl = CaracasLatexPrinter(settings)
+    #print("B")
+    return print(cl.doprint(expr))
+
+
