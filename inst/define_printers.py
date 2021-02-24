@@ -60,11 +60,22 @@ class CaracasLatexPrinter(LatexPrinter):
         #print("E")
         return r"\exp(1)"
 
+    def doprint(self, expr):
+        print("TEST")
+        tex = CaracasLatexPrinter._print(self, expr)
 
+        if self._settings['mode'] == 'plain':
+            return tex
+        elif self._settings['mode'] == 'inline':
+            return r"$%s$" % tex
+        elif self._settings['itex']:
+            return r"$$%s$$" % tex
+        else:
+            env_str = self._settings['mode']
+            return r"\begin{%s}%s\end{%s}" % (env_str, tex, env_str)
+            
 def print_caracas_latex(expr, **settings):
-    #print("A")
     cl = CaracasLatexPrinter(settings)
-    #print("B")
     return print(cl.doprint(expr))
 
 

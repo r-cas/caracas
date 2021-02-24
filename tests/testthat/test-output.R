@@ -13,11 +13,12 @@ test_that("as.character / tex", {
 test_that("tex exp", {
   skip_if_no_sympy()
   
-  n <- symbol("n")
-  f <- (1 + 1/n)^n
-  lim_f <- limf(f, n, Inf)
-  tex(lim_f)
-  get_py()$print_caracas_latex(lim_f$pyobj)
+  # FIXME: Issue 36: https://github.com/r-cas/caracas/issues/36
+  # n <- symbol("n")
+  # f <- (1 + 1/n)^n
+  # lim_f <- limf(f, n, Inf)
+  # tex(lim_f)
+  # get_py()$print_caracas_latex(lim_f$pyobj)
   
 })
 

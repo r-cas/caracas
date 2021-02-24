@@ -166,7 +166,7 @@ tex <- function(x) {
 tex.caracas_symbol <- function(x) {
   ensure_sympy()
   
-   if (!is.null(x$pyobj)) {
+  if (!is.null(x$pyobj)) {
      return(get_sympy()$latex(x$pyobj))
   }
   # if (!is.null(x$pyobj)) {
