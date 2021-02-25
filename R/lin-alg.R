@@ -1,9 +1,3 @@
-stopifnot_symbol <- function(x){
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
-}
-
 stopifnot_matrix <- function(x){
     if (!symbol_is_matrix(x)) {
         stop("'x' must be a matrix")

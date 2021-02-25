@@ -4,6 +4,12 @@ TXT_NOT_CARACAS_SYMBOL <- paste0("must be a caracas_symbol, ",
 
 PATTERN_PYHTON_VARIABLE <- "[a-zA-Z]+[a-zA-Z0-9_]*"
 
+stopifnot_symbol <- function(x){
+  if (!inherits(x, "caracas_symbol")) {
+    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+}
+
 verify_variable_name <- function(x) {
   if (length(x) != 1L) {
     stop("The name must have length 1")
@@ -137,9 +143,7 @@ is_atomic <- function(x) {
 #'
 #' @export
 doit <- function(x) {
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
+  stopifnot_symbol(x)
   
   ensure_sympy()
   
@@ -246,5 +250,33 @@ subs_lst <- function(s, x) {
   }
   
   return(new_s)
+}
+
+#' Get numerator and denominator of a fraction
+#' 
+#' @param x Fraction
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'      x <- as_sym("a/b")
+#'      frac <- fraction_parts(x)
+#'      frac
+#'      frac$numerator
+#'      frac$denominator
+#'  }
+#' 
+#' @concept caracas_symbol
+fraction_parts <- function(x) {
+  ensure_sympy()
+  stopifnot_symbol(x)
+  
+  frac <- x$pyobj$as_numer_denom()
+  
+  y <- list(
+    numerator = construct_symbol_from_pyobj(frac[0]),
+    denominator = construct_symbol_from_pyobj(frac[1])
+  )
+  
+  return(y)
 }
 
