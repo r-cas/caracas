@@ -181,13 +181,14 @@ tex.caracas_symbol <- function(x) {
 #' Convert symbol to character
 #'
 #' @param x A `caracas_symbol`
+#' @param replace_I Replace constant I (can both be identity and imaginary unit)
 #' @param \dots not used
 #'
 #' @concept output
 #'
 #' @export
-as.character.caracas_symbol <- function(x, ...) {
+as.character.caracas_symbol <- function(x, replace_I = TRUE, ...) {
   y <- as.character(x$pyobj)
-  y <- python_strings_to_r(y)
+  y <- python_strings_to_r(y, replace_I = replace_I)
   return(y)
 }

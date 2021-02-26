@@ -196,6 +196,15 @@ Math.caracas_symbol = function(x, ...) {
     stop(paste0("'y' ", TXT_NOT_CARACAS_SYMBOL))
   }
   
+  if (inherits(x$pyobj, "sympy.matrices.expressions.matexpr.MatrixExpr") || 
+      inherits(y$pyobj, "sympy.matrices.expressions.matexpr.MatrixExpr")) {
+    
+    s <- get_sympy()
+    y <- s$MatMul(x$pyobj, y$pyobj)$doit()
+    z <- construct_symbol_from_pyobj(y)
+    return(z)
+  }
+  
   z <- paste0("(", as.character(x$pyobj), ") * (", as.character(y$pyobj), ")")
   y <- eval_to_symbol(z)
   

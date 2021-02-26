@@ -1,10 +1,36 @@
 stopifnot_matrix <- function(x){
-    if (!symbol_is_matrix(x)) {
-        stop("'x' must be a matrix")
+  # MatrixSymbol
+  try({
+    res <- x$pyobj$is_MatrixExpr
+    
+    if (is.logical(res) && isTRUE(res)) {
+      return(invisible(NULL))
     }
+    
+    if (reticulate::py_to_r(res)) {
+      return(invisible(NULL))
+    }
+  }, silent = TRUE)
+  
+  if (!symbol_is_matrix(x)) {
+      stop("'x' must be a matrix")
+  }
 }
 
 symbol_is_matrix <- function(x) {
+  # MatrixSymbol
+  try({
+    res <- x$pyobj$is_MatrixExpr
+    
+    if (is.logical(res) && isTRUE(res)) {
+      return(TRUE)
+    }
+    
+    if (reticulate::py_to_r(res)) {
+      return(TRUE)
+    }
+  }, silent = TRUE)
+  
   xstr <- as.character(x)
   
   if (grepl("^Matrix\\(\\[", xstr)) {
@@ -61,6 +87,11 @@ number_rows <- function(x) {
     rows <- reticulate::py_to_r(rows)
   }
   
+  if (inherits(rows, "sympy.core.numbers.Integer")) {
+    # FIXME: For MatrixSymbols; avoid as.character()?
+    rows <- as.integer(as.character(rows))
+  }
+  
   return(rows)
 }
 
@@ -70,6 +101,11 @@ number_cols <- function(x) {
   
   if (inherits(cols, "python.builtin.int")) {
     cols <- reticulate::py_to_r(cols)
+  }
+  
+  if (inherits(cols, "sympy.core.numbers.Integer")) {
+    # FIXME: For MatrixSymbols; avoid as.character()?
+    cols <- as.integer(as.character(cols))
   }
   
   return(cols)
@@ -98,12 +134,14 @@ as_character_matrix <- function(x) {
 dim.caracas_symbol <- function(x) {
   ensure_sympy()
   stopifnot_symbol(x)
-    
-  if (!symbol_is_matrix(x)) { return(NULL) }
   
+  if (!symbol_is_matrix(x)) { 
+    return(NULL) 
+  }
+
   rows <- number_rows(x$pyobj)
   cols <- number_cols(x$pyobj)
-  
+
   return(c(rows, cols))
 }
 
@@ -120,7 +158,7 @@ t.caracas_symbol <- function(x) {
   ensure_sympy()
   stopifnot_symbol(x)
   stopifnot_matrix(x)
-    
+  
   xT <- x$pyobj$T
   return(construct_symbol_from_pyobj(xT))
 }

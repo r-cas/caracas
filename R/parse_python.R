@@ -1,4 +1,4 @@
-python_strings_to_r <- function(xstr) {
+python_strings_to_r <- function(xstr, replace_I = TRUE) {
   # Python syntax:
   # power() function
   xstr <- gsub("**", "^", xstr, fixed = TRUE)
@@ -6,9 +6,11 @@ python_strings_to_r <- function(xstr) {
   # I but not in Inf
   #xstr <- gsub("I(?!nf)", "1i", xstr, ignore.case = FALSE, perl = TRUE)
   # I but not followed by another character
-  xstr <- gsub("^I$", "1i", xstr, ignore.case = FALSE, perl = TRUE)
-  xstr <- gsub("^-I$", "-1i", xstr, ignore.case = FALSE, perl = TRUE)
-  xstr <- gsub("I([^a-zA-Z]+)", "1i \\1", xstr, ignore.case = FALSE, perl = TRUE)
+  if (replace_I) {
+    xstr <- gsub("^I$", "1i", xstr, ignore.case = FALSE, perl = TRUE)
+    xstr <- gsub("^-I$", "-1i", xstr, ignore.case = FALSE, perl = TRUE)
+    xstr <- gsub("I([^a-zA-Z]+)", "1i \\1", xstr, ignore.case = FALSE, perl = TRUE)
+  }
   
   # Exponential
   xstr <- gsub("^E$", "exp(1)", xstr, ignore.case = FALSE, perl = TRUE)
