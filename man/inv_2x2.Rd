@@ -7,7 +7,7 @@
 inv_2x2(x)
 }
 \arguments{
-\item{x}{}
+\item{x}{2x2 matrix to be inverted}
 }
 \value{
 Columns of result.
@@ -17,9 +17,9 @@ The reason it is not a matrix is because SymPy has problems as 'I' both means id
 Finds the inverse of\preformatted{[A  B]
 [C  D]
 }
-}
-\details{
-Arguments by row.
+
+based on block matrix inversion as explained at
+\url{https://en.wikipedia.org/wiki/Block_matrix#Block_matrix_inversion}.
 }
 \examples{
 if (has_sympy()) {

@@ -200,7 +200,8 @@ Math.caracas_symbol = function(x, ...) {
       inherits(y$pyobj, "sympy.matrices.expressions.matexpr.MatrixExpr")) {
     
     s <- get_sympy()
-    y <- s$MatMul(x$pyobj, y$pyobj)$doit()
+    y <- s$MatMul(x$pyobj$doit(), y$pyobj$doit())$doit()
+    y <- y$as_explicit()
     z <- construct_symbol_from_pyobj(y)
     return(z)
   }

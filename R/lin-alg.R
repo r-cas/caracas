@@ -160,6 +160,7 @@ t.caracas_symbol <- function(x) {
   stopifnot_matrix(x)
   
   xT <- x$pyobj$T
+  
   return(construct_symbol_from_pyobj(xT))
 }
 

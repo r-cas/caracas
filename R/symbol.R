@@ -392,11 +392,10 @@ sympy_declare <- function(x, cmd) {
 #' [A  B]
 #' [C  D]
 #' ```
+#' based on block matrix inversion as explained at
+#' <https://en.wikipedia.org/wiki/Block_matrix#Block_matrix_inversion>.
 #' 
-#' Arguments by row.
-#' 
-#' @param x
-#' 
+#' @param x 2x2 matrix to be inverted
 #' 
 #' @examples 
 #' if (has_sympy()) {
@@ -475,6 +474,47 @@ inv_2x2 <- function(x) {
   
   
   elements <- list(e11, e12, e21, e22)
+  
+  # Resolve dims
+  elements_dims <- lapply(seq_along(elements), function(i) {
+    e <- elements[[i]]
+    
+    try({
+      return(list(e$rows, e$cols))
+    }, silent = TRUE)
+    
+    return(list(NULL, NULL))
+  })
+  
+  n_NULL_dim <- sum(unlist(lapply(elements_dims, function(l) is.null(unlist(l)))))
+  # FIXME: Maybe 2 if both in diagonal/off-diagonal?
+  if (n_NULL_dim > 1L) {
+    stop("Too many unknown dimensions")
+  }
+  
+  if (is.null(elements_dims[[1L]][[1L]])) {
+    # FIXME
+    stop("Not implemented")
+  }
+  
+  if (is.null(elements_dims[[2L]][[1L]])) {
+    # FIXME
+    elements_dims[[2L]] <- c(elements_dims[[1L]][1L], elements_dims[[3L]][2L])
+  }
+  
+  if (is.null(elements_dims[[3L]][[1L]])) {
+    # FIXME
+    stop("Not implemented")
+  }
+  
+  if (is.null(elements_dims[[4L]][[1L]])) {
+    # FIXME
+    stop("Not implemented")
+  }
+  
+  
+  
+  
   elements_str <- lapply(seq_along(elements), function(i) {
     e <- elements[[i]]
     
@@ -487,7 +527,11 @@ inv_2x2 <- function(x) {
     }
 
     else if (inherits(e, "sympy.core.numbers.Zero")) {
-      return(paste0("ZeroMatrix(1, 1)"))
+      #return(paste0("ZeroMatrix(1, 1)"))
+      
+      nr <- elements_dims[[i]][[1L]]
+      nc <- elements_dims[[i]][[2L]]
+      return(paste0("ZeroMatrix(", nr, ", ", nc, ")"))
     }
     
     else if (inherits(e, "sympy.matrices.expressions.special.ZeroMatrix")) {
