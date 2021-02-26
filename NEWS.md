@@ -3,6 +3,7 @@
 * Global symbol assignment by `def_sym()` (#18)
 * Linear algebra: New `do_la()` function with convinience functions like `eigenval()`, `eigenvec()`, `QRdecomposition()`; new vignette demonstrating these
 * Assumptions being made available, see e.g. `symbol()` and `ask()`
+* Matrix symbols: `matrix_symbol()` together with helpers `sympy_declare()` and `inv_2x2()`
 * Arbitrary precision arithmetic: `N()` function and vignette on 
   "Arbitrary precision arithmetic"
 * Rename `eigen_val()`/`eigen_vec()` to `eigenval()`/`eigenvec()`

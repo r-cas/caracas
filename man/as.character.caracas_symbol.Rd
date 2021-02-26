@@ -4,10 +4,12 @@
 \alias{as.character.caracas_symbol}
 \title{Convert symbol to character}
 \usage{
-\method{as.character}{caracas_symbol}(x, ...)
+\method{as.character}{caracas_symbol}(x, replace_I = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{caracas_symbol}}
+
+\item{replace_I}{Replace constant I (can both be identity and imaginary unit)}
 
 \item{\dots}{not used}
 }
