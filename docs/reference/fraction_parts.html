@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get 'SymPy' version — sympy_version • caracas</title>
+<title>Get numerator and denominator of a fraction — fraction_parts • caracas</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Get 'SymPy' version — sympy_version" />
-<meta property="og:description" content="Get 'SymPy' version" />
+<meta property="og:title" content="Get numerator and denominator of a fraction — fraction_parts" />
+<meta property="og:description" content="Get numerator and denominator of a fraction" />
 
 
 
@@ -143,27 +143,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get 'SymPy' version</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/init.R'><code>R/init.R</code></a></small>
-    <div class="hidden name"><code>sympy_version.Rd</code></div>
+    <h1>Get numerator and denominator of a fraction</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/symbol.R'><code>R/symbol.R</code></a></small>
+    <div class="hidden name"><code>fraction_parts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get 'SymPy' version</p>
+    <p>Get numerator and denominator of a fraction</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sympy_version</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>fraction_parts</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Fraction</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>The version of the 'SymPy' available</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='has_sympy.html'>has_sympy</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'>sympy_version</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; [1] ‘1.7.1’</div><div class='input'>
+     <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as_sym.html'>as_sym</a></span><span class='op'>(</span><span class='st'>"a/b"</span><span class='op'>)</span>
+     <span class='va'>frac</span> <span class='op'>&lt;-</span> <span class='fu'>fraction_parts</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+     <span class='va'>frac</span>
+     <span class='va'>frac</span><span class='op'>$</span><span class='va'>numerator</span>
+     <span class='va'>frac</span><span class='op'>$</span><span class='va'>denominator</span>
+ <span class='op'>}</span>
+</div><div class='output co'>#&gt; [caracas]: b</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

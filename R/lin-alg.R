@@ -186,6 +186,7 @@ diag.default <- function(x, ...) {
   return(base::diag(x, ...))
 }
 
+
 #' Matrix diagonal
 #' 
 #' @param x Object `x`

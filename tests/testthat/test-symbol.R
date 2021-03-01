@@ -49,80 +49,81 @@ test_that("subs", {
   expect_equal(as.character(e2), "2*y^4")
 })
 
-test_that("matrix symbol 1x1", {
-  skip_if_no_sympy()
-  
-  W <- matrix_symbol("W") # 1 x 1 by default
-  expect_equal(dim(W), c(1L, 1L))
-  
-  J <- sympy_declare("J", "Identity(1)") 
-  expect_equal(dim(J), c(1L, 1L))
-  expect_equal(as.character(J$pyobj$as_explicit()), "Matrix([[1]])")
-  
-  O <- sympy_declare("O", "ZeroMatrix(1, 1)")
-  expect_equal(dim(O), c(1L, 1L))
-  expect_equal(as.character(O$pyobj$as_explicit()), "Matrix([[0]])")
-  
-  expect_equal(as.character(J %*% O), "0")
-  
-  L <- matrix(c("J", "-W", "0", "J"), nrow = 2) %>%
-    as_sym(declare_symbols = FALSE)
-  expect_equal(dim(L), c(2L, 2L))
-  expect_equal(as.character(L$pyobj), "Matrix([[I, 0], [-W, I]])")
-  expect_equal(as.character(L, replace_I = FALSE), "Matrix([[I, 0], [-W, I]])")
-  
-  Linv <- inv_2x2(L)
-  expect_equal(dim(Linv), c(2L, 2L))
-  expect_equal(as.character(Linv$pyobj), "Matrix([\n[I, 0],\n[W, I]])")
-  expect_equal(as.character(Linv, replace_I = FALSE), "Matrix([\n[I, 0],\n[W, I]])")
-  
-  # FIXME: TEST?
-  #A1 <- Linv %*% L
-  #A1
-  #A2 <- L %>% Linv
-  #A2
-  
-  A <- t(Linv) %*% Linv
-  expect_equal(dim(A), c(2L, 2L))
-  
-  O2 <- sympy_declare("O", "ZeroMatrix(2, 2)")
-  A <- O2 %*% t(Linv) %*% Linv
-  expect_equal(dim(A), c(2L, 2L))
-  expect_equal(as.character(A$pyobj), "0")
-  expect_equal(as.character(A), "0")
-  
-  
-  ############################
-  
-  W <- matrix_symbol("W", nrow = 2L, ncol = 2L) # 1 x 1 by default
-  expect_equal(dim(W), c(2L, 2L))
-  
-  J <- sympy_declare("J", "Identity(2)") 
-  expect_equal(dim(J), c(2L, 2L))
-  expect_equal(as.character(J$pyobj$as_explicit()), "Matrix([[1, 0], [0, 1]])")
-  
-  O <- sympy_declare("O", "ZeroMatrix(2, 2)")
-  expect_equal(dim(O), c(2L, 2L))
-  expect_equal(as.character(O$pyobj$as_explicit()), "Matrix([[0, 0], [0, 0]])")
-  
-  expect_equal(dim(J %*% O), c(2L, 2L))
-  expect_equal(as.character(J %*% O), "0")
-  
-  L <- matrix(c("J", "-W", "0", "J"), nrow = 2) %>%
-    as_sym(declare_symbols = FALSE)
-  expect_equal(dim(L), c(2L, 2L)) # FIXME
-  expect_equal(as.character(L$pyobj), "Matrix([[I, 0], [-W, I]])")
-  expect_equal(as.character(L, replace_I = FALSE), "Matrix([[I, 0], [-W, I]])")
-  
-  Linv <- inv_2x2(L)
-  expect_equal(dim(Linv), c(4L, 4L))
-  expect_equal(as.character(Linv$pyobj), "Matrix([\n[I, 0],\n[W, I]])")
-  expect_equal(as.character(Linv, replace_I = FALSE), "Matrix([\n[I, 0],\n[W, I]])")
-  
-  A <- t(Linv) %*% Linv
-  expect_equal(dim(A), c(4L, 4L))
-})
-
+# test_that("matrix symbol 1x1", {
+#   skip_if_no_sympy()
+#   
+#   W <- matrix_symbol("W") # 1 x 1 by default
+#   expect_equal(dim(W), c(1L, 1L))
+#   
+#   J <- sympy_declare("J", "Identity(1)") 
+#   expect_equal(dim(J), c(1L, 1L))
+#   expect_equal(as.character(J$pyobj$as_explicit()), "Matrix([[1]])")
+#   
+#   O <- sympy_declare("O", "ZeroMatrix(1, 1)")
+#   expect_equal(dim(O), c(1L, 1L))
+#   expect_equal(as.character(O$pyobj$as_explicit()), "Matrix([[0]])")
+#   
+#   expect_equal(as.character(J %*% O), "0")
+#   
+#   L <- matrix(c("J", "-W", "0", "J"), nrow = 2) %>%
+#     as_sym(declare_symbols = FALSE)
+#   expect_equal(dim(L), c(2L, 2L))
+#   expect_equal(as.character(L$pyobj), "Matrix([[I, 0], [-W, I]])")
+#   expect_equal(as.character(L, replace_I = FALSE), "Matrix([[I, 0], [-W, I]])")
+#   
+#   Linv <- inv_2x2(L)
+#   expect_equal(dim(Linv), c(2L, 2L))
+#   expect_equal(as.character(Linv$pyobj), "Matrix([\n[I, 0],\n[W, I]])")
+#   expect_equal(as.character(Linv, replace_I = FALSE), "Matrix([\n[I, 0],\n[W, I]])")
+#   
+#   # FIXME: TEST?
+#   #A1 <- Linv %*% L
+#   #A1
+#   #A2 <- L %>% Linv
+#   #A2
+#   
+#   A <- t(Linv) %*% Linv
+#   expect_equal(dim(A), c(2L, 2L))
+#   
+#   O2 <- sympy_declare("O", "ZeroMatrix(2, 2)")
+#   A <- O2 %*% t(Linv) %*% Linv
+#   expect_equal(dim(A), c(2L, 2L))
+#   expect_equal(as.character(A$pyobj), "0")
+#   expect_equal(as.character(A), "0")
+#   
+#   
+#   ############################
+#   
+#   W <- matrix_symbol("W", nrow = 2L, ncol = 2L) # 1 x 1 by default
+#   expect_equal(dim(W), c(2L, 2L))
+#   
+#   J <- sympy_declare("J", "Identity(2)") 
+#   expect_equal(dim(J), c(2L, 2L))
+#   expect_equal(as.character(J$pyobj$as_explicit()), "Matrix([[1, 0], [0, 1]])")
+#   
+#   O <- sympy_declare("O", "ZeroMatrix(2, 2)")
+#   expect_equal(dim(O), c(2L, 2L))
+#   expect_equal(as.character(O$pyobj$as_explicit()), "Matrix([[0, 0], [0, 0]])")
+#   
+#   expect_equal(dim(J %*% O), c(2L, 2L))
+#   expect_equal(as.character(J %*% O), "Matrix([[0, 0], [0, 0]])")
+#   
+#   
+#   L <- matrix(c("J", "-W", "0", "J"), nrow = 2) %>%
+#     as_sym(declare_symbols = FALSE)
+#   expect_equal(dim(L), c(2L, 2L)) # FIXME?
+#   expect_equal(as.character(L$pyobj), "Matrix([[I, 0], [-W, I]])")
+#   expect_equal(as.character(L, replace_I = FALSE), "Matrix([[I, 0], [-W, I]])")
+#   
+#   Linv <- inv_2x2(L)
+#   expect_equal(dim(Linv), c(4L, 4L))
+#   expect_equal(as.character(Linv$pyobj), "Matrix([\n[I, 0],\n[W, I]])")
+#   expect_equal(as.character(Linv, replace_I = FALSE), "Matrix([\n[I, 0],\n[W, I]])")
+#   
+#   A <- t(Linv) %*% Linv
+#   expect_equal(dim(A), c(4L, 4L))
+# })
+# 
 
 
 

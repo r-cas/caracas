@@ -44,9 +44,9 @@ if (!has_sympy()) {
 
 ```{r ar1, echo=F}
 N <- 3
-L1chr <- diag(4)
-L1chr[cbind(1 + (1:N), 1:N)] <- "-a"
-L1 <- as_sym(L1chr)
+L1 <- diag(4)
+L1[cbind(1 + (1:N), 1:N)] <- "-a"
+L1 <- as_sym(L1)
 ```
 
 ```{r, echo=F}
