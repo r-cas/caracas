@@ -1,6 +1,12 @@
 ---
 title: "Concentration and covariance matrix in an autoregressive model and in a dynamic linear model"
-output: rmarkdown::html_vignette
+author: Mikkel Meyer Andersen and Søren Højsgaard
+date: "`r date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+    number_sections: true
 vignette: >
   %\VignetteIndexEntry{Concentration and covariance matrix in an autoregressive model and in a dynamic linear model}
   %\VignetteEngine{knitr::rmarkdown}
