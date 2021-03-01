@@ -182,14 +182,6 @@ diag <- function(x, ...) {
 }
 
 #' @export
-diag.character <- function(x, ...) {
-  n <- length(x)
-  A <- diag(n)
-  base::diag(A, ...) <- x
-  return(A)
-}
-
-#' @export
 diag.default <- function(x, ...) {
   return(base::diag(x, ...))
 }
