@@ -36,37 +36,36 @@ if (!has_sympy()) {
 
 ## Autoregressive model ($AR(1)$)
 
-```{r ar1, echo=F}
-N <- 3
-L1 <- diag(4)
-L1[cbind(1 + (1:N), 1:N)] <- "-a"
-L1 <- as_sym(L1)
-```
-
-```{r, echo=F}
-e <- as_sym(paste0("e", 0:3))
-x <- as_sym(paste0("x", 0:3))
-u <- as_sym(paste0("u", 1:3))
-y <- as_sym(paste0("y", 1:3))
-eu <- rbind(e, u)
-xy <- rbind(x, y)
-```
-
-
 Consider this model: 
 $$
 x_i = a x_{i-1} + e_i, \quad i=1, \dots, 3
 $$ 
 and $x_0=e_0$. All terms $e_0, \dots, e_3$ are independent and $N(0,v^2)$ distributed. 
 Let $e=(e_0, \dots, e_3)$ and $x=(x_0, \dots x_3)$. Hence $e \sim N(0, v^2 I)$.
+
+In `caracas` we type:
+```{r}
+et <- as_sym(paste0("et", 0:3)) # 'et' for error term, 'e' conflicts with exp(1)
+x <- as_sym(paste0("x", 0:3))
+u <- as_sym(paste0("u", 1:3))
+y <- as_sym(paste0("y", 1:3))
+eu <- rbind(et, u)
+xy <- rbind(x, y)
+```
+
+And:
+```{r}
+n <- 3
+L1 <- diag(4)
+L1[cbind(1 + (1:n), 1:n)] <- "-a"
+L1 <- as_sym(L1)
+```
+
+
 Isolating error terms gives
 $$
-e= `r tex(e)` = `r tex(L1)` `r tex(x)` = L_1 x
+e = `r tex(et)` = `r tex(L1)` `r tex(x)` = L_1 x
 $$
-
-```{r}
-<<ar1>>
-```
 
 Since $\mathbf{Var}(e)=v^2 I$ we have 
 $\mathbf{Var}(e)=v^2 I=L \mathbf{Var}(x) L'$ so the covariance matrix of $x$ is $V_1=\mathbf{Var}(x) = v^2 L^- (L^-)'$ 
@@ -91,10 +90,10 @@ cat(
 ## Dynamic linear model
 
 ```{r L2, echo=F}
-N <- 3
-L2chr <- diag("1", 1 + 2*N)
-L2chr[cbind(1 + (1:N), 1:N)] <- "-a"
-L2chr[cbind(1 + N + (1:N), 1 + 1:N)] <- "-b"
+n <- 3
+L2chr <- diag("1", 1 + 2*n)
+L2chr[cbind(1 + (1:n), 1:n)] <- "-a"
+L2chr[cbind(1 + n + (1:n), 1 + 1:n)] <- "-b"
 L2 <- as_sym(L2chr)
 ```
 

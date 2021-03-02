@@ -2,12 +2,12 @@ pandoc: '2.5'
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  ar-ssm: ar-ssm.html
   arbitrary-precision-arithmetic: arbitrary-precision-arithmetic.html
   fastest-route: fastest-route.html
   introduction: introduction.html
   linear-algebra: linear-algebra.html
   reference: reference.html
-  ssm: ssm.html
   sympy-object: sympy-object.html
-last_built: 2021-03-02T12:07Z
+last_built: 2021-03-02T12:41Z
 

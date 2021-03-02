@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Expand expression — expand • caracas</title>
+<title>Matrix multiplication — matrix-products • caracas</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,9 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Expand expression — expand" />
-<meta property="og:description" content="Expand expression" />
+<meta property="og:title" content="Matrix multiplication — matrix-products" />
+<meta property="og:description" content="Matrix multiplication
+Matrix multiplication" />
 
 
 
@@ -143,26 +144,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Expand expression</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/simplify.R'><code>R/simplify.R</code></a></small>
-    <div class="hidden name"><code>expand.Rd</code></div>
+    <h1>Matrix multiplication</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/Ops-math.R'><code>R/Ops-math.R</code></a></small>
+    <div class="hidden name"><code>matrix-products.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Expand expression</p>
+    <p>Matrix multiplication</p>
+<p>Matrix multiplication</p>
     </div>
 
-    <pre class="usage"><span class='fu'>expand</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage">x %*% y
+
+# S3 method for caracas_symbol
+%*%(x, y)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>caracas_symbol</code></p></td>
+      <td><p>Object <code>x</code></p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>Object <code>y</code></p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/matmult.html'>base::%*%()</a></code></p>
+<p><code><a href='https://rdrr.io/r/base/matmult.html'>base::%*%()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
