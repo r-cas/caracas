@@ -28,13 +28,31 @@ if (!has_sympy()) {
   # SymPy not available, so the chunks shall not be evaluated
   knitr::opts_chunk$set(eval = FALSE)
   
-  inline_code <- inline_code <- function(x) {
+  inline_code <- function(x) {
     deparse(substitute(x))
   }
 }
 ```
 
+
 ## Autoregressive model ($AR(1)$)
+
+```{r ar1, echo=F}
+N <- 3
+L1 <- diag(4)
+L1[cbind(1 + (1:N), 1:N)] <- "-a"
+L1 <- as_sym(L1)
+```
+
+```{r, echo=F}
+e <- as_sym(paste0("e", 0:3))
+x <- as_sym(paste0("x", 0:3))
+u <- as_sym(paste0("u", 1:3))
+y <- as_sym(paste0("y", 1:3))
+eu <- rbind(e, u)
+xy <- rbind(x, y)
+```
+
 
 Consider this model: 
 $$
@@ -42,30 +60,14 @@ x_i = a x_{i-1} + e_i, \quad i=1, \dots, 3
 $$ 
 and $x_0=e_0$. All terms $e_0, \dots, e_3$ are independent and $N(0,v^2)$ distributed. 
 Let $e=(e_0, \dots, e_3)$ and $x=(x_0, \dots x_3)$. Hence $e \sim N(0, v^2 I)$.
-
-In `caracas` we type:
-```{r}
-et <- as_sym(paste0("et", 0:3)) # 'et' for error term, 'e' conflicts with exp(1)
-x <- as_sym(paste0("x", 0:3))
-u <- as_sym(paste0("u", 1:3))
-y <- as_sym(paste0("y", 1:3))
-eu <- rbind(et, u)
-xy <- rbind(x, y)
-```
-
-And:
-```{r}
-n <- 3
-L1 <- diag(4)
-L1[cbind(1 + (1:n), 1:n)] <- "-a"
-L1 <- as_sym(L1)
-```
-
-
 Isolating error terms gives
 $$
-e = `r tex(et)` = `r tex(L1)` `r tex(x)` = L_1 x
+e= `r inline_code(tex(e))` = `r inline_code(tex(L1))` `r inline_code(tex(x))` = L_1 x
 $$
+
+```{r}
+<<ar1>>
+```
 
 Since $\mathbf{Var}(e)=v^2 I$ we have 
 $\mathbf{Var}(e)=v^2 I=L \mathbf{Var}(x) L'$ so the covariance matrix of $x$ is $V_1=\mathbf{Var}(x) = v^2 L^- (L^-)'$ 
@@ -90,11 +92,11 @@ cat(
 ## Dynamic linear model
 
 ```{r L2, echo=F}
-n <- 3
-L2chr <- diag("1", 1 + 2*n)
-L2chr[cbind(1 + (1:n), 1:n)] <- "-a"
-L2chr[cbind(1 + n + (1:n), 1 + 1:n)] <- "-b"
-L2 <- as_sym(L2chr)
+N <- 3
+L2 <- diag("1", 1 + 2*N)
+L2[cbind(1 + (1:N), 1:N)] <- "-a"
+L2[cbind(1 + N + (1:N), 1 + 1:N)] <- "-b"
+L2 <- as_sym(L2)
 ```
 
 Augment the $AR(1)$ process above with $y_i=b x_i + u_i$ for
@@ -103,7 +105,7 @@ and inpendent of $e$.
 Then
 $(e,u)$ can be expressed in terms of $(x,y)$ as
 $$
-(e,u) = `r tex(eu)` = `r tex(L2)` `r tex(xy)` = L_2 (x,y)
+(e,u) = `r inline_code(tex(eu))` = `r inline_code(tex(L2))` `r inline_code(tex(xy))` = L_2 (x,y)
 $$
 where
 ```{r}
@@ -128,73 +130,3 @@ cat(
   "\\begin{align} K_2 &= ", tex(K2), " \\\\ 
                   V_2 &= ", tex(V2), " \\end{align}", sep = "")
 ```
-
-
-```{r}
-# <!-- ```{r} -->
-# <!-- x_index <- 1:4 -->
-# <!-- Kxx <- K2[x_index, x_index] -->
-# <!-- Kxy <- K2[x_index, -x_index] -->
-# <!-- Kyx <- K2[-x_index, x_index] -->
-# <!-- Kyy <- K2[-x_index, -x_index] -->
-# 
-# <!-- S <- Kyy - Kyx %*% inv(Kxx) %*% Kxy -->
-# <!-- Si <- inv(S) -->
-# <!-- ``` -->
-# 
-# <!-- $$ -->
-# <!--  S^{-1} = `r tex(Si)` -->
-# <!-- $$ -->
-#    
-#    
-#    
-#    
-# 
-# <!-- ## Numerical evalation in R -->
-# 
-# <!-- ```{r} -->
-# <!-- sparsify <- function(x) { -->
-# <!--   if (requireNamespace("Matrix", quietly = TRUE)) { -->
-# <!--       return(Matrix::Matrix(x, sparse = TRUE)) -->
-# <!--       ##return(Matrix(x, sparse = TRUE)) -->
-# <!--   } -->
-#   
-# <!--   return(x) -->
-# <!-- } -->
-# 
-# <!-- alpha <- 0.5 -->
-# <!-- beta <- -0.3 -->
-# 
-# <!-- ## AR(1) -->
-# <!-- N <- 3 -->
-# <!-- L1 <- diag(1, 1 + N) -->
-# <!-- L1[cbind(1+(1:N), 1:N)] <- -alpha -->
-# <!-- K1 <- L1 %*% t(L1) -->
-# <!-- V1 <- solve(K1) -->
-# <!-- sparsify(K1) -->
-# <!-- sparsify(V1) -->
-# 
-# <!-- ## Dynamic linear models -->
-# <!-- N <- 3 -->
-# <!-- L2 <- diag(1, 1 + 2*N) -->
-# <!-- L2[cbind(1+(1:N), 1:N)] <- -alpha -->
-# <!-- L2[cbind(1 + N + (1:N), 1 + 1:N)] <- -beta -->
-# <!-- K2 <- L2 %*% t(L2) -->
-# <!-- V2 <- solve(K2) -->
-# <!-- sparsify(K2) -->
-# <!-- sparsify(V2) -->
-# <!-- ``` -->
-# 
-# <!-- Comparing with results calculated by `caracas`: -->
-# 
-# <!-- ```{r} -->
-# <!-- V1_eval <- eval(as_expr(V1), list(a = alpha)) -->
-# <!-- V2_eval <- eval(as_expr(V2, first_doit = FALSE), list(a = alpha, b = beta)) -->
-# <!-- all.equal(V1, V1_eval) -->
-# <!-- all.equal(V2, V2_eval) -->
-# <!-- ```  -->
-```
-
-
-
-
