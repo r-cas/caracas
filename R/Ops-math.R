@@ -165,6 +165,9 @@ Math.caracas_symbol = function(x, ...) {
 #' @param x Object `x`
 #' @param y Object `y`
 #' 
+#' @name matrix-products
+#' @seealso [base::%*%()]
+#' 
 #' @concept linalg
 #' 
 #' @export
@@ -181,6 +184,9 @@ Math.caracas_symbol = function(x, ...) {
 #' 
 #' @param x Object `x`
 #' @param y Object `y`
+#' 
+#' @name matrix-products
+#' @seealso [base::%*%()]
 #' 
 #' @concept linalg
 #' 

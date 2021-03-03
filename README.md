@@ -16,6 +16,14 @@ status](https://github.com/r-cas/caracas/workflows/R-CMD-check/badge.svg)](https
 
     install.packages('caracas')
 
+Please ensure that you have SymPy installed, or else install it:
+
+``` r
+if (!caracas::has_sympy()) {
+  caracas::install_sympy() 
+}
+```
+
 To build and install from Github with vignettes run this command from
 within `R` (please install `remotes` first if not already installed):
 

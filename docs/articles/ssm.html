@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9143</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9142</span>
       </span>
     </div>
 
@@ -55,9 +55,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/ar-ssm.html">Concentration and covariance matrix in an autoregressive model and in a dynamic linear model</a>
-    </li>
-    <li>
       <a href="../articles/arbitrary-precision-arithmetic.html">Arbitrary precision arithmetic</a>
     </li>
     <li>
@@ -71,6 +68,9 @@
     </li>
     <li>
       <a href="../articles/reference.html">Reference</a>
+    </li>
+    <li>
+      <a href="../articles/ssm.html">Concentration and covariance matrix in an autoregressive model and in a dynamic linear model</a>
     </li>
     <li>
       <a href="../articles/sympy-object.html">Using the 'SymPy' object directly</a>
@@ -104,8 +104,8 @@
       <h1 data-toc-skip>Concentration and covariance matrix in an autoregressive model and in a dynamic linear model</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/master/vignettes/ar-ssm.Rmd"><code>vignettes/ar-ssm.Rmd</code></a></small>
-      <div class="hidden name"><code>ar-ssm.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/master/vignettes/ssm.Rmd"><code>vignettes/ssm.Rmd</code></a></small>
+      <div class="hidden name"><code>ssm.Rmd</code></div>
 
     </div>
 
@@ -145,10 +145,10 @@ e= \left[\begin{matrix}e_{0}\\e_{1}\\e_{2}\\e_{3}\end{matrix}\right] = \left[\be
 \]</span> where</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">3</span>
-<span class="va">L2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="fl">1</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">N</span><span class="op">)</span>
-<span class="va">L2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"-a"</span>
-<span class="va">L2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">N</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span>, <span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"-b"</span>
-<span class="va">L2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">L2</span><span class="op">)</span></code></pre></div>
+<span class="va">L2chr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="fl">1</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">N</span><span class="op">)</span>
+<span class="va">L2chr</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"-a"</span>
+<span class="va">L2chr</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">N</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span>, <span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="va">N</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"-b"</span>
+<span class="va">L2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">L2chr</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Veu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">7</span><span class="op">)</span>
 <span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="va">Veu</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"v2"</span>
@@ -182,6 +182,69 @@ e= \left[\begin{matrix}e_{0}\\e_{1}\\e_{2}\\e_{3}\end{matrix}\right] = \left[\be
 <span class="va">K2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">L2</span><span class="op">)</span> <span class="op">%*%</span> <span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">Veu</span><span class="op">)</span> <span class="op">%*%</span> <span class="va">L2</span></code></pre></div>
 <p><span class="math display">\[\begin{align} K_2 &amp;= \left[\begin{matrix}\frac{a^{2}}{v_{2}} + \frac{1}{v_{2}} &amp; - \frac{a}{v_{2}} &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\- \frac{a}{v_{2}} &amp; \frac{a^{2}}{v_{2}} + \frac{b^{2}}{w_{2}} + \frac{1}{v_{2}} &amp; - \frac{a}{v_{2}} &amp; 0 &amp; - \frac{b}{w_{2}} &amp; 0 &amp; 0\\0 &amp; - \frac{a}{v_{2}} &amp; \frac{a^{2}}{v_{2}} + \frac{b^{2}}{w_{2}} + \frac{1}{v_{2}} &amp; - \frac{a}{v_{2}} &amp; 0 &amp; - \frac{b}{w_{2}} &amp; 0\\0 &amp; 0 &amp; - \frac{a}{v_{2}} &amp; \frac{b^{2}}{w_{2}} + \frac{1}{v_{2}} &amp; 0 &amp; 0 &amp; - \frac{b}{w_{2}}\\0 &amp; - \frac{b}{w_{2}} &amp; 0 &amp; 0 &amp; \frac{1}{w_{2}} &amp; 0 &amp; 0\\0 &amp; 0 &amp; - \frac{b}{w_{2}} &amp; 0 &amp; 0 &amp; \frac{1}{w_{2}} &amp; 0\\0 &amp; 0 &amp; 0 &amp; - \frac{b}{w_{2}} &amp; 0 &amp; 0 &amp; \frac{1}{w_{2}}\end{matrix}\right] \\ 
                   V_2 &amp;= \left[\begin{matrix}v_{2} &amp; a v_{2} &amp; a^{2} v_{2} &amp; a^{3} v_{2} &amp; a b v_{2} &amp; a^{2} b v_{2} &amp; a^{3} b v_{2}\\a v_{2} &amp; a^{2} v_{2} + v_{2} &amp; a^{3} v_{2} + a v_{2} &amp; a^{4} v_{2} + a^{2} v_{2} &amp; a^{2} b v_{2} + b v_{2} &amp; a^{3} b v_{2} + a b v_{2} &amp; a^{4} b v_{2} + a^{2} b v_{2}\\a^{2} v_{2} &amp; a^{3} v_{2} + a v_{2} &amp; a^{4} v_{2} + a^{2} v_{2} + v_{2} &amp; a^{5} v_{2} + a^{3} v_{2} + a v_{2} &amp; a^{3} b v_{2} + a b v_{2} &amp; a^{4} b v_{2} + a^{2} b v_{2} + b v_{2} &amp; a^{5} b v_{2} + a^{3} b v_{2} + a b v_{2}\\a^{3} v_{2} &amp; a^{4} v_{2} + a^{2} v_{2} &amp; a^{5} v_{2} + a^{3} v_{2} + a v_{2} &amp; a^{6} v_{2} + a^{4} v_{2} + a^{2} v_{2} + v_{2} &amp; a^{4} b v_{2} + a^{2} b v_{2} &amp; a^{5} b v_{2} + a^{3} b v_{2} + a b v_{2} &amp; a^{6} b v_{2} + a^{4} b v_{2} + a^{2} b v_{2} + b v_{2}\\a b v_{2} &amp; a^{2} b v_{2} + b v_{2} &amp; a^{3} b v_{2} + a b v_{2} &amp; a^{4} b v_{2} + a^{2} b v_{2} &amp; a^{2} b^{2} v_{2} + b^{2} v_{2} + w_{2} &amp; a^{3} b^{2} v_{2} + a b^{2} v_{2} &amp; a^{4} b^{2} v_{2} + a^{2} b^{2} v_{2}\\a^{2} b v_{2} &amp; a^{3} b v_{2} + a b v_{2} &amp; a^{4} b v_{2} + a^{2} b v_{2} + b v_{2} &amp; a^{5} b v_{2} + a^{3} b v_{2} + a b v_{2} &amp; a^{3} b^{2} v_{2} + a b^{2} v_{2} &amp; a^{4} b^{2} v_{2} + a^{2} b^{2} v_{2} + b^{2} v_{2} + w_{2} &amp; a^{5} b^{2} v_{2} + a^{3} b^{2} v_{2} + a b^{2} v_{2}\\a^{3} b v_{2} &amp; a^{4} b v_{2} + a^{2} b v_{2} &amp; a^{5} b v_{2} + a^{3} b v_{2} + a b v_{2} &amp; a^{6} b v_{2} + a^{4} b v_{2} + a^{2} b v_{2} + b v_{2} &amp; a^{4} b^{2} v_{2} + a^{2} b^{2} v_{2} &amp; a^{5} b^{2} v_{2} + a^{3} b^{2} v_{2} + a b^{2} v_{2} &amp; a^{6} b^{2} v_{2} + a^{4} b^{2} v_{2} + a^{2} b^{2} v_{2} + b^{2} v_{2} + w_{2}\end{matrix}\right] \end{align}\]</span></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># &lt;!-- ```{r} --&gt;</span>
+<span class="co"># &lt;!-- x_index &lt;- 1:4 --&gt;</span>
+<span class="co"># &lt;!-- Kxx &lt;- K2[x_index, x_index] --&gt;</span>
+<span class="co"># &lt;!-- Kxy &lt;- K2[x_index, -x_index] --&gt;</span>
+<span class="co"># &lt;!-- Kyx &lt;- K2[-x_index, x_index] --&gt;</span>
+<span class="co"># &lt;!-- Kyy &lt;- K2[-x_index, -x_index] --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- S &lt;- Kyy - Kyx %*% inv(Kxx) %*% Kxy --&gt;</span>
+<span class="co"># &lt;!-- Si &lt;- inv(S) --&gt;</span>
+<span class="co"># &lt;!-- ``` --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- $$ --&gt;</span>
+<span class="co"># &lt;!--  S^{-1} = `r tex(Si)` --&gt;</span>
+<span class="co"># &lt;!-- $$ --&gt;</span>
+<span class="co">#    </span>
+<span class="co">#    </span>
+<span class="co">#    </span>
+<span class="co">#    </span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- ## Numerical evalation in R --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- ```{r} --&gt;</span>
+<span class="co"># &lt;!-- sparsify &lt;- function(x) { --&gt;</span>
+<span class="co"># &lt;!--   if (requireNamespace("Matrix", quietly = TRUE)) { --&gt;</span>
+<span class="co"># &lt;!--       return(Matrix::Matrix(x, sparse = TRUE)) --&gt;</span>
+<span class="co"># &lt;!--       ##return(Matrix(x, sparse = TRUE)) --&gt;</span>
+<span class="co"># &lt;!--   } --&gt;</span>
+<span class="co">#   </span>
+<span class="co"># &lt;!--   return(x) --&gt;</span>
+<span class="co"># &lt;!-- } --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- alpha &lt;- 0.5 --&gt;</span>
+<span class="co"># &lt;!-- beta &lt;- -0.3 --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- ## AR(1) --&gt;</span>
+<span class="co"># &lt;!-- N &lt;- 3 --&gt;</span>
+<span class="co"># &lt;!-- L1 &lt;- diag(1, 1 + N) --&gt;</span>
+<span class="co"># &lt;!-- L1[cbind(1+(1:N), 1:N)] &lt;- -alpha --&gt;</span>
+<span class="co"># &lt;!-- K1 &lt;- L1 %*% t(L1) --&gt;</span>
+<span class="co"># &lt;!-- V1 &lt;- solve(K1) --&gt;</span>
+<span class="co"># &lt;!-- sparsify(K1) --&gt;</span>
+<span class="co"># &lt;!-- sparsify(V1) --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- ## Dynamic linear models --&gt;</span>
+<span class="co"># &lt;!-- N &lt;- 3 --&gt;</span>
+<span class="co"># &lt;!-- L2 &lt;- diag(1, 1 + 2*N) --&gt;</span>
+<span class="co"># &lt;!-- L2[cbind(1+(1:N), 1:N)] &lt;- -alpha --&gt;</span>
+<span class="co"># &lt;!-- L2[cbind(1 + N + (1:N), 1 + 1:N)] &lt;- -beta --&gt;</span>
+<span class="co"># &lt;!-- K2 &lt;- L2 %*% t(L2) --&gt;</span>
+<span class="co"># &lt;!-- V2 &lt;- solve(K2) --&gt;</span>
+<span class="co"># &lt;!-- sparsify(K2) --&gt;</span>
+<span class="co"># &lt;!-- sparsify(V2) --&gt;</span>
+<span class="co"># &lt;!-- ``` --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- Comparing with results calculated by `caracas`: --&gt;</span>
+<span class="co"># </span>
+<span class="co"># &lt;!-- ```{r} --&gt;</span>
+<span class="co"># &lt;!-- V1_eval &lt;- eval(as_expr(V1), list(a = alpha)) --&gt;</span>
+<span class="co"># &lt;!-- V2_eval &lt;- eval(as_expr(V2, first_doit = FALSE), list(a = alpha, b = beta)) --&gt;</span>
+<span class="co"># &lt;!-- all.equal(V1, V1_eval) --&gt;</span>
+<span class="co"># &lt;!-- all.equal(V2, V2_eval) --&gt;</span>
+<span class="co"># &lt;!-- ```  --&gt;</span></code></pre></div>
 </div>
   </div>
 

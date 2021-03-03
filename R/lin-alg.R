@@ -211,6 +211,8 @@ diag.caracas_symbol <- function(x, ...) {
 #' @param x Object `x`
 #' @param value Replacement value
 #' 
+#' @name diag-set
+#' 
 #' @concept linalg
 #' 
 #' @export

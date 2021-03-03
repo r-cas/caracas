@@ -35,7 +35,7 @@ jobs:
           - {os: ubuntu-16.04,   r: 'oldrel',  rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
           - {os: ubuntu-16.04,   r: '3.5',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
           - {os: ubuntu-16.04,   r: '3.4',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04,   r: '3.3',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+#          - {os: ubuntu-16.04,   r: '3.3',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -67,6 +67,18 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-2-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-2-
 
+      - name: Install python3-venv
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install -y python3 python3-dev python3-venv python3-pip python3-setuptools curl
+          sudo -H pip3 install virtualenv
+          sudo conda config --set remote_read_timeout_secs 120
+
+      - name: Update pip
+        if: runner.os == 'macOS'
+        run: |
+          python3 -m pip install --upgrade pip
+
       - name: Install system dependencies
         if: runner.os == 'Linux'
         run: |
@@ -79,6 +91,14 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
+        shell: Rscript {0}
+
+      - name: Install SymPy
+        run: |
+          library(reticulate)
+          reticulate::install_miniconda()
+          reticulate::py_discover_config()
+          reticulate::py_install("sympy")
         shell: Rscript {0}
 
       - name: Session info
@@ -107,3 +127,16 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+
+      - name: Prepare test coverage
+        if: matrix.config.os == 'ubuntu-16.04' && matrix.config.r == 'release'
+        run: |
+          sudo apt-get install -y libcurl4-openssl-dev
+
+      - name: Test coverage
+        if: matrix.config.os == 'ubuntu-16.04' && matrix.config.r == 'release'
+        run: |
+          install.packages('covr')
+          covr::codecov(function_exclusions = '^install_sympy$', token = "${{secrets.CODECOV_TOKEN}}")
+        shell: Rscript {0}
+
