@@ -102,8 +102,9 @@ symbol <- function(x, ...) {
     arg_nm <- names(dots)
     
     arg_val <- rep("None", length(dots))
-    arg_val[unlist(lapply(dots, function(l) is.logical(l) && isTRUE(l)))] <- "True"
-    arg_val[unlist(lapply(dots, function(l) is.logical(l) && isFALSE(l)))] <- "False"
+    arg_val[unlist(lapply(dots, function(l) isTRUE(l)))] <- "True"
+    # isFALSE req. R >= 3.5, hence explicit:
+    arg_val[unlist(lapply(dots, function(l) is.logical(l) && length(l) == 1L && !is.na(l) && !l))] <- "False"
     
     extra_cmd <- paste0(arg_nm, " = ", arg_val, collapse = ", ")
   }
