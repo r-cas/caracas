@@ -81,6 +81,14 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
+      - name: Install SymPy
+        run: |
+          library(reticulate)
+          reticulate::install_miniconda()
+          reticulate::py_discover_config()
+          reticulate::py_install("sympy")
+        shell: Rscript {0}
+
       - name: Session info
         run: |
           options(width = 100)
@@ -107,3 +115,16 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+
+      - name: Prepare test coverage
+        if: matrix.config.os == 'ubuntu-16.04' && matrix.config.r == 'release'
+        run: |
+          sudo apt-get install -y libcurl4-openssl-dev
+
+      - name: Test coverage
+        if: matrix.config.os == 'ubuntu-16.04' && matrix.config.r == 'release'
+        run: |
+          install.packages('covr')
+          covr::codecov(function_exclusions = '^install_sympy$', token = "${{secrets.CODECOV_TOKEN}}")
+        shell: Rscript {0}
+
