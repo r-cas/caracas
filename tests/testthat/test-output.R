@@ -162,8 +162,10 @@ test_that("custom printer: exp", {
   o2 <- outstr(print(lim_f_sym, prettyascii = TRUE, ascii = FALSE))
   o3 <- outstr(print(lim_f_sym, prettyascii = FALSE, ascii = TRUE))
   
-  expect_equal(o1, "[caracas]:            n               ⎛    1⎞            lim ⎜1 + ─⎟            n─→∞⎝    n⎠")
-  expect_equal(o2, "[caracas]:             n                /    1\\             lim |1 + -|            n->oo\\    n/")
   expect_equal(o3, "[caracas]: Limit((1 + 1/n)^n, n, Inf, dir='-')")
+  expect_equal(o2, "[caracas]:             n                /    1\\             lim |1 + -|            n->oo\\    n/")
   
+  # Windows due to UTF-8:
+  skip_on_os("windows")
+  expect_equal(o1, "[caracas]:            n               ⎛    1⎞            lim ⎜1 + ─⎟            n─→∞⎝    n⎠")
 })
