@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9142</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9143</span>
       </span>
     </div>
 
@@ -662,9 +662,9 @@
 <span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): ValueError: Matrix must be Hermitian.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Detailed traceback: </span>
-<span class="co">#&gt;   File "/home/mikl/.local/share/r-miniconda/envs/r-reticulate/lib/python3.9/site-packages/sympy/matrices/dense.py", line 260, in cholesky</span>
+<span class="co">#&gt;   File "/home/mikl/.local/share/r-miniconda/envs/r-reticulate/lib/python3.6/site-packages/sympy/matrices/dense.py", line 260, in cholesky</span>
 <span class="co">#&gt;     return _cholesky(self, hermitian=hermitian)</span>
-<span class="co">#&gt;   File "/home/mikl/.local/share/r-miniconda/envs/r-reticulate/lib/python3.9/site-packages/sympy/matrices/decompositions.py", line 256, in _cholesky</span>
+<span class="co">#&gt;   File "/home/mikl/.local/share/r-miniconda/envs/r-reticulate/lib/python3.6/site-packages/sympy/matrices/decompositions.py", line 256, in _cholesky</span>
 <span class="co">#&gt;     raise ValueError("Matrix must be Hermitian.")</span></code></pre></div>
 <p>This fails as <code>A</code> is not positive (semi-)definite.</p>
 <p>To ensure this, we need to impose restrictions on <code>x</code>. This is done by defining a symbol with an assumption about positivity:</p>
