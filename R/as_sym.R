@@ -78,7 +78,7 @@ as_sym <- function(x,
     x <- as.character(x)
   }
   
-  varnames_exclude <- c("sqrt", "log", "I")
+  varnames_exclude <- c("sqrt", "log", "I", "exp", "sin", "cos")
 
   if (declare_symbols) {
     xele <- as.vector(x)
