@@ -46,7 +46,8 @@ rootsolve <- function(lhs, vars) {
   
   # Single variable
   if (inherits(vars, "caracas_symbol")) {
-    vars <- as.character(vars)
+    #vars <- as.character(vars)
+    vars <- vars$pyobj
   } else {
     # Multiple variables
     vars <- unlist(lapply(vars, function(x) {
@@ -91,6 +92,13 @@ rootsolve <- function(lhs, vars) {
 #'   exp1 <- 2*x + 2
 #'   exp2 <- x
 #'   solve_sys(cbind(exp1), cbind(exp2), x)
+#'   
+#'   x <- symbol("x")
+#'   y <- symbol("y")
+#'   lhs <- cbind(3*x*y - y, x)
+#'   rhs <- cbind(-5*x, y+4)
+#'   sol <- solve_sys(lhs, rhs, list(x, y))
+#'   sol
 #' }
 #' 
 #' @return A list with solutions (with class `caracas_solve_sys_sol` 

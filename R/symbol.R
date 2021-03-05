@@ -171,13 +171,54 @@ try_doit <- function(x) {
 }
 
 
+
+
+#' Creates Matrix from array symbol
+#' 
+#' @param x 
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   x <- symbol("x")
+#'   y <- symbol("y")
+#'   f <- 3*x^2 + x*y^2
+#'   h <- der2(f, list(x, y))
+#'   h
+#'   dim(h)
+#'   H <- matrify(h)
+#'   H
+#'   dim(H)
+#' }
+#' 
+#' @concept caracas_symbol
+#' 
+#' @export
+matrify <- function(x) {
+  z <- paste0("Matrix(", paste0(x, collapse = ", "), ")")
+  y <- eval_to_symbol(z)
+  return(y)
+}
+
+# Creates symbol vector from list of caracas symbols
+vectorfy <- function(x) {
+  z <- paste0(unlist(lapply(x, as.character)), collapse = ", ")
+  z <- paste0("[", z, "]")
+  y <- eval_to_symbol(z)
+  return(y)
+}
+
 #' @export
 c.caracas_symbol <- function(...) {
   ensure_sympy()
   
   # FIXME: To Python vector?
   #        In that case, see der() too.
-  x <- list(...)
+  #x <- list(...)
+  x <- vectorfy(list(...))
+  
+  # FIXME: Use? In that case ensure that all "[..., ...]" from elsewhere (e.g. der())
+  #        is also caught.
+  class(x) <- c("caracas_vector", class(x))
 
   return(x)
 }

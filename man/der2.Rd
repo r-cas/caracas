@@ -20,6 +20,12 @@ if (has_sympy()) {
   y <- symbol("y")
   f <- 3*x^2 + x*y^2
   der2(f, x)
+  h <- der2(f, list(x, y))
+  h
+  dim(h)
+  H <- matrify(h)
+  H
+  dim(H)
 }
 
 }

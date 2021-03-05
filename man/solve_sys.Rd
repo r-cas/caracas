@@ -30,6 +30,13 @@ if (has_sympy()) {
   exp1 <- 2*x + 2
   exp2 <- x
   solve_sys(cbind(exp1), cbind(exp2), x)
+  
+  x <- symbol("x")
+  y <- symbol("y")
+  lhs <- cbind(3*x*y - y, x)
+  rhs <- cbind(-5*x, y+4)
+  sol <- solve_sys(lhs, rhs, list(x, y))
+  sol
 }
 
 }

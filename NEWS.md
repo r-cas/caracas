@@ -10,6 +10,7 @@
 * More clear naming convention: R has expressions and caracas has symbols; 
   in this connection `as_r()` was renamed to `as_expr()` and 
   `as_symbol()` to `as_sym()`. Also, `as_sym()` changed argument from `declare_variables` to `declare_symbols`.
+* Changed internals such that `der()`, `der2()` and `solve_sys()` now takes multiple variables with `list()` instead of `c()`; see also `matrify()`
 * Minor bugs fixed
 
 # caracas 1.0.1

@@ -114,6 +114,10 @@ print.caracas_solve_sys_sol <- function(x,
   ensure_sympy()
   
   if (simplify) {
+    if (length(x) == 0L) {
+      cat("No solutions\n")
+    }
+    
     for (i in seq_along(x)) {
       cat("Solution ", i, ":\n", sep = "")
       #print(i)

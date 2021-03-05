@@ -80,7 +80,7 @@ test_that("solve_sys(lhs, vars)", {
   expect_equal(as.character(sol1[[2L]]$y), "-3")
   
   y <- symbol("y")
-  sol2 <- solve_sys(lhs, c(x, y))
+  sol2 <- solve_sys(lhs, list(x, y))
   sol2_ord <- order(unlist(lapply(sol2, function(l) Arg(as_expr(l$x)))))
   sol2 <- sol2[sol2_ord]
   
@@ -117,12 +117,12 @@ test_that("solve system of non-linear equations", {
   a <- as_sym("a")
   l <- sum(y*log(p))
   L <- -l + a*(sum(p) - 1)
-  g <- der(L, c(a, p))
+  g <- der(L, list(a, p))
   expect_match(as.character(g), 
                "[p1 + p2 + p3 - 1, a - y1/p1, a - y2/p2, a - y3/p3]", 
                fixed = TRUE)
   
-  sols <- solve_sys(g, c(a, p))
+  sols <- solve_sys(g, list(a, p))
   expect_equal(length(sols), 1L)
   
   sol <- sols[[1L]]
@@ -132,7 +132,7 @@ test_that("solve system of non-linear equations", {
   expect_match(as.character(sol$p3), "y3/(y1 + y2 + y3)", fixed = TRUE)
   expect_match(as.character(sol$a), "y1 + y2 + y3", fixed = TRUE)
   
-  H <- der2(L, c(p, a))
+  H <- der2(L, list(p, a))
   H_sol <- subs_lst(H, sol)
   expect_match(as.character(H_sol), 
                "[[(y1 + y2 + y3)^2/y1, 0, 0, 1], [0, (y1 + y2 + y3)^2/y2, 0, 1], [0, 0, (y1 + y2 + y3)^2/y3, 1], [1, 1, 1, 0]]", 
