@@ -160,14 +160,14 @@ as_expr(f)
 der(f, "x")
 der(f, x)
 der(f, c("x", "y"))
-der(f, c(x, y))
-f1 <- der(f, c(x, y))
+der(f, list(x, y))
+f1 <- der(f, list(x, y))
 f1
 as.character(f1)
 as_expr(f1)
 eval(as_expr(f1), list(x = 1, y = 2))
-der(f1, c(x, y))
-f2 <- der2(f, c(x, y))
+der(f1, list(x, y))
+f2 <- der2(f, list(x, y))
 f2
 as_expr(f2)
 eval(as_expr(f2), list(x = 1, y = 2))
@@ -179,7 +179,7 @@ x <- symbol("x")
 y <- symbol("y")
 f <- eval_to_symbol("[3*x**2 + x*y**2, 2*x, 5*y]")
 f
-der(f, c(x, y))
+der(f, list(x, y))
 ```
 
 
@@ -265,10 +265,10 @@ a <- as_sym("a")
 l <- sum(y*log(p))
 L <- -l + a*(sum(p) - 1)
 g <- der(L, c(a, p))
-sols <- solve_sys(g, c(a, p))
+sols <- solve_sys(g, list(a, p))
 sol <- sols[[1L]]
 sol
-H <- der2(L, c(p, a))
+H <- der2(L, list(p, a))
 H
 H_sol <- subs_lst(H, sol)
 H_sol
@@ -355,8 +355,8 @@ l <- sum(y*log(p))
 L <- -l + a*(sum(p) - 1)
 L
 print(L, ascii = TRUE)
-g <- der(L, c(p, a))
-sol <- solve_sys(g, c(p, a))
+g <- der(L, list(p, a))
+sol <- solve_sys(g, list(p, a))
 sol
 print(sol, simplify = FALSE)
 ```
