@@ -173,9 +173,9 @@ try_doit <- function(x) {
 
 
 
-#' Creates Matrix from array symbol
+#' Creates matrix from array symbol
 #' 
-#' @param x 
+#' @param x Array symbol to convert to matrix
 #' 
 #' @examples 
 #' if (has_sympy()) {

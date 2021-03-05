@@ -2,15 +2,15 @@
 % Please edit documentation in R/symbol.R
 \name{matrify}
 \alias{matrify}
-\title{Creates Matrix from array symbol}
+\title{Creates matrix from array symbol}
 \usage{
 matrify(x)
 }
 \arguments{
-\item{x}{}
+\item{x}{Array symbol to convert to matrix}
 }
 \description{
-Creates Matrix from array symbol
+Creates matrix from array symbol
 }
 \examples{
 if (has_sympy()) {
