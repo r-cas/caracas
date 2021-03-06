@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9143</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9202</span>
       </span>
     </div>
 
@@ -184,22 +184,15 @@
      <span class='va'>H_sol</span> <span class='op'>&lt;-</span> <span class='fu'>subs_lst</span><span class='op'>(</span><span class='va'>H</span>, <span class='va'>sol</span><span class='op'>)</span>
      <span class='va'>H_sol</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; [caracas]: ⎡              2                                     ⎤
-#&gt;            ⎢(y₁ + y₂ + y₃)                                      ⎥
-#&gt;            ⎢───────────────         0                0         1⎥
-#&gt;            ⎢       y₁                                           ⎥
-#&gt;            ⎢                                                    ⎥
-#&gt;            ⎢                               2                    ⎥
-#&gt;            ⎢                 (y₁ + y₂ + y₃)                     ⎥
-#&gt;            ⎢       0         ───────────────         0         1⎥
-#&gt;            ⎢                        y₂                          ⎥
-#&gt;            ⎢                                                    ⎥
-#&gt;            ⎢                                                2   ⎥
-#&gt;            ⎢                                  (y₁ + y₂ + y₃)    ⎥
-#&gt;            ⎢       0                0         ───────────────  1⎥
-#&gt;            ⎢                                         y₃         ⎥
-#&gt;            ⎢                                                    ⎥
-#&gt;            ⎣       1                1                1         0⎦</div><div class='input'>
+</div><div class='output co'>#&gt; [caracas]: ⎡ y₁     ⎤
+#&gt;            ⎢───   0 ⎥
+#&gt;            ⎢  2     ⎥
+#&gt;            ⎢p₁      ⎥
+#&gt;            ⎢        ⎥
+#&gt;            ⎢      y₂⎥
+#&gt;            ⎢ 0   ───⎥
+#&gt;            ⎢       2⎥
+#&gt;            ⎣     p₂ ⎦</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

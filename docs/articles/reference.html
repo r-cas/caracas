@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9143</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9202</span>
       </span>
     </div>
 
@@ -504,12 +504,12 @@
 <span class="co">#&gt; [caracas]: a⋅(p₁ + p₂ + p₃ - 1) - y₁⋅log(p₁) - y₂⋅log(p₂) - y₃⋅log(p₃)</span>
 <span class="fu"><a href="../reference/tex.html">tex</a></span><span class="op">(</span><span class="va">L</span><span class="op">)</span>
 <span class="co">#&gt; [1] "a \\left(p_{1} + p_{2} + p_{3} - 1\\right) - y_{1} \\log{\\left(p_{1} \\right)} - y_{2} \\log{\\left(p_{2} \\right)} - y_{3} \\log{\\left(p_{3} \\right)}"</span>
-<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">L</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
+<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">L</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
 <span class="va">g</span>
 <span class="co">#&gt; [caracas]: ⎡    y₁      y₂      y₃                  ⎤</span>
 <span class="co">#&gt;            ⎢a - ──  a - ──  a - ──  p₁ + p₂ + p₃ - 1⎥</span>
 <span class="co">#&gt;            ⎣    p₁      p₂      p₃                  ⎦</span>
-<span class="va">sol</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
+<span class="va">sol</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sol</span>
 <span class="co">#&gt; Solution 1:</span>
 <span class="co">#&gt;   p1 =       y₁     </span>
@@ -552,58 +552,31 @@
 <span class="va">sol</span> <span class="op">&lt;-</span> <span class="va">sols</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span>
 <span class="va">sol</span>
 <span class="co">#&gt; $a</span>
-<span class="co">#&gt; [caracas]: y₁ + y₂ + y₃</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $p1</span>
-<span class="co">#&gt; [caracas]:      y₁     </span>
-<span class="co">#&gt;            ────────────</span>
-<span class="co">#&gt;            y₁ + y₂ + y₃</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $p2</span>
-<span class="co">#&gt; [caracas]:      y₂     </span>
-<span class="co">#&gt;            ────────────</span>
-<span class="co">#&gt;            y₁ + y₂ + y₃</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $p3</span>
-<span class="co">#&gt; [caracas]:      y₃     </span>
-<span class="co">#&gt;            ────────────</span>
-<span class="co">#&gt;            y₁ + y₂ + y₃</span>
+<span class="co">#&gt; [caracas]: y₁</span>
+<span class="co">#&gt;            ──</span>
+<span class="co">#&gt;            p₁</span>
 <span class="va">H</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der2.html">der2</a></span><span class="op">(</span><span class="va">L</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
 <span class="va">H</span>
-<span class="co">#&gt; [caracas]: ⎡ y₁             ⎤</span>
-<span class="co">#&gt;            ⎢───   0    0   1⎥</span>
-<span class="co">#&gt;            ⎢  2             ⎥</span>
-<span class="co">#&gt;            ⎢p₁              ⎥</span>
-<span class="co">#&gt;            ⎢                ⎥</span>
-<span class="co">#&gt;            ⎢      y₂        ⎥</span>
-<span class="co">#&gt;            ⎢ 0   ───   0   1⎥</span>
-<span class="co">#&gt;            ⎢       2        ⎥</span>
-<span class="co">#&gt;            ⎢     p₂         ⎥</span>
-<span class="co">#&gt;            ⎢                ⎥</span>
-<span class="co">#&gt;            ⎢           y₃   ⎥</span>
-<span class="co">#&gt;            ⎢ 0    0   ───  1⎥</span>
-<span class="co">#&gt;            ⎢            2   ⎥</span>
-<span class="co">#&gt;            ⎢          p₃    ⎥</span>
-<span class="co">#&gt;            ⎢                ⎥</span>
-<span class="co">#&gt;            ⎣ 1    1    1   0⎦</span>
+<span class="co">#&gt; [caracas]: ⎡ y₁     ⎤</span>
+<span class="co">#&gt;            ⎢───   0 ⎥</span>
+<span class="co">#&gt;            ⎢  2     ⎥</span>
+<span class="co">#&gt;            ⎢p₁      ⎥</span>
+<span class="co">#&gt;            ⎢        ⎥</span>
+<span class="co">#&gt;            ⎢      y₂⎥</span>
+<span class="co">#&gt;            ⎢ 0   ───⎥</span>
+<span class="co">#&gt;            ⎢       2⎥</span>
+<span class="co">#&gt;            ⎣     p₂ ⎦</span>
 <span class="va">H_sol</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/subs_lst.html">subs_lst</a></span><span class="op">(</span><span class="va">H</span>, <span class="va">sol</span><span class="op">)</span>
 <span class="va">H_sol</span>
-<span class="co">#&gt; [caracas]: ⎡              2                                     ⎤</span>
-<span class="co">#&gt;            ⎢(y₁ + y₂ + y₃)                                      ⎥</span>
-<span class="co">#&gt;            ⎢───────────────         0                0         1⎥</span>
-<span class="co">#&gt;            ⎢       y₁                                           ⎥</span>
-<span class="co">#&gt;            ⎢                                                    ⎥</span>
-<span class="co">#&gt;            ⎢                               2                    ⎥</span>
-<span class="co">#&gt;            ⎢                 (y₁ + y₂ + y₃)                     ⎥</span>
-<span class="co">#&gt;            ⎢       0         ───────────────         0         1⎥</span>
-<span class="co">#&gt;            ⎢                        y₂                          ⎥</span>
-<span class="co">#&gt;            ⎢                                                    ⎥</span>
-<span class="co">#&gt;            ⎢                                                2   ⎥</span>
-<span class="co">#&gt;            ⎢                                  (y₁ + y₂ + y₃)    ⎥</span>
-<span class="co">#&gt;            ⎢       0                0         ───────────────  1⎥</span>
-<span class="co">#&gt;            ⎢                                         y₃         ⎥</span>
-<span class="co">#&gt;            ⎢                                                    ⎥</span>
-<span class="co">#&gt;            ⎣       1                1                1         0⎦</span></code></pre></div>
+<span class="co">#&gt; [caracas]: ⎡ y₁     ⎤</span>
+<span class="co">#&gt;            ⎢───   0 ⎥</span>
+<span class="co">#&gt;            ⎢  2     ⎥</span>
+<span class="co">#&gt;            ⎢p₁      ⎥</span>
+<span class="co">#&gt;            ⎢        ⎥</span>
+<span class="co">#&gt;            ⎢      y₂⎥</span>
+<span class="co">#&gt;            ⎢ 0   ───⎥</span>
+<span class="co">#&gt;            ⎢       2⎥</span>
+<span class="co">#&gt;            ⎣     p₂ ⎦</span></code></pre></div>
 </div>
 <div id="subsetting" class="section level2">
 <h2 class="hasAnchor">
@@ -712,42 +685,15 @@
 <span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">L</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sol</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sol</span>
-<span class="co">#&gt; Solution 1:</span>
-<span class="co">#&gt;   p1 =       y₁     </span>
-<span class="co">#&gt;        ────────────</span>
-<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
-<span class="co">#&gt;   p2 =       y₂     </span>
-<span class="co">#&gt;        ────────────</span>
-<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
-<span class="co">#&gt;   p3 =       y₃     </span>
-<span class="co">#&gt;        ────────────</span>
-<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
-<span class="co">#&gt;   a  =  y₁ + y₂ + y₃</span>
+<span class="co">#&gt; No solutions</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sol</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [[1]]$p1</span>
-<span class="co">#&gt; [caracas]:      y₁     </span>
-<span class="co">#&gt;            ────────────</span>
-<span class="co">#&gt;            y₁ + y₂ + y₃</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[1]]$p2</span>
-<span class="co">#&gt; [caracas]:      y₂     </span>
-<span class="co">#&gt;            ────────────</span>
-<span class="co">#&gt;            y₁ + y₂ + y₃</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[1]]$p3</span>
-<span class="co">#&gt; [caracas]:      y₃     </span>
-<span class="co">#&gt;            ────────────</span>
-<span class="co">#&gt;            y₁ + y₂ + y₃</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[1]]$a</span>
-<span class="co">#&gt; [caracas]: y₁ + y₂ + y₃</span></code></pre></div>
+<span class="co">#&gt; list()</span></code></pre></div>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
-<span class="co">#&gt; [1] "[a - y1/p1, a - y2/p2, a - y3/p3, p1 + p2 + p3 - 1]"</span>
+<span class="co">#&gt; [1] "[a - y1/p1, a - y2/p2]"</span>
 <span class="fu"><a href="../reference/as_character_matrix.html">as_character_matrix</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
-<span class="co">#&gt;      [,1]        [,2]         [,3]         [,4]               </span>
-<span class="co">#&gt; [1,] "a - y1/p1" " a - y2/p2" " a - y3/p3" " p1 + p2 + p3 - 1"</span></code></pre></div>
+<span class="co">#&gt;      [,1]        [,2]        </span>
+<span class="co">#&gt; [1,] "a - y1/p1" " a - y2/p2"</span></code></pre></div>
 <div id="options" class="section level3">
 <h3 class="hasAnchor">
 <a href="#options" class="anchor"></a>Options</h3>
@@ -760,57 +706,23 @@
 </ul>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sol</span>
-<span class="co">#&gt; Solution 1:</span>
-<span class="co">#&gt;   p1 =       y₁     </span>
-<span class="co">#&gt;        ────────────</span>
-<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
-<span class="co">#&gt;   p2 =       y₂     </span>
-<span class="co">#&gt;        ────────────</span>
-<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
-<span class="co">#&gt;   p3 =       y₃     </span>
-<span class="co">#&gt;        ────────────</span>
-<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
-<span class="co">#&gt;   a  =  y₁ + y₂ + y₃</span>
+<span class="co">#&gt; No solutions</span>
 <span class="va">L</span>
 <span class="co">#&gt; [caracas]: a⋅(p₁ + p₂ + p₃ - 1) - y₁⋅log(p₁) - y₂⋅log(p₂) - y₃⋅log(p₃)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.prettyascii <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
 <span class="va">sol</span>
-<span class="co">#&gt; Solution 1:</span>
-<span class="co">#&gt;   p1 =       y1     </span>
-<span class="co">#&gt;        ------------</span>
-<span class="co">#&gt;        y1 + y2 + y3 </span>
-<span class="co">#&gt;   p2 =       y2     </span>
-<span class="co">#&gt;        ------------</span>
-<span class="co">#&gt;        y1 + y2 + y3 </span>
-<span class="co">#&gt;   p3 =       y3     </span>
-<span class="co">#&gt;        ------------</span>
-<span class="co">#&gt;        y1 + y2 + y3 </span>
-<span class="co">#&gt;   a  =  y1 + y2 + y3</span>
+<span class="co">#&gt; No solutions</span>
 <span class="va">L</span>
 <span class="co">#&gt; [caracas]: a*(p1 + p2 + p3 - 1) - y1*log(p1) - y2*log(p2) - y3*log(p3)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.prettyascii <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (FALSE)</span></code></pre></div>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sol</span>
-<span class="co">#&gt; Solution 1:</span>
-<span class="co">#&gt;   p1 =       y₁     </span>
-<span class="co">#&gt;        ────────────</span>
-<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
-<span class="co">#&gt;   p2 =       y₂     </span>
-<span class="co">#&gt;        ────────────</span>
-<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
-<span class="co">#&gt;   p3 =       y₃     </span>
-<span class="co">#&gt;        ────────────</span>
-<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
-<span class="co">#&gt;   a  =  y₁ + y₂ + y₃</span>
+<span class="co">#&gt; No solutions</span>
 <span class="va">L</span>
 <span class="co">#&gt; [caracas]: a⋅(p₁ + p₂ + p₃ - 1) - y₁⋅log(p₁) - y₂⋅log(p₂) - y₃⋅log(p₃)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.ascii <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
 <span class="va">sol</span>
-<span class="co">#&gt; Solution 1:</span>
-<span class="co">#&gt;   p1 =  y1/(y1 + y2 + y3) </span>
-<span class="co">#&gt;   p2 =  y2/(y1 + y2 + y3) </span>
-<span class="co">#&gt;   p3 =  y3/(y1 + y2 + y3) </span>
-<span class="co">#&gt;   a  =  y1 + y2 + y3</span>
+<span class="co">#&gt; No solutions</span>
 <span class="va">L</span>
 <span class="co">#&gt; [caracas]: a*(p1 + p2 + p3 - 1) - y1*log(p1) - y2*log(p2) - y3*log(p3)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.ascii <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (FALSE)</span></code></pre></div>
@@ -827,37 +739,10 @@
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.rowvec <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (TRUE)</span></code></pre></div>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sol</span>
-<span class="co">#&gt; Solution 1:</span>
-<span class="co">#&gt;   p1 =       y₁     </span>
-<span class="co">#&gt;        ────────────</span>
-<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
-<span class="co">#&gt;   p2 =       y₂     </span>
-<span class="co">#&gt;        ────────────</span>
-<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
-<span class="co">#&gt;   p3 =       y₃     </span>
-<span class="co">#&gt;        ────────────</span>
-<span class="co">#&gt;        y₁ + y₂ + y₃ </span>
-<span class="co">#&gt;   a  =  y₁ + y₂ + y₃</span>
+<span class="co">#&gt; No solutions</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.sol.simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">sol</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [[1]]$p1</span>
-<span class="co">#&gt; [caracas]:      y₁     </span>
-<span class="co">#&gt;            ────────────</span>
-<span class="co">#&gt;            y₁ + y₂ + y₃</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[1]]$p2</span>
-<span class="co">#&gt; [caracas]:      y₂     </span>
-<span class="co">#&gt;            ────────────</span>
-<span class="co">#&gt;            y₁ + y₂ + y₃</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[1]]$p3</span>
-<span class="co">#&gt; [caracas]:      y₃     </span>
-<span class="co">#&gt;            ────────────</span>
-<span class="co">#&gt;            y₁ + y₂ + y₃</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[1]]$a</span>
-<span class="co">#&gt; [caracas]: y₁ + y₂ + y₃</span>
+<span class="co">#&gt; list()</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.sol.simplify <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (TRUE)</span></code></pre></div>
 </div>
 </div>

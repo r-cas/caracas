@@ -23,3 +23,24 @@ test_that("ask", {
   expect_true(ask(w, "positive"))
   expect_true(ask(D, "hermitian"))
 })
+
+
+
+test_that("solve 1", {
+  x <- symbol("x")
+  sol <- solve_sys(x^2 + 1, x)
+  expect_equal(length(sol), 2L)
+})
+
+test_that("solve 2", {
+  x <- symbol("x", real = TRUE)
+  sol <- solve_sys(x^2 + 1, x)
+  expect_equal(length(sol), 0L)
+})
+
+test_that("solve 3", {
+  x <- symbol("x", positive = TRUE)
+  ask(x, 'positive')
+  sol <- solve_sys(x^2 - 1, x)
+  expect_equal(length(sol), 1L)
+})

@@ -77,7 +77,7 @@ the solutions to lhs = rhs for vars are found." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9143</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9202</span>
       </span>
     </div>
 
@@ -189,9 +189,20 @@ list of the variables' values.</p>
   <span class='va'>exp1</span> <span class='op'>&lt;-</span> <span class='fl'>2</span><span class='op'>*</span><span class='va'>x</span> <span class='op'>+</span> <span class='fl'>2</span>
   <span class='va'>exp2</span> <span class='op'>&lt;-</span> <span class='va'>x</span>
   <span class='fu'>solve_sys</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>exp1</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>exp2</span><span class='op'>)</span>, <span class='va'>x</span><span class='op'>)</span>
+  
+  <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='symbol.html'>symbol</a></span><span class='op'>(</span><span class='st'>"x"</span><span class='op'>)</span>
+  <span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='symbol.html'>symbol</a></span><span class='op'>(</span><span class='st'>"y"</span><span class='op'>)</span>
+  <span class='va'>lhs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>*</span><span class='va'>x</span><span class='op'>*</span><span class='va'>y</span> <span class='op'>-</span> <span class='va'>y</span>, <span class='va'>x</span><span class='op'>)</span>
+  <span class='va'>rhs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>5</span><span class='op'>*</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>+</span><span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>sol</span> <span class='op'>&lt;-</span> <span class='fu'>solve_sys</span><span class='op'>(</span><span class='va'>lhs</span>, <span class='va'>rhs</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>sol</span>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; Solution 1:
-#&gt;   x =  -2 </div><div class='input'>
+#&gt;   x =  2/3 
+#&gt;   y =  -10/3 
+#&gt; Solution 2:
+#&gt;   x =  2 
+#&gt;   y =  -2 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

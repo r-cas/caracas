@@ -56,7 +56,7 @@ test_that("print solve_sys:", {
   y <- symbol("y")
   lhs <- cbind(3*x*y - y, x)
   rhs <- cbind(-5*x, y+4)
-  sol <- solve_sys(lhs, rhs, c(x, y))
+  sol <- solve_sys(lhs, rhs, list(x, y))
   
   out <- paste0(capture.output(print(sol)), collapse = "")
   expect_match(out, "Solution")
