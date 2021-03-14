@@ -165,7 +165,60 @@ t.caracas_symbol <- function(x) {
 }
 
 
+#' Elementwise reciprocal matrix
+#'
+#' @param x Object `x`
+#' @param num The numerator in the result.
+#'
+#' @concept linalg
+#' 
+#' @export
+reciprocal_matrix <- function(x, num=1){
+  ensure_sympy()
 
+  if (!symbol_is_matrix(x)) stop("'x' must be sympy matrix\n")
+
+  xx1 <- as.character(x)
+  xx1 <- remove_mat_prefix(xx1)  
+  xx1 ## "[[a, c, e], [b, d, f]]"
+  
+  
+  xx2 <- gsub("^\\[(.*)\\]$", "\\1", xx1)
+  xx2
+  
+  xx3 <- strsplit(xx2, "\\],")[[1]]
+  for (i in 1:(length(xx3)-1))
+    xx3[i] <- paste(xx3[i], "]")
+  xx3 ## "[a, c, e ]" " [b, d, f]"
+  
+  xx4 <- gsub("[[:space:]]*\\[(.*)\\][[:space:]]*", "\\1", xx3)
+  xx4 ##  "a, c, e " "b, d, f" 
+  
+  vv <- strsplit(xx4, ",")
+  vv
+  
+  ww <- lapply(vv, function(v) paste("(", v, ")", sep="") )
+  ww
+  
+  xx <- lapply(ww, function(w) paste0(num, "/", w))
+  xx
+
+  xx2 <- lapply(xx, function(x) paste(x, collapse=", "))
+  xx2
+
+
+  yy <- lapply(xx2, function(x) {paste("[", x, "]", collapse=", ")})
+  yy
+
+  zz <- unlist(yy) 
+  zz
+
+  out<- paste("Matrix([", paste0(zz, collapse=", "), "])")
+out
+
+  as_sym(out)
+
+}
 
 
 

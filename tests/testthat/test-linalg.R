@@ -5,13 +5,16 @@ test_that("Math", {
   
   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
   B <- as_sym(A)
-  
+
   expect_equal(as.character(B), "Matrix([[a, 0, a], [0, a, 0], [0, a, 0]])")
   expect_equal(as.character(2*B), "Matrix([[2*a, 0, 2*a], [0, 2*a, 0], [0, 2*a, 0]])")
   expect_equal(as.character(B + B), "Matrix([[2*a, 0, 2*a], [0, 2*a, 0], [0, 2*a, 0]])")
   expect_equal(as.character(B - B), "Matrix([[0, 0, 0], [0, 0, 0], [0, 0, 0]])")
   expect_equal(as.character(B*B), "Matrix([[a^2, 0, a^2], [0, a^2, 0], [0, a^2, 0]])")
 })
+
+
+
 
 test_that("determinant", {
   skip_if_no_sympy()
@@ -20,6 +23,20 @@ test_that("determinant", {
   
   expect_equal(as.character(det(B)), "x^3 - 2")
 })
+
+test_that("reciprocal_matrix", {
+  skip_if_no_sympy()
+
+  B <- as_sym("[[x, a], [a, x**2]]")
+  Bchar1 <- as.character(reciprocal_matrix(B))
+  Bchar2 <- as.character(reciprocal_matrix(B, num=2))
+  
+  expect_equal(Bchar1, "Matrix([[[1/x], [1/a]], [[1/a], [x^(-2)]]])")
+  expect_equal(Bchar2, "Matrix([[[2/x], [2/a]], [[2/a], [2/x^2]]])")
+})
+
+
+
 
 test_that("diag", {
   skip_if_no_sympy()
