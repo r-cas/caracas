@@ -49,9 +49,18 @@ test_that("subs", {
   expect_equal(as.character(e2), "2*y^4")
 })
 
-# test_that("matrix symbol 1x1", {
-#   skip_if_no_sympy()
-#   
+test_that("subs_vec", {
+  skip_if_no_sympy()
+  
+  x <- as_sym(paste0('x', 1:3))
+  e <- 2*x^2
+   
+  expect_equal(as.character(subs_vec(e, x, 1:3)), "Matrix([[2], [8], [18]])")
+  expect_equal(as.character(subs_vec(e, x, x^2)), "Matrix([[2*x1^4], [2*x2^4], [2*x3^4]])")
+})
+
+# test_that("matrix symbol 1x1", {  #   skip_if_no_sympy()  #  
+
 #   W <- matrix_symbol("W") # 1 x 1 by default
 #   expect_equal(dim(W), c(1L, 1L))
 #   

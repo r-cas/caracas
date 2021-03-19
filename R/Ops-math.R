@@ -10,6 +10,27 @@ get_pyobj <- function(e, method) {
 
 
 
+matrix_ele_power <- function(x, power = 1){
+  ensure_sympy()
+  
+  if (!symbol_is_matrix(x)) {
+    stop("'x' must be sympy matrix\n")
+  }
+  
+  power <- as.character(power)
+  
+  if (grepl("^-?[0-9]+$", power)) {
+    # S(): Sympify
+    # Means that this will be e.g. (S(1))/(1) = 1 instead of 1/1 = 1.0 (numeric)
+    power <- paste0("S(", power, ")")
+  }
+  
+  rx <- apply(as_character_matrix(x), 2, function(xx) {
+    paste0("(", xx, ")**(", power, ")")
+  })
+  
+  return(as_sym(rx))
+}
 
 
 #' Math operators
@@ -100,20 +121,27 @@ Ops.caracas_symbol = function(e1, e2) {
 
   ### cat("HERE\n"); str(list(o1=o1, o2=o2)); str(list(e1_is_mat=e1_is_mat, e2_is_mat=e2_is_mat))
   
-  # Component-wise * and / for matrices
-  # +/- is handles with normal operators
-  if ((e1_is_mat || e2_is_mat) && .Generic %in% c("*", "/")) {
+  # Component-wise * / ^ for matrices
+  # +/- is handled with normal operators
+  if ((e1_is_mat || e2_is_mat) && .Generic %in% c("*", "/", "^")) {
     ### cat("mat || mat\n")
     if (.Generic == "*") {
       z <- get_sympy()$matrix_multiply_elementwise(o1, o2)
       w <- construct_symbol_from_pyobj(z)
       return(w) 
-    } else {
+    } else if (.Generic == "/") {
       e2 <- reciprocal_matrix(e2)
       o2 <- e2$pyobj
       z <- get_sympy()$matrix_multiply_elementwise(o1, o2)
       w <- construct_symbol_from_pyobj(z)
       return(w)
+    } else if (.Generic == "^") {
+      #print(e1)
+      #print(e2)
+      w <- matrix_ele_power(e1, e2)
+      return(w) 
+    } else {
+      stop("Unexpected")
     }
   }
 

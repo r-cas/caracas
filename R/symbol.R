@@ -301,10 +301,13 @@ c.caracas_symbol <- function(...) {
 #'    subs(e, "x", y)
 #' }
 #' 
+#' @seealso [subs_vec()], [subs_lst()]
+#' 
 #' @concept caracas_symbol
 #' 
 #' @export
 subs <- function(s, x, v) {
+  ensure_sympy()
   
   sym <- as.character(x)
   
@@ -317,6 +320,63 @@ subs <- function(s, x, v) {
   y <- construct_symbol_from_pyobj(s$pyobj$subs(sym, val))
   return(y)
 }
+
+#' Substitute af vector of symbols for a vector of values
+#' 
+#' @param s Expression
+#' @param x Names of symbol (vector)
+#' @param v Values for `x` (vector)
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'    x <- as_sym(paste0('x', 1:3))
+#'    e <- 2*x^2
+#'    e
+#'    subs_vec(e, x, 1:3)
+#'    subs_vec(e, x, x^2)
+#' }
+#' 
+#' @seealso [subs()], [subs_lst()]
+#' @concept caracas_symbol
+#' 
+#' @export
+subs_vec <- function(s, x, v) {
+  ensure_sympy()
+  
+  stopifnot_matrix(x)
+  
+  vv <- v
+  
+  if (inherits(v, "caracas_symbol") && symbol_is_matrix(v)) {
+    if (ncol(v) == 1L) {
+      vv <- lapply(seq_len(nrow(v)), function(i) v[i, ])
+    } else if (nrow(v) == 1L) {
+      vv <- lapply(seq_len(ncol(v)), function(i) v[, i])
+    } else {
+      stop("When v is a caracas matrix, one dimension must be 1")
+    }
+  }
+  
+  if (nrow(x) != 1L && ncol(x) != 1L) {
+    stop("x must have either 1 row or 1 column")
+  }
+  
+  if (ncol(x) > 1L) {
+    x <- t(x)
+  }
+  
+  if (length(vv) != nrow(x)) {
+    stop("Dimension mismatch")
+  }
+  
+  ss <- s
+  for (i in seq_along(vv)) {
+    ss <- subs(ss, x[i, ], vv[[i]])
+  }
+  
+  return(ss)
+}
+
 
 #' Substitute symbol for of value given by a list
 #' 
@@ -342,10 +402,14 @@ subs <- function(s, x, v) {
 #'      H_sol
 #' }
 #' 
+#' @seealso [subs()], [subs_vec()]
+#' 
 #' @concept caracas_symbol
 #' 
 #' @export
 subs_lst <- function(s, x) {
+  ensure_sympy()
+  
   new_s <- s
   
   for (i in seq_along(x)) {

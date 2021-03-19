@@ -32,4 +32,7 @@ if (has_sympy()) {
 }
 
 }
+\seealso{
+\code{\link[=subs]{subs()}}, \code{\link[=subs_vec]{subs_vec()}}
+}
 \concept{caracas_symbol}

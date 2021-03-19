@@ -337,7 +337,7 @@ der <- function(expr, vars, simplify = TRUE) {
   if (simplify) {
     if (grepl("^\\[\\[\\[", as.character(d))) {
       d <- unbracket(d)
-      d <- matrify(d) 
+      d <- matrify(d)
     }
   }
   
