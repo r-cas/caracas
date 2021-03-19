@@ -82,8 +82,27 @@ A %*% B
 ## Hadamard (elementwise) product
 
 ```{r}
-A * A2 
+A * A2
 ```
+
+## Vector operations
+
+```{r}
+x <- as_sym(paste0("x", 1:3))
+x
+x + x
+1 / x
+x / x
+```
+
+
+## Reciprocal matrix
+
+```{r}
+reciprocal_matrix(A2)
+reciprocal_matrix(A2, num = "2*a")
+```
+
 
 ## Matrix inverse; solve system of linear equations
 

@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9202</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9211</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@
 </h1>
                         <h4 class="author">Mikkel Meyer Andersen and Søren Højsgaard</h4>
             
-            <h4 class="date">Fri Mar 5 11:25:24 2021</h4>
+            <h4 class="date">Fri Mar 19 11:17:12 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/master/vignettes/linear-algebra.Rmd"><code>vignettes/linear-algebra.Rmd</code></a></small>
       <div class="hidden name"><code>linear-algebra.Rmd</code></div>
@@ -172,18 +172,55 @@
 <h2 class="hasAnchor">
 <a href="#hadamard-elementwise-product" class="anchor"></a>Hadamard (elementwise) product</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">A</span> <span class="op">*</span> <span class="va">A2</span> 
+<code class="sourceCode R"><span class="va">A</span> <span class="op">*</span> <span class="va">A2</span>
 <span class="co">#&gt; [caracas]: ⎡ 2   ⎤</span>
 <span class="co">#&gt;            ⎢a   0⎥</span>
 <span class="co">#&gt;            ⎢     ⎥</span>
 <span class="co">#&gt;            ⎢ 2   ⎥</span>
 <span class="co">#&gt;            ⎣b   1⎦</span></code></pre></div>
 </div>
+<div id="vector-operations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#vector-operations" class="anchor"></a>Vector operations</h2>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span>
+<span class="co">#&gt; [caracas]: [x₁  x₂  x₃]ᵀ</span>
+<span class="va">x</span> <span class="op">+</span> <span class="va">x</span>
+<span class="co">#&gt; [caracas]: [2⋅x₁  2⋅x₂  2⋅x₃]ᵀ</span>
+<span class="fl">1</span> <span class="op">/</span> <span class="va">x</span>
+<span class="co">#&gt; [caracas]: ⎡1   1   1 ⎤</span>
+<span class="co">#&gt;            ⎢──  ──  ──⎥</span>
+<span class="co">#&gt;            ⎣x₁  x₂  x₃⎦ᵀ</span>
+<span class="va">x</span> <span class="op">/</span> <span class="va">x</span>
+<span class="co">#&gt; [caracas]: [1  1  1]ᵀ</span></code></pre></div>
+</div>
+<div id="reciprocal-matrix" class="section level2">
+<h2 class="hasAnchor">
+<a href="#reciprocal-matrix" class="anchor"></a>Reciprocal matrix</h2>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/reciprocal_matrix.html">reciprocal_matrix</a></span><span class="op">(</span><span class="va">A2</span><span class="op">)</span>
+<span class="co">#&gt; [caracas]: ⎡1  1⎤</span>
+<span class="co">#&gt;            ⎢─  ─⎥</span>
+<span class="co">#&gt;            ⎢a  c⎥</span>
+<span class="co">#&gt;            ⎢    ⎥</span>
+<span class="co">#&gt;            ⎢1   ⎥</span>
+<span class="co">#&gt;            ⎢─  1⎥</span>
+<span class="co">#&gt;            ⎣b   ⎦</span>
+<span class="fu"><a href="../reference/reciprocal_matrix.html">reciprocal_matrix</a></span><span class="op">(</span><span class="va">A2</span>, num <span class="op">=</span> <span class="st">"2*a"</span><span class="op">)</span>
+<span class="co">#&gt; [caracas]: ⎡     2⋅a⎤</span>
+<span class="co">#&gt;            ⎢ 2   ───⎥</span>
+<span class="co">#&gt;            ⎢      c ⎥</span>
+<span class="co">#&gt;            ⎢        ⎥</span>
+<span class="co">#&gt;            ⎢2⋅a     ⎥</span>
+<span class="co">#&gt;            ⎢───  2⋅a⎥</span>
+<span class="co">#&gt;            ⎣ b      ⎦</span></code></pre></div>
+</div>
 <div id="matrix-inverse-solve-system-of-linear-equations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#matrix-inverse-solve-system-of-linear-equations" class="anchor"></a>Matrix inverse; solve system of linear equations</h2>
 <p>Solve <span class="math inline">\(Ax=b\)</span> for <span class="math inline">\(x\)</span>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡ 1    ⎤</span>
 <span class="co">#&gt;            ⎢ ─   0⎥</span>
@@ -203,7 +240,7 @@
 <div id="generalized-penrose-moore-inverse-solve-system-of-linear-equations-tbw" class="section level2">
 <h2 class="hasAnchor">
 <a href="#generalized-penrose-moore-inverse-solve-system-of-linear-equations-tbw" class="anchor"></a>Generalized (Penrose-Moore) inverse; solve system of linear equations [TBW]</h2>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[1, 2, 3], [4, 5, 6]]"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/linalg.html">pinv</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡-17       ⎤</span>
@@ -240,7 +277,7 @@
 <div id="qr-decomposition" class="section level2">
 <h2 class="hasAnchor">
 <a href="#qr-decomposition" class="anchor"></a>QR decomposition</h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"0"</span>, <span class="st">"0"</span>, <span class="st">"1"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">A</span>
 <span class="co">#&gt; [caracas]: ⎡a  0⎤</span>
@@ -261,7 +298,7 @@
 <div id="eigenvalues-and-eigenvectors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#eigenvalues-and-eigenvectors" class="anchor"></a>Eigenvalues and eigenvectors</h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/linalg.html">eigenval</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; [[1]]$eigval</span>
@@ -277,7 +314,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]$eigmult</span>
 <span class="co">#&gt; [1] 1</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">evec</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linalg.html">eigenvec</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
 <span class="va">evec</span>
 <span class="co">#&gt; [[1]]</span>
@@ -316,7 +353,7 @@
 <div id="inverse-penrose-moore-pseudo-inverse" class="section level2">
 <h2 class="hasAnchor">
 <a href="#inverse-penrose-moore-pseudo-inverse" class="anchor"></a>Inverse, Penrose-Moore pseudo inverse</h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡1   ⎤</span>
 <span class="co">#&gt;            ⎢─  0⎥</span>
@@ -340,12 +377,12 @@
 <h2 class="hasAnchor">
 <a href="#additional-functionality-for-linear-algebra" class="anchor"></a>Additional functionality for linear algebra</h2>
 <p><code>do_la</code> short for “do linear algebra”</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/args.html">args</a></span><span class="op">(</span><span class="va">do_la</span><span class="op">)</span>
 <span class="co">#&gt; function (x, slot, ...) </span>
 <span class="co">#&gt; NULL</span></code></pre></div>
 <p>The above functions can be called:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"QRdecomposition"</span><span class="op">)</span> <span class="co"># == QRdecomposition(A)</span>
 <span class="co">#&gt; $Q</span>
 <span class="co">#&gt; [caracas]: ⎡ a    ⎤</span>
@@ -403,7 +440,7 @@
 <div id="characteristic-polynomium" class="section level3">
 <h3 class="hasAnchor">
 <a href="#characteristic-polynomium" class="anchor"></a>Characteristic polynomium</h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"charpoly"</span><span class="op">)</span>
 <span class="va">cp</span>
 <span class="co">#&gt; [caracas]:      2             </span>
@@ -414,14 +451,14 @@
 <div id="rank" class="section level3">
 <h3 class="hasAnchor">
 <a href="#rank" class="anchor"></a>Rank</h3>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"rank"</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: 2</span></code></pre></div>
 </div>
 <div id="cofactor" class="section level3">
 <h3 class="hasAnchor">
 <a href="#cofactor" class="anchor"></a>Cofactor</h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"0"</span>, <span class="st">"1"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">A</span>
 <span class="co">#&gt; [caracas]: ⎡a  0⎤</span>
@@ -437,7 +474,7 @@
 <div id="echelon-form" class="section level3">
 <h3 class="hasAnchor">
 <a href="#echelon-form" class="anchor"></a>Echelon form</h3>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">A</span><span class="op">)</span>, <span class="st">"echelon_form"</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡a  0  a  0⎤</span>
 <span class="co">#&gt;            ⎢          ⎥</span>
@@ -446,7 +483,7 @@
 <div id="cholesky-factorisation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#cholesky-factorisation" class="anchor"></a>Cholesky factorisation</h3>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[9, 3*I], [-3*I, 5]]"</span><span class="op">)</span>
 <span class="va">B</span>
 <span class="co">#&gt; [caracas]: ⎡ 9    3⋅ⅈ⎤</span>
@@ -460,7 +497,7 @@
 <div id="gram-schmidt" class="section level3">
 <h3 class="hasAnchor">
 <a href="#gram-schmidt" class="anchor"></a>Gram Schmidt</h3>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[ 2, 3, 5 ], [3, 6, 2], [8, 3, 6]]"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">B</span>, <span class="st">"GramSchmidt"</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡    23    1692 ⎤</span>
@@ -478,7 +515,7 @@
 <div id="reduced-row-echelon-form-rref" class="section level3">
 <h3 class="hasAnchor">
 <a href="#reduced-row-echelon-form-rref" class="anchor"></a>Reduced row-echelon form (rref)</h3>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6] ]"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">B</span>
 <span class="co">#&gt; [caracas]: ⎡2  4   8⎤</span>
@@ -501,7 +538,7 @@
 <div id="column-space-row-space-and-null-space" class="section level3">
 <h3 class="hasAnchor">
 <a href="#column-space-row-space-and-null-space" class="anchor"></a>Column space, row space and null space</h3>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">6</span>, <span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">9</span>, <span class="fl">6</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">B</span>
 <span class="co">#&gt; [caracas]: ⎡1  -2  3⎤</span>
@@ -541,7 +578,7 @@
 <div id="singular-values-svd" class="section level3">
 <h3 class="hasAnchor">
 <a href="#singular-values-svd" class="anchor"></a>Singular values, svd</h3>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6], [8, 3, 6] ]"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">B</span>
 <span class="co">#&gt; [caracas]: ⎡2  4   8  8⎤</span>
@@ -564,7 +601,7 @@
 <span class="co">#&gt; [[4]]</span>
 <span class="co">#&gt; [caracas]: 0</span>
 <span class="co">##svd(B) FIXME</span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># # FIXME</span>
 <span class="co"># B &lt;- t(as_sym("[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6], [8, 3, 6] ]"))</span>
 <span class="co"># B</span>

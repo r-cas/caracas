@@ -4,12 +4,14 @@
 \alias{der}
 \title{Symbolic differentiation of an expression}
 \usage{
-der(expr, vars)
+der(expr, vars, simplify = TRUE)
 }
 \arguments{
 \item{expr}{A \code{caracas_symbol}}
 
 \item{vars}{variables to take derivate with respect to}
+
+\item{simplify}{Simplify result}
 }
 \description{
 Symbolic differentiation of an expression

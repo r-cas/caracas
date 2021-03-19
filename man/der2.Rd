@@ -4,12 +4,14 @@
 \alias{der2}
 \title{Symbolic differentiation of second order of an expression}
 \usage{
-der2(expr, vars)
+der2(expr, vars, simplify = TRUE)
 }
 \arguments{
 \item{expr}{A \code{caracas_symbol}}
 
 \item{vars}{variables to take derivate with respect to}
+
+\item{simplify}{Simplify result}
 }
 \description{
 Symbolic differentiation of second order of an expression

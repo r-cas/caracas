@@ -174,27 +174,36 @@ t.caracas_symbol <- function(x) {
 #' Elementwise reciprocal matrix
 #'
 #' @param x Object `x`
-#' @param num The numerator in the result.
+#' @param numerator The numerator in the result.
 #'
 #' @concept linalg
 #' 
 #' @examples
 #' if (has_sympy()) {
-#'   s  <- as_sym("[[r1, r2, r3], [u1, u2, u3]]")
-#'   reciprocal_matrix(s, num=7)
+#'   s <- as_sym("[[r1, r2, r3], [u1, u2, u3]]")
+#'   reciprocal_matrix(s, numerator = 7)
 #' }
 #' 
 #' @export
-reciprocal_matrix <- function(x, num=1){
+reciprocal_matrix <- function(x, numerator = 1){
   ensure_sympy()
 
   if (!symbol_is_matrix(x)) {
     stop("'x' must be sympy matrix\n")
   }
+  
+  numerator <- as.character(numerator)
+  
+  if (grepl("^-?[0-9]+$", numerator)) {
+    # S(): Sympify
+    # Means that this will be e.g. (S(1))/(1) = 1 instead of 1/1 = 1.0 (numeric)
+    numerator <- paste0("S(", numerator, ")")
+  }
 
   rx <- apply(as_character_matrix(x), 2, function(xx) {
-    paste0("(", num, ")", "/(", xx, ")")
+    paste0("(", numerator, ")", "/(", xx, ")")
   })
+  
   return(as_sym(rx))
 }
 

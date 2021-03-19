@@ -4,14 +4,21 @@
 \alias{reciprocal_matrix}
 \title{Elementwise reciprocal matrix}
 \usage{
-reciprocal_matrix(x, num = 1)
+reciprocal_matrix(x, numerator = 1)
 }
 \arguments{
 \item{x}{Object \code{x}}
 
-\item{num}{The numerator in the result.}
+\item{numerator}{The numerator in the result.}
 }
 \description{
 Elementwise reciprocal matrix
+}
+\examples{
+if (has_sympy()) {
+  s <- as_sym("[[r1, r2, r3], [u1, u2, u3]]")
+  reciprocal_matrix(s, numerator = 7)
+}
+
 }
 \concept{linalg}

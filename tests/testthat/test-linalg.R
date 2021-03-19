@@ -31,8 +31,14 @@ test_that("reciprocal_matrix", {
   Bchar1 <- as.character(reciprocal_matrix(B))
   Bchar2 <- as.character(reciprocal_matrix(B, num=2))
   
-  expect_equal(Bchar1, "Matrix([[[1/x], [1/a]], [[1/a], [x^(-2)]]])")
-  expect_equal(Bchar2, "Matrix([[[2/x], [2/a]], [[2/a], [2/x^2]]])")
+  expect_equal(Bchar1, "Matrix([[1/x, 1/a], [1/a, x^(-2)]])")
+  expect_equal(Bchar2, "Matrix([[2/x, 2/a], [2/a, 2/x^2]])")
+  
+  
+  expect_equal(as.character(reciprocal_matrix(as_sym("Matrix([[a, c], [b, 1]])"))),
+               "Matrix([[1/a, 1/c], [1/b, 1]])")
+  expect_equal(as.character(reciprocal_matrix(as_sym("Matrix([[a, c], [b, 1]])"), "a")),
+               "Matrix([[1, a/c], [a/b, a]])")
 })
 
 

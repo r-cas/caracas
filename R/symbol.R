@@ -58,6 +58,7 @@ eval_to_symbol <- function(x) {
     if (grepl("[a-zA-Z]+[0-9-.]+/[0-9-.]+", x, perl = TRUE)) {
       # There was a character (e.g. 'x1/2'), do nothing
     } else {
+      # S(): Sympify
       x <- gsub("([0-9-.]+)/([0-9-.]+)", "S(\\1)/S(\\2)", x, perl = TRUE)
     }
   }
@@ -204,6 +205,66 @@ vectorfy <- function(x) {
   z <- paste0(unlist(lapply(x, as.character)), collapse = ", ")
   z <- paste0("[", z, "]")
   y <- eval_to_symbol(z)
+  return(y)
+}
+
+
+#' Remove inner-most dimension
+#' 
+#' @param x Array symbol to collapse dimension from
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   x <- as_sym("[[[x1/(b2 + x1)], 
+#'                  [x2/(b2 + x2)], 
+#'                  [x3/(b2 + x3)]], 
+#'                 [[-b1*x1/(b2 + x1)^2], 
+#'                  [-b1*x2/(b2 + x2)^2], 
+#'                  [-b1*x3/(b2 + x3)^2]]]")
+#'   x
+#'   unbracket(x)
+#'   
+#'   x <- as_sym("Matrix([[b1*x1/(b2 + x1)], [b1*x2/(b2 + x2)], [b1*x3/(b2 + x3)]])")
+#'   
+#' }
+#' 
+#' @concept caracas_symbol
+#' 
+#' @export
+unbracket <- function(x) {
+  z <- as.character(x)
+
+  zz <- gsub("\\[([^]]+)\\]", "\\1", z)
+  zz
+  
+  y <- eval_to_symbol(zz)
+  return(y)
+}
+
+#' Convert object to tuple
+#' 
+#' @param x Object
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   x <- as_sym("Matrix([[b1*x1/(b2 + x1)], [b1*x2/(b2 + x2)], [b1*x3/(b2 + x3)]])")
+#'   tuplify(x)
+#'   
+#' }
+#' 
+#' @concept caracas_symbol
+#' 
+#' @export
+tuplify <- function(x) {
+  z <- as.character(x)
+  
+  zz <- gsub("[", "", z, fixed = TRUE)
+  zz <- gsub("]", "", zz, fixed = TRUE)
+  zz <- remove_mat_prefix(zz)
+  zz <- paste0("(", zz, ")")
+  zz
+  
+  y <- eval_to_symbol(zz)
   return(y)
 }
 

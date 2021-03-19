@@ -296,6 +296,7 @@ vars_to_array <- function(vars) {
 #'
 #' @param expr A `caracas_symbol`
 #' @param vars variables to take derivate with respect to
+#' @param simplify Simplify result
 #'
 #' @examples 
 #' if (has_sympy()) {
@@ -327,11 +328,18 @@ vars_to_array <- function(vars) {
 #' @concept calculus
 #'
 #' @export
-der <- function(expr, vars) {
+der <- function(expr, vars, simplify = TRUE) {
   ensure_sympy()
   
   new_vars <- vars_to_array(vars)
   d <- der_worker(expr, new_vars)
+  
+  if (simplify) {
+    if (grepl("^\\[\\[\\[", as.character(d))) {
+      d <- unbracket(d)
+      d <- matrify(d) 
+    }
+  }
   
   return(d)
 }
@@ -340,6 +348,7 @@ der <- function(expr, vars) {
 #'
 #' @param expr A `caracas_symbol`
 #' @param vars variables to take derivate with respect to
+#' @param simplify Simplify result
 #' 
 #' @examples 
 #' if (has_sympy()) {
@@ -358,11 +367,11 @@ der <- function(expr, vars) {
 #' @concept calculus
 #'
 #' @export
-der2 <- function(expr, vars) {
+der2 <- function(expr, vars, simplify = TRUE) {
   ensure_sympy()
   
-  d1 <- der(expr, vars)
-  d2 <- der(d1, vars)
+  d1 <- der(expr, vars, simplify = simplify)
+  d2 <- der(d1, vars, simplify = simplify)
   
   return(d2)
 }
