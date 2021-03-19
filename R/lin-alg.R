@@ -116,6 +116,12 @@ number_cols <- function(x) {
 #' @param x caracas symbol
 #' 
 #' @concept linalg
+#' @examples
+#' if (has_sympy()) {
+#'   s  <- as_sym("[[r1, r2, r3], [u1, u2, u3]]")
+#'   s2 <- apply(as_character_matrix(s), 2, function(x) (paste("1/(", x, ")")))
+#'   as_sym(s2)
+#' }
 #' 
 #' @export
 as_character_matrix <- function(x) {
@@ -172,52 +178,24 @@ t.caracas_symbol <- function(x) {
 #'
 #' @concept linalg
 #' 
+#' @examples
+#' if (has_sympy()) {
+#'   s  <- as_sym("[[r1, r2, r3], [u1, u2, u3]]")
+#'   reciprocal_matrix(s, num=7)
+#' }
+#' 
 #' @export
 reciprocal_matrix <- function(x, num=1){
   ensure_sympy()
 
-  if (!symbol_is_matrix(x)) stop("'x' must be sympy matrix\n")
+  if (!symbol_is_matrix(x)) {
+    stop("'x' must be sympy matrix\n")
+  }
 
-  xx1 <- as.character(x)
-  xx1 <- remove_mat_prefix(xx1)  
-  xx1 ## "[[a, c, e], [b, d, f]]"
-  
-  
-  xx2 <- gsub("^\\[(.*)\\]$", "\\1", xx1)
-  xx2
-  
-  xx3 <- strsplit(xx2, "\\],")[[1]]
-  for (i in 1:(length(xx3)-1))
-    xx3[i] <- paste(xx3[i], "]")
-  xx3 ## "[a, c, e ]" " [b, d, f]"
-  
-  xx4 <- gsub("[[:space:]]*\\[(.*)\\][[:space:]]*", "\\1", xx3)
-  xx4 ##  "a, c, e " "b, d, f" 
-  
-  vv <- strsplit(xx4, ",")
-  vv
-  
-  ww <- lapply(vv, function(v) paste("(", v, ")", sep="") )
-  ww
-  
-  xx <- lapply(ww, function(w) paste0(num, "/", w))
-  xx
-
-  xx2 <- lapply(xx, function(x) paste(x, collapse=", "))
-  xx2
-
-
-  yy <- lapply(xx2, function(x) {paste("[", x, "]", collapse=", ")})
-  yy
-
-  zz <- unlist(yy) 
-  zz
-
-  out<- paste("Matrix([", paste0(zz, collapse=", "), "])")
-out
-
-  as_sym(out)
-
+  rx <- apply(as_character_matrix(x), 2, function(xx) {
+    paste0("(", num, ")", "/(", xx, ")")
+  })
+  return(as_sym(rx))
 }
 
 

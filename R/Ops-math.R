@@ -10,18 +10,6 @@ get_pyobj <- function(e, method) {
 
 
 
-## reciprocal_matrix <- function(r){
-##   ensure_sympy()
-##   xstr <- as.character(r)
-##   xstr <- remove_mat_prefix(xstr)  
-##   zz <- strsplit(gsub("\\[(.*)\\]$", "\\1", xstr), ",")
-##   uu <- gsub("[[:space:]]*\\[(.*)\\][[:space:]]*", "\\1", zz[[1]])
-##   uu <- paste("(", uu, ")", sep="")  
-##   out <- paste("Matrix([",paste0("[", paste0("1/",uu), "]", collapse=", "),"])")
-##   as_sym(out)
-## }
-
-
 
 
 #' Math operators
