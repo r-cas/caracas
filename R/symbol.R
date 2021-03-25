@@ -449,3 +449,43 @@ fraction_parts <- function(x) {
   return(y)
 }
 
+
+
+#' Call a SymPy function directly on x
+#' 
+#' @param x Object to call `fun` on
+#' @param fun Function to call
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   def_sym(x, a)
+#'   p <- (x-a)^4
+#'   p
+#'   q <- p %>% fn("expand")
+#'   q
+#'   q %>% fn("factor")
+#'   
+#'   def_sym(x, y, z)
+#'   expr <- x*y + x - 3 + 2*x^2 - z*x^2 + x^3
+#'   expr
+#'   expr %>% fn("collect", x) 
+#' }
+#'  
+#' @concept caracas_symbol
+#' 
+#' @export
+sympy_func <- function(x, fun, ...) {
+  args <- list(...)
+  
+  args <- lapply(args, function(a) {
+    if (inherits(a, "caracas_symbol")) {
+      return(as.character(a))
+    }
+    
+    return(a)
+  })
+  
+  p <- do.call(x$pyobj[[fun]], args)
+  res <- caracas:::construct_symbol_from_pyobj(p)
+  return(res)
+}

@@ -4,10 +4,12 @@
 \alias{def_sym}
 \title{Define caracas symbols in global environment}
 \usage{
-def_sym(..., warn = FALSE, env = parent.frame())
+def_sym(..., charvec = NULL, warn = FALSE, env = parent.frame())
 }
 \arguments{
 \item{...}{Names for new symbols, also supports non-standard evaluation}
+
+\item{charvec}{Take each element in this character vector and define as caracas symbols}
 
 \item{warn}{Warn if existing variable names are overwritten}
 
@@ -27,6 +29,8 @@ if (has_sympy()) {
   def_sym("x1", "x2", "x3")
   ls()
   def_sym("x1", "x2", "x3", warn = TRUE)
+  ls()
+  def_sym(i, j, charvec = c("x", "y"))
   ls()
 }
 

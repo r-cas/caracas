@@ -59,6 +59,21 @@ test_that("subs_vec", {
   expect_equal(as.character(subs_vec(e, x, x^2)), "Matrix([[2*x1^4], [2*x2^4], [2*x3^4]])")
 })
 
+
+test_that("sympy_func", {
+  skip_if_no_sympy()
+  
+  def_sym(x, a)
+  p <- (x-a)^4
+  q <- p %>% sympy_func("expand")
+  expect_equal(as.character(q), "a^4 - 4*a^3*x + 6*a^2*x^2 - 4*a*x^3 + x^4")
+  
+  def_sym(x, y, z)
+  expr <- x*y + x - 3 + 2*x^2 - z*x^2 + x^3
+  qc <- expr %>% sympy_func("collect", x)
+  expect_equal(as.character(qc), "x^3 + x^2*(2 - z) + x*(y + 1) - 3")
+})
+
 # test_that("matrix symbol 1x1", {  #   skip_if_no_sympy()  #  
 
 #   W <- matrix_symbol("W") # 1 x 1 by default

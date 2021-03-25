@@ -3,6 +3,7 @@
 #' @seealso [symbol()], [as_sym()]
 #' 
 #' @param ... Names for new symbols, also supports non-standard evaluation
+#' @param charvec Take each element in this character vector and define as caracas symbols
 #' @param warn Warn if existing variable names are overwritten
 #' @param env Environment to assign variable in
 #' 
@@ -17,12 +18,15 @@
 #'   ls()
 #'   def_sym("x1", "x2", "x3", warn = TRUE)
 #'   ls()
+#'   def_sym(i, j, charvec = c("x", "y"))
+#'   ls()
 #' }
 #' 
 #' @concept caracas_symbol
 #' 
 #' @export
 def_sym <- function(..., 
+                    charvec = NULL, 
                     warn = FALSE,
                     env = parent.frame()) {
   
@@ -39,6 +43,10 @@ def_sym <- function(...,
     
     return(y)
   })
+  
+  if (!is.null(charvec) && is.character(charvec)) {
+    nms <- c(nms, charvec)
+  }
   
   existing_nms <- c()
   
