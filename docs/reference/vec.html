@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dimensions of a caracas symbol — dim.caracas_symbol • caracas</title>
+<title>Stacks matrix to vector — vec • caracas</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Dimensions of a caracas symbol — dim.caracas_symbol" />
-<meta property="og:description" content="Dimensions of a caracas symbol" />
+<meta property="og:title" content="Stacks matrix to vector — vec" />
+<meta property="og:description" content="Stacks matrix to vector" />
 
 
 
@@ -143,28 +143,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Dimensions of a caracas symbol</h1>
+    <h1>Stacks matrix to vector</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/lin-alg.R'><code>R/lin-alg.R</code></a></small>
-    <div class="hidden name"><code>dim.caracas_symbol.Rd</code></div>
+    <div class="hidden name"><code>vec.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Dimensions of a caracas symbol</p>
+    <p>Stacks matrix to vector</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for caracas_symbol</span>
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>vec</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>caracas symbol</p></td>
+      <td><p>Matrix</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='has_sympy.html'>has_sympy</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as_sym.html'>as_sym</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>9</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'>vec</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; [caracas]: [1  2  3  4  5  6  7  8  9]ᵀ</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

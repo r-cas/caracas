@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dimensions of a caracas symbol — dim.caracas_symbol • caracas</title>
+<title>Symbolic matrix — matrix_sym • caracas</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Dimensions of a caracas symbol — dim.caracas_symbol" />
-<meta property="og:description" content="Dimensions of a caracas symbol" />
+<meta property="og:title" content="Symbolic matrix — matrix_sym" />
+<meta property="og:description" content="Symbolic matrix" />
 
 
 
@@ -143,28 +143,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Dimensions of a caracas symbol</h1>
+    <h1>Symbolic matrix</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-cas/caracas/blob/master/R/lin-alg.R'><code>R/lin-alg.R</code></a></small>
-    <div class="hidden name"><code>dim.caracas_symbol.Rd</code></div>
+    <div class="hidden name"><code>matrix_sym.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Dimensions of a caracas symbol</p>
+    <p>Symbolic matrix</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for caracas_symbol</span>
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>matrix_sym</span><span class='op'>(</span><span class='va'>...</span>, declare_symbols <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>caracas symbol</p></td>
+      <th>...</th>
+      <td><p>Passed on to <code><a href='https://rdrr.io/r/base/matrix.html'>matrix()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>declare_symbols</th>
+      <td><p>Passed on to <code><a href='as_sym.html'>as_sym()</a></code> when constructing symbolic matrix</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='has_sympy.html'>has_sympy</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>matrix_sym</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>9</span>, nrow <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+  <span class='fu'>matrix_sym</span><span class='op'>(</span><span class='st'>"a"</span>, <span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; [caracas]: ⎡a  a⎤
+#&gt;            ⎢    ⎥
+#&gt;            ⎣a  a⎦</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

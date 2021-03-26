@@ -10,6 +10,8 @@ sympy_func(x, fun, ...)
 \item{x}{Object to call \code{fun} on}
 
 \item{fun}{Function to call}
+
+\item{\dots}{Passed on to \code{fun}}
 }
 \description{
 Call a SymPy function directly on x

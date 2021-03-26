@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9211</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9218</span>
       </span>
     </div>
 
@@ -152,7 +152,7 @@
     <p>Define caracas symbols in global environment</p>
     </div>
 
-    <pre class="usage"><span class='fu'>def_sym</span><span class='op'>(</span><span class='va'>...</span>, warn <span class='op'>=</span> <span class='cn'>FALSE</span>, env <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>def_sym</span><span class='op'>(</span><span class='va'>...</span>, charvec <span class='op'>=</span> <span class='cn'>NULL</span>, warn <span class='op'>=</span> <span class='cn'>FALSE</span>, env <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,6 +160,10 @@
     <tr>
       <th>...</th>
       <td><p>Names for new symbols, also supports non-standard evaluation</p></td>
+    </tr>
+    <tr>
+      <th>charvec</th>
+      <td><p>Take each element in this character vector and define as caracas symbols</p></td>
     </tr>
     <tr>
       <th>warn</th>
@@ -187,8 +191,10 @@
   <span class='fu'><a href='https://rdrr.io/r/base/ls.html'>ls</a></span><span class='op'>(</span><span class='op'>)</span>
   <span class='fu'>def_sym</span><span class='op'>(</span><span class='st'>"x1"</span>, <span class='st'>"x2"</span>, <span class='st'>"x3"</span>, warn <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/ls.html'>ls</a></span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>def_sym</span><span class='op'>(</span><span class='va'>i</span>, <span class='va'>j</span>, charvec <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"x"</span>, <span class='st'>"y"</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/ls.html'>ls</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: The following names were overwritten: x1, x2, x3</span></div><div class='output co'>#&gt; [1] "n1" "n2" "n3" "x1" "x2" "x3"</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The following names were overwritten: x1, x2, x3</span></div><div class='output co'>#&gt;  [1] "i"  "j"  "n1" "n2" "n3" "x"  "x1" "x2" "x3" "y" </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
