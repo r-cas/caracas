@@ -455,6 +455,7 @@ fraction_parts <- function(x) {
 #' 
 #' @param x Object to call `fun` on
 #' @param fun Function to call
+#' @param \dots Passed on to `fun`
 #' 
 #' @examples 
 #' if (has_sympy()) {
