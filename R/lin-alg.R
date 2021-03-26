@@ -364,3 +364,61 @@ vec <- function(x) {
   
   return(x2)
 }
+
+
+
+#' Symbolic diagonal matrix
+#'
+#' @param x Character vector with diagonal
+#' @param n Number of times `x` should be repeated
+#' @param declare_symbols Passed on to `as_sym()` when constructing symbolic matrix
+#' @param \dots Passed on to `rep(x, n, ...)`
+#'
+#' @concept linalg
+#' 
+#' @examples
+#' if (has_sympy()) {
+#'   diag_sym(c("a", "b", "c"))
+#'   diag_sym("a", 2)
+#' }
+#' 
+#' @export
+diag_sym <- function(x, n = 1L, declare_symbols = TRUE, ...){
+  ensure_sympy()
+  
+  if (!is.character(x)) {
+    stop("'x' must be a character")
+  }
+  
+  x <- rep(x, n, ...)
+  n <- length(x)
+  
+  A <- matrix("0", nrow = n, ncol = n)
+  diag(A) <- x
+  y <- as_sym(A, declare_symbols = declare_symbols)
+  
+  return(y)
+}
+
+#' Symbolic matrix
+#'
+#' @param \dots Passed on to [matrix()]
+#' @param declare_symbols Passed on to `as_sym()` when constructing symbolic matrix
+#'
+#' @concept linalg
+#' 
+#' @examples
+#' if (has_sympy()) {
+#'   matrix_sym(1:9, nrow = 3)
+#'   matrix_sym("a", 2, 2)
+#' }
+#' 
+#' @export
+matrix_sym <- function(..., declare_symbols = TRUE){
+  ensure_sympy()
+  
+  A <- matrix(...)
+  y <- as_sym(A, declare_symbols = declare_symbols)
+  
+  return(y)
+}

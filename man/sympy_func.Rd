@@ -19,14 +19,14 @@ if (has_sympy()) {
   def_sym(x, a)
   p <- (x-a)^4
   p
-  q <- p \%>\% fn("expand")
+  q <- p \%>\% sympy_func("expand")
   q
-  q \%>\% fn("factor")
+  q \%>\% sympy_func("factor")
   
   def_sym(x, y, z)
-  expr <- x*y + x - 3 + 2*x**2 - z*x**2 + x**3
+  expr <- x*y + x - 3 + 2*x^2 - z*x^2 + x^3
   expr
-  expr \%>\% fn("collect", x) 
+  expr \%>\% sympy_func("collect", x) 
 }
  
 }

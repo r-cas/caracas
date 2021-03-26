@@ -186,3 +186,22 @@ test_that("do_la", {
   
 })
 
+
+
+test_that("diag_sym", {
+  skip_if_no_sympy()
+  
+  expect_equal(as.character(diag_sym(c("a", "b", "c"))), 
+               "Matrix([[a, 0, 0], [0, b, 0], [0, 0, c]])")
+  
+  expect_equal(as.character(diag_sym("a", 2)), "Matrix([[a, 0], [0, a]])")
+})
+
+test_that("matrix_sym", {
+  skip_if_no_sympy()
+  
+  expect_equal(as.character(matrix_sym(1:9, nrow = 3)), 
+               "Matrix([[1, 4, 7], [2, 5, 8], [3, 6, 9]])")
+  expect_equal(as.character(matrix_sym("a", 2, 2)), "Matrix([[a, a], [a, a]])")
+})
+
