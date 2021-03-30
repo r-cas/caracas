@@ -35,8 +35,16 @@ solve_lin <- function(A, b) {
 
 rootsolve <- function(lhs, vars) {
   if (!is.null(dim(lhs))) {
+    if (nrow(lhs) != 1L && ncol(lhs) == 1L) {
+      lhs <- t(lhs)
+    }
+    
     if (nrow(lhs) != 1L) {
       stop("Only 1 row in LHS allowed (multiple columns are allowed)")
+    }
+    
+    if (length(vars) == 1L && !is.null(dim(vars))) {
+      vars <- listify(vars)
     }
     
     if (length(vars) != ncol(lhs)) {

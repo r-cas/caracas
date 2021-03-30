@@ -138,3 +138,54 @@ test_that("solve system of non-linear equations", {
                "[[(y1 + y2 + y3)^2/y1, 0, 0, 1], [0, (y1 + y2 + y3)^2/y2, 0, 1], [0, 0, (y1 + y2 + y3)^2/y3, 1], [1, 1, 1, 0]]", 
                fixed = TRUE)
 })
+
+
+
+test_that("input variations", {
+  skip_if_no_sympy()
+  
+  
+  # Analysis of variance - one-way ANOVA
+  ngrp <- 3   # number of groups
+  spg  <- 2   # number of subjects per group
+  g <- seq_len(ngrp)
+  f <- factor(rep(g, each = spg))
+  y <- as_sym(matrix(paste0("y", seq_along(f))))
+  X <- as_sym(model.matrix(~ f))
+  XtX <- t(X) %*% X
+  XtXinv <- inv(XtX)
+  Xty <- t(X) %*% y
+  beta_hat <- XtXinv %*% Xty
+
+  beta <- as_sym(paste0("beta", 1:3))
+  res <- y - X %*% beta
+  RSS <- sum(res^2) 
+  logL <- - RSS / 2
+  
+  Score <- der(logL, beta) %>% matrify()
+  
+  beta_lst <- listify(beta)
+  sol1 <- solve_sys(Score, beta_lst)
+  sol2 <- solve_sys(Score, beta)
+  
+  expect_equal(length(sol1), 1L)
+  expect_equal(length(sol2), 1L)
+  
+  sol1 <- sol1[[1L]]
+  sol2 <- sol2[[1L]]
+  
+  expect_equal(paste0(sapply(sol1, as.character), collapse = ";"), 
+               "y1/2 + y2/2;-y1/2 - y2/2 + y3/2 + y4/2;-y1/2 - y2/2 + y5/2 + y6/2")
+  
+  expect_equal(paste0(sapply(sol1, as.character), collapse = ";"), 
+               paste0(sapply(sol2, as.character), collapse = ";"))
+  
+  
+  sol1_mat <- t(do.call(cbind, sol1))
+  expect_equal(as.character(sol1_mat), 
+               "Matrix([[y1/2 + y2/2], [-y1/2 - y2/2 + y3/2 + y4/2], [-y1/2 - y2/2 + y5/2 + y6/2]])")
+  expect_equal(as.character(sol1_mat), 
+               as.character(beta_hat))
+  
+})
+

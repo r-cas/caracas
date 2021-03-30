@@ -241,6 +241,16 @@ unbracket <- function(x) {
   return(y)
 }
 
+extract_elements <- function(x) {
+  z <- as.character(x)
+  
+  zz <- gsub("[", "", z, fixed = TRUE)
+  zz <- gsub("]", "", zz, fixed = TRUE)
+  zz <- remove_mat_prefix(zz)
+  
+  return(zz)
+}
+
 #' Convert object to tuple
 #' 
 #' @param x Object
@@ -249,23 +259,41 @@ unbracket <- function(x) {
 #' if (has_sympy()) {
 #'   x <- as_sym("Matrix([[b1*x1/(b2 + x1)], [b1*x2/(b2 + x2)], [b1*x3/(b2 + x3)]])")
 #'   tuplify(x)
-#'   
 #' }
 #' 
 #' @concept caracas_symbol
 #' 
 #' @export
 tuplify <- function(x) {
-  z <- as.character(x)
-  
-  zz <- gsub("[", "", z, fixed = TRUE)
-  zz <- gsub("]", "", zz, fixed = TRUE)
-  zz <- remove_mat_prefix(zz)
+  zz <- extract_elements(x)
   zz <- paste0("(", zz, ")")
-  zz
   
   y <- eval_to_symbol(zz)
   return(y)
+}
+
+#' Convert object to list of elements
+#' 
+#' @param x Object
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   x <- as_sym("Matrix([[b1*x1/(b2 + x1)], [b1*x2/(b2 + x2)], [b1*x3/(b2 + x3)]])")
+#'   listify(x)
+#'   
+#'   xT <- t(x)
+#'   listify(xT)
+#' }
+#' 
+#' @concept caracas_symbol
+#' 
+#' @export
+listify <- function(x) {
+  zz <- convert_to_r_mat(x)
+  dim(zz) <- NULL
+  zz <- as.list(zz)
+  zz <- lapply(zz, as_sym, declare_symbols = FALSE)
+  return(zz)
 }
 
 #' @export
