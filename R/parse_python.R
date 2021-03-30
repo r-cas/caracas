@@ -10,6 +10,7 @@ python_strings_to_r <- function(xstr, replace_I = TRUE) {
     xstr <- gsub("^I$", "1i", xstr, ignore.case = FALSE, perl = TRUE)
     xstr <- gsub("^-I$", "-1i", xstr, ignore.case = FALSE, perl = TRUE)
     xstr <- gsub("I([^a-zA-Z]+)", "1i \\1", xstr, ignore.case = FALSE, perl = TRUE)
+    xstr <- gsub("I$", "1i", xstr, ignore.case = FALSE, perl = TRUE)
   }
   
   # Exponential
