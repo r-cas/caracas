@@ -3,7 +3,6 @@
 * Global symbol assignment by `def_sym()` (#18)
 * Linear algebra: New `do_la()` function with convinience functions like `eigenval()`, `eigenvec()`, `QRdecomposition()`; new vignette demonstrating these
 * Assumptions being made available, see e.g. `symbol()` and `ask()`
-* Matrix symbols: `matrix_symbol()` together with helpers `sympy_declare()` and `inv_2x2()`
 * Arbitrary precision arithmetic: `N()` function and vignette on 
   "Arbitrary precision arithmetic"
 * Rename `eigen_val()`/`eigen_vec()` to `eigenval()`/`eigenvec()`
@@ -13,6 +12,7 @@
 * Changed internals such that `der()`, `der2()` and `solve_sys()` now takes multiple variables with `list()` (or as a vector symbol) instead of `c()`; see also `matrify()` and `listify()`
 * Added `diag_sym()` and `matrix_sym()`
 * Call SymPy functions directy with `sympy_func()`
+* `sumf()` renamed to `add()`, `intf()` to `int()`, `limf()` to `lim()`
 * Minor bugs fixed
 
 # caracas 1.0.1
