@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9302</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@
 </h1>
                         <h4 class="author">Mikkel Meyer Andersen and Søren Højsgaard</h4>
             
-            <h4 class="date">Tue Mar 30 21:49:28 2021</h4>
+            <h4 class="date">Thu Apr 8 11:22:56 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/master/vignettes/linear-algebra.Rmd"><code>vignettes/linear-algebra.Rmd</code></a></small>
       <div class="hidden name"><code>linear-algebra.Rmd</code></div>
@@ -132,26 +132,37 @@
 <span class="co">#&gt; [caracas]: ⎡a  0⎤</span>
 <span class="co">#&gt;            ⎢    ⎥</span>
 <span class="co">#&gt;            ⎣b  1⎦</span>
+<span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_.html">matrix_</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"0"</span>, <span class="st">"1"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span> <span class="co"># note the '_' postfix</span>
+<span class="va">A</span>
+<span class="co">#&gt; [caracas]: ⎡a  0⎤</span>
+<span class="co">#&gt;            ⎢    ⎥</span>
+<span class="co">#&gt;            ⎣b  1⎦</span>
 <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[a, 0], [b, 1]]"</span><span class="op">)</span>
 <span class="va">A</span>
 <span class="co">#&gt; [caracas]: ⎡a  0⎤</span>
 <span class="co">#&gt;            ⎢    ⎥</span>
 <span class="co">#&gt;            ⎣b  1⎦</span>
 
-<span class="va">A2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"1"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">A2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_.html">matrix_</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"1"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="va">A2</span>
 <span class="co">#&gt; [caracas]: ⎡a  c⎤</span>
 <span class="co">#&gt;            ⎢    ⎥</span>
 <span class="co">#&gt;            ⎣b  1⎦</span>
 
-<span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"0"</span>, 
-              <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"a"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_.html">matrix_</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"0"</span>, 
+              <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"a"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">B</span>
 <span class="co">#&gt; [caracas]: ⎡a  0  c⎤</span>
 <span class="co">#&gt;            ⎢       ⎥</span>
 <span class="co">#&gt;            ⎣b  c  a⎦</span>
 
-<span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"b1"</span>, <span class="st">"b2"</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_.html">matrix_</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"b1"</span>, <span class="st">"b2"</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+
+<span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/diag_.html">diag_</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span> <span class="co"># note the '_' postfix</span>
+<span class="va">D</span>
+<span class="co">#&gt; [caracas]: ⎡a  0⎤</span>
+<span class="co">#&gt;            ⎢    ⎥</span>
+<span class="co">#&gt;            ⎣0  b⎦</span></code></pre></div>
 <p>Note that a vector is a matrix in which one of the dimensions is one.</p>
 </div>
 <div id="matrix-matrix-sum-and-product" class="section level2">
@@ -599,41 +610,42 @@
 <span class="co">#&gt; [caracas]: 0</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[4]]</span>
-<span class="co">#&gt; [caracas]: 0</span>
-<span class="co">##svd(B) FIXME</span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># # FIXME</span>
-<span class="co"># B &lt;- t(as_sym("[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6], [8, 3, 6] ]"))</span>
-<span class="co"># B</span>
-<span class="co"># </span>
-<span class="co"># #do_la(B %*% t(B), "left_eigenvects")</span>
-<span class="co"># </span>
-<span class="co"># U &lt;- eigenvec(B %*% t(B)) %&gt;% lapply(function(v) v$eigvec) %&gt;% do.call(cbind, .)</span>
-<span class="co"># V &lt;- eigenvec(t(B) %*% B) %&gt;% lapply(function(v) v$eigvec) %&gt;% do.call(cbind, .)</span>
-<span class="co"># </span>
-<span class="co"># d &lt;- singular_values(B)[seq_len(ncol(U))]</span>
-<span class="co"># D &lt;- diag(ncol(U)) %&gt;% as_sym()</span>
-<span class="co"># for (i in seq_along(d)) {</span>
-<span class="co">#   D[i, i] &lt;- as.character(d[[i]])</span>
-<span class="co"># }</span>
-<span class="co"># </span>
-<span class="co"># d &lt;- singular_values(B) %&gt;% do.call(cbind, .)</span>
-<span class="co"># D &lt;- as_diag(d)</span>
-<span class="co"># </span>
-<span class="co"># </span>
-<span class="co"># r_svd &lt;- as_expr(B) %&gt;% svd()</span>
-<span class="co"># </span>
-<span class="co"># r_svd$d</span>
-<span class="co"># d %&gt;% as_expr()</span>
-<span class="co"># </span>
-<span class="co"># r_svd$u</span>
-<span class="co"># U %&gt;% as_expr()</span>
-<span class="co"># </span>
-<span class="co"># r_svd$v</span>
-<span class="co"># V %&gt;% as_expr()</span>
-<span class="co"># </span>
-<span class="co"># r_svd$u %*% diag(r_svd$d) %*% t(r_svd$v)</span>
-<span class="co"># U %*% D %*% t(V) %&gt;% as_expr()</span></code></pre></div>
+<span class="co">#&gt; [caracas]: 0</span></code></pre></div>
+<!-- ```{r} -->
+<!-- ##svd(B) FIXME -->
+<!-- # # FIXME -->
+<!-- # B <- t(as_sym("[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6], [8, 3, 6] ]")) -->
+<!-- # B -->
+<!-- #  -->
+<!-- # #do_la(B %*% t(B), "left_eigenvects") -->
+<!-- #  -->
+<!-- # U <- eigenvec(B %*% t(B)) %>% lapply(function(v) v$eigvec) %>% do.call(cbind, .) -->
+<!-- # V <- eigenvec(t(B) %*% B) %>% lapply(function(v) v$eigvec) %>% do.call(cbind, .) -->
+<!-- #  -->
+<!-- # d <- singular_values(B)[seq_len(ncol(U))] -->
+<!-- # D <- diag(ncol(U)) %>% as_sym() -->
+<!-- # for (i in seq_along(d)) { -->
+<!-- #   D[i, i] <- as.character(d[[i]]) -->
+<!-- # } -->
+<!-- #  -->
+<!-- # d <- singular_values(B) %>% do.call(cbind, .) -->
+<!-- # D <- as_diag(d) -->
+<!-- #  -->
+<!-- #  -->
+<!-- # r_svd <- as_expr(B) %>% svd() -->
+<!-- #  -->
+<!-- # r_svd$d -->
+<!-- # d %>% as_expr() -->
+<!-- #  -->
+<!-- # r_svd$u -->
+<!-- # U %>% as_expr() -->
+<!-- #  -->
+<!-- # r_svd$v -->
+<!-- # V %>% as_expr() -->
+<!-- #  -->
+<!-- # r_svd$u %*% diag(r_svd$d) %*% t(r_svd$v) -->
+<!-- # U %*% D %*% t(V) %>% as_expr() -->
+<!-- ``` -->
 </div>
 </div>
 </div>

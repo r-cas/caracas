@@ -16,7 +16,7 @@ test_that("as.character / tex", {
 #   # FIXME: Issue 36: https://github.com/r-cas/caracas/issues/36
 #   # n <- symbol("n")
 #   # f <- (1 + 1/n)^n
-#   # lim_f <- limf(f, n, Inf)
+#   # lim_f <- lim(f, n, Inf)
 #   # tex(lim_f)
 #   # get_py()$print_caracas_latex(lim_f$pyobj)
 #   
@@ -145,14 +145,14 @@ test_that("custom printer: exp", {
   
   
   f <- (1 + 1/n)^n
-  lim_f <- limf(f, n, Inf)
+  lim_f <- lim(f, n, Inf)
   
   expect_output(print(lim_f, prettyascii = FALSE, ascii = FALSE), "exp(1)", fixed = TRUE)
   expect_output(print(lim_f, prettyascii = TRUE, ascii = FALSE), "exp(1)", fixed = TRUE)
   expect_output(print(lim_f, prettyascii = FALSE, ascii = TRUE), "exp(1)", fixed = TRUE)
   
   
-  lim_f_sym <- limf(f, n, Inf, doit = FALSE)
+  lim_f_sym <- lim(f, n, Inf, doit = FALSE)
   
   outstr <- function(x) {
     paste0(capture.output(x), collapse = "")

@@ -15,7 +15,7 @@ Perform calculations setup previously
 \examples{
 if (has_sympy()) {
    x <- symbol('x')
-   res <- limf(sin(x)/x, "x", 0, doit = FALSE)
+   res <- lim(sin(x)/x, "x", 0, doit = FALSE)
    res 
    doit(res)
 }

@@ -56,17 +56,22 @@ We now show different ways to create a symbolic matrix:
 ```{r}
 A <- matrix(c("a", "b", "0", "1"), 2, 2) %>% as_sym()
 A
+A <- matrix_(c("a", "b", "0", "1"), 2, 2) # note the '_' postfix
+A
 A <- as_sym("[[a, 0], [b, 1]]")
 A
 
-A2 <- matrix(c("a", "b", "c", "1"), 2, 2) %>% as_sym()
+A2 <- matrix_(c("a", "b", "c", "1"), 2, 2)
 A2
 
-B <- matrix(c("a", "b", "0", 
-              "c", "c", "a"), 2, 3) %>% as_sym()
+B <- matrix_(c("a", "b", "0", 
+              "c", "c", "a"), 2, 3)
 B
 
-b <- matrix(c("b1", "b2"), nrow = 2) %>% as_sym()
+b <- matrix_(c("b1", "b2"), nrow = 2)
+
+D <- diag_(c("a", "b")) # note the '_' postfix
+D
 ```
 
 Note that a vector is a matrix in which one of the dimensions is one. 
@@ -263,41 +268,42 @@ B %*% x[[1]]
 B <- t(as_sym("[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6], [8, 3, 6] ]"))
 B
 singular_values(B)
-##svd(B) FIXME
 ```
 
-```{r}
-# # FIXME
-# B <- t(as_sym("[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6], [8, 3, 6] ]"))
-# B
-# 
-# #do_la(B %*% t(B), "left_eigenvects")
-# 
-# U <- eigenvec(B %*% t(B)) %>% lapply(function(v) v$eigvec) %>% do.call(cbind, .)
-# V <- eigenvec(t(B) %*% B) %>% lapply(function(v) v$eigvec) %>% do.call(cbind, .)
-# 
-# d <- singular_values(B)[seq_len(ncol(U))]
-# D <- diag(ncol(U)) %>% as_sym()
-# for (i in seq_along(d)) {
-#   D[i, i] <- as.character(d[[i]])
-# }
-# 
-# d <- singular_values(B) %>% do.call(cbind, .)
-# D <- as_diag(d)
-# 
-# 
-# r_svd <- as_expr(B) %>% svd()
-# 
-# r_svd$d
-# d %>% as_expr()
-# 
-# r_svd$u
-# U %>% as_expr()
-# 
-# r_svd$v
-# V %>% as_expr()
-# 
-# r_svd$u %*% diag(r_svd$d) %*% t(r_svd$v)
-# U %*% D %*% t(V) %>% as_expr()
-```
+
+<!-- ```{r} -->
+<!-- ##svd(B) FIXME -->
+<!-- # # FIXME -->
+<!-- # B <- t(as_sym("[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6], [8, 3, 6] ]")) -->
+<!-- # B -->
+<!-- #  -->
+<!-- # #do_la(B %*% t(B), "left_eigenvects") -->
+<!-- #  -->
+<!-- # U <- eigenvec(B %*% t(B)) %>% lapply(function(v) v$eigvec) %>% do.call(cbind, .) -->
+<!-- # V <- eigenvec(t(B) %*% B) %>% lapply(function(v) v$eigvec) %>% do.call(cbind, .) -->
+<!-- #  -->
+<!-- # d <- singular_values(B)[seq_len(ncol(U))] -->
+<!-- # D <- diag(ncol(U)) %>% as_sym() -->
+<!-- # for (i in seq_along(d)) { -->
+<!-- #   D[i, i] <- as.character(d[[i]]) -->
+<!-- # } -->
+<!-- #  -->
+<!-- # d <- singular_values(B) %>% do.call(cbind, .) -->
+<!-- # D <- as_diag(d) -->
+<!-- #  -->
+<!-- #  -->
+<!-- # r_svd <- as_expr(B) %>% svd() -->
+<!-- #  -->
+<!-- # r_svd$d -->
+<!-- # d %>% as_expr() -->
+<!-- #  -->
+<!-- # r_svd$u -->
+<!-- # U %>% as_expr() -->
+<!-- #  -->
+<!-- # r_svd$v -->
+<!-- # V %>% as_expr() -->
+<!-- #  -->
+<!-- # r_svd$u %*% diag(r_svd$d) %*% t(r_svd$v) -->
+<!-- # U %*% D %*% t(V) %>% as_expr() -->
+<!-- ``` -->
 

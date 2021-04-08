@@ -378,12 +378,12 @@ vec <- function(x) {
 #' 
 #' @examples
 #' if (has_sympy()) {
-#'   diag_sym(c("a", "b", "c"))
-#'   diag_sym("a", 2)
+#'   diag_(c("a", "b", "c"))
+#'   diag_("a", 2)
 #' }
 #' 
 #' @export
-diag_sym <- function(x, n = 1L, declare_symbols = TRUE, ...){
+diag_ <- function(x, n = 1L, declare_symbols = TRUE, ...){
   ensure_sympy()
   
   if (!is.character(x)) {
@@ -409,12 +409,12 @@ diag_sym <- function(x, n = 1L, declare_symbols = TRUE, ...){
 #' 
 #' @examples
 #' if (has_sympy()) {
-#'   matrix_sym(1:9, nrow = 3)
-#'   matrix_sym("a", 2, 2)
+#'   matrix_(1:9, nrow = 3)
+#'   matrix_("a", 2, 2)
 #' }
 #' 
 #' @export
-matrix_sym <- function(..., declare_symbols = TRUE){
+matrix_ <- function(..., declare_symbols = TRUE){
   ensure_sympy()
   
   A <- matrix(...)

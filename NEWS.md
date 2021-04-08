@@ -10,9 +10,11 @@
   in this connection `as_r()` was renamed to `as_expr()` and 
   `as_symbol()` to `as_sym()`. Also, `as_sym()` changed argument from `declare_variables` to `declare_symbols`.
 * Changed internals such that `der()`, `der2()` and `solve_sys()` now takes multiple variables with `list()` (or as a vector symbol) instead of `c()`; see also `matrify()` and `listify()`
-* Added `diag_sym()` and `matrix_sym()`
+* Added `diag_()` and `matrix_()` (postfix `_` to avoid name clashes)
+* `sumf()` renamed to `sum_()` and `prodf()` to `prod_()` (postfix `_` to avoid name clashes)
+* `intf()` renamed to `int()` and `limf()` to `lim()` (because there are no name clashes with base R)
 * Call SymPy functions directy with `sympy_func()`
-* `sumf()` renamed to `add()`, `intf()` to `int()`, `limf()` to `lim()`
+* Added `taylor()` and `drop_remainder()`
 * Minor bugs fixed
 
 # caracas 1.0.1

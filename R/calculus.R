@@ -40,15 +40,15 @@ calc_verify_func <- function(f) {
 #' @examples 
 #' if (has_sympy()) {
 #'   x <- symbol("x")
-#'   limf(sin(x)/x, "x", 0)
-#'   limf(1/x, "x", 0, dir = '+')
-#'   limf(1/x, "x", 0, dir = '-')
+#'   lim(sin(x)/x, "x", 0)
+#'   lim(1/x, "x", 0, dir = '+')
+#'   lim(1/x, "x", 0, dir = '-')
 #' }
 #' 
 #' @concept calculus
 #' 
 #' @export
-limf <- function(f, var, val, dir = NULL, doit = TRUE) {
+lim <- function(f, var, val, dir = NULL, doit = TRUE) {
   calc_verify_func(f)
   ensure_sympy()
   var <- as.character(var)
@@ -90,17 +90,17 @@ limf <- function(f, var, val, dir = NULL, doit = TRUE) {
 #' @examples 
 #' if (has_sympy()) {
 #'   x <- symbol("x")
-#'   s <- sumf(1/x, "x", 1, 10)
+#'   s <- sum_(1/x, "x", 1, 10)
 #'   as_expr(s)
 #'   sum(1/(1:10))
 #'   n <- symbol("n")
-#'   simplify(sumf(x, x, 1, n))
+#'   simplify(sum_(x, x, 1, n))
 #' }
 #' 
 #' @concept calculus
 #' 
 #' @export
-sumf <- function(f, var, lower, upper, doit = TRUE) {
+sum_ <- function(f, var, lower, upper, doit = TRUE) {
   calc_verify_func(f)
   ensure_sympy()
   var <- as.character(var)
@@ -131,18 +131,18 @@ sumf <- function(f, var, lower, upper, doit = TRUE) {
 #' @examples 
 #' if (has_sympy()) {
 #'   x <- symbol("x")
-#'   p <- prodf(1/x, "x", 1, 10)
+#'   p <- prod_(1/x, "x", 1, 10)
 #'   p
 #'   as_expr(p)
 #'   prod(1/(1:10))
 #'   n <- symbol("n")
-#'   prodf(x, x, 1, n)
+#'   prod_(x, x, 1, n)
 #' }
 #' 
 #' @concept calculus
 #' 
 #' @export
-prodf <- function(f, var, lower, upper, doit = TRUE) {
+prod_ <- function(f, var, lower, upper, doit = TRUE) {
   calc_verify_func(f)
   ensure_sympy()
   var <- as.character(var)
@@ -179,18 +179,18 @@ prodf <- function(f, var, lower, upper, doit = TRUE) {
 #' if (has_sympy()) {
 #'   x <- symbol("x")
 #'   
-#'   intf(1/x, x, 1, 10)
-#'   intf(1/x, x, 1, 10, doit = FALSE)
-#'   intf(1/x, x)
-#'   intf(1/x, x, doit = FALSE)
-#'   intf(exp(-x^2/2), x, -Inf, Inf)
-#'   intf(exp(-x^2/2), x, -Inf, Inf, doit = FALSE)
+#'   int(1/x, x, 1, 10)
+#'   int(1/x, x, 1, 10, doit = FALSE)
+#'   int(1/x, x)
+#'   int(1/x, x, doit = FALSE)
+#'   int(exp(-x^2/2), x, -Inf, Inf)
+#'   int(exp(-x^2/2), x, -Inf, Inf, doit = FALSE)
 #' }
 #' 
 #' @concept calculus
 #' 
 #' @export
-intf <- function(f, var, lower, upper, doit = TRUE) {
+int <- function(f, var, lower, upper, doit = TRUE) {
   calc_verify_func(f)
   ensure_sympy()
   var <- as.character(var)
@@ -374,5 +374,60 @@ der2 <- function(expr, vars, simplify = TRUE) {
   d2 <- der(d1, vars, simplify = simplify)
   
   return(d2)
+}
+
+
+#' Remove remainder term
+#' 
+#' @param x Expression to remove remainder term from
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   def_sym(x)
+#'   f <- cos(x)
+#'   ft_with_O <- taylor(f, x0 = 0, n = 4+1)
+#'   ft_with_O
+#'   ft_with_O %>% drop_remainder() %>% as_expr()
+#' }
+#' 
+#' @seealso [taylor()]
+#' 
+#' @concept calculus
+#'
+#' @export
+drop_remainder <- function(x) {
+  ensure_sympy()
+  
+  ft <- x %>% sympy_func("removeO")
+  
+  return(ft)
+}
+
+#' Taylor expansion
+#' 
+#' @param f Function to be expanded
+#' @param x0 Point to expand around
+#' @param n Order of remainder term
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   def_sym(x)
+#'   f <- cos(x)
+#'   ft_with_O <- taylor(f, x0 = 0, n = 4+1)
+#'   ft_with_O
+#'   ft_with_O %>% drop_remainder() %>% as_expr()
+#' }
+#' 
+#' @seealso [drop_remainder()]
+#' 
+#' @concept calculus
+#'
+#' @export
+taylor <- function(f, x0 = 0, n = 6) {
+  ensure_sympy()
+  
+  ft <- f %>% sympy_func("series", x0 = x0, n = n)
+  
+  return(ft)
 }
 

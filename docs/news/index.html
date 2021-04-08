@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9302</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -155,17 +155,20 @@
 <li>Linear algebra: New <code><a href="../reference/do_la.html">do_la()</a></code> function with convinience functions like <code><a href="../reference/linalg.html">eigenval()</a></code>, <code><a href="../reference/linalg.html">eigenvec()</a></code>, <code><a href="../reference/linalg.html">QRdecomposition()</a></code>; new vignette demonstrating these</li>
 <li>Assumptions being made available, see e.g. <code><a href="../reference/symbol.html">symbol()</a></code> and <code><a href="../reference/ask.html">ask()</a></code>
 </li>
-<li>Matrix symbols: <code>matrix_symbol()</code> together with helpers <code>sympy_declare()</code> and <code>inv_2x2()</code>
-</li>
 <li>Arbitrary precision arithmetic: <code><a href="../reference/N.html">N()</a></code> function and vignette on “Arbitrary precision arithmetic”</li>
 <li>Rename <code>eigen_val()</code>/<code>eigen_vec()</code> to <code><a href="../reference/linalg.html">eigenval()</a></code>/<code><a href="../reference/linalg.html">eigenvec()</a></code>
 </li>
 <li>More clear naming convention: R has expressions and caracas has symbols; in this connection <code>as_r()</code> was renamed to <code><a href="../reference/as_expr.html">as_expr()</a></code> and <code>as_symbol()</code> to <code><a href="../reference/as_sym.html">as_sym()</a></code>. Also, <code><a href="../reference/as_sym.html">as_sym()</a></code> changed argument from <code>declare_variables</code> to <code>declare_symbols</code>.</li>
 <li>Changed internals such that <code><a href="../reference/der.html">der()</a></code>, <code><a href="../reference/der2.html">der2()</a></code> and <code><a href="../reference/solve_sys.html">solve_sys()</a></code> now takes multiple variables with <code><a href="https://rdrr.io/r/base/list.html">list()</a></code> (or as a vector symbol) instead of <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>; see also <code><a href="../reference/matrify.html">matrify()</a></code> and <code><a href="../reference/listify.html">listify()</a></code>
 </li>
-<li>Added <code><a href="../reference/diag_sym.html">diag_sym()</a></code> and <code><a href="../reference/matrix_sym.html">matrix_sym()</a></code>
-</li>
+<li>Added <code><a href="../reference/diag_.html">diag_()</a></code> and <code><a href="../reference/matrix_.html">matrix_()</a></code> (postfix <code>_</code> to avoid name clashes)</li>
+<li>
+<code>sumf()</code> renamed to <code><a href="../reference/sum_.html">sum_()</a></code> and <code>prodf()</code> to <code><a href="../reference/prod_.html">prod_()</a></code> (postfix <code>_</code> to avoid name clashes)</li>
+<li>
+<code>intf()</code> renamed to <code><a href="../reference/int.html">int()</a></code> and <code>limf()</code> to <code><a href="../reference/lim.html">lim()</a></code> (because there are no name clashes with base R)</li>
 <li>Call SymPy functions directy with <code><a href="../reference/sympy_func.html">sympy_func()</a></code>
+</li>
+<li>Added <code><a href="../reference/taylor.html">taylor()</a></code> and <code><a href="../reference/drop_remainder.html">drop_remainder()</a></code>
 </li>
 <li>Minor bugs fixed</li>
 </ul>
