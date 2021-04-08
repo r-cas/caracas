@@ -12,7 +12,9 @@ Encoding: UTF-8
 Description: Computer algebra via the 'SymPy' library (<https://www.sympy.org/>). 
   This makes it possible to solve equations symbolically, 
   find symbolic integrals, symbolic sums and other important quantities. 
-Depends: R (>= 3.0)
+Depends: 
+  R (>= 3.0),
+  methods
 Imports:
   reticulate (>= 1.14),
   magrittr

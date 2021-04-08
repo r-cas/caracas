@@ -48,7 +48,7 @@ as.character(N(x, 50))
 
 ## Another example
 
-As `SymPy` requires [`mpmath`](http://mpmath.org/) this can be used directly, for example like this (example due to Hans W Borchers, thanks!):
+As `SymPy` requires [`mpmath`](https://mpmath.org/) this can be used directly, for example like this (example due to Hans W Borchers, thanks!):
 
 ```{r}
 mpmath <- reticulate::import('mpmath')

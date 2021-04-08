@@ -64,12 +64,12 @@
 ## 
 ## @export
 #sympy_declare <- function(x, cmd) {
-#  caracas:::ensure_sympy()
+#  ensure_sympy()
 #  
 #  python_cmd <- paste0(x, " = ", cmd)
 #  s <- reticulate::py_run_string(python_cmd, convert = FALSE)
 #  res <- s[[x]]
-#  y <- caracas:::construct_symbol_from_pyobj(res)
+#  y <- construct_symbol_from_pyobj(res)
 #  
 #  return(y)
 #}

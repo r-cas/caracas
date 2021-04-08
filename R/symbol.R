@@ -515,6 +515,6 @@ sympy_func <- function(x, fun, ...) {
   })
   
   p <- do.call(x$pyobj[[fun]], args)
-  res <- caracas:::construct_symbol_from_pyobj(p)
+  res <- construct_symbol_from_pyobj(p)
   return(res)
 }
