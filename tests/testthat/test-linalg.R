@@ -139,12 +139,12 @@ test_that("as_character_matrix", {
 test_that("do_la", {
   skip_if_no_sympy()
   
-  A <- matrix(c("a", "0", "0", "1"), 2, 2) %>% as_sym()
+  A <- matrix(c("2", "0", "0", "1"), 2, 2) %>% as_sym()
   
   
   res <- QRdecomposition(A)
-  expect_equal(as.character(res$Q), "Matrix([[a/Abs(a), 0], [0, 1]])")
-  expect_equal(as.character(res$R), "Matrix([[Abs(a), 0], [0, 1]])")
+  expect_equal(as.character(res$Q), "Matrix([[1, 0], [0, 1]])")
+  expect_equal(as.character(res$R), "Matrix([[2, 0], [0, 1]])")
   
   
   res <- inv(A)
