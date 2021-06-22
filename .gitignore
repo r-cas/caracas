@@ -17,3 +17,4 @@ release-featured-images/*.tex
 release-featured-images/*.png
 inst/doc
 ..Rcheck
+paper/paper.html

@@ -108,9 +108,10 @@ symbol <- function(x, ...) {
     arg_val[unlist(lapply(dots, function(l) is.logical(l) && length(l) == 1L && !is.na(l) && !l))] <- "False"
     
     extra_cmd <- paste0(arg_nm, " = ", arg_val, collapse = ", ")
+    extra_cmd <- paste0(", ", extra_cmd)
   }
   
-  cmd <- paste0(x, " = symbols('", x, "', ", extra_cmd, ")")
+  cmd <- paste0(x, " = symbols('", x, "'", extra_cmd, ")")
   
   # py_run_string instead of py_eval because we need to assign inside Python
   s <- reticulate::py_run_string(cmd, convert = FALSE)

@@ -1,5 +1,5 @@
 Package: caracas
-Version: 1.1.0
+Version: 1.1.0.9901
 Title: Computer Algebra
 Authors@R: c(
     person(given = "Mikkel Meyer", family = "Andersen",

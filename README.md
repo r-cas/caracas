@@ -143,3 +143,10 @@ eigenval(Binv)
 
 Please find more examples in the other vignettes available at
 <https://r-cas.github.io/caracas/>.
+
+## Contribute, issues, and support
+
+Please use the issue tracker at
+<https://github.com/r-cas/caracas/issues> if you want to notify us of an
+issue or need support. If you want to contribute, please either create
+an issue or make a pull request.
