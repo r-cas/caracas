@@ -1,3 +1,7 @@
+# caracas 1.1.1
+
+* Journal of Open Source submission
+
 # caracas 1.1.0
 
 * Global symbol assignment by `def_sym()` (#18)
