@@ -54,7 +54,7 @@ mathematical terms over symbolic manipulations of the model and further onto a s
 * simplification of mathematical expressions and
 * outputting in TeX format.
 
-Several (commercial) systems are available for such tasks (and many more). However, we will argue that there is a virtue in being able to handle such tasks directly from within `R` using the familiar `R` syntax. Moreover, it is an integrated part of the design of `caracas` that it is straightforward to coerce a mathematical object into an `R` expression which can, e.g., be evaluated numerically. 
+Several (commercial) systems are available for such tasks (and many more), e.g. Mathematica [@Mathematica] and Maple [@Maple]. However, we will argue that there is a virtue in being able to handle such tasks directly from within `R` using the familiar `R` syntax. Moreover, it is an integrated part of the design of `caracas` that it is straightforward to coerce a mathematical object into an `R` expression which can, e.g., be evaluated numerically. 
 
 
 # Acknowledgements
