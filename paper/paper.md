@@ -42,9 +42,9 @@ Compared to other CAS `R` packages like `Ryacas` [@Andersen2019] based on `yacas
 From a statistician's perspective, `R` is excellent for data handling,
 graphics, for model fitting and statistical inference and as a
 programming environment. However, `R` largely lacks the ability to
-perform symbolic computations. That is, `R` only support to a small
+perform symbolic computations. That is, `R` only supports to a small
 extent the step from posing a problem (for example a model) in
-mathematical terms over symbolic manipulations of the model and further onto a stage where a model can be combined with data. The `caracas` provides capapilities for these steps directly in `R`. Topicas that can be handled in `caracas` include:
+mathematical terms over symbolic manipulations of the model and further onto a stage where a model can be combined with data. The `caracas` provides capabilities for these steps directly in `R`. Topics that can be handled in `caracas` include:
 
 * Sums, 
 * limits, 
@@ -54,13 +54,13 @@ mathematical terms over symbolic manipulations of the model and further onto a s
 * simplification of mathematical expressions and
 * outputting in TeX format.
 
-Several (commerical) systems are available for such tasks (and many more). However, we will argue that there is a virtue in being able to handle such tasks directly from within `R` using the familiar `R` syntax. Moreover, it is an integrated part of the design of `caracas` that it is straight forward to coerce a mathematical object into an `R` expression which can, e.g. be evaluated numerically. 
+Several (commercial) systems are available for such tasks (and many more). However, we will argue that there is a virtue in being able to handle such tasks directly from within `R` using the familiar `R` syntax. Moreover, it is an integrated part of the design of `caracas` that it is straightforward to coerce a mathematical object into an `R` expression which can, e.g., be evaluated numerically. 
 
 
 # Acknowledgements
 
 We would like to thank the R Consortium for financial support for
-creating the `caracas` package ([link to details on the funded project](https://www.r-consortium.org/projects/awarded-projects/2019-group-2#Symbolic+mathematics+in+R+with+SymPy)) and to users for pin pointing points
+creating the `caracas` package ([link to details on the funded project](https://www.r-consortium.org/projects/awarded-projects/2019-group-2#Symbolic+mathematics+in+R+with+SymPy)) and to users for pinpointing points
 that can be improved in `caracas`.
 
 # References
