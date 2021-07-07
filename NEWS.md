@@ -1,6 +1,11 @@
+# caracas 1.1.2
+
+* `sympy_func(x, fun)` first tries calling `fun` on `x`; and if it does not exists it tries from the global namespace
+* `expand_func()` added
+
 # caracas 1.1.1
 
-* Journal of Open Source submission
+* Journal of Open Source Software submission
 
 # caracas 1.1.0
 

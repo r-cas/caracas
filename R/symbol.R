@@ -499,6 +499,11 @@ fraction_parts <- function(x) {
 #'   expr <- x*y + x - 3 + 2*x^2 - z*x^2 + x^3
 #'   expr
 #'   expr %>% sympy_func("collect", x) 
+#'   
+#'   x <- symbol("x")
+#'   y <- gamma(x+3)
+#'   sympy_func(y, "expand_func")
+#'   expand_func(y)
 #' }
 #'  
 #' @concept caracas_symbol
@@ -515,7 +520,21 @@ sympy_func <- function(x, fun, ...) {
     return(a)
   })
   
-  p <- do.call(x$pyobj[[fun]], args)
-  res <- construct_symbol_from_pyobj(p)
-  return(res)
+  # See if x has fun method
+  tryCatch({
+    p <- do.call(x$pyobj[[fun]], args)
+    res <- construct_symbol_from_pyobj(p)
+    #return(res)
+  }, error = {
+    
+    # ...it did not, try from global namespace:
+    
+    s <- get_sympy()
+    
+    args <- c(x$pyobj, args)
+    
+    p <- do.call(s[[fun]], args)
+    res <- construct_symbol_from_pyobj(p)
+    return(res)
+  })
 }

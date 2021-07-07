@@ -96,3 +96,24 @@ expand_log <- function(x) {
   return(v)
 }
 
+
+
+#' Expand a function expression
+#'
+#' @param x A `caracas_symbol`
+#'
+#' @concept simplify
+#'
+#' @export
+expand_func <- function(x) {
+  if (!inherits(x, "caracas_symbol")) {
+    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+  
+  ensure_sympy()
+  
+  z <- get_sympy()$expand_func(x$pyobj)
+  v <- construct_symbol_from_pyobj(z)
+  
+  return(v)
+}
