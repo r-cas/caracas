@@ -180,20 +180,20 @@ Ops.caracas_symbol = function(e1, e2) {
 
 Math_transtab <- matrix( c(
   #R					Python
-  "sin",			"Sin",
-  "cos",			"Cos",
-  "tan",			"Tan",
+  "sin",			"sin",
+  "cos",			"cos",
+  "tan",			"tan",
 
-  "asin",	  	"ArcSin",
-  "acos",	  	"ArcCos",
-  "atan",    	"ArcTan",
-  "asinh", 	  "ArcSinh",
-  "acosh", 	  "ArcCosh",
-  "atanh",   	"ArcTanh",
+  "asin",	  	"asin",
+  "acos",	  	"acos",
+  "atan",    	"atan",
+  "asinh", 	  "asinh",
+  "acosh", 	  "acosh",
+  "atanh",   	"atanh",
 
-  "exp", 	  	"Exp",
-  "log", 	  	"Ln",
-  "sqrt", 	  "Sqrt",
+  "exp", 	  	"exp",
+  "log", 	  	"log",
+  "sqrt", 	  "sqrt",
   
   "gamma",    "gamma"
 ), byrow = TRUE, ncol = 2)
@@ -219,7 +219,7 @@ Math.caracas_symbol = function(x, ...) {
     stop("Function '", .Generic, "' not yet implemented for caracas_symbol")
   }
 
-  fn <- Math_transtab[i, 1L]
+  fn <- Math_transtab[i, 2L]
   
   sympy <- get_sympy()
 
