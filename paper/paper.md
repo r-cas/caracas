@@ -34,7 +34,7 @@ other `R` libraries and objects.
 `caracas` contains a number of vignettes demonstrating both basic functionality like solving equations 
 as well as more advanced tasks like finding the concentration and covariance matrix in a dynamic linear model. 
 
-Compared to other CAS `R` packages like `Ryacas` [@Andersen2019] based on `yacas` [@yacas;@Pinkus2002] , 
+Compared to other CAS `R` packages like `Ryacas` [@Andersen2019] based on `yacas` [@yacas;@Pinkus2002], 
 `caracas` is more feature complete, for example with respect to solving equations.
 
 # Statement of Need
