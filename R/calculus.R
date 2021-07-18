@@ -398,7 +398,7 @@ der2 <- function(expr, vars, simplify = TRUE) {
 drop_remainder <- function(x) {
   ensure_sympy()
   
-  ft <- x %>% sympy_func("removeO")
+  ft <- sympy_func(x = x, fun = "removeO")
   
   return(ft)
 }

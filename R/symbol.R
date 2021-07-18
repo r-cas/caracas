@@ -521,11 +521,11 @@ sympy_func <- function(x, fun, ...) {
   })
   
   # See if x has fun method
-  tryCatch({
+  out <- tryCatch({
     p <- do.call(x$pyobj[[fun]], args)
     res <- construct_symbol_from_pyobj(p)
-    #return(res)
-  }, error = {
+    res
+  }, error = function(cond) {
     
     # ...it did not, try from global namespace:
     
@@ -537,4 +537,6 @@ sympy_func <- function(x, fun, ...) {
     res <- construct_symbol_from_pyobj(p)
     return(res)
   })
+  
+  return(out)
 }

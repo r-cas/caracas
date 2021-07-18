@@ -1,7 +1,8 @@
 # caracas 1.1.2
 
-* `sympy_func(x, fun)` first tries calling `fun` on `x`; and if it does not exists it tries from the global namespace
+* `sympy_func(x, fun)` first tries calling `fun` on `x`; and if it does not exist it tries from the global namespace
 * `expand_func()` added
+* Bug with `Ops` (functions) fixed
 
 # caracas 1.1.1
 
