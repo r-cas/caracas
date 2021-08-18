@@ -1,8 +1,10 @@
 # caracas 1.1.2
 
 * `sympy_func(x, fun)` first tries calling `fun` on `x`; and if it does not exist it tries from the global namespace
-* `expand_func()` added
+* New function: `mat_pow()` for raising a matrix to a power (not component-wise)
+* New function: `expand_func()` added
 * Bug with `Ops` (functions) fixed
+
 
 # caracas 1.1.1
 
