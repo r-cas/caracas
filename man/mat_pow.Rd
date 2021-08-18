@@ -9,7 +9,7 @@ mat_pow(x, pow = "1")
 \arguments{
 \item{x}{A \code{caracas_symbol}, a matrix.}
 
-\item{pow}{}
+\item{pow}{Power to raise matrix \code{x} to}
 }
 \description{
 Matrix power

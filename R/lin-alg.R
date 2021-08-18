@@ -211,7 +211,7 @@ reciprocal_matrix <- function(x, numerator = 1){
 #' Matrix power
 #'
 #' @param x A `caracas_symbol`, a matrix.
-#' @param pow 
+#' @param pow Power to raise matrix `x` to
 #' 
 #' @examples
 #' if (has_sympy()) {
