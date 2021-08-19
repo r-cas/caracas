@@ -227,7 +227,8 @@ mat_pow <- function(x, pow = "1") {
   stopifnot_symbol(x)
   stopifnot_matrix(x)
   
-  pow_str <- deparse1(substitute(pow)) # to avoid 1/2 gets converted to 0.5
+  #pow_str <- deparse1(substitute(pow)) # to avoid 1/2 gets converted to 0.5
+  pow_str <- paste0(deparse(substitute(pow))) # to avoid 1/2 gets converted to 0.5
 
   x_pow <- x$pyobj$pow(pow_str)
   

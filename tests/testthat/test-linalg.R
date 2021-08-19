@@ -205,3 +205,14 @@ test_that("matrix_", {
   expect_equal(as.character(matrix_("a", 2, 2)), "Matrix([[a, a], [a, a]])")
 })
 
+
+test_that("mat_pow", {
+  skip_if_no_sympy()
+  
+  M <- matrix_(c("1", "a", "a", 1), 2, 2)
+  Msqrt <- mat_pow(M, 1/2)
+  
+  expect_equal(as.character(Msqrt), 
+               "Matrix([[sqrt(1 - a)/2 + sqrt(a + 1)/2, -sqrt(1 - a)/2 + sqrt(a + 1)/2], [-sqrt(1 - a)/2 + sqrt(a + 1)/2, sqrt(1 - a)/2 + sqrt(a + 1)/2]])")
+})
+
