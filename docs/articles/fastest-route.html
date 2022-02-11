@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,18 +34,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -83,7 +79,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-cas/caracas/">
+  <a href="https://github.com/r-cas/caracas/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -104,7 +100,7 @@
       <h1 data-toc-skip>Fastest route through the forest</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/master/vignettes/fastest-route.Rmd"><code>vignettes/fastest-route.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/HEAD/vignettes/fastest-route.Rmd" class="external-link"><code>vignettes/fastest-route.Rmd</code></a></small>
       <div class="hidden name"><code>fastest-route.Rmd</code></div>
 
     </div>
@@ -112,13 +108,13 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas">caracas</a></span><span class="op">)</span></code></pre></div>
-<p>A <a href="https://ing.dk/artikel/taenkeboks-hurtigste-vej-mellem-a-b-1150-m-lang-232871">problem</a> was posted by the Danish newspaper, <em>Ingeniøren</em>, and it goes like this:</p>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas" class="external-link">caracas</a></span><span class="op">)</span></code></pre></div>
+<p>A <a href="https://ing.dk/artikel/taenkeboks-hurtigste-vej-mellem-a-b-1150-m-lang-232871" class="external-link">problem</a> was posted by the Danish newspaper, <em>Ingeniøren</em>, and it goes like this:</p>
 <p>You are in the middle of a dense forest located at <span class="math inline">\(A\)</span>. You need to get to <span class="math inline">\(C\)</span> in the fastest way possible, and you can only change direction once. You can walk directly via <span class="math inline">\(AB\)</span> to the dedicated walking path <span class="math inline">\(BC\)</span> where you can walk fast, you can take the direct path through the forest (<span class="math inline">\(AC\)</span>) where you have to walk slower, or cross through the forest to the dedicated walking path (<span class="math inline">\(AD\)</span> and then <span class="math inline">\(DC\)</span>).</p>
 <p><img src="fastest-route_files/figure-html/unnamed-chunk-4-1.png" width="768"></p>
-<div id="information-given" class="section level2">
-<h2 class="hasAnchor">
-<a href="#information-given" class="anchor"></a>Information given</h2>
+<div class="section level2">
+<h2 id="information-given">Information given<a class="anchor" aria-label="anchor" href="#information-given"></a>
+</h2>
 <ul>
 <li>Distances
 <ul>
@@ -141,9 +137,9 @@
 </ul>
 </li>
 </ul>
-<div id="length-of-line-segments" class="section level3">
-<h3 class="hasAnchor">
-<a href="#length-of-line-segments" class="anchor"></a>Length of line segments</h3>
+<div class="section level3">
+<h3 id="length-of-line-segments">Length of line segments<a class="anchor" aria-label="anchor" href="#length-of-line-segments"></a>
+</h3>
 <p>We parameterise with <span class="math inline">\(k = |BD|\)</span>, the distance between <span class="math inline">\(B\)</span> and <span class="math inline">\(D\)</span>. That is, how much to walk on fast walking path before crossing into the forest.</p>
 <p>Formulating using <code>caracas</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -153,12 +149,12 @@
 <span class="va">AC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">'1000'</span><span class="op">)</span>
 <span class="va">AC</span>
 <span class="co">#&gt; [caracas]: 1000</span>
-<span class="va">BC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">AC</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">AB</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">BC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">AC</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">AB</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
 <span class="va">BC</span>
 <span class="co">#&gt; [caracas]: 100⋅√91</span>
 <span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'k'</span><span class="op">)</span> <span class="co"># |BD|</span>
 <span class="va">DC</span> <span class="op">&lt;-</span> <span class="va">BC</span> <span class="op">-</span> <span class="va">k</span>
-<span class="va">AD</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">AB</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">k</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">AD</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">AB</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">k</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
 <span class="va">AD</span>
 <span class="co">#&gt; [caracas]:    ____________</span>
 <span class="co">#&gt;              ╱  2         </span>
@@ -178,9 +174,9 @@
 <code class="sourceCode R"><span class="va">lfun</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span>
 <span class="va">lfun</span>
 <span class="co">#&gt; expression(-k/5 + sqrt(k^2 + 90000)/2 + 20 * sqrt(91))</span>
-<span class="va">ks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">AC</span><span class="op">)</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
-<span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="va">lfun</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="va">ks</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ks</span>, <span class="va">ls</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"k"</span>, ylab <span class="op">=</span> <span class="st">"Time A to C"</span><span class="op">)</span></code></pre></div>
+<span class="va">ks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">AC</span><span class="op">)</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
+<span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html" class="external-link">eval</a></span><span class="op">(</span><span class="va">lfun</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="va">ks</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ks</span>, <span class="va">ls</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"k"</span>, ylab <span class="op">=</span> <span class="st">"Time A to C"</span><span class="op">)</span></code></pre></div>
 <p><img src="fastest-route_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 <p>It looks like a minimum around <span class="math inline">\(k = 150\)</span>.</p>
 <p>We find the analytical solution by first finding critical points:</p>
@@ -205,7 +201,7 @@
 <span class="co">#&gt;               7</span></code></pre></div>
 <p>The type of the critical point is found by considering the Hessian:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">dl</span>, <span class="va">k</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">best_k</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/eval.html" class="external-link">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">dl</span>, <span class="va">k</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">best_k</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.001283121</span></code></pre></div>
 <p>Thus the critical point is indeed a minimum as suggested by the plot.</p>
 <p>The fastest route is thus obtained for <span class="math display">\[
@@ -213,7 +209,7 @@
 \]</span> It has a length of (in meters)</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">DC_best</span> <span class="op">&lt;-</span> <span class="va">BC</span> <span class="op">-</span> <span class="va">best_k</span>
-<span class="va">AD_best</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">AB</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">best_k</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">AD_best</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">AB</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">best_k</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
 <span class="va">AD_best</span>
 <span class="co">#&gt; [caracas]: 500⋅√21</span>
 <span class="co">#&gt;            ───────</span>
@@ -254,11 +250,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Mikkel Meyer Andersen, Søren Højsgaard.</p>
+  <p></p>
+<p>Developed by Mikkel Meyer Andersen, Søren Højsgaard.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -266,6 +264,8 @@
 
   
 
+
+  
 
   </body>
 </html>

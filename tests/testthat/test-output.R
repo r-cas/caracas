@@ -89,6 +89,8 @@ test_that("print ascii", {
   eq_print <- paste0(capture.output(print(eq)), collapse = "")
   expect_false(grepl("^", eq_print, fixed = TRUE))
   
+  o <- getOption("caracas.print.prettyascii") 
+  options(caracas.print.prettyascii = NULL) 
   options(caracas.print.ascii = TRUE) # default is FALSE
   eq_print <- paste0(capture.output(print(eq)), collapse = "")
   expect_true(grepl("^", eq_print, fixed = TRUE))
@@ -102,6 +104,8 @@ test_that("print ascii", {
   expect_false(grepl("^", eq_print, fixed = TRUE))
   
   options(caracas.print.ascii = NULL)
+  
+  options(caracas.print.prettyascii = o) 
 })
 
 test_that("print prettyascii", {
@@ -165,7 +169,9 @@ test_that("custom printer: exp", {
   expect_equal(o3, "[caracas]: Limit((1 + 1/n)^n, n, Inf, dir='-')")
   expect_equal(o2, "[caracas]:             n                /    1\\             lim |1 + -|            n->oo\\    n/")
   
-  # Windows due to UTF-8:
-  skip_on_os("windows")
-  expect_equal(o1, "[caracas]:            n               ⎛    1⎞            lim ⎜1 + ─⎟            n─→∞⎝    n⎠")
+  if (grepl("UTF-8", Sys.getlocale())) {
+    # UTF-8 system:
+    expect_equal(o1, "[caracas]:            n               ⎛    1⎞            lim ⎜1 + ─⎟            n─→∞⎝    n⎠")
+  }
+  
 })

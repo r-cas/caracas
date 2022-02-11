@@ -214,7 +214,7 @@ reciprocal_matrix <- function(x, numerator = 1){
 #' @param pow Power to raise matrix `x` to
 #' 
 #' @examples
-#' if (has_sympy()) {
+#' if (has_sympy() && sympy_version() >= "1.6") {
 #'   M <- matrix_(c("1", "a", "a", 1), 2, 2)
 #'   M
 #'   mat_pow(M, 1/2)
@@ -230,6 +230,10 @@ mat_pow <- function(x, pow = "1") {
   #pow_str <- deparse1(substitute(pow)) # to avoid 1/2 gets converted to 0.5
   pow_str <- paste0(deparse(substitute(pow))) # to avoid 1/2 gets converted to 0.5
 
+  if (!("pow" %in% names(x$pyobj))) {
+    stop("pow() not supported by SymPy version")
+  }
+  
   x_pow <- x$pyobj$pow(pow_str)
   
   return(construct_symbol_from_pyobj(x_pow))

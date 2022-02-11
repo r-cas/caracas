@@ -79,6 +79,16 @@ test_that("fraction", {
 })
 
 
+test_that("fraction_parts()", {
+  skip_if_no_sympy()
+  
+  #https://docs.sympy.org/latest/gotchas.html#python-numbers-vs-sympy-numbers
+  x <- as_sym("120000/7")
+  x_f <- fraction_parts(x)
+  expect_equal(as.character(x_f$numerator$pyobj), "120000")
+  expect_equal(as.character(x_f$denominator$pyobj), "7")
+})
+
 test_that("eigval", {
   skip_if_no_sympy()
 

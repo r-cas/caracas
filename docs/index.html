@@ -22,6 +22,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -34,18 +36,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -85,7 +81,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-cas/caracas/">
+  <a href="https://github.com/r-cas/caracas/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -102,64 +98,66 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="caracas-computer-algebra-in-r" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#caracas-computer-algebra-in-r" class="anchor"></a><code>caracas</code>: Computer algebra in R</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="caracas-computer-algebra-in-r">
+<code>caracas</code>: Computer algebra in R<a class="anchor" aria-label="anchor" href="#caracas-computer-algebra-in-r"></a>
+</h1></div>
 <!-- badges: start -->
 
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p><code>caracas</code> is available on CRAN and can be installed as usual:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">'caracas'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'caracas'</span>)</span></code></pre></div>
 <p>Please ensure that you have SymPy installed, or else install it:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu">caracas</span><span class="fu">::</span><span class="fu"><a href="reference/has_sympy.html">has_sympy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu">caracas</span><span class="fu">::</span><span class="fu"><a href="reference/install_sympy.html">install_sympy</a></span><span class="op">(</span><span class="op">)</span> 
 <span class="op">}</span></code></pre></div>
 <p>To build and install from Github with vignettes run this command from within <code>R</code> (please install <code>remotes</code> first if not already installed):</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># install.packages('remotes')</span></a>
-<a class="sourceLine" id="cb3-2" title="2">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"r-cas/caracas"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages('remotes')</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"r-cas/caracas"</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>You can also install the package without vignettes if needed as follows:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"r-cas/caracas"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"r-cas/caracas"</span>)</span></code></pre></div>
 </div>
-<div id="configuring-the-python-environment" class="section level2">
-<h2 class="hasAnchor">
-<a href="#configuring-the-python-environment" class="anchor"></a>Configuring the Python environment</h2>
-<p>The <code>caracas</code> package uses the <a href="https://github.com/rstudio/reticulate"><code>reticulate</code></a> package (to run Python code). Thus, if you wish to configure your Python environment, you need to 1) load <code>reticulate</code>, 2) configure the Python environment, and 3) load <code>caracas</code>. The Python environment can be configured as described <a href="https://rstudio.github.io/reticulate/articles/versions.html">here</a>. Again, this need to be done <em>before</em> loading <code>caracas</code>.</p>
+<div class="section level2">
+<h2 id="configuring-the-python-environment">Configuring the Python environment<a class="anchor" aria-label="anchor" href="#configuring-the-python-environment"></a>
+</h2>
+<p>The <code>caracas</code> package uses the <a href="https://github.com/rstudio/reticulate" class="external-link"><code>reticulate</code></a> package (to run Python code). Thus, if you wish to configure your Python environment, you need to 1) load <code>reticulate</code>, 2) configure the Python environment, and 3) load <code>caracas</code>. The Python environment can be configured as described <a href="https://rstudio.github.io/reticulate/articles/versions.html" class="external-link">here</a>. Again, this need to be done <em>before</em> loading <code>caracas</code>.</p>
 </div>
-<div id="development-site" class="section level2">
-<h2 class="hasAnchor">
-<a href="#development-site" class="anchor"></a>Development site</h2>
-<p>See <a href="https://github.com/r-cas/caracas" class="uri">https://github.com/r-cas/caracas</a>.</p>
+<div class="section level2">
+<h2 id="development-site">Development site<a class="anchor" aria-label="anchor" href="#development-site"></a>
+</h2>
+<p>See <a href="https://github.com/r-cas/caracas" class="external-link uri">https://github.com/r-cas/caracas</a>.</p>
 </div>
-<div id="online-documentation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#online-documentation" class="anchor"></a>Online documentation</h2>
-<p>See <a href="https://r-cas.github.io/caracas/" class="uri">https://r-cas.github.io/caracas/</a>.</p>
+<div class="section level2">
+<h2 id="online-documentation">Online documentation<a class="anchor" aria-label="anchor" href="#online-documentation"></a>
+</h2>
+<p>See <a href="https://r-cas.github.io/caracas/" class="external-link uri">https://r-cas.github.io/caracas/</a>.</p>
 </div>
-<div id="origin-of-name" class="section level2">
-<h2 class="hasAnchor">
-<a href="#origin-of-name" class="anchor"></a>Origin of name</h2>
+<div class="section level2">
+<h2 id="origin-of-name">Origin of name<a class="anchor" aria-label="anchor" href="#origin-of-name"></a>
+</h2>
 <p>The name “caracas” is intended to mean “(inter)face to computer algebra system(s)” - notice that “cara” is Spanish (Castellano to be precise) for “face”.</p>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of conduct</h2>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
 <p>Please note that the <code>caracas</code> project is released with a Contributor Code of Conduct (available in <code>CODE_OF_CONDUCT.md</code>). By contributing to this project, you agree to abide by its terms.</p>
 </div>
-<div id="brief-introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#brief-introduction" class="anchor"></a>Brief introduction</h2>
+<div class="section level2">
+<h2 id="brief-introduction">Brief introduction<a class="anchor" aria-label="anchor" href="#brief-introduction"></a>
+</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas">caracas</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas" class="external-link">caracas</a></span><span class="op">)</span>
+<span class="co"># options(caracas.print.prettyascii = TRUE)</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'x'</span><span class="op">)</span>
 <span class="va">eq</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">x</span>
 <span class="va">eq</span>
 <span class="co">#&gt; [caracas]:    2    </span>
 <span class="co">#&gt;            2⋅x  - x</span>
-<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
 <span class="co">#&gt; [1] "2*x^2 - x"</span>
 <span class="fu"><a href="reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
 <span class="co">#&gt; expression(2 * x^2 - x)</span>
@@ -177,7 +175,7 @@
 <span class="co">#&gt; [caracas]:    2    </span>
 <span class="co">#&gt;            2⋅y  - y</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="st">"2*x"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="st">"2*x"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
 <span class="va">B</span>
 <span class="co">#&gt; [caracas]: ⎡x   0 ⎤</span>
@@ -215,65 +213,75 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]$eigmult</span>
 <span class="co">#&gt; [1] 1</span></code></pre></div>
-<p>Please find more examples in the other vignettes available at <a href="https://r-cas.github.io/caracas/" class="uri">https://r-cas.github.io/caracas/</a>.</p>
+<p>Please find more examples in the other vignettes available at <a href="https://r-cas.github.io/caracas/" class="external-link uri">https://r-cas.github.io/caracas/</a>.</p>
 </div>
-<div id="contribute-issues-and-support" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contribute-issues-and-support" class="anchor"></a>Contribute, issues, and support</h2>
-<p>Please use the issue tracker at <a href="https://github.com/r-cas/caracas/issues" class="uri">https://github.com/r-cas/caracas/issues</a> if you want to notify us of an issue or need support. If you want to contribute, please either create an issue or make a pull request.</p>
+<div class="section level2">
+<h2 id="contribute-issues-and-support">Contribute, issues, and support<a class="anchor" aria-label="anchor" href="#contribute-issues-and-support"></a>
+</h2>
+<p>Please use the issue tracker at <a href="https://github.com/r-cas/caracas/issues" class="external-link uri">https://github.com/r-cas/caracas/issues</a> if you want to notify us of an issue or need support. If you want to contribute, please either create an issue or make a pull request.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=caracas">https://​cloud.r-project.org/​package=caracas</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/r-cas/caracas/">https://​github.com/​r-cas/​caracas/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/r-cas/caracas/issues">https://​github.com/​r-cas/​caracas/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=caracas" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/r-cas/caracas/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/r-cas/caracas/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>GPL</li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing caracas</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Mikkel Meyer Andersen <br><small class="roles"> Author, maintainer, copyright holder </small>  </li>
 <li>Søren Højsgaard <br><small class="roles"> Author, copyright holder </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/r-cas/caracas/actions"><img src="https://github.com/r-cas/caracas/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/r-cas/caracas?branch=master"><img src="https://codecov.io/gh/r-cas/caracas/branch/master/graphs/badge.svg" alt="codecov.io"></a></li>
+<li><a href="https://github.com/r-cas/caracas/actions" class="external-link"><img src="https://github.com/r-cas/caracas/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://app.codecov.io/gh/r-cas/caracas?branch=master" class="external-link"><img src="https://codecov.io/gh/r-cas/caracas/branch/master/graphs/badge.svg" alt="codecov.io"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Mikkel Meyer Andersen, Søren Højsgaard.</p>
+  <p></p>
+<p>Developed by Mikkel Meyer Andersen, Søren Højsgaard.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -281,6 +289,8 @@
 
   
 
+
+  
 
   </body>
 </html>

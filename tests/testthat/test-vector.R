@@ -51,3 +51,16 @@ test_that("cbind/rbind", {
   expect_equal(as_character_matrix(rbind(t(b), t(2*b), t(b-1))), 
                structure(c("x", "2*x", "x - 1", "x^2", "2*x^2", "x^2 - 1"), .Dim = 3:2))
 })
+
+
+test_that("rev", {
+  skip_if_no_sympy()
+  
+  a <- c("x", "x^2")
+  x <- as_sym(a)
+  
+  y1 <- rev(x)
+  y2 <- as_sym(rev(a))
+  expect_equal(as.character(y1), as.character(y2))
+})
+

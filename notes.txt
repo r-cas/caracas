@@ -1,0 +1,36 @@
+# Check with Latin1 encoding (adapted from https://github.com/rstudio/httpuv/issues/264)
+
+First build:
+
+```
+docker build -t r-devel-caracas /home/mikl/gits/r-stuff/rocker/r-devel-caracas
+
+```
+
+Then run:
+
+```
+docker run -v /home/mikl/gits/r-cas/caracas:/mnt/r-cas/caracas --security-opt seccomp=unconfined --rm -ti r-devel-caracas /bin/bash
+
+RD --quiet -e 'reticulate::import("sympy")$`__version__`'
+
+RD --quiet -e 'Sys.getlocale()'
+
+cd /mnt/r-cas
+
+
+export LANG=en_US.iso88591
+# This prints a warning, but it seems to be necessary for things to work.
+export LC_ALL=en_US.iso88591
+
+RD --quiet -e 'Sys.getlocale()'
+
+#RD CMD build caracas
+# Cannot --as-cran due to libPaths
+#RD CMD check caracas_1.1.2.tar.gz
+
+RD CMD build caracas && RD CMD check caracas_1.1.2.tar.gz
+```
+
+
+

@@ -67,3 +67,27 @@ rbind.caracas_symbol <- function(..., deparse.level = 1) {
   
   return(z)
 }
+
+
+#' @export
+rev.caracas_symbol <- function(x) {
+  if (!symbol_is_matrix(x)) {
+    stop("x was not a vector")
+  }
+  
+  x_dim <- dim(x)
+  
+  if (is.null(x_dim)) {
+    stop("x was not a matrix")
+  }
+  
+  if (x_dim[2] != 1L) {
+    stop("x was not a vector")
+  }
+  
+  y <- as_character_matrix(x)
+  y <- rev(y[, 1L])
+  z <- as_sym(y)
+  return(z)
+}
+

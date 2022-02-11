@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,18 +34,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -83,7 +79,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-cas/caracas/">
+  <a href="https://github.com/r-cas/caracas/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -104,7 +100,7 @@
       <h1 data-toc-skip>Introduction to ‘caracas’</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/master/vignettes/introduction.Rmd"><code>vignettes/introduction.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/HEAD/vignettes/introduction.Rmd" class="external-link"><code>vignettes/introduction.Rmd</code></a></small>
       <div class="hidden name"><code>introduction.Rmd</code></div>
 
     </div>
@@ -112,17 +108,17 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas">caracas</a></span><span class="op">)</span></code></pre></div>
-<div id="quick-start" class="section level2">
-<h2 class="hasAnchor">
-<a href="#quick-start" class="anchor"></a>Quick start</h2>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas" class="external-link">caracas</a></span><span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'x'</span><span class="op">)</span>
 <span class="va">eq</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">x</span>
 <span class="va">eq</span>
 <span class="co">#&gt; [caracas]:    2    </span>
 <span class="co">#&gt;            2⋅x  - x</span>
-<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
 <span class="co">#&gt; [1] "2*x^2 - x"</span>
 <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
 <span class="co">#&gt; expression(2 * x^2 - x)</span>
@@ -141,11 +137,11 @@
 <span class="co">#&gt; [caracas]:    2    </span>
 <span class="co">#&gt;            2⋅y  - y</span></code></pre></div>
 </div>
-<div id="linear-algebra" class="section level2">
-<h2 class="hasAnchor">
-<a href="#linear-algebra" class="anchor"></a>Linear algebra</h2>
+<div class="section level2">
+<h2 id="linear-algebra">Linear algebra<a class="anchor" aria-label="anchor" href="#linear-algebra"></a>
+</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="st">"2*x"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="st">"2*x"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
 <span class="va">B</span>
 <span class="co">#&gt; [caracas]: ⎡x   0 ⎤</span>
@@ -212,9 +208,9 @@
 <span class="co">#&gt;            ⎢───  1⎥</span>
 <span class="co">#&gt;            ⎣ 2    ⎦ᵀ</span></code></pre></div>
 </div>
-<div id="more-examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#more-examples" class="anchor"></a>More examples</h2>
+<div class="section level2">
+<h2 id="more-examples">More examples<a class="anchor" aria-label="anchor" href="#more-examples"></a>
+</h2>
 <p>Please find more examples in the other vignettes.</p>
 </div>
   </div>
@@ -230,11 +226,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Mikkel Meyer Andersen, Søren Højsgaard.</p>
+  <p></p>
+<p>Developed by Mikkel Meyer Andersen, Søren Højsgaard.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -242,6 +240,8 @@
 
   
 
+
+  
 
   </body>
 </html>

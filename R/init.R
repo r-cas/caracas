@@ -9,18 +9,25 @@
 # reticulate::conda_remove('r-reticulate')
 # reticulate::use_python('/usr/bin/python3')
 # reticulate::conda_create('r-reticulate')
+### reticulate::use_condaenv('r-reticulate', required = TRUE)
 # install_sympy(method = "conda")
 
 # global reference to sympy
 pkg_globals <- new.env()
 pkg_globals$internal_py <- NULL
 pkg_globals$internal_sympy <- NULL
+pkg_globals$internal_sympy_version <- NULL
 pkg_globals$internal_globals_length <- NULL
 
 
 define_printers <- function() {
   fl <- system.file("define_printers.py", package = "caracas")
   reticulate::py_run_file(fl)
+  
+  if (!grepl("UTF-8", Sys.getlocale())) {
+    # Not UTF-8 system:
+    options(caracas.print.prettyascii = TRUE)
+  }
 }
 
 
@@ -48,6 +55,8 @@ silent_prepare_sympy <- function() {
       
       reticulate::py_run_string("from sympy import *")
       
+      pkg_globals$internal_sympy_version <- base::numeric_version(pkg_globals$internal_sympy$`__version__`)
+
       define_printers()
     } 
     
@@ -103,9 +112,7 @@ has_sympy <- function() {
 sympy_version <- function() {
   ensure_sympy()
   
-  sympy_version <- base::numeric_version(pkg_globals$internal_sympy$`__version__`)
-  
-  return(sympy_version)
+  return(pkg_globals$internal_sympy_version)
 }
 
 #' Access 'py' object

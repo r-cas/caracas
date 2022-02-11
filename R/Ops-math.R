@@ -32,6 +32,33 @@ matrix_ele_power <- function(x, power = 1){
   return(as_sym(rx))
 }
 
+mat_mult_elementwise <- function(o1, o2) {
+  # https://github.com/sympy/sympy/issues/22353
+  # https://github.com/sympy/sympy/pull/22362/
+  
+  # if (FALSE) {
+  #   e1 <- as_sym(paste0("x", 1:3))
+  #   e1
+  #   e2 <- as_sym(2:4)
+  #   e2
+  #   o1 <- e1$pyobj
+  #   o2 <- e2$pyobj
+  # }
+  
+  if (sympy_version() == "1.9") {
+    r1 <- o1["_rep"]
+    r2 <- o2["_rep"]
+    d <- r1$unify(r2)
+    z <- d[0]$mul_elementwise(d[1]) # Python 0-indexed
+    w <- z$to_Matrix()
+    return(construct_symbol_from_pyobj(w))
+  } 
+  
+  # Else: Other (previous and later versions)
+  z <- get_sympy()$matrix_multiply_elementwise(o1, o2)
+  return(construct_symbol_from_pyobj(z))
+}
+
 
 #' Math operators
 #'
@@ -80,16 +107,15 @@ Ops.caracas_symbol = function(e1, e2) {
     if (isTRUE(all.equal(dim_e1, dim(e2))) && any(dim_e1 == 1L)) {
       # Component wise operation
       if (.Generic == "*") {
-        z <- get_sympy()$matrix_multiply_elementwise(o1, o2)
-        return(construct_symbol_from_pyobj(z))
+        z <- mat_mult_elementwise(o1, o2)
+        return(z)
       }
-      else if (.Generic == "/"){ ## FIXME Mikkel; check this, please
+      else if (.Generic == "/"){
         e2 <- reciprocal_matrix(e2)
         o2 <- e2$pyobj
-        ##print(o1)
-        ##print(o2)
-        z <- get_sympy()$matrix_multiply_elementwise(o1, o2)
-        return(construct_symbol_from_pyobj(z))
+        
+        z <- mat_mult_elementwise(o1, o2)
+        return(z)
       }
     }
   }
@@ -126,15 +152,14 @@ Ops.caracas_symbol = function(e1, e2) {
   if ((e1_is_mat || e2_is_mat) && .Generic %in% c("*", "/", "^")) {
     ### cat("mat || mat\n")
     if (.Generic == "*") {
-      z <- get_sympy()$matrix_multiply_elementwise(o1, o2)
-      w <- construct_symbol_from_pyobj(z)
-      return(w) 
+      z <- mat_mult_elementwise(o1, o2)
+      return(z)
     } else if (.Generic == "/") {
       e2 <- reciprocal_matrix(e2)
       o2 <- e2$pyobj
-      z <- get_sympy()$matrix_multiply_elementwise(o1, o2)
-      w <- construct_symbol_from_pyobj(z)
-      return(w)
+      
+      z <- mat_mult_elementwise(o1, o2)
+      return(z)
     } else if (.Generic == "^") {
       #print(e1)
       #print(e2)

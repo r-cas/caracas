@@ -15,7 +15,7 @@ mat_pow(x, pow = "1")
 Matrix power
 }
 \examples{
-if (has_sympy()) {
+if (has_sympy() && sympy_version() >= "1.6") {
   M <- matrix_(c("1", "a", "a", 1), 2, 2)
   M
   mat_pow(M, 1/2)

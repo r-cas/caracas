@@ -33,7 +33,8 @@ get_caracas_out <- function(x,
   out <- if (!is.null(prettyascii) && as.logical(prettyascii) == TRUE) {
     # 'prettyascii'
     if (rowvec && symbol_is_matrix(x) && ncol(x) == 1L && nrow(x) > 1L) {
-      suffix <- intToUtf8(7488L) # T utf-8
+      #suffix <- intToUtf8(7488L) # T utf-8
+      suffix <- "^T"
       #reticulate::py_capture_output(get_sympy()$pprint(t(x)$pyobj, use_unicode = FALSE))
       reticulate::py_capture_output(py$print_caracas(t(x)$pyobj))
     } else {

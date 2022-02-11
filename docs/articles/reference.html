@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,18 +34,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -83,7 +79,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-cas/caracas/">
+  <a href="https://github.com/r-cas/caracas/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -104,7 +100,7 @@
       <h1 data-toc-skip>Reference</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/master/vignettes/reference.Rmd"><code>vignettes/reference.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/HEAD/vignettes/reference.Rmd" class="external-link"><code>vignettes/reference.Rmd</code></a></small>
       <div class="hidden name"><code>reference.Rmd</code></div>
 
     </div>
@@ -112,13 +108,13 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas">caracas</a></span><span class="op">)</span></code></pre></div>
-<div id="quick-start" class="section level2">
-<h2 class="hasAnchor">
-<a href="#quick-start" class="anchor"></a>Quick start</h2>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas" class="external-link">caracas</a></span><span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'x'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="co">#&gt; [1] "x"</span>
 <span class="va">x</span>
 <span class="co">#&gt; [caracas]: x</span>
@@ -128,12 +124,12 @@
 <code class="sourceCode R"><span class="fl">2</span><span class="op">*</span><span class="va">x</span>
 <span class="co">#&gt; [caracas]: 2⋅x</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'y'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">3</span><span class="op">*</span><span class="va">x</span><span class="op">^</span><span class="va">y</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">3</span><span class="op">*</span><span class="va">x</span><span class="op">^</span><span class="va">y</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]:       ____</span>
 <span class="co">#&gt;                 ╱  y </span>
 <span class="co">#&gt;            √3⋅╲╱  x</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
+<code class="sourceCode R"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
 <span class="va">z</span>
 <span class="co">#&gt; [caracas]:    2         2   </span>
 <span class="co">#&gt;            sin (x) + cos (x)</span>
@@ -142,12 +138,12 @@
 <span class="fu"><a href="../reference/tex.html">tex</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
 <span class="co">#&gt; [1] "\\sin^{2}{\\left(x \\right)} + \\cos^{2}{\\left(x \\right)}"</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
 <span class="va">z</span>
 <span class="co">#&gt; [caracas]: -sin(x)⋅sin(y) + cos(x)⋅cos(y)</span>
 <span class="fu"><a href="../reference/simplify.html">simplify</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: cos(x + y)</span>
-<span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">x</span> <span class="op">+</span> <span class="va">y</span><span class="op">)</span>
+<span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos</a></span><span class="op">(</span><span class="va">x</span> <span class="op">+</span> <span class="va">y</span><span class="op">)</span>
 <span class="va">z</span>
 <span class="co">#&gt; [caracas]: cos(x + y)</span>
 <span class="fu"><a href="../reference/expand.html">expand</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
@@ -157,14 +153,14 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'x'</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'y'</span><span class="op">)</span>
-<span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">*</span><span class="va">y</span><span class="op">)</span>
+<span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">*</span><span class="va">y</span><span class="op">)</span>
 <span class="va">z</span>
 <span class="co">#&gt; [caracas]: log(x⋅y)</span>
 <span class="fu"><a href="../reference/expand_log.html">expand_log</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: log(x) + log(y)</span></code></pre></div>
-<div id="sums" class="section level3">
-<h3 class="hasAnchor">
-<a href="#sums" class="anchor"></a>Sums</h3>
+<div class="section level3">
+<h3 id="sums">Sums<a class="anchor" aria-label="anchor" href="#sums"></a>
+</h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/sum_.html">sum_</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">x</span>, <span class="st">"x"</span>, <span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>
@@ -178,7 +174,7 @@
 <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sum_.html">sum_</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">x</span>, <span class="st">"x"</span>, <span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span>
 <span class="co">#&gt; [1] 2.928968</span>
-<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] 2.928968</span>
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">"n"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/simplify.html">simplify</a></span><span class="op">(</span><span class="fu"><a href="../reference/sum_.html">sum_</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x</span>, <span class="fl">1</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span>
@@ -186,9 +182,9 @@
 <span class="co">#&gt;            ─────────</span>
 <span class="co">#&gt;                2</span></code></pre></div>
 </div>
-<div id="products" class="section level3">
-<h3 class="hasAnchor">
-<a href="#products" class="anchor"></a>Products</h3>
+<div class="section level3">
+<h3 id="products">Products<a class="anchor" aria-label="anchor" href="#products"></a>
+</h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span>
 <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prod_.html">prod_</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">x</span>, <span class="st">"x"</span>, <span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>
@@ -196,15 +192,15 @@
 <span class="co">#&gt; [caracas]: 1/3628800</span>
 <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
 <span class="co">#&gt; [1] 2.755732e-07</span>
-<span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/prod.html" class="external-link">prod</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] 2.755732e-07</span>
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">"n"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/prod_.html">prod_</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x</span>, <span class="fl">1</span>, <span class="va">n</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: n!</span></code></pre></div>
 </div>
-<div id="integrals" class="section level3">
-<h3 class="hasAnchor">
-<a href="#integrals" class="anchor"></a>Integrals</h3>
+<div class="section level3">
+<h3 id="integrals">Integrals<a class="anchor" aria-label="anchor" href="#integrals"></a>
+</h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span>
 
@@ -237,12 +233,12 @@
 <span class="fu"><a href="../reference/doit.html">doit</a></span><span class="op">(</span><span class="va">i1</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: log(x)</span></code></pre></div>
 </div>
-<div id="limits" class="section level3">
-<h3 class="hasAnchor">
-<a href="#limits" class="anchor"></a>Limits</h3>
+<div class="section level3">
+<h3 id="limits">Limits<a class="anchor" aria-label="anchor" href="#limits"></a>
+</h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/lim.html">lim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="va">x</span>, <span class="st">"x"</span>, <span class="fl">0</span><span class="op">)</span>
+<span class="fu"><a href="../reference/lim.html">lim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="va">x</span>, <span class="st">"x"</span>, <span class="fl">0</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: 1</span>
 <span class="fu"><a href="../reference/lim.html">lim</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">x</span>, <span class="st">"x"</span>, <span class="fl">0</span>, dir <span class="op">=</span> <span class="st">'+'</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ∞</span>
@@ -251,17 +247,17 @@
 <p>We can also postpone evaluation:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/lim.html">lim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="va">x</span>, <span class="st">"x"</span>, <span class="fl">0</span><span class="op">)</span>
+<span class="fu"><a href="../reference/lim.html">lim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="va">x</span>, <span class="st">"x"</span>, <span class="fl">0</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: 1</span>
-<span class="fu"><a href="../reference/lim.html">lim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="va">x</span>, <span class="va">x</span>, <span class="fl">0</span><span class="op">)</span>
+<span class="fu"><a href="../reference/lim.html">lim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="va">x</span>, <span class="va">x</span>, <span class="fl">0</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: 1</span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lim.html">lim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="va">x</span>, <span class="st">"x"</span>, <span class="fl">0</span>, doit <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lim.html">lim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="va">x</span>, <span class="st">"x"</span>, <span class="fl">0</span>, doit <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">res</span>
 <span class="co">#&gt; [caracas]:      ⎛sin(x)⎞</span>
 <span class="co">#&gt;             lim ⎜──────⎟</span>
 <span class="co">#&gt;            x─→0⁺⎝  x   ⎠</span>
-<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Limit(sin(x)/x, x, 0)"</span>
 <span class="fu"><a href="../reference/tex.html">tex</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
 <span class="co">#&gt; [1] "\\lim_{x \\to 0^+}\\left(\\frac{\\sin{\\left(x \\right)}}{x}\\right)"</span>
@@ -270,10 +266,10 @@
 <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
 <span class="co">#&gt; [1] 1</span></code></pre></div>
 </div>
-<div id="derivatives" class="section level3">
-<h3 class="hasAnchor">
-<a href="#derivatives" class="anchor"></a>Derivatives</h3>
-<p>Note that the function is called <code>d()</code> and not <code><a href="https://rdrr.io/r/stats/deriv.html">deriv()</a></code>.</p>
+<div class="section level3">
+<h3 id="derivatives">Derivatives<a class="anchor" aria-label="anchor" href="#derivatives"></a>
+</h3>
+<p>Note that the function is called <code>d()</code> and not <code><a href="https://rdrr.io/r/stats/deriv.html" class="external-link">deriv()</a></code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span>
@@ -289,35 +285,35 @@
 <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">f</span>, <span class="va">x</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]:        2</span>
 <span class="co">#&gt;            6⋅x + y</span>
-<span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">f</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">f</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡       2       ⎤</span>
 <span class="co">#&gt;            ⎣6⋅x + y   2⋅x⋅y⎦</span>
-<span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">f</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">f</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡       2       ⎤</span>
 <span class="co">#&gt;            ⎣6⋅x + y   2⋅x⋅y⎦</span>
-<span class="va">f1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">f</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
+<span class="va">f1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">f</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
 <span class="va">f1</span>
 <span class="co">#&gt; [caracas]: ⎡       2       ⎤</span>
 <span class="co">#&gt;            ⎣6⋅x + y   2⋅x⋅y⎦</span>
-<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">f1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">f1</span><span class="op">)</span>
 <span class="co">#&gt; [1] "[6*x + y^2, 2*x*y]"</span>
 <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">f1</span><span class="op">)</span>
 <span class="co">#&gt; expression(cbind(6 * x + y^2, 2 * x * y))</span>
-<span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">f1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/eval.html" class="external-link">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">f1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;      [,1] [,2]</span>
 <span class="co">#&gt; [1,]   10    4</span>
-<span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">f1</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">f1</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡ 6   2⋅y⎤</span>
 <span class="co">#&gt;            ⎢        ⎥</span>
 <span class="co">#&gt;            ⎣2⋅y  2⋅x⎦</span>
-<span class="va">f2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der2.html">der2</a></span><span class="op">(</span><span class="va">f</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
+<span class="va">f2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der2.html">der2</a></span><span class="op">(</span><span class="va">f</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
 <span class="va">f2</span>
 <span class="co">#&gt; [caracas]: ⎡ 6   2⋅y⎤</span>
 <span class="co">#&gt;            ⎢        ⎥</span>
 <span class="co">#&gt;            ⎣2⋅y  2⋅x⎦</span>
 <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">f2</span><span class="op">)</span>
 <span class="co">#&gt; expression(rbind(cbind(6, 2 * y), cbind(2 * y, 2 * x)))</span>
-<span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">f2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/eval.html" class="external-link">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">f2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;      [,1] [,2]</span>
 <span class="co">#&gt; [1,]    6    4</span>
 <span class="co">#&gt; [2,]    4    2</span></code></pre></div>
@@ -328,33 +324,33 @@
 <span class="va">f</span>
 <span class="co">#&gt; [caracas]: ⎡   2      2          ⎤</span>
 <span class="co">#&gt;            ⎣3⋅x  + x⋅y , 2⋅x, 5⋅y⎦</span>
-<span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">f</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">f</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡       2      ⎤</span>
 <span class="co">#&gt;            ⎢6⋅x + y   2  0⎥</span>
 <span class="co">#&gt;            ⎢              ⎥</span>
 <span class="co">#&gt;            ⎣ 2⋅x⋅y    0  5⎦</span></code></pre></div>
 </div>
-<div id="taylor-expansion" class="section level3">
-<h3 class="hasAnchor">
-<a href="#taylor-expansion" class="anchor"></a>Taylor expansion</h3>
+<div class="section level3">
+<h3 id="taylor-expansion">Taylor expansion<a class="anchor" aria-label="anchor" href="#taylor-expansion"></a>
+</h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/def_sym.html">def_sym</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="va">ft_with_O</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taylor.html">taylor</a></span><span class="op">(</span><span class="va">f</span>, x0 <span class="op">=</span> <span class="fl">0</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">ft_with_O</span>
 <span class="co">#&gt; [caracas]:      2    4          </span>
 <span class="co">#&gt;                x    x     ⎛ 5.0⎞</span>
 <span class="co">#&gt;            1 - ── + ── + O⎝x   ⎠</span>
 <span class="co">#&gt;                2    24</span>
-<span class="va">ft_with_O</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/drop_remainder.html">drop_remainder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">ft_with_O</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/drop_remainder.html">drop_remainder</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; expression(x^4/24 - x^2/2 + 1)</span></code></pre></div>
 </div>
 </div>
-<div id="linear-algebra" class="section level2">
-<h2 class="hasAnchor">
-<a href="#linear-algebra" class="anchor"></a>Linear algebra</h2>
+<div class="section level2">
+<h2 id="linear-algebra">Linear algebra<a class="anchor" aria-label="anchor" href="#linear-algebra"></a>
+</h2>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="st">"2*x"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="st">"2*x"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="va">A</span>
 <span class="co">#&gt;      [,1] [,2] </span>
 <span class="co">#&gt; [1,] "x"  "0"  </span>
@@ -374,19 +370,19 @@
 <span class="co">#&gt;            ⎢        ⎥</span>
 <span class="co">#&gt;            ⎢       2⎥</span>
 <span class="co">#&gt;            ⎣0   4⋅x ⎦</span>
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
 <span class="co">#&gt; [1] 2 2</span>
-<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡√x    0  ⎤</span>
 <span class="co">#&gt;            ⎢         ⎥</span>
 <span class="co">#&gt;            ⎣0   √2⋅√x⎦</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡log(x)    zoo   ⎤</span>
 <span class="co">#&gt;            ⎢                ⎥</span>
 <span class="co">#&gt;            ⎣ zoo    log(2⋅x)⎦</span>
-<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: 3⋅x</span>
-<span class="va">B</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
+<span class="va">B</span> <span class="op"><a href="../reference/matrix-products.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡ 2      ⎤</span>
 <span class="co">#&gt;            ⎢x    0  ⎥</span>
 <span class="co">#&gt;            ⎢        ⎥</span>
@@ -394,11 +390,11 @@
 <span class="co">#&gt;            ⎣0   4⋅x ⎦</span>
 <span class="fu"><a href="../reference/diag.html">diag</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: [x  2⋅x]</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">B</span>, <span class="va">B</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">B</span>, <span class="va">B</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡x   0   x   0 ⎤</span>
 <span class="co">#&gt;            ⎢              ⎥</span>
 <span class="co">#&gt;            ⎣0  2⋅x  0  2⋅x⎦</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">B</span>, <span class="va">B</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">B</span>, <span class="va">B</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: ⎡x   0 ⎤</span>
 <span class="co">#&gt;            ⎢      ⎥</span>
 <span class="co">#&gt;            ⎢0  2⋅x⎥</span>
@@ -425,7 +421,7 @@
 <span class="co">#&gt;            ⎢          ⎥</span>
 <span class="co">#&gt;            ⎣ 0   2⋅│x│⎦</span></code></pre></div>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
 <span class="fu"><a href="../reference/linalg.html">eigenval</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
@@ -463,7 +459,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]$eigvec</span>
 <span class="co">#&gt; [caracas]: [1  0  0]ᵀ</span>
-<span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/eigen.html" class="external-link">eigen</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/eval.html" class="external-link">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; eigen() decomposition</span>
 <span class="co">#&gt; $values</span>
 <span class="co">#&gt; [1] 2 2 0</span>
@@ -497,9 +493,9 @@
 <span class="co">#&gt;            ⎢       ⎥</span>
 <span class="co">#&gt;            ⎣0  a  a⎦</span></code></pre></div>
 </div>
-<div id="solve" class="section level2">
-<h2 class="hasAnchor">
-<a href="#solve" class="anchor"></a>Solve</h2>
+<div class="section level2">
+<h2 id="solve">Solve<a class="anchor" aria-label="anchor" href="#solve"></a>
+</h2>
 <ul>
 <li>Linear system of equations: <code><a href="../reference/linalg.html">inv()</a></code> / <code><a href="../reference/solve_lin.html">solve_lin()</a></code>
 </li>
@@ -508,23 +504,23 @@
 </ul>
 <p>Below find an example with maximising the multinomial likelihood.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span>
-<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>
+<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>
 <span class="va">l</span>
 <span class="co">#&gt; [caracas]: y₁⋅log(p₁) + y₂⋅log(p₂) + y₃⋅log(p₃)</span>
-<span class="va">L</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">l</span> <span class="op">+</span> <span class="va">a</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">L</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">l</span> <span class="op">+</span> <span class="va">a</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">L</span>
 <span class="co">#&gt; [caracas]: a⋅(p₁ + p₂ + p₃ - 1) - y₁⋅log(p₁) - y₂⋅log(p₂) - y₃⋅log(p₃)</span>
 <span class="fu"><a href="../reference/tex.html">tex</a></span><span class="op">(</span><span class="va">L</span><span class="op">)</span>
 <span class="co">#&gt; [1] "a \\left(p_{1} + p_{2} + p_{3} - 1\\right) - y_{1} \\log{\\left(p_{1} \\right)} - y_{2} \\log{\\left(p_{2} \\right)} - y_{3} \\log{\\left(p_{3} \\right)}"</span>
-<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">L</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
+<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">L</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
 <span class="va">g</span>
 <span class="co">#&gt; [caracas]: ⎡    y₁      y₂      y₃                  ⎤</span>
 <span class="co">#&gt;            ⎢a - ──  a - ──  a - ──  p₁ + p₂ + p₃ - 1⎥</span>
 <span class="co">#&gt;            ⎣    p₁      p₂      p₃                  ⎦</span>
-<span class="va">sol</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
+<span class="va">sol</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sol</span>
 <span class="co">#&gt; Solution 1:</span>
 <span class="co">#&gt;   p1 =       y₁     </span>
@@ -544,9 +540,9 @@
 <span class="fu"><a href="../reference/tex.html">tex</a></span><span class="op">(</span><span class="va">sol</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">p1</span><span class="op">)</span>
 <span class="co">#&gt; [1] "\\frac{y_{1}}{y_{1} + y_{2} + y_{3}}"</span></code></pre></div>
 </div>
-<div id="substitution" class="section level2">
-<h2 class="hasAnchor">
-<a href="#substitution" class="anchor"></a>Substitution</h2>
+<div class="section level2">
+<h2 id="substitution">Substitution<a class="anchor" aria-label="anchor" href="#substitution"></a>
+</h2>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'x'</span><span class="op">)</span>
 <span class="va">eq</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">x</span>
@@ -557,13 +553,13 @@
 <span class="co">#&gt; [caracas]:    2    </span>
 <span class="co">#&gt;            2⋅y  - y</span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span>
-<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>
-<span class="va">L</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">l</span> <span class="op">+</span> <span class="va">a</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">L</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">p</span><span class="op">)</span><span class="op">)</span>
-<span class="va">sols</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">p</span><span class="op">)</span><span class="op">)</span>
+<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>
+<span class="va">L</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">l</span> <span class="op">+</span> <span class="va">a</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">L</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">p</span><span class="op">)</span><span class="op">)</span>
+<span class="va">sols</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">p</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sol</span> <span class="op">&lt;-</span> <span class="va">sols</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span>
 <span class="va">sol</span>
 <span class="co">#&gt; $a</span>
@@ -573,7 +569,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $p1</span>
 <span class="co">#&gt; [caracas]: -p₂ - p₃ + 1</span>
-<span class="va">H</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der2.html">der2</a></span><span class="op">(</span><span class="va">L</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
+<span class="va">H</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der2.html">der2</a></span><span class="op">(</span><span class="va">L</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
 <span class="va">H</span>
 <span class="co">#&gt; [caracas]: ⎡ y₁             ⎤</span>
 <span class="co">#&gt;            ⎢───   0    0   1⎥</span>
@@ -610,12 +606,12 @@
 <span class="co">#&gt;            ⎢                            ⎥</span>
 <span class="co">#&gt;            ⎣       1          1    1   0⎦</span></code></pre></div>
 </div>
-<div id="subsetting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#subsetting" class="anchor"></a>Subsetting</h2>
+<div class="section level2">
+<h2 id="subsetting">Subsetting<a class="anchor" aria-label="anchor" href="#subsetting"></a>
+</h2>
 <p>Note that all vectors in <code>caracas</code> are column vectors.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
 <span class="va">B</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>
 <span class="co">#&gt; [caracas]: [0  a  a]ᵀ</span>
@@ -637,9 +633,9 @@
 <span class="co">#&gt;            ⎢       ⎥</span>
 <span class="co">#&gt;            ⎣0  x  0⎦</span></code></pre></div>
 </div>
-<div id="using-sympy-directly" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-sympy-directly" class="anchor"></a>Using <code>SymPy</code> directly</h2>
+<div class="section level2">
+<h2 id="using-sympy-directly">Using <code>SymPy</code> directly<a class="anchor" aria-label="anchor" href="#using-sympy-directly"></a>
+</h2>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sympy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sympy.html">get_sympy</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
@@ -652,12 +648,12 @@
 <span class="co">#&gt; [[2]]</span>
 <span class="co">#&gt; 1</span></code></pre></div>
 </div>
-<div id="assumptions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#assumptions" class="anchor"></a>Assumptions</h2>
+<div class="section level2">
+<h2 id="assumptions">Assumptions<a class="anchor" aria-label="anchor" href="#assumptions"></a>
+</h2>
 <p>Below we give a brief example of assumptions. First consider the Cholesky decomposition of a matrix:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x+1"</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x+1"</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">A</span>
 <span class="co">#&gt; [caracas]: ⎡x + 1  1⎤</span>
 <span class="co">#&gt;            ⎢        ⎥</span>
@@ -666,10 +662,8 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"cholesky"</span><span class="op">)</span>
 <span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): ValueError: Matrix must be Hermitian.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Detailed traceback: </span>
-<span class="co">#&gt;   File "/home/mikl/.local/share/r-miniconda/envs/r-reticulate/lib/python3.6/site-packages/sympy/matrices/dense.py", line 260, in cholesky</span>
-<span class="co">#&gt;     return _cholesky(self, hermitian=hermitian)</span>
-<span class="co">#&gt;   File "/home/mikl/.local/share/r-miniconda/envs/r-reticulate/lib/python3.6/site-packages/sympy/matrices/decompositions.py", line 256, in _cholesky</span>
+<span class="co">#&gt; Detailed traceback:</span>
+<span class="co">#&gt;   File "/home/mikl/.local/lib/python3.7/site-packages/sympy/matrices/matrices.py", line 2855, in cholesky</span>
 <span class="co">#&gt;     raise ValueError("Matrix must be Hermitian.")</span></code></pre></div>
 <p>This fails as <code>A</code> is not positive (semi-)definite.</p>
 <p>To ensure this, we need to impose restrictions on <code>x</code>. This is done by defining a symbol with an assumption about positivity:</p>
@@ -691,7 +685,7 @@
 <span class="co">#&gt;            ⎢─────────    ╱  1 - ───── ⎥</span>
 <span class="co">#&gt;            ⎢  _______  ╲╱       y + 1 ⎥</span>
 <span class="co">#&gt;            ⎣╲╱ y + 1                  ⎦</span></code></pre></div>
-<p>It is possible to ask for properties (see <a href="https://docs.sympy.org/latest/modules/assumptions/ask.html" class="uri">https://docs.sympy.org/latest/modules/assumptions/ask.html</a>):</p>
+<p>It is possible to ask for properties (see <a href="https://docs.sympy.org/latest/modules/assumptions/ask.html" class="external-link uri">https://docs.sympy.org/latest/modules/assumptions/ask.html</a>):</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ask.html">ask</a></span><span class="op">(</span><span class="va">y</span>, <span class="st">"positive"</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span>
@@ -700,22 +694,22 @@
 <span class="fu"><a href="../reference/ask.html">ask</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"hermitian"</span><span class="op">)</span>
 <span class="co">#&gt; [1] NA</span></code></pre></div>
 </div>
-<div id="output" class="section level2">
-<h2 class="hasAnchor">
-<a href="#output" class="anchor"></a>Output</h2>
+<div class="section level2">
+<h2 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
+</h2>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Multinomial likelihood</span>
-<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span>
-<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>
-<span class="va">L</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">l</span> <span class="op">+</span> <span class="va">a</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>
+<span class="va">L</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">l</span> <span class="op">+</span> <span class="va">a</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">L</span>
 <span class="co">#&gt; [caracas]: a⋅(p₁ + p₂ + p₃ - 1) - y₁⋅log(p₁) - y₂⋅log(p₂) - y₃⋅log(p₃)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">L</span>, ascii <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">L</span>, ascii <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; [caracas]: a*(p1 + p2 + p3 - 1) - y1*log(p1) - y2*log(p2) - y3*log(p3)</span>
-<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">L</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
-<span class="va">sol</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
+<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">L</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
+<span class="va">sol</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sol</span>
 <span class="co">#&gt; Solution 1:</span>
 <span class="co">#&gt;   p1 =       y₁     </span>
@@ -728,7 +722,7 @@
 <span class="co">#&gt;        ────────────</span>
 <span class="co">#&gt;        y₁ + y₂ + y₃ </span>
 <span class="co">#&gt;   a  =  y₁ + y₂ + y₃</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sol</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sol</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; [[1]]$p1</span>
 <span class="co">#&gt; [caracas]:      y₁     </span>
@@ -748,14 +742,14 @@
 <span class="co">#&gt; [[1]]$a</span>
 <span class="co">#&gt; [caracas]: y₁ + y₂ + y₃</span></code></pre></div>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
 <span class="co">#&gt; [1] "[a - y1/p1, a - y2/p2, a - y3/p3, p1 + p2 + p3 - 1]"</span>
 <span class="fu"><a href="../reference/as_character_matrix.html">as_character_matrix</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
 <span class="co">#&gt;      [,1]        [,2]         [,3]         [,4]               </span>
 <span class="co">#&gt; [1,] "a - y1/p1" " a - y2/p2" " a - y3/p3" " p1 + p2 + p3 - 1"</span></code></pre></div>
-<div id="options" class="section level3">
-<h3 class="hasAnchor">
-<a href="#options" class="anchor"></a>Options</h3>
+<div class="section level3">
+<h3 id="options">Options<a class="anchor" aria-label="anchor" href="#options"></a>
+</h3>
 <p>The following options are available:</p>
 <ul>
 <li><code>caracas.print.prettyascii</code></li>
@@ -778,7 +772,7 @@
 <span class="co">#&gt;   a  =  y₁ + y₂ + y₃</span>
 <span class="va">L</span>
 <span class="co">#&gt; [caracas]: a⋅(p₁ + p₂ + p₃ - 1) - y₁⋅log(p₁) - y₂⋅log(p₂) - y₃⋅log(p₃)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.prettyascii <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>caracas.print.prettyascii <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
 <span class="va">sol</span>
 <span class="co">#&gt; Solution 1:</span>
 <span class="co">#&gt;   p1 =       y1     </span>
@@ -793,7 +787,7 @@
 <span class="co">#&gt;   a  =  y1 + y2 + y3</span>
 <span class="va">L</span>
 <span class="co">#&gt; [caracas]: a*(p1 + p2 + p3 - 1) - y1*log(p1) - y2*log(p2) - y3*log(p3)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.prettyascii <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (FALSE)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>caracas.print.prettyascii <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (FALSE)</span></code></pre></div>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sol</span>
 <span class="co">#&gt; Solution 1:</span>
@@ -809,7 +803,7 @@
 <span class="co">#&gt;   a  =  y₁ + y₂ + y₃</span>
 <span class="va">L</span>
 <span class="co">#&gt; [caracas]: a⋅(p₁ + p₂ + p₃ - 1) - y₁⋅log(p₁) - y₂⋅log(p₂) - y₃⋅log(p₃)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.ascii <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>caracas.print.ascii <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
 <span class="va">sol</span>
 <span class="co">#&gt; Solution 1:</span>
 <span class="co">#&gt;   p1 =  y1/(y1 + y2 + y3) </span>
@@ -818,18 +812,18 @@
 <span class="co">#&gt;   a  =  y1 + y2 + y3</span>
 <span class="va">L</span>
 <span class="co">#&gt; [caracas]: a*(p1 + p2 + p3 - 1) - y1*log(p1) - y2*log(p2) - y3*log(p3)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.ascii <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (FALSE)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>caracas.print.ascii <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (FALSE)</span></code></pre></div>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p</span>
 <span class="co">#&gt; [caracas]: [p₁  p₂  p₃]ᵀ</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.rowvec <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>caracas.print.rowvec <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">p</span>
 <span class="co">#&gt; [caracas]: ⎡p₁⎤</span>
 <span class="co">#&gt;            ⎢  ⎥</span>
 <span class="co">#&gt;            ⎢p₂⎥</span>
 <span class="co">#&gt;            ⎢  ⎥</span>
 <span class="co">#&gt;            ⎣p₃⎦</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.rowvec <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (TRUE)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>caracas.print.rowvec <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (TRUE)</span></code></pre></div>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sol</span>
 <span class="co">#&gt; Solution 1:</span>
@@ -843,7 +837,7 @@
 <span class="co">#&gt;        ────────────</span>
 <span class="co">#&gt;        y₁ + y₂ + y₃ </span>
 <span class="co">#&gt;   a  =  y₁ + y₂ + y₃</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.sol.simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>caracas.print.sol.simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">sol</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; [[1]]$p1</span>
@@ -863,7 +857,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[1]]$a</span>
 <span class="co">#&gt; [caracas]: y₁ + y₂ + y₃</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>caracas.print.sol.simplify <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (TRUE)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>caracas.print.sol.simplify <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># reset to default (TRUE)</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -879,11 +873,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Mikkel Meyer Andersen, Søren Højsgaard.</p>
+  <p></p>
+<p>Developed by Mikkel Meyer Andersen, Søren Højsgaard.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -891,6 +887,8 @@
 
   
 
+
+  
 
   </body>
 </html>

@@ -1,10 +1,12 @@
 # caracas 1.1.2
 
 * `sympy_func(x, fun)` first tries calling `fun` on `x`; and if it does not exist it tries from the global namespace
-* New function: `mat_pow()` for raising a matrix to a power (not component-wise)
+* New function: `mat_pow()` for raising a matrix to a power (not component-wise), requires SymPy >= 1.6
 * New function: `expand_func()` added
+* Added `rev()` for `caracas_symbol`'s
 * Bug with `Ops` (functions) fixed
-
+* SymPy 1.9 bug with elementwise matrix multiplication (https://github.com/sympy/sympy/issues/22353) addressed
+* Enabling pretty ASCII print option (`options(caracas.print.prettyascii = TRUE)`) instead of UTF-8, if the system locale is not UTF-8; this be disabled with `options(caracas.print.prettyascii = FALSE)`
 
 # caracas 1.1.1
 

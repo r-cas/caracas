@@ -1,5 +1,5 @@
-pandoc: '2.5'
-pkgdown: 1.6.1
+pandoc: 2.14.0.3
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   ar-ssm: ar-ssm.html
@@ -9,5 +9,5 @@ articles:
   linear-algebra: linear-algebra.html
   reference: reference.html
   sympy-object: sympy-object.html
-last_built: 2021-06-22T09:08Z
+last_built: 2022-02-11T07:17Z
 

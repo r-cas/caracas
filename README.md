@@ -7,7 +7,7 @@
 
 [![R build
 status](https://github.com/r-cas/caracas/workflows/R-CMD-check/badge.svg)](https://github.com/r-cas/caracas/actions)
-[![codecov.io](https://codecov.io/gh/r-cas/caracas/branch/master/graphs/badge.svg)](https://codecov.io/gh/r-cas/caracas?branch=master)
+[![codecov.io](https://codecov.io/gh/r-cas/caracas/branch/master/graphs/badge.svg)](https://app.codecov.io/gh/r-cas/caracas?branch=master)
 <!-- badges: end -->
 
 ## Installation
@@ -69,6 +69,7 @@ this project, you agree to abide by its terms.
 
 ``` r
 library(caracas)
+# options(caracas.print.prettyascii = TRUE)
 ```
 
 ``` r

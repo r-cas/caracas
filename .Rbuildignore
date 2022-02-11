@@ -28,3 +28,4 @@
 ^pkgdown$
 zandbox
 ^paper$
+^notes.txt$

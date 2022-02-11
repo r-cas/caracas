@@ -18,3 +18,5 @@ release-featured-images/*.png
 inst/doc
 ..Rcheck
 paper/paper.html
+/doc/
+/Meta/

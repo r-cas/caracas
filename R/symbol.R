@@ -471,7 +471,7 @@ fraction_parts <- function(x) {
   frac <- x$pyobj$as_numer_denom()
   
   y <- list(
-    numerator = construct_symbol_from_pyobj(frac[0]),
+    numerator = construct_symbol_from_pyobj(frac[0]), # Python 0-indexed
     denominator = construct_symbol_from_pyobj(frac[1])
   )
   
