@@ -17,6 +17,7 @@ RD --quiet -e 'reticulate::import("sympy")$`__version__`'
 RD --quiet -e 'Sys.getlocale()'
 
 cd /mnt/r-cas
+RD CMD build caracas && RD CMD check caracas_1.1.2.tar.gz
 
 
 export LANG=en_US.iso88591
