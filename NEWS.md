@@ -1,3 +1,9 @@
+# caracas 1.1.3
+
+* Imports the Matrix package instead of only suggesting
+* New functions: `vector_sym()`, `matrix_sym()`, `matrix_sym_diag()`, `matrix_sym_symmetric()`
+* New function: `colspan()` (Column space (range) of a symbolic matrix)
+
 # caracas 1.1.2
 
 * `sympy_func(x, fun)` first tries calling `fun` on `x`; and if it does not exist it tries from the global namespace

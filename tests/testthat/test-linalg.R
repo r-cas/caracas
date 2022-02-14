@@ -222,3 +222,56 @@ test_that("mat_pow", {
   
 })
 
+
+test_that("sym constructors", {
+  skip_if_no_sympy()
+  
+  n <- 4
+  m <- 3
+  expect_equal(as.character(vector_sym(n, "v")),
+               "Matrix([[v1], [v2], [v3], [v4]])")
+  
+  expect_equal(as.character(matrix_sym(n, m, "v")),
+               "Matrix([[v11, v12, v13], [v21, v22, v23], [v31, v32, v33], [v41, v42, v43]])")
+  
+  expect_equal(as.character(matrix_sym_diag(n, "v")),
+               "Matrix([[v1, 0, 0, 0], [0, v2, 0, 0], [0, 0, v3, 0], [0, 0, 0, v4]])")
+  
+  expect_equal(as.character(matrix_sym_symmetric(n, "v")),
+               "Matrix([[v11, v21, v31, v41], [v21, v22, v32, v42], [v31, v32, v33, v43], [v41, v42, v43, v44]])")
+  
+  
+})
+
+test_that("colspan", {
+  skip_if_no_sympy()
+  
+  X <- matrix_(paste0("x_",c(1,1,1,1,2,2,2,2,3,4,3,4)), nrow = 4)
+  expect_equal(colspan(X), structure(c(1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1), 
+                                     .Dim = c(4L, 4L), 
+                                     .Dimnames = list(c("1", "2", "3", "4"), 
+                                                      c("x_1", "x_2", "x_3", "x_4"))))
+})
+
+test_that("rankMatrix", {
+  skip_if_no_sympy()
+  
+  X <- matrix_(paste0("x_",c(1,1,1,1,2,2,2,2,3,4,3,4)), nrow=4)
+  res <- rankMatrix_(X)
+  expect_equal(as.numeric(res), 2)
+})
+
+test_that("add_prefix", {
+  skip_if_no_sympy()
+  
+  X <- matrix_sym(2, 3)
+  Y <- add_prefix(X, "e")
+  expect_equal(dim(X), dim(Y))
+  expect_equal(as.character(Y), "Matrix([[ev11, ev12, ev13], [ev21, ev22, ev23]])")
+  
+  X <- matrix(1:6, 3, 2)
+  Y <- add_prefix(X, "e")
+  expect_equal(dim(X), dim(Y))
+  expect_equal(as.character(Y), "Matrix([[e1, e4], [e2, e5], [e3, e6]])")
+  
+})

@@ -453,3 +453,175 @@ matrix_ <- function(..., declare_symbols = TRUE){
   
   return(y)
 }
+
+
+#' Generate generic vectors and matrices
+#'
+#' Generate generic vectors and matrices.
+#'
+#' @name generic-matrices
+#' 
+#' @param n,m Dimensions.
+#' @param entry The symbolic name of each entry.
+#' 
+#' @concept linalg
+#' 
+#' @examples
+#' if (has_sympy()) {
+#'   vector_sym(4, "b")
+#'   matrix_sym(3, 2, "a")
+#'   matrix_sym_diag(4, "s")
+#'   matrix_sym_symmetric(4, "s")
+#' }
+#'
+#' @rdname generic-matrices
+#' @export 
+vector_sym <- function(n, entry = "v"){ 
+  ensure_sympy()
+  
+  as_sym(paste0(entry, seq_len(n)))
+}
+
+#' @rdname generic-matrices
+#' @export 
+matrix_sym <- function(nrow, ncol, entry = "v"){
+  ensure_sympy()
+  
+  out <- outer(seq_len(nrow), seq_len(ncol), FUN = function(r, c) paste0(entry, r, c))
+  out <- matrix_(out, nrow = nrow)
+  out
+}
+
+#' @rdname generic-matrices
+#' @export 
+matrix_sym_diag <- function(nrow, entry = "v"){
+  ensure_sympy()
+  
+  out <- diag_(paste0(entry, seq_len(nrow)))
+  out 
+}
+
+#' @rdname generic-matrices
+#' @export 
+matrix_sym_symmetric <- function(nrow, entry = "v"){ 
+  ensure_sympy()
+  
+  out <- matrix(data = "", nrow = nrow, ncol = nrow)
+  for (r in seq_len(nrow)){
+    for (c in seq_len(nrow)){
+      if (r > c) {
+        out[r, c] <- paste0(entry, r, c)
+      } else {
+        out[r, c] <- paste0(entry, c, r)            
+      }
+    }            
+  }
+  out <- matrix_(out, nrow = nrow)
+  out
+}
+
+
+
+#' Column space (range) of a symbolic matrix
+#'
+#' Column space (range) of a symbolic matrix
+#'
+#' @param x Symbolic matrix
+#'
+#' @concept linalg
+#' 
+#' @examples
+#' if (has_sympy()) {
+#'   X <- matrix_(paste0("x_",c(1,1,1,1,2,2,2,2,3,4,3,4)), nrow = 4)
+#'   colspan(X)
+#' }
+#' 
+#' @importFrom stats model.matrix
+#' @export
+colspan <- function(x){
+  ensure_sympy()
+  
+  zz <- as_character_matrix(x)
+  
+  uu <- apply(zz, 2, factor, simplify = FALSE)
+  
+  mm <-
+    lapply(seq_along(uu),
+           function(i){
+             vv <- uu[[i]]
+             if (length(levels(vv)) == 1) {
+               out <- matrix(rep(1, length(vv)))
+             }
+             else {
+               out <- model.matrix(~ 0 + vv)
+             }
+             colnames(out) <- levels(uu[[i]])
+             out
+           })
+  
+  x_mat <- do.call(cbind, mm)
+  x_mat
+}
+
+#' Rank of matrix
+#'
+#' Rank of matrix
+#'
+#' @param x Numeric or symbolic matrix
+#'
+#' @concept linalg
+#' 
+#' @examples
+#' if (has_sympy()) {
+#'   X <- matrix_(paste0("x_",c(1,1,1,1,2,2,2,2,3,4,3,4)), nrow=4)
+#'   rankMatrix_(X)
+#' }
+#' 
+#' @importFrom Matrix rankMatrix
+#' @export
+rankMatrix_ <- function(x){
+  ensure_sympy()
+  
+  if (is.numeric(x)){
+    Matrix::rankMatrix(x)
+  }
+  else
+  {
+    Matrix::rankMatrix(colspan(x))
+  }
+}
+
+#' Add prefix to each element of matrix
+#' 
+#' Add prefix to each element of matrix
+#' 
+#' @param x Numeric or symbolic matrix
+#'
+#' @concept linalg
+#' 
+#' @examples
+#' if (has_sympy()) {
+#'   X <- matrix_sym(2, 3)
+#'   X
+#'   add_prefix(X, "e")
+#'   
+#'   X <- matrix(1:6, 3, 2)
+#'   X
+#'   add_prefix(X, "e")
+#' }
+#' 
+#' @export
+add_prefix <- function(x, prefix = "") {
+  ensure_sympy()
+  
+  if (inherits(x, "caracas_symbol")) {
+    x <- as_character_matrix(x)
+  }
+  
+  w <- apply(x, 2, function(y) {
+    paste0(prefix, y)
+  })
+  
+  as_sym(w)
+}
+
