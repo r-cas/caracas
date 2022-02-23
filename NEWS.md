@@ -3,6 +3,8 @@
 * Imports the Matrix package instead of only suggesting
 * New functions: `vector_sym()`, `matrix_sym()`, `matrix_sym_diag()`, `matrix_sym_symmetric()`
 * New function: `colspan()` (Column space (range) of a symbolic matrix)
+* New function: `get_basis()` Get basis for symbolic matrix / vector.
+* New function: `all_vars` Get all symbols in caracas symbol.
 
 # caracas 1.1.2
 

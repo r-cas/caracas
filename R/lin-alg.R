@@ -17,6 +17,10 @@ stopifnot_matrix <- function(x){
   }
 }
 
+## MIKKEL FIXME
+## x <- vector_sym(4)
+## caracas:::symbol_is_matrix(x)
+
 symbol_is_matrix <- function(x) {
   # MatrixSymbol
   try({
@@ -416,7 +420,12 @@ vec <- function(x) {
 #' @export
 diag_ <- function(x, n = 1L, declare_symbols = TRUE, ...){
   ensure_sympy()
+
   
+  if(inherits(x, "caracas_symbol")){ ## MIKKEL FIXME: This is fragile
+      x <- as_character_matrix(v)
+  }
+
   if (!is.character(x)) {
     stop("'x' must be a character")
   }
@@ -532,8 +541,10 @@ matrix_sym_symmetric <- function(nrow, entry = "v"){
 #' 
 #' @examples
 #' if (has_sympy()) {
-#'   X <- matrix_(paste0("x_",c(1,1,1,1,2,2,2,2,3,4,3,4)), nrow = 4)
-#'   colspan(X)
+#'   X1 <- matrix_(paste0("x_",c(1,1,1,1, 2,2,2,2, 3,4,3,4)), nrow = 4)
+#'   colspan(X1)
+#'   X2 <- matrix_(paste0("x_",c(1,1,1,1, 0,0,2,2, 3,4,3,4)), nrow = 4)
+#'   colspan(X2)
 #' }
 #' 
 #' @importFrom stats model.matrix
@@ -560,6 +571,9 @@ colspan <- function(x){
            })
   
   x_mat <- do.call(cbind, mm)
+  zero <- which(colnames(x_mat) == "0")
+  if (length(zero) > 0)
+      x_mat <- x_mat[, -zero]
   x_mat
 }
 
@@ -590,6 +604,8 @@ rankMatrix_ <- function(x){
     Matrix::rankMatrix(colspan(x))
   }
 }
+
+
 
 #' Add prefix to each element of matrix
 #' 
