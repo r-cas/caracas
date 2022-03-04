@@ -415,6 +415,7 @@ vec <- function(x) {
 #' if (has_sympy()) {
 #'   diag_(c("a", "b", "c"))
 #'   diag_("a", 2)
+#'   diag_(vector_sym(4))
 #' }
 #' 
 #' @export
@@ -423,7 +424,7 @@ diag_ <- function(x, n = 1L, declare_symbols = TRUE, ...){
 
   
   if(inherits(x, "caracas_symbol")){ ## MIKKEL FIXME: This is fragile
-      x <- as_character_matrix(v)
+      x <- as_character_matrix(x)
   }
 
   if (!is.character(x)) {
@@ -470,7 +471,7 @@ matrix_ <- function(..., declare_symbols = TRUE){
 #'
 #' @name generic-matrices
 #' 
-#' @param n,m Dimensions.
+#' @param n Length of vector
 #' @param entry The symbolic name of each entry.
 #' 
 #' @concept linalg
@@ -492,6 +493,8 @@ vector_sym <- function(n, entry = "v"){
 }
 
 #' @rdname generic-matrices
+#' @param nrow,ncol Number of rows and columns
+#' 
 #' @export 
 matrix_sym <- function(nrow, ncol, entry = "v"){
   ensure_sympy()
@@ -612,7 +615,7 @@ rankMatrix_ <- function(x){
 #' Add prefix to each element of matrix
 #' 
 #' @param x Numeric or symbolic matrix
-#'
+#' @param prefix A character vector
 #' @concept linalg
 #' 
 #' @examples
