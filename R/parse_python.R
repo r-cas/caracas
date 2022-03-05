@@ -173,12 +173,13 @@ as_expr.caracas_symbol <- function(x, first_doit = TRUE) {
   if (inherits(y, "error") || inherits(y, "warning")) {
     stop_parse_error(x)
   }
+
+  attributes(y) <- NULL ## FIXME SH: Check if ok
   
   if (expr_has_vars(y)) {
-    return(y)
+      out <- return(y)
+  } else {
+      return(eval(y))
   }
-  
-  #return(y)
-  return(eval(y))
 }
 
