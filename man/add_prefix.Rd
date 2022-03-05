@@ -8,6 +8,8 @@ add_prefix(x, prefix = "")
 }
 \arguments{
 \item{x}{Numeric or symbolic matrix}
+
+\item{prefix}{A character vector}
 }
 \description{
 Add prefix to each element of matrix

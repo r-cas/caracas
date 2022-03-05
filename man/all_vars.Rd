@@ -14,7 +14,7 @@ Return all variables in caracas symbol
 }
 \examples{
 
-x <- vector_(5)
+x <- vector_sym(5)
 all_vars(x)
 
 }

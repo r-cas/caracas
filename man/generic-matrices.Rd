@@ -17,9 +17,11 @@ matrix_sym_diag(nrow, entry = "v")
 matrix_sym_symmetric(nrow, entry = "v")
 }
 \arguments{
-\item{n, m}{Dimensions.}
+\item{n}{Length of vector}
 
 \item{entry}{The symbolic name of each entry.}
+
+\item{nrow, ncol}{Number of rows and columns}
 }
 \description{
 Generate generic vectors and matrices.

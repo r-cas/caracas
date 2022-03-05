@@ -22,6 +22,7 @@ Symbolic diagonal matrix
 if (has_sympy()) {
   diag_(c("a", "b", "c"))
   diag_("a", 2)
+  diag_(vector_sym(4))
 }
 
 }
