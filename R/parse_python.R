@@ -56,45 +56,74 @@ from_sy_vec <- function(x, as_character = FALSE) {
   if (as_character) {
     z[[1L]] <- paste0("'", z[[1L]], "'")
   }
-  
+
   u <- paste0("cbind(", paste0(z[[1L]], collapse = ", "), ")")
-  
+
   return(u)
 }
 
-## from_sy_mat <- function(x, as_character = FALSE) {
-##   z <- strsplit(x, "\\][ ]*,[ ]*\\[")
-##   z <- z[[1L]]
-##   z[1L] <- gsub("^\\[[ ]*\\[", "", z[1L])
-##   z[length(z)] <- gsub("\\][ ]*\\]$", "", z[length(z)])
-  
-##   if (as_character) {
-##     z <- strsplit(z, ",")
-##     z <- lapply(z, function(zi) paste0("'", trimws(zi, "both"), "'", collapse = ", "))
-##   }
-  
-##   u <- paste0("rbind(", paste0("cbind(", z, ")", collapse = ", "), ")")
-  
-##   return(u)
-## }
-
+# X <- matrix_sym(3, 2)
+# as_expr(X)
+# x <- remove_mat_prefix(python_strings_to_r(as.character(X$pyobj)))
+# from_sy_mat(x)
+# from_sy_mat(x, TRUE)
 from_sy_mat <- function(x, as_character = FALSE) {
   z <- strsplit(x, "\\][ ]*,[ ]*\\[")
   z <- z[[1L]]
   z[1L] <- gsub("^\\[[ ]*\\[", "", z[1L])
   z[length(z)] <- gsub("\\][ ]*\\]$", "", z[length(z)])
-
-  zz <<- z
+  z <- strsplit(z, ",")
+  z <- lapply(z, trimws, which = "both")
+  
+  ###
+  stopifnot(length(z) >= 1L)
+  w <- unlist(z)
+  
   if (as_character) {
-    z <- strsplit(z, ",")
-    z <- lapply(z, function(zi) paste0("'", trimws(zi, "both"), "'", collapse = ", "))
+    w <- paste0("'", w, "'")
   }
 
-
-  u <- paste0("cbind(", paste0("c(", z, ")", collapse = ", "), ")")
+  ww <- paste0("matrix(c(", 
+               paste0(w, collapse = ", "), "), nrow = ", length(z), ", byrow = TRUE)")
   
-  return(u)
+  return(ww)
 }
+
+# Org:
+# from_sy_mat <- function(x, as_character = FALSE) {
+#   z <- strsplit(x, "\\][ ]*,[ ]*\\[")
+#   z <- z[[1L]]
+#   z[1L] <- gsub("^\\[[ ]*\\[", "", z[1L])
+#   z[length(z)] <- gsub("\\][ ]*\\]$", "", z[length(z)])
+#   
+#   if (as_character) {
+#     z <- strsplit(z, ",")
+#     z <- lapply(z, function(zi) paste0("'", trimws(zi, "both"), "'", collapse = ", "))
+#   }
+#   
+#   u <- paste0("rbind(", paste0("cbind(", z, ")", collapse = ", "), ")")
+#   
+#   return(u)
+# }
+
+# SH:
+# from_sy_mat <- function(x, as_character = FALSE) {
+#   z <- strsplit(x, "\\][ ]*,[ ]*\\[")
+#   z <- z[[1L]]
+#   z[1L] <- gsub("^\\[[ ]*\\[", "", z[1L])
+#   z[length(z)] <- gsub("\\][ ]*\\]$", "", z[length(z)])
+# 
+#   zz <<- z
+#   if (as_character) {
+#     z <- strsplit(z, ",")
+#     z <- lapply(z, function(zi) paste0("'", trimws(zi, "both"), "'", collapse = ", "))
+#   }
+# 
+# 
+#   u <- paste0("cbind(", paste0("c(", z, ")", collapse = ", "), ")")
+#   
+#   return(u)
+# }
 
 
 
