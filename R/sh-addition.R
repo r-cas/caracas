@@ -14,33 +14,34 @@ all_vars <- function(x){
     all.vars(as_expr(x))
 }
 
-#' Convert caracas object to R (col or row wise)
-#'
-#' Convert caracas object to R (col or row wise)
-#'
-#' @param x caracas_symbol
-#' @param first_doit Try `doit()` first
-#' @param column_major
-#' 
-#' @export
-as_expr2 <- function(x, first_doit = TRUE, column_major=TRUE) {
-  UseMethod("as_expr2")
-}
 
-#' @export
-as_expr2.default <- function(x, first_doit = TRUE, column_major=TRUE) {
-  return(x)
-}
+## #' Convert caracas object to R (col or row wise)
+## #'
+## #' Convert caracas object to R (col or row wise)
+## #'
+## #' @param x caracas_symbol
+## #' @param first_doit Try `doit()` first
+## #' @param column_major
+## #' 
+## #' @export
+## as_expr2 <- function(x, first_doit = TRUE, column_major=TRUE) {
+##   UseMethod("as_expr2")
+## }
 
-#' @export
-as_expr2.caracas_symbol <- function(x, first_doit = TRUE, column_major=TRUE) {
-    if (column_major && symbol_is_matrix(x)){
-        as_expr(t(x))        
-    } else
-    {
-        as_expr(x)        
-    }
-}
+## #' @export
+## as_expr2.default <- function(x, first_doit = TRUE, column_major=TRUE) {
+##   return(x)
+## }
+
+## #' @export
+## as_expr2.caracas_symbol <- function(x, first_doit = TRUE, column_major=TRUE) {
+##     if (column_major && symbol_is_matrix(x)){
+##         as_expr(t(x))        
+##     } else
+##     {
+##         as_expr(x)        
+##     }
+## }
 
 
 
