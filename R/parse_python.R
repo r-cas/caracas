@@ -75,16 +75,19 @@ from_sy_mat <- function(x, as_character = FALSE) {
   z <- strsplit(z, ",")
   z <- lapply(z, trimws, which = "both")
   
+  # Transpose
+  u <- do.call(Map, c(f = c, z))
+  
   ###
   stopifnot(length(z) >= 1L)
-  w <- unlist(z)
+  w <- unlist(u)
   
   if (as_character) {
     w <- paste0("'", w, "'")
   }
 
   ww <- paste0("matrix(c(", 
-               paste0(w, collapse = ", "), "), nrow = ", length(z), ", byrow = TRUE)")
+               paste0(w, collapse = ", "), "), nrow = ", length(z), ")")
   
   return(ww)
 }
