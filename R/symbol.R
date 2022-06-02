@@ -540,3 +540,26 @@ sympy_func <- function(x, fun, ...) {
   
   return(out)
 }
+
+
+#' Get free symbol in expression
+#' 
+#' @param x Expression in which to get the free symbols in
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   def_sym(a, b)
+#'   x <- (a-b)^4
+#'   free_symbols(x)
+#' }
+#'  
+#' @concept caracas_symbol
+#' 
+#' @export
+free_symbols <- function(x) {
+  y <- x$pyobj$free_symbols
+  z <- reticulate::py_eval(paste0("list(", as.character(y), ")"), convert = TRUE)
+  z <- lapply(z, construct_symbol_from_pyobj)
+  return(z)
+}
+
