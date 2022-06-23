@@ -18,7 +18,8 @@ Depends:
 Imports:
   reticulate (>= 1.14),
   Matrix,
-  magrittr
+  magrittr,
+  tinytex
 Suggests:
   testthat (>= 2.1.0),
   knitr,

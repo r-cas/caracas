@@ -101,21 +101,52 @@ convert_to_r_mat <- function(x) {
     stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
   }
 
+  
   if (!symbol_is_matrix(x)) {
     stop("'x' must be a matrix")
   }
   
   xmat <- convert_to_r_mat(x)
+
+  ## FIXME: sh fix
+  if (symbol_is_matrix(value))
+      value <- convert_to_r_mat(value)
+
   
   xmat_mod <- if (missing(j)) {
     base::`[<-`(xmat, i, ..., value = value)
   } else {
     base::`[<-`(xmat, i, j, ..., value = value)
   }
-  
+
   y <- as_sym(xmat_mod)
   return(y)
 }
+
+
+
+## `[<-.caracas_symbol` <- function(x, i, j, ..., value) {
+##   ensure_sympy()
+  
+##   if (!inherits(x, "caracas_symbol")) {
+##     stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+##   }
+
+##   if (!symbol_is_matrix(x)) {
+##     stop("'x' must be a matrix")
+##   }
+  
+##   xmat <- convert_to_r_mat(x)
+  
+##   xmat_mod <- if (missing(j)) {
+##     base::`[<-`(xmat, i, ..., value = value)
+##   } else {
+##     base::`[<-`(xmat, i, j, ..., value = value)
+##   }
+  
+##   y <- as_sym(xmat_mod)
+##   return(y)
+## }
 
 
 

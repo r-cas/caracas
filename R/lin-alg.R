@@ -21,25 +21,50 @@ stopifnot_matrix <- function(x){
 ## x <- vector_sym(4)
 ## caracas:::symbol_is_matrix(x)
 
+#' Check if object is a caracas matrix
+#'
+#' Check if object is a caracas matrix
+#'
+#' @param x An object
+#'
+#' @examples
+#' 
+#' if (has_sympy() && sympy_version() >= "1.6") {
+#'   x <- vector_sym(4)
+#'   symbol_is_matrix(x)   ## TRUE
+#'   x2 <- as.character(x) ## "Matrix([[v1], [v2], [v3], [v4]])"
+#'   symbol_is_matrix(x2)  ## TRUE
+#'   x3 <- as_character_matrix(x) ## R matrix
+#'   symbol_is_matrix(x3)  ## FALSE 
+#' }
+#' 
+#' @concept linalg
+#' @export
 symbol_is_matrix <- function(x) {
-  # MatrixSymbol
-  try({
-    res <- x$pyobj$is_MatrixExpr
+    ## MatrixSymbol
+    try({
+        res <- x$pyobj$is_MatrixExpr
+        
+        if (is.logical(res) && isTRUE(res)) {
+            return(TRUE)
+        }
+        
+        if (reticulate::py_to_r(res)) {
+            return(TRUE)
+        }
+    }, silent = TRUE)
     
-    if (is.logical(res) && isTRUE(res)) {
-      return(TRUE)
+    xstr <- as.character(x)
+
+    ## FIXME: SH fix
+    if ((length(xstr) == 1) && (grepl("^Matrix\\(\\[", xstr))) {
+        return(TRUE)
     }
-    
-    if (reticulate::py_to_r(res)) {
-      return(TRUE)
-    }
-  }, silent = TRUE)
-  
-  xstr <- as.character(x)
-  
-  if (grepl("^Matrix\\(\\[", xstr)) {
-    return(TRUE)
-  }
+
+    ## WAS:
+    ## if (grepl("^Matrix\\(\\[", xstr)) {
+        ## return(TRUE)
+    ## }
   
   # FIXME: From der() and der2()
   # if (grepl("^\\[\\[", xstr)) {

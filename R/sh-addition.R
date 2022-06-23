@@ -1,3 +1,47 @@
+
+
+#' Dump latex representation of sympy object.
+#'
+#' Dump latex representation of sympy object and compile document into pdf.
+#'
+#' @param x An object that can be put in latex format with caracas' tex() function.
+#' @param name Name of tex file.
+#' @return Nothing, but a .tex file and a .pdf file is generated.
+#' 
+#' @examples
+#' S <- matrix_sym_symmetric(3, "s")
+#' \dontrun{
+#' texdump(S)
+#' }
+#'
+#' @importFrom tinytex pdflatex
+#' @export
+texdump <- function(x, name="obj"){
+
+    tex_name <- paste0("_dump_", name, ".tex", collapes="")    
+    s1 <- c("\\documentclass{article}",
+            "\\usepackage{amsmath}", 
+            "\\begin{document}",
+            "\\["
+            )
+    
+    s2 <- c("\\]",
+            "\\end{document}")
+    
+    s1 <- paste0(s1, "\n")
+    s2 <- paste0(s2, "\n")
+
+    st <- tex(x)
+    st_all <- paste0(c(s1, st, s2), collapse=" ")
+
+    cat(st_all, file=tex_name)
+    if (requireNamespace("tinytex", quietly = TRUE))
+        tinytex::pdflatex(tex_name)
+    invisible()
+}
+
+
+
 #' All variables
 #'
 #' Return all variables in caracas symbol
