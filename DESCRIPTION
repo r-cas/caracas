@@ -24,7 +24,8 @@ Suggests:
   knitr,
   rmarkdown,
   tinytex,
-  pdftools
+  pdftools,
+  qpdf
 License: GPL
 SystemRequirements: Python (>= 3.6.0)
 URL: https://github.com/r-cas/caracas
