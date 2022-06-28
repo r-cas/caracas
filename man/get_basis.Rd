@@ -13,10 +13,12 @@ get_basis(x)
 Get basis
 }
 \examples{
+if (has_sympy()) {
 x <- vector_sym(3)
 get_basis(x)
 
 W <- matrix(c("r_1", "r_1", "r_2", "r_2", "0", "0", "u_1", "u_2"), nrow=4)
 W <- as_sym(W)
 get_basis(W)
+}
 }

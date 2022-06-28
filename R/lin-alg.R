@@ -17,10 +17,6 @@ stopifnot_matrix <- function(x){
   }
 }
 
-## MIKKEL FIXME
-## x <- vector_sym(4)
-## caracas:::symbol_is_matrix(x)
-
 #' Check if object is a caracas matrix
 #'
 #' Check if object is a caracas matrix
@@ -41,6 +37,10 @@ stopifnot_matrix <- function(x){
 #' @concept linalg
 #' @export
 symbol_is_matrix <- function(x) {
+    if (length(x) != 1L){
+      return(FALSE)
+    }
+  
     ## MatrixSymbol
     try({
         res <- x$pyobj$is_MatrixExpr
@@ -56,15 +56,9 @@ symbol_is_matrix <- function(x) {
     
     xstr <- as.character(x)
 
-    ## FIXME: SH fix
-    if ((length(xstr) == 1) && (grepl("^Matrix\\(\\[", xstr))) {
-        return(TRUE)
+    if (grepl("^Matrix\\(\\[", xstr)) {
+      return(TRUE)
     }
-
-    ## WAS:
-    ## if (grepl("^Matrix\\(\\[", xstr)) {
-        ## return(TRUE)
-    ## }
   
   # FIXME: From der() and der2()
   # if (grepl("^\\[\\[", xstr)) {
@@ -438,6 +432,7 @@ vec <- function(x) {
 #' 
 #' @examples
 #' if (has_sympy()) {
+#'   diag_(c(1,3,5))
 #'   diag_(c("a", "b", "c"))
 #'   diag_("a", 2)
 #'   diag_(vector_sym(4))
@@ -448,14 +443,10 @@ diag_ <- function(x, n = 1L, declare_symbols = TRUE, ...){
   ensure_sympy()
 
   
-  if(inherits(x, "caracas_symbol")){ ## MIKKEL FIXME: This is fragile
+  if(inherits(x, "caracas_symbol")){
       x <- as_character_matrix(x)
   }
 
-  if (!is.character(x)) {
-    stop("'x' must be a character")
-  }
-  
   x <- rep(x, n, ...)
   n <- length(x)
   

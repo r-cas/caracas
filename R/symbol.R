@@ -563,3 +563,20 @@ free_symbols <- function(x) {
   return(z)
 }
 
+#' All variables
+#'
+#' Return all variables in caracas symbol
+#'
+#' @param x caracas symbol
+#'
+#' @examples
+#' if (has_sympy()){
+#'   x <- vector_sym(5)
+#'   all_vars(x)
+#' }
+#' 
+#' @export
+all_vars <- function(x){
+  all.vars(as_expr(x))
+}
+

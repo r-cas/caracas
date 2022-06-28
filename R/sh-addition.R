@@ -4,22 +4,34 @@
 #'
 #' Dump latex representation of sympy object and compile document into pdf.
 #'
-#' @param x An object that can be put in latex format with caracas' tex() function.
-#' @param name Name of tex file.
+#' @param x An object that can be put in latex format with caracas' tex() 
+#'          function or a character string with tex code (in math mode).
 #' @return Nothing, but a .tex file and a .pdf file is generated.
 #' 
 #' @examples
+#' if (has_sympy()) {
 #' S <- matrix_sym_symmetric(3, "s")
+#' S
 #' \dontrun{
-#' texdump(S)
+#' texshow(S)
+#' texshow(paste0("S = ", tex(S)))
+#' }
 #' }
 #'
-#' @importFrom tinytex pdflatex
+##@importFrom tinytex pdflatex
+##@importFrom magick image_read_pdf image_trim
+##@importFrom pdftools pdf_info
 #' @export
-texdump <- function(x, name="obj"){
+texshow <- function(x){#, name="obj"){
+  if (!requireNamespace("tinytex", quietly = TRUE) ||
+      !requireNamespace("magick", quietly = TRUE) ||
+      !requireNamespace("pdftools", quietly = TRUE)) {
+    stop("This function requires tinytex, magick, and pdftools packages")
+  }
 
-    tex_name <- paste0("_dump_", name, ".tex", collapes="")    
+    tex_name <- paste0(tempfile(), ".tex") #paste0("_dump_", name, ".tex", collapes="")    
     s1 <- c("\\documentclass{article}",
+            "\\pagestyle{empty}",
             "\\usepackage{amsmath}", 
             "\\begin{document}",
             "\\["
@@ -31,32 +43,24 @@ texdump <- function(x, name="obj"){
     s1 <- paste0(s1, "\n")
     s2 <- paste0(s2, "\n")
 
-    st <- tex(x)
+    st <- if (inherits(x, "caracas_symbol")) {
+      tex(x)
+    } else {
+      x
+    }
+    
     st_all <- paste0(c(s1, st, s2), collapse=" ")
 
     cat(st_all, file=tex_name)
-    if (requireNamespace("tinytex", quietly = TRUE))
-        tinytex::pdflatex(tex_name)
-    invisible()
+    out <- tinytex::pdflatex(tex_name)
+    
+    im <- magick::image_read_pdf(out)
+    im_content <- magick::image_trim(im)
+    plot(im_content)
+    return(invisible(NULL))
 }
 
 
-
-#' All variables
-#'
-#' Return all variables in caracas symbol
-#'
-#' @param x caracas symbol
-#'
-#' @examples
-#'
-#' x <- vector_sym(5)
-#' all_vars(x)
-#' 
-#' @export
-all_vars <- function(x){
-    all.vars(as_expr(x))
-}
 
 
 ## #' Convert caracas object to R (col or row wise)
@@ -97,12 +101,14 @@ all_vars <- function(x){
 #'
 #' @param x caracas vector / matrix
 #' @examples
+#' if (has_sympy()) {
 #' x <- vector_sym(3)
 #' get_basis(x)
 #' 
 #' W <- matrix(c("r_1", "r_1", "r_2", "r_2", "0", "0", "u_1", "u_2"), nrow=4)
 #' W <- as_sym(W)
 #' get_basis(W)
+#' }
 #' @export
 get_basis <- function(x){
     ensure_sympy()

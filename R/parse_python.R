@@ -226,10 +226,10 @@ as_expr.caracas_symbol <- function(x, first_doit = TRUE) {
     stop_parse_error(x)
   }
 
-  attributes(y) <- NULL ## FIXME SH: Check if ok
+  attributes(y) <- NULL
   
   if (expr_has_vars(y)) {
-      out <- return(y)
+      return(y)
   } else {
       return(eval(y))
   }

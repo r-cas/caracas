@@ -18,12 +18,13 @@ Depends:
 Imports:
   reticulate (>= 1.14),
   Matrix,
-  magrittr,
-  tinytex
+  magrittr
 Suggests:
   testthat (>= 2.1.0),
   knitr,
-  rmarkdown
+  rmarkdown,
+  tinytex,
+  pdftools
 License: GPL
 SystemRequirements: Python (>= 3.6.0)
 URL: https://github.com/r-cas/caracas

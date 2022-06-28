@@ -20,6 +20,7 @@ Symbolic diagonal matrix
 }
 \examples{
 if (has_sympy()) {
+  diag_(c(1,3,5))
   diag_(c("a", "b", "c"))
   diag_("a", 2)
   diag_(vector_sym(4))
