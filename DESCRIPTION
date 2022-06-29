@@ -24,6 +24,7 @@ Suggests:
   knitr,
   rmarkdown,
   tinytex,
+  magick,
   pdftools,
   qpdf
 License: GPL

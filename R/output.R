@@ -250,7 +250,7 @@ texshow <- function(x){#, name="obj"){
   cat(st_all, file = tex_name)
 
   out <- tinytex::pdflatex(tex_name)
-    
+
   im <- magick::image_read_pdf(out)
   im_content <- magick::image_trim(im)
   plot(im_content)
