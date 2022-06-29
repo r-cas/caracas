@@ -8,7 +8,7 @@ output:
     toc_depth: 3
     number_sections: true
 vignette: >
-  %\VignetteIndexEntry{Concentration and covariance matrix in an autoregressive model and in a dynamic linear model}
+  %\VignetteIndexEntry{21 - Concentration and covariance matrix in an autoregressive model and in a dynamic linear model}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

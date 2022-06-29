@@ -1,8 +1,8 @@
 ---
-title: "Using the 'SymPy' object directly"
+title: "90 - Using the 'SymPy' object directly"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using the 'SymPy' object directly}
+  %\VignetteIndexEntry{90 - Using the 'SymPy' object directly}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

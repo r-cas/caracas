@@ -1,8 +1,8 @@
 ---
-title: "Reference"
+title: "99 - Reference"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Reference}
+  %\VignetteIndexEntry{99 - Reference}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

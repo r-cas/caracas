@@ -2,7 +2,7 @@
 title: "Arbitrary precision arithmetic"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Arbitrary precision arithmetic}
+  %\VignetteIndexEntry{95 - Arbitrary precision arithmetic}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
