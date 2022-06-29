@@ -481,6 +481,8 @@ fraction_parts <- function(x) {
 
 
 #' Call a SymPy function directly on x
+#'
+#' Extend caracas by calling SymPy functions directly.
 #' 
 #' @param x Object to call `fun` on
 #' @param fun Function to call

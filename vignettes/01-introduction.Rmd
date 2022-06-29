@@ -2,7 +2,7 @@
 title: "01 - Introduction to 'caracas'"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to 'caracas'}
+  %\VignetteIndexEntry{01 - Introduction to 'caracas'}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
