@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2.9004</span>
       </span>
     </div>
 
@@ -26,12 +26,15 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/a01-introduction.html">01 - Introduction to 'caracas'</a>
+    </li>
+    <li>
       <a href="../articles/ar-ssm.html">Concentration and covariance matrix in an autoregressive model and in a dynamic linear model</a>
     </li>
     <li>
@@ -39,9 +42,6 @@
     </li>
     <li>
       <a href="../articles/fastest-route.html">Fastest route through the forest</a>
-    </li>
-    <li>
-      <a href="../articles/introduction.html">Introduction to 'caracas'</a>
     </li>
     <li>
       <a href="../articles/linear-algebra.html">Linear algebra in `caracas`</a>
@@ -102,6 +102,10 @@
           <p><code><a href="fraction_parts.html">fraction_parts()</a></code> </p>
         </td>
         <td><p>Get numerator and denominator of a fraction</p></td>
+      </tr><tr><td>
+          <p><code><a href="free_symbols.html">free_symbols()</a></code> </p>
+        </td>
+        <td><p>Get free symbol in expression</p></td>
       </tr><tr><td>
           <p><code><a href="listify.html">listify()</a></code> </p>
         </td>
@@ -235,6 +239,10 @@
           <p class="section-desc"></p><p>Functions related to linear algebra.</p>
         </th>
       </tr></tbody><tbody><tr><td>
+          <p><code><a href="add_prefix.html">add_prefix()</a></code> </p>
+        </td>
+        <td><p>Add prefix to each element of matrix</p></td>
+      </tr><tr><td>
           <p><code><a href="as_character_matrix.html">as_character_matrix()</a></code> </p>
         </td>
         <td><p>Get matrix as character matrix</p></td>
@@ -242,6 +250,10 @@
           <p><code><a href="as_diag.html">as_diag()</a></code> </p>
         </td>
         <td><p>Construct diagonal matrix from vector</p></td>
+      </tr><tr><td>
+          <p><code><a href="colspan.html">colspan()</a></code> </p>
+        </td>
+        <td><p>Column space (range) of a symbolic matrix</p></td>
       </tr><tr><td>
           <p><code><a href="diag-set.html">`diag&lt;-`()</a></code> </p>
         </td>
@@ -267,6 +279,10 @@
         </td>
         <td><p>Do linear algebra operation</p></td>
       </tr><tr><td>
+          <p><code><a href="generic-matrices.html">vector_sym()</a></code> <code><a href="generic-matrices.html">matrix_sym()</a></code> <code><a href="generic-matrices.html">matrix_sym_diag()</a></code> <code><a href="generic-matrices.html">matrix_sym_symmetric()</a></code> </p>
+        </td>
+        <td><p>Generate generic vectors and matrices</p></td>
+      </tr><tr><td>
           <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> </p>
         </td>
         <td><p>Do linear algebra operation</p></td>
@@ -283,9 +299,17 @@
         </td>
         <td><p>Symbolic matrix</p></td>
       </tr><tr><td>
+          <p><code><a href="rankMatrix_.html">rankMatrix_()</a></code> </p>
+        </td>
+        <td><p>Rank of matrix</p></td>
+      </tr><tr><td>
           <p><code><a href="reciprocal_matrix.html">reciprocal_matrix()</a></code> </p>
         </td>
         <td><p>Elementwise reciprocal matrix</p></td>
+      </tr><tr><td>
+          <p><code><a href="symbol_is_matrix.html">symbol_is_matrix()</a></code> </p>
+        </td>
+        <td><p>Check if object is a caracas matrix</p></td>
       </tr><tr><td>
           <p><code><a href="t.caracas_symbol.html">t(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
         </td>
@@ -371,9 +395,21 @@
           <p class="section-desc"></p><p>These are functions not mentioned above.</p>
         </th>
       </tr></tbody><tbody><tr><td>
+          <p><code><a href="all_vars.html">all_vars()</a></code> </p>
+        </td>
+        <td><p>All variables</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_basis.html">get_basis()</a></code> </p>
+        </td>
+        <td><p>Get basis</p></td>
+      </tr><tr><td>
           <p><code><a href="pipe.html">%&gt;%</a></code> </p>
         </td>
         <td><p>Pipe</p></td>
+      </tr><tr><td>
+          <p><code><a href="texshow.html">texshow()</a></code> </p>
+        </td>
+        <td><p>Dump latex representation of sympy object.</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="complete-reference">Complete reference <a href="#complete-reference" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
@@ -390,6 +426,14 @@
           <p><code><a href="Ops.caracas_symbol.html">Ops(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
         </td>
         <td><p>Math operators</p></td>
+      </tr><tr><td>
+          <p><code><a href="add_prefix.html">add_prefix()</a></code> </p>
+        </td>
+        <td><p>Add prefix to each element of matrix</p></td>
+      </tr><tr><td>
+          <p><code><a href="all_vars.html">all_vars()</a></code> </p>
+        </td>
+        <td><p>All variables</p></td>
       </tr><tr><td>
           <p><code><a href="as.character.caracas_symbol.html">as.character(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
         </td>
@@ -414,6 +458,10 @@
           <p><code><a href="ask.html">ask()</a></code> </p>
         </td>
         <td><p>Ask for a symbol's property</p></td>
+      </tr><tr><td>
+          <p><code><a href="colspan.html">colspan()</a></code> </p>
+        </td>
+        <td><p>Column space (range) of a symbolic matrix</p></td>
       </tr><tr><td>
           <p><code><a href="def_sym.html">def_sym()</a></code> </p>
         </td>
@@ -487,6 +535,18 @@
         </td>
         <td><p>Get numerator and denominator of a fraction</p></td>
       </tr><tr><td>
+          <p><code><a href="free_symbols.html">free_symbols()</a></code> </p>
+        </td>
+        <td><p>Get free symbol in expression</p></td>
+      </tr><tr><td>
+          <p><code><a href="generic-matrices.html">vector_sym()</a></code> <code><a href="generic-matrices.html">matrix_sym()</a></code> <code><a href="generic-matrices.html">matrix_sym_diag()</a></code> <code><a href="generic-matrices.html">matrix_sym_symmetric()</a></code> </p>
+        </td>
+        <td><p>Generate generic vectors and matrices</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_basis.html">get_basis()</a></code> </p>
+        </td>
+        <td><p>Get basis</p></td>
+      </tr><tr><td>
           <p><code><a href="get_py.html">get_py()</a></code> </p>
         </td>
         <td><p>Access 'py' object</p></td>
@@ -551,6 +611,10 @@
         </td>
         <td><p>Product of a function</p></td>
       </tr><tr><td>
+          <p><code><a href="rankMatrix_.html">rankMatrix_()</a></code> </p>
+        </td>
+        <td><p>Rank of matrix</p></td>
+      </tr><tr><td>
           <p><code><a href="reciprocal_matrix.html">reciprocal_matrix()</a></code> </p>
         </td>
         <td><p>Elementwise reciprocal matrix</p></td>
@@ -599,6 +663,10 @@
         </td>
         <td><p>Create a symbol</p></td>
       </tr><tr><td>
+          <p><code><a href="symbol_is_matrix.html">symbol_is_matrix()</a></code> </p>
+        </td>
+        <td><p>Check if object is a caracas matrix</p></td>
+      </tr><tr><td>
           <p><code><a href="sympy_func.html">sympy_func()</a></code> </p>
         </td>
         <td><p>Call a SymPy function directly on x</p></td>
@@ -618,6 +686,10 @@
           <p><code><a href="tex.html">tex()</a></code> </p>
         </td>
         <td><p>Export object to TeX</p></td>
+      </tr><tr><td>
+          <p><code><a href="texshow.html">texshow()</a></code> </p>
+        </td>
+        <td><p>Dump latex representation of sympy object.</p></td>
       </tr><tr><td>
           <p><code><a href="tuplify.html">tuplify()</a></code> </p>
         </td>
@@ -643,7 +715,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

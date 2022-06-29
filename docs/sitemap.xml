@@ -10,6 +10,9 @@
     <loc>/LICENSE-text.html</loc>
   </url>
   <url>
+    <loc>/articles/a01-introduction.html</loc>
+  </url>
+  <url>
     <loc>/articles/ar-ssm.html</loc>
   </url>
   <url>
@@ -55,6 +58,12 @@
     <loc>/reference/Ops.caracas_symbol.html</loc>
   </url>
   <url>
+    <loc>/reference/add_prefix.html</loc>
+  </url>
+  <url>
+    <loc>/reference/all_vars.html</loc>
+  </url>
+  <url>
     <loc>/reference/as.character.caracas_symbol.html</loc>
   </url>
   <url>
@@ -71,6 +80,9 @@
   </url>
   <url>
     <loc>/reference/ask.html</loc>
+  </url>
+  <url>
+    <loc>/reference/colspan.html</loc>
   </url>
   <url>
     <loc>/reference/def_sym.html</loc>
@@ -137,6 +149,15 @@
   </url>
   <url>
     <loc>/reference/fraction_parts.html</loc>
+  </url>
+  <url>
+    <loc>/reference/free_symbols.html</loc>
+  </url>
+  <url>
+    <loc>/reference/generic-matrices.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_basis.html</loc>
   </url>
   <url>
     <loc>/reference/get_py.html</loc>
@@ -214,6 +235,9 @@
     <loc>/reference/prodf.html</loc>
   </url>
   <url>
+    <loc>/reference/rankMatrix_.html</loc>
+  </url>
+  <url>
     <loc>/reference/reciprocal_matrix.html</loc>
   </url>
   <url>
@@ -253,6 +277,9 @@
     <loc>/reference/symbol.html</loc>
   </url>
   <url>
+    <loc>/reference/symbol_is_matrix.html</loc>
+  </url>
+  <url>
     <loc>/reference/sympy_func.html</loc>
   </url>
   <url>
@@ -266,6 +293,9 @@
   </url>
   <url>
     <loc>/reference/tex.html</loc>
+  </url>
+  <url>
+    <loc>/reference/texshow.html</loc>
   </url>
   <url>
     <loc>/reference/tuplify.html</loc>
