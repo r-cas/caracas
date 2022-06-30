@@ -1,5 +1,5 @@
 ---
-title: "Arbitrary precision arithmetic"
+title: "95 - Arbitrary precision arithmetic"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{95 - Arbitrary precision arithmetic}

@@ -1,5 +1,5 @@
 ---
-title: "Fastest route through the forest"
+title: "22 - Fastest route through the forest"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{22 - Fastest route through the forest}

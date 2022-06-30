@@ -1,5 +1,5 @@
 ---
-title: "Linear algebra in `caracas`"
+title: "11 - Linear algebra in `caracas`"
 author: Mikkel Meyer Andersen and Søren Højsgaard
 date: "`r date()`"
 output: 
@@ -8,7 +8,7 @@ output:
     toc_depth: 3
     number_sections: true
 vignette: >
-  %\VignetteIndexEntry{10 - Linear algebra in `caracas`}
+  %\VignetteIndexEntry{11 - Linear algebra in `caracas`}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

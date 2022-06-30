@@ -1,0 +1,72 @@
+---
+title: "05 - Extending 'caracas'"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{05 - Extending 'caracas'}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, message=FALSE}
+library(caracas)
+options("caracas.print.prettyascii"=FALSE)
+options("caracas.print.ascii"=TRUE)
+
+```
+
+It is relatively easy to extend `caracas` by calling `SymPy` functions
+directly. 
+
+As an example consider inverting a regular matrix $A$: Let $B$ be the
+inverse of $A$. Then, using cofactors, $B_{ij} =C_{ji} / det(A)$. The
+cofactor $C_{ij}$ is given as $C_{ij}=(-1)^{i+j}M_{ij}$ where $M_{ij}$
+is the determinant of the submatrix of $A$ obtained by deleting the
+$i$th row and the $j$th column of $A$. 
+
+A quick search
+https://docs.sympy.org/latest/modules/matrices/matrices.html shows
+that there are two relevant functions in `SymPy`: `cofactor` and
+`cofactor_matrix`.
+
+If these functions are not avaiables in `caracas` they can be made so using `sympy_func`:
+
+```{r}
+cofactor_matrix <- function(x){
+    sympy_func(x, "cofactor_matrix")    
+}
+
+cofactor <- function(x, i, j){
+    sympy_func(x, "cofactor", i, j)    
+}
+```
+
+```{r}
+A <- matrix_sym(3, 3, "a")
+```
+
+
+```{r}
+CC <- cofactor_matrix(A)
+CC
+cc <- cofactor(A, 1, 1) ## FIXME: Mikkel: Det ser da sært ud?
+cc
+```
+
+We get the right answer
+```{r}
+B <- t(CC) / det(A)
+P <- A %*% B
+P %>% simplify()
+```
+
+
+
+
