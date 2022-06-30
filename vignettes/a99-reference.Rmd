@@ -301,6 +301,29 @@ B[, 2] <- "x"
 B
 ```
 
+## Interactively show $\LaTeX$ representation
+
+```r
+texshow(B)
+```
+
+plots the following in the plot window:
+
+```{r, error=TRUE}
+texshow(B)
+```
+
+You can also provide a string instead:
+
+```r
+texshow(paste0("B = ", tex(B)))
+```
+
+giving
+
+```{r, error=TRUE}
+texshow(paste0("B = ", tex(B)))
+```
 
 ## Using `SymPy` directly
 
