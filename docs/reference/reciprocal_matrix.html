@@ -35,22 +35,25 @@
       <a href="../articles/a01-introduction.html">01 - Introduction to 'caracas'</a>
     </li>
     <li>
-      <a href="../articles/ar-ssm.html">Concentration and covariance matrix in an autoregressive model and in a dynamic linear model</a>
+      <a href="../articles/a05-extend-caracas.html">05 - Extending 'caracas'</a>
     </li>
     <li>
-      <a href="../articles/arbitrary-precision-arithmetic.html">Arbitrary precision arithmetic</a>
+      <a href="../articles/a11-linear-algebra.html">11 - Linear algebra in `caracas`</a>
     </li>
     <li>
-      <a href="../articles/fastest-route.html">Fastest route through the forest</a>
+      <a href="../articles/a21-ar-ssm.html">21 - Concentration and covariance matrix in an autoregressive model and in a dynamic linear model</a>
     </li>
     <li>
-      <a href="../articles/linear-algebra.html">Linear algebra in `caracas`</a>
+      <a href="../articles/a22-fastest-route.html">22 - Fastest route through the forest</a>
     </li>
     <li>
-      <a href="../articles/reference.html">Reference</a>
+      <a href="../articles/a91-sympy-object.html">91 - Using the 'SymPy' object directly</a>
     </li>
     <li>
-      <a href="../articles/sympy-object.html">Using the 'SymPy' object directly</a>
+      <a href="../articles/a95-arbitrary-precision-arithmetic.html">95 - Arbitrary precision arithmetic</a>
+    </li>
+    <li>
+      <a href="../articles/a99-reference.html">99 - Reference</a>
     </li>
   </ul></li>
 <li>
@@ -81,23 +84,26 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">reciprocal_matrix</span><span class="op">(</span><span class="va">x</span>, numerator <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">reciprocal_matrix</span><span class="op">(</span><span class="va">x</span>, numerator <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Object <code>x</code></p></dd>
+
+
 <dt>numerator</dt>
 <dd><p>The numerator in the result.</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="has_sympy.html">has_sympy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[r1, r2, r3], [u1, u2, u3]]"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">reciprocal_matrix</span><span class="op">(</span><span class="va">s</span>, numerator <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="has_sympy.html">has_sympy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[r1, r2, r3], [u1, u2, u3]]"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">reciprocal_matrix</span><span class="op">(</span><span class="va">s</span>, numerator <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [caracas]: ⎡7   7   7 ⎤</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            ⎢──  ──  ──⎥</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            ⎢r₁  r₂  r₃⎥</span>
@@ -105,7 +111,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>            ⎢7   7   7 ⎥</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            ⎢──  ──  ──⎥</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            ⎣u₁  u₂  u₃⎦</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -120,7 +126,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

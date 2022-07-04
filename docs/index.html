@@ -56,22 +56,25 @@
       <a href="articles/a01-introduction.html">01 - Introduction to 'caracas'</a>
     </li>
     <li>
-      <a href="articles/ar-ssm.html">Concentration and covariance matrix in an autoregressive model and in a dynamic linear model</a>
+      <a href="articles/a05-extend-caracas.html">05 - Extending 'caracas'</a>
     </li>
     <li>
-      <a href="articles/arbitrary-precision-arithmetic.html">Arbitrary precision arithmetic</a>
+      <a href="articles/a11-linear-algebra.html">11 - Linear algebra in `caracas`</a>
     </li>
     <li>
-      <a href="articles/fastest-route.html">Fastest route through the forest</a>
+      <a href="articles/a21-ar-ssm.html">21 - Concentration and covariance matrix in an autoregressive model and in a dynamic linear model</a>
     </li>
     <li>
-      <a href="articles/linear-algebra.html">Linear algebra in `caracas`</a>
+      <a href="articles/a22-fastest-route.html">22 - Fastest route through the forest</a>
     </li>
     <li>
-      <a href="articles/reference.html">Reference</a>
+      <a href="articles/a91-sympy-object.html">91 - Using the 'SymPy' object directly</a>
     </li>
     <li>
-      <a href="articles/sympy-object.html">Using the 'SymPy' object directly</a>
+      <a href="articles/a95-arbitrary-precision-arithmetic.html">95 - Arbitrary precision arithmetic</a>
+    </li>
+    <li>
+      <a href="articles/a99-reference.html">99 - Reference</a>
     </li>
   </ul>
 </li>
@@ -103,22 +106,21 @@
 <code>caracas</code>: Computer algebra in R<a class="anchor" aria-label="anchor" href="#caracas-computer-algebra-in-r"></a>
 </h1></div>
 <!-- badges: start -->
-
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p><code>caracas</code> is available on CRAN and can be installed as usual:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'caracas'</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">'caracas'</span>)</a></code></pre></div>
 <p>Please ensure that you have SymPy installed, or else install it:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu">caracas</span><span class="fu">::</span><span class="fu"><a href="reference/has_sympy.html">has_sympy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">caracas</span><span class="fu">::</span><span class="fu"><a href="reference/install_sympy.html">install_sympy</a></span><span class="op">(</span><span class="op">)</span> 
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu">caracas</span><span class="fu">::</span><span class="fu"><a href="reference/has_sympy.html">has_sympy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">caracas</span><span class="fu">::</span><span class="fu"><a href="reference/install_sympy.html">install_sympy</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>To build and install from Github with vignettes run this command from within <code>R</code> (please install <code>remotes</code> first if not already installed):</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages('remotes')</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"r-cas/caracas"</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># install.packages('remotes')</span></a>
+<a class="sourceLine" id="cb3-2" title="2">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"r-cas/caracas"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>You can also install the package without vignettes if needed as follows:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"r-cas/caracas"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"r-cas/caracas"</span>)</a></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="configuring-the-python-environment">Configuring the Python environment<a class="anchor" aria-label="anchor" href="#configuring-the-python-environment"></a>
@@ -149,70 +151,70 @@
 <h2 id="brief-introduction">Brief introduction<a class="anchor" aria-label="anchor" href="#brief-introduction"></a>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas" class="external-link">caracas</a></span><span class="op">)</span>
-<span class="co"># options(caracas.print.prettyascii = TRUE)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas" class="external-link">caracas</a></span><span class="op">)</span></span>
+<span><span class="co"># options(caracas.print.prettyascii = TRUE)</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'x'</span><span class="op">)</span>
-<span class="va">eq</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">x</span>
-<span class="va">eq</span>
-<span class="co">#&gt; [caracas]:    2    </span>
-<span class="co">#&gt;            2⋅x  - x</span>
-<span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
-<span class="co">#&gt; [1] "2*x^2 - x"</span>
-<span class="fu"><a href="reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
-<span class="co">#&gt; expression(2 * x^2 - x)</span>
-<span class="fu"><a href="reference/tex.html">tex</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span>
-<span class="co">#&gt; [1] "2 x^{2} - x"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'x'</span><span class="op">)</span></span>
+<span><span class="va">eq</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">x</span></span>
+<span><span class="va">eq</span></span>
+<span><span class="co">#&gt; [caracas]:    2    </span></span>
+<span><span class="co">#&gt;            2⋅x  - x</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "2*x^2 - x"</span></span>
+<span><span class="fu"><a href="reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span></span>
+<span><span class="co">#&gt; expression(2 * x^2 - x)</span></span>
+<span><span class="fu"><a href="reference/tex.html">tex</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "2 x^{2} - x"</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">eq</span>, <span class="va">x</span><span class="op">)</span>
-<span class="co">#&gt; Solution 1:</span>
-<span class="co">#&gt;   x =  0 </span>
-<span class="co">#&gt; Solution 2:</span>
-<span class="co">#&gt;   x =  1/2</span>
-<span class="fu"><a href="reference/der.html">der</a></span><span class="op">(</span><span class="va">eq</span>, <span class="va">x</span><span class="op">)</span>
-<span class="co">#&gt; [caracas]: 4⋅x - 1</span>
-<span class="fu"><a href="reference/subs.html">subs</a></span><span class="op">(</span><span class="va">eq</span>, <span class="va">x</span>, <span class="st">"y"</span><span class="op">)</span>
-<span class="co">#&gt; [caracas]:    2    </span>
-<span class="co">#&gt;            2⋅y  - y</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">eq</span>, <span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Solution 1:</span></span>
+<span><span class="co">#&gt;   x =  0 </span></span>
+<span><span class="co">#&gt; Solution 2:</span></span>
+<span><span class="co">#&gt;   x =  1/2</span></span>
+<span><span class="fu"><a href="reference/der.html">der</a></span><span class="op">(</span><span class="va">eq</span>, <span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [caracas]: 4⋅x - 1</span></span>
+<span><span class="fu"><a href="reference/subs.html">subs</a></span><span class="op">(</span><span class="va">eq</span>, <span class="va">x</span>, <span class="st">"y"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [caracas]:    2    </span></span>
+<span><span class="co">#&gt;            2⋅y  - y</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="st">"2*x"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
-<span class="va">B</span>
-<span class="co">#&gt; [caracas]: ⎡x   0 ⎤</span>
-<span class="co">#&gt;            ⎢      ⎥</span>
-<span class="co">#&gt;            ⎣2  2⋅x⎦</span>
-<span class="va">Binv</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span>
-<span class="va">Binv</span>
-<span class="co">#&gt; [caracas]: ⎡ 1      ⎤</span>
-<span class="co">#&gt;            ⎢ ─    0 ⎥</span>
-<span class="co">#&gt;            ⎢ x      ⎥</span>
-<span class="co">#&gt;            ⎢        ⎥</span>
-<span class="co">#&gt;            ⎢-1    1 ⎥</span>
-<span class="co">#&gt;            ⎢───  ───⎥</span>
-<span class="co">#&gt;            ⎢  2  2⋅x⎥</span>
-<span class="co">#&gt;            ⎣ x      ⎦</span>
-<span class="fu"><a href="reference/tex.html">tex</a></span><span class="op">(</span><span class="va">Binv</span><span class="op">)</span>
-<span class="co">#&gt; [1] "\\left[\\begin{matrix}\\frac{1}{x} &amp; 0\\\\- \\frac{1}{x^{2}} &amp; \\frac{1}{2 x}\\end{matrix}\\right]"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="st">"2*x"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
+<span><span class="va">B</span></span>
+<span><span class="co">#&gt; [caracas]: ⎡x   0 ⎤</span></span>
+<span><span class="co">#&gt;            ⎢      ⎥</span></span>
+<span><span class="co">#&gt;            ⎣2  2⋅x⎦</span></span>
+<span><span class="va">Binv</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
+<span><span class="va">Binv</span></span>
+<span><span class="co">#&gt; [caracas]: ⎡ 1      ⎤</span></span>
+<span><span class="co">#&gt;            ⎢ ─    0 ⎥</span></span>
+<span><span class="co">#&gt;            ⎢ x      ⎥</span></span>
+<span><span class="co">#&gt;            ⎢        ⎥</span></span>
+<span><span class="co">#&gt;            ⎢-1    1 ⎥</span></span>
+<span><span class="co">#&gt;            ⎢───  ───⎥</span></span>
+<span><span class="co">#&gt;            ⎢  2  2⋅x⎥</span></span>
+<span><span class="co">#&gt;            ⎣ x      ⎦</span></span>
+<span><span class="fu"><a href="reference/tex.html">tex</a></span><span class="op">(</span><span class="va">Binv</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "\\left[\\begin{matrix}\\frac{1}{x} &amp; 0\\\\- \\frac{1}{x^{2}} &amp; \\frac{1}{2 x}\\end{matrix}\\right]"</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/linalg.html">eigenval</a></span><span class="op">(</span><span class="va">Binv</span><span class="op">)</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [[1]]$eigval</span>
-<span class="co">#&gt; [caracas]: 1</span>
-<span class="co">#&gt;            ─</span>
-<span class="co">#&gt;            x</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[1]]$eigmult</span>
-<span class="co">#&gt; [1] 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; [[2]]$eigval</span>
-<span class="co">#&gt; [caracas]:  1 </span>
-<span class="co">#&gt;            ───</span>
-<span class="co">#&gt;            2⋅x</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[2]]$eigmult</span>
-<span class="co">#&gt; [1] 1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/linalg.html">eigenval</a></span><span class="op">(</span><span class="va">Binv</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [[1]]$eigval</span></span>
+<span><span class="co">#&gt; [caracas]: 1</span></span>
+<span><span class="co">#&gt;            ─</span></span>
+<span><span class="co">#&gt;            x</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$eigmult</span></span>
+<span><span class="co">#&gt; [1] 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [[2]]$eigval</span></span>
+<span><span class="co">#&gt; [caracas]:  1 </span></span>
+<span><span class="co">#&gt;            ───</span></span>
+<span><span class="co">#&gt;            2⋅x</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]$eigmult</span></span>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
 <p>Please find more examples in the other vignettes available at <a href="https://r-cas.github.io/caracas/" class="external-link uri">https://r-cas.github.io/caracas/</a>.</p>
 </div>
 <div class="section level2">
@@ -281,7 +283,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer>

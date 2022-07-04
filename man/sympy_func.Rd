@@ -14,7 +14,7 @@ sympy_func(x, fun, ...)
 \item{\dots}{Passed on to \code{fun}}
 }
 \description{
-Call a SymPy function directly on x
+Extend caracas by calling SymPy functions directly.
 }
 \examples{
 if (has_sympy()) {

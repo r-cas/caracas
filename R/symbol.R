@@ -350,6 +350,9 @@ subs <- function(s, x, v) {
   return(y)
 }
 
+
+
+
 #' Substitute af vector of symbols for a vector of values
 #' 
 #' @param s Expression

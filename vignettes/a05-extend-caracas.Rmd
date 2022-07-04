@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
 library(caracas)
 options("caracas.print.prettyascii"=FALSE)
 options("caracas.print.ascii"=TRUE)
-
 ```
 
 It is relatively easy to extend `caracas` by calling `SymPy` functions
