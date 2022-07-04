@@ -351,34 +351,6 @@ subs <- function(s, x, v) {
 }
 
 
-#' Substitute af vector of symbols for a vector of values in matrix.
-#' 
-#' @param s Matrix
-#' @param x Names of symbol (vector)
-#' @param v Values for `x` (vector)
-#'
-#' #' @examples 
-#' if (has_sympy()) {
-#'    S <- matrix_sym(2,2)
-#'    x <- c("v11", "v12")
-#'    v <- c(2,4)
-#'    subs_mat(S, x, v)
-#' }
-#' 
-#' @export
-subs_mat <- function(s, x, v) {
-  ensure_sympy()
-  
-  stopifnot_matrix(x)
-  stopifnot_matrix(s)
-
-  s_ <- as_character_matrix(s)
-
-  s_[match(x, s_)] <- v
-  as_sym(s_)
-}
-
-
 
 #' Substitute af vector of symbols for a vector of values
 #' 
@@ -401,6 +373,13 @@ subs_mat <- function(s, x, v) {
 #' @export
 subs_vec <- function(s, x, v) {
   ensure_sympy()
+
+  if (is.character(x)){
+      x <- as_sym(x)
+  }
+  if (is.character(v)){
+      v <- as_sym(v)
+  }
   
   stopifnot_matrix(x)
   
