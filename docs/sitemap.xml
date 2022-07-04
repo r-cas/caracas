@@ -16,9 +16,12 @@
     <loc>/articles/a05-extend-caracas.html</loc>
   </url>
   <url>
+<<<<<<< HEAD
     <loc>/articles/a10-linear-algebra.html</loc>
   </url>
   <url>
+=======
+>>>>>>> 897a4fcc6b83c51a39715add4ebea687d29ffc64
     <loc>/articles/a11-linear-algebra.html</loc>
   </url>
   <url>
@@ -28,9 +31,12 @@
     <loc>/articles/a22-fastest-route.html</loc>
   </url>
   <url>
+<<<<<<< HEAD
     <loc>/articles/a90-sympy-object.html</loc>
   </url>
   <url>
+=======
+>>>>>>> 897a4fcc6b83c51a39715add4ebea687d29ffc64
     <loc>/articles/a91-sympy-object.html</loc>
   </url>
   <url>

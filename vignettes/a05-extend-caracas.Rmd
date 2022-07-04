@@ -17,12 +17,25 @@ knitr::opts_chunk$set(
 
 ```{r, message=FALSE}
 library(caracas)
+<<<<<<< HEAD
 options("caracas.print.prettyascii"=FALSE)
 options("caracas.print.ascii"=TRUE)
+=======
 ```
+
+```{r, include=FALSE}
+#options("caracas.print.prettyascii"=FALSE)
+#options("caracas.print.ascii"=TRUE)
+>>>>>>> 897a4fcc6b83c51a39715add4ebea687d29ffc64
+```
+
 
 It is relatively easy to extend `caracas` by calling `SymPy` functions
 directly. 
+
+This can be achived using `sympy_func(x, fun, ...)` that calls a member 
+function on the object provided, i.e. `x$fun(...)`, or if that fails it 
+calls a function from the global namespace `fun(x, ...)`.
 
 As an example consider inverting a regular matrix $A$: Let $B$ be the
 inverse of $A$. Then, using cofactors, $B_{ij} =C_{ji} / det(A)$. The
@@ -35,15 +48,17 @@ https://docs.sympy.org/latest/modules/matrices/matrices.html shows
 that there are two relevant functions in `SymPy`: `cofactor` and
 `cofactor_matrix`.
 
-If these functions are not avaiables in `caracas` they can be made so using `sympy_func`:
+If these functions are not available in `caracas` they can be made so using `sympy_func`:
 
 ```{r}
-cofactor_matrix <- function(x){
-    sympy_func(x, "cofactor_matrix")    
+cofactor_matrix <- function(x) {
+  sympy_func(x, "cofactor_matrix")
 }
 
-cofactor <- function(x, i, j){
-    sympy_func(x, "cofactor", i, j)    
+cofactor <- function(x, i, j) {
+  # Python indexing starts at 0 - thus substract 1 to convert from R indexing
+  # to Python indexing
+  sympy_func(x, "cofactor", i - 1, j - 1)
 }
 ```
 
@@ -51,11 +66,10 @@ cofactor <- function(x, i, j){
 A <- matrix_sym(3, 3, "a")
 ```
 
-
 ```{r}
 CC <- cofactor_matrix(A)
 CC
-cc <- cofactor(A, 1, 1) ## FIXME: Mikkel: Det ser da sært ud?
+cc <- cofactor(A, 1, 1)
 cc
 ```
 

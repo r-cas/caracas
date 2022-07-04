@@ -10,5 +10,9 @@ articles:
   a91-sympy-object: a91-sympy-object.html
   a95-arbitrary-precision-arithmetic: a95-arbitrary-precision-arithmetic.html
   a99-reference: a99-reference.html
+<<<<<<< HEAD
 last_built: 2022-07-04T11:57Z
+=======
+last_built: 2022-07-04T09:54Z
+>>>>>>> 897a4fcc6b83c51a39715add4ebea687d29ffc64
 
