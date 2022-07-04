@@ -17,16 +17,8 @@ knitr::opts_chunk$set(
 
 ```{r, message=FALSE}
 library(caracas)
-<<<<<<< HEAD
 options("caracas.print.prettyascii"=FALSE)
 options("caracas.print.ascii"=TRUE)
-=======
-```
-
-```{r, include=FALSE}
-#options("caracas.print.prettyascii"=FALSE)
-#options("caracas.print.ascii"=TRUE)
->>>>>>> 897a4fcc6b83c51a39715add4ebea687d29ffc64
 ```
 
 
