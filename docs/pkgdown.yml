@@ -3,11 +3,12 @@ pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   a01-introduction: a01-introduction.html
-  ar-ssm: ar-ssm.html
-  arbitrary-precision-arithmetic: arbitrary-precision-arithmetic.html
-  fastest-route: fastest-route.html
-  linear-algebra: linear-algebra.html
-  reference: reference.html
-  sympy-object: sympy-object.html
-last_built: 2022-06-29T09:49Z
+  a05-extend-caracas: a05-extend-caracas.html
+  a11-linear-algebra: a11-linear-algebra.html
+  a21-ar-ssm: a21-ar-ssm.html
+  a22-fastest-route: a22-fastest-route.html
+  a91-sympy-object: a91-sympy-object.html
+  a95-arbitrary-precision-arithmetic: a95-arbitrary-precision-arithmetic.html
+  a99-reference: a99-reference.html
+last_built: 2022-07-04T09:54Z
 
