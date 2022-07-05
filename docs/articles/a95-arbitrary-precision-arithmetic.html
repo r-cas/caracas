@@ -103,11 +103,7 @@
       <h1 data-toc-skip>95 - Arbitrary precision arithmetic</h1>
             
       
-<<<<<<< HEAD
-      <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/HEAD/R/vignettes/a95-arbitrary-precision-arithmetic.Rmd" class="external-link"><code>R/vignettes/a95-arbitrary-precision-arithmetic.Rmd</code></a></small>
-=======
       <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/HEAD/vignettes/a95-arbitrary-precision-arithmetic.Rmd" class="external-link"><code>vignettes/a95-arbitrary-precision-arithmetic.Rmd</code></a></small>
->>>>>>> 897a4fcc6b83c51a39715add4ebea687d29ffc64
       <div class="hidden name"><code>a95-arbitrary-precision-arithmetic.Rmd</code></div>
 
     </div>
@@ -115,16 +111,11 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<<<<<<< HEAD
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas" class="external-link">caracas</a></span><span class="op">)</span></span></code></pre></div>
-=======
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas" class="external-link">caracas</a></span><span class="op">)</span></code></pre></div>
->>>>>>> 897a4fcc6b83c51a39715add4ebea687d29ffc64
 <div class="section level2">
 <h2 id="an-example">An example<a class="anchor" aria-label="anchor" href="#an-example"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<<<<<<< HEAD
 <code class="sourceCode R"><span><span class="va">n_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"2"</span><span class="op">)</span></span>
 <span><span class="va">n_pi</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"pi"</span>, declare_symbols <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># pi is a constant in SymPy</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">n_2</span><span class="op">)</span> <span class="op">*</span> <span class="va">n_pi</span></span>
@@ -138,26 +129,10 @@
 <span><span class="co">#&gt; [caracas]: 4.4428829381583662470158809900606936986146216893757</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/N.html">N</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "4.4428829381583662470158809900606936986146216893757"</span></span></code></pre></div>
-=======
-<code class="sourceCode R"><span class="va">n_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"2"</span><span class="op">)</span>
-<span class="va">n_pi</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"pi"</span>, declare_symbols <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># pi is a constant in SymPy</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">n_2</span><span class="op">)</span> <span class="op">*</span> <span class="va">n_pi</span>
-<span class="va">x</span>
-<span class="co">#&gt; [caracas]: √2⋅π</span>
-<span class="fu"><a href="../reference/N.html">N</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="co">#&gt; [caracas]: 4.44288293815837</span>
-<span class="fu"><a href="../reference/N.html">N</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">5</span><span class="op">)</span>
-<span class="co">#&gt; [caracas]: 4.4429</span>
-<span class="fu"><a href="../reference/N.html">N</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">50</span><span class="op">)</span>
-<span class="co">#&gt; [caracas]: 4.4428829381583662470158809900606936986146216893757</span>
-<span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/N.html">N</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] "4.4428829381583662470158809900606936986146216893757"</span></code></pre></div>
->>>>>>> 897a4fcc6b83c51a39715add4ebea687d29ffc64
 </div>
 <div class="section level2">
 <h2 id="another-example">Another example<a class="anchor" aria-label="anchor" href="#another-example"></a>
 </h2>
-<<<<<<< HEAD
 <p>As <code>SymPy</code> requires <a href="https://mpmath.org/" class="external-link"><code>mpmath</code></a> this can be used directly, for example like this (example due to Hans W Borchers, thanks!):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpmath</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">'mpmath'</span><span class="op">)</span></span>
@@ -170,22 +145,6 @@
 <span><span class="co">#&gt; [1] "2.3454640626800434588582100226"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">zeta_z</span><span class="op">$</span><span class="va">imag</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "-0.641476965582898402371607967236"</span></span></code></pre></div>
-=======
-<p>As <code>SymPy</code> requires <a href="https://mpmath.org/" class="external-link"><code>mpmath</code></a> this can be used
-directly, for example like this (example due to Hans W Borchers,
-thanks!):</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mpmath</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">'mpmath'</span><span class="op">)</span>
-<span class="va">mpmath</span><span class="op">$</span><span class="va">mp</span><span class="op">$</span><span class="va">dps</span> <span class="op">&lt;-</span> <span class="fl">30</span>
-<span class="va">z</span> <span class="op">&lt;-</span> <span class="va">mpmath</span><span class="op">$</span><span class="fu">mpc</span><span class="op">(</span>real <span class="op">=</span> <span class="st">'1.0'</span>, imag <span class="op">=</span> <span class="st">'63.453'</span><span class="op">)</span>
-<span class="va">zeta_z</span> <span class="op">&lt;-</span> <span class="va">mpmath</span><span class="op">$</span><span class="fu">zeta</span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
-<span class="va">zeta_z</span>
-<span class="co">#&gt; mpc(real='2.34546406268004345885821002260475', imag='-0.641476965582898402371607967235787')</span>
-<span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">zeta_z</span><span class="op">$</span><span class="va">real</span><span class="op">)</span>
-<span class="co">#&gt; [1] "2.3454640626800434588582100226"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">zeta_z</span><span class="op">$</span><span class="va">imag</span><span class="op">)</span>
-<span class="co">#&gt; [1] "-0.641476965582898402371607967236"</span></code></pre></div>
->>>>>>> 897a4fcc6b83c51a39715add4ebea687d29ffc64
 </div>
   </div>
 
@@ -206,11 +165,7 @@ thanks!):</p>
 
 <div class="pkgdown">
   <p></p>
-<<<<<<< HEAD
 <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
-=======
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
->>>>>>> 897a4fcc6b83c51a39715add4ebea687d29ffc64
 </div>
 
       </footer>
