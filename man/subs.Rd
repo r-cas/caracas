@@ -2,32 +2,31 @@
 % Please edit documentation in R/symbol.R
 \name{subs}
 \alias{subs}
-\title{Substitute symbol for value}
+\title{Substitute af vector of symbols for a vector of values}
 \usage{
 subs(s, x, v)
 }
 \arguments{
 \item{s}{Expression}
 
-\item{x}{Name of symbol (character)}
+\item{x}{Names of symbol (vector)}
 
-\item{v}{Value for \code{x}}
+\item{v}{Values for \code{x} (vector)}
 }
 \description{
-Substitute symbol for value
+Substitute af vector of symbols for a vector of values
 }
 \examples{
 if (has_sympy()) {
-   x <- symbol('x')
+   x <- as_sym(paste0('x', 1:3))
    e <- 2*x^2
    e
-   subs(e, "x", "2")
-   y <- as_sym("2")
-   subs(e, "x", y)
+   subs(e, x, 1:3)
+   subs(e, x, x^2)
 }
 
 }
 \seealso{
-\code{\link[=subs_vec]{subs_vec()}}, \code{\link[=subs_lst]{subs_lst()}}
+\code{\link[=subs_single]{subs_single()}}, \code{\link[=subs_lst]{subs_lst()}}
 }
 \concept{caracas_symbol}

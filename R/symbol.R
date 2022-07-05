@@ -325,17 +325,17 @@ c.caracas_symbol <- function(...) {
 #'    x <- symbol('x')
 #'    e <- 2*x^2
 #'    e
-#'    subs(e, "x", "2")
+#'    subs_single(e, "x", "2")
 #'    y <- as_sym("2")
-#'    subs(e, "x", y)
+#'    subs_single(e, "x", y)
 #' }
 #' 
-#' @seealso [subs_vec()], [subs_lst()]
+#' @seealso [subs], [subs_lst()]
 #' 
 #' @concept caracas_symbol
 #' 
 #' @export
-subs <- function(s, x, v) {
+subs_single <- function(s, x, v) {
   ensure_sympy()
   
   sym <- as.character(x)
@@ -363,24 +363,35 @@ subs <- function(s, x, v) {
 #'    x <- as_sym(paste0('x', 1:3))
 #'    e <- 2*x^2
 #'    e
-#'    subs_vec(e, x, 1:3)
-#'    subs_vec(e, x, x^2)
+#'    subs(e, x, 1:3)
+#'    subs(e, x, x^2)
 #' }
 #' 
-#' @seealso [subs()], [subs_lst()]
+#' @seealso [subs_single()], [subs_lst()]
 #' @concept caracas_symbol
 #' 
 #' @export
-subs_vec <- function(s, x, v) {
+subs <- function(s, x, v) {
   ensure_sympy()
 
   if (is.character(x)){
-      x <- as_sym(x)
+      x <- as_sym(matrix(x))
   }
-  if (is.character(v)){
+
+  ## if (any(dim(x) > 1)){
+      x <- as_sym(matrix(c(as_character_matrix(x))))
+  ## }
+
+  ## print(x)
+        
+  if (is.character(v) || is.numeric(v)){
       v <- as_sym(v)
   }
   
+  if (any(dim(v) > 1)){
+      v <- as_sym(c(as_character_matrix(v)))      
+  }
+
   stopifnot_matrix(x)
   
   vv <- v
@@ -409,7 +420,7 @@ subs_vec <- function(s, x, v) {
   
   ss <- s
   for (i in seq_along(vv)) {
-    ss <- subs(ss, x[i, ], vv[[i]])
+      ss <- subs_single(ss, x[i, ], vv[[i]])
   }
   
   return(ss)
@@ -451,7 +462,7 @@ subs_lst <- function(s, x) {
   new_s <- s
   
   for (i in seq_along(x)) {
-    new_s <- subs(new_s, names(x)[i], x[[i]])
+    new_s <- subs_single(new_s, names(x)[i], x[[i]])
   }
   
   return(new_s)
