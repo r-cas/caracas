@@ -55,8 +55,8 @@ test_that("subs_vec", {
   x <- as_sym(paste0('x', 1:3))
   e <- 2*x^2
    
-  expect_equal(as.character(subs_vec(e, x, 1:3)), "Matrix([[2], [8], [18]])")
-  expect_equal(as.character(subs_vec(e, x, x^2)), "Matrix([[2*x1^4], [2*x2^4], [2*x3^4]])")
+  expect_equal(as.character(subs(e, x, 1:3)), "Matrix([[2], [8], [18]])")
+  expect_equal(as.character(subs(e, x, x^2)), "Matrix([[2*x1^4], [2*x2^4], [2*x3^4]])")
 })
 
 
