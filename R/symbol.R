@@ -328,6 +328,10 @@ c.caracas_symbol <- function(...) {
 #'    subs_single(e, "x", "2")
 #'    y <- as_sym("2")
 #'    subs_single(e, "x", y)
+#'    b1 <- symbol("a"); str(b1)
+#'    b2 <- b1 + 1; str(b2)
+#'    b3 <- subs(b2, "a", "k");
+#'    str(b3)
 #' }
 #' 
 #' @seealso [subs], [subs_lst()]
@@ -451,7 +455,7 @@ subs <- function(s, x, v) {
 #'      H_sol
 #' }
 #' 
-#' @seealso [subs()], [subs_vec()]
+#' @seealso [subs()]
 #' 
 #' @concept caracas_symbol
 #' 

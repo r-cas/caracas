@@ -73,6 +73,10 @@ as_py_string <- function(x) {
 as_sym <- function(x, 
                    declare_symbols = TRUE) {
   ensure_sympy()
+
+  if (is_sym(x)){ ## FIXME: IS OK?
+      return(x)
+  }
   
   if (is.expression(x)) {
     x <- as.character(x)

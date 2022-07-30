@@ -1,6 +1,30 @@
+#' Create list of factors as in a product
+#'
+#' @param ... factors
+#' 
+#' @export
+as_factor_list <- function(...){
+    lst <- list(...)
+    out <- lapply(lst, as_sym)  
+    class(out) <- "factor_list"
+    out
+}
 
+#' Print factor list
+#'
+#' @param x factor list
+#' @export
+tex.factor_list <- function(x){
+    a<- lapply(x, tex)  |> unlist()
+    paste(a, collapse="  ")
+}
 
-
+#' Is object a caracas symbol
+#' @param x factor list
+#' @export
+is_sym <- function(x){
+    inherits(x, "caracas_symbol")
+}
 
 
 
