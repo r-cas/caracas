@@ -201,7 +201,9 @@ matrify <- function(x) {
   return(y)
 }
 
-# Creates symbol vector from list of caracas symbols
+#' Creates symbol vector from list of caracas symbols
+#' @param x Symbol to be coerced to vector
+#' @export
 vectorfy <- function(x) {
   z <- paste0(unlist(lapply(x, as.character)), collapse = ", ")
   z <- paste0("[", z, "]")
@@ -296,6 +298,9 @@ listify <- function(x) {
   zz <- lapply(zz, as_sym, declare_symbols = FALSE)
   return(zz)
 }
+
+
+## concatenate
 
 #' @export
 c.caracas_symbol <- function(...) {
