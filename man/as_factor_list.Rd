@@ -12,3 +12,18 @@ as_factor_list(...)
 \description{
 Create list of factors as in a product
 }
+\examples{
+if (has_sympy()) {
+ d <- 2
+ m <- matrix_sym(d, d)
+ mi <- inv(m)
+ det_m <- det(m)
+ fl <- as_factor_list(1/det_m, det_m * mi)
+ tex(fl)
+ m <- matrix(1:4, nrow=2)
+ mi <- solve(m)
+ det_m <- det(m)
+ fl <- as_factor_list(paste0("1/", det_m), det_m * mi)
+ tex(fl)
+}
+}
