@@ -1,6 +1,3 @@
-## FIXME: Need Jacobian
-##sympy_func(rss, "Jacobian", mu)
-
 #' Compute Jacobian
 #'
 #' @param expr 'caracas expression'.
@@ -14,6 +11,8 @@
 #'  y2 <- x1^2 + x3
 #'  y <- c(y1, y2)
 #'  jacobian(y, x)
+#'  u <- 2 + 4*x1^2
+#'  jacobian(u, x1)
 #' }
 #' @export
 jacobian <- function(expr, vars){

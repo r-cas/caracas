@@ -5,6 +5,9 @@
 * New function: `colspan()` (Column space (range) of a symbolic matrix)
 * New function: `get_basis()` Get basis for symbolic matrix / vector.
 * New function: `all_vars` Get all symbols in caracas symbol.
+* `matrify()` now works on atomic elements.
+* New function: `def_sym_vec()` defines symbol for each element in a character vector.
+* New function: `jacobian()` function added. 
 
 # caracas 1.1.2
 

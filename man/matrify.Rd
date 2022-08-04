@@ -17,6 +17,7 @@ if (has_sympy()) {
   x <- symbol("x")
   y <- symbol("y")
   f <- 3*x^2 + x*y^2
+  matrify(f)
   h <- der2(f, list(x, y))
   h
   dim(h)

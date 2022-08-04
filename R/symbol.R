@@ -184,6 +184,7 @@ try_doit <- function(x) {
 #'   x <- symbol("x")
 #'   y <- symbol("y")
 #'   f <- 3*x^2 + x*y^2
+#'   matrify(f)
 #'   h <- der2(f, list(x, y))
 #'   h
 #'   dim(h)
@@ -196,8 +197,14 @@ try_doit <- function(x) {
 #' 
 #' @export
 matrify <- function(x) {
-  z <- paste0("Matrix(", paste0(x, collapse = ", "), ")")
-  y <- eval_to_symbol(z)
+    stopifnot_symbol(x)
+
+    if (!grepl("^\\[", paste0(x))) {## atomic
+        x <- c(x) ## FIXME SH: The way to do it?
+    }
+
+    z <- paste0("Matrix(", paste0(x, collapse = ", "), ")")
+    y <- eval_to_symbol(z)
   return(y)
 }
 

@@ -22,5 +22,7 @@ if (has_sympy()) {
  y2 <- x1^2 + x3
  y <- c(y1, y2)
  jacobian(y, x)
+ u <- 2 + 4*x1^2
+ jacobian(u, x1)
 }
 }

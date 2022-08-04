@@ -56,7 +56,7 @@ get_caracas_out <- function(x,
     }
   }
   
-  out <- gsub("[ \n]+$", "", out)
+  out <- gsub("[ \n]+$", "", out) 
   
   if (caracas_prefix) {
     prefix <- '[caracas]: '
