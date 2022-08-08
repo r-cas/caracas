@@ -47,11 +47,13 @@ construct_symbol_from_pyobj <- function(pyobj) {
 eval_to_symbol <- function(x) {
   ensure_sympy()
   
-  # https://docs.sympy.org/latest/gotchas.html#python-numbers-vs-sympy-numbers
+  # --------------------------------------------
   # 1/3 should be caught
+  # --------------------------------------------
+  # https://docs.sympy.org/latest/gotchas.html#python-numbers-vs-sympy-numbers
   # y1/3 should not be caught
   if (grepl("[0-9-.]+/[0-9-.]+", x, perl = TRUE)) {
-    # Not there is a fraction that looks like '1/3'; 
+    # Now there is a fraction that looks like '1/3'; 
     # we need to be sure that there are no characters in front of the 
     # number in the numerator
     
@@ -61,6 +63,17 @@ eval_to_symbol <- function(x) {
       # S(): Sympify
       x <- gsub("([0-9-.]+)/([0-9-.]+)", "S(\\1)/S(\\2)", x, perl = TRUE)
     }
+  }
+  
+  # --------------------------------------------
+  # (1)/(3) should be caught  
+  # --------------------------------------------
+  # https://docs.sympy.org/latest/gotchas.html#python-numbers-vs-sympy-numbers
+  if (grepl("\\([0-9-.]+\\) */ *\\([0-9-.]+\\)", x, perl = TRUE)) {
+    # Now there is a fraction that looks like '(1)/(3)'; 
+    # S(): Sympify
+    # This gives S(1)/S(2), okay with no extra parentheses 
+    x <- gsub("\\(([0-9-.]+)\\) */ *\\(([0-9-.]+)\\)", "S(\\1)/S(\\2)", x, perl = TRUE)
   }
   
   x <- r_strings_to_python(x)

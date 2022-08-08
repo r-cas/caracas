@@ -78,6 +78,15 @@ test_that("fraction", {
   expect_equal(as.character(x + y), "120140/7")
 })
 
+test_that("fraction not double", {
+  skip_if_no_sympy()
+  
+  expect_equal(as.character(as_sym("1/2")), "1/2")
+  
+  eval_to_symbol("(1) / (2)")
+  expect_equal(as.character(eval_to_symbol("(1) / (2)")), "1/2")
+  expect_equal(as.character(as_sym("1")/as_sym("2")), "1/2")
+})
 
 test_that("fraction_parts()", {
   skip_if_no_sympy()
