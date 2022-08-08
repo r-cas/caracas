@@ -212,8 +212,8 @@ try_doit <- function(x) {
 matrify <- function(x) {
     stopifnot_symbol(x)
 
-    if (!grepl("^\\[", paste0(x))) {## atomic
-        x <- c(x) ## FIXME SH: The way to do it?
+    if (!grepl("^\\[", as.character(x))) {
+        x <- c(x) 
     }
 
     z <- paste0("Matrix(", paste0(x, collapse = ", "), ")")

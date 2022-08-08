@@ -74,7 +74,7 @@ as_sym <- function(x,
                    declare_symbols = TRUE) {
   ensure_sympy()
 
-  if (is_sym(x)){ ## FIXME: IS OK?
+  if (is_sym(x)){ 
       return(x)
   }
   
@@ -111,4 +111,13 @@ as_sym <- function(x,
   y <- eval_to_symbol(cmd)
   
   return(y)
+}
+
+
+
+#' Is object a caracas symbol
+#' @param x factor list
+#' @export
+is_sym <- function(x){
+    inherits(x, "caracas_symbol")
 }

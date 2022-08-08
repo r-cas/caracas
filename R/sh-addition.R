@@ -38,7 +38,7 @@ jacobian <- function(expr, vars){
 #'   as_sym(u)
 #'  }
 #' @export  
-def_sym_vec <- function(x, env=parent.frame()){
+def_sym_vec <- function(x, env=parent.frame()){  ## FIXME: OK; maybe different name???
     for (i in seq_along(x)){
         assign(x[i], as_sym(x[i]), envir = env)
     }
@@ -60,7 +60,7 @@ def_sym_vec <- function(x, env=parent.frame()){
 #'  m <- matrix(1:4, nrow=2)
 #'  mi <- solve(m)
 #'  det_m <- det(m)
-#'  fl <- as_factor_list(paste0("1/", det_m), det_m * mi)
+#'  fl <- as_factor_list(1 / as_sym(det_m), det_m * mi)
 #'  tex(fl)
 #' }
 #' @export
@@ -78,13 +78,6 @@ as_factor_list <- function(...){
 tex.factor_list <- function(x){
     a<- lapply(x, tex)  |> unlist()
     paste(a, collapse="  ")
-}
-
-#' Is object a caracas symbol
-#' @param x factor list
-#' @export
-is_sym <- function(x){
-    inherits(x, "caracas_symbol")
 }
 
 
