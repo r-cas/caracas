@@ -7,6 +7,8 @@
 \alias{rowspace}
 \alias{singular_values}
 \alias{inv}
+\alias{invcf}
+\alias{inv2fl}
 \alias{eigenval}
 \alias{eigenvec}
 \alias{GramSchmidt}
@@ -25,6 +27,10 @@ rowspace(x)
 singular_values(x)
 
 inv(x)
+
+invcf(x)
+
+inv2fl(x)
 
 eigenval(x)
 
@@ -60,6 +66,8 @@ if (has_sympy()) {
   eigenval(A)
   eigenvec(A)
   inv(A)
+  invcf(A)
+  inv2fl(A)
   det(A)
   
   

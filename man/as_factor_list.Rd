@@ -23,7 +23,7 @@ if (has_sympy()) {
  m <- matrix(1:4, nrow=2)
  mi <- solve(m)
  det_m <- det(m)
- fl <- as_factor_list(paste0("1/", det_m), det_m * mi)
+ fl <- as_factor_list(1 / as_sym(det_m), det_m * mi)
  tex(fl)
 }
 }
