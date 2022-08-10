@@ -185,6 +185,8 @@ finalise_rref <- function(vals) {
 #'   eigenval(A)
 #'   eigenvec(A)
 #'   inv(A)
+#'   invcf(A)
+#'   inv2fl(A)
 #'   det(A)
 #'   
 #'   
@@ -241,6 +243,20 @@ inv <- function(x) {
 
 #' @rdname linalg
 #' @export
+invcf <- function(x){
+  return(t(sympy_func(x, "cofactor_matrix")) / det(x))
+}
+
+#' @rdname linalg
+#' @export
+inv2fl <- function(x){
+  xi <- invcf(x)
+  d <- denominator(xi[1,1])
+  as_factor_list(1/d, d * xi)
+}
+
+#' @rdname linalg
+#' @export
 eigenval <- function(x) {
     return(do_la(x, "eigenvals"))
 }
@@ -276,7 +292,6 @@ rref <- function(x) {
 QRdecomposition <- function(x) {
     return(do_la(x, "QR"))
 }
-
 
 
 #' @rdname linalg

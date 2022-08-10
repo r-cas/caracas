@@ -528,6 +528,21 @@ fraction_parts <- function(x) {
 }
 
 
+#' @export
+numerator <- function(x) {
+    return(fraction_parts(x)$numerator)
+}
+
+#' @export
+denominator <- function(x) {
+    return(fraction_parts(x)$denominator)
+}
+
+
+
+
+
+
 
 #' Call a SymPy function directly on x
 #'
