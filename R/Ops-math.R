@@ -9,27 +9,88 @@ get_pyobj <- function(e, method) {
 }
 
 
-
+# x <- v
+# power <- y
 matrix_ele_power <- function(x, power = 1){
   ensure_sympy()
+
+  stopifnot_symbol(x)
   
   if (!symbol_is_matrix(x)) {
-    stop("'x' must be sympy matrix\n")
+    x <- matrify(x)
   }
   
-  power <- as.character(power)
-  
-  if (grepl("^-?[0-9]+$", power)) {
-    # S(): Sympify
-    # Means that this will be e.g. (S(1))/(1) = 1 instead of 1/1 = 1.0 (numeric)
-    power <- paste0("S(", power, ")")
+  # Ensure same dimensions
+  if (symbol_is_matrix(power)) {
+    # Repeat 'x' or 'power'?
+    # Either both are same size, or one must be re-used:
+    
+    # 1) Same size:
+    # 
+    if (isTRUE(all.equal(dim(x), dim(power)))) {
+      # No-op
+    } else if (prod(dim(power)) == 1L) {
+      # Power really atomic -> make same size as x
+
+      power <- as_character_matrix(power)[1L, 1L]
+      p2 <- x # For right dimensions
+      for (i in seq_len(nrow(x))) {
+        for (j in seq_len(ncol(x))) {
+          p2[i, j] <- power
+        }
+      }
+      power <- as_sym(p2)
+      
+    } else if (prod(dim(x)) == 1L) {
+      # x really atomic -> make same size as power
+
+      x <- as_character_matrix(x)[1L, 1L]
+      x2 <- power # For right dimensions
+      for (i in seq_len(nrow(power))) {
+        for (j in seq_len(ncol(power))) {
+          x2[i, j] <- x
+        }
+      }
+      x <- as_sym(x2)
+    } else {
+      stop("Non-conformable dimensions")
+    }
+    
+    
+  } else {
+    
+    if (!grepl("^S\\(.+\\)$", power)) {
+      # S(): Sympify
+      # Means that this will be e.g. (S(1))/(1) = 1 instead of 1/1 = 1.0 (numeric)
+      power <- paste0("S(", power, ")")
+    }
+    
+    # power not matrix, so x is (one must be)
+    p2 <- as_character_matrix(x)
+    for (i in seq_len(nrow(x))) {
+      for (j in seq_len(ncol(x))) {
+        p2[i, j] <- as.character(power)
+      }
+    }
+    power <- as_sym(p2)
   }
   
-  rx <- apply(as_character_matrix(x), 2, function(xx) {
-    paste0("(", xx, ")**(", power, ")")
-  })
+  stopifnot(isTRUE(all.equal(dim(x), dim(power))))
   
-  return(as_sym(rx))
+
+  out <- as_character_matrix(x)
+  for (i in seq_len(nrow(x))) {
+    for (j in seq_len(ncol(x))) {
+      out[i, j] <- paste0("(", x[i, j], ")**(", power[i, j], ")")
+    }
+  }
+  return(as_sym(out))
+  
+  # rx <- apply(as_character_matrix(x), 2, function(xx) {
+  #   paste0("(", xx, ")**(", power, ")")
+  # })
+  
+  #return(as_sym(rx))
 }
 
 mat_mult_elementwise <- function(o1, o2) {
