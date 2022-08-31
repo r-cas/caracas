@@ -15,7 +15,7 @@ Get free symbol in expression
 \examples{
 if (has_sympy()) {
   def_sym(a, b)
-  x <- (a-b)^4
+  x <- (a - b)^4
   free_symbols(x)
 }
  

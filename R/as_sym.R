@@ -98,18 +98,18 @@ as_sym <- function(x,
       reticulate::py_run_string(cmd, convert = FALSE)
     }
   }
-  
+
   # Defining a matrix by hand with '[[1], [2]]' syntax
   if (is.character(x) && length(x) == 1L && grepl("^\\[\\[", x)) {
-    x <- paste0("Matrix(", r_strings_to_python(x), ")")
-    y <- eval_to_symbol(x)
-    return(y)    
+      cat("Create matrix\n")
+      x <- paste0("Matrix(", r_strings_to_python(x), ")")
+      y <- eval_to_symbol(x)
+      return(y)    
   } 
   
   # else 
   cmd <- as_py_string(x)
   y <- eval_to_symbol(cmd)
-  
   return(y)
 }
 

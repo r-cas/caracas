@@ -34,7 +34,19 @@ solve_lin <- function(A, b) {
 
 
 rootsolve <- function(lhs, vars) {
-  if (!is.null(dim(lhs))) {
+
+    ## USED only in solve.R
+    is_atomic <- function(x) {
+        xstr <- as.character(x)
+
+        PATTERN_PYHTON_VARIABLE <- "[a-zA-Z]+[a-zA-Z0-9_]*"
+        
+        pattern <- paste0("^", PATTERN_PYHTON_VARIABLE, "$")
+        
+        return(grepl(pattern, x))
+    }
+
+    if (!is.null(dim(lhs))) {
     if (nrow(lhs) != 1L && ncol(lhs) == 1L) {
       lhs <- t(lhs)
     }
