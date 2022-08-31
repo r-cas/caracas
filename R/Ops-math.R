@@ -131,7 +131,7 @@ mat_mult_elementwise <- function(o1, o2) {
 #' @export
 Ops.caracas_symbol = function(e1, e2) {
   ensure_sympy()
-
+  
   if (!(.Generic %in% c("+", "-", "*", "/", "^"))) {
     stop("Function '", .Generic, "' not yet implemented for caracas_symbol")
   }
@@ -218,7 +218,7 @@ Ops.caracas_symbol = function(e1, e2) {
     } else if (.Generic == "/") {
       e2 <- reciprocal_matrix(e2)
       o2 <- e2$pyobj
-      
+
       z <- mat_mult_elementwise(o1, o2)
       return(z)
     } else if (.Generic == "^") {

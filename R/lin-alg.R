@@ -227,6 +227,8 @@ reciprocal_matrix <- function(x, numerator = 1){
     paste0("(", numerator, ")", "/(", xx, ")")
   })
   
+  dim(rx) <- dim(x)
+  
   return(as_sym(rx))
 }
 

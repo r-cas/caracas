@@ -2,7 +2,7 @@
 % Please edit documentation in R/def_sym.R
 \name{def_sym}
 \alias{def_sym}
-\title{Define caracas symbols in global environment}
+\title{Define (invisibly) caracas symbols in global environment}
 \usage{
 def_sym(..., charvec = NULL, warn = FALSE, env = parent.frame())
 }
@@ -19,7 +19,7 @@ def_sym(..., charvec = NULL, warn = FALSE, env = parent.frame())
 Names of declared variables (invisibly)
 }
 \description{
-Define caracas symbols in global environment
+Define (invisibly) caracas symbols in global environment
 }
 \examples{
 if (has_sympy()) {

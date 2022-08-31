@@ -59,3 +59,14 @@ test_that("matrix_ele_power", {
   expect_equal(as.character(beta^x), "Matrix([[beta^x_1], [beta^x_2]])")
 })
 
+
+test_that("matrix ops", {
+  skip_if_no_sympy()
+  
+  u <- matrix_sym(1,1)
+  
+  expect_equal(as.character(u^-1), "Matrix([[1/v11]])")
+  expect_equal(as.character(1/u), "Matrix([[1/v11]])")
+})
+
+

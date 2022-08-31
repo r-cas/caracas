@@ -2,7 +2,7 @@
 % Please edit documentation in R/as_sym.R
 \name{as_sym}
 \alias{as_sym}
-\title{Convert object to symbol}
+\title{Convert R object to caracas symbol}
 \usage{
 as_sym(x, declare_symbols = TRUE)
 }
@@ -30,7 +30,7 @@ if (has_sympy()) {
   A
   B <- as_sym(A)
   B
-  2*B
+  2 * B
   dim(B)
   sqrt(B)
   D <- as_sym("[[1, 4, 5], [-5, 8, 9]]")
