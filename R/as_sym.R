@@ -38,7 +38,7 @@ as_py_string <- function(x) {
   return(hlp_to_py_vec(x))
 }
 
-#' Convert object to symbol
+#' Convert R object to caracas symbol
 #' 
 #' Variables are detected as a
 #' character followed by a number of either: 
@@ -60,7 +60,7 @@ as_py_string <- function(x) {
 #'   A
 #'   B <- as_sym(A)
 #'   B
-#'   2*B
+#'   2 * B
 #'   dim(B)
 #'   sqrt(B)
 #'   D <- as_sym("[[1, 4, 5], [-5, 8, 9]]")

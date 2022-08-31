@@ -1,4 +1,4 @@
-#' Define caracas symbols in global environment
+#' Define (invisibly) caracas symbols in global environment
 #' 
 #' @seealso [symbol()], [as_sym()]
 #' 
