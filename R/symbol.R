@@ -135,13 +135,7 @@ symbol <- function(x, ...) {
   return(y)
 }
 
-is_atomic <- function(x) {
-  xstr <- as.character(x)
-  
-  pattern <- paste0("^", PATTERN_PYHTON_VARIABLE, "$")
-  
-  return(grepl(pattern, x))
-}
+
 
 #' Perform calculations setup previously
 #'
@@ -188,48 +182,7 @@ try_doit <- function(x) {
 
 
 
-#' Creates matrix from array symbol
-#' 
-#' @param x Array symbol to convert to matrix
-#' 
-#' @examples 
-#' if (has_sympy()) {
-#'   x <- symbol("x")
-#'   y <- symbol("y")
-#'   f <- 3*x^2 + x*y^2
-#'   matrify(f)
-#'   h <- der2(f, list(x, y))
-#'   h
-#'   dim(h)
-#'   H <- matrify(h)
-#'   H
-#'   dim(H)
-#' }
-#' 
-#' @concept caracas_symbol
-#' 
-#' @export
-matrify <- function(x) {
-    stopifnot_symbol(x)
 
-    if (!grepl("^\\[", as.character(x))) {
-        x <- c(x) 
-    }
-
-    z <- paste0("Matrix(", paste0(x, collapse = ", "), ")")
-    y <- eval_to_symbol(z)
-  return(y)
-}
-
-#' Creates symbol vector from list of caracas symbols
-#' @param x Symbol to be coerced to vector
-#' @export
-vectorfy <- function(x) {
-  z <- paste0(unlist(lapply(x, as.character)), collapse = ", ")
-  z <- paste0("[", z, "]")
-  y <- eval_to_symbol(z)
-  return(y)
-}
 
 
 #' Remove inner-most dimension
@@ -295,29 +248,6 @@ tuplify <- function(x) {
   return(y)
 }
 
-#' Convert object to list of elements
-#' 
-#' @param x Object
-#' 
-#' @examples 
-#' if (has_sympy()) {
-#'   x <- as_sym("Matrix([[b1*x1/(b2 + x1)], [b1*x2/(b2 + x2)], [b1*x3/(b2 + x3)]])")
-#'   listify(x)
-#'   
-#'   xT <- t(x)
-#'   listify(xT)
-#' }
-#' 
-#' @concept caracas_symbol
-#' 
-#' @export
-listify <- function(x) {
-  zz <- convert_to_r_mat(x)
-  dim(zz) <- NULL
-  zz <- as.list(zz)
-  zz <- lapply(zz, as_sym, declare_symbols = FALSE)
-  return(zz)
-}
 
 
 ## concatenate
@@ -615,7 +545,7 @@ sympy_func <- function(x, fun, ...) {
 #' @examples 
 #' if (has_sympy()) {
 #'   def_sym(a, b)
-#'   x <- (a-b)^4
+#'   x <- (a - b)^4
 #'   free_symbols(x)
 #' }
 #'  
@@ -646,3 +576,81 @@ all_vars <- function(x){
   all.vars(as_expr(x))
 }
 
+## COERCION and is_...
+
+
+is_atomic <- function(x) {
+  xstr <- as.character(x)
+  
+  pattern <- paste0("^", PATTERN_PYHTON_VARIABLE, "$")
+  
+  return(grepl(pattern, x))
+}
+
+
+#' Creates matrix from array symbol
+#' 
+#' @param x Array symbol to convert to matrix
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   x <- symbol("x")
+#'   y <- symbol("y")
+#'   f <- 3*x^2 + x*y^2
+#'   matrify(f)
+#'   h <- der2(f, list(x, y))
+#'   h
+#'   dim(h)
+#'   H <- matrify(h)
+#'   H
+#'   dim(H)
+#' }
+#' 
+#' @concept caracas_symbol
+#' 
+#' @export
+matrify <- function(x) {
+    stopifnot_symbol(x)
+
+    if (!grepl("^\\[", as.character(x))) {
+        x <- c(x) 
+    }
+
+    z <- paste0("Matrix(", paste0(x, collapse = ", "), ")")
+    y <- eval_to_symbol(z)
+  return(y)
+}
+
+#' Creates symbol vector from list of caracas symbols
+#' @param x Symbol to be coerced to vector
+#' @export
+vectorfy <- function(x) {
+  z <- paste0(unlist(lapply(x, as.character)), collapse = ", ")
+  z <- paste0("[", z, "]")
+  y <- eval_to_symbol(z)
+  return(y)
+}
+
+#' Convert object to list of elements
+#' 
+#' @param x Object
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   x <- as_sym("Matrix([[b1*x1/(b2 + x1)], [b1*x2/(b2 + x2)], [b1*x3/(b2 + x3)]])")
+#'   listify(x)
+#'   
+#'   xT <- t(x)
+#'   listify(xT)
+#' }
+#' 
+#' @concept caracas_symbol
+#' 
+#' @export
+listify <- function(x) {
+  zz <- convert_to_r_mat(x)
+  dim(zz) <- NULL
+  zz <- as.list(zz)
+  zz <- lapply(zz, as_sym, declare_symbols = FALSE)
+  return(zz)
+}
