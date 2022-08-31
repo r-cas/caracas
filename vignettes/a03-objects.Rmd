@@ -1,0 +1,205 @@
+---
+title: "03 - Objects in 'caracas'"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{03 - Objects in 'caracas'}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, message=FALSE}
+library(caracas)
+```
+
+```{r, include = FALSE}
+inline_code <- function(x) {
+  x
+}
+
+if (!has_sympy()) {
+  # SymPy not available, so the chunks shall not be evaluated
+  knitr::opts_chunk$set(eval = FALSE)
+  
+  inline_code <- function(x) {
+    deparse(substitute(x))
+  }
+}
+```
+
+
+## Variables, names, symbols etc.
+
+We can think of a variable as a piece of memory in a computer. A variable typically also has a name (also called a symbol). That name/symbol is used to refer to the variable; that is, the name / symbol is a handle on the variable. It is like the difference between you and your name. 
+
+There are different ways of creating a variable in `caracas`. One is as
+
+```{r}
+symbol("a")
+```
+
+which creates a SymPy variable `a` but provides no handle on it (no R-symbol). We can get an R-handle on a SymPy variable with
+```{r}
+b <- symbol("a")
+a <- symbol("b")
+```
+where we do something very confusing: Assign the R-name `a` to the SymPy variable `b` and vice versa. We can compute on variable `b` in SymPy by manipulating the symbol `a` in R, e.g.
+```{r}
+a + 1
+a <- a + 1
+a / b
+```
+
+A text representation of a symbol can be found as:
+```{r}
+a %>% print.default()
+a %>% as.character()
+```
+
+Usually, the best practice is to assign R symbols to SymPy variables of the same name. To avoid confusion, symbol names and Python variable names will always coincide. 
+
+## Creating symbols
+
+In addition to `symbol()` illustrated above, multiple R-symbols / Python-variables can be defined using `def_sym` and `def_sym_vec`
+```{r}
+def_sym(u, v)
+def_sym("w", "x")
+def_sym_vec(c("y", "z"))
+```
+With this, R-symbols `u`, `v`, `w`, `x` exist and each are connected to Python variables with the same name
+```{r}
+u; v; w; x; y; z
+```
+
+A third way for creating a symbol with `as_sym`.
+First notice:
+```{r}
+as_sym("l1")
+# same as symbol("l1")
+l2 <- as_sym("l2"); l2
+# same as def_sym("l2")
+```
+
+More interestingly
+```{r}
+m_ <- paste0("m", 1:4)
+m <- as_sym(m_)
+m
+
+B_ <- matrix(c("x", 2, 0, "2*x"), 2, 2)
+B <- as_sym(B_)
+```
+
+
+## Classes
+
+Above, `r` is a $4 \times 1$ matrix, while e.g. `u` is an atom:
+```{r}
+m %>% symbol_class()
+u %>% symbol_class()
+```
+
+We can coerce between different "classes" (we quote the word because it is not a class system as e.g. those known from R)
+A text representation of the variables are:
+```{r}
+m %>% as.character()
+u %>% as.character()
+```
+
+While not often needed that are also lists and vectors in Python. In `caracas` they are created by coercion:
+
+```{r}
+u %>% to_list()
+u %>% to_vector()
+m %>% to_list()
+m %>% to_vector()
+```
+
+The corresponding text representations are:
+```{r}
+u %>% to_list() %>% as.character()
+u %>% to_vector() %>% as.character()
+m %>% to_list() %>% as.character()
+m %>% to_vector() %>% as.character()
+```
+
+Likewise:
+```{r}
+m %>% to_matrix()
+u %>% to_matrix()
+```
+
+## Indexing
+
+Let 
+```{r}
+v <- m %>% to_vector()
+l <- m %>% to_list()
+V <- matrix_sym(2, 2)
+```
+
+```{r}
+
+```
+
+
+
+
+## Quick start
+
+```{r}
+def_sym('x', 'y')
+eq <- 2*x^2 - x - y
+eq
+as.character(eq)
+as_expr(eq)
+tex(eq)
+```
+
+$$`r inline_code(tex(eq))`$$
+
+```{r}
+sol <- solve_sys(eq, x)
+sol
+# Access solutions
+sol[[1]]$x
+sol[[2]]$x
+
+dx <- der(eq, x)
+dx
+dx %>% symbol_class()
+
+dxy <- der(eq, c(x, y))
+dxy
+dxy %>% symbol_class()
+
+subs(eq, x, y)
+```
+
+## Linear algebra
+
+```{r}
+B_ <- matrix(c("x", 2, 0, "2*x"), 2, 2)
+B <- as_sym(B_)
+B
+Binv <- inv(B) # or solve_lin(B)
+Binv
+tex(Binv)
+det(B)
+Binv * det(B)
+
+```
+
+$$`r inline_code(tex(Binv))`$$
+
+```{r}
+eigenval(Binv)
+eigenvec(Binv)
+```
+
