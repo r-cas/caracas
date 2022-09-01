@@ -101,7 +101,7 @@ as_sym <- function(x,
 
   # Defining a matrix by hand with '[[1], [2]]' syntax
   if (is.character(x) && length(x) == 1L && grepl("^\\[\\[", x)) {
-      cat("Create matrix\n")
+      ## cat("Create matrix\n")
       x <- paste0("Matrix(", r_strings_to_python(x), ")")
       y <- eval_to_symbol(x)
       return(y)    

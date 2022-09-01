@@ -98,14 +98,15 @@ to_matrix <- function(x){
   switch(symbol_class(x),
          "atomic"={
            o <- paste0("Matrix([", z, "])")
-           return(caracas::eval_to_symbol(o))
+           return(eval_to_symbol(o))
          },
          "vector"={
            o <- paste0("Matrix(", z, ")")
-           return(caracas::eval_to_symbol(o))
+           return(eval_to_symbol(o))
          },
          "list"={
-           stop("A caracas list can not be coerced to matrix\n")
+             o <- paste0("Matrix(", paste0(x, collapse = ", "), ")")
+             return(eval_to_symbol(o))
          },
          "matrix"={
            return(x)
