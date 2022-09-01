@@ -26,3 +26,6 @@ if (has_sympy()) {
  jacobian(u, x1)
 }
 }
+\seealso{
+\code{\link[=score]{score()}}, \code{\link[=hessian]{hessian()}} \code{\link[=der]{der()}}
+}
