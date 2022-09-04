@@ -1,11 +1,11 @@
 #' Define (invisibly) caracas symbols in global environment
-#' 
+#' @name def_sym
 #' @seealso [symbol()], [as_sym()]
 #' 
 #' @param ... Names for new symbols, also supports non-standard evaluation
 #' @param charvec Take each element in this character vector and define as caracas symbols
 #' @param warn Warn if existing variable names are overwritten
-#' @param env Environment to assign variable in
+#' @param env Environment to assign variable in.
 #' 
 #' @return Names of declared variables (invisibly)
 #' 
@@ -25,6 +25,7 @@
 #' @concept caracas_symbol
 #' 
 #' @export
+#' @rdname def_sym
 def_sym <- function(..., 
                     charvec = NULL, 
                     warn = FALSE,
@@ -74,4 +75,27 @@ def_sym <- function(...,
   }
   
   return(invisible(nms))
+}
+
+#' Define symbol for components in vector
+#'
+#' @param x Character vector.
+#' @param env The environment in which the assignment is made.
+#' @examples
+#' if (has_sympy()) {
+#'   def_sym(z1, z2, z3)
+#'   u <- paste0("u", seq_len(3))
+#'   ## Creates symbols u1, u2, u3 and binds to names u1, u2, u3 in R.
+#'   def_sym_vec(u) 
+#'   ## Same as (but easier than)
+#'   def_sym(u1, u2, u3)
+#'   ## Notice: this creates matrix [u1, u2, u3]
+#'   as_sym(u)
+#'  }
+#' @export  
+#' @rdname def_sym
+def_sym_vec <- function(x, env=parent.frame()){  ## FIXME: OK; maybe different name???
+    for (i in seq_along(x)){
+        assign(x[i], as_sym(x[i]), envir = env)
+    }
 }

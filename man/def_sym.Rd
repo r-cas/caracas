@@ -2,9 +2,12 @@
 % Please edit documentation in R/def_sym.R
 \name{def_sym}
 \alias{def_sym}
+\alias{def_sym_vec}
 \title{Define (invisibly) caracas symbols in global environment}
 \usage{
 def_sym(..., charvec = NULL, warn = FALSE, env = parent.frame())
+
+def_sym_vec(x, env = parent.frame())
 }
 \arguments{
 \item{...}{Names for new symbols, also supports non-standard evaluation}
@@ -13,13 +16,17 @@ def_sym(..., charvec = NULL, warn = FALSE, env = parent.frame())
 
 \item{warn}{Warn if existing variable names are overwritten}
 
-\item{env}{Environment to assign variable in}
+\item{env}{The environment in which the assignment is made.}
+
+\item{x}{Character vector.}
 }
 \value{
 Names of declared variables (invisibly)
 }
 \description{
 Define (invisibly) caracas symbols in global environment
+
+Define symbol for components in vector
 }
 \examples{
 if (has_sympy()) {
@@ -34,6 +41,16 @@ if (has_sympy()) {
   ls()
 }
 
+if (has_sympy()) {
+  def_sym(z1, z2, z3)
+  u <- paste0("u", seq_len(3))
+  ## Creates symbols u1, u2, u3 and binds to names u1, u2, u3 in R.
+  def_sym_vec(u) 
+  ## Same as (but easier than)
+  def_sym(u1, u2, u3)
+  ## Notice: this creates matrix [u1, u2, u3]
+  as_sym(u)
+ }
 }
 \seealso{
 \code{\link[=symbol]{symbol()}}, \code{\link[=as_sym]{as_sym()}}

@@ -2,9 +2,15 @@
 % Please edit documentation in R/symbol.R
 \name{fraction_parts}
 \alias{fraction_parts}
+\alias{numerator}
+\alias{denominator}
 \title{Get numerator and denominator of a fraction}
 \usage{
 fraction_parts(x)
+
+numerator(x)
+
+denominator(x)
 }
 \arguments{
 \item{x}{Fraction}

@@ -6,6 +6,7 @@
 #' @name score_hessian
 #' @param expr 'caracas expression'.
 #' @param vars variables to take derivative with respect to.
+#' @param simplify Try to simplify result using `simplify()`; may be time consuming.
 #' @seealso [jacobian()], [der()]
 #' @examples
 #' 
@@ -68,27 +69,6 @@ jacobian <- function(expr, vars){
     return(out)
 }
 
-#' Define symbol for components in vector
-#'
-#' @param x Character vector.
-#' @param x The environment in which the assignment is made.
-#' @examples
-#' if (has_sympy()) {
-#'   def_sym(z1, z2, z3)
-#'   u <- paste0("u", seq_len(3))
-#'   ## Creates symbols u1, u2, u3 and binds to names u1, u2, u3 in R.
-#'   def_sym_vec(u) 
-#'   ## Same as (but easier than)
-#'   def_sym(u1, u2, u3)
-#'   ## Notice: this creates matrix [u1, u2, u3]
-#'   as_sym(u)
-#'  }
-#' @export  
-def_sym_vec <- function(x, env=parent.frame()){  ## FIXME: OK; maybe different name???
-    for (i in seq_along(x)){
-        assign(x[i], as_sym(x[i]), envir = env)
-    }
-}
 
 
 #' Create list of factors as in a product

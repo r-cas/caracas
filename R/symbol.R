@@ -408,7 +408,8 @@ subs_lst <- function(s, x) {
 #' Get numerator and denominator of a fraction
 #' 
 #' @param x Fraction
-#' 
+#'
+#' @name fraction_parts
 #' @examples 
 #' if (has_sympy()) {
 #'      x <- as_sym("a/b")
@@ -437,11 +438,13 @@ fraction_parts <- function(x) {
 
 
 #' @export
+#' @rdname fraction_parts
 numerator <- function(x) {
     return(fraction_parts(x)$numerator)
 }
 
 #' @export
+#' @rdname fraction_parts
 denominator <- function(x) {
     return(fraction_parts(x)$denominator)
 }

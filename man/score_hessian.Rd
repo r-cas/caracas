@@ -14,6 +14,8 @@ hessian(expr, vars, simplify = TRUE)
 \item{expr}{'caracas expression'.}
 
 \item{vars}{variables to take derivative with respect to.}
+
+\item{simplify}{Try to simplify result using \code{simplify()}; may be time consuming.}
 }
 \description{
 Compute column vector of first derivatives and matrix of second
