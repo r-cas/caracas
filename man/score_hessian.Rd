@@ -20,6 +20,7 @@ Compute column vector of first derivatives and matrix of second
 derivatives of univariate function.
 }
 \examples{
+
 if (has_sympy()) {
 def_sym(b0, b1, x, x0)
 f <- b0 / (1 + exp(b1*(x-x0)))

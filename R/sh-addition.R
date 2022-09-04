@@ -8,13 +8,14 @@
 #' @param vars variables to take derivative with respect to.
 #' @seealso [jacobian()], [der()]
 #' @examples
-#' if (has_sympy()) {
-#' def_sym(b0, b1, x, x0)
-#' f <- b0 / (1 + exp(b1*(x-x0)))
-#' S <- score(f, c(b0, b1))
-#' H <- hessian(f, c(b0, b1))
-#' }
 #' 
+##' if (has_sympy()) {
+##' def_sym(b0, b1, x, x0)
+##' f <- b0 / (1 + exp(b1*(x-x0)))
+##' S <- score(f, c(b0, b1))
+##' H <- hessian(f, c(b0, b1))
+##' }
+##' 
 #' @export
 #' @rdname score_hessian
 score <- function(expr, vars, simplify=TRUE){
@@ -60,7 +61,7 @@ hessian <- function(expr, vars, simplify=TRUE){
 #' @export
 jacobian <- function(expr, vars){
     ensure_sympy()
-    stopifnot_symbol(x)
+    stopifnot_symbol(expr)
     out <- der(expr, vars)
     out <- matrify(out)
     out <- t(out)
