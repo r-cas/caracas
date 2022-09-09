@@ -38,58 +38,58 @@ rootsolve <- function(lhs, vars) {
     ## USED only in solve.R
     is_atomic <- function(x) {
         xstr <- as.character(x)
-
+        
         PATTERN_PYHTON_VARIABLE <- "[a-zA-Z]+[a-zA-Z0-9_]*"
         
         pattern <- paste0("^", PATTERN_PYHTON_VARIABLE, "$")
         
         return(grepl(pattern, x))
     }
-
+    
     if (!is.null(dim(lhs))) {
-    if (nrow(lhs) != 1L && ncol(lhs) == 1L) {
-      lhs <- t(lhs)
-    }
-    
-    if (nrow(lhs) != 1L) {
-      stop("Only 1 row in LHS allowed (multiple columns are allowed)")
-    }
-    
-    if (length(vars) == 1L && !is.null(dim(vars))) {
-      vars <- listify(vars)
-    }
-    
-    if (length(vars) != ncol(lhs)) {
-      stop("The number of columns must equal the number of variables")
-    }
-  } 
-  
-  # Single variable
-  if (inherits(vars, "caracas_symbol")) {
-    #vars <- as.character(vars)
-    vars <- vars$pyobj
-  } else {
-    # Multiple variables
-    vars <- unlist(lapply(vars, function(x) {
-      if (inherits(x, "caracas_symbol")) {
-        if (!is_atomic(x)) {
-          #stop("Variable is not atomic")
-          
-          y <- as.vector(as_character_matrix(do.call(rbind, vars)))
-          return(y)
+        if (nrow(lhs) != 1L && ncol(lhs) == 1L) {
+            lhs <- t(lhs)
         }
         
-        return(as.character(x))
-      }
-      
-      return(x)
-    }))
-  }
-  
-  y <- get_sympy()$solve(lhs$pyobj, vars, dict = TRUE, set = FALSE)
-  solset <- sol_to_r_symbol_list(y)
-  
-  class(solset) <- c("caracas_solve_sys_sol", class(solset))
+        if (nrow(lhs) != 1L) {
+            stop("Only 1 row in LHS allowed (multiple columns are allowed)")
+        }
+        
+        if (length(vars) == 1L && !is.null(dim(vars))) {
+            vars <- listify(vars)
+        }
+        
+        if (length(vars) != ncol(lhs)) {
+            stop("The number of columns must equal the number of variables")
+        }
+    } 
+    
+    ## Single variable
+    if (inherits(vars, "caracas_symbol")) {
+        ##vars <- as.character(vars)
+        vars <- vars$pyobj
+    } else {
+        ## Multiple variables
+        vars <- unlist(lapply(vars, function(x) {
+            if (inherits(x, "caracas_symbol")) {
+                if (!is_atomic(x)) {
+                    ##stop("Variable is not atomic")
+                    
+                    y <- as.vector(as_character_matrix(do.call(rbind, vars)))
+                    return(y)
+                }
+                
+                return(as.character(x))
+            }
+            
+            return(x)
+        }))
+    }
+    
+    y <- get_sympy()$solve(lhs$pyobj, vars, dict = TRUE, set = FALSE)
+    solset <- sol_to_r_symbol_list(y)
+    
+    class(solset) <- c("caracas_solve_sys_sol", class(solset))
   
   return(solset)
 }
