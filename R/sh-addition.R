@@ -100,10 +100,13 @@ as_factor_list <- function(...){
 #' Print factor list
 #'
 #' @param x factor list
+#' @param \dots Other arguments passed along
+#' 
 #' @export
-tex.factor_list <- function(x){
-    a<- lapply(x, tex)  |> unlist()
-    paste(a, collapse="  ")
+tex.factor_list <- function(x, ...){
+    a <- unlist(lapply(x, tex, ...))
+    o <- paste(a, collapse = "  ")
+    o
 }
 
 

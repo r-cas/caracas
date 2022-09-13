@@ -159,21 +159,32 @@ print.caracas_solve_sys_sol <- function(x,
 #' Export object to TeX
 #'
 #' @param x A `caracas_symbol`
+#' @param zero_as_dot Print zero as dots
+#' @param \dots Other arguments passed along
 #'
 #' @concept output
 #'
 #' @export
-tex <- function(x) {
+tex <- function(x, zero_as_dot = FALSE, ...) {
   UseMethod("tex")
 }
 
+
 #' @export
-tex.caracas_symbol <- function(x) {
+tex.caracas_symbol <- function(x, zero_as_dot = FALSE, ...) {
   ensure_sympy()
   
   if (!is.null(x$pyobj)) {
-     return(get_sympy()$latex(x$pyobj))
+    o <- get_sympy()$latex(x$pyobj)
+    
+    if (zero_as_dot) {
+      # Matrices
+      o <- gsub("([^0-9])0([^0-9])", "\\1.\\2", o)
+    }
+    
+    return(o)
   }
+  
   # if (!is.null(x$pyobj)) {
   #   py <- get_py()
   #   o <- reticulate::py_capture_output(py$print_caracas_latex(x$pyobj))

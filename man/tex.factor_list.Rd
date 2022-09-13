@@ -4,10 +4,12 @@
 \alias{tex.factor_list}
 \title{Print factor list}
 \usage{
-\method{tex}{factor_list}(x)
+\method{tex}{factor_list}(x, ...)
 }
 \arguments{
 \item{x}{factor list}
+
+\item{\dots}{Other arguments passed along}
 }
 \description{
 Print factor list
