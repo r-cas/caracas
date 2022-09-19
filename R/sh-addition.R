@@ -1,3 +1,63 @@
+#' Special matrices: zeros, ones, eyes
+#' @name special_matrices
+#' @param nrow,ncol Number of rows and columns of output
+#' @examples
+#'
+#' if (has_sympy()){
+#'   zeros(3, 4)
+#'   ones(3, 4)
+#'   eye(3, 4)
+#' }
+#' 
+#' @export
+#' @rdname special_matrices
+zeros <- function(nrow, ncol){
+    as_sym(matrix(0, nrow=nrow, ncol=ncol))
+}
+
+#' @export
+#' @rdname special_matrices
+ones <- function(nrow, ncol){
+    as_sym(matrix(1, nrow=nrow, ncol=ncol))
+}
+
+#' @export
+#' @rdname special_matrices
+eye <- function(nrow, ncol){
+    if (nrow==ncol)
+        return(diag_(1, nrow))
+    m <- min(nrow, ncol)
+    out <- matrix(0, nrow=nrow, ncol=ncol)
+    d <- diag(1, m)
+    out[1:m, 1:m] <- d
+    as_sym(out)
+}
+
+
+#' Difference matrix
+#'
+#' @param N Number of rows (and columns)
+#' @param l Value / symbol below main diagonal
+#' @param d Value / symbol on main diagonal
+#'
+#' @examples
+#' if (has_sympy()){
+#' Dm <- diff_mat(4)
+#' Dm
+#' y <- vector_sym(4, "y")
+#' Dm %*% y
+#' }
+
+#' @export
+diff_mat <- function(N, l="-1", d=1){
+    L1 <- diag(d, N)
+    L1[cbind(1 + (1:(N-1)), 1:(N-1))] <- l
+    L1 <- as_sym(L1)
+    L1
+}
+
+
+
 #' Score and Hessian matrix
 #'
 #' Compute column vector of first derivatives and matrix of second

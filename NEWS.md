@@ -8,6 +8,8 @@
 * `matrify()` now works on atomic elements.
 * New function: `def_sym_vec()` defines symbol for each element in a character vector.
 * New function: `jacobian()` function added. 
+* New functions: `zeros()`, `ones()`, `eye()` added.
+* New function: `diff_mat()` added.
 
 # caracas 1.1.2
 
