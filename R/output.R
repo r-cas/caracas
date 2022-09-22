@@ -160,9 +160,21 @@ print.caracas_solve_sys_sol <- function(x,
 #'
 #' @param x A `caracas_symbol`
 #' @param zero_as_dot Print zero as dots
+#' @param matstr Replace `\begin{matrix}` with another environment, e.g. `pmatrix`. 
+#' If vector of length two, the second element is an optional argument.
 #' @param \dots Other arguments passed along
 #'
 #' @concept output
+#' 
+#' @examples
+#' if (has_sympy()) {
+#' S <- matrix_sym_symmetric(3, "s")
+#' S[1, 2] <- "1-x"
+#' S
+#' tex(S)
+#' tex(S, matstr = "pmatrix")
+#' tex(S, matstr = c("pmatrix", "r"))
+#' }
 #'
 #' @export
 tex <- function(x, zero_as_dot = FALSE, ...) {
@@ -171,7 +183,7 @@ tex <- function(x, zero_as_dot = FALSE, ...) {
 
 
 #' @export
-tex.caracas_symbol <- function(x, zero_as_dot = FALSE, ...) {
+tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
   ensure_sympy()
   
   if (!is.null(x$pyobj)) {
@@ -180,6 +192,13 @@ tex.caracas_symbol <- function(x, zero_as_dot = FALSE, ...) {
     if (zero_as_dot) {
       # Matrices
       o <- gsub("([^0-9])0([^0-9])", "\\1.\\2", o)
+    }
+    
+    if (!is.null(matstr) && is.character(matstr) && length(matstr) >= 1L) { 
+      opt <- ifelse(length(matstr) == 2L, paste0("[", matstr[2L], "]"), "")
+
+      o <- gsub("\\begin{matrix}", paste0("\\begin{", matstr[1L], "}", opt), o, fixed = TRUE)
+      o <- gsub("\\end{matrix}", paste0("\\end{", matstr[1L], "}"), o, fixed = TRUE)
     }
     
     return(o)
