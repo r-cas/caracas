@@ -28,3 +28,6 @@ if (has_sympy()){
 }
 
 }
+\seealso{
+\code{\link[=diag_]{diag_()}}, \code{\link[=matrix_sym]{matrix_sym()}}, \code{\link[=vector_sym]{vector_sym()}}
+}

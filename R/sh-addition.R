@@ -1,6 +1,7 @@
 #' Special matrices: zeros, ones, eyes
 #' @name special_matrices
 #' @param nrow,ncol Number of rows and columns of output
+#' @seealso [diag_()], [matrix_sym()], [vector_sym()]
 #' @examples
 #'
 #' if (has_sympy()){
@@ -155,6 +156,47 @@ as_factor_list <- function(...){
     out <- lapply(lst, as_sym)  
     class(out) <- "factor_list"
     out
+}
+
+#' Divide or multiply matrix with factor.
+#' @name mat_div_mult
+#' @param m Matrix
+#' @param s Factor
+#' 
+#' @export
+#' @rdname mat_div_mult
+mat_factor_div <- function(m, s){
+    as_factor_list(paste0("1/", s), s * m)
+}
+
+#' @export
+#' @rdname mat_div_mult
+mat_factor_mult <- function(m, s){
+    as_factor_list(s, m / s)
+}
+
+#' Matrix cross product
+#'
+#' @name matrix_cross_product
+#' @param x,y caracas matrices
+#'
+#' @export
+#' @rdname matrix_cross_product
+crossprod_ <- function(x, y=NULL){
+    if (is.null(y)){
+        t(x) %*% x        
+    } else {
+        t(x) %*% y
+    }
+}
+#' @export
+#' @rdname matrix_cross_product
+tcrossprod_ <- function(x, y=NULL){
+    if (is.null(y)){
+        x %*% t(x) 
+    } else {
+        x %*% t(y) 
+    }
 }
 
 #' Print factor list

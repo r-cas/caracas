@@ -10,6 +10,7 @@
 * New function: `jacobian()` function added. 
 * New functions: `zeros()`, `ones()`, `eye()` added.
 * New function: `diff_mat()` added.
+* New functions: `crossprod_()`, `tcrossprod_()` added.
 
 # caracas 1.1.2
 
