@@ -662,3 +662,43 @@ add_prefix <- function(x, prefix = "") {
   as_sym(w)
 }
 
+
+
+
+#' Form Row and Column Sums
+#'
+#' Form Row and Column Sums
+#'
+#' @param x Symbolic matrix
+#'
+#' @concept linalg
+#' @name rowSums_colSums
+#' 
+#' @examples
+#' if (has_sympy()) {
+#'   X <- matrix_(paste0("x_",c(1,1,1,1,2,2,2,2,3,4,3,4)), nrow=4)
+#'   rowSums_(X)
+#'   colSums_(X)
+#' }
+#' 
+#' @export
+rowSums_ <- function(x){
+  ensure_sympy()
+  stopifnot_matrix(x)
+  
+  y <- as_sym(rep(1, ncol(x)))
+  
+  x %*% y
+}
+
+#' @rdname rowSums_colSums
+#' @export
+colSums_ <- function(x){
+  ensure_sympy()
+  stopifnot_matrix(x)
+  
+  y <- as_sym(rep(1, nrow(x)))
+  
+  t(y) %*% x
+}
+
