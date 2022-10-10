@@ -19,7 +19,7 @@ if (has_sympy()){
   cancel(expr)
   expr = (x*y**2 - 2*x*y*z + x*z**2 + y**2 - 2*y*z + z**2)/(x**2 - 1)
   cancel(expr)
-  factor(expr)
+  factor_(expr)
 }
 }
 \concept{simplify}

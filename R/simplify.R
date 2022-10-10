@@ -55,7 +55,7 @@ collect <- function(x, a) {
 #'   cancel(expr)
 #'   expr = (x*y**2 - 2*x*y*z + x*z**2 + y**2 - 2*y*z + z**2)/(x**2 - 1)
 #'   cancel(expr)
-#'   factor(expr)
+#'   factor_(expr)
 #' }
 
 #' @concept simplify
@@ -120,12 +120,12 @@ expand <- function(x) {
 #' 
 #' if (has_sympy()){
 #'   def_sym(x, y, z)
-#'   factor(x**3 - x**2 + x - 1)
-#'   factor(x**2*z + 4*x*y*z + 4*y**2*z)
+#'   factor_(x**3 - x**2 + x - 1)
+#'   factor_(x**2*z + 4*x*y*z + 4*y**2*z)
 #' }
 #'
 #' @export
-factor <- function(x) {
+factor_ <- function(x) {
   ensure_sympy()
   stopifnot_symbol(x)
   sympy_func(x, "factor")
