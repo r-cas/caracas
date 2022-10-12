@@ -154,7 +154,7 @@ jacobian <- function(expr, vars){
 as_factor_list <- function(...){
     lst <- list(...)
     out <- lapply(lst, as_sym)  
-    class(out) <- "factor_list"
+    class(out) <- c("caracas_factor_list", "list")
     out
 }
 
@@ -166,7 +166,8 @@ as_factor_list <- function(...){
 #' @export
 #' @rdname mat_div_mult
 mat_factor_div <- function(m, s){
-    as_factor_list(paste0("1/", s), s * m)
+  numer <- 
+    as_factor_list(paste0("1/S(", s, ")"), s * m)
 }
 
 #' @export
@@ -205,7 +206,7 @@ tcrossprod_ <- function(x, y=NULL){
 #' @param \dots Other arguments passed along
 #' 
 #' @export
-tex.factor_list <- function(x, ...){
+tex.caracas_factor_list <- function(x, ...){
     a <- unlist(lapply(x, tex, ...))
     o <- paste(a, collapse = "  ")
     o

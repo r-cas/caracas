@@ -155,6 +155,29 @@ print.caracas_solve_sys_sol <- function(x,
 }
 
 
+#' Print solution
+#' 
+#' @param x A `caracas_factor_list`
+#' @param \dots Passed to [print.caracas_symbol()]
+#'
+#' @concept output
+#' 
+#' @export
+print.caracas_factor_list <- function(x, ...) {
+  ensure_sympy()
+  
+  z <- lapply(x, function(y) {
+    paste0("UnevaluatedExpr(", as.character(y), ")")
+  })
+  
+  w <- paste0(z, collapse = "*")
+  
+  v <- eval_to_symbol(w)
+  print(v)
+  
+  return(invisible(v))
+}
+
 
 #' Export object to TeX
 #'
@@ -192,6 +215,8 @@ tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
     if (zero_as_dot) {
       # Matrices
       o <- gsub("([^0-9])0([^0-9])", "\\1.\\2", o)
+      # FIXME:
+      # Replaces e0 in matrix
     }
     
     if (!is.null(matstr) && is.character(matstr) && length(matstr) >= 1L) { 
