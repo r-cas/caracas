@@ -282,7 +282,7 @@ subs_single <- function(s, x, v) {
   } else {
     v
   }
-  
+
   y <- construct_symbol_from_pyobj(s$pyobj$subs(sym, val))
   return(y)
 }
@@ -315,11 +315,9 @@ subs <- function(s, x, v) {
       x <- as_sym(matrix(x))
   }
 
-  ## if (any(dim(x) > 1)){
+  if (any(dim(x) > 1)){
       x <- as_sym(matrix(c(as_character_matrix(x))))
-  ## }
-
-  ## print(x)
+  }
         
   if (is.character(v) || is.numeric(v)){
       v <- as_sym(v)
