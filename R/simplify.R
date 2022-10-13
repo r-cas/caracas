@@ -12,10 +12,7 @@
 #'
 #' @export
 simplify <- function(x) {
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
-  
+  stopifnot_symbol(x)
   ensure_sympy()
   
   z <- get_sympy()$simplify(x$pyobj)
@@ -133,9 +130,6 @@ factor_ <- function(x) {
 
 
 
-
-
-
 #' Expand a trigonometric expression
 #'
 #' @param x A `caracas_symbol`
@@ -144,16 +138,13 @@ factor_ <- function(x) {
 #'
 #' @export
 expand_trig <- function(x) {
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
+    stopifnot_symbol(x)
+    ensure_sympy()
   
-  ensure_sympy()
-  
-  z <- get_sympy()$expand_trig(x$pyobj)
-  v <- construct_symbol_from_pyobj(z)
-  
-  return(v)
+    z <- get_sympy()$expand_trig(x$pyobj)
+    v <- construct_symbol_from_pyobj(z)
+    
+    return(v)
 }
 
 
@@ -179,16 +170,13 @@ expand_trig <- function(x) {
 #' 
 #' @export
 expand_log <- function(x) {
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
-  
-  ensure_sympy()
-  
-  z <- get_sympy()$expand_log(x$pyobj, force = TRUE)
-  v <- construct_symbol_from_pyobj(z)
-  
-  return(v)
+    stopifnot_symbol(x)      
+    ensure_sympy()
+    
+    z <- get_sympy()$expand_log(x$pyobj, force = TRUE)
+    v <- construct_symbol_from_pyobj(z)
+    
+    return(v)
 }
 
 #' Expand a function expression
@@ -199,10 +187,7 @@ expand_log <- function(x) {
 #'
 #' @export
 expand_func <- function(x) {
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
-  
+  stopifnot_symbol(x)
   ensure_sympy()
   
   z <- get_sympy()$expand_func(x$pyobj)
