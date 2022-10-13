@@ -363,7 +363,6 @@ subs <- function(s, x, v) {
   return(ss)
 }
 
-
 #' Substitute symbol for of value given by a list
 #' 
 #' Useful for substituting solutions into expressions.
@@ -386,6 +385,9 @@ subs <- function(s, x, v) {
 #'      H
 #'      H_sol <- subs_lst(H, sol)
 #'      H_sol
+#'      
+#'      
+#'      subs_lst(p, list("p1" = 1, "p2" = y[1], "p3" = 0))
 #' }
 #' 
 #' @seealso [subs()]
@@ -396,14 +398,28 @@ subs <- function(s, x, v) {
 subs_lst <- function(s, x) {
   ensure_sympy()
   
-  new_s <- s
+  x <- lapply(x, as.character)
+  nms <- names(x)
+  x <- as.character(x)
   
-  for (i in seq_along(x)) {
-    new_s <- subs_single(new_s, names(x)[i], x[[i]])
-  }
-  
+  st <- paste0("{", paste0(nms, ": ", x, collapse=", "), "}")
+  e <- reticulate::py_eval(st)
+
+  new_s <- construct_symbol_from_pyobj(s$pyobj$subs(e))
+
   return(new_s)
 }
+# subs_lst <- function(s, x) {
+#   ensure_sympy()
+#   
+#   new_s <- s
+#   
+#   for (i in seq_along(x)) {
+#     new_s <- subs_single(new_s, names(x)[i], x[[i]])
+#   }
+#   
+#   return(new_s)
+# }
 
 #' Get numerator and denominator of a fraction
 #' 
