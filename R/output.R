@@ -200,7 +200,7 @@ print.caracas_factor_list <- function(x, ...) {
 #' }
 #'
 #' @export
-tex <- function(x, zero_as_dot = FALSE, ...) {
+tex <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
   UseMethod("tex")
 }
 

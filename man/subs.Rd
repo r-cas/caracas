@@ -23,6 +23,7 @@ if (has_sympy()) {
    e
    subs(e, x, 1:3)
    subs(e, x, x^2)
+   
 }
 
 }

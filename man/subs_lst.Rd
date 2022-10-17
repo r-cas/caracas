@@ -4,12 +4,14 @@
 \alias{subs_lst}
 \title{Substitute symbol for of value given by a list}
 \usage{
-subs_lst(s, x)
+subs_lst(s, x, v)
 }
 \arguments{
 \item{s}{Expression}
 
-\item{x}{Named list of values}
+\item{x}{Named list of values OR vector of symbols.}
+
+\item{v}{Vector of values.}
 }
 \description{
 Useful for substituting solutions into expressions.
@@ -29,6 +31,19 @@ if (has_sympy()) {
      H
      H_sol <- subs_lst(H, sol)
      H_sol
+     
+     p <- vector_sym(3, "p")
+     y <- vector_sym(3, "y")
+     subs_lst(p, list("p1" = 1, "p2" = y[1], "p3" = 0))
+
+     def_sym(aa, bb)
+     cc <- aa + bb
+     # Short
+     subs_lst(cc, c(aa, bb), c(1122, aa^2+bb))
+     # Same as
+     l <- as.list(c(1122, aa^2+bb))
+     names(l) <- all_vars(c(aa, bb))
+     subs_lst(cc, l)
 }
 
 }

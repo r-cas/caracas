@@ -302,6 +302,7 @@ subs_single <- function(s, x, v) {
 #'    e
 #'    subs(e, x, 1:3)
 #'    subs(e, x, x^2)
+#'    
 #' }
 #' 
 #' @seealso [subs_single()], [subs_lst()]
@@ -318,6 +319,12 @@ subs <- function(s, x, v) {
   if (any(dim(x) > 1)){
       x <- as_sym(matrix(c(as_character_matrix(x))))
   }
+
+  if (!symbol_is_matrix(x)){ ## FIXME SH hack
+      x <- cbind(x)
+  }
+  
+  stopifnot_matrix(x)
         
   if (is.character(v) || is.numeric(v)){
       v <- as_sym(v)
@@ -327,7 +334,6 @@ subs <- function(s, x, v) {
       v <- as_sym(c(as_character_matrix(v)))      
   }
 
-  stopifnot_matrix(x)
   
   vv <- v
   
@@ -366,7 +372,8 @@ subs <- function(s, x, v) {
 #' Useful for substituting solutions into expressions.
 #' 
 #' @param s Expression
-#' @param x Named list of values
+#' @param x Named list of values OR vector of symbols.
+#' @param v Vector of values.
 #' 
 #' @examples 
 #' if (has_sympy()) {
@@ -384,8 +391,18 @@ subs <- function(s, x, v) {
 #'      H_sol <- subs_lst(H, sol)
 #'      H_sol
 #'      
-#'      
+#'      p <- vector_sym(3, "p")
+#'      y <- vector_sym(3, "y")
 #'      subs_lst(p, list("p1" = 1, "p2" = y[1], "p3" = 0))
+#'
+#'      def_sym(aa, bb)
+#'      cc <- aa + bb
+#'      # Short
+#'      subs_lst(cc, c(aa, bb), c(1122, aa^2+bb))
+#'      # Same as
+#'      l <- as.list(c(1122, aa^2+bb))
+#'      names(l) <- all_vars(c(aa, bb))
+#'      subs_lst(cc, l)
 #' }
 #' 
 #' @seealso [subs()]
@@ -393,8 +410,14 @@ subs <- function(s, x, v) {
 #' @concept caracas_symbol
 #' 
 #' @export
-subs_lst <- function(s, x) {
+subs_lst <- function(s, x, v) {
   ensure_sympy()
+
+  if ((!inherits(x, "list")) && (!missing(v))){
+      nms <- all_vars(x)
+      x <- as.list(v)
+      names(x) <- nms      
+  }
   
   x <- lapply(x, as.character)
   nms <- names(x)
@@ -407,6 +430,9 @@ subs_lst <- function(s, x) {
 
   return(new_s)
 }
+
+
+
 # subs_lst <- function(s, x) {
 #   ensure_sympy()
 #   
