@@ -106,3 +106,15 @@ test_that("subs vectors2", {
   expect_equal(as.character(s), "Matrix([[2*A, 2], [0, 2*B]])")
 })
 
+
+
+test_that("subs issue #70", {
+  skip_if_no_sympy()
+  
+  def_sym(a,b)
+  a <- b + b^2
+  expect_equal(as.character(subs(a, b, 2)), "6")
+  expect_equal(as.character(subs(a, "b", 2)), "6")
+  expect_equal(as.character(subs(a, cbind(b), 2)), "6")
+})
+
