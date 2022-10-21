@@ -1,3 +1,7 @@
+# caracas 2.0.0
+
+* Reworked `subs()` - see documentation. `subs_lst()` removed.
+
 # caracas 1.1.3
 
 * Imports the Matrix package instead of only suggesting

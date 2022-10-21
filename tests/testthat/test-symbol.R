@@ -40,24 +40,6 @@ test_that("eval_to_symbol", {
   expect_equal(as.character(eval_to_symbol("x1/3")), "x1/3")
 })
 
-test_that("subs", {
-  skip_if_no_sympy()
-  
-  x <- symbol('x')
-  e <- 2*x^2
-  e2 <- subs(e, "x", "y^2")
-  expect_equal(as.character(e2), "2*y^4")
-})
-
-test_that("subs_vec", {
-  skip_if_no_sympy()
-  
-  x <- as_sym(paste0('x', 1:3))
-  e <- 2*x^2
-   
-  expect_equal(as.character(subs(e, x, 1:3)), "Matrix([[2], [8], [18]])")
-  expect_equal(as.character(subs(e, x, x^2)), "Matrix([[2*x1^4], [2*x2^4], [2*x3^4]])")
-})
 
 
 test_that("sympy_func", {

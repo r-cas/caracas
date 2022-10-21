@@ -38,6 +38,31 @@ as_py_string <- function(x) {
   return(hlp_to_py_vec(x))
 }
 
+get_reserved_names <- function() {
+  c("S", "sqrt", "log", "I", "exp", "sin", "cos", "Matrix", "Function")
+}
+
+extract_vars <- function(x) {
+  varnames_exclude <- get_reserved_names()
+  
+  xele <- as.vector(x)
+  m <- gregexpr(pattern = PATTERN_PYHTON_VARIABLE, 
+                text = xele)
+  varnames <- regmatches(x = xele, m = m, invert = FALSE)
+  varnames <- unique(unlist(varnames[unlist(lapply(varnames, length)) > 0]))
+  varnames <- setdiff(varnames, varnames_exclude)
+  varnames
+}
+
+declare_symbols_worker <- function(varnames) {
+  for (varname in varnames) {
+    cmd <- paste0(varname, " = symbols('", varname, "')")
+    reticulate::py_run_string(cmd, convert = FALSE)
+  }
+  
+  return(invisible(varnames))
+}
+
 #' Convert R object to caracas symbol
 #' 
 #' Variables are detected as a
@@ -82,21 +107,9 @@ as_sym <- function(x,
     x <- as.character(x)
   }
   
-  varnames_exclude <- c("S", "sqrt", "log", "I", "exp", "sin", "cos", "Matrix", "Function")
-
   if (declare_symbols) {
-    xele <- as.vector(x)
-    m <- gregexpr(pattern = PATTERN_PYHTON_VARIABLE, 
-                  text = xele)
-    varnames <- regmatches(x = xele, m = m, invert = FALSE)
-    varnames <- unique(unlist(varnames[unlist(lapply(varnames, length)) > 0]))
-    varnames <- setdiff(varnames, varnames_exclude)
-    #varnames
-    
-    for (varname in varnames) {
-      cmd <- paste0(varname, " = symbols('", varname, "')")
-      reticulate::py_run_string(cmd, convert = FALSE)
-    }
+    varnames <- extract_vars(x)
+    declare_symbols_worker(varnames)
   }
 
   # Defining a matrix by hand with '[[1], [2]]' syntax
