@@ -133,7 +133,7 @@ test_that("solve system of non-linear equations", {
   expect_match(as.character(sol$a), "y1 + y2 + y3", fixed = TRUE)
   
   H <- der2(L, list(p, a))
-  H_sol <- subs_lst(H, sol)
+  H_sol <- subs(H, sol)
   expect_match(as.character(H_sol), 
                "[[(y1 + y2 + y3)^2/y1, 0, 0, 1], [0, (y1 + y2 + y3)^2/y2, 0, 1], [0, 0, (y1 + y2 + y3)^2/y3, 1], [1, 1, 1, 0]]", 
                fixed = TRUE)
