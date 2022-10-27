@@ -1,18 +1,18 @@
 update_sym <- function(sym, nms, vls, declare_symbols = TRUE){
-  if (!is.character(nms)) stop("nms must be character - use as.char() first")
-  if (!is.character(vls)) stop("vls must be character - use as.char() first")
+    if (!is.character(nms)) stop("nms must be character - use as.char() first")
+    if (!is.character(vls)) stop("vls must be character - use as.char() first")
   
-  if (declare_symbols) {
-    declare_symbols_worker(nms)
+    if (declare_symbols) {
+        declare_symbols_worker(nms)
+        
+        varnames <- extract_vars(vls)
+        declare_symbols_worker(varnames)
+    }
     
-    varnames <- extract_vars(vls)
-    declare_symbols_worker(varnames)
-  }
-  
-  dict <- paste0("{", paste0(nms, ": ", caracas:::r_strings_to_python(vls), collapse=", "), "}")
-  #print(dict)
-  e <- reticulate::py_eval(dict)
-  construct_symbol_from_pyobj(sym$pyobj$subs(e))
+    dict <- paste0("{", paste0(nms, ": ", r_strings_to_python(vls), collapse=", "), "}")
+    ## print(dict)
+    e <- reticulate::py_eval(dict)
+    construct_symbol_from_pyobj(sym$pyobj$subs(e))
 }
 
 # Gives character vector (i.e. no dimensions)
@@ -98,8 +98,9 @@ subs <- function(sym, nms, vls){
   }
   
   # subs() with both nms and vls
-  nms_ <- any_to_char(nms)
-  vls_ <- any_to_char(vls)
-  sym2 <- update_sym(sym, nms_, vls_)
-  return(sym2)
+    nms_ <- any_to_char(nms)
+    vls_ <- any_to_char(vls)
+    ## str(list(nms_=nms_, vls_=vls_))
+    sym2 <- update_sym(sym, nms_, vls_)
+    return(sym2)
 }

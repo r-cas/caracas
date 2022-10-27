@@ -25,6 +25,8 @@
 #'   
 #'   do_la(A, "det") # Determinant
 #'   det(A)
+#'
+#' 
 #' }
 #' 
 #' @return Returns the requested property of a matrix.
@@ -189,7 +191,16 @@ finalise_rref <- function(vals) {
 #'   inv2fl(A)
 #'   det(A)
 #'   
-#'   
+#'   ## Matrix inversion:
+#'   d <- 3
+#'   m <- matrix_sym(d, d)
+#'   print(system.time(inv(m)))       ## Gauss elimination
+#'   print(system.time(invcf(m)))     ## Cofactor 
+#'   print(system.time(invlu(m)))     ## LU decomposition
+#'   if (requireNamespace("Ryacas")){
+#'     print(system.time(invyac(m)))  ## Use Ryacas
+#'   }
+#' 
 #'   A <- matrix(c("a", "b", "c", "d"), 2, 2) %>% as_sym()
 #'   evec <- eigenvec(A)
 #'   evec
@@ -201,6 +212,8 @@ finalise_rref <- function(vals) {
 #'
 #'   A <- as_sym("[[1, 2, 3], [4, 5, 6]]")
 #'   pinv(A)
+#'
+#' 
 #' }
 #' 
 #' @return Returns the requested property of a matrix.
@@ -244,8 +257,35 @@ inv <- function(x) {
 #' @rdname linalg
 #' @export
 invcf <- function(x){
-  return(t(sympy_func(x, "cofactor_matrix")) / det(x))
+    stopifnot_symbol(x)
+    stopifnot(symbol_is_matrix(x))
+    return(t(sympy_func(x, "cofactor_matrix")) / det(x))
 }
+
+#' @rdname linalg
+#' @export
+invlu <- function(x){
+    stopifnot_symbol(x)
+    stopifnot(symbol_is_matrix(x))
+    construct_symbol_from_pyobj(x$pyobj$inv(method="LU"))
+}
+
+#' @rdname linalg
+#' @export
+invyac <- function(x){
+    if (!requireNamespace("Ryacas", quietly = TRUE))
+        install.packages("Ryacas")
+    ##Ai <- as_y(Amat) %>% y_fn("Inverse") %>% yac_str()
+    stopifnot_symbol(x)
+    stopifnot(symbol_is_matrix(x))
+    A_ <- as_character_matrix(x)
+    Ay <- Ryacas::as_y(A_)
+    Ai <- Ay %>% Ryacas::y_fn("Inverse") %>% Ryacas::yac_str()
+    B <- as_sym(Ryacas::as_r(Ai))
+    return(B)
+}
+
+
 
 #' @rdname linalg
 #' @export
