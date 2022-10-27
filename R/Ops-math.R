@@ -186,12 +186,16 @@ Ops.caracas_symbol = function(e1, e2) {
     if (e1_is_mat && !e2_is_mat) {
       ##cat("mat || !mat\n")
       if (.Generic == "/") {
-        e2 <- as_sym(scalar_to_matrix(paste0("1/(", as.character(e2), ")"), dim(e1)))
+        e2 <- as_sym(scalar_to_matrix(paste0("1/(", as.character(e2), ")"), dim(e1)), 
+                     # To carry along properties of variables
+                     declare_symbols = FALSE)
         o2 <- e2$pyobj
         e2_is_mat  <- TRUE
         .Generic <- "*"
       } else {
-        e2 <- as_sym(scalar_to_matrix(as.character(e2), dim(e1)))
+        e2 <- as_sym(scalar_to_matrix(as.character(e2), dim(e1)), 
+                     # To carry along properties of variables
+                     declare_symbols = FALSE)
         o2 <- e2$pyobj
         e2_is_mat  <- TRUE
       }
@@ -200,7 +204,9 @@ Ops.caracas_symbol = function(e1, e2) {
       # o2 <- e2$pyobj
     } else if (!e1_is_mat && e2_is_mat) {
       ###cat("!mat && mat\n")
-      e1 <- as_sym(scalar_to_matrix(as.character(e1), dim(e2)))
+      e1 <- as_sym(scalar_to_matrix(as.character(e1), dim(e2)),
+                   # To carry along properties of variables
+                   declare_symbols = FALSE)
       o1 <- e1$pyobj
       e1_is_mat  <- TRUE
     } 

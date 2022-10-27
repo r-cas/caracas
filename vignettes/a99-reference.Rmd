@@ -260,6 +260,19 @@ sol[[1L]]$p1
 tex(sol[[1L]]$p1)
 ```
 
+### Assumptions
+
+```{r}
+x <- symbol("x", positive = TRUE)
+solve_sys(x^2 - 1, 0, x)
+
+x <- symbol("x", real = TRUE)
+solve_sys(x^2 + 1, 0, x)
+
+x <- symbol("x")
+solve_sys(x^2 + 1, 0, x)
+```
+
 ## Substitution
 
 ```{r}
