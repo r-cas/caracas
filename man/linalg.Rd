@@ -8,6 +8,8 @@
 \alias{singular_values}
 \alias{inv}
 \alias{invcf}
+\alias{invlu}
+\alias{invyac}
 \alias{inv2fl}
 \alias{eigenval}
 \alias{eigenvec}
@@ -29,6 +31,10 @@ singular_values(x)
 inv(x)
 
 invcf(x)
+
+invlu(x)
+
+invyac(x)
 
 inv2fl(x)
 
@@ -70,7 +76,16 @@ if (has_sympy()) {
   inv2fl(A)
   det(A)
   
-  
+  ## Matrix inversion:
+  d <- 3
+  m <- matrix_sym(d, d)
+  print(system.time(inv(m)))       ## Gauss elimination
+  print(system.time(invcf(m)))     ## Cofactor 
+  print(system.time(invlu(m)))     ## LU decomposition
+  if (requireNamespace("Ryacas")){
+    print(system.time(invyac(m)))  ## Use Ryacas
+  }
+
   A <- matrix(c("a", "b", "c", "d"), 2, 2) \%>\% as_sym()
   evec <- eigenvec(A)
   evec
@@ -82,6 +97,8 @@ if (has_sympy()) {
 
   A <- as_sym("[[1, 2, 3], [4, 5, 6]]")
   pinv(A)
+
+
 }
 
 }

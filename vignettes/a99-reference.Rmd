@@ -294,7 +294,7 @@ sol <- sols[[1L]]
 sol
 H <- der2(L, list(p, a))
 H
-H_sol <- subs_lst(H, sol)
+H_sol <- subs(H, sol)
 H_sol
 ```
 
