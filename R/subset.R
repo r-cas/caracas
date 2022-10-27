@@ -109,8 +109,12 @@ convert_to_r_mat <- function(x) {
   
   xmat <- convert_to_r_mat(x)
 
-  if (inherits(value, "caracas_symbol") && symbol_is_matrix(value)){
+  if (inherits(value, "caracas_symbol")){
+    if (symbol_is_matrix(value)) {
       value <- convert_to_r_mat(value)
+    } else {
+      value <- as.character(value)
+    }
   }
   
   xmat_mod <- if (missing(j)) {
