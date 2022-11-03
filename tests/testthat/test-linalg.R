@@ -186,8 +186,7 @@ test_that("do_la", {
   
 })
 
-
-
+  
 test_that("diag_", {
   skip_if_no_sympy()
   

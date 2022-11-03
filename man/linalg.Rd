@@ -7,9 +7,6 @@
 \alias{rowspace}
 \alias{singular_values}
 \alias{inv}
-\alias{invcf}
-\alias{invlu}
-\alias{invyac}
 \alias{inv2fl}
 \alias{eigenval}
 \alias{eigenvec}
@@ -28,13 +25,7 @@ rowspace(x)
 
 singular_values(x)
 
-inv(x)
-
-invcf(x)
-
-invlu(x)
-
-invyac(x)
+inv(x, method = c("lu", "gauss", "cf", "yac"))
 
 inv2fl(x)
 
@@ -54,6 +45,11 @@ det(x, ...)
 }
 \arguments{
 \item{x}{A matrix for which a property is requested}
+
+\item{method}{The default works by $LU$ decomposition.
+The alternatives are Gaussian elimination (\code{gauss}),
+the cofactor method (\code{cf}),
+and \code{Ryacas} (\code{yac}).}
 
 \item{...}{Auxillary arguments}
 }

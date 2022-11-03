@@ -249,35 +249,47 @@ singular_values <- function(x) {
 
 
 #' @rdname linalg
+#' @param method The default works by $LU$ decomposition. 
+#' The alternatives are Gaussian elimination (`gauss`), 
+#' the cofactor method (`cf`), 
+#' and `Ryacas` (`yac`).
 #' @export
-inv <- function(x) {
-    return(do_la(x, "inv"))
+inv <- function(x, method = c("lu", "gauss", "cf", "yac")) {
+  method <- match.arg(method)
+  
+  stopifnot_symbol(x)
+  stopifnot(symbol_is_matrix(x))
+  
+  if (FALSE) {
+    microbenchmark::microbenchmark(
+      inv(A, "lu"),
+      inv(A, "gauss"),
+      inv(A, "cf"),
+      inv(A, "yac"),
+      times = 10
+    )
+  }
+  
+  switch(method,
+         lu = inv_lu(x),
+         gauss = do_la(x, "inv"),
+         cf = inv_cf(x),
+         yac = inv_yac(x))
 }
 
-#' @rdname linalg
-#' @export
-invcf <- function(x){
-    stopifnot_symbol(x)
-    stopifnot(symbol_is_matrix(x))
+inv_cf <- function(x){
     return(t(sympy_func(x, "cofactor_matrix")) / det(x))
 }
 
-#' @rdname linalg
-#' @export
-invlu <- function(x){
-    stopifnot_symbol(x)
-    stopifnot(symbol_is_matrix(x))
+inv_lu <- function(x){
     construct_symbol_from_pyobj(x$pyobj$inv(method="LU"))
 }
 
-#' @rdname linalg
-#' @export
-invyac <- function(x){
-    if (!requireNamespace("Ryacas", quietly = TRUE))
-        install.packages("Ryacas")
-    ##Ai <- as_y(Amat) %>% y_fn("Inverse") %>% yac_str()
-    stopifnot_symbol(x)
-    stopifnot(symbol_is_matrix(x))
+inv_yac <- function(x){
+    if (!requireNamespace("Ryacas", quietly = TRUE)) {
+      stop("This method requires Ryacas - please install.packages('Ryacas')")
+    }
+
     A_ <- as_character_matrix(x)
     Ay <- Ryacas::as_y(A_)
     Ai <- Ay %>% Ryacas::y_fn("Inverse") %>% Ryacas::yac_str()
