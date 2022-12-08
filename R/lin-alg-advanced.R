@@ -25,8 +25,6 @@
 #'   
 #'   do_la(A, "det") # Determinant
 #'   det(A)
-#'
-#' 
 #' }
 #' 
 #' @return Returns the requested property of a matrix.
@@ -187,7 +185,6 @@ finalise_rref <- function(vals) {
 #'   eigenval(A)
 #'   eigenvec(A)
 #'   inv(A)
-#'   invcf(A)
 #'   inv2fl(A)
 #'   det(A)
 #'   
@@ -195,10 +192,10 @@ finalise_rref <- function(vals) {
 #'   d <- 3
 #'   m <- matrix_sym(d, d)
 #'   print(system.time(inv(m)))       ## Gauss elimination
-#'   print(system.time(invcf(m)))     ## Cofactor 
-#'   print(system.time(invlu(m)))     ## LU decomposition
+#'   print(system.time(inv(m, method="cf")))     ## Cofactor 
+#'   print(system.time(inv(m, method="lu")))     ## LU decomposition
 #'   if (requireNamespace("Ryacas")){
-#'     print(system.time(invyac(m)))  ## Use Ryacas
+#'     print(system.time(inv(m, method="yac")))  ## Use Ryacas
 #'   }
 #' 
 #'   A <- matrix(c("a", "b", "c", "d"), 2, 2) %>% as_sym()
@@ -260,15 +257,15 @@ inv <- function(x, method = c("lu", "gauss", "cf", "yac")) {
   stopifnot_symbol(x)
   stopifnot(symbol_is_matrix(x))
   
-  if (FALSE) {
-    microbenchmark::microbenchmark(
-      inv(A, "lu"),
-      inv(A, "gauss"),
-      inv(A, "cf"),
-      inv(A, "yac"),
-      times = 10
-    )
-  }
+  ## if (FALSE) {
+    ## microbenchmark::microbenchmark(
+      ## inv(A, "lu"),
+      ## inv(A, "gauss"),
+      ## inv(A, "cf"),
+      ## inv(A, "yac"),
+      ## times = 10
+    ## )
+  ## }
   
   switch(method,
          lu = inv_lu(x),
@@ -302,7 +299,7 @@ inv_yac <- function(x){
 #' @rdname linalg
 #' @export
 inv2fl <- function(x){
-  xi <- invcf(x)
+  xi <- inv(x)
   d <- denominator(xi[1,1])
   as_factor_list(1/d, d * xi)
 }
