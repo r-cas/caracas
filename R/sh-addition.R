@@ -1,3 +1,20 @@
+#' Coerce symbol to character
+#'
+#' Coerce symbol to character
+#' @param x caracas symbol
+#'
+#' @export
+as_character <- function(x){
+    ensure_sympy()
+    stopifnot_symbol(x)
+    
+    switch(symbol_class(x),
+           "matrix" ={as_character_matrix(x)},
+           "atomic" ={as.character(x)}
+           )
+}
+
+
 #' Special matrices: zeros, ones, eyes
 #' @name special_matrices
 #' @param nrow,ncol Number of rows and columns of output

@@ -68,7 +68,6 @@ if (has_sympy()) {
   eigenval(A)
   eigenvec(A)
   inv(A)
-  invcf(A)
   inv2fl(A)
   det(A)
   
@@ -76,10 +75,10 @@ if (has_sympy()) {
   d <- 3
   m <- matrix_sym(d, d)
   print(system.time(inv(m)))       ## Gauss elimination
-  print(system.time(invcf(m)))     ## Cofactor 
-  print(system.time(invlu(m)))     ## LU decomposition
+  print(system.time(inv(m, method="cf")))     ## Cofactor 
+  print(system.time(inv(m, method="lu")))     ## LU decomposition
   if (requireNamespace("Ryacas")){
-    print(system.time(invyac(m)))  ## Use Ryacas
+    print(system.time(inv(m, method="yac")))  ## Use Ryacas
   }
 
   A <- matrix(c("a", "b", "c", "d"), 2, 2) \%>\% as_sym()

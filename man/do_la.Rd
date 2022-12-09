@@ -40,8 +40,6 @@ if (has_sympy()) {
   
   do_la(A, "det") # Determinant
   det(A)
-
-
 }
 
 }
