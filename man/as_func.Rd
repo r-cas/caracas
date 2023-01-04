@@ -18,19 +18,21 @@ alphabetical ordering.}
 Convert expression into function object.
 }
 \examples{
+if (has_sympy()) {
+  def_sym(b0, b1, b2, k, x)
+  e <- b1 + (b0 - b1)*exp(-k*x) + b2*x
 
-def_sym(b0, b1, b2, k, x)
-e <- b1 + (b0 - b1)*exp(-k*x) + b2*x
-
-f1 <- as_func(e)
-f1
-f1(1,2,3,4,5)
-f1 <- as_func(e, order=sort(all_vars(e)))
-f1(1,2,3,4,5)
-f2 <- as_func(e, vec_arg=TRUE)
-f2
-f2(c(1,2,3,4,5))
-f2 <- as_func(e, order=sort(all_vars(e)), vec_arg=TRUE)
-f2
-f2(c(1,2,3,4,5))
+  f1 <- as_func(e)
+  f1
+  f1(1, 2, 3, 4, 5)
+  f1 <- as_func(e, order = sort(all_vars(e)))
+  f1(1, 2, 3, 4, 5)
+  f2 <- as_func(e, vec_arg = TRUE)
+  f2
+  f2(c(1, 2, 3, 4, 5))
+  f2 <- as_func(e, order = sort(all_vars(e)), vec_arg = TRUE)
+  f2
+  f2(c(1,2,3,4,5))
 }
+}
+\concept{caracas_symbol}

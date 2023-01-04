@@ -129,7 +129,8 @@ as_sym <- function(x,
 
 
 #' Is object a caracas symbol
-#' @param x factor list
+#' @param x object
+#' @concept caracas_symbol
 #' @export
 is_sym <- function(x){
     inherits(x, "caracas_symbol")

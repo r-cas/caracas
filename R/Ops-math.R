@@ -347,6 +347,7 @@ Math.caracas_symbol = function(x, ...) {
   UseMethod("%*%")
 }
 
+#' @concept linalg
 #' @export
 `%*%.default` <- function(x, y) {
   return(base::`%*%`(x, y))

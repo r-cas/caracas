@@ -9,3 +9,4 @@ ls_sym()
 \description{
 List defined symbols
 }
+\concept{caracas_symbol}

@@ -1,7 +1,9 @@
 #' Ask type of caracas symbol
 #'
 #' @param x An object, a caracas object is expected
-#'
+#' 
+#' @concept caracas_symbol
+#' 
 #' @export
 symbol_class <- function(x){
   stopifnot_symbol(x)
@@ -42,6 +44,8 @@ symbol_is_matrix <- function(x){
 #' @name to_something
 #' 
 #' @param x a caracas object is expected
+#' 
+#' @concept caracas_symbol
 #'
 #' @export
 #' @rdname to_something
@@ -152,6 +156,7 @@ matrify <- function(x) {
 
 #' Creates symbol vector from list of caracas symbols
 #' @param x Symbol to be coerced to vector
+#' @concept caracas_symbol
 #' @export
 vectorfy <- function(x) {
   z <- paste0(unlist(lapply(x, as.character)), collapse = ", ")

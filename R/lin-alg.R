@@ -702,3 +702,126 @@ colSums_ <- function(x){
   t(y) %*% x
 }
 
+
+
+#' Special matrices: zeros, ones, eyes
+#' @name special_matrices
+#' @param nrow,ncol Number of rows and columns of output
+#' @seealso [diag_()], [matrix_sym()], [vector_sym()]
+#' @examples
+#'
+#' if (has_sympy()){
+#'   zeros(3, 4)
+#'   ones(3, 4)
+#'   eye(3, 4)
+#' }
+#' 
+#' @export
+#' @concept linalg
+#' @rdname special_matrices
+zeros <- function(nrow, ncol){
+  as_sym(matrix(0, nrow=nrow, ncol=ncol))
+}
+
+#' @export
+#' @rdname special_matrices
+ones <- function(nrow, ncol){
+  as_sym(matrix(1, nrow=nrow, ncol=ncol))
+}
+
+#' @export
+#' @rdname special_matrices
+eye <- function(nrow, ncol){
+  if (nrow==ncol)
+    return(diag_(1, nrow))
+  m <- min(nrow, ncol)
+  out <- matrix(0, nrow=nrow, ncol=ncol)
+  d <- diag(1, m)
+  out[1:m, 1:m] <- d
+  as_sym(out)
+}
+
+#' Difference matrix
+#'
+#' @param N Number of rows (and columns)
+#' @param l Value / symbol below main diagonal
+#' @param d Value / symbol on main diagonal
+#'
+#' @examples
+#' if (has_sympy()){
+#'   Dm <- diff_mat(4)
+#'   Dm
+#'   y <- vector_sym(4, "y")
+#'   Dm %*% y
+#' }
+#' @concept linalg
+#' 
+#' @export
+diff_mat <- function(N, l="-1", d=1){
+  L1 <- diag(d, N)
+  L1[cbind(1 + (1:(N-1)), 1:(N-1))] <- l
+  L1 <- as_sym(L1)
+  L1
+}
+
+
+
+#' Matrix cross product
+#'
+#' @name matrix_cross_product
+#' @param x,y caracas matrices
+#' @concept linalg
+#' 
+#' @export
+#' @rdname matrix_cross_product
+crossprod_ <- function(x, y=NULL){
+  if (is.null(y)){
+    t(x) %*% x        
+  } else {
+    t(x) %*% y
+  }
+}
+
+#' @export
+#' @rdname matrix_cross_product
+tcrossprod_ <- function(x, y=NULL){
+  if (is.null(y)){
+    x %*% t(x) 
+  } else {
+    x %*% t(y) 
+  }
+}
+
+
+#' Get basis
+#'
+#' Get basis
+#'
+#' @param x caracas vector / matrix
+#' @examples
+#' if (has_sympy()) {
+#'   x <- vector_sym(3)
+#'   get_basis(x)
+#' 
+#'   W <- matrix(c("r_1", "r_1", "r_2", "r_2", "0", "0", "u_1", "u_2"), nrow=4)
+#'   W <- as_sym(W)
+#'   get_basis(W)
+#' }
+#' @concept linalg
+#' @export
+get_basis <- function(x){
+  ensure_sympy()
+  stopifnot_symbol(x)
+  
+  zz <- as_character_matrix(x)
+  ##unique symbols
+  us <- setdiff(unique(as.character(zz)), "0")
+  out <- lapply(seq_along(us),
+                function(i){
+                  1*(us[i] == zz)           
+                })
+  names(out) <- us
+  ## attr(out, "symbols") <- us
+  out
+}
+

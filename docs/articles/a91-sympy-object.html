@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.9.9001</span>
       </span>
     </div>
 
@@ -52,6 +52,9 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="../articles/a01-introduction.html">01 - Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/a03-objects.html">03 - Objects in 'caracas'</a>
     </li>
     <li>
       <a href="../articles/a05-extend-caracas.html">05 - Extending 'caracas'</a>
@@ -131,12 +134,17 @@
 <div class="section level2">
 <h2 id="elaborate-example">Elaborate example<a class="anchor" aria-label="anchor" href="#elaborate-example"></a>
 </h2>
-<p>How can we minimise the amount of material used to produce a cylindric tin can that contains 1 litre. The cylinder has diameter <span class="math inline">\(d\)</span> and height <span class="math inline">\(h\)</span>. The question is therefore: What is <span class="math inline">\(d\)</span> and <span class="math inline">\(h\)</span>?</p>
-<p>We introduce the variables <code>d</code> (diameter) and <code>h</code> (height):</p>
+<p>How can we minimise the amount of material used to produce a
+cylindric tin can that contains 1 litre. The cylinder has diameter <span class="math inline">\(d\)</span> and height <span class="math inline">\(h\)</span>. The question is therefore: What is
+<span class="math inline">\(d\)</span> and <span class="math inline">\(h\)</span>?</p>
+<p>We introduce the variables <code>d</code> (diameter) and
+<code>h</code> (height):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">sympy</span><span class="op">$</span><span class="fu">symbols</span><span class="op">(</span><span class="st">'d'</span><span class="op">)</span></span>
 <span><span class="va">h</span> <span class="op">&lt;-</span> <span class="va">sympy</span><span class="op">$</span><span class="fu">symbols</span><span class="op">(</span><span class="st">'h'</span><span class="op">)</span></span></code></pre></div>
-<p>The problem is a constrained optimisation problem, and we solve it by a Lagrange multiplier, and therefore we introduce <code>lam</code> (the Lagrange multiplier):</p>
+<p>The problem is a constrained optimisation problem, and we solve it by
+a Lagrange multiplier, and therefore we introduce <code>lam</code> (the
+Lagrange multiplier):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lam</span> <span class="op">&lt;-</span> <span class="va">sympy</span><span class="op">$</span><span class="fu">symbols</span><span class="op">(</span><span class="st">'lam'</span><span class="op">)</span></span></code></pre></div>
 <p>We now set up the problem:</p>
@@ -169,24 +177,24 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; [[2]]$d</span></span>
-<span><span class="co">#&gt; 2**(2/3)*(-1 + sqrt(3)*I)/(2*Pi**(1/3))</span></span>
+<span><span class="co">#&gt; 2**(2/3)*(-1 - sqrt(3)*I)/(2*Pi**(1/3))</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]$h</span></span>
-<span><span class="co">#&gt; 2**(2/3)*(-1 + sqrt(3)*I)/(2*Pi**(1/3))</span></span>
+<span><span class="co">#&gt; 2**(2/3)*(-1 - sqrt(3)*I)/(2*Pi**(1/3))</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]$lam</span></span>
-<span><span class="co">#&gt; -2**(1/3)*Pi**(1/3) - 2**(1/3)*sqrt(3)*I*Pi**(1/3)</span></span>
+<span><span class="co">#&gt; -2**(1/3)*Pi**(1/3) + 2**(1/3)*sqrt(3)*I*Pi**(1/3)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; [[3]]$d</span></span>
-<span><span class="co">#&gt; -2**(2/3)*(1 + sqrt(3)*I)/(2*Pi**(1/3))</span></span>
+<span><span class="co">#&gt; 2**(2/3)*(-1 + sqrt(3)*I)/(2*Pi**(1/3))</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]$h</span></span>
-<span><span class="co">#&gt; -2**(2/3)*(1 + sqrt(3)*I)/(2*Pi**(1/3))</span></span>
+<span><span class="co">#&gt; 2**(2/3)*(-1 + sqrt(3)*I)/(2*Pi**(1/3))</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]$lam</span></span>
-<span><span class="co">#&gt; -2**(1/3)*Pi**(1/3) + 2**(1/3)*sqrt(3)*I*Pi**(1/3)</span></span></code></pre></div>
+<span><span class="co">#&gt; -2**(1/3)*Pi**(1/3) - 2**(1/3)*sqrt(3)*I*Pi**(1/3)</span></span></code></pre></div>
 <p>We take the one with the real solution:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sol</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
@@ -198,7 +206,9 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lam</span></span>
 <span><span class="co">#&gt; 2*2**(1/3)*Pi**(1/3)</span></span></code></pre></div>
-<p>We now have a short helper function to help getting appropriate <code>R</code> expressions (such a function will be included in later versions of this package):</p>
+<p>We now have a short helper function to help getting appropriate
+<code>R</code> expressions (such a function will be included in later
+versions of this package):</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">to_r</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -218,7 +228,8 @@
 <span><span class="co">#&gt; expression(2^(2/3)/pi^(1/3))</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/eval.html" class="external-link">eval</a></span><span class="op">(</span><span class="va">sol_h</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1.083852</span></span></code></pre></div>
-<p>(It is left as an exercise to the reader to show that the critical point indeed is a minimum.)</p>
+<p>(It is left as an exercise to the reader to show that the critical
+point indeed is a minimum.)</p>
 </div>
 <div class="section level2">
 <h2 id="simple-example-with-assumptions">Simple example with assumptions<a class="anchor" aria-label="anchor" href="#simple-example-with-assumptions"></a>
@@ -233,59 +244,59 @@
 <span><span class="co">#&gt; $positive</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $extended_real</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $imaginary</span></span>
-<span><span class="co">#&gt; [1] FALSE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $extended_positive</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $commutative</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $extended_nonnegative</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $extended_negative</span></span>
-<span><span class="co">#&gt; [1] FALSE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $hermitian</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $complex</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $finite</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $infinite</span></span>
-<span><span class="co">#&gt; [1] FALSE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $zero</span></span>
-<span><span class="co">#&gt; [1] FALSE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $nonnegative</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $extended_nonzero</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $real</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $nonpositive</span></span>
-<span><span class="co">#&gt; [1] FALSE</span></span>
-<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $nonzero</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $extended_nonpositive</span></span>
 <span><span class="co">#&gt; [1] FALSE</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $nonpositive</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $extended_nonzero</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $zero</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $extended_nonnegative</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $extended_real</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $negative</span></span>
 <span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $extended_positive</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $finite</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $commutative</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $complex</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $hermitian</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $infinite</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $imaginary</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $nonnegative</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $extended_negative</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $real</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="va">eq</span> <span class="op">&lt;-</span> <span class="va">sympy</span><span class="op">$</span><span class="va">parsing</span><span class="op">$</span><span class="va">sympy_parser</span><span class="op">$</span><span class="fu">parse_expr</span><span class="op">(</span><span class="st">"x**2 - 1"</span>,</span>
 <span>                                            local_dict <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'x'</span> <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sympy</span><span class="op">$</span><span class="fu">solve</span><span class="op">(</span><span class="va">eq</span>, <span class="va">x</span>, dict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -329,7 +340,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -26,7 +26,7 @@ define_printers <- function() {
   
   if (!grepl("UTF-8", Sys.getlocale())) {
     # Not UTF-8 system:
-    options(caracas.print.prettyascii = TRUE)
+    options(caracas.print.method = "prettyascii")
   }
 }
 

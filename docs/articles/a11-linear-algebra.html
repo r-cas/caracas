@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.9.9001</span>
       </span>
     </div>
 
@@ -52,6 +52,9 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="../articles/a01-introduction.html">01 - Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/a03-objects.html">03 - Objects in 'caracas'</a>
     </li>
     <li>
       <a href="../articles/a05-extend-caracas.html">05 - Extending 'caracas'</a>
@@ -102,9 +105,10 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>11 - Linear algebra in <code>caracas</code>
 </h1>
-                        <h4 data-toc-skip class="author">Mikkel Meyer Andersen and Søren Højsgaard</h4>
+                        <h4 data-toc-skip class="author">Mikkel Meyer
+Andersen and Søren Højsgaard</h4>
             
-            <h4 data-toc-skip class="date">Tue Jul 5 12:01:11 2022</h4>
+            <h4 data-toc-skip class="date">Wed Jan 4 15:37:42 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/HEAD/vignettes/a11-linear-algebra.Rmd" class="external-link"><code>vignettes/a11-linear-algebra.Rmd</code></a></small>
       <div class="hidden name"><code>a11-linear-algebra.Rmd</code></div>
@@ -116,7 +120,10 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>This vignette is based on <code>caracas</code> version <code>r packageVersion("caracas")</code>. <code>caracas</code> is avavailable on CRAN at [<a href="https://cran.r-project.org/package=caracas" class="external-link uri">https://cran.r-project.org/package=caracas</a>] and on github at [<a href="https://github.com/r-cas/caracas" class="external-link uri">https://github.com/r-cas/caracas</a>].</p>
+<p>This vignette is based on <code>caracas</code> version
+<code>r packageVersion("caracas")</code>. <code>caracas</code> is
+avavailable on CRAN at [<a href="https://cran.r-project.org/package=caracas" class="external-link uri">https://cran.r-project.org/package=caracas</a>] and on
+github at [<a href="https://github.com/r-cas/caracas" class="external-link uri">https://github.com/r-cas/caracas</a>].</p>
 </div>
 <div class="section level2">
 <h2 id="elementary-matrix-operations">Elementary matrix operations<a class="anchor" aria-label="anchor" href="#elementary-matrix-operations"></a>
@@ -162,7 +169,8 @@
 <span><span class="co">#&gt; [caracas]: ⎡a  0⎤</span></span>
 <span><span class="co">#&gt;            ⎢    ⎥</span></span>
 <span><span class="co">#&gt;            ⎣0  b⎦</span></span></code></pre></div>
-<p>Note that a vector is a matrix in which one of the dimensions is one.</p>
+<p>Note that a vector is a matrix in which one of the dimensions is
+one.</p>
 </div>
 <div class="section level3">
 <h3 id="matrix-matrix-sum-and-product">Matrix-matrix sum and product<a class="anchor" aria-label="anchor" href="#matrix-matrix-sum-and-product"></a>
@@ -248,7 +256,8 @@
 <span><span class="co">#&gt; [caracas]: [b₁  b₂]ᵀ</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="generalized-penrose-moore-inverse-solve-system-of-linear-equations-tbw">Generalized (Penrose-Moore) inverse; solve system of linear equations [TBW]<a class="anchor" aria-label="anchor" href="#generalized-penrose-moore-inverse-solve-system-of-linear-equations-tbw"></a>
+<h3 id="generalized-penrose-moore-inverse-solve-system-of-linear-equations-tbw">Generalized (Penrose-Moore) inverse; solve system of linear
+equations [TBW]<a class="anchor" aria-label="anchor" href="#generalized-penrose-moore-inverse-solve-system-of-linear-equations-tbw"></a>
 </h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[1, 2, 3], [4, 5, 6]]"</span><span class="op">)</span></span>
@@ -283,7 +292,11 @@
 <div class="section level2">
 <h2 id="more-special-linear-algebra-functionality">More special linear algebra functionality<a class="anchor" aria-label="anchor" href="#more-special-linear-algebra-functionality"></a>
 </h2>
-<p>Below we present convenient functions for performing linear algebra operations. If you need a function in SymPy for which we have not supplied a convinience function (see <a href="https://docs.sympy.org/latest/modules/matrices/matrices.html" class="external-link uri">https://docs.sympy.org/latest/modules/matrices/matrices.html</a>), you can still call it with the <code><a href="../reference/do_la.html">do_la()</a></code> (short for “do linear algebra”) function presented at the end of this section.</p>
+<p>Below we present convenient functions for performing linear algebra
+operations. If you need a function in SymPy for which we have not
+supplied a convinience function (see <a href="https://docs.sympy.org/latest/modules/matrices/matrices.html" class="external-link uri">https://docs.sympy.org/latest/modules/matrices/matrices.html</a>),
+you can still call it with the <code><a href="../reference/do_la.html">do_la()</a></code> (short for “do
+linear algebra”) function presented at the end of this section.</p>
 <div class="section level3">
 <h3 id="qr-decomposition">QR decomposition<a class="anchor" aria-label="anchor" href="#qr-decomposition"></a>
 </h3>
@@ -295,9 +308,15 @@
 <span><span class="co">#&gt;            ⎣0  1⎦</span></span>
 <span><span class="va">qr_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linalg.html">QRdecomposition</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
 <span><span class="va">qr_res</span><span class="op">$</span><span class="va">Q</span></span>
-<span><span class="co">#&gt; [caracas]: [0  1]ᵀ</span></span>
+<span><span class="co">#&gt; [caracas]: ⎡ a    ⎤</span></span>
+<span><span class="co">#&gt;            ⎢───  0⎥</span></span>
+<span><span class="co">#&gt;            ⎢│a│   ⎥</span></span>
+<span><span class="co">#&gt;            ⎢      ⎥</span></span>
+<span><span class="co">#&gt;            ⎣ 0   1⎦</span></span>
 <span><span class="va">qr_res</span><span class="op">$</span><span class="va">R</span></span>
-<span><span class="co">#&gt; [caracas]: [0  1]</span></span></code></pre></div>
+<span><span class="co">#&gt; [caracas]: ⎡│a│  0⎤</span></span>
+<span><span class="co">#&gt;            ⎢      ⎥</span></span>
+<span><span class="co">#&gt;            ⎣ 0   1⎦</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="eigenvalues-and-eigenvectors">Eigenvalues and eigenvectors<a class="anchor" aria-label="anchor" href="#eigenvalues-and-eigenvectors"></a>
@@ -389,10 +408,16 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"QRdecomposition"</span><span class="op">)</span> <span class="co"># == QRdecomposition(A)</span></span>
 <span><span class="co">#&gt; $Q</span></span>
-<span><span class="co">#&gt; [caracas]: [0  1]ᵀ</span></span>
+<span><span class="co">#&gt; [caracas]: ⎡ a    ⎤</span></span>
+<span><span class="co">#&gt;            ⎢───  0⎥</span></span>
+<span><span class="co">#&gt;            ⎢│a│   ⎥</span></span>
+<span><span class="co">#&gt;            ⎢      ⎥</span></span>
+<span><span class="co">#&gt;            ⎣ 0   1⎦</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $R</span></span>
-<span><span class="co">#&gt; [caracas]: [0  1]</span></span>
+<span><span class="co">#&gt; [caracas]: ⎡│a│  0⎤</span></span>
+<span><span class="co">#&gt;            ⎢      ⎥</span></span>
+<span><span class="co">#&gt;            ⎣ 0   1⎦</span></span>
 <span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"inv"</span><span class="op">)</span>             <span class="co"># == inv(A)</span></span>
 <span><span class="co">#&gt; [caracas]: ⎡1   ⎤</span></span>
 <span><span class="co">#&gt;            ⎢─  0⎥</span></span>
@@ -655,7 +680,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

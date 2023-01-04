@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.9.9001</span>
       </span>
     </div>
 
@@ -33,6 +33,9 @@
   </a>
   <ul class="dropdown-menu" role="menu"><li>
       <a href="../articles/a01-introduction.html">01 - Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/a03-objects.html">03 - Objects in 'caracas'</a>
     </li>
     <li>
       <a href="../articles/a05-extend-caracas.html">05 - Extending 'caracas'</a>
@@ -86,23 +89,39 @@
         </td>
         <td><p>Numerical evaluation</p></td>
       </tr><tr><td>
+          <p><code><a href="all_vars.html">all_vars()</a></code> </p>
+        </td>
+        <td><p>All variables</p></td>
+      </tr><tr><td>
+          <p><code><a href="as_character.html">as_character()</a></code> </p>
+        </td>
+        <td><p>Coerce symbol to character</p></td>
+      </tr><tr><td>
           <p><code><a href="as_expr.html">as_expr()</a></code> </p>
         </td>
         <td><p>Convert caracas object to R</p></td>
       </tr><tr><td>
+          <p><code><a href="as_factor_list.html">as_factor_list()</a></code> </p>
+        </td>
+        <td><p>Create list of factors as in a product</p></td>
+      </tr><tr><td>
+          <p><code><a href="as_func.html">as_func()</a></code> </p>
+        </td>
+        <td><p>Convert expression into function object.</p></td>
+      </tr><tr><td>
           <p><code><a href="as_sym.html">as_sym()</a></code> </p>
         </td>
-        <td><p>Convert object to symbol</p></td>
+        <td><p>Convert R object to caracas symbol</p></td>
       </tr><tr><td>
-          <p><code><a href="def_sym.html">def_sym()</a></code> </p>
+          <p><code><a href="def_sym.html">def_sym()</a></code> <code><a href="def_sym.html">def_sym_vec()</a></code> </p>
         </td>
-        <td><p>Define caracas symbols in global environment</p></td>
+        <td><p>Define (invisibly) caracas symbols in global environment</p></td>
       </tr><tr><td>
           <p><code><a href="doit.html">doit()</a></code> </p>
         </td>
         <td><p>Perform calculations setup previously</p></td>
       </tr><tr><td>
-          <p><code><a href="fraction_parts.html">fraction_parts()</a></code> </p>
+          <p><code><a href="fraction_parts.html">fraction_parts()</a></code> <code><a href="fraction_parts.html">numerator()</a></code> <code><a href="fraction_parts.html">denominator()</a></code> </p>
         </td>
         <td><p>Get numerator and denominator of a fraction</p></td>
       </tr><tr><td>
@@ -110,9 +129,21 @@
         </td>
         <td><p>Get free symbol in expression</p></td>
       </tr><tr><td>
+          <p><code><a href="is_sym.html">is_sym()</a></code> </p>
+        </td>
+        <td><p>Is object a caracas symbol</p></td>
+      </tr><tr><td>
           <p><code><a href="listify.html">listify()</a></code> </p>
         </td>
         <td><p>Convert object to list of elements</p></td>
+      </tr><tr><td>
+          <p><code><a href="ls_sym.html">ls_sym()</a></code> </p>
+        </td>
+        <td><p>List defined symbols</p></td>
+      </tr><tr><td>
+          <p><code><a href="mat_div_mult.html">mat_factor_div()</a></code> <code><a href="mat_div_mult.html">mat_factor_mult()</a></code> </p>
+        </td>
+        <td><p>Divide or multiply matrix with factor.</p></td>
       </tr><tr><td>
           <p><code><a href="matrify.html">matrify()</a></code> </p>
         </td>
@@ -120,23 +151,23 @@
       </tr><tr><td>
           <p><code><a href="subs.html">subs()</a></code> </p>
         </td>
-        <td><p>Substitute af vector of symbols for a vector of values</p></td>
-      </tr><tr><td>
-          <p><code><a href="subs_lst.html">subs_lst()</a></code> </p>
-        </td>
-        <td><p>Substitute symbol for of value given by a list</p></td>
-      </tr><tr><td>
-          <p><code><a href="subs_single.html">subs_single()</a></code> </p>
-        </td>
         <td><p>Substitute symbol for value</p></td>
       </tr><tr><td>
           <p><code><a href="symbol.html">symbol()</a></code> </p>
         </td>
         <td><p>Create a symbol</p></td>
       </tr><tr><td>
+          <p><code><a href="symbol_class.html">symbol_class()</a></code> </p>
+        </td>
+        <td><p>Ask type of caracas symbol</p></td>
+      </tr><tr><td>
           <p><code><a href="sympy_func.html">sympy_func()</a></code> </p>
         </td>
         <td><p>Call a SymPy function directly on x</p></td>
+      </tr><tr><td>
+          <p><code><a href="to_something.html">to_list()</a></code> <code><a href="to_something.html">to_vector()</a></code> <code><a href="to_something.html">to_matrix()</a></code> </p>
+        </td>
+        <td><p>Coerce caracas object</p></td>
       </tr><tr><td>
           <p><code><a href="tuplify.html">tuplify()</a></code> </p>
         </td>
@@ -145,6 +176,10 @@
           <p><code><a href="unbracket.html">unbracket()</a></code> </p>
         </td>
         <td><p>Remove inner-most dimension</p></td>
+      </tr><tr><td>
+          <p><code><a href="vectorfy.html">vectorfy()</a></code> </p>
+        </td>
+        <td><p>Creates symbol vector from list of caracas symbols</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="basic-algebra">Basic algebra <a href="#basic-algebra" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Functions related to simple operations.</p>
@@ -182,6 +217,18 @@
           <p class="section-desc"></p><p>Functions related to simplifying and expanding expressions.</p>
         </th>
       </tr></tbody><tbody><tr><td>
+          <p><code><a href="apart.html">apart()</a></code> </p>
+        </td>
+        <td><p>Partial fraction decomposition on a rational function</p></td>
+      </tr><tr><td>
+          <p><code><a href="cancel.html">cancel()</a></code> </p>
+        </td>
+        <td><p>Put rational function into standard form</p></td>
+      </tr><tr><td>
+          <p><code><a href="collect.html">collect()</a></code> </p>
+        </td>
+        <td><p>Collects common powers of a term in an expression</p></td>
+      </tr><tr><td>
           <p><code><a href="expand.html">expand()</a></code> </p>
         </td>
         <td><p>Expand expression</p></td>
@@ -197,6 +244,10 @@
           <p><code><a href="expand_trig.html">expand_trig()</a></code> </p>
         </td>
         <td><p>Expand a trigonometric expression</p></td>
+      </tr><tr><td>
+          <p><code><a href="factor_.html">factor_()</a></code> </p>
+        </td>
+        <td><p>Expand expression</p></td>
       </tr><tr><td>
           <p><code><a href="simplify.html">simplify()</a></code> </p>
         </td>
@@ -222,6 +273,10 @@
         </td>
         <td><p>Integrate a function</p></td>
       </tr><tr><td>
+          <p><code><a href="jacobian.html">jacobian()</a></code> </p>
+        </td>
+        <td><p>Compute Jacobian</p></td>
+      </tr><tr><td>
           <p><code><a href="lim.html">lim()</a></code> </p>
         </td>
         <td><p>Limit of a function</p></td>
@@ -229,6 +284,10 @@
           <p><code><a href="prod_.html">prod_()</a></code> </p>
         </td>
         <td><p>Product of a function</p></td>
+      </tr><tr><td>
+          <p><code><a href="score_hessian.html">score()</a></code> <code><a href="score_hessian.html">hessian()</a></code> </p>
+        </td>
+        <td><p>Score and Hessian matrix</p></td>
       </tr><tr><td>
           <p><code><a href="sum_.html">sum_()</a></code> </p>
         </td>
@@ -274,6 +333,10 @@
         </td>
         <td><p>Symbolic diagonal matrix</p></td>
       </tr><tr><td>
+          <p><code><a href="diff_mat.html">diff_mat()</a></code> </p>
+        </td>
+        <td><p>Difference matrix</p></td>
+      </tr><tr><td>
           <p><code><a href="dim.caracas_symbol.html">dim(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
         </td>
         <td><p>Dimensions of a caracas symbol</p></td>
@@ -286,7 +349,11 @@
         </td>
         <td><p>Generate generic vectors and matrices</p></td>
       </tr><tr><td>
-          <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> </p>
+          <p><code><a href="get_basis.html">get_basis()</a></code> </p>
+        </td>
+        <td><p>Get basis</p></td>
+      </tr><tr><td>
+          <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">inv2fl()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> </p>
         </td>
         <td><p>Do linear algebra operation</p></td>
       </tr><tr><td>
@@ -302,6 +369,10 @@
         </td>
         <td><p>Symbolic matrix</p></td>
       </tr><tr><td>
+          <p><code><a href="matrix_cross_product.html">crossprod_()</a></code> <code><a href="matrix_cross_product.html">tcrossprod_()</a></code> </p>
+        </td>
+        <td><p>Matrix cross product</p></td>
+      </tr><tr><td>
           <p><code><a href="rankMatrix_.html">rankMatrix_()</a></code> </p>
         </td>
         <td><p>Rank of matrix</p></td>
@@ -309,6 +380,14 @@
           <p><code><a href="reciprocal_matrix.html">reciprocal_matrix()</a></code> </p>
         </td>
         <td><p>Elementwise reciprocal matrix</p></td>
+      </tr><tr><td>
+          <p><code><a href="rowSums_colSums.html">rowSums_()</a></code> <code><a href="rowSums_colSums.html">colSums_()</a></code> </p>
+        </td>
+        <td><p>Form Row and Column Sums</p></td>
+      </tr><tr><td>
+          <p><code><a href="special_matrices.html">zeros()</a></code> <code><a href="special_matrices.html">ones()</a></code> <code><a href="special_matrices.html">eye()</a></code> </p>
+        </td>
+        <td><p>Special matrices: zeros, ones, eyes</p></td>
       </tr><tr><td>
           <p><code><a href="symbol_is_matrix.html">symbol_is_matrix()</a></code> </p>
         </td>
@@ -342,6 +421,10 @@
         </td>
         <td><p>Convert symbol to character</p></td>
       </tr><tr><td>
+          <p><code><a href="print.caracas_factor_list.html">print(<i>&lt;caracas_factor_list&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print factor list</p></td>
+      </tr><tr><td>
           <p><code><a href="print.caracas_solve_sys_sol.html">print(<i>&lt;caracas_solve_sys_sol&gt;</i>)</a></code> </p>
         </td>
         <td><p>Print solution</p></td>
@@ -353,6 +436,14 @@
           <p><code><a href="tex.html">tex()</a></code> </p>
         </td>
         <td><p>Export object to TeX</p></td>
+      </tr><tr><td>
+          <p><code><a href="tex.caracas_factor_list.html">tex(<i>&lt;caracas_factor_list&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print factor list</p></td>
+      </tr><tr><td>
+          <p><code><a href="texshow.html">texshow()</a></code> </p>
+        </td>
+        <td><p>Dump latex representation of sympy object.</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="low-level-functions">Low level functions <a href="#low-level-functions" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>These are various utility functions that are normally only called by advanced users.</p>
@@ -398,21 +489,9 @@
           <p class="section-desc"></p><p>These are functions not mentioned above.</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="all_vars.html">all_vars()</a></code> </p>
-        </td>
-        <td><p>All variables</p></td>
-      </tr><tr><td>
-          <p><code><a href="get_basis.html">get_basis()</a></code> </p>
-        </td>
-        <td><p>Get basis</p></td>
-      </tr><tr><td>
           <p><code><a href="pipe.html">%&gt;%</a></code> </p>
         </td>
         <td><p>Pipe</p></td>
-      </tr><tr><td>
-          <p><code><a href="texshow.html">texshow()</a></code> </p>
-        </td>
-        <td><p>Dump latex representation of sympy object.</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="complete-reference">Complete reference <a href="#complete-reference" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
@@ -438,9 +517,17 @@
         </td>
         <td><p>All variables</p></td>
       </tr><tr><td>
+          <p><code><a href="apart.html">apart()</a></code> </p>
+        </td>
+        <td><p>Partial fraction decomposition on a rational function</p></td>
+      </tr><tr><td>
           <p><code><a href="as.character.caracas_symbol.html">as.character(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
         </td>
         <td><p>Convert symbol to character</p></td>
+      </tr><tr><td>
+          <p><code><a href="as_character.html">as_character()</a></code> </p>
+        </td>
+        <td><p>Coerce symbol to character</p></td>
       </tr><tr><td>
           <p><code><a href="as_character_matrix.html">as_character_matrix()</a></code> </p>
         </td>
@@ -454,21 +541,37 @@
         </td>
         <td><p>Convert caracas object to R</p></td>
       </tr><tr><td>
+          <p><code><a href="as_factor_list.html">as_factor_list()</a></code> </p>
+        </td>
+        <td><p>Create list of factors as in a product</p></td>
+      </tr><tr><td>
+          <p><code><a href="as_func.html">as_func()</a></code> </p>
+        </td>
+        <td><p>Convert expression into function object.</p></td>
+      </tr><tr><td>
           <p><code><a href="as_sym.html">as_sym()</a></code> </p>
         </td>
-        <td><p>Convert object to symbol</p></td>
+        <td><p>Convert R object to caracas symbol</p></td>
       </tr><tr><td>
           <p><code><a href="ask.html">ask()</a></code> </p>
         </td>
         <td><p>Ask for a symbol's property</p></td>
       </tr><tr><td>
+          <p><code><a href="cancel.html">cancel()</a></code> </p>
+        </td>
+        <td><p>Put rational function into standard form</p></td>
+      </tr><tr><td>
+          <p><code><a href="collect.html">collect()</a></code> </p>
+        </td>
+        <td><p>Collects common powers of a term in an expression</p></td>
+      </tr><tr><td>
           <p><code><a href="colspan.html">colspan()</a></code> </p>
         </td>
         <td><p>Column space (range) of a symbolic matrix</p></td>
       </tr><tr><td>
-          <p><code><a href="def_sym.html">def_sym()</a></code> </p>
+          <p><code><a href="def_sym.html">def_sym()</a></code> <code><a href="def_sym.html">def_sym_vec()</a></code> </p>
         </td>
-        <td><p>Define caracas symbols in global environment</p></td>
+        <td><p>Define (invisibly) caracas symbols in global environment</p></td>
       </tr><tr><td>
           <p><code><a href="der.html">der()</a></code> </p>
         </td>
@@ -497,6 +600,10 @@
           <p><code><a href="diag_.html">diag_()</a></code> </p>
         </td>
         <td><p>Symbolic diagonal matrix</p></td>
+      </tr><tr><td>
+          <p><code><a href="diff_mat.html">diff_mat()</a></code> </p>
+        </td>
+        <td><p>Difference matrix</p></td>
       </tr><tr><td>
           <p><code><a href="dim.caracas_symbol.html">dim(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
         </td>
@@ -534,7 +641,11 @@
         </td>
         <td><p>Expand a trigonometric expression</p></td>
       </tr><tr><td>
-          <p><code><a href="fraction_parts.html">fraction_parts()</a></code> </p>
+          <p><code><a href="factor_.html">factor_()</a></code> </p>
+        </td>
+        <td><p>Expand expression</p></td>
+      </tr><tr><td>
+          <p><code><a href="fraction_parts.html">fraction_parts()</a></code> <code><a href="fraction_parts.html">numerator()</a></code> <code><a href="fraction_parts.html">denominator()</a></code> </p>
         </td>
         <td><p>Get numerator and denominator of a fraction</p></td>
       </tr><tr><td>
@@ -570,17 +681,33 @@
         </td>
         <td><p>Integrate a function</p></td>
       </tr><tr><td>
+          <p><code><a href="is_sym.html">is_sym()</a></code> </p>
+        </td>
+        <td><p>Is object a caracas symbol</p></td>
+      </tr><tr><td>
+          <p><code><a href="jacobian.html">jacobian()</a></code> </p>
+        </td>
+        <td><p>Compute Jacobian</p></td>
+      </tr><tr><td>
           <p><code><a href="lim.html">lim()</a></code> </p>
         </td>
         <td><p>Limit of a function</p></td>
       </tr><tr><td>
-          <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> </p>
+          <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">inv2fl()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> </p>
         </td>
         <td><p>Do linear algebra operation</p></td>
       </tr><tr><td>
           <p><code><a href="listify.html">listify()</a></code> </p>
         </td>
         <td><p>Convert object to list of elements</p></td>
+      </tr><tr><td>
+          <p><code><a href="ls_sym.html">ls_sym()</a></code> </p>
+        </td>
+        <td><p>List defined symbols</p></td>
+      </tr><tr><td>
+          <p><code><a href="mat_div_mult.html">mat_factor_div()</a></code> <code><a href="mat_div_mult.html">mat_factor_mult()</a></code> </p>
+        </td>
+        <td><p>Divide or multiply matrix with factor.</p></td>
       </tr><tr><td>
           <p><code><a href="mat_pow.html">mat_pow()</a></code> </p>
         </td>
@@ -598,9 +725,17 @@
         </td>
         <td><p>Symbolic matrix</p></td>
       </tr><tr><td>
+          <p><code><a href="matrix_cross_product.html">crossprod_()</a></code> <code><a href="matrix_cross_product.html">tcrossprod_()</a></code> </p>
+        </td>
+        <td><p>Matrix cross product</p></td>
+      </tr><tr><td>
           <p><code><a href="pipe.html">%&gt;%</a></code> </p>
         </td>
         <td><p>Pipe</p></td>
+      </tr><tr><td>
+          <p><code><a href="print.caracas_factor_list.html">print(<i>&lt;caracas_factor_list&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print factor list</p></td>
       </tr><tr><td>
           <p><code><a href="print.caracas_solve_sys_sol.html">print(<i>&lt;caracas_solve_sys_sol&gt;</i>)</a></code> </p>
         </td>
@@ -622,6 +757,14 @@
         </td>
         <td><p>Elementwise reciprocal matrix</p></td>
       </tr><tr><td>
+          <p><code><a href="rowSums_colSums.html">rowSums_()</a></code> <code><a href="rowSums_colSums.html">colSums_()</a></code> </p>
+        </td>
+        <td><p>Form Row and Column Sums</p></td>
+      </tr><tr><td>
+          <p><code><a href="score_hessian.html">score()</a></code> <code><a href="score_hessian.html">hessian()</a></code> </p>
+        </td>
+        <td><p>Score and Hessian matrix</p></td>
+      </tr><tr><td>
           <p><code><a href="simplify.html">simplify()</a></code> </p>
         </td>
         <td><p>Simplify expression</p></td>
@@ -634,19 +777,15 @@
         </td>
         <td><p>Solves a system of non-linear equations</p></td>
       </tr><tr><td>
+          <p><code><a href="special_matrices.html">zeros()</a></code> <code><a href="special_matrices.html">ones()</a></code> <code><a href="special_matrices.html">eye()</a></code> </p>
+        </td>
+        <td><p>Special matrices: zeros, ones, eyes</p></td>
+      </tr><tr><td>
           <p><code><a href="sub-.caracas_symbol.html">`[`(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
         </td>
         <td><p>Extract or replace parts of an object</p></td>
       </tr><tr><td>
           <p><code><a href="subs.html">subs()</a></code> </p>
-        </td>
-        <td><p>Substitute af vector of symbols for a vector of values</p></td>
-      </tr><tr><td>
-          <p><code><a href="subs_lst.html">subs_lst()</a></code> </p>
-        </td>
-        <td><p>Substitute symbol for of value given by a list</p></td>
-      </tr><tr><td>
-          <p><code><a href="subs_single.html">subs_single()</a></code> </p>
         </td>
         <td><p>Substitute symbol for value</p></td>
       </tr><tr><td>
@@ -665,6 +804,10 @@
           <p><code><a href="symbol.html">symbol()</a></code> </p>
         </td>
         <td><p>Create a symbol</p></td>
+      </tr><tr><td>
+          <p><code><a href="symbol_class.html">symbol_class()</a></code> </p>
+        </td>
+        <td><p>Ask type of caracas symbol</p></td>
       </tr><tr><td>
           <p><code><a href="symbol_is_matrix.html">symbol_is_matrix()</a></code> </p>
         </td>
@@ -690,9 +833,17 @@
         </td>
         <td><p>Export object to TeX</p></td>
       </tr><tr><td>
+          <p><code><a href="tex.caracas_factor_list.html">tex(<i>&lt;caracas_factor_list&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print factor list</p></td>
+      </tr><tr><td>
           <p><code><a href="texshow.html">texshow()</a></code> </p>
         </td>
         <td><p>Dump latex representation of sympy object.</p></td>
+      </tr><tr><td>
+          <p><code><a href="to_something.html">to_list()</a></code> <code><a href="to_something.html">to_vector()</a></code> <code><a href="to_something.html">to_matrix()</a></code> </p>
+        </td>
+        <td><p>Coerce caracas object</p></td>
       </tr><tr><td>
           <p><code><a href="tuplify.html">tuplify()</a></code> </p>
         </td>
@@ -705,6 +856,10 @@
           <p><code><a href="vec.html">vec()</a></code> </p>
         </td>
         <td><p>Stacks matrix to vector</p></td>
+      </tr><tr><td>
+          <p><code><a href="vectorfy.html">vectorfy()</a></code> </p>
+        </td>
+        <td><p>Creates symbol vector from list of caracas symbols</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -718,7 +873,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

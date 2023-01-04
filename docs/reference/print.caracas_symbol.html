@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.9.9001</span>
       </span>
     </div>
 
@@ -33,6 +33,9 @@
   </a>
   <ul class="dropdown-menu" role="menu"><li>
       <a href="../articles/a01-introduction.html">01 - Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/a03-objects.html">03 - Objects in 'caracas'</a>
     </li>
     <li>
       <a href="../articles/a05-extend-caracas.html">05 - Extending 'caracas'</a>
@@ -88,8 +91,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  caracas_prefix <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  prettyascii <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"caracas.print.prettyascii"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
-<span>  ascii <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"caracas.print.ascii"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"caracas.print.method"</span>, default <span class="op">=</span> <span class="st">"utf8"</span><span class="op">)</span>,</span>
 <span>  rowvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"caracas.print.rowvec"</span>, default <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -105,20 +107,20 @@
 <dd><p>Print 'caracas' prefix</p></dd>
 
 
-<dt>prettyascii</dt>
-<dd><p><code>TRUE</code> to print in pretty ASCII format rather than in utf8</p></dd>
-
-
-<dt>ascii</dt>
-<dd><p><code>TRUE</code> to print in ASCII format rather than in utf8</p></dd>
-
-
 <dt>rowvec</dt>
 <dd><p><code>FALSE</code> to print column vectors as is</p></dd>
 
 
 <dt>...</dt>
 <dd><p>not used</p></dd>
+
+
+<dt>prettyascii</dt>
+<dd><p><code>TRUE</code> to print in pretty ASCII format rather than in utf8</p></dd>
+
+
+<dt>ascii</dt>
+<dd><p><code>TRUE</code> to print in ASCII format rather than in utf8</p></dd>
 
 </dl></div>
 
@@ -134,7 +136,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

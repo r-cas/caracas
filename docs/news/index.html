@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.9.9001</span>
       </span>
     </div>
 
@@ -33,6 +33,9 @@
   </a>
   <ul class="dropdown-menu" role="menu"><li>
       <a href="../articles/a01-introduction.html">01 - Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/a03-objects.html">03 - Objects in 'caracas'</a>
     </li>
     <li>
       <a href="../articles/a05-extend-caracas.html">05 - Extending 'caracas'</a>
@@ -79,6 +82,13 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="2.0.0" id="caracas-200">caracas 2.0.0<a class="anchor" aria-label="anchor" href="#caracas-200"></a></h2>
+<ul><li>Reworked <code><a href="../reference/subs.html">subs()</a></code> - see documentation. <code>subs_lst()</code> removed.</li>
+<li>Reworked output format (<code>utf8</code>, <code>prettyascii</code> or <code>ascii</code>) to one argument and one option, i.e.  <code>options(caracas.print.method = 'prettyascii')</code> and <code>print(x, method = "prettyascii")</code> (default is <code>utf8</code>)</li>
+<li>New function: <code><a href="../reference/as_func.html">as_func()</a></code>
+</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.3" id="caracas-113">caracas 1.1.3<a class="anchor" aria-label="anchor" href="#caracas-113"></a></h2>
 <ul><li>Imports the Matrix package instead of only suggesting</li>
 <li>New functions: <code><a href="../reference/generic-matrices.html">vector_sym()</a></code>, <code><a href="../reference/generic-matrices.html">matrix_sym()</a></code>, <code><a href="../reference/generic-matrices.html">matrix_sym_diag()</a></code>, <code><a href="../reference/generic-matrices.html">matrix_sym_symmetric()</a></code>
@@ -86,6 +96,13 @@
 <li>New function: <code><a href="../reference/colspan.html">colspan()</a></code> (Column space (range) of a symbolic matrix)</li>
 <li>New function: <code><a href="../reference/get_basis.html">get_basis()</a></code> Get basis for symbolic matrix / vector.</li>
 <li>New function: <code>all_vars</code> Get all symbols in caracas symbol.</li>
+<li>
+<code><a href="../reference/matrify.html">matrify()</a></code> now works on atomic elements.</li>
+<li>New function: <code><a href="../reference/def_sym.html">def_sym_vec()</a></code> defines symbol for each element in a character vector.</li>
+<li>New function: <code><a href="../reference/jacobian.html">jacobian()</a></code> function added.</li>
+<li>New functions: <code><a href="../reference/special_matrices.html">zeros()</a></code>, <code><a href="../reference/special_matrices.html">ones()</a></code>, <code><a href="../reference/special_matrices.html">eye()</a></code> added.</li>
+<li>New function: <code><a href="../reference/diff_mat.html">diff_mat()</a></code> added.</li>
+<li>New functions: <code><a href="../reference/matrix_cross_product.html">crossprod_()</a></code>, <code><a href="../reference/matrix_cross_product.html">tcrossprod_()</a></code> added.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.2" id="caracas-112">caracas 1.1.2<small>2022-02-11</small><a class="anchor" aria-label="anchor" href="#caracas-112"></a></h2>
@@ -101,7 +118,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.1" id="caracas-111">caracas 1.1.1<small>2021-07-05</small><a class="anchor" aria-label="anchor" href="#caracas-111"></a></h2>
-<ul><li>Journal of Open Source Software submission</li></ul></div>
+<ul><li>Journal of Open Source Software submission</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.0" id="caracas-110">caracas 1.1.0<small>2021-04-08</small><a class="anchor" aria-label="anchor" href="#caracas-110"></a></h2>
 <ul><li>Global symbol assignment by <code><a href="../reference/def_sym.html">def_sym()</a></code> (<a href="https://github.com/r-cas/caracas/issues/18" class="external-link">#18</a>)</li>
@@ -127,13 +145,16 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.1" id="caracas-101">caracas 1.0.1<small>2020-05-21</small><a class="anchor" aria-label="anchor" href="#caracas-101"></a></h2>
-<ul><li>Require Python 3</li></ul></div>
+<ul><li>Require Python 3</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.0" id="caracas-100">caracas 1.0.0<small>2020-05-21</small><a class="anchor" aria-label="anchor" href="#caracas-100"></a></h2>
-<ul><li>An entire new interface for using SymPy, including symbols, symbolic matrices, solving equations, limits and lots of other functionality.</li></ul></div>
+<ul><li>An entire new interface for using SymPy, including symbols, symbolic matrices, solving equations, limits and lots of other functionality.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.1" id="caracas-001">caracas 0.0.1<small>2020-01-26</small><a class="anchor" aria-label="anchor" href="#caracas-001"></a></h2>
-<ul><li>Initial release</li></ul></div>
+<ul><li>Initial release</li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -148,7 +169,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

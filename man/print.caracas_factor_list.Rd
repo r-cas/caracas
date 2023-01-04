@@ -2,7 +2,7 @@
 % Please edit documentation in R/output.R
 \name{print.caracas_factor_list}
 \alias{print.caracas_factor_list}
-\title{Print solution}
+\title{Print factor list}
 \usage{
 \method{print}{caracas_factor_list}(x, ...)
 }
@@ -12,6 +12,6 @@
 \item{\dots}{Passed to \code{\link[=print.caracas_symbol]{print.caracas_symbol()}}}
 }
 \description{
-Print solution
+Print factor list
 }
 \concept{output}

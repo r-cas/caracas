@@ -89,23 +89,20 @@ test_that("print ascii", {
   eq_print <- paste0(capture.output(print(eq)), collapse = "")
   expect_false(grepl("^", eq_print, fixed = TRUE))
   
-  o <- getOption("caracas.print.prettyascii") 
-  options(caracas.print.prettyascii = NULL) 
-  options(caracas.print.ascii = TRUE) # default is FALSE
+  o <- getOption("caracas.print.method") 
+  options(caracas.print.method = "ascii") 
   eq_print <- paste0(capture.output(print(eq)), collapse = "")
   expect_true(grepl("^", eq_print, fixed = TRUE))
   
-  options(caracas.print.ascii = FALSE)
+  options(caracas.print.method = NULL) # reset, default = 'utf8'
   
-  eq_print <- paste0(capture.output(print(eq, ascii = TRUE)), collapse = "")
+  eq_print <- paste0(capture.output(print(eq, method = "ascii")), collapse = "")
   expect_true(grepl("^", eq_print, fixed = TRUE))
   
-  eq_print <- paste0(capture.output(print(eq, ascii = FALSE)), collapse = "")
+  eq_print <- paste0(capture.output(print(eq)), collapse = "")
   expect_false(grepl("^", eq_print, fixed = TRUE))
   
-  options(caracas.print.ascii = NULL)
-  
-  options(caracas.print.prettyascii = o) 
+  options(caracas.print.method = o) 
 })
 
 test_that("print prettyascii", {
@@ -116,16 +113,16 @@ test_that("print prettyascii", {
   eq_print <- paste0(capture.output(print(eq)), collapse = "")
   expect_false(grepl("^", eq_print, fixed = TRUE))
   
-  options(caracas.print.prettyascii = TRUE) # default is FALSE
+  options(caracas.print.method = "prettyascii")
   eq_print <- paste0(capture.output(print(eq)), collapse = "")
   expect_true(grepl("*", eq_print, fixed = TRUE))
   
-  options(caracas.print.prettyascii = FALSE)
+  options(caracas.print.method = NULL)
   
-  eq_print <- paste0(capture.output(print(eq, prettyascii = TRUE)), collapse = "")
+  eq_print <- paste0(capture.output(print(eq, method = "prettyascii")), collapse = "")
   expect_true(grepl("*", eq_print, fixed = TRUE))
   
-  options(caracas.print.prettyascii = NULL)
+  options(caracas.print.method = NULL)
 })
 
 
@@ -145,16 +142,19 @@ test_that("custom printer: exp", {
   
   # Error on Win 3.6
   #expect_output(print(exp(2*n), prettyascii = FALSE, ascii = FALSE), "exp(2⋅n)", fixed = TRUE)
-  expect_output(print(exp(2*n), prettyascii = TRUE, ascii = FALSE), "exp(2*n)", fixed = TRUE)
-  expect_output(print(exp(2*n), prettyascii = FALSE, ascii = TRUE), "exp(2*n)", fixed = TRUE)
+  expect_output(print(exp(2*n), method = "prettyascii"), "exp(2*n)", fixed = TRUE)
+  expect_output(print(exp(2*n), method = "ascii"), "exp(2*n)", fixed = TRUE)
   
   
   f <- (1 + 1/n)^n
   lim_f <- lim(f, n, Inf)
   
-  expect_output(print(lim_f, prettyascii = FALSE, ascii = FALSE), "exp(1)", fixed = TRUE)
-  expect_output(print(lim_f, prettyascii = TRUE, ascii = FALSE), "exp(1)", fixed = TRUE)
-  expect_output(print(lim_f, prettyascii = FALSE, ascii = TRUE), "exp(1)", fixed = TRUE)
+  expect_output(print(lim_f), "exp(1)", fixed = TRUE)
+  expect_output(print(lim_f, method = "utf8"), "exp(1)", fixed = TRUE)
+  expect_output(print(lim_f, method = NULL), "exp(1)", fixed = TRUE)
+  
+  expect_output(print(lim_f, method = "prettyascii"), "exp(1)", fixed = TRUE)
+  expect_output(print(lim_f, method = "ascii"), "exp(1)", fixed = TRUE)
   
   
   lim_f_sym <- lim(f, n, Inf, doit = FALSE)
@@ -163,9 +163,11 @@ test_that("custom printer: exp", {
     paste0(capture.output(x), collapse = "")
   }
   
-  o1 <- outstr(print(lim_f_sym, prettyascii = FALSE, ascii = FALSE))
-  o2 <- outstr(print(lim_f_sym, prettyascii = TRUE, ascii = FALSE))
-  o3 <- outstr(print(lim_f_sym, prettyascii = FALSE, ascii = TRUE))
+  o1 <- outstr(print(lim_f_sym))
+  o1 <- outstr(print(lim_f_sym, method = "utf8"))
+  o1 <- outstr(print(lim_f_sym, method = NULL))
+  o2 <- outstr(print(lim_f_sym, method = "prettyascii"))
+  o3 <- outstr(print(lim_f_sym, method = "ascii"))
   
   expect_equal(o3, "[caracas]: Limit((1 + 1/n)^n, n, Inf, dir='-')")
   expect_equal(o2, "[caracas]:             n                /    1\\             lim |1 + -|            n->oo\\    n/")

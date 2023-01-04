@@ -12,3 +12,4 @@ symbol_class(x)
 \description{
 Ask type of caracas symbol
 }
+\concept{caracas_symbol}

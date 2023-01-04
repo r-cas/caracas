@@ -25,4 +25,6 @@ texshow(S)
 texshow(paste0("S = ", tex(S)))
 }
 }
+
 }
+\concept{output}

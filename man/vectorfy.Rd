@@ -12,3 +12,4 @@ vectorfy(x)
 \description{
 Creates symbol vector from list of caracas symbols
 }
+\concept{caracas_symbol}

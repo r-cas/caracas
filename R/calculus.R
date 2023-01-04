@@ -431,3 +431,78 @@ taylor <- function(f, x0 = 0, n = 6) {
   return(ft)
 }
 
+#' Score and Hessian matrix
+#'
+#' Compute column vector of first derivatives and matrix of second
+#' derivatives of univariate function.
+#' 
+#' @name score_hessian
+#' @param expr 'caracas expression'.
+#' @param vars variables to take derivative with respect to.
+#' @param simplify Try to simplify result using `simplify()`; may be time consuming.
+#' @seealso [jacobian()], [der()]
+#' @examples
+#' 
+#' if (has_sympy()) {
+#'   def_sym(b0, b1, x, x0)
+#'   f <- b0 / (1 + exp(b1*(x-x0)))
+#'   S <- score(f, c(b0, b1))
+#'   S
+#'   H <- hessian(f, c(b0, b1))
+#'   H
+#' }
+#' 
+#' @concept calculus
+#' @export
+#' @rdname score_hessian
+score <- function(expr, vars, simplify=TRUE){
+  ensure_sympy()
+  stopifnot_symbol(expr)
+  if (!symbol_is_atomic(expr)){
+    stop("'expr' must be atomic")
+  }
+  out <- der(expr, vars, simplify = simplify)
+  out <- to_matrix(out)
+  return(out)
+}
+
+#' @export
+#' @rdname score_hessian
+hessian <- function(expr, vars, simplify=TRUE){
+  ensure_sympy()
+  stopifnot_symbol(expr)
+  if (!symbol_is_atomic(expr)){
+    stop("'expr' must be atomic")
+  }
+  out <- der2(expr, vars, simplify = simplify)
+  return(to_matrix(out))
+}
+
+
+#' Compute Jacobian
+#'
+#' @param expr 'caracas expression'.
+#' @param vars variables to take derivative with respect to 
+#'
+#' @seealso [score()], [hessian()] [der()]
+#' @examples
+#' if (has_sympy()) {
+#'   x <- paste0("x", seq_len(3))
+#'   def_sym_vec(x)
+#'   y1 <- x1 + x2
+#'   y2 <- x1^2 + x3
+#'   y <- c(y1, y2)
+#'   jacobian(y, x)
+#'   u <- 2 + 4*x1^2
+#'   jacobian(u, x1)
+#' }
+#' @concept calculus
+#' @export
+jacobian <- function(expr, vars){
+  ensure_sympy()
+  stopifnot_symbol(expr)
+  out <- der(expr, vars)
+  out <- matrify(out)
+  out <- t(out)
+  return(out)
+}

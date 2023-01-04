@@ -1,4 +1,7 @@
 #' List defined symbols
+#' 
+#' @concept caracas_symbol
+#' 
 #' @export
 ls_sym <- function() {
  ensure_sympy()

@@ -13,6 +13,9 @@
     <loc>/articles/a01-introduction.html</loc>
   </url>
   <url>
+    <loc>/articles/a03-objects.html</loc>
+  </url>
+  <url>
     <loc>/articles/a05-extend-caracas.html</loc>
   </url>
   <url>
@@ -91,7 +94,13 @@
     <loc>/reference/all_vars.html</loc>
   </url>
   <url>
+    <loc>/reference/apart.html</loc>
+  </url>
+  <url>
     <loc>/reference/as.character.caracas_symbol.html</loc>
+  </url>
+  <url>
+    <loc>/reference/as_character.html</loc>
   </url>
   <url>
     <loc>/reference/as_character_matrix.html</loc>
@@ -103,10 +112,22 @@
     <loc>/reference/as_expr.html</loc>
   </url>
   <url>
+    <loc>/reference/as_factor_list.html</loc>
+  </url>
+  <url>
+    <loc>/reference/as_func.html</loc>
+  </url>
+  <url>
     <loc>/reference/as_sym.html</loc>
   </url>
   <url>
     <loc>/reference/ask.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cancel.html</loc>
+  </url>
+  <url>
+    <loc>/reference/collect.html</loc>
   </url>
   <url>
     <loc>/reference/colspan.html</loc>
@@ -142,6 +163,9 @@
     <loc>/reference/diag_sym.html</loc>
   </url>
   <url>
+    <loc>/reference/diff_mat.html</loc>
+  </url>
+  <url>
     <loc>/reference/dim.caracas_symbol.html</loc>
   </url>
   <url>
@@ -173,6 +197,9 @@
   </url>
   <url>
     <loc>/reference/expand_trig.html</loc>
+  </url>
+  <url>
+    <loc>/reference/factor_.html</loc>
   </url>
   <url>
     <loc>/reference/fraction_parts.html</loc>
@@ -220,6 +247,12 @@
     <loc>/reference/inv.html</loc>
   </url>
   <url>
+    <loc>/reference/is_sym.html</loc>
+  </url>
+  <url>
+    <loc>/reference/jacobian.html</loc>
+  </url>
+  <url>
     <loc>/reference/lim.html</loc>
   </url>
   <url>
@@ -230,6 +263,12 @@
   </url>
   <url>
     <loc>/reference/listify.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ls_sym.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mat_div_mult.html</loc>
   </url>
   <url>
     <loc>/reference/mat_pow.html</loc>
@@ -244,10 +283,16 @@
     <loc>/reference/matrix_.html</loc>
   </url>
   <url>
+    <loc>/reference/matrix_cross_product.html</loc>
+  </url>
+  <url>
     <loc>/reference/matrix_sym.html</loc>
   </url>
   <url>
     <loc>/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.caracas_factor_list.html</loc>
   </url>
   <url>
     <loc>/reference/print.caracas_solve_sys_sol.html</loc>
@@ -268,6 +313,12 @@
     <loc>/reference/reciprocal_matrix.html</loc>
   </url>
   <url>
+    <loc>/reference/rowSums_colSums.html</loc>
+  </url>
+  <url>
+    <loc>/reference/score_hessian.html</loc>
+  </url>
+  <url>
     <loc>/reference/simplify.html</loc>
   </url>
   <url>
@@ -275,6 +326,9 @@
   </url>
   <url>
     <loc>/reference/solve_sys.html</loc>
+  </url>
+  <url>
+    <loc>/reference/special_matrices.html</loc>
   </url>
   <url>
     <loc>/reference/sub-.caracas_symbol.html</loc>
@@ -307,6 +361,9 @@
     <loc>/reference/symbol.html</loc>
   </url>
   <url>
+    <loc>/reference/symbol_class.html</loc>
+  </url>
+  <url>
     <loc>/reference/symbol_is_matrix.html</loc>
   </url>
   <url>
@@ -322,10 +379,16 @@
     <loc>/reference/taylor.html</loc>
   </url>
   <url>
+    <loc>/reference/tex.caracas_factor_list.html</loc>
+  </url>
+  <url>
     <loc>/reference/tex.html</loc>
   </url>
   <url>
     <loc>/reference/texshow.html</loc>
+  </url>
+  <url>
+    <loc>/reference/to_something.html</loc>
   </url>
   <url>
     <loc>/reference/tuplify.html</loc>
@@ -335,5 +398,8 @@
   </url>
   <url>
     <loc>/reference/vec.html</loc>
+  </url>
+  <url>
+    <loc>/reference/vectorfy.html</loc>
   </url>
 </urlset>

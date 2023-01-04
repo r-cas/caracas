@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.9.9001</span>
       </span>
     </div>
 
@@ -52,6 +52,9 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="../articles/a01-introduction.html">01 - Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/a03-objects.html">03 - Objects in 'caracas'</a>
     </li>
     <li>
       <a href="../articles/a05-extend-caracas.html">05 - Extending 'caracas'</a>
@@ -112,8 +115,13 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas" class="external-link">caracas</a></span><span class="op">)</span></span></code></pre></div>
-<p>A <a href="https://ing.dk/artikel/taenkeboks-hurtigste-vej-mellem-a-b-1150-m-lang-232871" class="external-link">problem</a> was posted by the Danish newspaper, <em>Ingeniøren</em>, and it goes like this:</p>
-<p>You are in the middle of a dense forest located at <span class="math inline">\(A\)</span>. You need to get to <span class="math inline">\(C\)</span> in the fastest way possible, and you can only change direction once. You can walk directly via <span class="math inline">\(AB\)</span> to the dedicated walking path <span class="math inline">\(BC\)</span> where you can walk fast, you can take the direct path through the forest (<span class="math inline">\(AC\)</span>) where you have to walk slower, or cross through the forest to the dedicated walking path (<span class="math inline">\(AD\)</span> and then <span class="math inline">\(DC\)</span>).</p>
+<p>A <a href="https://ing.dk/artikel/taenkeboks-hurtigste-vej-mellem-a-b-1150-m-lang-232871" class="external-link">problem</a>
+was posted by the Danish newspaper, <em>Ingeniøren</em>, and it goes
+like this:</p>
+<p>You are in the middle of a dense forest located at <span class="math inline">\(A\)</span>. You need to get to <span class="math inline">\(C\)</span> in the fastest way possible, and you
+can only change direction once. You can walk directly via <span class="math inline">\(AB\)</span> to the dedicated walking path <span class="math inline">\(BC\)</span> where you can walk fast, you can take
+the direct path through the forest (<span class="math inline">\(AC\)</span>) where you have to walk slower, or
+cross through the forest to the dedicated walking path (<span class="math inline">\(AD\)</span> and then <span class="math inline">\(DC\)</span>).</p>
 <p><img src="a22-fastest-route_files/figure-html/unnamed-chunk-4-1.png" width="768"></p>
 <div class="section level2">
 <h2 id="information-given">Information given<a class="anchor" aria-label="anchor" href="#information-given"></a>
@@ -143,7 +151,9 @@
 <div class="section level3">
 <h3 id="length-of-line-segments">Length of line segments<a class="anchor" aria-label="anchor" href="#length-of-line-segments"></a>
 </h3>
-<p>We parameterise with <span class="math inline">\(k = |BD|\)</span>, the distance between <span class="math inline">\(B\)</span> and <span class="math inline">\(D\)</span>. That is, how much to walk on fast walking path before crossing into the forest.</p>
+<p>We parameterise with <span class="math inline">\(k = |BD|\)</span>,
+the distance between <span class="math inline">\(B\)</span> and <span class="math inline">\(D\)</span>. That is, how much to walk on fast
+walking path before crossing into the forest.</p>
 <p>Formulating using <code>caracas</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">AB</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">'300'</span><span class="op">)</span></span>
@@ -162,7 +172,12 @@
 <span><span class="co">#&gt; [caracas]:    ____________</span></span>
 <span><span class="co">#&gt;              ╱  2         </span></span>
 <span><span class="co">#&gt;            ╲╱  k  + 90000</span></span></code></pre></div>
-<p>So for a distance of <span class="math inline">\(|AD|\)</span>, you travel by 5 m/s, and then for a distance of <span class="math inline">\(- k + 100 \sqrt{91}\)</span> you travel by 2 m/s. Thus it takes <span class="math inline">\(\frac{\sqrt{k^{2} + 90000}}{2}\)</span> to travel <span class="math inline">\(AD\)</span> and <span class="math inline">\(- \frac{k}{5} + 20 \sqrt{91}\)</span> to travel <span class="math inline">\(DC\)</span>.</p>
+<p>So for a distance of <span class="math inline">\(|AD|\)</span>, you
+travel by 5 m/s, and then for a distance of <span class="math inline">\(- k + 100 \sqrt{91}\)</span> you travel by 2 m/s.
+Thus it takes <span class="math inline">\(\frac{\sqrt{k^{2} +
+90000}}{2}\)</span> to travel <span class="math inline">\(AD\)</span>
+and <span class="math inline">\(- \frac{k}{5} + 20 \sqrt{91}\)</span> to
+travel <span class="math inline">\(DC\)</span>.</p>
 <p>The question is: What is the fastest way to get from <span class="math inline">\(A\)</span> to <span class="math inline">\(C\)</span>?</p>
 <p>First, the total duration of the route is:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -181,7 +196,8 @@
 <span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html" class="external-link">eval</a></span><span class="op">(</span><span class="va">lfun</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="va">ks</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ks</span>, <span class="va">ls</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"k"</span>, ylab <span class="op">=</span> <span class="st">"Time A to C"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a22-fastest-route_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
-<p>It looks like a minimum around <span class="math inline">\(k = 150\)</span>.</p>
+<p>It looks like a minimum around <span class="math inline">\(k =
+150\)</span>.</p>
 <p>We find the analytical solution by first finding critical points:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">l</span>, <span class="va">k</span><span class="op">)</span></span>
@@ -202,11 +218,13 @@
 <span><span class="co">#&gt; [caracas]: 200⋅√21</span></span>
 <span><span class="co">#&gt;            ───────</span></span>
 <span><span class="co">#&gt;               7</span></span></code></pre></div>
-<p>The type of the critical point is found by considering the Hessian:</p>
+<p>The type of the critical point is found by considering the
+Hessian:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/eval.html" class="external-link">eval</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">dl</span>, <span class="va">k</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">best_k</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.001283121</span></span></code></pre></div>
-<p>Thus the critical point is indeed a minimum as suggested by the plot.</p>
+<p>Thus the critical point is indeed a minimum as suggested by the
+plot.</p>
 <p>The fastest route is thus obtained for <span class="math display">\[
   k = \frac{200 \sqrt{21}}{7} \approx 130.93 .
 \]</span> It has a length of (in meters)</p>
@@ -259,7 +277,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

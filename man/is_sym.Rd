@@ -7,8 +7,9 @@
 is_sym(x)
 }
 \arguments{
-\item{x}{factor list}
+\item{x}{object}
 }
 \description{
 Is object a caracas symbol
 }
+\concept{caracas_symbol}

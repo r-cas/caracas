@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.9.9001</span>
       </span>
     </div>
 
@@ -52,6 +52,9 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="../articles/a01-introduction.html">01 - Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/a03-objects.html">03 - Objects in 'caracas'</a>
     </li>
     <li>
       <a href="../articles/a05-extend-caracas.html">05 - Extending 'caracas'</a>
@@ -112,13 +115,22 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas" class="external-link">caracas</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"caracas.print.prettyascii"</span><span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"caracas.print.ascii"</span><span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>It is relatively easy to extend <code>caracas</code> by calling <code>SymPy</code> functions directly.</p>
-<p>This can be achived using <code>sympy_func(x, fun, ...)</code> that calls a member function on the object provided, i.e. <code>x$fun(...)</code>, or if that fails it calls a function from the global namespace <code>fun(x, ...)</code>.</p>
-<p>As an example consider inverting a regular matrix <span class="math inline">\(A\)</span>: Let <span class="math inline">\(B\)</span> be the inverse of <span class="math inline">\(A\)</span>. Then, using cofactors, <span class="math inline">\(B_{ij} =C_{ji} / det(A)\)</span>. The cofactor <span class="math inline">\(C_{ij}\)</span> is given as <span class="math inline">\(C_{ij}=(-1)^{i+j}M_{ij}\)</span> where <span class="math inline">\(M_{ij}\)</span> is the determinant of the submatrix of <span class="math inline">\(A\)</span> obtained by deleting the <span class="math inline">\(i\)</span>th row and the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(A\)</span>.</p>
-<p>A quick search <a href="https://docs.sympy.org/latest/modules/matrices/matrices.html" class="external-link uri">https://docs.sympy.org/latest/modules/matrices/matrices.html</a> shows that there are two relevant functions in <code>SymPy</code>: <code>cofactor</code> and <code>cofactor_matrix</code>.</p>
-<p>If these functions are not available in <code>caracas</code> they can be made so using <code>sympy_func</code>:</p>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>caracas.print.method <span class="op">=</span> <span class="st">"ascii"</span><span class="op">)</span></span></code></pre></div>
+<p>It is relatively easy to extend <code>caracas</code> by calling
+<code>SymPy</code> functions directly.</p>
+<p>This can be achived using <code>sympy_func(x, fun, ...)</code> that
+calls a member function on the object provided,
+i.e. <code>x$fun(...)</code>, or if that fails it calls a function from
+the global namespace <code>fun(x, ...)</code>.</p>
+<p>As an example consider inverting a regular matrix <span class="math inline">\(A\)</span>: Let <span class="math inline">\(B\)</span> be the inverse of <span class="math inline">\(A\)</span>. Then, using cofactors, <span class="math inline">\(B_{ij} =C_{ji} / det(A)\)</span>. The cofactor
+<span class="math inline">\(C_{ij}\)</span> is given as <span class="math inline">\(C_{ij}=(-1)^{i+j}M_{ij}\)</span> where <span class="math inline">\(M_{ij}\)</span> is the determinant of the
+submatrix of <span class="math inline">\(A\)</span> obtained by deleting
+the <span class="math inline">\(i\)</span>th row and the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(A\)</span>.</p>
+<p>A quick search <a href="https://docs.sympy.org/latest/modules/matrices/matrices.html" class="external-link uri">https://docs.sympy.org/latest/modules/matrices/matrices.html</a>
+shows that there are two relevant functions in <code>SymPy</code>:
+<code>cofactor</code> and <code>cofactor_matrix</code>.</p>
+<p>If these functions are not available in <code>caracas</code> they can
+be made so using <code>sympy_func</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cofactor_matrix</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/sympy_func.html">sympy_func</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"cofactor_matrix"</span><span class="op">)</span></span>
@@ -140,7 +152,7 @@
 <span><span class="co">#&gt;            [ a12*a23 - a13*a22, -a11*a23 + a13*a21,  a11*a22 - a12*a21]])</span></span>
 <span><span class="va">cc</span> <span class="op">&lt;-</span> <span class="fu">cofactor</span><span class="op">(</span><span class="va">A</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">cc</span></span>
-<span><span class="co">#&gt; [caracas]: 1.0*a22*a33 - 1.0*a23*a32</span></span></code></pre></div>
+<span><span class="co">#&gt; [caracas]: a22*a33 - a23*a32</span></span></code></pre></div>
 <p>We get the right answer</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">CC</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="../reference/linalg.html">det</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
@@ -167,7 +179,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

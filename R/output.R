@@ -14,23 +14,21 @@ indent_not_first_line <- function(x, indent = 0) {
 
 get_caracas_out <- function(x, 
                             caracas_prefix = TRUE, 
-                            prettyascii = getOption("caracas.print.prettyascii", 
-                                                    default = FALSE),
-                            ascii = getOption("caracas.print.ascii", 
-                                              default = FALSE),
-                            rowvec = getOption("caracas.print.rowvec", 
-                                                default = TRUE)) {
+                            method = getOption("caracas.print.method", default = "utf8"),
+                            rowvec = getOption("caracas.print.rowvec", default = TRUE)) {
   ensure_sympy()
   
   if (is.null(x$pyobj)) {
     stop("Unexpected")
   }
   
+  method <- match.arg(method, choices = c("utf8", "prettyascii", "ascii"))
+  
   py <- get_py()
   
   suffix <- ""
   
-  out <- if (!is.null(prettyascii) && as.logical(prettyascii) == TRUE) {
+  out <- if (method == "prettyascii") {
     # 'prettyascii'
     if (rowvec && symbol_is_matrix(x) && ncol(x) == 1L && nrow(x) > 1L) {
       #suffix <- intToUtf8(7488L) # T utf-8
@@ -41,10 +39,12 @@ get_caracas_out <- function(x,
       #reticulate::py_capture_output(get_sympy()$pprint(x$pyobj, use_unicode = FALSE))
       reticulate::py_capture_output(py$print_caracas(x$pyobj))
     }
-  } else if (!is.null(ascii) && as.logical(ascii) == TRUE) {
+  } else if (method == "ascii") {
     # 'ascii'
     python_strings_to_r(get_sympy()$sstr(x$pyobj))
   } else {
+    stopifnot(method == "utf8")
+    
     # 'utf8'
     if (rowvec && symbol_is_matrix(x) && ncol(x) == 1L && nrow(x) > 1L) {
       suffix <- intToUtf8(7488L) # T utf-8
@@ -83,16 +83,14 @@ get_caracas_out <- function(x,
 #' @export
 print.caracas_symbol <- function(x, 
                                  caracas_prefix = TRUE, 
-                                 prettyascii = getOption("caracas.print.prettyascii", default = FALSE),
-                                 ascii = getOption("caracas.print.ascii", default = FALSE), 
+                                 method = getOption("caracas.print.method", default = "utf8"), 
                                  rowvec = getOption("caracas.print.rowvec", 
                                                                default = TRUE),
                                  ...) {
   
   out <- get_caracas_out(x, 
                          caracas_prefix = caracas_prefix,
-                         prettyascii = prettyascii,
-                         ascii = ascii, 
+                         method = method, 
                          rowvec = rowvec)
   out <- paste0(out, "\n")
   cat(out)
@@ -155,7 +153,7 @@ print.caracas_solve_sys_sol <- function(x,
 }
 
 
-#' Print solution
+#' Print factor list
 #' 
 #' @param x A `caracas_factor_list`
 #' @param \dots Passed to [print.caracas_symbol()]
@@ -176,6 +174,18 @@ print.caracas_factor_list <- function(x, ...) {
   print(v)
   
   return(invisible(v))
+}
+
+#' Print factor list
+#'
+#' @param x factor list
+#' @param \dots Other arguments passed along
+#' @concept output
+#' @export
+tex.caracas_factor_list <- function(x, ...){
+  a <- unlist(lapply(x, tex, ...))
+  o <- paste(a, collapse = "  ")
+  o
 }
 
 
@@ -271,6 +281,9 @@ as.character.caracas_symbol <- function(x, replace_I = TRUE, ...) {
 #' texshow(paste0("S = ", tex(S)))
 #' }
 #' }
+#' 
+#' @concept output
+#' 
 #' @export
 texshow <- function(x){#, name="obj"){
   if (!requireNamespace("tinytex", quietly = TRUE) ||

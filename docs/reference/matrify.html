@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.9.9001</span>
       </span>
     </div>
 
@@ -33,6 +33,9 @@
   </a>
   <ul class="dropdown-menu" role="menu"><li>
       <a href="../articles/a01-introduction.html">01 - Introduction to 'caracas'</a>
+    </li>
+    <li>
+      <a href="../articles/a03-objects.html">03 - Objects in 'caracas'</a>
     </li>
     <li>
       <a href="../articles/a05-extend-caracas.html">05 - Extending 'caracas'</a>
@@ -75,7 +78,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Creates matrix from array symbol</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/HEAD/R/symbol.R" class="external-link"><code>R/symbol.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/HEAD/R/more-coerce.R" class="external-link"><code>R/more-coerce.R</code></a></small>
     <div class="hidden name"><code>matrify.Rd</code></div>
     </div>
 
@@ -100,6 +103,7 @@
 <span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="symbol.html">symbol</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="symbol.html">symbol</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">f</span> <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">*</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">x</span><span class="op">*</span><span class="va">y</span><span class="op">^</span><span class="fl">2</span></span></span>
+<span class="r-in"><span>  <span class="fu">matrify</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="der2.html">der2</a></span><span class="op">(</span><span class="va">f</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">h</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span></span>
@@ -123,7 +127,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

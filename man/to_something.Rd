@@ -19,3 +19,4 @@ to_matrix(x)
 \description{
 Coerce caracas object
 }
+\concept{caracas_symbol}
