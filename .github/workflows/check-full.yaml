@@ -63,8 +63,11 @@ jobs:
       - name: Install SymPy
         run: |
           library(reticulate)
-          reticulate::install_miniconda()
-          reticulate::py_discover_config()
+          reticulate::virtualenv_remove(reticulate::virtualenv_list())
+          reticulate::virtualenv_create('r-reticulate')
+          Sys.setenv(RETICULATE_PYTHON = "~/.virtualenvs/r-reticulate/bin/python")
+          cat('Sys.setenv(RETICULATE_PYTHON = "~/.virtualenvs/r-reticulate/bin/python")', file = "~/.Rprofile")
+          reticulate::reticulate::py_discover_config()
           reticulate::py_install("sympy")
         shell: Rscript {0}
       # < mikl
