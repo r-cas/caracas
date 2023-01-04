@@ -53,6 +53,10 @@ jobs:
       - name: setup r-reticulate venv
         shell: Rscript {0}
         run: |
+          # doBy Github:
+          remotes::install_github('hojsgaard/doby')
+          
+          # reticulate
           python_packages <- c("numpy", "sympy")
           
           library(reticulate)
