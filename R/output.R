@@ -73,8 +73,7 @@ get_caracas_out <- function(x,
 #' 
 #' @param x A `caracas_symbol`
 #' @param caracas_prefix Print 'caracas' prefix
-#' @param prettyascii `TRUE` to print in pretty ASCII format rather than in utf8
-#' @param ascii `TRUE` to print in ASCII format rather than in utf8
+#' @param method What way to print (`utf8`, `prettyascii` or `ascii`)
 #' @param rowvec `FALSE` to print column vectors as is
 #' @param \dots not used
 #'
