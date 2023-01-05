@@ -13,7 +13,7 @@ indent_not_first_line <- function(x, indent = 0) {
 }
 
 get_caracas_out <- function(x, 
-                            caracas_prefix = TRUE, 
+                            prompt = getOption("caracas.prompt", default = "[caracas]: "), 
                             method = getOption("caracas.print.method", default = "utf8"),
                             rowvec = getOption("caracas.print.rowvec", default = TRUE)) {
   ensure_sympy()
@@ -58,10 +58,9 @@ get_caracas_out <- function(x,
   
   out <- gsub("[ \n]+$", "", out) 
   
-  if (caracas_prefix) {
-    prefix <- '[caracas]: '
-    out <- indent_not_first_line(out, indent = nchar(prefix))
-    out <- paste0(prefix, out)
+  if (nchar(prompt) > 0) {
+    out <- indent_not_first_line(out, indent = nchar(prompt))
+    out <- paste0(prompt, out)
   }
   
   out <- paste0(out, suffix)
@@ -72,7 +71,7 @@ get_caracas_out <- function(x,
 #' Print symbol
 #' 
 #' @param x A `caracas_symbol`
-#' @param caracas_prefix Print 'caracas' prefix
+#' @param prompt Which prompt/prefix to print (default: 'C: ')
 #' @param method What way to print (`utf8`, `prettyascii` or `ascii`)
 #' @param rowvec `FALSE` to print column vectors as is
 #' @param \dots not used
@@ -81,14 +80,14 @@ get_caracas_out <- function(x,
 #' 
 #' @export
 print.caracas_symbol <- function(x, 
-                                 caracas_prefix = TRUE, 
+                                 prompt = getOption("caracas.prompt", default = "C: "), 
                                  method = getOption("caracas.print.method", default = "utf8"), 
                                  rowvec = getOption("caracas.print.rowvec", 
                                                                default = TRUE),
                                  ...) {
   
   out <- get_caracas_out(x, 
-                         caracas_prefix = caracas_prefix,
+                         prompt = prompt,
                          method = method, 
                          rowvec = rowvec)
   out <- paste0(out, "\n")
@@ -123,7 +122,7 @@ print.caracas_solve_sys_sol <- function(x,
       nms <- names(x[[i]])
       nms <- sprintf(paste0("%-", max(nchar(nms)), "s"), nms)
       
-      vals <- lapply(x[[i]], get_caracas_out, caracas_prefix = FALSE, ...)
+      vals <- lapply(x[[i]], get_caracas_out, prompt = "", ...)
       
       prefix <- "  "
       nms <- paste0(prefix, nms, " = ")
