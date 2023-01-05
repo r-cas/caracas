@@ -108,7 +108,7 @@
                         <h4 data-toc-skip class="author">Mikkel Meyer
 Andersen and Søren Højsgaard</h4>
             
-            <h4 data-toc-skip class="date">Wed Jan 4 15:40:49 2023</h4>
+            <h4 data-toc-skip class="date">Thu Jan 5 15:54:03 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/HEAD/vignettes/a11-linear-algebra.Rmd" class="external-link"><code>vignettes/a11-linear-algebra.Rmd</code></a></small>
       <div class="hidden name"><code>a11-linear-algebra.Rmd</code></div>
@@ -135,40 +135,40 @@ github at [<a href="https://github.com/r-cas/caracas" class="external-link uri">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"0"</span>, <span class="st">"1"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">A</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡a  0⎤</span></span>
-<span><span class="co">#&gt;            ⎢    ⎥</span></span>
-<span><span class="co">#&gt;            ⎣b  1⎦</span></span>
+<span><span class="co">#&gt; c: ⎡a  0⎤</span></span>
+<span><span class="co">#&gt;    ⎢    ⎥</span></span>
+<span><span class="co">#&gt;    ⎣b  1⎦</span></span>
 <span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_.html">matrix_</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"0"</span>, <span class="st">"1"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span> <span class="co"># note the '_' postfix</span></span>
 <span><span class="va">A</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡a  0⎤</span></span>
-<span><span class="co">#&gt;            ⎢    ⎥</span></span>
-<span><span class="co">#&gt;            ⎣b  1⎦</span></span>
+<span><span class="co">#&gt; c: ⎡a  0⎤</span></span>
+<span><span class="co">#&gt;    ⎢    ⎥</span></span>
+<span><span class="co">#&gt;    ⎣b  1⎦</span></span>
 <span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[a, 0], [b, 1]]"</span><span class="op">)</span></span>
 <span><span class="va">A</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡a  0⎤</span></span>
-<span><span class="co">#&gt;            ⎢    ⎥</span></span>
-<span><span class="co">#&gt;            ⎣b  1⎦</span></span>
+<span><span class="co">#&gt; c: ⎡a  0⎤</span></span>
+<span><span class="co">#&gt;    ⎢    ⎥</span></span>
+<span><span class="co">#&gt;    ⎣b  1⎦</span></span>
 <span></span>
 <span><span class="va">A2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_.html">matrix_</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"1"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">A2</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡a  c⎤</span></span>
-<span><span class="co">#&gt;            ⎢    ⎥</span></span>
-<span><span class="co">#&gt;            ⎣b  1⎦</span></span>
+<span><span class="co">#&gt; c: ⎡a  c⎤</span></span>
+<span><span class="co">#&gt;    ⎢    ⎥</span></span>
+<span><span class="co">#&gt;    ⎣b  1⎦</span></span>
 <span></span>
 <span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_.html">matrix_</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"0"</span>, </span>
 <span>              <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"a"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">B</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡a  0  c⎤</span></span>
-<span><span class="co">#&gt;            ⎢       ⎥</span></span>
-<span><span class="co">#&gt;            ⎣b  c  a⎦</span></span>
+<span><span class="co">#&gt; c: ⎡a  0  c⎤</span></span>
+<span><span class="co">#&gt;    ⎢       ⎥</span></span>
+<span><span class="co">#&gt;    ⎣b  c  a⎦</span></span>
 <span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_.html">matrix_</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"b1"</span>, <span class="st">"b2"</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/diag_.html">diag_</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span> <span class="co"># note the '_' postfix</span></span>
 <span><span class="va">D</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡a  0⎤</span></span>
-<span><span class="co">#&gt;            ⎢    ⎥</span></span>
-<span><span class="co">#&gt;            ⎣0  b⎦</span></span></code></pre></div>
+<span><span class="co">#&gt; c: ⎡a  0⎤</span></span>
+<span><span class="co">#&gt;    ⎢    ⎥</span></span>
+<span><span class="co">#&gt;    ⎣0  b⎦</span></span></code></pre></div>
 <p>Note that a vector is a matrix in which one of the dimensions is
 one.</p>
 </div>
@@ -177,25 +177,25 @@ one.</p>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">A</span> <span class="op">+</span> <span class="va">A2</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡2⋅a  c⎤</span></span>
-<span><span class="co">#&gt;            ⎢      ⎥</span></span>
-<span><span class="co">#&gt;            ⎣2⋅b  2⎦</span></span>
+<span><span class="co">#&gt; c: ⎡2⋅a  c⎤</span></span>
+<span><span class="co">#&gt;    ⎢      ⎥</span></span>
+<span><span class="co">#&gt;    ⎣2⋅b  2⎦</span></span>
 <span><span class="va">A</span> <span class="op"><a href="../reference/matrix-products.html">%*%</a></span> <span class="va">B</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡   2               ⎤</span></span>
-<span><span class="co">#&gt;            ⎢  a      0    a⋅c  ⎥</span></span>
-<span><span class="co">#&gt;            ⎢                   ⎥</span></span>
-<span><span class="co">#&gt;            ⎣a⋅b + b  c  a + b⋅c⎦</span></span></code></pre></div>
+<span><span class="co">#&gt; c: ⎡   2               ⎤</span></span>
+<span><span class="co">#&gt;    ⎢  a      0    a⋅c  ⎥</span></span>
+<span><span class="co">#&gt;    ⎢                   ⎥</span></span>
+<span><span class="co">#&gt;    ⎣a⋅b + b  c  a + b⋅c⎦</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="hadamard-elementwise-product">Hadamard (elementwise) product<a class="anchor" aria-label="anchor" href="#hadamard-elementwise-product"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">A</span> <span class="op">*</span> <span class="va">A2</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡ 2   ⎤</span></span>
-<span><span class="co">#&gt;            ⎢a   0⎥</span></span>
-<span><span class="co">#&gt;            ⎢     ⎥</span></span>
-<span><span class="co">#&gt;            ⎢ 2   ⎥</span></span>
-<span><span class="co">#&gt;            ⎣b   1⎦</span></span></code></pre></div>
+<span><span class="co">#&gt; c: ⎡ 2   ⎤</span></span>
+<span><span class="co">#&gt;    ⎢a   0⎥</span></span>
+<span><span class="co">#&gt;    ⎢     ⎥</span></span>
+<span><span class="co">#&gt;    ⎢ 2   ⎥</span></span>
+<span><span class="co">#&gt;    ⎣b   1⎦</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="vector-operations">Vector operations<a class="anchor" aria-label="anchor" href="#vector-operations"></a>
@@ -203,36 +203,36 @@ one.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
-<span><span class="co">#&gt; [caracas]: [x₁  x₂  x₃]ᵀ</span></span>
+<span><span class="co">#&gt; c: [x₁  x₂  x₃]ᵀ</span></span>
 <span><span class="va">x</span> <span class="op">+</span> <span class="va">x</span></span>
-<span><span class="co">#&gt; [caracas]: [2⋅x₁  2⋅x₂  2⋅x₃]ᵀ</span></span>
+<span><span class="co">#&gt; c: [2⋅x₁  2⋅x₂  2⋅x₃]ᵀ</span></span>
 <span><span class="fl">1</span> <span class="op">/</span> <span class="va">x</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡1   1   1 ⎤</span></span>
-<span><span class="co">#&gt;            ⎢──  ──  ──⎥</span></span>
-<span><span class="co">#&gt;            ⎣x₁  x₂  x₃⎦ᵀ</span></span>
+<span><span class="co">#&gt; c: ⎡1   1   1 ⎤</span></span>
+<span><span class="co">#&gt;    ⎢──  ──  ──⎥</span></span>
+<span><span class="co">#&gt;    ⎣x₁  x₂  x₃⎦ᵀ</span></span>
 <span><span class="va">x</span> <span class="op">/</span> <span class="va">x</span></span>
-<span><span class="co">#&gt; [caracas]: [1  1  1]ᵀ</span></span></code></pre></div>
+<span><span class="co">#&gt; c: [1  1  1]ᵀ</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="reciprocal-matrix">Reciprocal matrix<a class="anchor" aria-label="anchor" href="#reciprocal-matrix"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/reciprocal_matrix.html">reciprocal_matrix</a></span><span class="op">(</span><span class="va">A2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡1  1⎤</span></span>
-<span><span class="co">#&gt;            ⎢─  ─⎥</span></span>
-<span><span class="co">#&gt;            ⎢a  c⎥</span></span>
-<span><span class="co">#&gt;            ⎢    ⎥</span></span>
-<span><span class="co">#&gt;            ⎢1   ⎥</span></span>
-<span><span class="co">#&gt;            ⎢─  1⎥</span></span>
-<span><span class="co">#&gt;            ⎣b   ⎦</span></span>
+<span><span class="co">#&gt; c: ⎡1  1⎤</span></span>
+<span><span class="co">#&gt;    ⎢─  ─⎥</span></span>
+<span><span class="co">#&gt;    ⎢a  c⎥</span></span>
+<span><span class="co">#&gt;    ⎢    ⎥</span></span>
+<span><span class="co">#&gt;    ⎢1   ⎥</span></span>
+<span><span class="co">#&gt;    ⎢─  1⎥</span></span>
+<span><span class="co">#&gt;    ⎣b   ⎦</span></span>
 <span><span class="fu"><a href="../reference/reciprocal_matrix.html">reciprocal_matrix</a></span><span class="op">(</span><span class="va">A2</span>, num <span class="op">=</span> <span class="st">"2*a"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡     2⋅a⎤</span></span>
-<span><span class="co">#&gt;            ⎢ 2   ───⎥</span></span>
-<span><span class="co">#&gt;            ⎢      c ⎥</span></span>
-<span><span class="co">#&gt;            ⎢        ⎥</span></span>
-<span><span class="co">#&gt;            ⎢2⋅a     ⎥</span></span>
-<span><span class="co">#&gt;            ⎢───  2⋅a⎥</span></span>
-<span><span class="co">#&gt;            ⎣ b      ⎦</span></span></code></pre></div>
+<span><span class="co">#&gt; c: ⎡     2⋅a⎤</span></span>
+<span><span class="co">#&gt;    ⎢ 2   ───⎥</span></span>
+<span><span class="co">#&gt;    ⎢      c ⎥</span></span>
+<span><span class="co">#&gt;    ⎢        ⎥</span></span>
+<span><span class="co">#&gt;    ⎢2⋅a     ⎥</span></span>
+<span><span class="co">#&gt;    ⎢───  2⋅a⎥</span></span>
+<span><span class="co">#&gt;    ⎣ b      ⎦</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="matrix-inverse-solve-system-of-linear-equations">Matrix inverse; solve system of linear equations<a class="anchor" aria-label="anchor" href="#matrix-inverse-solve-system-of-linear-equations"></a>
@@ -240,20 +240,20 @@ one.</p>
 <p>Solve <span class="math inline">\(Ax=b\)</span> for <span class="math inline">\(x\)</span>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡ 1    ⎤</span></span>
-<span><span class="co">#&gt;            ⎢ ─   0⎥</span></span>
-<span><span class="co">#&gt;            ⎢ a    ⎥</span></span>
-<span><span class="co">#&gt;            ⎢      ⎥</span></span>
-<span><span class="co">#&gt;            ⎢-b    ⎥</span></span>
-<span><span class="co">#&gt;            ⎢───  1⎥</span></span>
-<span><span class="co">#&gt;            ⎣ a    ⎦</span></span>
+<span><span class="co">#&gt; c: ⎡ 1    ⎤</span></span>
+<span><span class="co">#&gt;    ⎢ ─   0⎥</span></span>
+<span><span class="co">#&gt;    ⎢ a    ⎥</span></span>
+<span><span class="co">#&gt;    ⎢      ⎥</span></span>
+<span><span class="co">#&gt;    ⎢-b    ⎥</span></span>
+<span><span class="co">#&gt;    ⎢───  1⎥</span></span>
+<span><span class="co">#&gt;    ⎣ a    ⎦</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_lin.html">solve_lin</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">b</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡b₁       b⋅b₁⎤</span></span>
-<span><span class="co">#&gt;            ⎢──  b₂ - ────⎥</span></span>
-<span><span class="co">#&gt;            ⎣a         a  ⎦ᵀ</span></span>
+<span><span class="co">#&gt; c: ⎡b₁       b⋅b₁⎤</span></span>
+<span><span class="co">#&gt;    ⎢──  b₂ - ────⎥</span></span>
+<span><span class="co">#&gt;    ⎣a         a  ⎦ᵀ</span></span>
 <span><span class="va">A</span> <span class="op"><a href="../reference/matrix-products.html">%*%</a></span> <span class="va">x</span> <span class="co">## Sanity check</span></span>
-<span><span class="co">#&gt; [caracas]: [b₁  b₂]ᵀ</span></span></code></pre></div>
+<span><span class="co">#&gt; c: [b₁  b₂]ᵀ</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="generalized-penrose-moore-inverse-solve-system-of-linear-equations-tbw">Generalized (Penrose-Moore) inverse; solve system of linear
@@ -262,31 +262,31 @@ equations [TBW]<a class="anchor" aria-label="anchor" href="#generalized-penrose-
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[1, 2, 3], [4, 5, 6]]"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/linalg.html">pinv</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡-17       ⎤</span></span>
-<span><span class="co">#&gt;            ⎢────  4/9 ⎥</span></span>
-<span><span class="co">#&gt;            ⎢ 18       ⎥</span></span>
-<span><span class="co">#&gt;            ⎢          ⎥</span></span>
-<span><span class="co">#&gt;            ⎢-1/9  1/9 ⎥</span></span>
-<span><span class="co">#&gt;            ⎢          ⎥</span></span>
-<span><span class="co">#&gt;            ⎢ 13       ⎥</span></span>
-<span><span class="co">#&gt;            ⎢ ──   -2/9⎥</span></span>
-<span><span class="co">#&gt;            ⎣ 18       ⎦</span></span>
+<span><span class="co">#&gt; c: ⎡-17       ⎤</span></span>
+<span><span class="co">#&gt;    ⎢────  4/9 ⎥</span></span>
+<span><span class="co">#&gt;    ⎢ 18       ⎥</span></span>
+<span><span class="co">#&gt;    ⎢          ⎥</span></span>
+<span><span class="co">#&gt;    ⎢-1/9  1/9 ⎥</span></span>
+<span><span class="co">#&gt;    ⎢          ⎥</span></span>
+<span><span class="co">#&gt;    ⎢ 13       ⎥</span></span>
+<span><span class="co">#&gt;    ⎢ ──   -2/9⎥</span></span>
+<span><span class="co">#&gt;    ⎣ 18       ⎦</span></span>
 <span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[7], [8]]"</span><span class="op">)</span> </span>
 <span><span class="va">B</span></span>
-<span><span class="co">#&gt; [caracas]: [7  8]ᵀ</span></span>
+<span><span class="co">#&gt; c: [7  8]ᵀ</span></span>
 <span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">M</span>, <span class="st">"pinv_solve"</span>, <span class="va">B</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">z</span>, rowvec <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># Do not print column vectors as transposed row vectors</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡ w₀ ₀   w₁ ₀   w₂ ₀   55  ⎤</span></span>
-<span><span class="co">#&gt;            ⎢ ──── - ──── + ──── - ──  ⎥</span></span>
-<span><span class="co">#&gt;            ⎢  6      3      6     18  ⎥</span></span>
-<span><span class="co">#&gt;            ⎢                          ⎥</span></span>
-<span><span class="co">#&gt;            ⎢  w₀ ₀   2⋅w₁ ₀   w₂ ₀   1⎥</span></span>
-<span><span class="co">#&gt;            ⎢- ──── + ────── - ──── + ─⎥</span></span>
-<span><span class="co">#&gt;            ⎢   3       3       3     9⎥</span></span>
-<span><span class="co">#&gt;            ⎢                          ⎥</span></span>
-<span><span class="co">#&gt;            ⎢ w₀ ₀   w₁ ₀   w₂ ₀   59  ⎥</span></span>
-<span><span class="co">#&gt;            ⎢ ──── - ──── + ──── + ──  ⎥</span></span>
-<span><span class="co">#&gt;            ⎣  6      3      6     18  ⎦</span></span></code></pre></div>
+<span><span class="co">#&gt; c: ⎡ w₀ ₀   w₁ ₀   w₂ ₀   55  ⎤</span></span>
+<span><span class="co">#&gt;    ⎢ ──── - ──── + ──── - ──  ⎥</span></span>
+<span><span class="co">#&gt;    ⎢  6      3      6     18  ⎥</span></span>
+<span><span class="co">#&gt;    ⎢                          ⎥</span></span>
+<span><span class="co">#&gt;    ⎢  w₀ ₀   2⋅w₁ ₀   w₂ ₀   1⎥</span></span>
+<span><span class="co">#&gt;    ⎢- ──── + ────── - ──── + ─⎥</span></span>
+<span><span class="co">#&gt;    ⎢   3       3       3     9⎥</span></span>
+<span><span class="co">#&gt;    ⎢                          ⎥</span></span>
+<span><span class="co">#&gt;    ⎢ w₀ ₀   w₁ ₀   w₂ ₀   59  ⎥</span></span>
+<span><span class="co">#&gt;    ⎢ ──── - ──── + ──── + ──  ⎥</span></span>
+<span><span class="co">#&gt;    ⎣  6      3      6     18  ⎦</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -303,20 +303,20 @@ linear algebra”) function presented at the end of this section.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"0"</span>, <span class="st">"0"</span>, <span class="st">"1"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">A</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡a  0⎤</span></span>
-<span><span class="co">#&gt;            ⎢    ⎥</span></span>
-<span><span class="co">#&gt;            ⎣0  1⎦</span></span>
+<span><span class="co">#&gt; c: ⎡a  0⎤</span></span>
+<span><span class="co">#&gt;    ⎢    ⎥</span></span>
+<span><span class="co">#&gt;    ⎣0  1⎦</span></span>
 <span><span class="va">qr_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linalg.html">QRdecomposition</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
 <span><span class="va">qr_res</span><span class="op">$</span><span class="va">Q</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡ a    ⎤</span></span>
-<span><span class="co">#&gt;            ⎢───  0⎥</span></span>
-<span><span class="co">#&gt;            ⎢│a│   ⎥</span></span>
-<span><span class="co">#&gt;            ⎢      ⎥</span></span>
-<span><span class="co">#&gt;            ⎣ 0   1⎦</span></span>
+<span><span class="co">#&gt; c: ⎡ a    ⎤</span></span>
+<span><span class="co">#&gt;    ⎢───  0⎥</span></span>
+<span><span class="co">#&gt;    ⎢│a│   ⎥</span></span>
+<span><span class="co">#&gt;    ⎢      ⎥</span></span>
+<span><span class="co">#&gt;    ⎣ 0   1⎦</span></span>
 <span><span class="va">qr_res</span><span class="op">$</span><span class="va">R</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡│a│  0⎤</span></span>
-<span><span class="co">#&gt;            ⎢      ⎥</span></span>
-<span><span class="co">#&gt;            ⎣ 0   1⎦</span></span></code></pre></div>
+<span><span class="co">#&gt; c: ⎡│a│  0⎤</span></span>
+<span><span class="co">#&gt;    ⎢      ⎥</span></span>
+<span><span class="co">#&gt;    ⎣ 0   1⎦</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="eigenvalues-and-eigenvectors">Eigenvalues and eigenvectors<a class="anchor" aria-label="anchor" href="#eigenvalues-and-eigenvectors"></a>
@@ -325,7 +325,7 @@ linear algebra”) function presented at the end of this section.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/linalg.html">eigenval</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [[1]]$eigval</span></span>
-<span><span class="co">#&gt; [caracas]: a</span></span>
+<span><span class="co">#&gt; c: a</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[1]]$eigmult</span></span>
 <span><span class="co">#&gt; [1] 1</span></span>
@@ -333,7 +333,7 @@ linear algebra”) function presented at the end of this section.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; [[2]]$eigval</span></span>
-<span><span class="co">#&gt; [caracas]: 1</span></span>
+<span><span class="co">#&gt; c: 1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]$eigmult</span></span>
 <span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
@@ -342,59 +342,59 @@ linear algebra”) function presented at the end of this section.</p>
 <span><span class="va">evec</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [[1]]$eigval</span></span>
-<span><span class="co">#&gt; [caracas]: 1</span></span>
+<span><span class="co">#&gt; c: 1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[1]]$eigmult</span></span>
 <span><span class="co">#&gt; [1] 1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[1]]$eigvec</span></span>
-<span><span class="co">#&gt; [caracas]: [0  1]ᵀ</span></span>
+<span><span class="co">#&gt; c: [0  1]ᵀ</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; [[2]]$eigval</span></span>
-<span><span class="co">#&gt; [caracas]: a</span></span>
+<span><span class="co">#&gt; c: a</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]$eigmult</span></span>
 <span><span class="co">#&gt; [1] 1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]$eigvec</span></span>
-<span><span class="co">#&gt; [caracas]: [1  0]ᵀ</span></span>
+<span><span class="co">#&gt; c: [1  0]ᵀ</span></span>
 <span><span class="va">evec1</span> <span class="op">&lt;-</span> <span class="va">evec</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">eigvec</span></span>
 <span><span class="va">evec1</span></span>
-<span><span class="co">#&gt; [caracas]: [0  1]ᵀ</span></span>
+<span><span class="co">#&gt; c: [0  1]ᵀ</span></span>
 <span><span class="fu"><a href="../reference/simplify.html">simplify</a></span><span class="op">(</span><span class="va">evec1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: [0  1]ᵀ</span></span>
+<span><span class="co">#&gt; c: [0  1]ᵀ</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">evec</span>, <span class="kw">function</span><span class="op">(</span><span class="va">l</span><span class="op">)</span> <span class="fu"><a href="../reference/simplify.html">simplify</a></span><span class="op">(</span><span class="va">l</span><span class="op">$</span><span class="va">eigvec</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [caracas]: [0  1]ᵀ</span></span>
+<span><span class="co">#&gt; c: [0  1]ᵀ</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [caracas]: [1  0]ᵀ</span></span></code></pre></div>
+<span><span class="co">#&gt; c: [1  0]ᵀ</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="inverse-penrose-moore-pseudo-inverse">Inverse, Penrose-Moore pseudo inverse<a class="anchor" aria-label="anchor" href="#inverse-penrose-moore-pseudo-inverse"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡1   ⎤</span></span>
-<span><span class="co">#&gt;            ⎢─  0⎥</span></span>
-<span><span class="co">#&gt;            ⎢a   ⎥</span></span>
-<span><span class="co">#&gt;            ⎢    ⎥</span></span>
-<span><span class="co">#&gt;            ⎣0  1⎦</span></span>
+<span><span class="co">#&gt; c: ⎡1   ⎤</span></span>
+<span><span class="co">#&gt;    ⎢─  0⎥</span></span>
+<span><span class="co">#&gt;    ⎢a   ⎥</span></span>
+<span><span class="co">#&gt;    ⎢    ⎥</span></span>
+<span><span class="co">#&gt;    ⎣0  1⎦</span></span>
 <span><span class="fu"><a href="../reference/linalg.html">pinv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">A</span><span class="op">)</span><span class="op">)</span> <span class="co"># pseudo inverse</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡ 1      ⎤</span></span>
-<span><span class="co">#&gt;            ⎢───   0 ⎥</span></span>
-<span><span class="co">#&gt;            ⎢2⋅a     ⎥</span></span>
-<span><span class="co">#&gt;            ⎢        ⎥</span></span>
-<span><span class="co">#&gt;            ⎢ 0   1/2⎥</span></span>
-<span><span class="co">#&gt;            ⎢        ⎥</span></span>
-<span><span class="co">#&gt;            ⎢ 1      ⎥</span></span>
-<span><span class="co">#&gt;            ⎢───   0 ⎥</span></span>
-<span><span class="co">#&gt;            ⎢2⋅a     ⎥</span></span>
-<span><span class="co">#&gt;            ⎢        ⎥</span></span>
-<span><span class="co">#&gt;            ⎣ 0   1/2⎦</span></span></code></pre></div>
+<span><span class="co">#&gt; c: ⎡ 1      ⎤</span></span>
+<span><span class="co">#&gt;    ⎢───   0 ⎥</span></span>
+<span><span class="co">#&gt;    ⎢2⋅a     ⎥</span></span>
+<span><span class="co">#&gt;    ⎢        ⎥</span></span>
+<span><span class="co">#&gt;    ⎢ 0   1/2⎥</span></span>
+<span><span class="co">#&gt;    ⎢        ⎥</span></span>
+<span><span class="co">#&gt;    ⎢ 1      ⎥</span></span>
+<span><span class="co">#&gt;    ⎢───   0 ⎥</span></span>
+<span><span class="co">#&gt;    ⎢2⋅a     ⎥</span></span>
+<span><span class="co">#&gt;    ⎢        ⎥</span></span>
+<span><span class="co">#&gt;    ⎣ 0   1/2⎦</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="additional-functionality-for-linear-algebra">Additional functionality for linear algebra<a class="anchor" aria-label="anchor" href="#additional-functionality-for-linear-algebra"></a>
@@ -408,47 +408,47 @@ linear algebra”) function presented at the end of this section.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"QRdecomposition"</span><span class="op">)</span> <span class="co"># == QRdecomposition(A)</span></span>
 <span><span class="co">#&gt; $Q</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡ a    ⎤</span></span>
-<span><span class="co">#&gt;            ⎢───  0⎥</span></span>
-<span><span class="co">#&gt;            ⎢│a│   ⎥</span></span>
-<span><span class="co">#&gt;            ⎢      ⎥</span></span>
-<span><span class="co">#&gt;            ⎣ 0   1⎦</span></span>
+<span><span class="co">#&gt; c: ⎡ a    ⎤</span></span>
+<span><span class="co">#&gt;    ⎢───  0⎥</span></span>
+<span><span class="co">#&gt;    ⎢│a│   ⎥</span></span>
+<span><span class="co">#&gt;    ⎢      ⎥</span></span>
+<span><span class="co">#&gt;    ⎣ 0   1⎦</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $R</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡│a│  0⎤</span></span>
-<span><span class="co">#&gt;            ⎢      ⎥</span></span>
-<span><span class="co">#&gt;            ⎣ 0   1⎦</span></span>
+<span><span class="co">#&gt; c: ⎡│a│  0⎤</span></span>
+<span><span class="co">#&gt;    ⎢      ⎥</span></span>
+<span><span class="co">#&gt;    ⎣ 0   1⎦</span></span>
 <span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"inv"</span><span class="op">)</span>             <span class="co"># == inv(A)</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡1   ⎤</span></span>
-<span><span class="co">#&gt;            ⎢─  0⎥</span></span>
-<span><span class="co">#&gt;            ⎢a   ⎥</span></span>
-<span><span class="co">#&gt;            ⎢    ⎥</span></span>
-<span><span class="co">#&gt;            ⎣0  1⎦</span></span>
+<span><span class="co">#&gt; c: ⎡1   ⎤</span></span>
+<span><span class="co">#&gt;    ⎢─  0⎥</span></span>
+<span><span class="co">#&gt;    ⎢a   ⎥</span></span>
+<span><span class="co">#&gt;    ⎢    ⎥</span></span>
+<span><span class="co">#&gt;    ⎣0  1⎦</span></span>
 <span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"eigenvec"</span><span class="op">)</span>        <span class="co"># == eigenvec(A)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [[1]]$eigval</span></span>
-<span><span class="co">#&gt; [caracas]: 1</span></span>
+<span><span class="co">#&gt; c: 1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[1]]$eigmult</span></span>
 <span><span class="co">#&gt; [1] 1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[1]]$eigvec</span></span>
-<span><span class="co">#&gt; [caracas]: [0  1]ᵀ</span></span>
+<span><span class="co">#&gt; c: [0  1]ᵀ</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; [[2]]$eigval</span></span>
-<span><span class="co">#&gt; [caracas]: a</span></span>
+<span><span class="co">#&gt; c: a</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]$eigmult</span></span>
 <span><span class="co">#&gt; [1] 1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]$eigvec</span></span>
-<span><span class="co">#&gt; [caracas]: [1  0]ᵀ</span></span>
+<span><span class="co">#&gt; c: [1  0]ᵀ</span></span>
 <span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"eigenvals"</span><span class="op">)</span>       <span class="co"># == eigenval(A)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [[1]]$eigval</span></span>
-<span><span class="co">#&gt; [caracas]: a</span></span>
+<span><span class="co">#&gt; c: a</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[1]]$eigmult</span></span>
 <span><span class="co">#&gt; [1] 1</span></span>
@@ -456,7 +456,7 @@ linear algebra”) function presented at the end of this section.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; [[2]]$eigval</span></span>
-<span><span class="co">#&gt; [caracas]: 1</span></span>
+<span><span class="co">#&gt; c: 1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]$eigmult</span></span>
 <span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
@@ -466,8 +466,8 @@ linear algebra”) function presented at the end of this section.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"charpoly"</span><span class="op">)</span></span>
 <span><span class="va">cp</span></span>
-<span><span class="co">#&gt; [caracas]:      2             </span></span>
-<span><span class="co">#&gt;            a + λ  + λ⋅(-a - 1)</span></span>
+<span><span class="co">#&gt; c:      2             </span></span>
+<span><span class="co">#&gt;    a + λ  + λ⋅(-a - 1)</span></span>
 <span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">cp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; expression(a + lambda^2 + lambda * (-a - 1))</span></span></code></pre></div>
 </div>
@@ -476,7 +476,7 @@ linear algebra”) function presented at the end of this section.</p>
 </h4>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"rank"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: 2</span></span></code></pre></div>
+<span><span class="co">#&gt; c: 2</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="cofactor">Cofactor<a class="anchor" aria-label="anchor" href="#cofactor"></a>
@@ -484,24 +484,24 @@ linear algebra”) function presented at the end of this section.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"0"</span>, <span class="st">"1"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">A</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡a  0⎤</span></span>
-<span><span class="co">#&gt;            ⎢    ⎥</span></span>
-<span><span class="co">#&gt;            ⎣b  1⎦</span></span>
+<span><span class="co">#&gt; c: ⎡a  0⎤</span></span>
+<span><span class="co">#&gt;    ⎢    ⎥</span></span>
+<span><span class="co">#&gt;    ⎣b  1⎦</span></span>
 <span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"cofactor"</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: -1.0⋅b</span></span>
+<span><span class="co">#&gt; c: -1.0⋅b</span></span>
 <span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"cofactor_matrix"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡1  -b⎤</span></span>
-<span><span class="co">#&gt;            ⎢     ⎥</span></span>
-<span><span class="co">#&gt;            ⎣0  a ⎦</span></span></code></pre></div>
+<span><span class="co">#&gt; c: ⎡1  -b⎤</span></span>
+<span><span class="co">#&gt;    ⎢     ⎥</span></span>
+<span><span class="co">#&gt;    ⎣0  a ⎦</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="echelon-form">Echelon form<a class="anchor" aria-label="anchor" href="#echelon-form"></a>
 </h4>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">A</span><span class="op">)</span>, <span class="st">"echelon_form"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡a  0  a  0⎤</span></span>
-<span><span class="co">#&gt;            ⎢          ⎥</span></span>
-<span><span class="co">#&gt;            ⎣0  a  0  a⎦</span></span></code></pre></div>
+<span><span class="co">#&gt; c: ⎡a  0  a  0⎤</span></span>
+<span><span class="co">#&gt;    ⎢          ⎥</span></span>
+<span><span class="co">#&gt;    ⎣0  a  0  a⎦</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="cholesky-factorisation">Cholesky factorisation<a class="anchor" aria-label="anchor" href="#cholesky-factorisation"></a>
@@ -509,13 +509,13 @@ linear algebra”) function presented at the end of this section.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[9, 3*I], [-3*I, 5]]"</span><span class="op">)</span></span>
 <span><span class="va">B</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡ 9    3⋅ⅈ⎤</span></span>
-<span><span class="co">#&gt;            ⎢         ⎥</span></span>
-<span><span class="co">#&gt;            ⎣-3⋅ⅈ   5 ⎦</span></span>
+<span><span class="co">#&gt; c: ⎡ 9    3⋅ⅈ⎤</span></span>
+<span><span class="co">#&gt;    ⎢         ⎥</span></span>
+<span><span class="co">#&gt;    ⎣-3⋅ⅈ   5 ⎦</span></span>
 <span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">B</span>, <span class="st">"cholesky"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡3   0⎤</span></span>
-<span><span class="co">#&gt;            ⎢     ⎥</span></span>
-<span><span class="co">#&gt;            ⎣-ⅈ  2⎦</span></span></code></pre></div>
+<span><span class="co">#&gt; c: ⎡3   0⎤</span></span>
+<span><span class="co">#&gt;    ⎢     ⎥</span></span>
+<span><span class="co">#&gt;    ⎣-ⅈ  2⎦</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="gram-schmidt">Gram Schmidt<a class="anchor" aria-label="anchor" href="#gram-schmidt"></a>
@@ -523,17 +523,17 @@ linear algebra”) function presented at the end of this section.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[ 2, 3, 5 ], [3, 6, 2], [8, 3, 6]]"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">B</span>, <span class="st">"GramSchmidt"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡    23    1692 ⎤</span></span>
-<span><span class="co">#&gt;            ⎢2   ──    ──── ⎥</span></span>
-<span><span class="co">#&gt;            ⎢    19    353  ⎥</span></span>
-<span><span class="co">#&gt;            ⎢               ⎥</span></span>
-<span><span class="co">#&gt;            ⎢    63   -1551 ⎥</span></span>
-<span><span class="co">#&gt;            ⎢3   ──   ──────⎥</span></span>
-<span><span class="co">#&gt;            ⎢    19    706  ⎥</span></span>
-<span><span class="co">#&gt;            ⎢               ⎥</span></span>
-<span><span class="co">#&gt;            ⎢   -47   -423  ⎥</span></span>
-<span><span class="co">#&gt;            ⎢5  ────  ───── ⎥</span></span>
-<span><span class="co">#&gt;            ⎣    19    706  ⎦</span></span></code></pre></div>
+<span><span class="co">#&gt; c: ⎡    23    1692 ⎤</span></span>
+<span><span class="co">#&gt;    ⎢2   ──    ──── ⎥</span></span>
+<span><span class="co">#&gt;    ⎢    19    353  ⎥</span></span>
+<span><span class="co">#&gt;    ⎢               ⎥</span></span>
+<span><span class="co">#&gt;    ⎢    63   -1551 ⎥</span></span>
+<span><span class="co">#&gt;    ⎢3   ──   ──────⎥</span></span>
+<span><span class="co">#&gt;    ⎢    19    706  ⎥</span></span>
+<span><span class="co">#&gt;    ⎢               ⎥</span></span>
+<span><span class="co">#&gt;    ⎢   -47   -423  ⎥</span></span>
+<span><span class="co">#&gt;    ⎢5  ────  ───── ⎥</span></span>
+<span><span class="co">#&gt;    ⎣    19    706  ⎦</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="reduced-row-echelon-form-rref">Reduced row-echelon form (rref)<a class="anchor" aria-label="anchor" href="#reduced-row-echelon-form-rref"></a>
@@ -541,19 +541,19 @@ linear algebra”) function presented at the end of this section.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6] ]"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">B</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡2  4   8⎤</span></span>
-<span><span class="co">#&gt;            ⎢        ⎥</span></span>
-<span><span class="co">#&gt;            ⎢3  6   3⎥</span></span>
-<span><span class="co">#&gt;            ⎢        ⎥</span></span>
-<span><span class="co">#&gt;            ⎣5  10  6⎦</span></span>
+<span><span class="co">#&gt; c: ⎡2  4   8⎤</span></span>
+<span><span class="co">#&gt;    ⎢        ⎥</span></span>
+<span><span class="co">#&gt;    ⎢3  6   3⎥</span></span>
+<span><span class="co">#&gt;    ⎢        ⎥</span></span>
+<span><span class="co">#&gt;    ⎣5  10  6⎦</span></span>
 <span><span class="va">B_rref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">B</span>, <span class="st">"rref"</span><span class="op">)</span></span>
 <span><span class="va">B_rref</span></span>
 <span><span class="co">#&gt; $mat</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡1  2  0⎤</span></span>
-<span><span class="co">#&gt;            ⎢       ⎥</span></span>
-<span><span class="co">#&gt;            ⎢0  0  1⎥</span></span>
-<span><span class="co">#&gt;            ⎢       ⎥</span></span>
-<span><span class="co">#&gt;            ⎣0  0  0⎦</span></span>
+<span><span class="co">#&gt; c: ⎡1  2  0⎤</span></span>
+<span><span class="co">#&gt;    ⎢       ⎥</span></span>
+<span><span class="co">#&gt;    ⎢0  0  1⎥</span></span>
+<span><span class="co">#&gt;    ⎢       ⎥</span></span>
+<span><span class="co">#&gt;    ⎣0  0  0⎦</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $pivot_vars</span></span>
 <span><span class="co">#&gt; [1] 1 3</span></span></code></pre></div>
@@ -564,39 +564,39 @@ linear algebra”) function presented at the end of this section.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">6</span>, <span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">9</span>, <span class="fl">6</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">B</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡1  -2  3⎤</span></span>
-<span><span class="co">#&gt;            ⎢        ⎥</span></span>
-<span><span class="co">#&gt;            ⎢3  -6  9⎥</span></span>
-<span><span class="co">#&gt;            ⎢        ⎥</span></span>
-<span><span class="co">#&gt;            ⎣0  0   6⎦</span></span>
+<span><span class="co">#&gt; c: ⎡1  -2  3⎤</span></span>
+<span><span class="co">#&gt;    ⎢        ⎥</span></span>
+<span><span class="co">#&gt;    ⎢3  -6  9⎥</span></span>
+<span><span class="co">#&gt;    ⎢        ⎥</span></span>
+<span><span class="co">#&gt;    ⎣0  0   6⎦</span></span>
 <span><span class="fu"><a href="../reference/linalg.html">columnspace</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [caracas]: [1  3  0]ᵀ</span></span>
+<span><span class="co">#&gt; c: [1  3  0]ᵀ</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [caracas]: [3  9  6]ᵀ</span></span>
+<span><span class="co">#&gt; c: [3  9  6]ᵀ</span></span>
 <span><span class="fu"><a href="../reference/linalg.html">rowspace</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [caracas]: [1  -2  3]</span></span>
+<span><span class="co">#&gt; c: [1  -2  3]</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [caracas]: [0  0  6]</span></span>
+<span><span class="co">#&gt; c: [0  0  6]</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linalg.html">nullspace</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [caracas]: [2  1  0]ᵀ</span></span>
+<span><span class="co">#&gt; c: [2  1  0]ᵀ</span></span>
 <span><span class="fu"><a href="../reference/linalg.html">rref</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $mat</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡1  -2  0⎤</span></span>
-<span><span class="co">#&gt;            ⎢        ⎥</span></span>
-<span><span class="co">#&gt;            ⎢0  0   1⎥</span></span>
-<span><span class="co">#&gt;            ⎢        ⎥</span></span>
-<span><span class="co">#&gt;            ⎣0  0   0⎦</span></span>
+<span><span class="co">#&gt; c: ⎡1  -2  0⎤</span></span>
+<span><span class="co">#&gt;    ⎢        ⎥</span></span>
+<span><span class="co">#&gt;    ⎢0  0   1⎥</span></span>
+<span><span class="co">#&gt;    ⎢        ⎥</span></span>
+<span><span class="co">#&gt;    ⎣0  0   0⎦</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $pivot_vars</span></span>
 <span><span class="co">#&gt; [1] 1 3</span></span>
 <span><span class="va">B</span> <span class="op"><a href="../reference/matrix-products.html">%*%</a></span> <span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; [caracas]: [0  0  0]ᵀ</span></span></code></pre></div>
+<span><span class="co">#&gt; c: [0  0  0]ᵀ</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="singular-values-svd">Singular values, svd<a class="anchor" aria-label="anchor" href="#singular-values-svd"></a>
@@ -604,25 +604,25 @@ linear algebra”) function presented at the end of this section.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[ 2, 3, 5 ], [4, 6, 10], [8, 3, 6], [8, 3, 6] ]"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">B</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡2  4   8  8⎤</span></span>
-<span><span class="co">#&gt;            ⎢           ⎥</span></span>
-<span><span class="co">#&gt;            ⎢3  6   3  3⎥</span></span>
-<span><span class="co">#&gt;            ⎢           ⎥</span></span>
-<span><span class="co">#&gt;            ⎣5  10  6  6⎦</span></span>
+<span><span class="co">#&gt; c: ⎡2  4   8  8⎤</span></span>
+<span><span class="co">#&gt;    ⎢           ⎥</span></span>
+<span><span class="co">#&gt;    ⎢3  6   3  3⎥</span></span>
+<span><span class="co">#&gt;    ⎢           ⎥</span></span>
+<span><span class="co">#&gt;    ⎣5  10  6  6⎦</span></span>
 <span><span class="fu"><a href="../reference/linalg.html">singular_values</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [caracas]:   ______________</span></span>
-<span><span class="co">#&gt;            ╲╱ √30446 + 204</span></span>
+<span><span class="co">#&gt; c:   ______________</span></span>
+<span><span class="co">#&gt;    ╲╱ √30446 + 204</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [caracas]:   ______________</span></span>
-<span><span class="co">#&gt;            ╲╱ 204 - √30446</span></span>
+<span><span class="co">#&gt; c:   ______________</span></span>
+<span><span class="co">#&gt;    ╲╱ 204 - √30446</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; [caracas]: 0</span></span>
+<span><span class="co">#&gt; c: 0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[4]]</span></span>
-<span><span class="co">#&gt; [caracas]: 0</span></span></code></pre></div>
+<span><span class="co">#&gt; c: 0</span></span></code></pre></div>
 <!-- ```{r} -->
 <!-- ##svd(B) FIXME -->
 <!-- # # FIXME -->

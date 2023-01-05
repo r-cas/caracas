@@ -71,7 +71,7 @@ get_caracas_out <- function(x,
 #' Print symbol
 #' 
 #' @param x A `caracas_symbol`
-#' @param prompt Which prompt/prefix to print (default: 'C: ')
+#' @param prompt Which prompt/prefix to print (default: 'c: ')
 #' @param method What way to print (`utf8`, `prettyascii` or `ascii`)
 #' @param rowvec `FALSE` to print column vectors as is
 #' @param \dots not used
@@ -80,7 +80,7 @@ get_caracas_out <- function(x,
 #' 
 #' @export
 print.caracas_symbol <- function(x, 
-                                 prompt = getOption("caracas.prompt", default = "C: "), 
+                                 prompt = getOption("caracas.prompt", default = "c: "), 
                                  method = getOption("caracas.print.method", default = "utf8"), 
                                  rowvec = getOption("caracas.print.rowvec", 
                                                                default = TRUE),

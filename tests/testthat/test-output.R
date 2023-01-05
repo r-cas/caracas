@@ -29,14 +29,14 @@ test_that("print", {
   z <- cos(x)^2 + sin(x)^2
   
   expect_equal(paste0(capture.output(print(z)), collapse = ""), 
-               "C:    2         2      sin (x) + cos (x)")
+               "c:    2         2      sin (x) + cos (x)")
   
   x <- symbol('x')
   y <- symbol('y')
   eq <- x^2 + 3*x + 4*y + y^4
   #der(eq, x) # eq = x^2+3*x+4*y+y^4
   H <- der2(eq, c(x, y)) # Hessian
-  expect_false(grepl("C: ", 
+  expect_false(grepl("c: ", 
                      paste0(capture.output(print(H, prompt = '')), collapse = ""),
                      fixed = TRUE))
 })
@@ -130,7 +130,7 @@ test_that("print vector", {
   skip_if_no_sympy()
   
   B <- as_sym(1:3)
-  expect_true(grepl("^C: \\[1  2  3\\].+$", 
+  expect_true(grepl("^c: \\[1  2  3\\].+$", 
                     capture.output(print(B)))) # .{1} == transpose 
 })
 
@@ -169,12 +169,12 @@ test_that("custom printer: exp", {
   o2 <- outstr(print(lim_f_sym, method = "prettyascii"))
   o3 <- outstr(print(lim_f_sym, method = "ascii"))
   
-  expect_equal(o3, "C: Limit((1 + 1/n)^n, n, Inf, dir='-')")
-  expect_equal(o2, "C:             n        /    1\\     lim |1 + -|    n->oo\\    n/")
+  expect_equal(o3, "c: Limit((1 + 1/n)^n, n, Inf, dir='-')")
+  expect_equal(o2, "c:             n        /    1\\     lim |1 + -|    n->oo\\    n/")
   
   if (grepl("UTF-8", Sys.getlocale())) {
     # UTF-8 system:
-    expect_equal(o1, "C:            n       ⎛    1⎞    lim ⎜1 + ─⎟    n─→∞⎝    n⎠")
+    expect_equal(o1, "c:            n       ⎛    1⎞    lim ⎜1 + ─⎟    n─→∞⎝    n⎠")
   }
   
 })

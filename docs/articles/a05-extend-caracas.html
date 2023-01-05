@@ -146,22 +146,22 @@ be made so using <code>sympy_func</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CC</span> <span class="op">&lt;-</span> <span class="fu">cofactor_matrix</span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
 <span><span class="va">CC</span></span>
-<span><span class="co">#&gt; [caracas]: Matrix([</span></span>
-<span><span class="co">#&gt;            [ a22*a33 - a23*a32, -a21*a33 + a23*a31,  a21*a32 - a22*a31],</span></span>
-<span><span class="co">#&gt;            [-a12*a33 + a13*a32,  a11*a33 - a13*a31, -a11*a32 + a12*a31],</span></span>
-<span><span class="co">#&gt;            [ a12*a23 - a13*a22, -a11*a23 + a13*a21,  a11*a22 - a12*a21]])</span></span>
+<span><span class="co">#&gt; c: Matrix([</span></span>
+<span><span class="co">#&gt;    [ a22*a33 - a23*a32, -a21*a33 + a23*a31,  a21*a32 - a22*a31],</span></span>
+<span><span class="co">#&gt;    [-a12*a33 + a13*a32,  a11*a33 - a13*a31, -a11*a32 + a12*a31],</span></span>
+<span><span class="co">#&gt;    [ a12*a23 - a13*a22, -a11*a23 + a13*a21,  a11*a22 - a12*a21]])</span></span>
 <span><span class="va">cc</span> <span class="op">&lt;-</span> <span class="fu">cofactor</span><span class="op">(</span><span class="va">A</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">cc</span></span>
-<span><span class="co">#&gt; [caracas]: a22*a33 - a23*a32</span></span></code></pre></div>
+<span><span class="co">#&gt; c: a22*a33 - a23*a32</span></span></code></pre></div>
 <p>We get the right answer</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">CC</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="../reference/linalg.html">det</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
 <span><span class="va">P</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op"><a href="../reference/matrix-products.html">%*%</a></span> <span class="va">B</span></span>
 <span><span class="va">P</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/simplify.html">simplify</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: Matrix([</span></span>
-<span><span class="co">#&gt;            [1, 0, 0],</span></span>
-<span><span class="co">#&gt;            [0, 1, 0],</span></span>
-<span><span class="co">#&gt;            [0, 0, 1]])</span></span></code></pre></div>
+<span><span class="co">#&gt; c: Matrix([</span></span>
+<span><span class="co">#&gt;    [1, 0, 0],</span></span>
+<span><span class="co">#&gt;    [0, 1, 0],</span></span>
+<span><span class="co">#&gt;    [0, 0, 1]])</span></span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

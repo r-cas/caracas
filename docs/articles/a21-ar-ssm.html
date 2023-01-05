@@ -108,7 +108,7 @@ autoregressive model and in a dynamic linear model</h1>
                         <h4 data-toc-skip class="author">Mikkel Meyer
 Andersen and Søren Højsgaard</h4>
             
-            <h4 data-toc-skip class="date">Wed Jan 4 15:41:01 2023</h4>
+            <h4 data-toc-skip class="date">Thu Jan 5 15:54:11 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/HEAD/vignettes/a21-ar-ssm.Rmd" class="external-link"><code>vignettes/a21-ar-ssm.Rmd</code></a></small>
       <div class="hidden name"><code>a21-ar-ssm.Rmd</code></div>
@@ -203,19 +203,19 @@ with <span class="math inline">\(y_i=b x_i + u_i\)</span> for <span class="math 
 <span><span class="co">#&gt; [7,] "0"  "0"  "0"  "0"  "0"  "0"  "w2"</span></span>
 <span><span class="va">Veu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">Veu</span><span class="op">)</span></span>
 <span><span class="va">Veu</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡v₂  0   0   0   0   0   0 ⎤</span></span>
-<span><span class="co">#&gt;            ⎢                          ⎥</span></span>
-<span><span class="co">#&gt;            ⎢0   v₂  0   0   0   0   0 ⎥</span></span>
-<span><span class="co">#&gt;            ⎢                          ⎥</span></span>
-<span><span class="co">#&gt;            ⎢0   0   v₂  0   0   0   0 ⎥</span></span>
-<span><span class="co">#&gt;            ⎢                          ⎥</span></span>
-<span><span class="co">#&gt;            ⎢0   0   0   v₂  0   0   0 ⎥</span></span>
-<span><span class="co">#&gt;            ⎢                          ⎥</span></span>
-<span><span class="co">#&gt;            ⎢0   0   0   0   w₂  0   0 ⎥</span></span>
-<span><span class="co">#&gt;            ⎢                          ⎥</span></span>
-<span><span class="co">#&gt;            ⎢0   0   0   0   0   w₂  0 ⎥</span></span>
-<span><span class="co">#&gt;            ⎢                          ⎥</span></span>
-<span><span class="co">#&gt;            ⎣0   0   0   0   0   0   w₂⎦</span></span>
+<span><span class="co">#&gt; c: ⎡v₂  0   0   0   0   0   0 ⎤</span></span>
+<span><span class="co">#&gt;    ⎢                          ⎥</span></span>
+<span><span class="co">#&gt;    ⎢0   v₂  0   0   0   0   0 ⎥</span></span>
+<span><span class="co">#&gt;    ⎢                          ⎥</span></span>
+<span><span class="co">#&gt;    ⎢0   0   v₂  0   0   0   0 ⎥</span></span>
+<span><span class="co">#&gt;    ⎢                          ⎥</span></span>
+<span><span class="co">#&gt;    ⎢0   0   0   v₂  0   0   0 ⎥</span></span>
+<span><span class="co">#&gt;    ⎢                          ⎥</span></span>
+<span><span class="co">#&gt;    ⎢0   0   0   0   w₂  0   0 ⎥</span></span>
+<span><span class="co">#&gt;    ⎢                          ⎥</span></span>
+<span><span class="co">#&gt;    ⎢0   0   0   0   0   w₂  0 ⎥</span></span>
+<span><span class="co">#&gt;    ⎢                          ⎥</span></span>
+<span><span class="co">#&gt;    ⎣0   0   0   0   0   0   w₂⎦</span></span>
 <span><span class="va">L2inv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">L2</span><span class="op">)</span> </span>
 <span><span class="va">V2</span> <span class="op">&lt;-</span> <span class="va">L2inv</span> <span class="op"><a href="../reference/matrix-products.html">%*%</a></span> <span class="va">Veu</span> <span class="op"><a href="../reference/matrix-products.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">L2inv</span><span class="op">)</span> </span>
 <span><span class="va">K2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">L2</span><span class="op">)</span> <span class="op"><a href="../reference/matrix-products.html">%*%</a></span> <span class="fu"><a href="../reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">Veu</span><span class="op">)</span> <span class="op"><a href="../reference/matrix-products.html">%*%</a></span> <span class="va">L2</span></span></code></pre></div>

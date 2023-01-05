@@ -158,20 +158,20 @@ walking path before crossing into the forest.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">AB</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">'300'</span><span class="op">)</span></span>
 <span><span class="va">AB</span></span>
-<span><span class="co">#&gt; [caracas]: 300</span></span>
+<span><span class="co">#&gt; c: 300</span></span>
 <span><span class="va">AC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">'1000'</span><span class="op">)</span></span>
 <span><span class="va">AC</span></span>
-<span><span class="co">#&gt; [caracas]: 1000</span></span>
+<span><span class="co">#&gt; c: 1000</span></span>
 <span><span class="va">BC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">AC</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">AB</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">BC</span></span>
-<span><span class="co">#&gt; [caracas]: 100⋅√91</span></span>
+<span><span class="co">#&gt; c: 100⋅√91</span></span>
 <span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'k'</span><span class="op">)</span> <span class="co"># |BD|</span></span>
 <span><span class="va">DC</span> <span class="op">&lt;-</span> <span class="va">BC</span> <span class="op">-</span> <span class="va">k</span></span>
 <span><span class="va">AD</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">AB</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">k</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">AD</span></span>
-<span><span class="co">#&gt; [caracas]:    ____________</span></span>
-<span><span class="co">#&gt;              ╱  2         </span></span>
-<span><span class="co">#&gt;            ╲╱  k  + 90000</span></span></code></pre></div>
+<span><span class="co">#&gt; c:    ____________</span></span>
+<span><span class="co">#&gt;      ╱  2         </span></span>
+<span><span class="co">#&gt;    ╲╱  k  + 90000</span></span></code></pre></div>
 <p>So for a distance of <span class="math inline">\(|AD|\)</span>, you
 travel by 5 m/s, and then for a distance of <span class="math inline">\(- k + 100 \sqrt{91}\)</span> you travel by 2 m/s.
 Thus it takes <span class="math inline">\(\frac{\sqrt{k^{2} +
@@ -183,11 +183,11 @@ travel <span class="math inline">\(DC\)</span>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">l</span> <span class="op">&lt;-</span> <span class="va">AD</span><span class="op">/</span><span class="fl">2</span> <span class="op">+</span> <span class="va">DC</span><span class="op">/</span><span class="fl">5</span></span>
 <span><span class="va">l</span></span>
-<span><span class="co">#&gt; [caracas]:          ____________         </span></span>
-<span><span class="co">#&gt;                    ╱  2                  </span></span>
-<span><span class="co">#&gt;              k   ╲╱  k  + 90000          </span></span>
-<span><span class="co">#&gt;            - ─ + ─────────────── + 20⋅√91</span></span>
-<span><span class="co">#&gt;              5          2</span></span></code></pre></div>
+<span><span class="co">#&gt; c:          ____________         </span></span>
+<span><span class="co">#&gt;            ╱  2                  </span></span>
+<span><span class="co">#&gt;      k   ╲╱  k  + 90000          </span></span>
+<span><span class="co">#&gt;    - ─ + ─────────────── + 20⋅√91</span></span>
+<span><span class="co">#&gt;      5          2</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lfun</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span></span>
 <span><span class="va">lfun</span></span>
@@ -202,11 +202,11 @@ travel <span class="math inline">\(DC\)</span>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">l</span>, <span class="va">k</span><span class="op">)</span></span>
 <span><span class="va">dl</span></span>
-<span><span class="co">#&gt; [caracas]:         k           1</span></span>
-<span><span class="co">#&gt;            ───────────────── - ─</span></span>
-<span><span class="co">#&gt;                 ____________   5</span></span>
-<span><span class="co">#&gt;                ╱  2             </span></span>
-<span><span class="co">#&gt;            2⋅╲╱  k  + 90000</span></span>
+<span><span class="co">#&gt; c:         k           1</span></span>
+<span><span class="co">#&gt;    ───────────────── - ─</span></span>
+<span><span class="co">#&gt;         ____________   5</span></span>
+<span><span class="co">#&gt;        ╱  2             </span></span>
+<span><span class="co">#&gt;    2⋅╲╱  k  + 90000</span></span>
 <span><span class="va">crit_points</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">dl</span>, <span class="va">k</span><span class="op">)</span></span>
 <span><span class="va">crit_points</span></span>
 <span><span class="co">#&gt; Solution 1:</span></span>
@@ -215,9 +215,9 @@ travel <span class="math inline">\(DC\)</span>.</p>
 <span><span class="co">#&gt;          7</span></span>
 <span><span class="va">best_k</span> <span class="op">&lt;-</span> <span class="va">crit_points</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">k</span></span>
 <span><span class="va">best_k</span></span>
-<span><span class="co">#&gt; [caracas]: 200⋅√21</span></span>
-<span><span class="co">#&gt;            ───────</span></span>
-<span><span class="co">#&gt;               7</span></span></code></pre></div>
+<span><span class="co">#&gt; c: 200⋅√21</span></span>
+<span><span class="co">#&gt;    ───────</span></span>
+<span><span class="co">#&gt;       7</span></span></code></pre></div>
 <p>The type of the critical point is found by considering the
 Hessian:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -232,14 +232,14 @@ plot.</p>
 <code class="sourceCode R"><span><span class="va">DC_best</span> <span class="op">&lt;-</span> <span class="va">BC</span> <span class="op">-</span> <span class="va">best_k</span></span>
 <span><span class="va">AD_best</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">AB</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">best_k</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">AD_best</span></span>
-<span><span class="co">#&gt; [caracas]: 500⋅√21</span></span>
-<span><span class="co">#&gt;            ───────</span></span>
-<span><span class="co">#&gt;               7</span></span>
+<span><span class="co">#&gt; c: 500⋅√21</span></span>
+<span><span class="co">#&gt;    ───────</span></span>
+<span><span class="co">#&gt;       7</span></span>
 <span><span class="va">best_route</span> <span class="op">&lt;-</span> <span class="va">AD_best</span> <span class="op">+</span> <span class="va">DC_best</span></span>
 <span><span class="va">best_route</span></span>
-<span><span class="co">#&gt; [caracas]: 300⋅√21          </span></span>
-<span><span class="co">#&gt;            ─────── + 100⋅√91</span></span>
-<span><span class="co">#&gt;               7</span></span>
+<span><span class="co">#&gt; c: 300⋅√21          </span></span>
+<span><span class="co">#&gt;    ─────── + 100⋅√91</span></span>
+<span><span class="co">#&gt;       7</span></span>
 <span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">best_route</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1150.335</span></span></code></pre></div>
 <p><span class="math display">\[
@@ -248,7 +248,7 @@ plot.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">best_l</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/subs.html">subs</a></span><span class="op">(</span><span class="va">l</span>, <span class="st">"k"</span>, <span class="va">best_k</span><span class="op">)</span></span>
 <span><span class="va">best_l</span></span>
-<span><span class="co">#&gt; [caracas]: 30⋅√21 + 20⋅√91</span></span>
+<span><span class="co">#&gt; c: 30⋅√21 + 20⋅√91</span></span>
 <span><span class="fu"><a href="../reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">best_l</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 328.2651</span></span></code></pre></div>
 <p><span class="math display">\[
