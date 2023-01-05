@@ -6,7 +6,7 @@
 \usage{
 \method{print}{caracas_symbol}(
   x,
-  prompt = getOption("caracas.prompt", default = "C: "),
+  prompt = getOption("caracas.prompt", default = "c: "),
   method = getOption("caracas.print.method", default = "utf8"),
   rowvec = getOption("caracas.print.rowvec", default = TRUE),
   ...
@@ -15,7 +15,7 @@
 \arguments{
 \item{x}{A \code{caracas_symbol}}
 
-\item{prompt}{Which prompt/prefix to print (default: 'C: ')}
+\item{prompt}{Which prompt/prefix to print (default: 'c: ')}
 
 \item{method}{What way to print (\code{utf8}, \code{prettyascii} or \code{ascii})}
 
