@@ -476,7 +476,15 @@ diag_ <- function(x, n = 1L, declare_symbols = TRUE, ...){
 matrix_ <- function(..., declare_symbols = TRUE){
   ensure_sympy()
   
-  A <- matrix(...)
+  args <- list(...)
+  
+  if (length(args) >= 1L & inherits(args[[1L]], "caracas_vector")) {
+    args[[1L]] <- as_character_matrix(args[[1L]])
+  }
+  
+  A <- do.call(matrix, args)
+  
+  #A <- matrix(...)
   y <- as_sym(A, declare_symbols = declare_symbols)
   
   return(y)
