@@ -420,7 +420,8 @@ as_character <- function(x){
   stopifnot_symbol(x)
   
   switch(symbol_class(x),
-         "matrix" ={as_character_matrix(x)},
+         "matrix" ={as_character_matrix(x)},         
+         "vector"= {c(as_character_matrix(x))},
          "atomic" ={as.character(x)}
   )
 }
