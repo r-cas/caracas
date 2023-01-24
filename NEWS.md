@@ -4,6 +4,7 @@
 * Reworked output format (`utf8`, `prettyascii` or `ascii`) to one argument and one option, i.e. 
   `options(caracas.print.method = 'prettyascii')` and `print(x, method = "prettyascii")` (default is `utf8`)
 * New function: `as_func()`
+* `dim()<-` assignment for `caracas` matrices
 
 # caracas 1.1.3
 

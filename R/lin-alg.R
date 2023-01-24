@@ -174,7 +174,39 @@ dim.caracas_symbol <- function(x) {
   return(c(rows, cols))
 }
 
-
+#' Dimensions of a caracas symbol
+#' 
+#' @param x caracas symbol
+#' @param value new dimension
+#' 
+#' @examples
+#' if (has_sympy()) {
+#'   m <- matrix_sym(2, 2)
+#'   dim(m)
+#'   dim(m) <- c(4, 1)
+#'   m
+#' }
+#' 
+#' @concept linalg
+#' 
+#' @export
+`dim<-.caracas_symbol` <- function(x, value) {
+  ensure_sympy()
+  stopifnot_symbol(x)
+  
+  if (!symbol_is_matrix(x)) { 
+    return(NULL) 
+  }
+  
+  if (prod(dim(x)) != prod(value)) {
+    stop("Wrong number of elements")
+  }
+  
+  m1 <- as_character_matrix(x)
+  dim(m1) <- value
+  m1 <- as_sym(m1)
+  m1
+}
 
 #' Transpose of matrix
 #'
