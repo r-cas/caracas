@@ -610,9 +610,16 @@ matrix_sym_symmetric <- function(nrow, entry = "v"){
 #' @examples
 #' if (has_sympy()) {
 #'   X1 <- matrix_(paste0("x_",c(1,1,1,1, 2,2,2,2, 3,4,3,4)), nrow = 4)
+#'   X1
 #'   colspan(X1)
+#'   do_la(X1, "columnspace")
+#'   rankMatrix_(X1)
+#'   
 #'   X2 <- matrix_(paste0("x_",c(1,1,1,1, 0,0,2,2, 3,4,3,4)), nrow = 4)
+#'   X2
 #'   colspan(X2)
+#'   do_la(X2, "columnspace")
+#'   rankMatrix_(X2)
 #' }
 #' 
 #' @importFrom stats model.matrix
@@ -620,29 +627,34 @@ matrix_sym_symmetric <- function(nrow, entry = "v"){
 colspan <- function(x){
   ensure_sympy()
   
-  zz <- as_character_matrix(x)
+  #rf <- do_la(x, "rref")
+  #x[, rf$pivot_vars]
   
-  uu <- apply(zz, 2, factor, simplify = FALSE)
+  do.call(cbind, do_la(x, "columnspace"))
   
-  mm <-
-    lapply(seq_along(uu),
-           function(i){
-             vv <- uu[[i]]
-             if (length(levels(vv)) == 1) {
-               out <- matrix(rep(1, length(vv)))
-             }
-             else {
-               out <- model.matrix(~ 0 + vv)
-             }
-             colnames(out) <- levels(uu[[i]])
-             out
-           })
-  
-  x_mat <- do.call(cbind, mm)
-  zero <- which(colnames(x_mat) == "0")
-  if (length(zero) > 0)
-      x_mat <- x_mat[, -zero]
-  x_mat
+  # zz <- as_character_matrix(x)
+  # 
+  # uu <- apply(zz, 2, factor, simplify = FALSE)
+  # 
+  # mm <-
+  #   lapply(seq_along(uu),
+  #          function(i){
+  #            vv <- uu[[i]]
+  #            if (length(levels(vv)) == 1) {
+  #              out <- matrix(rep(1, length(vv)))
+  #            }
+  #            else {
+  #              out <- model.matrix(~ 0 + vv)
+  #            }
+  #            colnames(out) <- levels(uu[[i]])
+  #            out
+  #          })
+  # 
+  # x_mat <- do.call(cbind, mm)
+  # zero <- which(colnames(x_mat) == "0")
+  # if (length(zero) > 0)
+  #     x_mat <- x_mat[, -zero]
+  # x_mat
 }
 
 #' Rank of matrix
@@ -656,7 +668,9 @@ colspan <- function(x){
 #' @examples
 #' if (has_sympy()) {
 #'   X <- matrix_(paste0("x_",c(1,1,1,1,2,2,2,2,3,4,3,4)), nrow=4)
+#'   X
 #'   rankMatrix_(X)
+#'   colspan(X)
 #' }
 #' 
 #' @importFrom Matrix rankMatrix
@@ -667,9 +681,11 @@ rankMatrix_ <- function(x){
   if (is.numeric(x)){
     Matrix::rankMatrix(x)
   }
+  
   else
   {
-    Matrix::rankMatrix(colspan(x))
+    #Matrix::rankMatrix(colspan(x))
+    do_la(x, "rank")
   }
 }
 

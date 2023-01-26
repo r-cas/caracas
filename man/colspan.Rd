@@ -15,9 +15,16 @@ Column space (range) of a symbolic matrix
 \examples{
 if (has_sympy()) {
   X1 <- matrix_(paste0("x_",c(1,1,1,1, 2,2,2,2, 3,4,3,4)), nrow = 4)
+  X1
   colspan(X1)
+  do_la(X1, "columnspace")
+  rankMatrix_(X1)
+  
   X2 <- matrix_(paste0("x_",c(1,1,1,1, 0,0,2,2, 3,4,3,4)), nrow = 4)
+  X2
   colspan(X2)
+  do_la(X2, "columnspace")
+  rankMatrix_(X2)
 }
 
 }
