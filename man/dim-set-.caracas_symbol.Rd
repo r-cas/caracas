@@ -16,6 +16,16 @@ Dimensions of a caracas symbol
 }
 \examples{
 if (has_sympy()) {
+  v <- vector_sym(4)
+  v
+  dim(v)
+  dim(v) <- c(2, 2)
+  v
+  l <- to_list(v)
+  l
+  dim(l)
+  dim(l) <- c(2, 2)
+  l
   m <- matrix_sym(2, 2)
   dim(m)
   dim(m) <- c(4, 1)

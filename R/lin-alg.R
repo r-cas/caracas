@@ -164,6 +164,7 @@ dim.caracas_symbol <- function(x) {
   ensure_sympy()
   stopifnot_symbol(x)
   
+  # FIXME: This contract is used in dim<- setter
   if (!symbol_is_matrix(x)) { 
     return(NULL) 
   }
@@ -181,6 +182,11 @@ dim.caracas_symbol <- function(x) {
 #' 
 #' @examples
 #' if (has_sympy()) {
+#'   v <- vector_sym(4)
+#'   v
+#'   dim(v)
+#'   dim(v) <- c(2, 2)
+#'   v
 #'   m <- matrix_sym(2, 2)
 #'   dim(m)
 #'   dim(m) <- c(4, 1)
@@ -194,14 +200,15 @@ dim.caracas_symbol <- function(x) {
   ensure_sympy()
   stopifnot_symbol(x)
   
-  if (!symbol_is_matrix(x)) { 
-    return(NULL) 
+  if (is.null(dim(x))) {
+    stop("x does not have a dimension to change")
   }
   
   if (prod(dim(x)) != prod(value)) {
     stop("Wrong number of elements")
   }
   
+  # FIXME: Currently works because dim(x) is only non-NULL for matrices
   m1 <- as_character_matrix(x)
   dim(m1) <- value
   m1 <- as_sym(m1)
