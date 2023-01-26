@@ -21,11 +21,6 @@ if (has_sympy()) {
   dim(v)
   dim(v) <- c(2, 2)
   v
-  l <- to_list(v)
-  l
-  dim(l)
-  dim(l) <- c(2, 2)
-  l
   m <- matrix_sym(2, 2)
   dim(m)
   dim(m) <- c(4, 1)
