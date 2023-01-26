@@ -246,10 +246,9 @@ test_that("colspan", {
   skip_if_no_sympy()
   
   X <- matrix_(paste0("x_",c(1,1,1,1,2,2,2,2,3,4,3,4)), nrow = 4)
-  expect_equal(colspan(X), structure(c(1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1), 
-                                     .Dim = c(4L, 4L), 
-                                     .Dimnames = list(c("1", "2", "3", "4"), 
-                                                      c("x_1", "x_2", "x_3", "x_4"))))
+  expect_equal(as_character_matrix(colspan(X)), 
+               structure(c("x_1", "x_1", "x_1", "x_1", "x_3", "x_4", "x_3", "x_4"), 
+                         dim = c(4L, 2L)))
 })
 
 test_that("rankMatrix", {
