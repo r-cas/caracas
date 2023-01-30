@@ -13,7 +13,6 @@ get_pyobj <- function(e, method) {
 # power <- y
 matrix_ele_power <- function(x, power = 1){
   ensure_sympy()
-
   stopifnot_symbol(x)
   
   if (!symbol_is_matrix(x)) {
@@ -270,24 +269,28 @@ Ops.caracas_symbol = function(e1, e2) {
     ## }
 
 
-Math_transtab <- matrix( c(
-  #R					Python
-  "sin",			"sin",
-  "cos",			"cos",
-  "tan",			"tan",
 
+Math_transtab <- matrix( c(
+  #R			Python
+  "sin",		"sin",
+  "cos",		"cos",
+  "tan",		"tan",
+
+  "tanh",               "tanh",
+  ## "coth",               "coth",
+  
   "asin",	  	"asin",
   "acos",	  	"acos",
-  "atan",    	"atan",
-  "asinh", 	  "asinh",
-  "acosh", 	  "acosh",
-  "atanh",   	"atanh",
+  "atan",    	        "atan",
+  "asinh", 	        "asinh",
+  "acosh", 	        "acosh",
+  "atanh",   	        "atanh",
 
   "exp", 	  	"exp",
   "log", 	  	"log",
-  "sqrt", 	  "sqrt",
+  "sqrt", 	        "sqrt",
   
-  "gamma",    "gamma"
+  "gamma",              "gamma"
 ), byrow = TRUE, ncol = 2)
 colnames(Math_transtab) <- c("R", "Python")
 #paste0(Math_transtab[, 1], "()", collapse = ", ")
