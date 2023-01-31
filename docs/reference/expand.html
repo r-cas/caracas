@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.9.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
       </span>
     </div>
 
@@ -87,13 +87,24 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">expand</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">expand</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A <code>caracas_symbol</code></p></dd>
+
+
+<dt>...</dt>
+<dd><p>Pass on to SymPy's expand, e.g. <code>force = TRUE</code></p>
+<p>if (has_sympy()) 
+def_sym(x)
+y &lt;- log(exp(x))
+simplify(y)
+expand(simplify(y))
+expand(simplify(y), force = TRUE)
+expand_log(simplify(y))</p></dd>
 
 </dl></div>
 
