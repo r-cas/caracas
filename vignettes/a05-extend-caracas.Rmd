@@ -17,9 +17,22 @@ knitr::opts_chunk$set(
 
 ```{r, message=FALSE}
 library(caracas)
-options(caracas.print.method = "ascii")
 ```
 
+```{r, include = FALSE}
+inline_code <- function(x) {
+  x
+}
+
+if (!has_sympy()) {
+  # SymPy not available, so the chunks shall not be evaluated
+  knitr::opts_chunk$set(eval = FALSE)
+  
+  inline_code <- function(x) {
+    deparse(substitute(x))
+  }
+}
+```
 
 It is relatively easy to extend `caracas` by calling `SymPy` functions
 directly. 
@@ -47,7 +60,7 @@ cofactor_matrix <- function(x) {
 }
 
 cofactor <- function(x, i, j) {
-  # Python indexing starts at 0 - thus substract 1 to convert from R indexing
+  # Python indexing starts at 0 - thus subtract 1 to convert from R indexing
   # to Python indexing
   sympy_func(x, "cofactor", i - 1, j - 1)
 }
@@ -70,7 +83,4 @@ B <- t(CC) / det(A)
 P <- A %*% B
 P %>% simplify()
 ```
-
-
-
 
