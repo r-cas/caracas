@@ -4,10 +4,21 @@
 \alias{expand}
 \title{Expand expression}
 \usage{
-expand(x)
+expand(x, ...)
 }
 \arguments{
 \item{x}{A \code{caracas_symbol}}
+
+\item{\dots}{Pass on to SymPy's expand, e.g. \code{force = TRUE}
+
+if (has_sympy()) {
+def_sym(x)
+y <- log(exp(x))
+simplify(y)
+expand(simplify(y))
+expand(simplify(y), force = TRUE)
+expand_log(simplify(y))
+}}
 }
 \description{
 Expand expression

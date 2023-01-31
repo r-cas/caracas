@@ -76,7 +76,6 @@ cancel <- function(x) {
 #'   expr = (4*x**3 + 21*x**2 + 10*x + 12)/(x**4 + 5*x**3 + 5*x**2 + 4*x)
 #'   apart(expr)
 #' }
-
 #' @concept simplify
 #'
 #' @export
@@ -94,15 +93,25 @@ apart <- function(x) {
 #' Expand expression
 #'
 #' @param x A `caracas_symbol`
-#'
+#' @param \dots Pass on to SymPy's expand, e.g. `force = TRUE`
+#' 
+#' if (has_sympy()) {
+#'   def_sym(x)
+#'   y <- log(exp(x))
+#'   simplify(y)
+#'   expand(simplify(y))
+#'   expand(simplify(y), force = TRUE)
+#'   expand_log(simplify(y))
+#' }
+#' 
 #' @concept simplify
 #'
 #' @export
-expand <- function(x) {
+expand <- function(x, ...) {
   stopifnot_symbol(x)
   ensure_sympy()
   
-  z <- get_sympy()$expand(x$pyobj)
+  z <- get_sympy()$expand(x$pyobj, ...)
   v <- construct_symbol_from_pyobj(z)
   return(v)
 }
