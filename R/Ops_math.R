@@ -170,10 +170,9 @@ Ops.caracas_symbol = function(e1, e2) {
         z <- mat_mult_elementwise(o1, o2)
         return(z)
       }
-      else if (.Generic == "/"){
+      else if (.Generic == "/") {
         e2 <- reciprocal_matrix(e2)
-        o2 <- e2$pyobj
-        
+        o2 <- e2$pyobj        
         z <- mat_mult_elementwise(o1, o2)
         return(z)
       }

@@ -1,19 +1,17 @@
-## FIXME (SH): Skal have symbol_is_matrix() og stopifnot_matrix() skal
-## blot kalde symbol_is_matrix()
 
 stopifnot_matrix <- function(x) {
   # MatrixSymbol
-  try({
-    res <- x$pyobj$is_MatrixExpr
+  ## try({
+  ##   res <- x$pyobj$is_MatrixExpr
     
-    if (is.logical(res) && isTRUE(res)) {
-      return(invisible(NULL))
-    }
+  ##   if (is.logical(res) && isTRUE(res)) {
+  ##     return(invisible(NULL))
+  ##   }
     
-    if (reticulate::py_to_r(res)) {
-      return(invisible(NULL))
-    }
-  }, silent = TRUE)
+  ##   if (reticulate::py_to_r(res)) {
+  ##     return(invisible(NULL))
+  ##   }
+  ## }, silent = TRUE)
   
   if (!symbol_is_matrix(x)) {
       stop("'x' must be a matrix")
@@ -62,11 +60,6 @@ symbol_is_matrix <- function(x) {
     if (grepl("^Matrix\\(\\[", xstr)) {
       return(TRUE)
     }
-  
-  # FIXME: From der() and der2()
-  # if (grepl("^\\[\\[", xstr)) {
-  #   return(TRUE)
-  # }
   
   return(FALSE)
 }
@@ -227,16 +220,13 @@ t.caracas_symbol <- function(x) {
 #' @export
 reciprocal_matrix <- function(x, numerator=1) {
     ensure_sympy()
-    
-    if (!symbol_is_matrix(x)) {
-        stop("'x' must be sympy matrix\n")
-    }
+    stopifnot_matrix(x)
     
     numerator <- as.character(numerator)
     
     if (grepl("^-?[0-9]+$", numerator)) {
-                                        # S(): Sympify
-                                        # Means that this will be e.g. (S(1))/(1) = 1 instead of 1/1 = 1.0 (numeric)
+        ## S(): Sympify
+        ## Means that this will be e.g. (S(1))/(1) = 1 instead of 1/1 = 1.0 (numeric)
         numerator <- paste0("S(", numerator, ")")
     }
     
@@ -629,17 +619,13 @@ colspan <- function(x) {
 #' 
 #' @importFrom Matrix rankMatrix
 #' @export
-rankMatrix_ <- function(x){
+rankMatrix_ <- function(x) {
   ensure_sympy()
   
-  if (is.numeric(x)){
-    Matrix::rankMatrix(x)
-  }
-  
-  else
-  {
-    #Matrix::rankMatrix(colspan(x))
-    do_la(x, "rank")
+  if (is.numeric(x)) {
+      Matrix::rankMatrix(x)
+  } else {
+      do_la(x, "rank")
   }
 }
 
@@ -734,19 +720,19 @@ colSums_ <- function(x) {
 #' @export
 #' @concept linalg
 #' @rdname special_matrices
-zeros <- function(nrow, ncol){
+zeros <- function(nrow, ncol) {
   as_sym(matrix(0, nrow=nrow, ncol=ncol))
 }
 
 #' @export
 #' @rdname special_matrices
-ones <- function(nrow, ncol){
+ones <- function(nrow, ncol) {
   as_sym(matrix(1, nrow=nrow, ncol=ncol))
 }
 
 #' @export
 #' @rdname special_matrices
-eye <- function(nrow, ncol){
+eye <- function(nrow, ncol) {
   if (nrow==ncol)
     return(diag_(1, nrow))
   m <- min(nrow, ncol)

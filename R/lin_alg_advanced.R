@@ -179,7 +179,7 @@ finalise_rref <- function(vals) {
 #' 
 #' @examples 
 #' if (has_sympy()) {
-#'   A <- matrix(c("a", "0", "0", "1"), 2, 2) %>% as_sym()
+#'   A <- matrix(c("a", "0", "0", "1"), 2, 2) |> as_sym()
 #'   
 #'   QRdecomposition(A)
 #'   eigenval(A)
@@ -191,7 +191,7 @@ finalise_rref <- function(vals) {
 #'   ## Matrix inversion:
 #'   d <- 3
 #'   m <- matrix_sym(d, d)
-#'   print(system.time(inv(m)))       ## Gauss elimination
+#'   print(system.time(inv(m)))                  ## Gauss elimination
 #'   print(system.time(inv(m, method="cf")))     ## Cofactor 
 #'   print(system.time(inv(m, method="lu")))     ## LU decomposition
 #'   if (requireNamespace("Ryacas")){
@@ -209,8 +209,6 @@ finalise_rref <- function(vals) {
 #'
 #'   A <- as_sym("[[1, 2, 3], [4, 5, 6]]")
 #'   pinv(A)
-#'
-#' 
 #' }
 #' 
 #' @return Returns the requested property of a matrix.
@@ -246,10 +244,9 @@ singular_values <- function(x) {
 
 
 #' @rdname linalg
-#' @param method The default works by $LU$ decomposition. 
-#' The alternatives are Gaussian elimination (`gauss`), 
-#' the cofactor method (`cf`), 
-#' and `Ryacas` (`yac`).
+#' @param method The default works by $LU$ decomposition.  The
+#'     alternatives are Gaussian elimination (`gauss`), the cofactor
+#'     method (`cf`), and `Ryacas` (`yac`).
 #' @export
 inv <- function(x, method = c("lu", "gauss", "cf", "yac")) {
   method <- match.arg(method)
@@ -268,21 +265,21 @@ inv <- function(x, method = c("lu", "gauss", "cf", "yac")) {
   ## }
   
   switch(method,
-         lu = inv_lu(x),
+         lu    = inv_lu(x),
          gauss = do_la(x, "inv"),
-         cf = inv_cf(x),
-         yac = inv_yac(x))
+         cf    = inv_cf(x),
+         yac   = inv_yac(x))
 }
 
-inv_cf <- function(x){
+inv_cf <- function(x) {
     return(t(sympy_func(x, "cofactor_matrix")) / det(x))
 }
 
-inv_lu <- function(x){
+inv_lu <- function(x) {
     construct_symbol_from_pyobj(x$pyobj$inv(method="LU"))
 }
 
-inv_yac <- function(x){
+inv_yac <- function(x) {
     if (!requireNamespace("Ryacas", quietly = TRUE)) {
       stop("This method requires Ryacas - please install.packages('Ryacas')")
     }
@@ -298,10 +295,10 @@ inv_yac <- function(x){
 
 #' @rdname linalg
 #' @export
-inv2fl <- function(x){
+inv2fl <- function(x) {
   xi <- inv(x)
   d <- denominator(xi[1,1])
-  as_factor_list(1/d, d * xi)
+  as_factor_list(1 / d, d * xi)
 }
 
 #' @rdname linalg
@@ -359,7 +356,13 @@ det.caracas_symbol <- function(x, ...) {
     return(do_la(x, "det"))
 }
 
-
+#' @export
+trace_ <- function(x) {
+    ensure_sympy()
+    stopifnot_matrix(x)
+    ## return(sympy_func(x, "Trace"))
+    return(sum(diag(x)))
+}
 
 GramSchmidt_worker <- function(x) {
     ensure_sympy()
