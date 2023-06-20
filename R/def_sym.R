@@ -94,8 +94,8 @@ def_sym <- function(...,
 #'  }
 #' @export  
 #' @rdname def_sym
-def_sym_vec <- function(x, env=parent.frame()){  ## FIXME: OK; maybe different name???
-    for (i in seq_along(x)){
+def_sym_vec <- function(x, env=parent.frame()) {  ## FIXME: OK; maybe different name???
+    for (i in seq_along(x)) {
         assign(x[i], as_sym(x[i]), envir = env)
     }
 }

@@ -1,59 +1,5 @@
-update_sym <- function(sym, nms, vls, declare_symbols = TRUE){
-    if (!is.character(nms)) stop("nms must be character - use as.char() first")
-    if (!is.character(vls)) stop("vls must be character - use as.char() first")
-  
-    if (declare_symbols) {
-        declare_symbols_worker(nms)
-        
-        varnames <- extract_vars(vls)
-        declare_symbols_worker(varnames)
-    }
-    
-    dict <- paste0("{", paste0(nms, ": ", r_strings_to_python(vls), collapse=", "), "}")
-    ## print(dict)
-    e <- reticulate::py_eval(dict)
-    construct_symbol_from_pyobj(sym$pyobj$subs(e))
-}
-
-# Gives character vector (i.e. no dimensions)
-any_to_char <- function(x, ...){ ## JUST A WRAPPER
-  if (!inherits(x, "caracas_symbol")){
-    return(as.character(x))
-  }
-  switch(symbol_class(x),
-         "atomic"={
-           as.character(x)
-         },
-         "matrix"={
-           c(as_character_matrix(x))
-         },           
-         "vector"={
-           gsub(" *", "", c(as_character_matrix(x)))
-         },
-         "list"={
-           cat("NOT IMPLEMENTED\n")
-         },
-         cat("DON'T KNOW WHAT TO DO\n")
-  )
-}
-
-
-list_to_nms_vls <- function(nms){
-  if (!inherits(nms, "list")){
-    stop("'nms' is not a list\n")
-  }
-  
-  vls_ <- unname(sapply(nms, as.character))
-  nms_ <- names(nms)
-  if (any(nchar(nms_) == 0)){
-    stop("'nms' is a list but not properly named\n")
-  }
-  list(nms=nms_, vls=vls_)
-}
-
 
 ################################################################################
-
 
 #' Substitute symbol for value
 #' 
@@ -85,22 +31,79 @@ list_to_nms_vls <- function(nms){
 #' @concept caracas_symbol
 #' 
 #' @export
-subs <- function(sym, nms, vls){
-  # subs() from named list
-  if (inherits(nms, "list")){
-    if (!missing(vls)) {
-      warning("vls ignored")
+subs <- function(sym, nms, vls) {
+    ensure_sympy()
+    stopifnot_symbol(sym)
+
+    ## subs() from named list
+    if (inherits(nms, "list")) {
+        if (!missing(vls)) {
+            warning("vls ignored")
+        }
+        
+        args <- list_to_nms_vls(nms)
+        sym2 <- update_sym(sym, args$nms, args$vls)
+        return(sym2)
     }
     
-    args <- list_to_nms_vls(nms)
-    sym2 <- update_sym(sym, args$nms, args$vls)
-    return(sym2)
-  }
-  
-  # subs() with both nms and vls
+    ## subs() with both nms and vls
     nms_ <- any_to_char(nms)
     vls_ <- any_to_char(vls)
     ## str(list(nms_=nms_, vls_=vls_))
     sym2 <- update_sym(sym, nms_, vls_)
     return(sym2)
+}
+
+
+update_sym <- function(sym, nms, vls, declare_symbols = TRUE) {
+    if (!is.character(nms)) stop("nms must be character - use as.char() first")
+    if (!is.character(vls)) stop("vls must be character - use as.char() first")
+  
+    if (declare_symbols) {
+        declare_symbols_worker(nms)
+        
+        varnames <- extract_vars(vls)
+        declare_symbols_worker(varnames)
+    }
+    
+    dict <- paste0("{", paste0(nms, ": ", r_strings_to_python(vls), collapse=", "), "}")
+    ## print(dict)
+    e <- reticulate::py_eval(dict)
+    construct_symbol_from_pyobj(sym$pyobj$subs(e))
+}
+
+# Gives character vector (i.e. no dimensions)
+any_to_char <- function(x, ...) { ## JUST A WRAPPER
+  if (!inherits(x, "caracas_symbol")) {
+    return(as.character(x))
+  }
+  switch(symbol_class(x),
+         "atomic" = {
+           as.character(x)
+         },
+         "matrix" = {
+           c(as_character_matrix(x))
+         },           
+         "vector" = {
+           gsub(" *", "", c(as_character_matrix(x)))
+         },
+         "list" = {
+           cat("NOT IMPLEMENTED\n")
+         },
+         cat("DON'T KNOW WHAT TO DO\n")
+  )
+}
+
+
+list_to_nms_vls <- function(nms) {
+  if (!inherits(nms, "list")) {
+    stop("'nms' is not a list\n")
+  }
+  
+  vls_ <- unname(sapply(nms, as.character))
+  nms_ <- names(nms)
+  if (any(nchar(nms_) == 0)) {
+    stop("'nms' is a list but not properly named\n")
+  }
+  list(nms=nms_, vls=vls_)
 }

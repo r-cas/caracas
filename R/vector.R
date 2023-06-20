@@ -68,7 +68,6 @@ rbind.caracas_symbol <- function(..., deparse.level = 1) {
   return(z)
 }
 
-
 #' @export
 rev.caracas_symbol <- function(x) {
   if (!symbol_is_matrix(x)) {

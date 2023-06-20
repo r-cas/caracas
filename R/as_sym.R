@@ -99,7 +99,7 @@ as_sym <- function(x,
                    declare_symbols = TRUE) {
   ensure_sympy()
 
-  if (is_sym(x)){ 
+  if (is_sym(x)) { 
       return(x)
   }
   

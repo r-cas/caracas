@@ -1,4 +1,98 @@
+
+#' Extract or replace parts of an object
+#' 
+#' @param x A `caracas_symbol`.
+#' @param i row indices specifying elements to extract or replace
+#' @param j column indices specifying elements to extract or replace
+#' @param \dots Not used
+#' @param drop Simplify dimensions of resulting object
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
+#'   B <- as_sym(A)
+#'   B[1:2, ]
+#'   B[, 2]
+#'   B[2, , drop = FALSE]
+#' }
+#' 
+#' @concept vectors
+#' 
+#' @export
+`[.caracas_symbol` <- function(x, i, j, ..., drop = TRUE) {
+  ensure_sympy()
+  stopifnot_symbol(x)
+  stopifnot_matrix(x)
+  
+  ## if (!symbol_is_matrix(x)) {
+  ##   stop("'x' must be a matrix")
+  ## }
+  
+  xmat <- convert_to_r_mat(x)
+  xmat_subset <- base::`[`(xmat, i, j, ..., drop = drop)
+  y <- as_sym(xmat_subset)
+  return(y)
+}
+
+#' Extract or replace parts of an object
+#' 
+#' @param x A `caracas_symbol`.
+#' @param i row indices specifying elements to extract or replace
+#' @param j column indices specifying elements to extract or replace
+#' @param \dots Not used
+#' @param value Replacement value
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
+#'   B <- as_sym(A)
+#'   B[, 2] <- "x"
+#'   B[, 3] <- vector_sym(3)
+#'   B
+#' }
+#' 
+#' @concept vectors
+#' 
+#' @export
+`[<-.caracas_symbol` <- function(x, i, j, ..., value) {
+  ensure_sympy()
+  stopifnot_symbol(x)
+  stopifnot_matrix(x)
+  
+  if (!inherits(x, "caracas_symbol")) {
+    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
+  }
+
+  
+  if (!symbol_is_matrix(x)) {
+    stop("'x' must be a matrix")
+  }
+  
+  xmat <- convert_to_r_mat(x)
+
+  if (inherits(value, "caracas_symbol")) {
+    if (symbol_is_matrix(value)) {
+      value <- convert_to_r_mat(value)
+    } else {
+      value <- as.character(value)
+    }
+  }
+  
+  xmat_mod <- if (missing(j)) {
+    base::`[<-`(xmat, i, ..., value = value)
+  } else {
+    base::`[<-`(xmat, i, j, ..., value = value)
+  }
+
+  y <- as_sym(xmat_mod)
+  return(y)
+}
+
+
+
 convert_to_r_mat <- function(x) {
+  ensure_sympy()
+  
   xmat <- matrix(NA_character_, nrow = nrow(x), ncol = ncol(x))
   xlst <- x$pyobj$tolist()
   
@@ -33,99 +127,3 @@ convert_to_r_mat <- function(x) {
 #   
 #   return(xmat)
 # }
-
-#' Extract or replace parts of an object
-#' 
-#' @param x A `caracas_symbol`.
-#' @param i row indices specifying elements to extract or replace
-#' @param j column indices specifying elements to extract or replace
-#' @param \dots Not used
-#' @param drop Simplify dimensions of resulting object
-#' 
-#' @examples 
-#' if (has_sympy()) {
-#'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-#'   B <- as_sym(A)
-#'   B[1:2, ]
-#'   B[, 2]
-#'   B[2, , drop = FALSE]
-#' }
-#' 
-#' @concept vectors
-#' 
-#' @export
-`[.caracas_symbol` <- function(x, i, j, ..., drop = TRUE) {
-  ensure_sympy()
-  
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
-  
-  #if (!symbol_is_matrix(x) && !symbol_is_vector(x)) {
-  #  stop("'x' must be a vector or matrix")
-  #}
-  
-  if (!symbol_is_matrix(x)) {
-    stop("'x' must be a matrix")
-  }
-  
-  xmat <- convert_to_r_mat(x)
-  xmat_subset <- base::`[`(xmat, i, j, ..., drop = drop)
-  y <- as_sym(xmat_subset)
-  return(y)
-}
-
-#' Extract or replace parts of an object
-#' 
-#' @param x A `caracas_symbol`.
-#' @param i row indices specifying elements to extract or replace
-#' @param j column indices specifying elements to extract or replace
-#' @param \dots Not used
-#' @param value Replacement value
-#' 
-#' @examples 
-#' if (has_sympy()) {
-#'   A <- matrix(c("a", 0, 0, 0, "a", "a", "a", 0, 0), 3, 3)
-#'   B <- as_sym(A)
-#'   B[, 2] <- "x"
-#'   B[, 3] <- vector_sym(3)
-#'   B
-#' }
-#' 
-#' @concept vectors
-#' 
-#' @export
-`[<-.caracas_symbol` <- function(x, i, j, ..., value) {
-  ensure_sympy()
-  
-  if (!inherits(x, "caracas_symbol")) {
-    stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-  }
-
-  
-  if (!symbol_is_matrix(x)) {
-    stop("'x' must be a matrix")
-  }
-  
-  xmat <- convert_to_r_mat(x)
-
-  if (inherits(value, "caracas_symbol")){
-    if (symbol_is_matrix(value)) {
-      value <- convert_to_r_mat(value)
-    } else {
-      value <- as.character(value)
-    }
-  }
-  
-  xmat_mod <- if (missing(j)) {
-    base::`[<-`(xmat, i, ..., value = value)
-  } else {
-    base::`[<-`(xmat, i, j, ..., value = value)
-  }
-
-  y <- as_sym(xmat_mod)
-  return(y)
-}
-
-
-
