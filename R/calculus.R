@@ -191,7 +191,7 @@ prod_ <- function(f, var, lower, upper, doit = TRUE) {
 #' 
 #' @export
 int <- function(f, var, lower, upper, doit = TRUE) {
-  calc_verify_func(f)
+  calc_verify_func(f) 
   ensure_sympy()
   var <- as.character(var)
   verify_variable_name(var)
