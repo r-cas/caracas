@@ -1,3 +1,5 @@
+## FIXME (SH): Perhaps remove dependency on doBy?
+
 #' Convert expression into function object.
 #'
 #' @param x caracas expression.
@@ -29,104 +31,13 @@ as_func <- function(x, order=NULL, vec_arg=FALSE){
     stopifnot_symbol(x)
 
     x <- as_expr(x)
-    if (vec_arg){
-        doBy::expr_to_fun(x, order=order, vec_arg=TRUE)
-    } else {
-        doBy::expr_to_fun(x, order=order, vec_arg=FALSE)
-    }    
+    ## if (vec_arg){
+    ##     doBy::expr_to_fun(x, order=order, vec_arg=TRUE)
+    ## } else {
+    ##     doBy::expr_to_fun(x, order=order, vec_arg=FALSE)
+    ## }
+
+    doBy::expr_to_fun(x, order=order, vec_arg=vec_arg)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## ' @export
-## expr_to_one_param_fun <- function(e, order=NULL){
-##     if (!is.null(order)) ## FIXME FRAGILE
-##         nms <- order
-##     else
-##         nms <- all.vars(e)
-##     e_str <- expr_to_string(e)
-
-##     if (length(nms)) {
-##         aux <- sapply(1:length(nms),
-##                       function(i) {
-##                           nm <- nms[i]
-##                           paste0(nm, " = parm[", i, "]")
-##                       }
-##                       )
-##     } else {
-##         aux <- NULL
-##     }
-
-##     comb <- c(aux, e_str)    
-    
-##     fun_str <- "function(parm)"
-    
-##     bd <- paste0("\n{ \n", paste0(comb, collapse=";\n "), "\n}")
-##     ff <- paste0(fun_str, bd)
-##     fun <- eval(parse(text=ff))
-##     return(fun)
-## }
-
-## ## ' @export
-## expr_to_multi_param_fun <- function(e, order=NULL){
-##     if (!is.null(order)) ## FIXME FRAGILE
-##         nms <- order
-##     else
-##         nms <- all.vars(e)
-##     e_str <- expr_to_string(e)
-
-##     fun_str <- paste0("function(", paste0(nms, collapse=", "), ")")
-    
-    
-##     bd <- paste0("\n{ \n", paste0(e_str, collapse=";\n "), "\n}")
-    
-##     ff <- paste0(fun_str, bd)
-
-##     fun <- eval(parse(text=ff))
-##     return(fun)
-## }
-
-
-## expr_to_string <- function(e){
-##     e_str <- lapply(e, deparse)
-
-##     e_str <-
-##         lapply(e_str,
-##            function(e){
-##                paste0(e, collapse=" ")               
-##            })
-##     e_str
-## }
-
-
-
-## expr_to_fun <- function(e){
-    ## vn <- all.vars(e)
-    ## fmls <- vector("list", length(vn))
-    ## names(fmls) <- vn
-    
-    ## out <- function(){}
-
-    ## formals(out) <- fmls
-    ## body(out) <- e
-    ## return(out)
-## }
