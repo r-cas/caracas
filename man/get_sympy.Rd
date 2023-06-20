@@ -10,9 +10,9 @@ get_sympy()
 The 'SymPy' object with direct access to the library.
 }
 \description{
-Get the 'SymPy' object.
-Note that it gives you extra responsibilities
-when you choose to access the 'SymPy' object directly.
+Get the 'SymPy' object. Note that it gives you extra
+responsibilities when you choose to access the 'SymPy' object
+directly.
 }
 \examples{
 if (has_sympy()) {

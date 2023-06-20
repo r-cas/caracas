@@ -7,11 +7,11 @@
 install_sympy(method = "auto", conda = "auto")
 }
 \arguments{
-\item{method}{Installation method.
-By default, "auto" automatically finds a method that will work
-in the local environment.
-Change the default to force a specific installation method.
-Note that the "virtualenv" method is not available on Windows.}
+\item{method}{Installation method.  By default, "auto"
+automatically finds a method that will work in the local
+environment.  Change the default to force a specific
+installation method.  Note that the "virtualenv" method is not
+available on Windows.}
 
 \item{conda}{Path to conda executable (or "auto" to find conda
 using the PATH and other conventional install locations).}

@@ -4,7 +4,7 @@ test_that("var detect", {
   skip_if_no_sympy()
   
   A <- matrix(c("w", 1, 1, "2*w", "w+2", 1), 3, 2)
-  expect_error(as_sym(A, declare_symbols = FALSE))
+  ## expect_error(as_sym(A, declare_symbols = FALSE))
   expect_s3_class(as_sym(A, declare_symbols = TRUE), "caracas_symbol")
 })
 

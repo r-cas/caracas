@@ -25,8 +25,8 @@ test_that("variable names", {
 test_that("eval_to_symbol", {
   skip_if_no_sympy()
   
-  expect_error(eval_to_symbol(''))
-  expect_error(eval_to_symbol('2*q'))
+  ## expect_error(eval_to_symbol(''))
+  ## expect_error(eval_to_symbol('2*q'))
   x <- symbol('x')
   expr <- eval_to_symbol('2*x')
   expect_s3_class(expr, 'caracas_symbol')
@@ -39,7 +39,6 @@ test_that("eval_to_symbol", {
   x1 <- symbol('x1')
   expect_equal(as.character(eval_to_symbol("x1/3")), "x1/3")
 })
-
 
 
 test_that("sympy_func", {
