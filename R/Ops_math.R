@@ -11,7 +11,7 @@ get_pyobj <- function(e, method) {
 
 # x <- v
 # power <- y
-matrix_ele_power <- function(x, power = 1){
+matrix_ele_power <- function(x, power = 1) {
   ensure_sympy()
   stopifnot_symbol(x)
   
@@ -73,10 +73,8 @@ matrix_ele_power <- function(x, power = 1){
     }
     power <- as_sym(p2)
   }
-  
   stopifnot(isTRUE(all.equal(dim(x), dim(power))))
   
-
   out <- as_character_matrix(x)
   for (i in seq_len(nrow(x))) {
     for (j in seq_len(ncol(x))) {
@@ -93,8 +91,12 @@ matrix_ele_power <- function(x, power = 1){
 }
 
 mat_mult_elementwise <- function(o1, o2) {
-  # https://github.com/sympy/sympy/issues/22353
-  # https://github.com/sympy/sympy/pull/22362/
+
+    o1 <<- o1
+    o2 <<- o2
+    
+    ## https://github.com/sympy/sympy/issues/22353
+    ## https://github.com/sympy/sympy/pull/22362/
   
   # if (FALSE) {
   #   e1 <- as_sym(paste0("x", 1:3))
@@ -104,15 +106,17 @@ mat_mult_elementwise <- function(o1, o2) {
   #   o1 <- e1$pyobj
   #   o2 <- e2$pyobj
   # }
-  
-  if (sympy_version() == "1.9") {
-    r1 <- o1["_rep"]
-    r2 <- o2["_rep"]
-    d <- r1$unify(r2)
-    z <- d[0]$mul_elementwise(d[1]) # Python 0-indexed
-    w <- z$to_Matrix()
-    return(construct_symbol_from_pyobj(w))
-  } 
+  ## FIXME (SH): Seems obsolete now
+  ## if (sympy_version() == "1.9") {
+  ##   r1 <- o1["_rep"]
+  ##   r2 <- o2["_rep"]
+
+  ##   d <- r1$unify(r2)
+  ##   d <<- d
+  ##   z <- d[0]$mul_elementwise(d[1]) # Python 0-indexed
+  ##   w <- z$to_Matrix()
+  ##   return(construct_symbol_from_pyobj(w))
+  ## } 
   
   # Else: Other (previous and later versions)
   z <- get_sympy()$matrix_multiply_elementwise(o1, o2)
@@ -210,14 +214,17 @@ Ops.caracas_symbol = function(e1, e2) {
     } 
   }
 
-  ### cat("HERE\n"); str(list(o1=o1, o2=o2)); str(list(e1_is_mat=e1_is_mat, e2_is_mat=e2_is_mat))
+  ## cat("HERE\n"); str(list(o1=o1, o2=o2)); str(list(e1_is_mat=e1_is_mat, e2_is_mat=e2_is_mat))
   
   # Component-wise * / ^ for matrices
   # +/- is handled with normal operators
   if ((e1_is_mat || e2_is_mat) && .Generic %in% c("*", "/", "^")) {
-    ### cat("mat || mat\n")
+     ## cat("mat || mat\n")
     if (.Generic == "*") {
-      z <- mat_mult_elementwise(o1, o2)
+
+        ## print(o1)
+        ## print(o2)
+        z <- mat_mult_elementwise(o1, o2)
       return(z)
     } else if (.Generic == "/") {
       e2 <- reciprocal_matrix(e2)

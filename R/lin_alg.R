@@ -38,30 +38,34 @@ stopifnot_matrix <- function(x) {
 #' @concept linalg
 #' @export
 symbol_is_matrix <- function(x) {
-    if (length(x) != 1L) {
-      return(FALSE)
-    }
-  
-    ## MatrixSymbol
-    try({
-        res <- x$pyobj$is_MatrixExpr
-        
-        if (is.logical(res) && isTRUE(res)) {
-            return(TRUE)
-        }
-        
-        if (reticulate::py_to_r(res)) {
-            return(TRUE)
-        }
-    }, silent = TRUE)
-    
-    xstr <- as.character(x)
 
-    if (grepl("^Matrix\\(\\[", xstr)) {
-      return(TRUE)
+    if (length(x) != 1L) {
+        cat("length not 1\n")
+        return(FALSE)
     }
-  
-  return(FALSE)
+
+    ## FIXME (SH) Need this? Can go into loop
+    ## MatrixSymbol
+    ## try({
+    ##     res <- x$pyobj$is_MatrixExpr
+        
+    ##     if (is.logical(res) && isTRUE(res)) {
+    ##         return(TRUE)
+    ##     }
+        
+    ##     if (reticulate::py_to_r(res)) {
+    ##         return(TRUE)
+    ##     }
+    ## }, silent = TRUE)
+
+
+    xstr <- as.character(x)
+    
+    if (grepl("^Matrix\\(\\[", xstr)) {
+        return(TRUE)
+    }
+    
+    return(FALSE)
 }
 
 
@@ -134,7 +138,8 @@ as_character_matrix <- function(x) {
 dim.caracas_symbol <- function(x) {
   ensure_sympy()
   stopifnot_symbol(x)
-  
+
+  ## print(symbol_is_matrix(x))
   # FIXME: This contract is used in dim<- setter
   if (!symbol_is_matrix(x)) { 
     return(NULL) 
