@@ -415,13 +415,13 @@ as_diag <- function(x) {
 #' @examples 
 #' if (has_sympy()) {
 #'   A <- as_sym(matrix(1:9, 3))
-#'   vec(A)
+#'   as_vec(A)
 #' }
 #' 
 #' @concept linalg
 #' 
 #' @export
-vec <- function(x) {
+as_vec <- function(x) {
   ensure_sympy()
   stopifnot_symbol(x)
   stopifnot_matrix(x)

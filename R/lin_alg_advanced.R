@@ -172,8 +172,9 @@ finalise_rref <- function(vals) {
 #' Performs various linear algebra operations like finding the inverse, 
 #' the QR decomposition, the eigenvectors and the eigenvalues.
 #' 
-#' @param x A matrix for which a property is requested
-#' @param ... Auxillary arguments
+#' @param x A matrix for which a property is requested.
+#' @param matrix When relevant should a matrix be returned.
+#' @param ... Auxillary arguments.
 #' 
 #' @seealso [do_la()]
 #' 
@@ -217,23 +218,34 @@ finalise_rref <- function(vals) {
 #' @name linalg
 NULL
 
-
 #' @rdname linalg
 #' @export
-columnspace <- function(x) {
-    return(do_la(x, "columnspace"))
+columnspace <- function(x, matrix=TRUE) {
+    out <- do_la(x, "columnspace")
+    if (matrix)
+        return(do.call(cbind, out))
+    else 
+        return(out)
 }
 
 #' @rdname linalg
 #' @export
-nullspace <- function(x) {
-    return(do_la(x, "nullspace"))
+nullspace <- function(x, matrix=TRUE) {
+    out <- do_la(x, "nullspace")
+    if (matrix)
+        return(do.call(cbind, out))
+    else 
+        return(out)
 }
 
 #' @rdname linalg
 #' @export
-rowspace <- function(x) {
-    return(do_la(x, "rowspace"))
+rowspace <- function(x, matrix=TRUE) {
+    out <- do_la(x, "rowspace")
+    if (matrix)
+        return(do.call(cbind, out))
+    else 
+        return(out)
 }
 
 #' @rdname linalg
