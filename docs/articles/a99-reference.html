@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.1</span>
       </span>
     </div>
 
@@ -707,7 +707,7 @@ Cholesky decomposition of a matrix:</p>
 <span><span class="co">#&gt;    ⎣  1    1⎦</span></span></code></pre></div>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/do_la.html">do_la</a></span><span class="op">(</span><span class="va">A</span>, <span class="st">"cholesky"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): ValueError: Matrix must be Hermitian.</span></span></code></pre></div>
+<span><span class="co">#&gt; Matrix must be Hermitian.</span></span></code></pre></div>
 <p>This fails as <code>A</code> is not positive (semi-)definite.</p>
 <p>To ensure this, we need to impose restrictions on <code>x</code>.
 This is done by defining a symbol with an assumption about

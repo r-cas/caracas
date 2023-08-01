@@ -121,6 +121,9 @@
     <loc>/reference/as_sym.html</loc>
   </url>
   <url>
+    <loc>/reference/as_vec.html</loc>
+  </url>
+  <url>
     <loc>/reference/ask.html</loc>
   </url>
   <url>
@@ -359,6 +362,12 @@
   </url>
   <url>
     <loc>/reference/sumf.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sym_class.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sym_inherits.html</loc>
   </url>
   <url>
     <loc>/reference/symbol.html</loc>

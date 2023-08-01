@@ -15,6 +15,7 @@
 \alias{rref}
 \alias{QRdecomposition}
 \alias{det}
+\alias{trace_}
 \title{Do linear algebra operation}
 \usage{
 columnspace(x, matrix = TRUE)
@@ -42,6 +43,8 @@ rref(x)
 QRdecomposition(x)
 
 det(x, ...)
+
+trace_(x)
 }
 \arguments{
 \item{x}{A matrix for which a property is requested.}

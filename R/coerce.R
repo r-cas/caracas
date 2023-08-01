@@ -26,6 +26,7 @@ symbol_class <- function(x) {
   return(character(0L))
 }
 
+#' @inherit symbol_class
 #' @export
 sym_class <- symbol_class
 
@@ -54,6 +55,13 @@ symbol_is_matrix <- function(x) {
   grepl("^Matrix\\(\\[", z)
 }
 
+#' Ask if type of caracas symbol is of a requested type
+#'
+#' @param x An object, a caracas object is expected
+#' @param what Requested type (e.g. atomic, vector, list, matrix)
+#' 
+#' @concept caracas_symbol
+#' 
 #' @export
 sym_inherits <- function(x, what) {
     cls <- sym_class(x)

@@ -35,6 +35,9 @@ if (has_sympy()) {
   do_la(A, "inv")
   inv(A)
   
+  do_la(A, "trace")
+  trace_(A)
+  
   do_la(A, "echelon_form")
   do_la(A, "rank")
   

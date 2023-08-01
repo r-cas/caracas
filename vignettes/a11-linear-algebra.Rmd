@@ -259,7 +259,7 @@ rowspace(B)
 x <- nullspace(B)
 x
 rref(B)
-B %*% x[[1]]
+B %*% x
 ```
 
 ### Singular values, svd

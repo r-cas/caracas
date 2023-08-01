@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.1</span>
       </span>
     </div>
 
@@ -108,7 +108,7 @@
                         <h4 data-toc-skip class="author">Mikkel Meyer
 Andersen and Søren Højsgaard</h4>
             
-            <h4 data-toc-skip class="date">Tue Jan 31 14:53:41 2023</h4>
+            <h4 data-toc-skip class="date">Tue Aug 1 11:29:38 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-cas/caracas/blob/HEAD/vignettes/a11-linear-algebra.Rmd" class="external-link"><code>vignettes/a11-linear-algebra.Rmd</code></a></small>
       <div class="hidden name"><code>a11-linear-algebra.Rmd</code></div>
@@ -570,20 +570,15 @@ linear algebra”) function presented at the end of this section.</p>
 <span><span class="co">#&gt;    ⎢        ⎥</span></span>
 <span><span class="co">#&gt;    ⎣0  0   6⎦</span></span>
 <span><span class="fu"><a href="../reference/linalg.html">columnspace</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; c: [1  3  0]ᵀ</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; c: [3  9  6]ᵀ</span></span>
+<span><span class="co">#&gt; c: ⎡1  3⎤</span></span>
+<span><span class="co">#&gt;    ⎢    ⎥</span></span>
+<span><span class="co">#&gt;    ⎢3  9⎥</span></span>
+<span><span class="co">#&gt;    ⎢    ⎥</span></span>
+<span><span class="co">#&gt;    ⎣0  6⎦</span></span>
 <span><span class="fu"><a href="../reference/linalg.html">rowspace</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; c: [1  -2  3]</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; c: [0  0  6]</span></span>
+<span><span class="co">#&gt; c: [1  -2  3  0  0  6]</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linalg.html">nullspace</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; c: [2  1  0]ᵀ</span></span>
 <span><span class="fu"><a href="../reference/linalg.html">rref</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $mat</span></span>
@@ -595,7 +590,7 @@ linear algebra”) function presented at the end of this section.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $pivot_vars</span></span>
 <span><span class="co">#&gt; [1] 1 3</span></span>
-<span><span class="va">B</span> <span class="op"><a href="../reference/matrix-products.html">%*%</a></span> <span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">B</span> <span class="op"><a href="../reference/matrix-products.html">%*%</a></span> <span class="va">x</span></span>
 <span><span class="co">#&gt; c: [0  0  0]ᵀ</span></span></code></pre></div>
 </div>
 <div class="section level4">

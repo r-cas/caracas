@@ -20,6 +20,9 @@
 #'   do_la(A, "inv")
 #'   inv(A)
 #'   
+#'   do_la(A, "trace")
+#'   trace_(A)
+#'   
 #'   do_la(A, "echelon_form")
 #'   do_la(A, "rank")
 #'   
@@ -368,6 +371,7 @@ det.caracas_symbol <- function(x, ...) {
     return(do_la(x, "det"))
 }
 
+#' @rdname linalg
 #' @export
 trace_ <- function(x) {
     ensure_sympy()

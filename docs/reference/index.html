@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.1</span>
       </span>
     </div>
 
@@ -152,6 +152,10 @@
           <p><code><a href="subs.html">subs()</a></code> </p>
         </td>
         <td><p>Substitute symbol for value</p></td>
+      </tr><tr><td>
+          <p><code><a href="sym_inherits.html">sym_inherits()</a></code> </p>
+        </td>
+        <td><p>Ask if type of caracas symbol is of a requested type</p></td>
       </tr><tr><td>
           <p><code><a href="symbol.html">symbol()</a></code> </p>
         </td>
@@ -313,6 +317,10 @@
         </td>
         <td><p>Construct diagonal matrix from vector</p></td>
       </tr><tr><td>
+          <p><code><a href="as_vec.html">as_vec()</a></code> </p>
+        </td>
+        <td><p>Stacks matrix to vector</p></td>
+      </tr><tr><td>
           <p><code><a href="colspan.html">colspan()</a></code> </p>
         </td>
         <td><p>Column space (range) of a symbolic matrix</p></td>
@@ -357,7 +365,7 @@
         </td>
         <td><p>Get basis</p></td>
       </tr><tr><td>
-          <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">inv2fl()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> </p>
+          <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">inv2fl()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> <code><a href="linalg.html">trace_()</a></code> </p>
         </td>
         <td><p>Do linear algebra operation</p></td>
       </tr><tr><td>
@@ -400,10 +408,6 @@
           <p><code><a href="t.caracas_symbol.html">t(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
         </td>
         <td><p>Transpose of matrix</p></td>
-      </tr><tr><td>
-          <p><code><a href="vec.html">vec()</a></code> </p>
-        </td>
-        <td><p>Stacks matrix to vector</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="solve">Solve <a href="#solve" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Functions related to solving equations</p>
@@ -496,6 +500,10 @@
           <p><code><a href="pipe.html">%&gt;%</a></code> </p>
         </td>
         <td><p>Pipe</p></td>
+      </tr><tr><td>
+          <p><code><a href="sym_class.html">sym_class()</a></code> </p>
+        </td>
+        <td><p>Ask type of caracas symbol</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="complete-reference">Complete reference <a href="#complete-reference" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
@@ -556,6 +564,10 @@
           <p><code><a href="as_sym.html">as_sym()</a></code> </p>
         </td>
         <td><p>Convert R object to caracas symbol</p></td>
+      </tr><tr><td>
+          <p><code><a href="as_vec.html">as_vec()</a></code> </p>
+        </td>
+        <td><p>Stacks matrix to vector</p></td>
       </tr><tr><td>
           <p><code><a href="ask.html">ask()</a></code> </p>
         </td>
@@ -701,7 +713,7 @@
         </td>
         <td><p>Limit of a function</p></td>
       </tr><tr><td>
-          <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">inv2fl()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> </p>
+          <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">inv2fl()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> <code><a href="linalg.html">trace_()</a></code> </p>
         </td>
         <td><p>Do linear algebra operation</p></td>
       </tr><tr><td>
@@ -809,6 +821,14 @@
         </td>
         <td><p>Sum of a function</p></td>
       </tr><tr><td>
+          <p><code><a href="sym_class.html">sym_class()</a></code> </p>
+        </td>
+        <td><p>Ask type of caracas symbol</p></td>
+      </tr><tr><td>
+          <p><code><a href="sym_inherits.html">sym_inherits()</a></code> </p>
+        </td>
+        <td><p>Ask if type of caracas symbol is of a requested type</p></td>
+      </tr><tr><td>
           <p><code><a href="symbol.html">symbol()</a></code> </p>
         </td>
         <td><p>Create a symbol</p></td>
@@ -860,10 +880,6 @@
           <p><code><a href="unbracket.html">unbracket()</a></code> </p>
         </td>
         <td><p>Remove inner-most dimension</p></td>
-      </tr><tr><td>
-          <p><code><a href="vec.html">vec()</a></code> </p>
-        </td>
-        <td><p>Stacks matrix to vector</p></td>
       </tr><tr><td>
           <p><code><a href="vectorfy.html">vectorfy()</a></code> </p>
         </td>

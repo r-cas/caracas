@@ -1,3 +1,7 @@
+# caracas 2.0.1
+
+* Minor bug fixes
+
 # caracas 2.0.0
 
 * Reworked `subs()` - see documentation. `subs_lst()` removed.
