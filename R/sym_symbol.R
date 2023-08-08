@@ -201,13 +201,20 @@ try_doit <- function(x) {
 #'   unbracket(x)
 #'   
 #'   x <- as_sym("Matrix([[b1*x1/(b2 + x1)], [b1*x2/(b2 + x2)], [b1*x3/(b2 + x3)]])")
-#'   
 #' }
 #' 
 #' @concept caracas_symbol
 #' 
 #' @export
 unbracket <- function(x) {
+  if (is.list(x)) {
+    z <- lapply(x, as_character)
+    z <- do.call(rbind, z)
+    z <- as_sym(z)
+    #z <- to_vector(z)
+    return(z)
+  }
+  
   z <- as.character(x)
 
   zz <- gsub("\\[([^]]+)\\]", "\\1", z)
@@ -226,6 +233,7 @@ extract_elements <- function(x) {
   
   return(zz)
 }
+
 
 
 ## concatenate

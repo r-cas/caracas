@@ -46,6 +46,21 @@ rootsolve <- function(lhs, vars) {
         return(grepl(pattern, x))
     }
     
+    # vars itself is not caracas_symbol, but contains a list of them
+    if (!inherits(vars, "caracas_symbol") && is.list(vars) && length(vars) >= 1) {
+      all_caracas_symbol <- TRUE
+      
+      for (v in vars) {
+        if (!inherits(v, "caracas_symbol")) {
+          all_caracas_symbol <- FALSE
+          break
+        }
+      }
+      if (all_caracas_symbol) {
+        vars <- unbracket(vars)
+      }
+    }
+    
     if (!is.null(dim(lhs))) {
         if (nrow(lhs) != 1L && ncol(lhs) == 1L) {
             lhs <- t(lhs)

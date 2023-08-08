@@ -24,7 +24,6 @@ if (has_sympy()) {
   unbracket(x)
   
   x <- as_sym("Matrix([[b1*x1/(b2 + x1)], [b1*x2/(b2 + x2)], [b1*x3/(b2 + x3)]])")
-  
 }
 
 }
