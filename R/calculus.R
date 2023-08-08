@@ -320,9 +320,9 @@ vars_to_array <- function(vars) {
 #'   dim(H)
 #'   
 #'   g %>% 
-#'     der(list(x, y)) %>% 
-#'     der(list(x, y)) %>% 
-#'     der(list(x, y))
+#'     der(list(x, y), simplify = FALSE) %>% 
+#'     der(list(x, y), simplify = FALSE) %>% 
+#'     der(list(x, y), simplify = FALSE)
 #' }
 #' 
 #' @concept calculus
