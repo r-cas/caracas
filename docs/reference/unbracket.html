@@ -100,18 +100,13 @@
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="has_sympy.html">has_sympy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"[[[x1/(b2 + x1)], </span></span></span>
-<span class="r-in"><span><span class="st">                 [x2/(b2 + x2)], </span></span></span>
-<span class="r-in"><span><span class="st">                 [x3/(b2 + x3)]], </span></span></span>
-<span class="r-in"><span><span class="st">                [[-b1*x1/(b2 + x1)^2], </span></span></span>
-<span class="r-in"><span><span class="st">                 [-b1*x2/(b2 + x2)^2], </span></span></span>
-<span class="r-in"><span><span class="st">                 [-b1*x3/(b2 + x3)^2]]]"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">x</span></span></span>
-<span class="r-in"><span>  <span class="fu">unbracket</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  </span></span>
-<span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"Matrix([[b1*x1/(b2 + x1)], [b1*x2/(b2 + x2)], [b1*x3/(b2 + x3)]])"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  </span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_sym.html">as_sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_sym.html">as_sym</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">l</span></span></span>
+<span class="r-in"><span>  <span class="fu">unbracket</span><span class="op">(</span><span class="va">l</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> c: [x₁  x₂  x₃  y]ᵀ</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

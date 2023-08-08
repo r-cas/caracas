@@ -16,7 +16,7 @@
 #'   ls()
 #'   def_sym("x1", "x2", "x3")
 #'   ls()
-#'   def_sym("x1", "x2", "x3", warn = TRUE)
+#'   # def_sym("x1", "x2", "x3", warn = TRUE) # Do not run as will cause a warning
 #'   ls()
 #'   def_sym(i, j, charvec = c("x", "y"))
 #'   ls()

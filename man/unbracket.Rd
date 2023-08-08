@@ -14,16 +14,11 @@ Remove inner-most dimension
 }
 \examples{
 if (has_sympy()) {
-  x <- as_sym("[[[x1/(b2 + x1)], 
-                 [x2/(b2 + x2)], 
-                 [x3/(b2 + x3)]], 
-                [[-b1*x1/(b2 + x1)^2], 
-                 [-b1*x2/(b2 + x2)^2], 
-                 [-b1*x3/(b2 + x3)^2]]]")
-  x
-  unbracket(x)
-  
-  x <- as_sym("Matrix([[b1*x1/(b2 + x1)], [b1*x2/(b2 + x2)], [b1*x3/(b2 + x3)]])")
+  x <- as_sym(paste0("x", 1:3))
+  y <- as_sym("y")
+  l <- list(x, y)
+  l
+  unbracket(l)
 }
 
 }
