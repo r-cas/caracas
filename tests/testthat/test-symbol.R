@@ -132,3 +132,28 @@ test_that("sympy_func", {
 
 
 
+test_that("eval_to_symbol", {
+  skip_if_no_sympy()
+  
+  def_sym(y_11)
+  expect_equal(as.character(eval_to_symbol("3*y_11/4")), "3*y_11/4")
+  
+  ###
+  
+  nr <- 2
+  nc <- 2
+  
+  y  <- as_sym(c("y_11", "y_21", "y_12", "y_22"))
+  dat <- expand.grid(r=factor(1:nr), s=factor(1:nc))
+  X <- model.matrix(~ r + s, data=dat) |> as_sym()
+  b <- vector_sym(ncol(X), "b")
+  mu <- X %*% b
+  
+  XtX <- t(X) %*% X
+  XtXinv <- inv(XtX)
+  Xty <- t(X) %*% y
+  b_hat <- XtXinv %*% Xty
+  expect_equal(as.character(b_hat),
+               "Matrix([[3*y_11/4 + y_12/4 + y_21/4 - y_22/4], [-y_11/2 - y_12/2 + y_21/2 + y_22/2], [-y_11/2 + y_12/2 - y_21/2 + y_22/2]])")
+  
+})

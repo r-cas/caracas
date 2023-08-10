@@ -57,8 +57,10 @@ eval_to_symbol <- function(x) {
     # we need to be sure that there are no characters in front of the 
     # number in the numerator
     
-    if (grepl("[a-zA-Z]+[0-9-.]+/[0-9-.]+", x, perl = TRUE)) {
-      # There was a character (e.g. 'x1/2'), do nothing
+    if (grepl("[a-zA-Z_]+[0-9-.]+/[0-9-.]+", x, perl = TRUE)) {
+      # There was a character (e.g. 'x1/2') 
+      # or a subscript/underscore (e.g. 3*y_11/4)
+      # do nothing
     } else {
       # S(): Sympify
       x <- gsub("([0-9-.]+)/([0-9-.]+)", "S(\\1)/S(\\2)", x, perl = TRUE)
