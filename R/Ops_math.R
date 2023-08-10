@@ -92,11 +92,8 @@ matrix_ele_power <- function(x, power = 1) {
 
 mat_mult_elementwise <- function(o1, o2) {
 
-    o1 <<- o1
-    o2 <<- o2
-    
-    ## https://github.com/sympy/sympy/issues/22353
-    ## https://github.com/sympy/sympy/pull/22362/
+  ## https://github.com/sympy/sympy/issues/22353
+  ## https://github.com/sympy/sympy/pull/22362/
   
   # if (FALSE) {
   #   e1 <- as_sym(paste0("x", 1:3))

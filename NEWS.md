@@ -1,5 +1,6 @@
 # caracas 2.0.1
 
+* New functions, e.g.: `as_vec()`, `trace_()`
 * Minor bug fixes
 
 # caracas 2.0.0
