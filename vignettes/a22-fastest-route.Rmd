@@ -33,7 +33,7 @@ if (!has_sympy()) {
 }
 ```
 
-A [problem](https://ing.dk/artikel/taenkeboks-hurtigste-vej-mellem-a-b-1150-m-lang-232871) was posted by the Danish newspaper, *Ingeniøren*, and it goes like this:
+A [problem](https://ing.dk/artikel/taenkeboks-den-hurtigste-vej-mellem-og-b-er-1150-m-lang) was posted by the Danish newspaper, *Ingeniøren*, and it goes like this:
 
 You are in the middle of a dense forest located at $A$. 
 You need to get to $C$ in the fastest way possible, and you can only change direction once. 

@@ -291,7 +291,7 @@ inv_cf <- function(x) {
 }
 
 inv_lu <- function(x) {
-    construct_symbol_from_pyobj(x$pyobj$inv(method="LU"))
+      construct_symbol_from_pyobj(x$pyobj$inv(method="LU"))
 }
 
 inv_yac <- function(x) {

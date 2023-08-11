@@ -1,6 +1,9 @@
 # caracas 2.0.1
 
 * New functions, e.g.: `as_vec()`, `trace_()`
+* Initialisation of SymPy/Python is now done at package at start up. This may move 
+  the waiting time from first time using the SymPy backend to loading the package. 
+  This was done to satisfy CRAN checks.
 * Minor bug fixes
 
 # caracas 2.0.0
