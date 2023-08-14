@@ -1,0 +1,84 @@
+---
+title: "Chunk engine for easy tex output in Rmarkdown and Quarto"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Chunk engine for easy tex output in Rmarkdown and Quarto}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(caracas)
+```
+
+
+```{r, include = FALSE}
+inline_code <- function(x) {
+  x
+}
+
+if (!has_sympy()) {
+  # SymPy not available, so the chunks shall not be evaluated
+  knitr::opts_chunk$set(eval = FALSE)
+  
+  inline_code <- function(x) {
+    deparse(substitute(x))
+  }
+}
+```
+
+We have added a chunk engine that outputs (an object) to tex format. 
+That is, `tex()` is applied to the object and the output is 
+put inside a display math environment.
+
+For example, if you write the following:
+
+````{verbatim}
+```{r}
+library(caracas)
+def_sym(x, y)
+p <- x^3 + y^2
+```
+
+```{rtex}
+der(p, c(x, y))
+```
+````
+
+You will get this output:
+
+```{r}
+library(caracas)
+def_sym(x, y)
+p <- x^3 + y^2
+```
+
+```{rtex}
+der(p, c(x, y))
+```
+
+
+# Custom `tex()`
+
+You can also create your own custom `tex()` function:
+
+```{r}
+tex <- function(x) {
+  paste0("g(x, y) = ", caracas::tex(x))
+}
+```
+
+```{rtex}
+der(p, c(x, y))
+```
+
+The reason this works is because `rtex` just calls `tex()` and 
+if you define one in global namespace, then this is previous in the 
+search path than the one provided by `caracas`.

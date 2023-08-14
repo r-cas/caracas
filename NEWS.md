@@ -1,6 +1,6 @@
 # caracas 2.0.2
 
-* 
+* Added `knitr` engine `rtex` (see vignette "Chunk engine for easy tex output in Rmarkdown and Quarto")
 
 # caracas 2.0.1
 
