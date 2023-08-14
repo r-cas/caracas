@@ -1,3 +1,7 @@
+# caracas 2.0.2
+
+* Added `prepostfix` argument to `tex.caracas_symbol()` for prefix and postfix
+
 # caracas 2.0.1
 
 * New functions, e.g.: `as_vec()`, `trace_()`
