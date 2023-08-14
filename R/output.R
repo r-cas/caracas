@@ -193,7 +193,6 @@ tex.caracas_factor_list <- function(x, ...){
 #' @param zero_as_dot Print zero as dots
 #' @param matstr Replace `\begin{matrix}` with another environment, e.g. `pmatrix`. 
 #' If vector of length two, the second element is an optional argument.
-#' @param prepostfix Add string before and after, e.g. `$$`
 #' @param \dots Other arguments passed along
 #'
 #' @concept output
@@ -215,7 +214,7 @@ tex <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
 
 
 #' @export
-tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, prepostfix = NULL, ...) {
+tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
   ensure_sympy()
   
   if (!is.null(x$pyobj)) {
@@ -233,10 +232,6 @@ tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, prepostfix
 
       o <- gsub("\\begin{matrix}", paste0("\\begin{", matstr[1L], "}", opt), o, fixed = TRUE)
       o <- gsub("\\end{matrix}", paste0("\\end{", matstr[1L], "}"), o, fixed = TRUE)
-    }
-    
-    if (!is.null(prepostfix) && is.character(prepostfix) && length(prepostfix) >= 1L) { 
-      o <- paste0(prepostfix, o, prepostfix)
     }
     
     return(o)

@@ -15,8 +15,6 @@ tex(x, zero_as_dot = FALSE, matstr = NULL, ...)
 If vector of length two, the second element is an optional argument.}
 
 \item{\dots}{Other arguments passed along}
-
-\item{prepostfix}{Add string before and after, e.g. \verb{$$}}
 }
 \description{
 Export object to TeX

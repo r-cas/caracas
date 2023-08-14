@@ -1,6 +1,6 @@
 # caracas 2.0.2
 
-* Added `prepostfix` argument to `tex.caracas_symbol()` for prefix and postfix
+* 
 
 # caracas 2.0.1
 
