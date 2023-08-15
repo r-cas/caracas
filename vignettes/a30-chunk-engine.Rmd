@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r, message=FALSE, echo=FALSE}
 library(caracas)
 ```
 
@@ -41,26 +41,20 @@ put inside a display math environment.
 For example, if you write the following:
 
 ````{verbatim}
-```{r}
+```{rtex}
 library(caracas)
 def_sym(x, y)
 p <- x^3 + y^2
-```
-
-```{rtex}
 der(p, c(x, y))
 ```
 ````
 
-You will get this output:
+You will get this result:
 
-```{r}
+```{rtex}
 library(caracas)
 def_sym(x, y)
 p <- x^3 + y^2
-```
-
-```{rtex}
 der(p, c(x, y))
 ```
 
@@ -123,4 +117,8 @@ search path than the one provided by `caracas`.
 ```{r, include = FALSE}
 rm(tex)
 ```
+
+# Notes
+
+Note that all lines generating output will get `tex()`'ed. 
 
