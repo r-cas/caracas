@@ -142,20 +142,58 @@ put inside a display math environment.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-cas/caracas" class="external-link">caracas</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/def_sym.html">def_sym</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span> <span class="op">+</span> <span class="va">y</span><span class="op">^</span><span class="fl">2</span></span></code></pre></div>
-<pre class="rtex"><code><span><span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}3 x^{2} &amp; 2
 y\end{matrix}\right]\]</span></p>
+<div class="section level2">
+<h2 id="multiple-lines">Multiple lines<a class="anchor" aria-label="anchor" href="#multiple-lines"></a>
+</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>```{rtex}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>def_sym(z, w)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>q &lt;- z + z^2 + w^3</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a># Comment</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>der(q, c(z, w))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>p &lt;- z^2 + w^8</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>der2(p, c(z, w))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<p>Gives</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/def_sym.html">def_sym</a></span><span class="op">(</span><span class="va">z</span>, <span class="va">w</span><span class="op">)</span></span>
+<span><span class="va">q</span> <span class="op">&lt;-</span> <span class="va">z</span> <span class="op">+</span> <span class="va">z</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">w</span><span class="op">^</span><span class="fl">3</span></span>
+<span><span class="co"># Comment</span></span>
+<span><span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">q</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">z</span>, <span class="va">w</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><span class="math display">\[\left[\begin{matrix}2 z + 1 &amp; 3
+w^{2}\end{matrix}\right]\]</span></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">w</span><span class="op">^</span><span class="fl">8</span></span>
+<span><span class="fu"><a href="../reference/der2.html">der2</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">z</span>, <span class="va">w</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><span class="math display">\[\left[\begin{matrix}2 &amp; 0\\0 &amp;
+56 w^{6}\end{matrix}\right]\]</span></p>
+<p>Note that to achieve this, tidying code has been disabled for
+<code>rtex</code> chunks.</p>
+</div>
+<div class="section level2">
+<h2 id="check-with-no-echo">Check with no echo<a class="anchor" aria-label="anchor" href="#check-with-no-echo"></a>
+</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>```{rtex, echo = FALSE}</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>der2(p, c(z, w))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<p><span class="math display">\[\left[\begin{matrix}2 &amp; 0\\0 &amp;
+56 w^{6}\end{matrix}\right]\]</span></p>
+</div>
 <div class="section level2">
 <h2 id="custom-tex">Custom <code>tex()</code><a class="anchor" aria-label="anchor" href="#custom-tex"></a>
 </h2>
 <p>You can also create your own custom <code><a href="../reference/tex.html">tex()</a></code> function:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tex</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"g(x, y) = "</span>, <span class="fu">caracas</span><span class="fu">::</span><span class="fu"><a href="../reference/tex.html">tex</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">caracas</span><span class="fu">::</span><span class="fu"><a href="../reference/tex.html">tex</a></span><span class="op">(</span><span class="va">x</span>, zero_as_dot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<pre class="rtex"><code><span><span class="fu"><a href="../reference/der.html">der</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></code></pre>
-<p><span class="math display">\[g(x, y) = \left[\begin{matrix}3 x^{2}
-&amp; 2 y\end{matrix}\right]\]</span></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/der2.html">der2</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">z</span>, <span class="va">w</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><span class="math display">\[\left[\begin{matrix}2 &amp; .\\. &amp;
+56 w^{6}\end{matrix}\right]\]</span></p>
 <p>The reason this works is because <code>rtex</code> just calls
 <code><a href="../reference/tex.html">tex()</a></code> and if you define one in global namespace, then this
 is previous in the search path than the one provided by

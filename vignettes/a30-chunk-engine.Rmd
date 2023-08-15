@@ -64,6 +64,43 @@ p <- x^3 + y^2
 der(p, c(x, y))
 ```
 
+# Multiple lines
+
+````{verbatim}
+```{rtex}
+def_sym(z, w)
+q <- z + z^2 + w^3
+# Comment
+der(q, c(z, w))
+p <- z^2 + w^8
+der2(p, c(z, w))
+```
+````
+
+Gives
+
+```{rtex}
+def_sym(z, w)
+q <- z + z^2 + w^3
+# Comment
+der(q, c(z, w))
+p <- z^2 + w^8
+der2(p, c(z, w))
+```
+
+Note that to achieve this, tidying code has been disabled for `rtex` chunks.
+
+# Check with no echo
+
+````{verbatim}
+```{rtex, echo = FALSE}
+der2(p, c(z, w))
+```
+````
+
+```{rtex, echo = FALSE}
+der2(p, c(z, w))
+```
 
 # Custom `tex()`
 
@@ -71,14 +108,19 @@ You can also create your own custom `tex()` function:
 
 ```{r}
 tex <- function(x) {
-  paste0("g(x, y) = ", caracas::tex(x))
+  caracas::tex(x, zero_as_dot = TRUE)
 }
 ```
 
 ```{rtex}
-der(p, c(x, y))
+der2(p, c(z, w))
 ```
 
 The reason this works is because `rtex` just calls `tex()` and 
 if you define one in global namespace, then this is previous in the 
 search path than the one provided by `caracas`.
+
+```{r, include = FALSE}
+rm(tex)
+```
+
