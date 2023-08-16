@@ -339,10 +339,21 @@ sympy_func <- function(x, fun, ...) {
     return(a)
   })
   
+  convert_res <- function(o) {
+    o <- if (is.list(o)) {
+      lapply(o, construct_symbol_from_pyobj)
+    } else {
+      construct_symbol_from_pyobj(o)
+    }
+    
+    o
+  }
+  
   # See if x has fun method
   out <- tryCatch({
       p <- do.call(x$pyobj[[fun]], args)
-      res <- construct_symbol_from_pyobj(p)
+      #res <- construct_symbol_from_pyobj(p)
+      res <- convert_res(p)
       res
   }, error = function(cond) {
       
@@ -350,7 +361,11 @@ sympy_func <- function(x, fun, ...) {
     s <- get_sympy()
     args <- c(x$pyobj, args)
     p <- do.call(s[[fun]], args)
-    res <- construct_symbol_from_pyobj(p)
+    
+    #print(p)
+    
+    #res <- construct_symbol_from_pyobj(p)
+    res <- convert_res(p)
     return(res)
   })
   
