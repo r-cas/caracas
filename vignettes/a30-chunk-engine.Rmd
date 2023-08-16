@@ -34,6 +34,11 @@ if (!has_sympy()) {
 }
 ```
 
+```{rtex}
+def_sym(z, w)
+q <- z + z^2 + w^3
+```
+
 We have added a chunk engine that outputs (an object) to tex format. 
 That is, `tex()` is applied to the object and the output is 
 put inside a display math environment.

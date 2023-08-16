@@ -53,7 +53,15 @@ NULL
         output <- R_engine(options)
         o_l <- strsplit(output, "\n", fixed = TRUE)[[1L]]
         
-        ###
+        # Remove empty lines and chunk beginnings/endings:
+        input <- input[nchar(input) > 0]
+        
+        o_l <- o_l[nchar(o_l) > 0]
+        o_l <- o_l[!grepl("^[ ]*```rtex", o_l)]
+        o_l <- o_l[!grepl("[ ]*```$", o_l)]
+        
+
+        # ###
         # cat("===== input> =====\n")
         # print(input)
         # cat("===== <input =====\n")
