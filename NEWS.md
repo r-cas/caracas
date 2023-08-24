@@ -1,6 +1,7 @@
 # caracas 2.0.2
 
 * Added `knitr` engine `rtex` (see vignette "Chunk engine for easy tex output in Rmarkdown and Quarto")
+* New functions: `as_expr.caracas_solve_sys_sol`
 
 # caracas 2.0.1
 

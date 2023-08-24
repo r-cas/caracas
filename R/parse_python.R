@@ -205,6 +205,17 @@ as_expr.default <- function(x, first_doit = TRUE) {
   return(x)
 }
 
+
+#' @export
+as_expr.caracas_solve_sys_sol <- function(x, first_doit = TRUE) {
+    out <- lapply(x, lapply, as_expr, first_doit)
+    return(out)
+}
+
+
+
+
+
 #' @export
 as_expr.caracas_symbol <- function(x, first_doit = TRUE) {
   ensure_sympy()
