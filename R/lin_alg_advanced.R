@@ -259,11 +259,11 @@ singular_values <- function(x) {
 
 
 #' @rdname linalg
-#' @param method The default works by $LU$ decomposition.  The
-#'     alternatives are Gaussian elimination (`gauss`), the cofactor
+#' @param method The default works by Gaussian elimination.  The
+#'     alternatives are $LU$ decomposition (`lu`), the cofactor
 #'     method (`cf`), and `Ryacas` (`yac`).
 #' @export
-inv <- function(x, method = c("lu", "gauss", "cf", "yac")) {
+inv <- function(x, method = c("gauss", "lu", "cf", "yac")) {
   method <- match.arg(method)
   
   stopifnot_symbol(x)
@@ -280,8 +280,8 @@ inv <- function(x, method = c("lu", "gauss", "cf", "yac")) {
   ## }
   
   switch(method,
-         lu    = inv_lu(x),
          gauss = do_la(x, "inv"),
+         lu    = inv_lu(x),
          cf    = inv_cf(x),
          yac   = inv_yac(x))
 }

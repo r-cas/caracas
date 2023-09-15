@@ -26,7 +26,7 @@ rowspace(x, matrix = TRUE)
 
 singular_values(x)
 
-inv(x, method = c("lu", "gauss", "cf", "yac"))
+inv(x, method = c("gauss", "lu", "cf", "yac"))
 
 inv2fl(x)
 
@@ -51,8 +51,8 @@ trace_(x)
 
 \item{matrix}{When relevant should a matrix be returned.}
 
-\item{method}{The default works by $LU$ decomposition.  The
-alternatives are Gaussian elimination (\code{gauss}), the cofactor
+\item{method}{The default works by Gaussian elimination.  The
+alternatives are $LU$ decomposition (\code{lu}), the cofactor
 method (\code{cf}), and \code{Ryacas} (\code{yac}).}
 
 \item{...}{Auxillary arguments.}
