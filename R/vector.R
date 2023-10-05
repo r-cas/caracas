@@ -135,3 +135,16 @@ rev.caracas_symbol <- function(x) {
   return(z)
 }
 
+
+
+## FIXME SH 
+#' @export
+rep.caracas_symbol <- function(x, times) {
+
+    ## FIXME : Make it work on matrices too
+    out <- vector_sym(times)
+    for (i in 1:times){
+        out[i] <- x       
+    }
+    return (out)    
+}
