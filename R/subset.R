@@ -28,9 +28,41 @@
   ##   stop("'x' must be a matrix")
   ## }
   
+  # xmat <- convert_to_r_mat(x)
+  # xmat_subset <- base::`[`(xmat, i, j, ..., drop = drop)
+  # y <- as_sym(xmat_subset)
+  # return(y)
+  
+  # A <- matrix_sym(4, 3)
+  # A[2]
+  # A[2, ]
+  # A[, 2]
+  # A[1:2, 2]
+  # A[2, drop = FALSE]
   xmat <- convert_to_r_mat(x)
-  xmat_subset <- base::`[`(xmat, i, j, ..., drop = drop)
-  y <- as_sym(xmat_subset)
+  
+  
+  
+  n_args_without_drop <- nargs()
+  arg_names <- names(as.list(match.call()))
+  if ("drop" %in% arg_names) {
+    n_args_without_drop <- n_args_without_drop - 1L
+  }
+  res <- NULL
+  
+  if (n_args_without_drop == 2L) {
+    if (missing(i)) {
+      res <- base::`[`(xmat, j = j, ..., drop = drop)
+    } else if (missing(j)) {
+      res <- base::`[`(xmat, i = i, ..., drop = drop)
+    }
+  } else if (n_args_without_drop == 3L) {
+    res <- base::`[`(xmat, i, j, ..., drop = drop)
+  }
+  
+  #xmat_subset <- base::`[`(xmat, i, j, ..., drop = drop)
+  
+  y <- as_sym(res)
   return(y)
 }
 

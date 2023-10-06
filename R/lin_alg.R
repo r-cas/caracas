@@ -489,7 +489,8 @@ matrix_ <- function(..., declare_symbols = TRUE) {
   
   args <- list(...)
   
-  if (length(args) >= 1L & inherits(args[[1L]], "caracas_vector")) {
+  #if (length(args) >= 1L & inherits(args[[1L]], "caracas_vector")) {
+  if (length(args) >= 1L & symbol_is_matrix(args[[1L]])) {
     args[[1L]] <- as_character(args[[1L]])
   }
   

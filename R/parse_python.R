@@ -52,6 +52,7 @@ stop_parse_error <- function(x) {
 from_sy_vec <- function(x, as_character = FALSE) {
   y <- gsub("^\\[(.*)\\]$", "\\1", x)
   z <- strsplit(y, ",")
+  z <- lapply(z, trimws)
 
   if (as_character) {
     z[[1L]] <- paste0("'", z[[1L]], "'")
@@ -165,7 +166,7 @@ as_expr_worker <- function(x, as_character = FALSE, first_doit = TRUE) {
   if (as_character) {
     return(paste0("'", xstr, "'"))
   }
-  
+
   return(xstr)
 }
 

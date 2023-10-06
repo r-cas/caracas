@@ -107,6 +107,14 @@ rbind.caracas_symbol <- function(..., deparse.level = 1) {
   expr <- list(...)
   
   z <- lapply(expr, as_character_matrix)
+  
+  col_vecs <- unlist(lapply(z, function(w) ncol(w) == 1L))
+  
+  if (isTRUE(all(col_vecs))) {
+    # Transpose:
+    z <- lapply(z, t)
+  }
+  
   z <- do.call(rbind, z)
   z <- as_sym(z)
   
@@ -135,16 +143,13 @@ rev.caracas_symbol <- function(x) {
   return(z)
 }
 
-
-
-## FIXME SH 
 #' @export
-rep.caracas_symbol <- function(x, times) {
-
-    ## FIXME : Make it work on matrices too
-    out <- vector_sym(times)
-    for (i in 1:times){
-        out[i] <- x       
-    }
-    return (out)    
+rep.caracas_symbol <- function(x, ...) {
+  ensure_sympy()
+  
+  z <- c(x)
+  z <- as_character(z)
+  z <- base::rep(z, ...)
+  z <- as_sym(z)
+  return(z)
 }

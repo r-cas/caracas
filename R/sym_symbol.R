@@ -239,16 +239,29 @@ extract_elements <- function(x) {
 c.caracas_symbol <- function(...) {
   ensure_sympy()
   
-  # FIXME: To Python vector?
-  #        In that case, see der() too.
-  #x <- list(...)
-  x <- vectorfy(list(...))
+  # v <- vector_sym(2)
+  # c(v)
+  # c(v, v)
+  # A <- matrix_sym(3, 4)
+  # c(A)
+  # c(A, A)
+  z <- list(...)
+  z <- lapply(z, as_character)
+  z <- unlist(z)
+  z <- base::c(z)
+  z <- as_sym(z)
+  return(z)
   
-  # FIXME: Use? In that case ensure that all "[..., ...]" from elsewhere (e.g. der())
-  #        is also caught.
-  class(x) <- c("caracas_vector", class(x))
-
-  return(x)
+  # # FIXME: To Python vector?
+  # #        In that case, see der() too.
+  # #x <- list(...)
+  # x <- vectorfy(list(...))
+  # 
+  # # FIXME: Use? In that case ensure that all "[..., ...]" from elsewhere (e.g. der())
+  # #        is also caught.
+  # class(x) <- c("caracas_vector", class(x))
+  # 
+  # return(x)
 }
 
 
