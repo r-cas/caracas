@@ -103,6 +103,11 @@ as_sym <- function(x,
       return(x)
   }
   
+  if (inherits(x, "python.builtin.object")) {
+    y <- construct_symbol_from_pyobj(x)
+    return(y)
+  }
+  
   if (is.expression(x)) {
     x <- as.character(x)
   }

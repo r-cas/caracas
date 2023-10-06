@@ -43,7 +43,11 @@ matrix_ele_power <- function(x, power = 1) {
     } else if (prod(dim(x)) == 1L) {
       # x really atomic -> make same size as power
 
-      x <- as_character_matrix(x)[1L, 1L]
+      x <- as_character_matrix(x)
+      if (symbol_is_matrix(x)) {
+        x <- x[1L, 1L]
+      }
+      
       x2 <- power # For right dimensions
       for (i in seq_len(nrow(power))) {
         for (j in seq_len(ncol(power))) {

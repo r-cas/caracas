@@ -157,3 +157,28 @@ test_that("eval_to_symbol", {
                "Matrix([[3*y_11/4 + y_12/4 + y_21/4 - y_22/4], [-y_11/2 - y_12/2 + y_21/2 + y_22/2], [-y_11/2 + y_12/2 - y_21/2 + y_22/2]])")
   
 })
+
+
+test_that("as_sym", {
+  skip_if_no_sympy()
+  
+  A <- as_sym(matrix(1:9, 3))
+  expect_equal(as.character(A), "Matrix([[1, 4, 7], [2, 5, 8], [3, 6, 9]])")
+  
+  x <- as_sym("x")
+  expect_equal(as.character(x), "x")
+  
+  ####
+  
+  sympy <- get_sympy()
+  a <- sympy$symbols("a")
+  b <- sympy$symbols("b")
+  M <- sympy$Matrix(list(c(a, b, b), c(b, a, b)))
+  
+  A <- as_sym(M)
+  expect_equal(as.character(A), "Matrix([[a, b, b], [b, a, b]])")
+  
+  B <- matrix_(c("a", "b", "b", "b", "a", "b"), 2, byrow = TRUE)
+  expect_equal(as.character(A), as.character(B))
+})
+

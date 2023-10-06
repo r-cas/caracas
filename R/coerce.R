@@ -171,14 +171,15 @@ to_matrix <- function(x) {
 #' 
 #' @export
 matrify <- function(x) {
-    stopifnot_symbol(x)
-
-    if (!grepl("^\\[", as.character(x))) {
-        x <- c(x) 
-    }
-
-    z <- paste0("Matrix(", paste0(x, collapse = ", "), ")")
-    y <- eval_to_symbol(z)
+  stopifnot_symbol(x)
+  
+  if (!grepl("^\\[", as.character(x))) {
+    #x <- c(x) 
+    x <- paste0("[", as_character(x), "]")
+  }
+  
+  z <- paste0("Matrix(", paste0(x, collapse = ", "), ")")
+  y <- eval_to_symbol(z)
   return(y)
 }
 
