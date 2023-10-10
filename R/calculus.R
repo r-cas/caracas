@@ -498,11 +498,15 @@ hessian <- function(expr, vars, simplify=TRUE){
 #' }
 #' @concept calculus
 #' @export
-jacobian <- function(expr, vars){
-  ensure_sympy()
-  stopifnot_symbol(expr)
-  out <- der(expr, vars)
-  out <- matrify(out)
-  out <- t(out)
-  return(out)
+jacobian <- function(expr, vars) {
+    ensure_sympy()
+    stopifnot_symbol(expr)
+    out <- der(expr, vars)
+
+    if (is.null(dim(out))) {
+        out <- matrify(out)
+    }
+    
+    out <- t(out)
+    return(out)
 }

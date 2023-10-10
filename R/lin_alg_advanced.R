@@ -399,3 +399,59 @@ GramSchmidt_worker <- function(x) {
     
     return(out)
 }
+
+
+
+
+
+## FIXME method
+
+#' Kronecker product of two matrices
+#'
+#' Computes the Kronecker product of two matrices.
+#'
+#' @param X,Y matrices as caracas symbols.
+#' @param FUN a function; it may be a quoted string.
+#' @param make.dimnames Provide dimnames that are the product of the dimnames of
+#' ‘X’ and ‘Y’.
+#' @param ... optional arguments to be passed to ‘FUN’.
+#' 
+#' @return Kronecker product of A and B.
+#'
+#' @examples
+#'
+#' A <- matrix_sym(2, 2, "a")
+#' B <- matrix_sym(2, 2, "b")
+#' II <- matrix_sym_diag(2)
+#' EE <- eye(2,2)
+#' JJ <- ones(2,2)
+#'
+#' kronecker_(A, B)
+#' kronecker_(II, B)
+#' kronecker_(EE, B)
+#' kronecker_(JJ, B)
+#'
+#' @concept linalg
+#' @export
+kronecker_ <- function(X, Y, FUN = "*", make.dimnames = FALSE, ...) {
+
+    stopifnot_matrix(X)
+    stopifnot_matrix(Y)
+
+    do_col <- function(i, X, Y) {
+        rr <-
+            lapply(1:ncol(X), function(j) {
+                X[i,j] * Y     
+            } 
+            )
+        out <- do.call(cbind, rr)
+        out
+    }
+    
+    rr <- lapply(1:nrow(X),
+                 function(i) {
+                     do_col(i, X, Y)
+                 })
+    out <- do.call(rbind, rr)
+    out
+}
