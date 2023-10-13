@@ -9,7 +9,6 @@
 #' @export
 NULL
 
-
 # This was created, or else CRAN complained about that the first example
 # run took too long - because that was the first call that 
 # actually prepared SymPy

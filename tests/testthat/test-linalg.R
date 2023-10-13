@@ -273,3 +273,34 @@ test_that("add_prefix", {
   expect_equal(as.character(Y), "Matrix([[e1, e4], [e2, e5], [e3, e6]])")
   
 })
+
+# test_that("kronecker", {
+#   skip_if_no_sympy()
+#   
+#   # FIXME: Consider removing test 
+#   # 
+#   # # Needed for test to run
+#   # setOldClass("caracas_symbol")
+#   # 
+#   # A <- matrix_sym(2, 2, "a")
+#   # B <- matrix_sym(2, 2, "b")
+#   # II <- matrix_sym_diag(2)
+#   # EE <- eye(2, 2)
+#   # JJ <- ones(2, 2)
+#   # 
+#   # expect_equal(as.character(kronecker(A, B)), "Matrix([[a11*b11, a11*b12, a12*b11, a12*b12], [a11*b21, a11*b22, a12*b21, a12*b22], [a21*b11, a21*b12, a22*b11, a22*b12], [a21*b21, a21*b22, a22*b21, a22*b22]])")
+#   # expect_equal(as.character(kronecker(A, B, FUN = "+")), "Matrix([[a11 + b11, a11 + b12, a12 + b11, a12 + b12], [a11 + b21, a11 + b22, a12 + b21, a12 + b22], [a21 + b11, a21 + b12, a22 + b11, a22 + b12], [a21 + b21, a21 + b22, a22 + b21, a22 + b22]])")
+#   # expect_equal(as.character(kronecker(II, B)), "Matrix([[b11*v1, b12*v1, 0, 0], [b21*v1, b22*v1, 0, 0], [0, 0, b11*v2, b12*v2], [0, 0, b21*v2, b22*v2]])")
+#   # expect_equal(as.character(kronecker(EE, B)), "Matrix([[b11, b12, 0, 0], [b21, b22, 0, 0], [0, 0, b11, b12], [0, 0, b21, b22]])")
+#   # expect_equal(as.character(kronecker(JJ, B)), "Matrix([[b11, b12, b11, b12], [b21, b22, b21, b22], [b11, b12, b11, b12], [b21, b22, b21, b22]])")
+#   # 
+#   # ####
+#   # 
+#   # A <- matrix(c(2, 4, 5, 8, 2, 7), nrow = 3)
+#   # B <- matrix(c(6, 3, 2, 2, 2, 7, 6, 8, 4, 6, 6, 4), nrow = 4)
+#   # K <- kronecker(A, B)
+#   # K2 <- kronecker(as_sym(A), as_sym(B))
+#   # expect_true(inherits(K2, "caracas_symbol"))
+#   # expect_equal(K, as_expr(K2))
+# })
+

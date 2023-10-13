@@ -17,6 +17,17 @@ sol_to_r_symbol_list <- function(x) {
 #' @param A matrix
 #' @param b vector
 #' 
+#' @examples 
+#' if (has_sympy()) {
+#'   A <- matrix_sym(2, 2, "a")
+#'   b <- vector_sym(2, "b")
+#'   # Inverse of A:
+#'   solve_lin(A) %*% A |> simplify()
+#'   # Find x in Ax = b
+#'   x <- solve_lin(A, b)
+#'   A %*% x |> simplify()
+#' }
+#' 
 #' @concept solve
 #' 
 #' @export
@@ -157,3 +168,41 @@ solve_sys <- function(lhs, rhs, vars) {
 }
 
 
+#' Solve a System of Linear Equations
+#' 
+#' @param a caracas_symbol
+#' @param b If provided, either a caracas_symbol (if not, `as_sym()` is called on the object)
+#' @param \dots Not used
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   A <- matrix_sym(2, 2, "a")
+#'   b <- vector_sym(2, "b")
+#'   # Inverse of A:
+#'   solve(A)
+#'   inv(A)
+#'   solve(A) %*% A |> simplify()
+#'   # Find x in Ax = b
+#'   x <- solve(A, b)
+#'   A %*% x |> simplify()
+#'   solve(A, c(2, 1)) |> simplify()
+#' }
+#' 
+#' @concept solve
+#' 
+#' @export
+solve.caracas_symbol <- function(a, b, ...) {
+  ensure_sympy()
+  stopifnot_symbol(a)
+  
+  if (missing(b)) {
+    return(inv(a))
+  } else {
+    
+    if (!inherits(b, "caracas_symbol")) {
+      b <- as_sym(b)
+    }
+    
+    return(inv(a) %*% b)
+  } 
+}

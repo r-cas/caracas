@@ -3,7 +3,9 @@
 * Added `knitr` engine `rtex` (see vignette "Chunk engine for easy tex output in Rmarkdown and Quarto")
 * New functions: `as_expr.caracas_solve_sys_sol`
 * `inv()` by default uses `gauss` like SymPy
-* `kronecker`, `rep` added
+* `kronecker()`, `rep()` added
+* `solve()` now dispatches on caracas_symbols and works like `solve_lin()`
+* `scale_matrix()` can construct matrix-scalar products for prettier output
 
 # caracas 2.0.1
 

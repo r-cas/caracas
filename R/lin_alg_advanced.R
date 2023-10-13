@@ -189,7 +189,6 @@ finalise_rref <- function(vals) {
 #'   eigenval(A)
 #'   eigenvec(A)
 #'   inv(A)
-#'   inv2fl(A)
 #'   det(A)
 #'   
 #'   ## Matrix inversion:
@@ -307,15 +306,6 @@ inv_yac <- function(x) {
 }
 
 
-
-#' @rdname linalg
-#' @export
-inv2fl <- function(x) {
-  xi <- inv(x)
-  d <- denominator(xi[1,1])
-  as_factor_list(1 / d, d * xi)
-}
-
 #' @rdname linalg
 #' @export
 eigenval <- function(x) {
@@ -400,11 +390,8 @@ GramSchmidt_worker <- function(x) {
     return(out)
 }
 
-
-
-
-
-## FIXME method
+#' @importFrom methods setOldClass
+setOldClass("caracas_symbol")
 
 #' Kronecker product of two matrices
 #'
@@ -426,32 +413,40 @@ GramSchmidt_worker <- function(x) {
 #' EE <- eye(2,2)
 #' JJ <- ones(2,2)
 #'
-#' kronecker_(A, B)
-#' kronecker_(II, B)
-#' kronecker_(EE, B)
-#' kronecker_(JJ, B)
+#' kronecker(A, B)
+#' kronecker(A, B, FUN = "+")
+#' kronecker(II, B)
+#' kronecker(EE, B)
+#' kronecker(JJ, B)
 #'
 #' @concept linalg
 #' @export
-kronecker_ <- function(X, Y, FUN = "*", make.dimnames = FALSE, ...) {
-
+setMethod(
+  "kronecker", 
+  signature = c("caracas_symbol", "caracas_symbol"), 
+  definition = function(X, Y, FUN = "*", make.dimnames = FALSE, ...) {
+    
     stopifnot_matrix(X)
     stopifnot_matrix(Y)
-
+    
+    FUN <- match.fun(FUN)
+    
     do_col <- function(i, X, Y) {
-        rr <-
-            lapply(1:ncol(X), function(j) {
-                X[i,j] * Y     
-            } 
-            )
-        out <- do.call(cbind, rr)
-        out
+      rr <-
+        lapply(seq_len(ncol(X)), function(j) {
+          FUN(X[i,j], Y)
+        } 
+        )
+      out <- do.call(cbind, rr)
+      out
     }
     
-    rr <- lapply(1:nrow(X),
+    rr <- lapply(seq_len(nrow(X)),
                  function(i) {
-                     do_col(i, X, Y)
+                   do_col(i, X, Y)
                  })
     out <- do.call(rbind, rr)
     out
-}
+  }
+)
+

@@ -15,4 +15,16 @@ solve_lin(A, b)
 Find \code{x} in \code{Ax = b}. If \code{b} not supplied,
 the inverse of \code{A} is returned.
 }
+\examples{
+if (has_sympy()) {
+  A <- matrix_sym(2, 2, "a")
+  b <- vector_sym(2, "b")
+  # Inverse of A:
+  solve_lin(A) \%*\% A |> simplify()
+  # Find x in Ax = b
+  x <- solve_lin(A, b)
+  A \%*\% x |> simplify()
+}
+
+}
 \concept{solve}

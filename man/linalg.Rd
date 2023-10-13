@@ -7,7 +7,6 @@
 \alias{rowspace}
 \alias{singular_values}
 \alias{inv}
-\alias{inv2fl}
 \alias{eigenval}
 \alias{eigenvec}
 \alias{GramSchmidt}
@@ -27,8 +26,6 @@ rowspace(x, matrix = TRUE)
 singular_values(x)
 
 inv(x, method = c("gauss", "lu", "cf", "yac"))
-
-inv2fl(x)
 
 eigenval(x)
 
@@ -72,7 +69,6 @@ if (has_sympy()) {
   eigenval(A)
   eigenvec(A)
   inv(A)
-  inv2fl(A)
   det(A)
   
   ## Matrix inversion:

@@ -2,29 +2,29 @@
 % Please edit documentation in R/lin_alg.R
 \name{special_matrices}
 \alias{special_matrices}
-\alias{zeros}
-\alias{ones}
-\alias{eye}
-\title{Special matrices: zeros, ones, eyes}
+\alias{zeros_sym}
+\alias{ones_sym}
+\alias{eye_sym}
+\title{Special matrices: zeros_sym, ones_sym, eye_sym}
 \usage{
-zeros(nrow, ncol)
+zeros_sym(nrow, ncol)
 
-ones(nrow, ncol)
+ones_sym(nrow, ncol)
 
-eye(nrow, ncol)
+eye_sym(nrow, ncol)
 }
 \arguments{
 \item{nrow, ncol}{Number of rows and columns of output}
 }
 \description{
-Special matrices: zeros, ones, eyes
+Special matrices: zeros_sym, ones_sym, eye_sym
 }
 \examples{
 
 if (has_sympy()){
-  zeros(3, 4)
-  ones(3, 4)
-  eye(3, 4)
+  zeros_sym(3, 4)
+  ones_sym(3, 4)
+  eye_sym(3, 4)
 }
 
 }

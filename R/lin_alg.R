@@ -711,34 +711,34 @@ colSums_ <- function(x) {
 
 
 
-#' Special matrices: zeros, ones, eyes
+#' Special matrices: zeros_sym, ones_sym, eye_sym
 #' @name special_matrices
 #' @param nrow,ncol Number of rows and columns of output
 #' @seealso [diag_()], [matrix_sym()], [vector_sym()]
 #' @examples
 #'
 #' if (has_sympy()){
-#'   zeros(3, 4)
-#'   ones(3, 4)
-#'   eye(3, 4)
+#'   zeros_sym(3, 4)
+#'   ones_sym(3, 4)
+#'   eye_sym(3, 4)
 #' }
 #' 
 #' @export
 #' @concept linalg
 #' @rdname special_matrices
-zeros <- function(nrow, ncol) {
+zeros_sym <- function(nrow, ncol) {
   as_sym(matrix(0, nrow=nrow, ncol=ncol))
 }
 
 #' @export
 #' @rdname special_matrices
-ones <- function(nrow, ncol) {
+ones_sym <- function(nrow, ncol) {
   as_sym(matrix(1, nrow=nrow, ncol=ncol))
 }
 
 #' @export
 #' @rdname special_matrices
-eye <- function(nrow, ncol) {
+eye_sym <- function(nrow, ncol) {
   if (nrow==ncol)
     return(diag_(1, nrow))
   m <- min(nrow, ncol)

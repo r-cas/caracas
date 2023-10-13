@@ -13,7 +13,7 @@ if (py_ver >= "3" && reticulate::py_module_available("sympy")) {
   if (base::numeric_version(local_sympy$`__version__`) >= "1.4") {
     # All okay:
     library(caracas)
-    
+
     test_check("caracas")
   }
 }

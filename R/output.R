@@ -151,41 +151,6 @@ print.caracas_solve_sys_sol <- function(x,
 }
 
 
-#' Print factor list
-#' 
-#' @param x A `caracas_factor_list`
-#' @param \dots Passed to [print.caracas_symbol()]
-#'
-#' @concept output
-#' 
-#' @export
-print.caracas_factor_list <- function(x, ...) {
-  ensure_sympy()
-  
-  z <- lapply(x, function(y) {
-    paste0("UnevaluatedExpr(", as.character(y), ")")
-  })
-  
-  w <- paste0(z, collapse = "*")
-  
-  v <- eval_to_symbol(w)
-  print(v)
-  
-  return(invisible(v))
-}
-
-#' Print factor list
-#'
-#' @param x factor list
-#' @param \dots Other arguments passed along
-#' @concept output
-#' @export
-tex.caracas_factor_list <- function(x, ...){
-  a <- unlist(lapply(x, tex, ...))
-  o <- paste(a, collapse = "  ")
-  o
-}
-
 
 #' Export object to TeX
 #'
