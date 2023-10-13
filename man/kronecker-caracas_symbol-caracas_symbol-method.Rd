@@ -27,8 +27,8 @@ Computes the Kronecker product of two matrices.
 A <- matrix_sym(2, 2, "a")
 B <- matrix_sym(2, 2, "b")
 II <- matrix_sym_diag(2)
-EE <- eye(2,2)
-JJ <- ones(2,2)
+EE <- eye_sym(2,2)
+JJ <- ones_sym(2,2)
 
 kronecker(A, B)
 kronecker(A, B, FUN = "+")

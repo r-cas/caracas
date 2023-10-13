@@ -285,8 +285,8 @@ test_that("add_prefix", {
 #   # A <- matrix_sym(2, 2, "a")
 #   # B <- matrix_sym(2, 2, "b")
 #   # II <- matrix_sym_diag(2)
-#   # EE <- eye(2, 2)
-#   # JJ <- ones(2, 2)
+#   # EE <- eye_sym(2, 2)
+#   # JJ <- ones_sym(2, 2)
 #   # 
 #   # expect_equal(as.character(kronecker(A, B)), "Matrix([[a11*b11, a11*b12, a12*b11, a12*b12], [a11*b21, a11*b22, a12*b21, a12*b22], [a21*b11, a21*b12, a22*b11, a22*b12], [a21*b21, a21*b22, a22*b21, a22*b22]])")
 #   # expect_equal(as.character(kronecker(A, B, FUN = "+")), "Matrix([[a11 + b11, a11 + b12, a12 + b11, a12 + b12], [a11 + b21, a11 + b22, a12 + b21, a12 + b22], [a21 + b11, a21 + b12, a22 + b11, a22 + b12], [a21 + b21, a21 + b22, a22 + b21, a22 + b22]])")

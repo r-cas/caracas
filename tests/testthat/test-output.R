@@ -126,6 +126,27 @@ test_that("print prettyascii", {
 })
 
 
+test_that("print compactascii", {
+  skip_if_no_sympy()
+  
+  x <- symbol("x") 
+  eq <- x^2 + 3*x
+  eq_print <- paste0(capture.output(print(eq)), collapse = "")
+  expect_false(grepl("^", eq_print, fixed = TRUE))
+  
+  options(caracas.print.method = "compactascii")
+  eq_print <- paste0(capture.output(print(eq)), collapse = "")
+  expect_true(grepl("*", eq_print, fixed = TRUE))
+  
+  options(caracas.print.method = NULL)
+  
+  eq_print <- paste0(capture.output(print(eq, method = "compactascii")), collapse = "")
+  expect_true(grepl("*", eq_print, fixed = TRUE))
+  
+  options(caracas.print.method = NULL)
+})
+
+
 test_that("print vector", {
   skip_if_no_sympy()
   

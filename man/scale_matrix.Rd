@@ -10,6 +10,8 @@ scale_matrix(X, k = NULL, divide = TRUE)
 \item{X}{matrix}
 
 \item{k}{scalar to be factored out}
+
+\item{divide}{Should \code{X} be divided with \code{k} before constructing scaled matrix?}
 }
 \description{
 Create list of factors as in a product

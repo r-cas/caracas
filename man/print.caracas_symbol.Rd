@@ -17,7 +17,7 @@
 
 \item{prompt}{Which prompt/prefix to print (default: 'c: ')}
 
-\item{method}{What way to print (\code{utf8}, \code{prettyascii} or \code{ascii})}
+\item{method}{What way to print (\code{utf8}, \code{prettyascii}, \code{ascii}, \code{compactascii})}
 
 \item{rowvec}{\code{FALSE} to print column vectors as is}
 

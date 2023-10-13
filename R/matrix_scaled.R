@@ -2,6 +2,7 @@
 #'
 #' @param X matrix
 #' @param k scalar to be factored out
+#' @param divide Should `X` be divided with `k` before constructing scaled matrix?
 #'
 #' @examples
 #' if (has_sympy()) {

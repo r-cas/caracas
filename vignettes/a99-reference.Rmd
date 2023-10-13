@@ -419,7 +419,7 @@ as_character_matrix(g)
 
 The following options are available:
 
-* `caracas.print.method` (`utf8` is default, others are: `prettyascii` and `ascii`)
+* `caracas.print.method` (`utf8` is default, others are: `prettyascii`, `ascii`, `compactascii`)
 * `caracas.print.rowvec`
 * `caracas.print.sol.simplify`
 

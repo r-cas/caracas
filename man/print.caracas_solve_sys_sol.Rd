@@ -20,4 +20,17 @@
 \description{
 Print solution
 }
+\examples{
+if (has_sympy()) {
+  x <- symbol('x')
+  solve_sys(x^2, -1, x)
+  
+  y <- symbol("y")
+  lhs <- cbind(3*x*y - y, x)
+  rhs <- cbind(-5*x, y+4)
+  sol <- solve_sys(lhs, rhs, list(x, y))
+  sol
+}
+
+}
 \concept{output}
