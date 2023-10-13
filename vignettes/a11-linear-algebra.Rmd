@@ -195,7 +195,7 @@ do_la(A, "eigenvec")        # == eigenvec(A)
 do_la(A, "eigenvals")       # == eigenval(A)
 ```
 
-### Characteristic polynomium
+### Characteristic polynomial
 
 ```{r}
 cp <- do_la(A, "charpoly")
