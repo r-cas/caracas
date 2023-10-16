@@ -23,7 +23,7 @@
 #'   tex(Ksi)
 #' }
 #' 
-#' @concept caracas_symbol
+#' @concept linalg
 #' 
 #' @export
 scale_matrix <- function(X, k = NULL, divide = TRUE) {
@@ -54,6 +54,23 @@ scale_matrix <- function(X, k = NULL, divide = TRUE) {
   out
 }
 
+#' Extract matrix from scaled matrix
+#'
+#' @param X scaled matrix created with [scale_matrix()]
+#'
+#' @examples
+#' if (has_sympy()) {
+#'   V <- matrix_sym(2, 2, "v")
+#'   a <- symbol("a")
+#'   Ks <- scale_matrix(V, a, divide = FALSE)
+#'   Ks
+#'   unscale_matrix(Ks)
+#'   V %*% a
+#' }
+#' 
+#' @concept linalg
+#' 
+#' @export
 unscale_matrix <- function(X) {
   ensure_sympy()
   
