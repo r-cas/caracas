@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.0</span>
       </span>
     </div>
 
@@ -85,8 +85,22 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="2.0.2" id="caracas-202">caracas 2.0.2<a class="anchor" aria-label="anchor" href="#caracas-202"></a></h2>
+<h2 class="page-header" data-toc-text="2.1.0" id="caracas-210">caracas 2.1.0<a class="anchor" aria-label="anchor" href="#caracas-210"></a></h2>
 <ul><li>Added <code>knitr</code> engine <code>rtex</code> (see vignette “Chunk engine for easy tex output in Rmarkdown and Quarto”)</li>
+<li>New functions: <code>as_expr.caracas_solve_sys_sol</code>
+</li>
+<li>
+<code><a href="../reference/linalg.html">inv()</a></code> by default uses <code>gauss</code> like SymPy</li>
+<li>
+<code><a href="https://rdrr.io/r/base/kronecker.html" class="external-link">kronecker()</a></code>, <code><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep()</a></code> added</li>
+<li>
+<code><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve()</a></code> now dispatches on caracas_symbols and works like <code><a href="../reference/solve_lin.html">solve_lin()</a></code>
+</li>
+<li>
+<code><a href="../reference/scale_matrix.html">scale_matrix()</a></code> can construct matrix-scalar products for prettier output</li>
+<li>
+<code>print(..., method = "compactascii")</code> as <code>prettyascii</code> except more compact matrices by removing empty rows</li>
+<li>More compact <code><a href="../reference/solve_sys.html">solve_sys()</a></code> result printing when there is only one unknown</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.0.1" id="caracas-201">caracas 2.0.1<small>2023-08-11</small><a class="anchor" aria-label="anchor" href="#caracas-201"></a></h2>
@@ -116,7 +130,7 @@
 <code><a href="../reference/matrify.html">matrify()</a></code> now works on atomic elements.</li>
 <li>New function: <code><a href="../reference/def_sym.html">def_sym_vec()</a></code> defines symbol for each element in a character vector.</li>
 <li>New function: <code><a href="../reference/jacobian.html">jacobian()</a></code> function added.</li>
-<li>New functions: <code><a href="../reference/special_matrices.html">zeros()</a></code>, <code><a href="../reference/special_matrices.html">ones()</a></code>, <code><a href="../reference/special_matrices.html">eye()</a></code> added.</li>
+<li>New functions: <code>zeros()</code>, <code>ones()</code>, <code>eye()</code> added.</li>
 <li>New function: <code><a href="../reference/diff_mat.html">diff_mat()</a></code> added.</li>
 <li>New functions: <code><a href="../reference/matrix_cross_product.html">crossprod_()</a></code>, <code><a href="../reference/matrix_cross_product.html">tcrossprod_()</a></code> added.</li>
 </ul></div>

@@ -262,6 +262,9 @@
     <loc>/reference/jacobian.html</loc>
   </url>
   <url>
+    <loc>/reference/kronecker-caracas_symbol-caracas_symbol-method.html</loc>
+  </url>
+  <url>
     <loc>/reference/lim.html</loc>
   </url>
   <url>
@@ -304,6 +307,9 @@
     <loc>/reference/print.caracas_factor_list.html</loc>
   </url>
   <url>
+    <loc>/reference/print.caracas_scaled_matrix.html</loc>
+  </url>
+  <url>
     <loc>/reference/print.caracas_solve_sys_sol.html</loc>
   </url>
   <url>
@@ -325,10 +331,16 @@
     <loc>/reference/rowSums_colSums.html</loc>
   </url>
   <url>
+    <loc>/reference/scale_matrix.html</loc>
+  </url>
+  <url>
     <loc>/reference/score_hessian.html</loc>
   </url>
   <url>
     <loc>/reference/simplify.html</loc>
+  </url>
+  <url>
+    <loc>/reference/solve.caracas_symbol.html</loc>
   </url>
   <url>
     <loc>/reference/solve_lin.html</loc>
@@ -395,6 +407,9 @@
   </url>
   <url>
     <loc>/reference/tex.caracas_factor_list.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tex.caracas_scaled_matrix.html</loc>
   </url>
   <url>
     <loc>/reference/tex.html</loc>

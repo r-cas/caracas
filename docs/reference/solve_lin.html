@@ -18,7 +18,7 @@ the inverse of A is returned."><!-- mathjax --><script src="https://cdnjs.cloudf
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.0</span>
       </span>
     </div>
 
@@ -106,6 +106,21 @@ the inverse of <code>A</code> is returned.</p>
 
 </dl></div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="has_sympy.html">has_sympy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="generic-matrices.html">matrix_sym</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="st">"a"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="generic-matrices.html">vector_sym</a></span><span class="op">(</span><span class="fl">2</span>, <span class="st">"b"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># Inverse of A:</span></span></span>
+<span class="r-in"><span>  <span class="fu">solve_lin</span><span class="op">(</span><span class="va">A</span><span class="op">)</span> <span class="op"><a href="matrix-products.html">%*%</a></span> <span class="va">A</span> <span class="op">|&gt;</span> <span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># Find x in Ax = b</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">solve_lin</span><span class="op">(</span><span class="va">A</span>, <span class="va">b</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">A</span> <span class="op"><a href="matrix-products.html">%*%</a></span> <span class="va">x</span> <span class="op">|&gt;</span> <span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> c: [b₁  b₂]ᵀ</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

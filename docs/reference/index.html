@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">caracas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.0</span>
       </span>
     </div>
 
@@ -104,10 +104,6 @@
         </td>
         <td><p>Convert caracas object to R</p></td>
       </tr><tr><td>
-          <p><code><a href="as_factor_list.html">as_factor_list()</a></code> </p>
-        </td>
-        <td><p>Create list of factors as in a product</p></td>
-      </tr><tr><td>
           <p><code><a href="as_func.html">as_func()</a></code> </p>
         </td>
         <td><p>Convert expression into function object.</p></td>
@@ -144,13 +140,13 @@
         </td>
         <td><p>List defined symbols</p></td>
       </tr><tr><td>
-          <p><code><a href="mat_div_mult.html">mat_factor_div()</a></code> <code><a href="mat_div_mult.html">mat_factor_mult()</a></code> </p>
-        </td>
-        <td><p>Divide or multiply matrix with factor.</p></td>
-      </tr><tr><td>
           <p><code><a href="matrify.html">matrify()</a></code> </p>
         </td>
         <td><p>Creates matrix from array symbol</p></td>
+      </tr><tr><td>
+          <p><code><a href="scale_matrix.html">scale_matrix()</a></code> </p>
+        </td>
+        <td><p>Create list of factors as in a product</p></td>
       </tr><tr><td>
           <p><code><a href="subs.html">subs()</a></code> </p>
         </td>
@@ -368,7 +364,11 @@
         </td>
         <td><p>Get basis</p></td>
       </tr><tr><td>
-          <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">inv2fl()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> <code><a href="linalg.html">trace_()</a></code> </p>
+          <p><code><a href="kronecker-caracas_symbol-caracas_symbol-method.html">kronecker(<i>&lt;caracas_symbol&gt;</i>,<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Kronecker product of two matrices</p></td>
+      </tr><tr><td>
+          <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> <code><a href="linalg.html">trace_()</a></code> </p>
         </td>
         <td><p>Do linear algebra operation</p></td>
       </tr><tr><td>
@@ -400,9 +400,9 @@
         </td>
         <td><p>Form Row and Column Sums</p></td>
       </tr><tr><td>
-          <p><code><a href="special_matrices.html">zeros()</a></code> <code><a href="special_matrices.html">ones()</a></code> <code><a href="special_matrices.html">eye()</a></code> </p>
+          <p><code><a href="special_matrices.html">zeros_sym()</a></code> <code><a href="special_matrices.html">ones_sym()</a></code> <code><a href="special_matrices.html">eye_sym()</a></code> </p>
         </td>
-        <td><p>Special matrices: zeros, ones, eyes</p></td>
+        <td><p>Special matrices: zeros_sym, ones_sym, eye_sym</p></td>
       </tr><tr><td>
           <p><code><a href="symbol_is_matrix.html">symbol_is_matrix()</a></code> </p>
         </td>
@@ -416,6 +416,10 @@
           <p class="section-desc"></p><p>Functions related to solving equations</p>
         </th>
       </tr></tbody><tbody><tr><td>
+          <p><code><a href="solve.caracas_symbol.html">solve(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Solve a System of Linear Equations</p></td>
+      </tr><tr><td>
           <p><code><a href="solve_lin.html">solve_lin()</a></code> </p>
         </td>
         <td><p>Solve a linear system of equations</p></td>
@@ -432,9 +436,9 @@
         </td>
         <td><p>Convert symbol to character</p></td>
       </tr><tr><td>
-          <p><code><a href="print.caracas_factor_list.html">print(<i>&lt;caracas_factor_list&gt;</i>)</a></code> </p>
+          <p><code><a href="print.caracas_scaled_matrix.html">print(<i>&lt;caracas_scaled_matrix&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Print factor list</p></td>
+        <td><p>Print scaled matrix</p></td>
       </tr><tr><td>
           <p><code><a href="print.caracas_solve_sys_sol.html">print(<i>&lt;caracas_solve_sys_sol&gt;</i>)</a></code> </p>
         </td>
@@ -448,9 +452,9 @@
         </td>
         <td><p>Export object to TeX</p></td>
       </tr><tr><td>
-          <p><code><a href="tex.caracas_factor_list.html">tex(<i>&lt;caracas_factor_list&gt;</i>)</a></code> </p>
+          <p><code><a href="tex.caracas_scaled_matrix.html">tex(<i>&lt;caracas_scaled_matrix&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Print factor list</p></td>
+        <td><p>Export scaled matrix to tex</p></td>
       </tr><tr><td>
           <p><code><a href="texshow.html">texshow()</a></code> </p>
         </td>
@@ -555,10 +559,6 @@
           <p><code><a href="as_expr.html">as_expr()</a></code> </p>
         </td>
         <td><p>Convert caracas object to R</p></td>
-      </tr><tr><td>
-          <p><code><a href="as_factor_list.html">as_factor_list()</a></code> </p>
-        </td>
-        <td><p>Create list of factors as in a product</p></td>
       </tr><tr><td>
           <p><code><a href="as_func.html">as_func()</a></code> </p>
         </td>
@@ -712,11 +712,15 @@
         </td>
         <td><p>Compute Jacobian</p></td>
       </tr><tr><td>
+          <p><code><a href="kronecker-caracas_symbol-caracas_symbol-method.html">kronecker(<i>&lt;caracas_symbol&gt;</i>,<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Kronecker product of two matrices</p></td>
+      </tr><tr><td>
           <p><code><a href="lim.html">lim()</a></code> </p>
         </td>
         <td><p>Limit of a function</p></td>
       </tr><tr><td>
-          <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">inv2fl()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> <code><a href="linalg.html">trace_()</a></code> </p>
+          <p><code><a href="linalg.html">columnspace()</a></code> <code><a href="linalg.html">nullspace()</a></code> <code><a href="linalg.html">rowspace()</a></code> <code><a href="linalg.html">singular_values()</a></code> <code><a href="linalg.html">inv()</a></code> <code><a href="linalg.html">eigenval()</a></code> <code><a href="linalg.html">eigenvec()</a></code> <code><a href="linalg.html">GramSchmidt()</a></code> <code><a href="linalg.html">pinv()</a></code> <code><a href="linalg.html">rref()</a></code> <code><a href="linalg.html">QRdecomposition()</a></code> <code><a href="linalg.html">det()</a></code> <code><a href="linalg.html">trace_()</a></code> </p>
         </td>
         <td><p>Do linear algebra operation</p></td>
       </tr><tr><td>
@@ -727,10 +731,6 @@
           <p><code><a href="ls_sym.html">ls_sym()</a></code> </p>
         </td>
         <td><p>List defined symbols</p></td>
-      </tr><tr><td>
-          <p><code><a href="mat_div_mult.html">mat_factor_div()</a></code> <code><a href="mat_div_mult.html">mat_factor_mult()</a></code> </p>
-        </td>
-        <td><p>Divide or multiply matrix with factor.</p></td>
       </tr><tr><td>
           <p><code><a href="mat_pow.html">mat_pow()</a></code> </p>
         </td>
@@ -756,9 +756,9 @@
         </td>
         <td><p>Pipe</p></td>
       </tr><tr><td>
-          <p><code><a href="print.caracas_factor_list.html">print(<i>&lt;caracas_factor_list&gt;</i>)</a></code> </p>
+          <p><code><a href="print.caracas_scaled_matrix.html">print(<i>&lt;caracas_scaled_matrix&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Print factor list</p></td>
+        <td><p>Print scaled matrix</p></td>
       </tr><tr><td>
           <p><code><a href="print.caracas_solve_sys_sol.html">print(<i>&lt;caracas_solve_sys_sol&gt;</i>)</a></code> </p>
         </td>
@@ -784,6 +784,10 @@
         </td>
         <td><p>Form Row and Column Sums</p></td>
       </tr><tr><td>
+          <p><code><a href="scale_matrix.html">scale_matrix()</a></code> </p>
+        </td>
+        <td><p>Create list of factors as in a product</p></td>
+      </tr><tr><td>
           <p><code><a href="score_hessian.html">score()</a></code> <code><a href="score_hessian.html">hessian()</a></code> </p>
         </td>
         <td><p>Score and Hessian matrix</p></td>
@@ -791,6 +795,10 @@
           <p><code><a href="simplify.html">simplify()</a></code> </p>
         </td>
         <td><p>Simplify expression</p></td>
+      </tr><tr><td>
+          <p><code><a href="solve.caracas_symbol.html">solve(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Solve a System of Linear Equations</p></td>
       </tr><tr><td>
           <p><code><a href="solve_lin.html">solve_lin()</a></code> </p>
         </td>
@@ -800,9 +808,9 @@
         </td>
         <td><p>Solves a system of non-linear equations</p></td>
       </tr><tr><td>
-          <p><code><a href="special_matrices.html">zeros()</a></code> <code><a href="special_matrices.html">ones()</a></code> <code><a href="special_matrices.html">eye()</a></code> </p>
+          <p><code><a href="special_matrices.html">zeros_sym()</a></code> <code><a href="special_matrices.html">ones_sym()</a></code> <code><a href="special_matrices.html">eye_sym()</a></code> </p>
         </td>
-        <td><p>Special matrices: zeros, ones, eyes</p></td>
+        <td><p>Special matrices: zeros_sym, ones_sym, eye_sym</p></td>
       </tr><tr><td>
           <p><code><a href="sub-.caracas_symbol.html">`[`(<i>&lt;caracas_symbol&gt;</i>)</a></code> </p>
         </td>
@@ -864,9 +872,9 @@
         </td>
         <td><p>Export object to TeX</p></td>
       </tr><tr><td>
-          <p><code><a href="tex.caracas_factor_list.html">tex(<i>&lt;caracas_factor_list&gt;</i>)</a></code> </p>
+          <p><code><a href="tex.caracas_scaled_matrix.html">tex(<i>&lt;caracas_scaled_matrix&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Print factor list</p></td>
+        <td><p>Export scaled matrix to tex</p></td>
       </tr><tr><td>
           <p><code><a href="texshow.html">texshow()</a></code> </p>
         </td>

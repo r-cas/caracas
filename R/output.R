@@ -148,6 +148,7 @@ print.caracas_solve_sys_sol <- function(x,
   if (simplify) {
     if (length(x) == 0L) {
       cat("No solutions\n")
+      return(invisible(x))
     }
     
     num_vars <- length(names(x[[1L]]))
