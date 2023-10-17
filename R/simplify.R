@@ -95,6 +95,7 @@ apart <- function(x) {
 #' @param x A `caracas_symbol`
 #' @param \dots Pass on to SymPy's expand, e.g. `force = TRUE`
 #' 
+#' @examples
 #' if (has_sympy()) {
 #'   def_sym(x)
 #'   y <- log(exp(x))

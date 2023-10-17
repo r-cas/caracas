@@ -164,8 +164,8 @@
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/symbol.html">symbol</a></span><span class="op">(</span><span class="st">'x'</span><span class="op">)</span></span>
 <span><span class="va">eq</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">x</span></span>
 <span><span class="va">eq</span></span>
-<span><span class="co">#&gt; [caracas]:    2    </span></span>
-<span><span class="co">#&gt;            2⋅x  - x</span></span>
+<span><span class="co">#&gt; c:    2    </span></span>
+<span><span class="co">#&gt;    2⋅x  - x</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "2*x^2 - x"</span></span>
 <span><span class="fu"><a href="reference/as_expr.html">as_expr</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span></span>
@@ -174,41 +174,39 @@
 <span><span class="co">#&gt; [1] "2 x^{2} - x"</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/solve_sys.html">solve_sys</a></span><span class="op">(</span><span class="va">eq</span>, <span class="va">x</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Solution 1:</span></span>
-<span><span class="co">#&gt;   x =  0 </span></span>
-<span><span class="co">#&gt; Solution 2:</span></span>
-<span><span class="co">#&gt;   x =  1/2</span></span>
+<span><span class="co">#&gt; x = 0</span></span>
+<span><span class="co">#&gt; x = 1/2</span></span>
 <span><span class="fu"><a href="reference/der.html">der</a></span><span class="op">(</span><span class="va">eq</span>, <span class="va">x</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]: 4⋅x - 1</span></span>
+<span><span class="co">#&gt; c: 4⋅x - 1</span></span>
 <span><span class="fu"><a href="reference/subs.html">subs</a></span><span class="op">(</span><span class="va">eq</span>, <span class="va">x</span>, <span class="st">"y"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [caracas]:    2    </span></span>
-<span><span class="co">#&gt;            2⋅y  - y</span></span></code></pre></div>
+<span><span class="co">#&gt; c:    2    </span></span>
+<span><span class="co">#&gt;    2⋅y  - y</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="st">"2*x"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/as_sym.html">as_sym</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
 <span><span class="va">B</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡x   0 ⎤</span></span>
-<span><span class="co">#&gt;            ⎢      ⎥</span></span>
-<span><span class="co">#&gt;            ⎣2  2⋅x⎦</span></span>
+<span><span class="co">#&gt; c: ⎡x   0 ⎤</span></span>
+<span><span class="co">#&gt;    ⎢      ⎥</span></span>
+<span><span class="co">#&gt;    ⎣2  2⋅x⎦</span></span>
 <span><span class="va">Binv</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/linalg.html">inv</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
 <span><span class="va">Binv</span></span>
-<span><span class="co">#&gt; [caracas]: ⎡ 1      ⎤</span></span>
-<span><span class="co">#&gt;            ⎢ ─    0 ⎥</span></span>
-<span><span class="co">#&gt;            ⎢ x      ⎥</span></span>
-<span><span class="co">#&gt;            ⎢        ⎥</span></span>
-<span><span class="co">#&gt;            ⎢-1    1 ⎥</span></span>
-<span><span class="co">#&gt;            ⎢───  ───⎥</span></span>
-<span><span class="co">#&gt;            ⎢  2  2⋅x⎥</span></span>
-<span><span class="co">#&gt;            ⎣ x      ⎦</span></span>
+<span><span class="co">#&gt; c: ⎡ 1      ⎤</span></span>
+<span><span class="co">#&gt;    ⎢ ─    0 ⎥</span></span>
+<span><span class="co">#&gt;    ⎢ x      ⎥</span></span>
+<span><span class="co">#&gt;    ⎢        ⎥</span></span>
+<span><span class="co">#&gt;    ⎢-1    1 ⎥</span></span>
+<span><span class="co">#&gt;    ⎢───  ───⎥</span></span>
+<span><span class="co">#&gt;    ⎢  2  2⋅x⎥</span></span>
+<span><span class="co">#&gt;    ⎣ x      ⎦</span></span>
 <span><span class="fu"><a href="reference/tex.html">tex</a></span><span class="op">(</span><span class="va">Binv</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "\\left[\\begin{matrix}\\frac{1}{x} &amp; 0\\\\- \\frac{1}{x^{2}} &amp; \\frac{1}{2 x}\\end{matrix}\\right]"</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/linalg.html">eigenval</a></span><span class="op">(</span><span class="va">Binv</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [[1]]$eigval</span></span>
-<span><span class="co">#&gt; [caracas]: 1</span></span>
-<span><span class="co">#&gt;            ─</span></span>
-<span><span class="co">#&gt;            x</span></span>
+<span><span class="co">#&gt; c: 1</span></span>
+<span><span class="co">#&gt;    ─</span></span>
+<span><span class="co">#&gt;    x</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[1]]$eigmult</span></span>
 <span><span class="co">#&gt; [1] 1</span></span>
@@ -216,9 +214,9 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; [[2]]$eigval</span></span>
-<span><span class="co">#&gt; [caracas]:  1 </span></span>
-<span><span class="co">#&gt;            ───</span></span>
-<span><span class="co">#&gt;            2⋅x</span></span>
+<span><span class="co">#&gt; c:  1 </span></span>
+<span><span class="co">#&gt;    ───</span></span>
+<span><span class="co">#&gt;    2⋅x</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]$eigmult</span></span>
 <span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
@@ -275,7 +273,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/r-cas/caracas/actions" class="external-link"><img src="https://github.com/r-cas/caracas/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://app.codecov.io/gh/r-cas/caracas?branch=master" class="external-link"><img src="https://codecov.io/gh/r-cas/caracas/branch/master/graphs/badge.svg" alt="codecov.io"></a></li>
+<li><a href="https://codecov.io/gh/r-cas/caracas" class="external-link"><img src="https://codecov.io/gh/r-cas/caracas/graph/badge.svg?token=HF9MZ6AUWA" alt="codecov"></a></li>
 </ul>
 </div>
 

@@ -7,7 +7,7 @@
 
 [![R build
 status](https://github.com/r-cas/caracas/workflows/R-CMD-check/badge.svg)](https://github.com/r-cas/caracas/actions)
-[![codecov.io](https://codecov.io/gh/r-cas/caracas/branch/master/graphs/badge.svg)](https://app.codecov.io/gh/r-cas/caracas?branch=master)
+[![codecov](https://codecov.io/gh/r-cas/caracas/graph/badge.svg?token=HF9MZ6AUWA)](https://app.codecov.io/gh/r-cas/caracas)
 <!-- badges: end -->
 
 ## Installation
@@ -76,8 +76,8 @@ library(caracas)
 x <- symbol('x')
 eq <- 2*x^2 - x
 eq
-#> [caracas]:    2    
-#>            2⋅x  - x
+#> c:    2    
+#>    2⋅x  - x
 as.character(eq)
 #> [1] "2*x^2 - x"
 as_expr(eq)
@@ -88,34 +88,32 @@ tex(eq)
 
 ``` r
 solve_sys(eq, x)
-#> Solution 1:
-#>   x =  0 
-#> Solution 2:
-#>   x =  1/2
+#> x = 0
+#> x = 1/2
 der(eq, x)
-#> [caracas]: 4⋅x - 1
+#> c: 4⋅x - 1
 subs(eq, x, "y")
-#> [caracas]:    2    
-#>            2⋅y  - y
+#> c:    2    
+#>    2⋅y  - y
 ```
 
 ``` r
 A <- matrix(c("x", 2, 0, "2*x"), 2, 2)
 B <- as_sym(A)
 B
-#> [caracas]: ⎡x   0 ⎤
-#>            ⎢      ⎥
-#>            ⎣2  2⋅x⎦
+#> c: ⎡x   0 ⎤
+#>    ⎢      ⎥
+#>    ⎣2  2⋅x⎦
 Binv <- inv(B)
 Binv
-#> [caracas]: ⎡ 1      ⎤
-#>            ⎢ ─    0 ⎥
-#>            ⎢ x      ⎥
-#>            ⎢        ⎥
-#>            ⎢-1    1 ⎥
-#>            ⎢───  ───⎥
-#>            ⎢  2  2⋅x⎥
-#>            ⎣ x      ⎦
+#> c: ⎡ 1      ⎤
+#>    ⎢ ─    0 ⎥
+#>    ⎢ x      ⎥
+#>    ⎢        ⎥
+#>    ⎢-1    1 ⎥
+#>    ⎢───  ───⎥
+#>    ⎢  2  2⋅x⎥
+#>    ⎣ x      ⎦
 tex(Binv)
 #> [1] "\\left[\\begin{matrix}\\frac{1}{x} & 0\\\\- \\frac{1}{x^{2}} & \\frac{1}{2 x}\\end{matrix}\\right]"
 ```
@@ -124,9 +122,9 @@ tex(Binv)
 eigenval(Binv)
 #> [[1]]
 #> [[1]]$eigval
-#> [caracas]: 1
-#>            ─
-#>            x
+#> c: 1
+#>    ─
+#>    x
 #> 
 #> [[1]]$eigmult
 #> [1] 1
@@ -134,9 +132,9 @@ eigenval(Binv)
 #> 
 #> [[2]]
 #> [[2]]$eigval
-#> [caracas]:  1 
-#>            ───
-#>            2⋅x
+#> c:  1 
+#>    ───
+#>    2⋅x
 #> 
 #> [[2]]$eigmult
 #> [1] 1

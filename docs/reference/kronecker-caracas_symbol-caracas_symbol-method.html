@@ -122,46 +122,19 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="generic-matrices.html">matrix_sym</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="st">"a"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="generic-matrices.html">matrix_sym</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="st">"b"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">II</span> <span class="op">&lt;-</span> <span class="fu"><a href="generic-matrices.html">matrix_sym_diag</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">EE</span> <span class="op">&lt;-</span> <span class="fu"><a href="special_matrices.html">eye_sym</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">JJ</span> <span class="op">&lt;-</span> <span class="fu"><a href="special_matrices.html">ones_sym</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="has_sympy.html">has_sympy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="generic-matrices.html">matrix_sym</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="st">"a"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="generic-matrices.html">matrix_sym</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="st">"b"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">II</span> <span class="op">&lt;-</span> <span class="fu"><a href="generic-matrices.html">matrix_sym_diag</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">EE</span> <span class="op">&lt;-</span> <span class="fu"><a href="special_matrices.html">eye_sym</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">JJ</span> <span class="op">&lt;-</span> <span class="fu"><a href="special_matrices.html">ones_sym</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/kronecker.html" class="external-link">kronecker</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> c: ⎡a₁₁⋅b₁₁  a₁₁⋅b₁₂  a₁₂⋅b₁₁  a₁₂⋅b₁₂⎤</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                                  ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢a₁₁⋅b₂₁  a₁₁⋅b₂₂  a₁₂⋅b₂₁  a₁₂⋅b₂₂⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                                  ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢a₂₁⋅b₁₁  a₂₁⋅b₁₂  a₂₂⋅b₁₁  a₂₂⋅b₁₂⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                                  ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎣a₂₁⋅b₂₁  a₂₁⋅b₂₂  a₂₂⋅b₂₁  a₂₂⋅b₂₂⎦</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/kronecker.html" class="external-link">kronecker</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, FUN <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> c: ⎡a₁₁ + b₁₁  a₁₁ + b₁₂  a₁₂ + b₁₁  a₁₂ + b₁₂⎤</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                                          ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢a₁₁ + b₂₁  a₁₁ + b₂₂  a₁₂ + b₂₁  a₁₂ + b₂₂⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                                          ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢a₂₁ + b₁₁  a₂₁ + b₁₂  a₂₂ + b₁₁  a₂₂ + b₁₂⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                                          ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎣a₂₁ + b₂₁  a₂₁ + b₂₂  a₂₂ + b₂₁  a₂₂ + b₂₂⎦</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/kronecker.html" class="external-link">kronecker</a></span><span class="op">(</span><span class="va">II</span>, <span class="va">B</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> c: ⎡b₁₁⋅v₁  b₁₂⋅v₁    0       0   ⎤</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                              ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢b₂₁⋅v₁  b₂₂⋅v₁    0       0   ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                              ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢  0       0     b₁₁⋅v₂  b₁₂⋅v₂⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                              ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎣  0       0     b₂₁⋅v₂  b₂₂⋅v₂⎦</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/kronecker.html" class="external-link">kronecker</a></span><span class="op">(</span><span class="va">EE</span>, <span class="va">B</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> c: ⎡b₁₁  b₁₂   0    0 ⎤</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                  ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢b₂₁  b₂₂   0    0 ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                  ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢ 0    0   b₁₁  b₁₂⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                  ⎥</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ⎣ 0    0   b₂₁  b₂₂⎦</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/kronecker.html" class="external-link">kronecker</a></span><span class="op">(</span><span class="va">JJ</span>, <span class="va">B</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/kronecker.html" class="external-link">kronecker</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/kronecker.html" class="external-link">kronecker</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, FUN <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/kronecker.html" class="external-link">kronecker</a></span><span class="op">(</span><span class="va">II</span>, <span class="va">B</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/kronecker.html" class="external-link">kronecker</a></span><span class="op">(</span><span class="va">EE</span>, <span class="va">B</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/kronecker.html" class="external-link">kronecker</a></span><span class="op">(</span><span class="va">JJ</span>, <span class="va">B</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> c: ⎡b₁₁  b₁₂  b₁₁  b₁₂⎤</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢                  ⎥</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ⎢b₂₁  b₂₂  b₂₁  b₂₂⎥</span>

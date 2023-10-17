@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R build status](https://github.com/r-cas/caracas/workflows/R-CMD-check/badge.svg)](https://github.com/r-cas/caracas/actions) 
-[![codecov.io](https://codecov.io/gh/r-cas/caracas/branch/master/graphs/badge.svg)](https://app.codecov.io/gh/r-cas/caracas?branch=master)
+[![codecov](https://codecov.io/gh/r-cas/caracas/graph/badge.svg?token=HF9MZ6AUWA)](https://app.codecov.io/gh/r-cas/caracas)
 <!-- badges: end -->
   
 ## Installation
