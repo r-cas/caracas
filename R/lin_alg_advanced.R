@@ -42,6 +42,10 @@ do_la <- function(x, slot, ...) {
                out <- do_la_worker(x, "QRdecomposition", ...)
                return(finalise_QR(out))
            },
+           "LUdecomposition"=, "LU"= {
+               out <- do_la_worker(x, "LUdecomposition", ...)
+               return(finalise_LU(out))
+           },
            "eigenval"=, "eigenvals"={
                out <- do_la_worker(x, "eigenvals", ...)
                return(finalise_eigenval(out))
@@ -156,12 +160,23 @@ finalise_QR <- function(vals) {
     return(qr_info)    
 }
 
+finalise_LU <- function(vals) {
+    vals <- reticulate::py_to_r(vals)
+    
+    lu_info <- list(
+        L = construct_symbol_from_pyobj(vals[[1L]]),
+        U = construct_symbol_from_pyobj(vals[[2L]])
+    )  
+    return(lu_info)    
+}
+
+
 finalise_rref <- function(vals) {
     vals <- reticulate::py_to_r(vals)
     
     rref_info <- list(
         mat = construct_symbol_from_pyobj(vals[[1L]]),
-        pivot_vars = unlist(vals[[2L]])+1
+        pivot_vars = unlist(vals[[2L]]) + 1
     )  
     return(rref_info)   
 }
@@ -342,6 +357,13 @@ rref <- function(x) {
 #' @export
 QRdecomposition <- function(x) {
     return(do_la(x, "QR"))
+}
+
+
+#' @rdname linalg
+#' @export
+LUdecomposition <- function(x) {
+    return(do_la(x, "LU"))
 }
 
 

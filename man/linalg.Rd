@@ -13,6 +13,7 @@
 \alias{pinv}
 \alias{rref}
 \alias{QRdecomposition}
+\alias{LUdecomposition}
 \alias{det}
 \alias{trace_}
 \title{Do linear algebra operation}
@@ -38,6 +39,8 @@ pinv(x)
 rref(x)
 
 QRdecomposition(x)
+
+LUdecomposition(x)
 
 det(x, ...)
 
