@@ -45,23 +45,21 @@ get_caracas_out <- function(x,
   } else if (method == "compactascii") {
     # 'compactascii'
     
-    # z <- if (rowvec && symbol_is_matrix(x) && ncol(x) == 1L && nrow(x) > 1L) {
-    #   suffix <- "^T"
-    #   reticulate::py_capture_output(py$print_caracas(t(x)$pyobj))
-    # } else {
-    #   reticulate::py_capture_output(py$print_caracas(x$pyobj))
-    # }
-    # 
-    # # Remove "empty" rows in matrix:
-    # if (symbol_is_matrix(x)) {
-    #   z <- gsub("\\n\\[[ \t]+\\]", "", z)
-    # }
+    suffix <- ""
+    obj <- x$pyobj
     
-    z <- python_strings_to_r(get_sympy()$sstr(x$pyobj))
+    if (rowvec && symbol_is_matrix(x) && ncol(x) == 1L && nrow(x) > 1L) {
+      suffix <- "^T"
+      obj <- obj$T
+    }
+    
+    z <- python_strings_to_r(get_sympy()$sstr(obj))
     if (symbol_is_matrix(x)) {
       z <- gsub("\\n\\[", "\n [", z)
       z <- gsub("^Matrix\\(\\[\\n \\[", "[[", z)
       z <- gsub("\\)$", "", z)
+      
+      z <- gsub("^Matrix\\(\\[", "[", z)
     }
     z
     

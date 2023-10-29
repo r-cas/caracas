@@ -1,3 +1,7 @@
+# caracas 2.1.1
+
+* `print(..., method = "compactascii")`: column vector as transposed row vector
+
 # caracas 2.1.0
 
 * Added `knitr` engine `rtex` (see vignette "Chunk engine for easy tex output in Rmarkdown and Quarto")
