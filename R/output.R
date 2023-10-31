@@ -60,6 +60,11 @@ get_caracas_out <- function(x,
       z <- gsub("\\)$", "", z)
       
       z <- gsub("^Matrix\\(\\[", "[", z)
+      #z <- gsub("Matrix\\(\\[(.*)\\]\\)", "[(\\1)]", z)
+      #z <- gsub("Matrix\\(", "", z)
+    } else if (grepl("*Matrix", z)) {
+      # Probably caracas_scaled_matrix, but we do not have x's class
+      z <- gsub("Matrix\\((.*)\\)", "\\1", z)
     }
     z
     

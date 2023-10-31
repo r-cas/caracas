@@ -99,13 +99,11 @@ print.caracas_scaled_matrix <- function(x, ...) {
   }
   
   z <- c(as.character(x$scale), as.character(x$mat))
-  #print(z)
   w <- paste0("UnevaluatedExpr(", z, ")", collapse = "*")
   v <- eval_to_symbol(w)
-  print(v)
-  #print(w)
-  
-  return(invisible(v))
+  print(v, ...)
+
+  return(invisible(x))
 }
 
 #' Export scaled matrix to tex
