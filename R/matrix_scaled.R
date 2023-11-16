@@ -99,6 +99,45 @@ print.caracas_scaled_matrix <- function(x, ...) {
   }
   
   z <- c(as.character(x$scale), as.character(x$mat))
+  
+  dots <- list(...)
+  
+  if ("method" %in% names(dots) && dots[["method"]] == "compactascii") {
+    prompt <- getOption("caracas.prompt", default = "c: ")
+    rowvec <- getOption("caracas.print.rowvec", default = TRUE)
+    
+    if ("prompt" %in% names(dots)) {
+      prompt <- dots[["prompt"]]
+    }
+    
+    if ("rowvec" %in% names(dots)) {
+      rowvec <- dots[["rowvec"]]
+    }
+    
+    z1 <- get_caracas_out(x$scale,
+                          prompt = prompt, 
+                          method = "compactascii", 
+                          rowvec = rowvec)
+    z2 <- get_caracas_out(x$mat,
+                          prompt = prompt, 
+                          method = "compactascii", 
+                          rowvec = rowvec)
+    
+    # scale on its own line:
+    # z2 <- gsub(paste0("^", prompt), 
+    #            paste0(rep(" ", nchar(prompt)), collapse = ""), 
+    #            z2)
+    # cat(z1, " * \n", z2, "\n", sep = "")
+    
+    # first row of matrix at same line as scale:
+    z2 <- gsub(paste0("^", prompt), "", z2)
+    indent <- paste0(rep(" ", nchar(z1) - nchar(prompt) + 3), collapse = "")
+    z2 <- gsub("\n", paste0("\n", indent), z2)
+    cat(z1, " * ", z2, "\n", sep = "")
+    
+    return(invisible(x))
+  } 
+  
   w <- paste0("UnevaluatedExpr(", z, ")", collapse = "*")
   v <- eval_to_symbol(w)
   print(v, ...)

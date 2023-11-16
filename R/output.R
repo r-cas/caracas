@@ -13,7 +13,7 @@ indent_not_first_line <- function(x, indent = 0) {
 }
 
 get_caracas_out <- function(x, 
-                            prompt = getOption("caracas.prompt", default = "[caracas]: "), 
+                            prompt = getOption("caracas.prompt", default = "c: "), 
                             method = getOption("caracas.print.method", default = "utf8"),
                             rowvec = getOption("caracas.print.rowvec", default = TRUE)) {
   ensure_sympy()
