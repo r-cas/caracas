@@ -124,16 +124,16 @@ print.caracas_scaled_matrix <- function(x, ...) {
                           rowvec = rowvec)
     
     # scale on its own line:
-    # z2 <- gsub(paste0("^", prompt), 
-    #            paste0(rep(" ", nchar(prompt)), collapse = ""), 
-    #            z2)
-    # cat(z1, " * \n", z2, "\n", sep = "")
+    z2 <- gsub(paste0("^", prompt),
+               paste0(rep(" ", nchar(prompt)), collapse = ""),
+               z2)
+    cat(z1, " * \n", z2, "\n", sep = "")
     
     # first row of matrix at same line as scale:
-    z2 <- gsub(paste0("^", prompt), "", z2)
-    indent <- paste0(rep(" ", nchar(z1) - nchar(prompt) + 3), collapse = "")
-    z2 <- gsub("\n", paste0("\n", indent), z2)
-    cat(z1, " * ", z2, "\n", sep = "")
+    # z2 <- gsub(paste0("^", prompt), "", z2)
+    # indent <- paste0(rep(" ", nchar(z1) - nchar(prompt) + 3), collapse = "")
+    # z2 <- gsub("\n", paste0("\n", indent), z2)
+    # cat(z1, " * ", z2, "\n", sep = "")
     
     return(invisible(x))
   } 
