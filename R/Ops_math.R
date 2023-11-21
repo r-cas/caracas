@@ -279,6 +279,8 @@ Ops.caracas_symbol = function(e1, e2) {
 
 Math_transtab <- matrix( c(
   #R			Python
+  "abs",  "Abs",
+  
   "sin",		"sin",
   "cos",		"cos",
   "tan",		"tan",
