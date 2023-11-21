@@ -3,6 +3,7 @@
 * `print(..., method = "compactascii")`: column vector as transposed row vector
    and handling `caracas_scaled_matrix`
 * `LUdecomposition()` added.
+* `cumsum()` added.
 
 # caracas 2.1.0
 

@@ -153,3 +153,50 @@ rep.caracas_symbol <- function(x, ...) {
   z <- as_sym(z)
   return(z)
 }
+
+
+
+
+
+#' Cumulative Sums
+#'
+#' @param x Elements to sum
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   A <- matrix(1:9, 3)
+#'   cumsum(A)
+#'   B <- matrix_sym(3, 3)
+#'   cumsum(B)
+#'   C <- vector_sym(3)
+#'   cumsum(C)
+#' }
+#' 
+#' @concept vectors
+#'
+#' @export
+cumsum.caracas_symbol <- function(x) {
+  ensure_sympy()
+  stopifnot_symbol(x)
+  stopifnot_matrix(x)  
+  
+  y <- c(x) # coerce
+  n <- nrow(y)
+
+  if (n == 0L) {
+    return(NULL)
+  }
+  
+  if (n == 1L) {
+    return(y)
+  }
+  
+  # Now n >= 2L:
+  res <- y
+  
+  for (i in 2L:n) {
+    res[i] <- res[i] + res[i-1L]
+  }
+  
+  return(res)
+}
