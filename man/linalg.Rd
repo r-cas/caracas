@@ -14,6 +14,8 @@
 \alias{rref}
 \alias{QRdecomposition}
 \alias{LUdecomposition}
+\alias{chol.caracas_symbol}
+\alias{svd_}
 \alias{det}
 \alias{trace_}
 \title{Do linear algebra operation}
@@ -42,6 +44,10 @@ QRdecomposition(x)
 
 LUdecomposition(x)
 
+\method{chol}{caracas_symbol}(x, ...)
+
+svd_(x, ...)
+
 det(x, ...)
 
 trace_(x)
@@ -69,6 +75,9 @@ if (has_sympy()) {
   A <- matrix(c("a", "0", "0", "1"), 2, 2) |> as_sym()
   
   QRdecomposition(A)
+  LUdecomposition(A)
+  #chol(A) # error
+  chol(A, hermitian = FALSE)
   eigenval(A)
   eigenvec(A)
   inv(A)

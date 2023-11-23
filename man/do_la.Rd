@@ -25,7 +25,25 @@ if (has_sympy()) {
   
   do_la(A, "QR")
   QRdecomposition(A)
+
+  do_la(A, "LU")
+  LUdecomposition(A)
+
+  do_la(A, "cholesky", hermitian = FALSE)
+  chol(A, hermitian = FALSE)
   
+  do_la(A, "singular_value_decomposition")
+  do_la(A, "svd")
+  svd_res <- svd_(A)
+  svd_res
+  U_expr <- svd_res$U |> as_expr()
+  U_expr
+  eval(U_expr, list(a = 3+2i))
+  
+  b <- symbol("b", real = TRUE)
+  B <- matrix(c("b", "0", "0", "1"), 2, 2) \%>\% as_sym(declare_symbols = FALSE)
+  svd_(B)
+
   do_la(A, "eigenval")
   eigenval(A)
   

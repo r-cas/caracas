@@ -10,7 +10,25 @@
 #'   
 #'   do_la(A, "QR")
 #'   QRdecomposition(A)
+#'
+#'   do_la(A, "LU")
+#'   LUdecomposition(A)
+#'
+#'   do_la(A, "cholesky", hermitian = FALSE)
+#'   chol(A, hermitian = FALSE)
 #'   
+#'   do_la(A, "singular_value_decomposition")
+#'   do_la(A, "svd")
+#'   svd_res <- svd_(A)
+#'   svd_res
+#'   U_expr <- svd_res$U |> as_expr()
+#'   U_expr
+#'   eval(U_expr, list(a = 3+2i))
+#'   
+#'   b <- symbol("b", real = TRUE)
+#'   B <- matrix(c("b", "0", "0", "1"), 2, 2) %>% as_sym(declare_symbols = FALSE)
+#'   svd_(B)
+#'
 #'   do_la(A, "eigenval")
 #'   eigenval(A)
 #'   
@@ -45,6 +63,10 @@ do_la <- function(x, slot, ...) {
            "LUdecomposition"=, "LU"= {
                out <- do_la_worker(x, "LUdecomposition", ...)
                return(finalise_LU(out))
+           },
+           "singular_value_decomposition"=, "svd"= {
+             out <- do_la_worker(x, "singular_value_decomposition", ...)
+             return(finalise_svd(out))
            },
            "eigenval"=, "eigenvals"={
                out <- do_la_worker(x, "eigenvals", ...)
@@ -170,6 +192,17 @@ finalise_LU <- function(vals) {
     return(lu_info)    
 }
 
+finalise_svd <- function(vals) {
+  vals <- reticulate::py_to_r(vals)
+  
+  svd_info <- list(
+    U = construct_symbol_from_pyobj(vals[[1L]]),
+    S = construct_symbol_from_pyobj(vals[[2L]]),
+    V = construct_symbol_from_pyobj(vals[[3L]])
+  )  
+  return(svd_info)    
+}
+
 
 finalise_rref <- function(vals) {
     vals <- reticulate::py_to_r(vals)
@@ -201,6 +234,9 @@ finalise_rref <- function(vals) {
 #'   A <- matrix(c("a", "0", "0", "1"), 2, 2) |> as_sym()
 #'   
 #'   QRdecomposition(A)
+#'   LUdecomposition(A)
+#'   #chol(A) # error
+#'   chol(A, hermitian = FALSE)
 #'   eigenval(A)
 #'   eigenvec(A)
 #'   inv(A)
@@ -364,6 +400,18 @@ QRdecomposition <- function(x) {
 #' @export
 LUdecomposition <- function(x) {
     return(do_la(x, "LU"))
+}
+
+#' @rdname linalg
+#' @export
+chol.caracas_symbol <- function(x, ...) {
+  return(do_la(x, "cholesky", ...))
+}
+
+#' @rdname linalg
+#' @export
+svd_ <- function(x, ...) {
+  return(do_la(x, "singular_value_decomposition", ...))
 }
 
 

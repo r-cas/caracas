@@ -23,8 +23,11 @@ python_strings_to_r <- function(xstr, replace_I = TRUE) {
   xstr <- gsub("oo", "Inf", xstr, fixed = TRUE)
   
   # Other functions
+  # Abs()
   xstr <- gsub("(^|[^A-Za-z]+)Abs\\(", "\\1abs(", xstr, ignore.case = FALSE, perl = TRUE)
-
+  # conjugate()
+  xstr <- gsub("(^|[^A-Za-z]+)conjugate\\(", "\\1Conj(", xstr, ignore.case = FALSE, perl = TRUE)
+  
   return(xstr)
 }
 
