@@ -4,6 +4,7 @@
    and handling `caracas_scaled_matrix`
 * `LUdecomposition()`, `chol()` (Cholesky), `svd_()` (Singular Value decomposition) added.
 * `cumsum()` added.
+* `as.expression()` (alias for `as_expr()`) and `as.function()` (alias for `as_func()`) cf. #75
 
 # caracas 2.1.0
 
