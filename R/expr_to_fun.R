@@ -46,7 +46,8 @@ as_func <- function(x, order=NULL, vec_arg=FALSE){
 }
 
 
-#' @inherit as_func
+#' @rdname as_func
+#' @param \dots not used
 #' @export
 as.function.caracas_symbol <- function(x, ...) {
   as_func(x, ...)

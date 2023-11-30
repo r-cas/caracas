@@ -2,14 +2,22 @@
 % Please edit documentation in R/parse_python.R
 \name{as_expr}
 \alias{as_expr}
+\alias{as.expression.caracas_symbol}
+\alias{as.expression.caracas_solve_sys_sol}
 \title{Convert caracas object to R}
 \usage{
 as_expr(x, first_doit = TRUE)
+
+\method{as.expression}{caracas_symbol}(x, ...)
+
+\method{as.expression}{caracas_solve_sys_sol}(x, ...)
 }
 \arguments{
 \item{x}{caracas_symbol}
 
 \item{first_doit}{Try \code{doit()} first}
+
+\item{\dots}{not used}
 }
 \description{
 Potentially calls \code{\link[=doit]{doit()}}.

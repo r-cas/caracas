@@ -2,9 +2,12 @@
 % Please edit documentation in R/expr_to_fun.R
 \name{as_func}
 \alias{as_func}
+\alias{as.function.caracas_symbol}
 \title{Convert expression into function object.}
 \usage{
 as_func(x, order = NULL, vec_arg = FALSE)
+
+\method{as.function}{caracas_symbol}(x, ...)
 }
 \arguments{
 \item{x}{caracas expression.}
@@ -13,6 +16,8 @@ as_func(x, order = NULL, vec_arg = FALSE)
 alphabetical ordering.}
 
 \item{vec_arg}{should the function take vector valued argument.}
+
+\item{\dots}{not used}
 }
 \description{
 Convert expression into function object.

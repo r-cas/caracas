@@ -271,14 +271,15 @@ as_expr.caracas_solve_sys_sol <- function(x, first_doit = TRUE) {
 }
 
 
-
-#' @inherit as_expr
+#' @rdname as_expr
+#' @param \dots not used
 #' @export
 as.expression.caracas_symbol <- function(x, ...) {
   as_expr(x, ...)
 }
 
-#' @inherit as_expr
+#' @rdname as_expr
+#' @param \dots not used
 #' @export
 as.expression.caracas_solve_sys_sol <- function(x, ...) {
   as_expr(x, ...)
