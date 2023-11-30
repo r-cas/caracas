@@ -53,6 +53,13 @@ See <https://github.com/r-cas/caracas>.
 
 See <https://r-cas.github.io/caracas/>.
 
+## Reference card
+
+Reference card available at
+<https://people.math.aau.dk/~mikl/misc/caracas_refcard.pdf>.
+
+![](https://people.math.aau.dk/~mikl/misc/caracas_refcard.png)
+
 ## Origin of name
 
 The name “caracas” is intended to mean “(inter)face to computer algebra
