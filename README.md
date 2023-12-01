@@ -56,10 +56,10 @@ See <https://r-cas.github.io/caracas/>.
 ## Reference card
 
 Reference card available at
-<https://people.math.aau.dk/~mikl/misc/caracas_refcard.pdf>.
+<https://raw.githubusercontent.com/r-cas/caracas/master/refcard/caracas_refcard.pdf>.
 
 [![Reference
-card](https://people.math.aau.dk/~mikl/misc/caracas_refcard.png)](https://people.math.aau.dk/~mikl/misc/caracas_refcard.pdf)
+card](https://raw.githubusercontent.com/r-cas/caracas/master/refcard/caracas_refcard.png)](https://raw.githubusercontent.com/r-cas/caracas/master/refcard/caracas_refcard.pdf)
 
 ## Origin of name
 
