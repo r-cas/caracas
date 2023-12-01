@@ -1,0 +1,476 @@
+% knitr::knit2pdf('refcard/caracas_refcard.rnw', output = 'refcard/caracas_refcard.tex'); system("convert refcard/caracas_refcard.pdf refcard/caracas_refcard.png")
+\documentclass[10pt,landscape,letterpaper]{article}
+\usepackage{amssymb,amsfonts,amsmath,amsthm}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{multirow}
+
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage[scaled=0.85]{beramono}
+
+\usepackage{graphicx}
+\usepackage[cmyk]{xcolor}
+\definecolor{caracaslink}{HTML}{eb6800}
+\definecolor{omittedgrey}{HTML}{999999}
+\definecolor{boxgrey}{HTML}{999999}
+
+\usepackage[landscape]{geometry}
+\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} 
+\pagestyle{empty}
+
+\usepackage[colorlinks=true,urlcolor=caracaslink]{hyperref}
+\usepackage{booktabs}
+
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-5ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\sffamily\large}}
+
+\makeatother
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+
+\usepackage[firstpage]{draftwatermark}
+\SetWatermarkText{\tikz\node[opacity=0.1]{\includegraphics[width=2.5em]{../logo/v03-watermark}};}
+\SetWatermarkAngle{0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\renewenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+     %\colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % mikl: if coloured box should be removed, replace line above with line below
+     {##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+
+
+\usepackage[framemethod=tikz]{mdframed}
+\let\oldalltt\alltt
+\renewenvironment{alltt}{
+    %\vspace{-0.75\baselineskip}
+    \begin{mdframed}[apptotikzsetting={\tikzset{mdfbackground/.append style={fill=boxgrey,fill opacity=0.25}}}]
+    \begin{oldalltt}
+  }{
+    \end{oldalltt}%\vspace{-0.1\baselineskip}
+    \end{mdframed}
+  }
+
+\let\oldverbatim\verbatim
+\renewenvironment{verbatim}{
+    \vspace{-2em}
+    \begin{mdframed}[apptotikzsetting={\tikzset{mdfbackground/.append style={fill=boxgrey,fill opacity=0.1}}}]
+    \begin{oldverbatim}
+  }{
+    \end{oldverbatim}\vspace{-0.1\baselineskip}
+    \end{mdframed}
+    \vspace{-1em}
+  }
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\footnotesize
+
+\begin{center}
+  {\huge\sffamily\bfseries A quick guide to {\Huge \texttt{\textbf{caracas}}}} \\
+   \small{\textbf{Mikkel Meyer Andersen} (\url{mikl@math.aau.dk}, Dept Math Sci, Aalborg U, Denmark) and \textbf{S{\o}ren H{\o}jsgaard} (\url{sorenh@math.aau.dk}, Dept Math Sci, Aalborg U, Denmark)}
+\end{center}
+\setlength{\premulticols}{0pt}
+\setlength{\postmulticols}{0pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{1.8em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+<<echo=FALSE, message=FALSE>>=
+options("digits" = 4)
+options(useFancyQuotes = FALSE)
+knitr::opts_chunk$set(tidy = FALSE, 
+                      highlight = TRUE, # using custom listing
+                      fig.width=5, fig.height=4, size="scriptsize", out.extra='keepaspectratio')
+@
+
+<<options_used, echo=FALSE, message=FALSE>>=
+library(caracas)
+options(caracas.prompt = "")
+options(caracas.print.method = "compactascii")
+@
+
+
+<<echo=FALSE, message=FALSE>>=
+generate_table <- function(x) {
+  latex_escape <- function(w) {
+    w <- gsub("_", "\\_", w, fixed = TRUE)
+    w <- gsub("^", "\\^{}", w, fixed = TRUE)
+    w <- gsub("$", "\\$", w, fixed = TRUE)
+    w
+  }
+#\\textbf{Command} & \\textbf{Output} \\\\
+#\\midrule
+  
+  cat("
+\\begin{tabular}{p{0.19\\textwidth}p{0.10\\textwidth}}
+\\toprule
+", sep = "")
+  
+  for (y in x) {
+    if (!is.null(y[[1L]])) {
+      eval(y[[1L]], envir = .GlobalEnv)
+    }
+
+    cmd_out <- lapply(y[[2L]], function(z) latex_escape(as.character(z))) |> paste0(collapse = "; ")
+    #outs <- lapply(y[[2L]], function(z) latex_escape(capture.output(eval(z, envir = .GlobalEnv))))
+    outs <- lapply(y[[2L]], function(z) {
+      s <- eval(z, envir = .GlobalEnv)
+      
+      # e.g. limits with doit = FALSE
+      if (length(y) >= 3L && !is.null(y[[3L]]) && y[[3L]] == TRUE && is(s, "caracas_symbol") && !is.null(s$pyobj$doit)) {
+        return(paste0("$", tex(s), "$"))
+      }
+      
+      latex_escape(capture.output(s))
+    })
+    
+    if (!is.null(y[[1L]]) && length(y[[2L]]) > 0L) {
+      #cmd_out <- paste0("; ", cmd_out)
+      cmd_out <- ""
+    }
+    
+    if (!is.null(y[[2L]]) && length(y[[2L]]) == 0L) {
+      cat("\\multicolumn{2}{l}{\\texttt{", latex_escape(as.character(y[[1L]])), cmd_out, "}} \\\\\n", sep = "")
+    } else {
+      # outs <- paste0(outs, collapse = "; ")
+      # outs <- gsub("[ ]+", " ", outs)
+      # outs <- gsub("\\[[ ]+", "[", outs)
+      # 
+      # if (is.null(y[[2L]])) {
+      #   outs <- "{\\color{omittedgrey} \\emph{omitted}}"
+      # } 
+      # 
+      # cat("\\texttt{", latex_escape(as.character(y[[1L]])), cmd_out, "}", 
+      #   " & ", 
+      #   "\\texttt{", outs, "}", " \\\\\n", sep = "")
+      
+      # outs <- paste0(outs, collapse = "; ")
+      # outs <- gsub("[ ]+", " ", outs)
+      # outs <- gsub("\\[[ ]+", "[", outs)
+      # 
+      if (is.null(y[[2L]])) {
+        outs <- "{\\color{omittedgrey} \\emph{output omitted}}"
+      }
+      
+      for (i in seq_along(outs)) {
+        o_i <- outs[[i]]
+        
+        for (j in seq_along(o_i)) {
+          o_i_j <- o_i[[j]]
+          
+          if (nchar(o_i_j) == 0L) {
+            next # remove empty lines
+          }
+          
+          if (i == 1L && j == 1L) {
+            cat("\\texttt{", latex_escape(as.character(y[[1L]])), cmd_out, "}", 
+            " & ", 
+            "\\texttt{", o_i_j, "}", " \\\\\n", sep = "")
+          } else{
+            cat("& \\texttt{", o_i_j, "}", " \\\\\n", sep = "")
+          }
+        }
+      }
+    }
+  }
+  
+  cat("\\bottomrule
+\\end{tabular}
+
+")
+}
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{multicols}{3}
+
+
+
+<<echo=FALSE>>=
+# input validation, e.g.:
+# nrow/length
+# length == 0
+# not vector?
+
+diff_ <- function(x){
+
+    if (nrow(x)==1) return(NULL) ## Return value
+    l <- 2:nrow(x)
+    out <- x[-1]
+    for (i in 2:nrow(x)){
+        out[i] <- x[i] - x[i-1]
+    }
+    out
+}
+@ 
+
+\section{What is {\large \texttt{\textbf{caracas}}}?}
+
+\texttt{caracas} is an R package that gives symbolic mathematics in R. 
+\texttt{caracas} is based on SymPy (a computer algebra system for Python). 
+
+Function names are kept the same as in R if 
+the function does the same, but have been given a 
+postfix \texttt{\_} if the functionality is 
+different (e.g.\ \texttt{sum\_()}).
+
+
+
+\section{Creating symbols}
+\label{sec:creating-symbols}
+
+<<results='asis', echo=FALSE>>=
+commands <- list(
+  #list(expression(), list(expression())),
+  list(expression(k <- symbol("k")), list(expression(k))),
+  list(expression(def_sym(a, b)), list(expression(a), 
+                                       expression(b))),
+  # list(expression(def_sym_vec(c("a", "b"))), list(expression(a), 
+  #                                                 expression(b)),
+  #      TRUE # linebreak between input and in output
+  #      ),
+  list(expression(def_sym_vec(c("a", "b"))), list(expression(a), expression(b))),
+  list(expression(v <- vector_sym(2, "v")), list(expression(v))),
+  list(expression(M <- matrix_sym(2, 2, "m")), list(expression(M))),
+  list(expression(D <- matrix_sym_diag(2)), list(expression(D)))
+) |> generate_table()
+@
+
+
+\section{Coerce R objects to symbols}
+
+<<results='asis', echo=FALSE>>=
+commands <- list(
+  #list(expression(), list(expression())),
+  list(expression(T2 <- matrix(c("a", "b", "b", "a"), nrow = 2)), list()),
+  list(expression(T3 <- toeplitz(c("a", "b", "0"))), list()),
+  list(expression(T2 <- as_sym(T2)), list(expression(T2))),
+  list(expression(T3 <- as_sym(T3)), list(expression(T3)))
+) |> generate_table()
+@
+
+
+
+
+
+\section{Standard R functions}
+\label{sec:standard-r-functions}
+
+<<results='asis', echo=FALSE>>=
+commands <- list(
+  #list(expression(), list(expression())),
+  list(expression(c(v, v)), NULL), # NULL -> omitted
+  list(expression(cbind(v)), NULL), # NULL -> omitted
+  list(expression(rbind(v)), NULL),  # NULL -> omitted
+  list(NULL, list(expression(sum(v)))),
+  list(NULL, list(expression(cumsum(v)))),
+  list(expression(rep(v, times = 2)), NULL),  # NULL -> omitted
+  list(expression(rep(v, each = 2)), NULL),  # NULL -> omitted
+  list(NULL, list(expression(rev(v))))
+) |> generate_table()
+@
+
+
+
+
+\section{Algebra}
+\label{sec:algebra}
+
+<<results='asis', echo=FALSE>>=
+commands <- list(
+  #list(expression(), list(expression())),
+  list(NULL, list(expression(simplify(cos(a)^2 + sin(a)^2)))),
+  list(NULL, list(expression(solve_sys(a^2, -1, a)))),
+  #list(expression(solve_lin(T2)), NULL),
+  list(expression(inv(T2)), NULL),
+  list(expression(solve(T2)), NULL),
+  list(NULL, list(expression(factor_(a^3 - a^2 + a - 1)))),
+  list(NULL, list(expression(expand((a - 1)*(a^2 + 1)))))
+) |> generate_table()
+@
+
+
+\section{Calculus}
+\label{sec:calculus}
+
+<<results='asis', echo=FALSE>>=
+commands <- list(
+  #list(expression(), list(expression())),
+  list(NULL, list(expression(der(3*a + a^2, a)))),
+  list(NULL, list(expression(sum_(1/a^2, a, 1, Inf)))),
+  #list(NULL, list(expression(sum_(1/a^2, a, 1, Inf, doit = FALSE))), TRUE), # TRUE -> tex()
+  list(expression(s <- sum_(1/a^2, a, 1, Inf, doit = FALSE)), list()),
+  list(NULL, list(expression(s)), TRUE), # TRUE -> tex()
+  list(NULL, list(expression(doit(s)))), # TRUE -> tex()
+  list(NULL, list(expression(lim((1 + a)^(1/a), a, 0)))),
+  list(expression(f <- taylor(cos(a), x0 = 0, n = 3+1)), list()),
+  list(NULL, list(expression(drop_remainder(f))))
+) |> generate_table()
+@
+
+
+%\vfill\null
+%\columnbreak
+
+\section{Subsetting}
+\label{sec:subsetting}
+
+<<results='asis', echo=FALSE>>=
+commands <- list(
+  #list(expression(), list(expression())),
+  list(NULL, list(expression(T3[1:2, 2:3]))),
+  list(NULL, list(expression(T3[1:2]))),
+  list(NULL, list(expression(T3[2]))),
+  list(NULL, list(expression(T3[2,])))
+) |> generate_table()
+@
+
+
+
+\section{Linear algebra}
+\label{sec:linear-algebra}
+
+
+<<results='asis', echo=FALSE>>=
+commands <- list(
+  #list(expression(), list(expression())),
+  list(NULL, list(expression(rankMatrix_(T2)))),
+  list(NULL, list(expression(rref(T2)))),
+  list(expression(T2i <- solve(T2)), list()),
+  #list(expression(T2is <- scale_matrix(T2i, det(T2i))), list()),
+  list(NULL, list(expression(scale_matrix(T2i, det(T2i))))),
+  #list(NULL, list(expression(T2is))),
+  list(expression(QRdecomposition(D)), NULL),
+  list(expression(LUdecomposition(D)), NULL),
+  list(expression(chol(D, hermitian = FALSE)), NULL),
+  list(expression(svd_(D)), NULL)
+  #list(NULL, list(expression(QRdecomposition(D))))#,
+  #list(NULL, list(expression(LUdecomposition(D))))
+) |> generate_table()
+@
+
+
+
+\section{Substitution and evaluation}
+\label{sec:subst-eval}
+
+
+
+<<results='asis', echo=FALSE>>=
+commands <- list(
+  #list(expression(), list(expression())),
+  list(NULL, list(expression(subs(T2, "b", "b-k")))),
+  list(NULL, list(expression(subs(T2, c("a", "b"), c(1, 2)))))
+) |> generate_table()
+@
+
+
+\vfill\null
+\columnbreak
+
+
+\section{Coercion to R objects}
+\label{sec:coercion-r-objects}
+
+<<eval=TRUE>>=
+T2e <- as.expression(T2) # or as_expr()
+T2e
+T2f <- as.function(T2) # or as_func()
+@ 
+
+<<results='asis', echo=FALSE>>=
+commands <- list(
+  #list(expression(), list(expression())),
+  list(expression(eval(T2e, list(a=1, b=2))), NULL),
+  list(expression(T2f(a=1, b=2)), NULL),
+  list(expression(T2f2 <- as.function(T2, vec_arg = TRUE)), list()),
+  list(expression(T2f2(c(a=1, b=2))), NULL)
+) |> generate_table()
+@
+
+\section{Extending caracas}
+\label{sec:extending-caracas}
+
+SymPy documentation at \url{https://docs.sympy.org/}.
+
+With helper function \texttt{sympy\_func()}:
+
+<<results='asis', echo=FALSE>>=
+commands <- list(
+  #list(expression(), list(expression())),
+  list(expression(sympy_func(T2, "inverse_BLOCK")), NULL),
+  list(expression(sympy_func(T2, "upper_triangular")), NULL)
+) |> generate_table()
+@
+
+\vspace{1em}
+
+Calling SymPy directly via \texttt{reticulate}:
+
+<<eval=TRUE>>=
+get_sympy()$diff("2*a*x**2", "x") |> as.character()
+@ 
+
+
+\section{Output}
+\label{sec:output}
+
+Functions: \texttt{tex()}, \texttt{print(..., method = "prettyascii")} and others.
+
+Chunk type \texttt{rtex} for e.g.\ \texttt{rmarkdown}/Quarto.
+
+%\section{Reproducibility information}
+%<<ref.label = c("options_used"),include=TRUE,echo=TRUE>>=
+%@
+
+
+\begin{center}
+\includegraphics[width=15em]{../logo/v03}
+\end{center}
+
+
+\begin{flushleft}
+Online docs
+\hfill
+Updated Nov 2023
+\\
+\url{https://r-cas.github.io/caracas/}
+\hfill
+\texttt{caracas} v. \Sexpr{packageVersion("caracas")}
+\end{flushleft}
+
+
+\end{multicols}
+
+%\SetWatermarkHorCenter{0.65\paperwidth}
+\end{document}

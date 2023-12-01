@@ -26,6 +26,8 @@
 ^\.github
 ^\.github$
 ^pkgdown$
-zandbox
+^zandbox
+^refcard
+^logo
 ^paper$
 ^notes.txt$
