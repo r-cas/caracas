@@ -206,3 +206,40 @@ solve.caracas_symbol <- function(a, b, ...) {
     return(inv(a) %*% b)
   } 
 }
+
+
+#' Solve lower or upper triangular system
+#' 
+#' @param a caracas_symbol
+#' @param b If provided, either a caracas_symbol (if not, `as_sym()` is called on the object)
+#' @param \dots Not used
+#' 
+#' @examples 
+#' if (has_sympy()) {
+#'   A <- matrix_sym(4, 4)
+#'   A[upper.tri(A)] <- 0
+#'   lower_triangular_solve(A)
+#' }
+#' 
+#' @concept solve
+#' 
+#' @export
+lower_triangular_solve <- function(a, b, ...){
+    ensure_sympy()
+    stopifnot_symbol(a)
+    if (missing(b))
+        b <- diag_(1, nrow(a))
+    out <- caracas:::do_la_worker(a, "lower_triangular_solve", b)
+    out <- caracas:::construct_symbol_from_pyobj(out)
+    return(out)
+}
+
+upper_triangular_solve <- function(a, b, ...){
+    ensure_sympy()
+    stopifnot_symbol(a)
+    if (missing(b))
+        b <- diag_(1, nrow(a))
+    out <- caracas:::do_la_worker(a, "upper_triangular_solve", b)
+    out <- caracas:::construct_symbol_from_pyobj(out)
+    return(out)
+}

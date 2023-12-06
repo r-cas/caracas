@@ -56,6 +56,7 @@
 #' @export
 do_la <- function(x, slot, ...) {
     switch(slot,
+           
            "QRdecomposition"=, "QR"= {
                out <- do_la_worker(x, "QRdecomposition", ...)
                return(finalise_QR(out))
