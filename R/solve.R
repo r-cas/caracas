@@ -216,9 +216,12 @@ solve.caracas_symbol <- function(a, b, ...) {
 #' 
 #' @examples 
 #' if (has_sympy()) {
-#'   A <- matrix_sym(4, 4)
+#'   A <- matrix_sym(3, 3)
 #'   A[upper.tri(A)] <- 0
-#'   lower_triangular_solve(A)
+#'   lower_triangular_solve(A) |> simplify()
+#'   A <- matrix_sym(3, 3)
+#'   A[lower.tri(A)] <- 0
+#'   upper_triangular_solve(A) |> simplify()
 #' }
 #' 
 #' @concept solve
