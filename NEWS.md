@@ -1,3 +1,7 @@
+# caracas 2.1.2
+
+* `solve_lower_triangular()` and `solve_upper_triangular()` added.
+
 # caracas 2.1.1
 
 * `print(..., method = "compactascii")`: column vector as transposed row vector
