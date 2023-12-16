@@ -5,6 +5,27 @@
 # rbind
 # cbind
 
+#' Extract unique elements
+#'
+#' @param x A caracas vector or matrix
+#' @param incomparables Same meaning as for other unique methods
+#' @param ... Additional arguments; currently not used.
+#'
+#' @examples
+#' if (has_sympy()){
+#' v <- vector_sym(4)
+#' v2 <- rep(v, each=2)
+#' unique(v2)
+#' }
+#' @export
+unique.caracas_symbol <- function(x, incomparables = FALSE, ...){
+    .x <- unique(as_character(x), incomparables = incomparables, ...)
+    o <- as_sym(.x)
+    return(o)
+}
+
+
+
 
 #' Summation
 #'

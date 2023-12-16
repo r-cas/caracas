@@ -1,6 +1,7 @@
 # caracas 2.1.2
 
 * `solve_lower_triangular()` and `solve_upper_triangular()` added.
+* `unique()` method added.
 
 # caracas 2.1.1
 
