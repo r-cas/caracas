@@ -91,12 +91,13 @@ do_la <- function(x, slot, ...) {
                out <- do_la_worker(x, "rref", ...)
                return(finalise_rref(out))
            },          
-           "nullspace"=,"columnspace"=,"rowspace"=, "singular_values"={
+           "rowspace"=, "nullspace"=, "columnspace"=, "singular_values"={
                out <- do_la_worker(x, slot, ...)
                out <- reticulate::py_to_r(out)
                out <- lapply(out, construct_symbol_from_pyobj)
                return(out)
            },
+           
            {
                out <- do_la_worker(x, slot, ...)
                out <- reticulate::py_to_r(out)
@@ -219,6 +220,7 @@ finalise_rref <- function(vals) {
 
 
 
+
 #' Do linear algebra operation
 #' 
 #' Performs various linear algebra operations like finding the inverse, 
@@ -242,6 +244,9 @@ finalise_rref <- function(vals) {
 #'   eigenvec(A)
 #'   inv(A)
 #'   det(A)
+#'   rowspace(A)
+#'   columnspace(A)
+#'   nullspace(A)
 #'   
 #'   ## Matrix inversion:
 #'   d <- 3
@@ -297,7 +302,7 @@ nullspace <- function(x, matrix=TRUE) {
 rowspace <- function(x, matrix=TRUE) {
     out <- do_la(x, "rowspace")
     if (matrix)
-        return(do.call(cbind, out))
+        return(t(do.call(rbind, out)))
     else 
         return(out)
 }
@@ -522,3 +527,16 @@ setMethod(
   }
 )
 
+
+
+
+
+## finalise_nullspace <- function(vals) {
+##     vals2 <- reticulate::py_to_r(vals)
+##     out <- lapply(vals2,
+##                   caracas:::construct_symbol_from_pyobj
+##                   )
+##     B <- do.call(cbind.caracas_symbol, out)
+##     B
+
+## }
