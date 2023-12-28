@@ -82,6 +82,9 @@ if (has_sympy()) {
   eigenvec(A)
   inv(A)
   det(A)
+  rowspace(A)
+  columnspace(A)
+  nullspace(A)
   
   ## Matrix inversion:
   d <- 3
