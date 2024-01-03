@@ -45,6 +45,15 @@ described
 [here](https://rstudio.github.io/reticulate/articles/versions.html).
 Again, this need to be done *before* loading `caracas`.
 
+For linux users, specifically, do:
+
+    library(reticulate)
+    reticulate::import("sympy")
+    reticulate::py_install(packages="sympy")
+    reticulate::import("sympy") 
+
+If the prompt says `Module(sympy)` things should be fine.
+
 ## Development site
 
 See <https://github.com/r-cas/caracas>.
