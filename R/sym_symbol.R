@@ -287,7 +287,9 @@ c.caracas_symbol <- function(...) {
 fraction_parts <- function(x) {
   ensure_sympy()
   stopifnot_symbol(x)
-  
+
+  ## SH For some reasons this hack has been found necessary in certain cases
+  x <- as_sym(as_character_matrix(x))
   frac <- x$pyobj$as_numer_denom()
   
   y <- list(

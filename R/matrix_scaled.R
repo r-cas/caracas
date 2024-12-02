@@ -50,6 +50,8 @@ scale_matrix <- function(X, k = NULL, divide = TRUE) {
   }
   
   out$mat <- simplify(out$mat)
+  if (!symbol_is_matrix(X))
+      out$mat <- vectorfy(out$mat)
   class(out) <- c("caracas_scaled_matrix", "list")
   out
 }
