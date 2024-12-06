@@ -609,10 +609,10 @@ colspan <- function(x) {
 
 #' Rank of matrix
 #'
-#' Rank of matrix
+#' Rank of symbolic or numeric matrix. 
 #'
-#' @param x Numeric or symbolic matrix
-#'
+#' @param x Numeric or symbolic matrix.
+#' @param tol Tolerence, only relevant for a numeric matrix.
 #' @concept linalg
 #' 
 #' @examples
@@ -625,11 +625,11 @@ colspan <- function(x) {
 #' 
 #' @importFrom Matrix rankMatrix
 #' @export
-rankMatrix_ <- function(x) {
+rankMatrix_ <- function(x, tol=NULL) {
   ensure_sympy()
   
   if (is.numeric(x)) {
-      Matrix::rankMatrix(x)
+      Matrix::rankMatrix(x, tol=NULL)
   } else {
       do_la(x, "rank")
   }

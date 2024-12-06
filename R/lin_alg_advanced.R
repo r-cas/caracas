@@ -226,7 +226,7 @@ finalise_rref <- function(vals) {
 #' Performs various linear algebra operations like finding the inverse, 
 #' the QR decomposition, the eigenvectors and the eigenvalues.
 #' 
-#' @param x A matrix for which a property is requested.
+#' @param x,x2 A matrix for which a property is requested.
 #' @param matrix When relevant should a matrix be returned.
 #' @param ... Auxillary arguments.
 #' 
@@ -300,12 +300,71 @@ nullspace <- function(x, matrix=TRUE) {
 #' @rdname linalg
 #' @export
 rowspace <- function(x, matrix=TRUE) {
-    out <- do_la(x, "rowspace")
-    if (matrix)
-        return(t(do.call(rbind, out)))
-    else 
-        return(out)
+    # out <- do_la(x, "rowspace")
+    # if (matrix)
+    #     return(t(do.call(rbind, out)))
+    # else 
+    #     return(out)
+    columnspace(t(x), matrix=matrix)
 }
+
+
+
+
+#' @rdname linalg
+#' @export
+orthcompspace <- function(x, x2=NULL){
+  ensure_sympy()
+  stopifnot_symbol(x)
+  stopifnot_matrix(x)
+  if (!is.null(x2)) {
+    stopifnot_symbol(x2)
+    stopifnot_matrix(x2)
+  }
+
+  NS <- nullspace(t(x))
+  if (is.null(x2))
+    return(NS)
+  else {
+    return(intersectionspace(NS, x2))
+  }
+}
+
+#' @rdname linalg
+#' @export
+intersectionspace <- function(x, x2){
+  ensure_sympy()
+  stopifnot_symbol(x)
+  stopifnot_matrix(x)
+  if (!is.null(x2)) {
+    stopifnot_symbol(x2)
+    stopifnot_matrix(x2)
+  }
+  A <- cbind(x, -x2)
+  N <- nullspace(A)
+  S1 <- N[1:ncol(x),]
+  W = x %*% S1
+  
+  aa <- colSums_(W^2) |> as_character()
+  bb <- c(aa != 0)
+  if (any(bb)) {
+    W[, which(bb)]
+  } else {
+    NULL
+  }
+}
+
+#' @rdname linalg
+#' @export
+leftnullspace <- function(x) {
+  ensure_sympy()
+  stopifnot_symbol(x)
+  stopifnot_matrix(x)
+  orthcompspace(columnspace(x))
+}
+
+
+
 
 #' @rdname linalg
 #' @export
