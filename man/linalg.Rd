@@ -5,6 +5,9 @@
 \alias{columnspace}
 \alias{nullspace}
 \alias{rowspace}
+\alias{orthcompspace}
+\alias{intersectionspace}
+\alias{leftnullspace}
 \alias{singular_values}
 \alias{inv}
 \alias{eigenval}
@@ -25,6 +28,12 @@ columnspace(x, matrix = TRUE)
 nullspace(x, matrix = TRUE)
 
 rowspace(x, matrix = TRUE)
+
+orthcompspace(x, x2 = NULL)
+
+intersectionspace(x, x2)
+
+leftnullspace(x)
 
 singular_values(x)
 
@@ -53,7 +62,7 @@ det(x, ...)
 trace_(x)
 }
 \arguments{
-\item{x}{A matrix for which a property is requested.}
+\item{x, x2}{A matrix for which a property is requested.}
 
 \item{matrix}{When relevant should a matrix be returned.}
 

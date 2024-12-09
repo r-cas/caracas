@@ -4,13 +4,15 @@
 \alias{rankMatrix_}
 \title{Rank of matrix}
 \usage{
-rankMatrix_(x)
+rankMatrix_(x, tol = NULL)
 }
 \arguments{
-\item{x}{Numeric or symbolic matrix}
+\item{x}{Numeric or symbolic matrix.}
+
+\item{tol}{Tolerence, only relevant for a numeric matrix.}
 }
 \description{
-Rank of matrix
+Rank of symbolic or numeric matrix.
 }
 \examples{
 if (has_sympy()) {
