@@ -294,6 +294,10 @@ tex_list <- function(x, zero_as_dot=FALSE, matstr=NULL, ...){
     if (!is.list(x)){
         stop("'x' must be a list")
     }
+    if (any(sapply(x, is.list))){
+        x <- unlist(x, recursive=FALSE)
+    }
+        
     o <- sapply(x, function(z){
         if (is_sym(z)){
             tex(z, zero_as_dot=zero_as_dot, matstr=matstr, ...)
