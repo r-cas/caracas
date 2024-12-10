@@ -234,27 +234,28 @@ tex <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
 
 #' @export
 tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
-  ensure_sympy()
-  
-  if (!is.null(x$pyobj)) {
-    o <- get_sympy()$latex(x$pyobj)
-    
-    if (zero_as_dot) {
-      # Matrices
-      o <- gsub("([^0-9])0([^0-9])", "\\1.\\2", o)
-      # FIXME:
-      # Replaces e0 in matrix
-    }
-    
-    if (!is.null(matstr) && is.character(matstr) && length(matstr) >= 1L) { 
-      opt <- ifelse(length(matstr) == 2L, paste0("[", matstr[2L], "]"), "")
+    ensure_sympy()
 
-      o <- gsub("\\begin{matrix}", paste0("\\begin{", matstr[1L], "}", opt), o, fixed = TRUE)
-      o <- gsub("\\end{matrix}", paste0("\\end{", matstr[1L], "}"), o, fixed = TRUE)
+    ## cat("x:\n"); print(x)
+    if (!is.null(x$pyobj)) {
+        o <- get_sympy()$latex(x$pyobj)
+        
+        if (zero_as_dot) {
+                                        # Matrices
+            o <- gsub("([^0-9])0([^0-9])", "\\1.\\2", o)
+                                        # FIXME:
+                                        # Replaces e0 in matrix
+        }
+        
+        if (!is.null(matstr) && is.character(matstr) && length(matstr) >= 1L) { 
+            opt <- ifelse(length(matstr) == 2L, paste0("[", matstr[2L], "]"), "")
+            
+            o <- gsub("\\begin{matrix}", paste0("\\begin{", matstr[1L], "}", opt), o, fixed = TRUE)
+            o <- gsub("\\end{matrix}", paste0("\\end{", matstr[1L], "}"), o, fixed = TRUE)
+        }
+        
+        return(o)
     }
-    
-    return(o)
-  }
   
   # if (!is.null(x$pyobj)) {
   #   py <- get_py()
@@ -270,11 +271,14 @@ tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
 
 #' Export object to TeX
 #'
-#' @param x A list of `caracas_symbol`s and other (simple) R objects (atomics, dataframes, matrices)
+#' @param \dots Objects to be put in tex for. Can be `caracas_symbol`s
+#'     and other (simple) R objects (atomics, dataframes, matrices).
+#' @param x A such objects described above.
 #' @param zero_as_dot Print zero as dots
-#' @param matstr Replace `\begin{matrix}` with another environment, e.g. `pmatrix`. 
-#' If vector of length two, the second element is an optional argument.
-#' @param \dots Other arguments passed along
+#' @param matstr Replace `\begin{matrix}` with another environment,
+#'     e.g. `pmatrix`.  If vector of length two, the second element is
+#'     an optional argument.
+#' 
 #'
 #' @concept output
 #'
@@ -283,42 +287,44 @@ tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
 #'   X <- matrix_sym(4,2,"a")
 #'   b <- vector_sym(2,"b")
 #'   y <- vector_sym(4,"y")
-#'   tex_list(list(y, "=", X, b))
+#'   tex_list(y, "=", X, b)
+#'   tex_list(x=list(y, "=", X, b))
 #'
 #'   M <- iris[1:3, 1:2]
-#'   tex_list(list(M, "+", M, "=", M + M))
+#'   tex_list(M, "+", M, "=", M + M)
+#'   tex_list(x=list(M, "+", M, "=", M + M))
+#' 
 #' }
 #' @export
-tex_list <- function(x, zero_as_dot=FALSE, matstr=NULL, ...){
+tex_list <- function(..., x=NULL, zero_as_dot=FALSE, matstr=NULL){
     ensure_sympy()
+    x <- c(list(...), x)
+    ## xx <<- x
+    ## print(x)
     if (!is.list(x)){
         stop("'x' must be a list")
     }
-    if (any(sapply(x, is.list))){
-        x <- unlist(x, recursive=FALSE)
-    }
-        
-    o <- sapply(x, function(z){
-        if (is_sym(z)){
-            tex(z, zero_as_dot=zero_as_dot, matstr=matstr, ...)
-        } else {
-            if (inherits(z, c("matrix", "data.frame"))){
-                tex(as_sym(as.matrix(z)),zero_as_dot=zero_as_dot, matstr=matstr, ...)
-            } else {
-                if (is.atomic(z)){
-                    z
-                }
-                else{
-                    stop("Unexpected input")
-                }
-            }
-            
-        }
-        })
-        
-    
-    out <- paste0(o, collapse="\n")
 
+    ## cat("x:\n"); print(x)
+    o <- sapply(x, function(z){
+        ## cat("z:\n"); print(z)
+
+        if (inherits(z, c("matrix", "data.frame"))){
+            z <- as_sym(as.matrix(z))
+        }
+ 
+        if (is_sym(z)){
+            return(tex(z, zero_as_dot=zero_as_dot, matstr=matstr))
+        }
+
+        if (is.atomic(z)){
+            return(z)
+        }
+
+        stop("Unexpected input")
+        })
+           
+    out <- paste0(o, collapse="\n")
     out
 }
 
