@@ -309,6 +309,9 @@ tex_list <- function(..., x=NULL, zero_as_dot=FALSE, matstr=NULL){
     o <- sapply(x, function(z){
         ## cat("z:\n"); print(z)
 
+        if (inherits(z, "sparseMatrix")){
+            z <- as(z, "matrix")
+        }
         if (inherits(z, c("matrix", "data.frame"))){
             z <- as_sym(as.matrix(z))
         }

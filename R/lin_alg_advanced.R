@@ -460,6 +460,28 @@ QRdecomposition <- function(x) {
     return(do_la(x, "QR"))
 }
 
+## FIXME SH addition
+#' @rdname linalg
+#' @export
+QR <- function(x) {
+    return(do_la(x, "QR"))
+}
+
+## FIXME SH addition
+#' @rdname linalg
+#' @export
+QR_Q <- function(x) {
+    x$Q
+}
+
+## FIXME SH addition
+#' @rdname linalg
+#' @export
+QR_R <- function(x) {
+    x$R
+}
+
+
 
 #' @rdname linalg
 #' @export

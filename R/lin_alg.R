@@ -151,6 +151,14 @@ dim.caracas_symbol <- function(x) {
   return(c(rows, cols))
 }
 
+
+
+
+
+
+
+
+
 #' Dimensions of a caracas symbol
 #' 
 #' @param x caracas symbol
@@ -622,14 +630,15 @@ colspan <- function(x) {
 #'   rankMatrix_(X)
 #'   colspan(X)
 #' }
-#' 
+
+## FIXME SH addition. Not sure this is good idea
 #' @importFrom Matrix rankMatrix
 #' @export
 rankMatrix_ <- function(x, tol=NULL) {
   ensure_sympy()
   
   if (is.numeric(x)) {
-      Matrix::rankMatrix(x, tol=NULL)
+      c(Matrix::rankMatrix(x, tol=tol))
   } else {
       do_la(x, "rank")
   }
@@ -727,18 +736,27 @@ colSums_ <- function(x) {
 #' @concept linalg
 #' @rdname special_matrices
 zeros_sym <- function(nrow, ncol) {
-  as_sym(matrix(0, nrow=nrow, ncol=ncol))
+    if (missing(ncol)){
+        ncol <- nrow
+    }
+    as_sym(matrix(0, nrow=nrow, ncol=ncol))
 }
 
 #' @export
 #' @rdname special_matrices
 ones_sym <- function(nrow, ncol) {
+    if (missing(ncol)){
+        ncol <- nrow
+    }
   as_sym(matrix(1, nrow=nrow, ncol=ncol))
 }
 
 #' @export
 #' @rdname special_matrices
 eye_sym <- function(nrow, ncol) {
+    if (missing(ncol)){
+        ncol <- nrow
+    }
   if (nrow==ncol)
     return(diag_(1, nrow))
   m <- min(nrow, ncol)
@@ -778,6 +796,14 @@ diff_mat <- function(N, l="-1", d=1) {
 #' @name matrix_cross_product
 #' @param x,y caracas matrices
 #' @concept linalg
+#'
+#' @examples
+#' if (has_sympy()) {
+#'   s  <- as_sym("[[r1, r2, r3], [u1, u2, u3]]")
+#'   s2 <- apply(as_character_matrix(s), 2, function(x) (paste("1/(", x, ")")))
+#'   as_sym(s2)
+#' }
+
 #' 
 #' @export
 #' @rdname matrix_cross_product
@@ -793,6 +819,8 @@ crossprod_ <- function(x, y=NULL) {
     }
 }
 
+
+
 #' @export
 #' @rdname matrix_cross_product
 tcrossprod_ <- function(x, y=NULL) {
@@ -806,6 +834,29 @@ tcrossprod_ <- function(x, y=NULL) {
         x %*% t(y) 
   }
 }
+
+## #' @method tcrossprod caracas_symbol
+## #' @export
+## #' @rdname matrix_cross_product
+## tcrossprod.caracas_symbol <- function(x, y=NULL) {
+##     ensure_sympy()
+##     stopifnot_matrix(x)    
+    
+##     if (is.null(y)) {
+##         x %*% t(x) 
+##     } else {
+##         stopifnot_matrix(y)        
+##         x %*% t(y) 
+##   }
+## }
+
+
+
+
+
+
+
+
 
 
 #' Get basis
