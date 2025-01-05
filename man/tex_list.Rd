@@ -4,17 +4,19 @@
 \alias{tex_list}
 \title{Export object to TeX}
 \usage{
-tex_list(x, zero_as_dot = FALSE, matstr = NULL, ...)
+tex_list(..., x = NULL, zero_as_dot = FALSE, matstr = NULL)
 }
 \arguments{
-\item{x}{A list of \code{caracas_symbol}s and other (simple) R objects (atomics, dataframes, matrices)}
+\item{\dots}{Objects to be put in tex for. Can be \code{caracas_symbol}s
+and other (simple) R objects (atomics, dataframes, matrices).}
+
+\item{x}{A such objects described above.}
 
 \item{zero_as_dot}{Print zero as dots}
 
-\item{matstr}{Replace \verb{\\begin\{matrix\}} with another environment, e.g. \code{pmatrix}.
-If vector of length two, the second element is an optional argument.}
-
-\item{\dots}{Other arguments passed along}
+\item{matstr}{Replace \verb{\\begin\{matrix\}} with another environment,
+e.g. \code{pmatrix}.  If vector of length two, the second element is
+an optional argument.}
 }
 \description{
 Export object to TeX
@@ -24,7 +26,13 @@ if (has_sympy()) {
   X <- matrix_sym(4,2,"a")
   b <- vector_sym(2,"b")
   y <- vector_sym(4,"y")
-  tex_list(list(y, "=", X, b))
+  tex_list(y, "=", X, b)
+  tex_list(x=list(y, "=", X, b))
+
+  M <- iris[1:3, 1:2]
+  tex_list(M, "+", M, "=", M + M)
+  tex_list(x=list(M, "+", M, "=", M + M))
+
 }
 }
 \concept{output}

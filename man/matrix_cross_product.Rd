@@ -16,4 +16,12 @@ tcrossprod_(x, y = NULL)
 \description{
 Matrix cross product
 }
+\examples{
+if (has_sympy()) {
+  s  <- as_sym("[[r1, r2, r3], [u1, u2, u3]]")
+  s2 <- apply(as_character_matrix(s), 2, function(x) (paste("1/(", x, ")")))
+  as_sym(s2)
+}
+
+}
 \concept{linalg}

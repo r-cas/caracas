@@ -16,6 +16,9 @@
 \alias{pinv}
 \alias{rref}
 \alias{QRdecomposition}
+\alias{QR}
+\alias{QR_Q}
+\alias{QR_R}
 \alias{LUdecomposition}
 \alias{chol.caracas_symbol}
 \alias{svd_}
@@ -50,6 +53,12 @@ pinv(x)
 rref(x)
 
 QRdecomposition(x)
+
+QR(x)
+
+QR_Q(x)
+
+QR_R(x)
 
 LUdecomposition(x)
 
