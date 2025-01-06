@@ -1,0 +1,188 @@
+---
+title: "16 - Mixed models with `caracas`"
+author: Mikkel Meyer Andersen and Søren Højsgaard
+date: "`r date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{16 - Mixed models with `caracas`}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+```{r, message=FALSE, echo=FALSE}
+library(caracas)
+##packageVersion("caracas")
+```
+
+```{r}
+if (!has_sympy()) {
+  # SymPy not available, so the chunks shall not be evaluated
+  knitr::opts_chunk$set(eval = FALSE)
+  
+  inline_code <- function(x) {
+    deparse(substitute(x))
+  }
+}
+```
+
+This vignette is based on `caracas` version 
+`r packageVersion("caracas")`. `caracas` is avavailable on CRAN at
+[https://cran.r-project.org/package=caracas] and on github at 
+[https://github.com/r-cas/caracas].
+
+# Linear mixed model
+
+A linear mixed model can be written in the form:
+
+$$
+y = Xb + Zu + e
+$$
+
+Here $X$ is a model matrix and $b$ is a corresponding vector of
+regression coefficients. Also $Z$ is a model matrix and $u$ is a
+corresponding vector of random effects. Lastly, $e$ is also a vector
+of random effects. Because there are two random effects ($u$ and $e$)
+such models are often called mixed models.
+
+It is assumed that $u$ and $e$ are independent and that $u \sim N(0,
+G)$ and $e \sim N(0, R)$.
+ 
+Consequently 
+
+$$
+E(y)=Xb, \quad Var(y)=ZGZ'+R.
+$$
+
+For reference to the code
+below, let $V=ZGZ'+R$.
+
+We illustrate fitting a mixed model based on a subset of the shoes
+data available, e.g. in the MASS and doBy packages. We also compare
+the results with the output from lmer() if the lme4 package is
+installed.
+
+
+```{r}
+shoes_long <- data.frame(
+  stringsAsFactors = FALSE,
+  footA = c("L", "L", "L", "L", "R", "R", "L", "L"),
+  type = c("A", "B", "A", "B", "A", "B", "A", "B"),
+  wear = c(13.2, 14, 8.2, 8.8, 10.9, 11.2, 14.3, 14.2),
+  boy = as.factor(c("1", "1", "2", "2", "3", "3", "4", "4")))
+
+yy <- shoes_long$wear
+XX <- model.matrix(~type, data=shoes_long) |> head(10)
+ZZ <- model.matrix(~-1+boy, data=shoes_long) |> head(10)
+yy; XX; ZZ
+```
+
+# Fitting model with lmer() - if available
+
+```{r}
+if (require(lme4)){
+    lmm_fit  <- lmer(wear ~ type + (1|boy), data=shoes_long, REML=FALSE)
+    print(VarCorr(lmm_fit))
+    print(fixef(lmm_fit))
+    print(vcov(lmm_fit))
+    ##XX <- getME(lmm_fit, "X") |> head(10)
+    ##ZZ <- getME(lmm_fit, "Z") |> as.matrix()
+}
+```
+
+# Fitting model with `caracas`
+
+We define the following symbols in caracas:
+
+```{r}
+yy_ <- as_sym(yy)
+XX_ <- as_sym(XX)
+ZZ_ <- as_sym(ZZ)
+bb_ <- vector_sym(2, "b")
+def_sym(tau2, sigma2)
+yy_
+XX_ 
+ZZ_
+
+## Covariance matrices for random effects
+GG_  <- diag_("tau2", ncol(ZZ))
+RR_  <- diag_("sigma2", nrow(ZZ))
+GG_
+RR_
+```
+
+```{r}
+## Variance etc of y
+VV_  <- ZZ_ %*% GG_ %*% t(ZZ_) + RR_
+VVi_ <- solve(VV_)
+detVV_ <- do_la(VV_, "det") ## Hvorfor virker det() ikke?
+
+## For known value of variance Var(y), the MLE for b is
+bb_hat_ <- solve(t(XX_) %*% VVi_ %*% XX_, t(XX_) %*% VVi_) %*% yy_
+bb_hat_ <- bb_hat_ |> simplify()
+bb_hat_
+
+## The profile likelihood
+resid0_ <- yy_ - XX_ %*% bb_hat_
+resid0_ <- resid0_ |> simplify()
+resid0_
+QQ0_ <- t(resid0_) %*% VVi_ %*% resid0_
+QQ0_ <- QQ0_  |> simplify()
+QQ0_
+plogL_ <- -0.5 * (log(detVV_) + QQ0_)
+plogL_func <- as_func(plogL_, vec_arg = T)
+
+## Now optimize
+fit <- optim(c(.5, .1), plogL_func, method="L-BFGS-B", control=list(fnscale=-1), hessian=TRUE)
+var_par <- fit$par
+var_par
+names(var_par) <- c("sigma2", "tau2") # 2.27, 0.24
+var_par 
+sqrt(var_par) ## Same as lmer
+
+## Substitute variance parameters into expression for b
+bb_hat <- subs(bb_hat_, as.list(var_par))
+bb_hat ## 11.64 0.04
+
+## The full likelihood
+resid1_ <- yy_ - XX_ %*% bb_
+QQ1_ <- t(resid1_) %*% VVi_ %*% resid1_
+QQ1_ <- QQ1_  |> simplify()
+QQ1_
+logL_ <- -0.5 * (log(detVV_) + QQ1_)
+logL_func <- as_func(logL_, vec_arg = T)
+
+H_ <- der2(logL_, bb_) 
+H  <- subs(H_, as.list(var_par))
+J  <- solve(-H)
+as_expr(J) 
+```
+
+# In conclusion
+
+```{r}
+as_expr(var_par)
+as.numeric(as_expr(bb_hat))
+as_expr(J)
+
+if (require(lme4)){
+    print(VarCorr(lmm_fit))
+    print(fixef(lmm_fit))
+    print(vcov(lmm_fit))
+}
+```
+
+
+
