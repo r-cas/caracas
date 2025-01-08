@@ -285,41 +285,64 @@ mat_pow <- function(x, pow = "1") {
 }
 
 
+## ' Matrix diagonal
+## '
+## ' @param x Object `x`
+## ' @param \dots Passed on
+## ' 
+## ' @concept linalg
+## ' 
+## ' @export
+
+
+## #' Matrix diagonal
+## #' 
+## #' @param x Object `x`
+## #' @param \dots Not used
+## #' 
+## #' @concept linalg
+## #' 
+## #' @export
+## diag.caracas_symbol <- function(x, ...) {
+##   ensure_sympy()
+##   stopifnot_symbol(x)
+##   stopifnot_matrix(x)  
+  
+##   y <- eval_to_symbol(x$pyobj$diagonal())
+  
+##   return(y)
+## }
+
 #' Matrix diagonal
-#'
+#' 
 #' @param x Object `x`
-#' @param \dots Passed on
+## #' @param \dots Not used
 #' 
 #' @concept linalg
-#' 
+#' @importFrom Matrix diag
+#' @method diag caracas_symbol
 #' @export
-diag <- function(x, ...) {
-  UseMethod("diag")
-}
+setMethod(
+  "diag",
+  signature(x = "caracas_symbol"),
+  function(x) {
+      ensure_sympy()
+      stopifnot_symbol(x)
+      stopifnot_matrix(x)  
+      y <- eval_to_symbol(x$pyobj$diagonal())
+      return(y)
+  }
+)
 
-#' @export
-diag.default <- function(x, ...) {
-  return(base::diag(x, ...))
-}
 
+## diag <- function(x, ...) {
+##   UseMethod("diag")
+## }
 
-#' Matrix diagonal
-#' 
-#' @param x Object `x`
-#' @param \dots Not used
-#' 
-#' @concept linalg
-#' 
-#' @export
-diag.caracas_symbol <- function(x, ...) {
-  ensure_sympy()
-  stopifnot_symbol(x)
-  stopifnot_matrix(x)  
-  
-  y <- eval_to_symbol(x$pyobj$diagonal())
-  
-  return(y)
-}
+## #' @export
+## diag.default <- function(x, ...) {
+##   return(base::diag(x, ...))
+## }
 
 
 #' Replace matrix diagonal
@@ -835,20 +858,29 @@ tcrossprod_ <- function(x, y=NULL) {
   }
 }
 
-## #' @method tcrossprod caracas_symbol
-## #' @export
-## #' @rdname matrix_cross_product
-## tcrossprod.caracas_symbol <- function(x, y=NULL) {
-##     ensure_sympy()
-##     stopifnot_matrix(x)    
-    
-##     if (is.null(y)) {
-##         x %*% t(x) 
-##     } else {
-##         stopifnot_matrix(y)        
-##         x %*% t(y) 
-##   }
-## }
+#' @importFrom Matrix crossprod
+#' @method crossprod caracas_symbol
+#' @export
+#' @rdname matrix_cross_product
+setMethod(
+  "crossprod",
+  signature(x = "caracas_symbol", y = "missing"),
+  function(x, y) {
+    crossprod_(x, y)
+  }
+)
+
+#' @importFrom Matrix tcrossprod
+#' @method tcrossprod caracas_symbol
+#' @export
+#' @rdname matrix_cross_product
+setMethod(
+  "tcrossprod",
+  signature(x = "caracas_symbol", y = "missing"),
+  function(x, y) {
+    tcrossprod_(x, y)
+  }
+)
 
 
 

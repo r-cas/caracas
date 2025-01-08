@@ -6,7 +6,7 @@
 #' 
 #' @examples 
 #' if (has_sympy()) {
-#'   A <- matrix(c("a", "0", "0", "1"), 2, 2) %>% as_sym()
+#'   A <- matrix(c("a", "0", "0", "1"), 2, 2) |> as_sym()
 #'   
 #'   do_la(A, "QR")
 #'   QRdecomposition(A)
@@ -26,7 +26,7 @@
 #'   eval(U_expr, list(a = 3+2i))
 #'   
 #'   b <- symbol("b", real = TRUE)
-#'   B <- matrix(c("b", "0", "0", "1"), 2, 2) %>% as_sym(declare_symbols = FALSE)
+#'   B <- matrix(c("b", "0", "0", "1"), 2, 2) |> as_sym(declare_symbols = FALSE)
 #'   svd_(B)
 #'
 #'   do_la(A, "eigenval")
@@ -258,7 +258,7 @@ finalise_rref <- function(vals) {
 #'     print(system.time(inv(m, method="yac")))  ## Use Ryacas
 #'   }
 #' 
-#'   A <- matrix(c("a", "b", "c", "d"), 2, 2) %>% as_sym()
+#'   A <- matrix(c("a", "b", "c", "d"), 2, 2) |> as_sym()
 #'   evec <- eigenvec(A)
 #'   evec
 #'   evec1 <- evec[[1]]$eigvec
@@ -416,7 +416,7 @@ inv_yac <- function(x) {
 
     A_ <- as_character_matrix(x)
     Ay <- Ryacas::as_y(A_)
-    Ai <- Ay %>% Ryacas::y_fn("Inverse") %>% Ryacas::yac_str()
+    Ai <- Ay |> Ryacas::y_fn("Inverse") |> Ryacas::yac_str()
     B <- as_sym(Ryacas::as_r(Ai))
     return(B)
 }
@@ -447,11 +447,6 @@ pinv <- function(x) {
     return(do_la(x, "pinv"))
 }
 
-#' @rdname linalg
-#' @export
-rref <- function(x) {
-    return(do_la(x, "rref"))
-}
 
 
 #' @rdname linalg
@@ -460,26 +455,94 @@ QRdecomposition <- function(x) {
     return(do_la(x, "QR"))
 }
 
-## FIXME SH addition
-#' @rdname linalg
+#' @importFrom Matrix qr
+#' @method qr caracas_symbol
 #' @export
-QR <- function(x) {
-    return(do_la(x, "QR"))
-}
+#' @rdname linalg
+setMethod(
+  "qr",
+  signature(x = "caracas_symbol"),
+  function(x) {
+      out <- QRdecomposition(x)
+      out$rank <- ncol(out$Q)
+      class(out) <- c("QRdecomposition", "list")
+      out
+  }
+)
 
-## FIXME SH addition
-#' @rdname linalg
-#' @export
-QR_Q <- function(x) {
-    x$Q
-}
+setOldClass("QRdecomposition")
 
-## FIXME SH addition
-#' @rdname linalg
+#' @importFrom Matrix qr.Q
+#' @param qr A QRdecomposition object.
+#' @method qr caracas_symbol
 #' @export
-QR_R <- function(x) {
-    x$R
-}
+#' @rdname linalg
+setMethod(
+  "qr.Q",
+  signature(qr = "QRdecomposition"),
+  function(qr) {
+    qr$Q
+  }
+)
+
+#' @importFrom Matrix qr.R
+#' @method qr caracas_symbol
+#' @export
+#' @rdname linalg
+setMethod(
+  "qr.R",
+  signature(qr = "QRdecomposition"),
+  function(qr) {
+    qr$R
+  }
+)
+
+#' @importFrom Matrix determinant
+#' @method x caracas_symbol
+#' @param logarithm logical.
+#' @export
+#' @rdname linalg
+setMethod(
+  "determinant",
+  signature(x = "caracas_symbol", logarithm="ANY"),
+  function(x, logarithm=TRUE, ...) {
+      if (logarithm){
+          return(log(do_la(x, "det")))          
+      } else {
+          return(do_la(x, "det"))          
+      }
+  }
+)
+
+
+
+
+
+
+
+
+
+
+## ## FIXME SH addition
+## #' @rdname linalg
+## #' @export
+## QR <- function(x) {
+##     return(do_la(x, "QR"))
+## }
+
+## ## FIXME SH addition
+## #' @rdname linalg
+## #' @export
+## QR_Q <- function(x) {
+##     x$Q
+## }
+
+## ## FIXME SH addition
+## #' @rdname linalg
+## #' @export
+## QR_R <- function(x) {
+##     x$R
+## }
 
 
 

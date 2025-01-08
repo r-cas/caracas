@@ -319,9 +319,9 @@ vars_to_array <- function(vars) {
 #'   H
 #'   dim(H)
 #'   
-#'   g %>% 
-#'     der(list(x, y), simplify = FALSE) %>% 
-#'     der(list(x, y), simplify = FALSE) %>% 
+#'   g |> 
+#'     der(list(x, y), simplify = FALSE) |> 
+#'     der(list(x, y), simplify = FALSE) |> 
 #'     der(list(x, y), simplify = FALSE)
 #' }
 #' 
@@ -387,7 +387,7 @@ der2 <- function(expr, vars, simplify = TRUE) {
 #'   f <- cos(x)
 #'   ft_with_O <- taylor(f, x0 = 0, n = 4+1)
 #'   ft_with_O
-#'   ft_with_O %>% drop_remainder() %>% as_expr()
+#'   ft_with_O |> drop_remainder() |> as_expr()
 #' }
 #' 
 #' @seealso [taylor()]
@@ -415,7 +415,7 @@ drop_remainder <- function(x) {
 #'   f <- cos(x)
 #'   ft_with_O <- taylor(f, x0 = 0, n = 4+1)
 #'   ft_with_O
-#'   ft_with_O %>% drop_remainder() %>% as_expr()
+#'   ft_with_O |> drop_remainder() |> as_expr()
 #' }
 #' 
 #' @seealso [drop_remainder()]
@@ -426,7 +426,7 @@ drop_remainder <- function(x) {
 taylor <- function(f, x0 = 0, n = 6) {
   ensure_sympy()
   
-  ft <- f %>% sympy_func("series", x0 = x0, n = n)
+  ft <- f |> sympy_func("series", x0 = x0, n = n)
   
   return(ft)
 }

@@ -295,6 +295,7 @@ tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
 #'   tex_list(x=list(M, "+", M, "=", M + M))
 #' 
 #' }
+#' @importFrom methods as
 #' @export
 tex_list <- function(..., x=NULL, zero_as_dot=FALSE, matstr=NULL){
     ensure_sympy()

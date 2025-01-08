@@ -107,15 +107,34 @@ apart <- function(x) {
 #' 
 #' @concept simplify
 #'
+#' @importFrom Matrix expand
+#' @method expand caracas_symbol
 #' @export
-expand <- function(x, ...) {
-  stopifnot_symbol(x)
-  ensure_sympy()
+#' @rdname simplify
+setMethod(
+  "expand",
+  signature(x = "caracas_symbol"),
+  function(x, ...) {
+      ensure_sympy()
+      stopifnot_symbol(x)      
+      z <- get_sympy()$expand(x$pyobj, ...)
+      v <- construct_symbol_from_pyobj(z)
+      return(v)
+  }
+)
+
+
+## expand <- function(x, ...) {
+##   stopifnot_symbol(x)
+##   ensure_sympy()
   
-  z <- get_sympy()$expand(x$pyobj, ...)
-  v <- construct_symbol_from_pyobj(z)
-  return(v)
-}
+##   z <- get_sympy()$expand(x$pyobj, ...)
+##   v <- construct_symbol_from_pyobj(z)
+##   return(v)
+## }
+
+
+
 
 ## FIXME: There is also a factor_list() function
 #' Expand expression
