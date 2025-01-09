@@ -189,7 +189,7 @@ def_sym(x)
 f <- cos(x)
 ft_with_O <- taylor(f, x0 = 0, n = 4+1)
 ft_with_O
-ft_with_O %>% drop_remainder() %>% as_expr()
+ft_with_O |> drop_remainder() |> as_expr()
 ```
 
 
@@ -214,7 +214,7 @@ rbind(B, B)
 ```
 
 ```{r}
-det(B)
+determinant(B)
 QRdecomposition(B)
 ```
 
@@ -355,7 +355,7 @@ Below we give a brief example of assumptions.
 First consider the Cholesky decomposition of a matrix:
 
 ```{r}
-A <- matrix(c("x+1", 1, 1, 1), 2, 2) %>% as_sym()
+A <- matrix(c("x+1", 1, 1, 1), 2, 2) |> as_sym()
 A
 ```
 

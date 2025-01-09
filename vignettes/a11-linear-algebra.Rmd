@@ -54,7 +54,7 @@ packageVersion("caracas")`. `caracas` is avavailable on CRAN at
 We now show different ways to create a symbolic matrix:
 
 ```{r}
-A <- matrix(c("a", "b", "0", "1"), 2, 2) %>% as_sym()
+A <- matrix(c("a", "b", "0", "1"), 2, 2) |> as_sym()
 A
 A <- matrix_(c("a", "b", "0", "1"), 2, 2) # note the '_' postfix
 A
@@ -145,7 +145,7 @@ this section.
 ## QR decomposition
 
 ```{r}
-A <- matrix(c("a", "0", "0", "1"), 2, 2) %>% as_sym()
+A <- matrix(c("a", "0", "0", "1"), 2, 2) |> as_sym()
 A
 qr_res <- QRdecomposition(A)
 qr_res$Q
@@ -212,7 +212,7 @@ do_la(A, "rank")
 ### Cofactor
 
 ```{r}
-A <- matrix(c("a", "b", "0", "1"), 2, 2) %>% as_sym()
+A <- matrix(c("a", "b", "0", "1"), 2, 2) |> as_sym()
 A
 do_la(A, "cofactor", 0, 1)
 do_la(A, "cofactor_matrix")
@@ -252,7 +252,7 @@ B_rref
 ### Column space, row space and null space
 
 ```{r}
-B <- matrix(c(1, 3, 0, -2, -6, 0, 3, 9, 6), nrow = 3) %>% as_sym()
+B <- matrix(c(1, 3, 0, -2, -6, 0, 3, 9, 6), nrow = 3) |> as_sym()
 B
 columnspace(B)
 rowspace(B)
@@ -279,31 +279,31 @@ singular_values(B)
 <!-- #  -->
 <!-- # #do_la(B %*% t(B), "left_eigenvects") -->
 <!-- #  -->
-<!-- # U <- eigenvec(B %*% t(B)) %>% lapply(function(v) v$eigvec) %>% do.call(cbind, .) -->
-<!-- # V <- eigenvec(t(B) %*% B) %>% lapply(function(v) v$eigvec) %>% do.call(cbind, .) -->
+<!-- # U <- eigenvec(B %*% t(B)) |> lapply(function(v) v$eigvec) |> do.call(cbind, .) -->
+<!-- # V <- eigenvec(t(B) %*% B) |> lapply(function(v) v$eigvec) |> do.call(cbind, .) -->
 <!-- #  -->
 <!-- # d <- singular_values(B)[seq_len(ncol(U))] -->
-<!-- # D <- diag(ncol(U)) %>% as_sym() -->
+<!-- # D <- diag(ncol(U)) |> as_sym() -->
 <!-- # for (i in seq_along(d)) { -->
 <!-- #   D[i, i] <- as.character(d[[i]]) -->
 <!-- # } -->
 <!-- #  -->
-<!-- # d <- singular_values(B) %>% do.call(cbind, .) -->
+<!-- # d <- singular_values(B) |> do.call(cbind, .) -->
 <!-- # D <- as_diag(d) -->
 <!-- #  -->
 <!-- #  -->
-<!-- # r_svd <- as_expr(B) %>% svd() -->
+<!-- # r_svd <- as_expr(B) |> svd() -->
 <!-- #  -->
 <!-- # r_svd$d -->
-<!-- # d %>% as_expr() -->
+<!-- # d |> as_expr() -->
 <!-- #  -->
 <!-- # r_svd$u -->
-<!-- # U %>% as_expr() -->
+<!-- # U |> as_expr() -->
 <!-- #  -->
 <!-- # r_svd$v -->
-<!-- # V %>% as_expr() -->
+<!-- # V |> as_expr() -->
 <!-- #  -->
 <!-- # r_svd$u %*% diag(r_svd$d) %*% t(r_svd$v) -->
-<!-- # U %*% D %*% t(V) %>% as_expr() -->
+<!-- # U %*% D %*% t(V) |> as_expr() -->
 <!-- ``` -->
 

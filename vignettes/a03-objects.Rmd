@@ -58,8 +58,8 @@ a / b
 
 A text representation of a symbol can be found as:
 ```{r}
-a %>% print.default()
-a %>% as.character()
+a |> print.default()
+a |> as.character()
 ```
 
 Usually, the best practice is to assign R symbols to SymPy variables of the same name. To avoid confusion, symbol names and Python variable names will always coincide. 
@@ -101,46 +101,46 @@ B <- as_sym(B_)
 
 Above, `r` is a $4 \times 1$ matrix, while e.g. `u` is an atom:
 ```{r}
-m %>% symbol_class()
-u %>% symbol_class()
+m |> symbol_class()
+u |> symbol_class()
 ```
 
 We can coerce between different "classes" (we quote the word because it is not a class system as e.g. those known from R)
 A text representation of the variables are:
 ```{r}
-m %>% as.character()
-u %>% as.character()
+m |> as.character()
+u |> as.character()
 ```
 
 While not often needed that are also lists and vectors in Python. In `caracas` they are created by coercion:
 
 ```{r}
-u %>% to_list()
-u %>% to_vector()
-m %>% to_list()
-m %>% to_vector()
+u |> to_list()
+u |> to_vector()
+m |> to_list()
+m |> to_vector()
 ```
 
 The corresponding text representations are:
 ```{r}
-u %>% to_list() %>% as.character()
-u %>% to_vector() %>% as.character()
-m %>% to_list() %>% as.character()
-m %>% to_vector() %>% as.character()
+u |> to_list() |> as.character()
+u |> to_vector() |> as.character()
+m |> to_list() |> as.character()
+m |> to_vector() |> as.character()
 ```
 
 Likewise:
 ```{r}
-m %>% to_matrix()
-u %>% to_matrix()
+m |> to_matrix()
+u |> to_matrix()
 ```
 
 ## Indexing
 
 Let 
 ```{r}
-v <- m %>% to_vector()
-l <- m %>% to_list()
+v <- m |> to_vector()
+l <- m |> to_list()
 V <- matrix_sym(2, 2)
 ```
 
@@ -173,11 +173,11 @@ sol[[2]]$x
 
 dx <- der(eq, x)
 dx
-dx %>% symbol_class()
+dx |> symbol_class()
 
 dxy <- der(eq, c(x, y))
 dxy
-dxy %>% symbol_class()
+dxy |> symbol_class()
 
 subs(eq, x, y)
 ```
