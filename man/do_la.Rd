@@ -21,7 +21,7 @@ Do linear algebra operation
 }
 \examples{
 if (has_sympy()) {
-  A <- matrix(c("a", "0", "0", "1"), 2, 2) \%>\% as_sym()
+  A <- matrix(c("a", "0", "0", "1"), 2, 2) |> as_sym()
   
   do_la(A, "QR")
   QRdecomposition(A)
@@ -41,7 +41,7 @@ if (has_sympy()) {
   eval(U_expr, list(a = 3+2i))
   
   b <- symbol("b", real = TRUE)
-  B <- matrix(c("b", "0", "0", "1"), 2, 2) \%>\% as_sym(declare_symbols = FALSE)
+  B <- matrix(c("b", "0", "0", "1"), 2, 2) |> as_sym(declare_symbols = FALSE)
   svd_(B)
 
   do_la(A, "eigenval")

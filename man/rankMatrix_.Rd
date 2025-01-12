@@ -21,6 +21,5 @@ if (has_sympy()) {
   rankMatrix_(X)
   colspan(X)
 }
-
 }
 \concept{linalg}

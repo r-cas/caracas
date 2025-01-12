@@ -18,7 +18,7 @@ if (has_sympy()) {
   f <- cos(x)
   ft_with_O <- taylor(f, x0 = 0, n = 4+1)
   ft_with_O
-  ft_with_O \%>\% drop_remainder() \%>\% as_expr()
+  ft_with_O |> drop_remainder() |> as_expr()
 }
 
 }

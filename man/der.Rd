@@ -37,9 +37,9 @@ if (has_sympy()) {
   H
   dim(H)
   
-  g \%>\% 
-    der(list(x, y), simplify = FALSE) \%>\% 
-    der(list(x, y), simplify = FALSE) \%>\% 
+  g |> 
+    der(list(x, y), simplify = FALSE) |> 
+    der(list(x, y), simplify = FALSE) |> 
     der(list(x, y), simplify = FALSE)
 }
 

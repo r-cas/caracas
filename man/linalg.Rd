@@ -14,11 +14,11 @@
 \alias{eigenvec}
 \alias{GramSchmidt}
 \alias{pinv}
-\alias{rref}
 \alias{QRdecomposition}
-\alias{QR}
-\alias{QR_Q}
-\alias{QR_R}
+\alias{qr,caracas_symbol-method}
+\alias{qr.Q,QRdecomposition-method}
+\alias{qr.R,QRdecomposition-method}
+\alias{determinant,caracas_symbol,ANY-method}
 \alias{LUdecomposition}
 \alias{chol.caracas_symbol}
 \alias{svd_}
@@ -50,15 +50,15 @@ GramSchmidt(x)
 
 pinv(x)
 
-rref(x)
-
 QRdecomposition(x)
 
-QR(x)
+\S4method{qr}{caracas_symbol}(x)
 
-QR_Q(x)
+\S4method{qr.Q}{QRdecomposition}(qr)
 
-QR_R(x)
+\S4method{qr.R}{QRdecomposition}(qr)
+
+\S4method{determinant}{caracas_symbol,ANY}(x, logarithm = TRUE, ...)
 
 LUdecomposition(x)
 
@@ -78,6 +78,10 @@ trace_(x)
 \item{method}{The default works by Gaussian elimination.  The
 alternatives are $LU$ decomposition (\code{lu}), the cofactor
 method (\code{cf}), and \code{Ryacas} (\code{yac}).}
+
+\item{qr}{A QRdecomposition object.}
+
+\item{logarithm}{logical.}
 
 \item{...}{Auxillary arguments.}
 }
@@ -114,7 +118,7 @@ if (has_sympy()) {
     print(system.time(inv(m, method="yac")))  ## Use Ryacas
   }
 
-  A <- matrix(c("a", "b", "c", "d"), 2, 2) \%>\% as_sym()
+  A <- matrix(c("a", "b", "c", "d"), 2, 2) |> as_sym()
   evec <- eigenvec(A)
   evec
   evec1 <- evec[[1]]$eigvec

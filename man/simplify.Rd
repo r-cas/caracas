@@ -2,14 +2,32 @@
 % Please edit documentation in R/simplify.R
 \name{simplify}
 \alias{simplify}
+\alias{expand,caracas_symbol-method}
 \title{Simplify expression}
 \usage{
 simplify(x)
+
+\S4method{expand}{caracas_symbol}(x, ...)
 }
 \arguments{
 \item{x}{A \code{caracas_symbol}}
+
+\item{\dots}{Pass on to SymPy's expand, e.g. \code{force = TRUE}}
 }
 \description{
 Simplify expression
+
+Expand expression
+}
+\examples{
+if (has_sympy()) {
+  def_sym(x)
+  y <- log(exp(x))
+  simplify(y)
+  expand(simplify(y))
+  expand(simplify(y), force = TRUE)
+  expand_log(simplify(y))
+}
+
 }
 \concept{simplify}

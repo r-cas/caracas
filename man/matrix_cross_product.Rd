@@ -4,11 +4,17 @@
 \alias{matrix_cross_product}
 \alias{crossprod_}
 \alias{tcrossprod_}
+\alias{crossprod,caracas_symbol,missing-method}
+\alias{tcrossprod,caracas_symbol,missing-method}
 \title{Matrix cross product}
 \usage{
 crossprod_(x, y = NULL)
 
 tcrossprod_(x, y = NULL)
+
+\S4method{crossprod}{caracas_symbol,missing}(x, y)
+
+\S4method{tcrossprod}{caracas_symbol,missing}(x, y)
 }
 \arguments{
 \item{x, y}{caracas matrices}
