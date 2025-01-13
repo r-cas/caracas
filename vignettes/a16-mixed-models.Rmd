@@ -25,6 +25,7 @@ options("digits"=4)
 
 ```{r, message=FALSE, echo=FALSE}
 library(caracas)
+library(Matrix)
 ##packageVersion("caracas")
 ```
 
@@ -43,6 +44,8 @@ This vignette is based on `caracas` version
 `r packageVersion("caracas")`. `caracas` is avavailable on CRAN at
 [https://cran.r-project.org/package=caracas] and on github at 
 [https://github.com/r-cas/caracas].
+
+
 
 # Linear mixed model
 
@@ -66,6 +69,13 @@ $$
 E(y)=\mu=Xb, \quad Var(y) = V(\theta) =ZG(\theta)Z'+R(\theta).
 $$
 
+We illustrate fitting a mixed model based on a subset of the shoes
+data available, e.g. in the MASS and doBy packages. We also compare
+the results with the output from lmer() if the lme4 package is
+installed and with gls() if the nlme package is installed. 
+
+
+## The likelihood
 
 The log-likelihood is
 
@@ -86,10 +96,8 @@ plogL(\theta) = - \frac 1 2 (\log|V(\theta)| + (y-X\hat b(\theta))'V(\theta)^{-1
 $$
 
 
-We illustrate fitting a mixed model based on a subset of the shoes
-data available, e.g. in the MASS and doBy packages. We also compare
-the results with the output from lmer() if the lme4 package is
-installed. All caracas symbols are postfixed with an underscore.
+
+## Shoes data
 
 ```{r}
 shoes_long <- data.frame(
@@ -109,13 +117,14 @@ Z |> head()
 
 # Fitting model with `caracas`
 
-We define the following symbols in caracas:
+We define the following symbols in caracas. All caracas symbols are postfixed with an underscore.
+
 
 ```{r}
 y_ <- as_sym(y)
 X_ <- as_sym(X)
 Z_ <- as_sym(Z)
-b_ <- vector_sym(2, "b")
+b_ <- vector_sym(ncol(X_), "b")
 def_sym(tau2, sigma2)
 ```
 
@@ -130,7 +139,7 @@ So for this example, $\theta=(\tau, \sigma)$. The variance of $y$ is
 ```{r}
 ## Variance etc of y
 V_  <- Z_ %*% G_ %*% t(Z_) + R_
-Vi_ <- solve(V_)
+Vi_ <- inv_block(V_)
 detV_ <- determinant(V_, log=FALSE)
 ```
 
@@ -139,15 +148,28 @@ $$
 `r tex_list("G=", G_, ", R=", R_, zero_as_dot=T)`
 $$
 
+The first blocks of $V$ and $V^{-1}$ are:
+
 $$
-`r tex_list("V=", V_, zero_as_dot=T)`
+`r tex_list("V=", V_[1:4,1:4], zero_as_dot=T)`
+$$
+
+$$
+`r tex_list("V^{-1}=", Vi_[1:4,1:4], zero_as_dot=T)`
 $$
 
 
-A programmatic approach is to define a function returning the log-likelihood and the profile log-likelihood as a caracas symbol. Notice that we supply the both $V$, $V^{-1}$ and $\log|V|$ as arguments to the log-likelihood function. There is redundancy in this, but it is convenient to be able to supply alternative forms for $V$. 
+
+## Programmatic approach
+
+A programmatic approach is to define a function returning the
+log-likelihood and the profile log-likelihood as a caracas
+symbol. Notice that we supply the both $V$, $V^{-1}$ and $\log|V|$ as
+arguments to the log-likelihood function. There is redundancy in this,
+but it is convenient to be able to supply alternative forms for $V$.
 
 ```{r}
-get_logL <- function(y, X, b, V, Vi=solve(V), detV=determinant(V, log=FALSE)) {
+get_logL0 <- function(y, X, b, V, Vi=inv_block(V), detV=determinant(V, log=FALSE)) {
     res <- function(y, X, b) {
         return(y - X %*% b)
     }
@@ -160,7 +182,7 @@ get_logL <- function(y, X, b, V, Vi=solve(V), detV=determinant(V, log=FALSE)) {
     return(-0.5 * (log(detV) + Q))
 }
 
-get_bhat <- function(X, y, Vi) {
+get_bhat <- function(y, X, V, Vi=inv_block(V)) {
     return(solve(t(X) %*% Vi %*% X, t(X) %*% Vi) %*% y)
 }
 
@@ -168,134 +190,58 @@ get_V <- function(Z, G, R) {
     return(Z %*% G %*% t(Z) + R)
 }
 
-get_J <- function(logL, b) {
+get_hessian <- function(logL, b) {
     return(-der2(logL, b))
 }
-```
-
-```{r}
-
-
-
-handle_order <- function(e, order) {
-    if (is.null(order))
-        return(sort(all.vars(e)))
-    
-    nms <- all.vars(e)
-    ss <- setdiff(nms, order)
-    if (length(ss) > 0) {        
-        stop("some arguments are not given in 'order'")
-    }
-    return(order)
-}
-  
-
-expr_to_string <- function(ee) {
-    ee_str <- lapply(ee, deparse)
-    
-    ee_str <-
-        lapply(ee_str,
-               function(e_) {
-                   paste0(e_, collapse="\n")               
-               })
-    ee_str
-}
-
-expr_to_multi_param_fun <- function(ee, order=NULL) {
-
-    nms <- handle_order(ee, order)   
-    ee_str <- expr_to_string(ee)
-    
-    fun_str <- paste0("function(", paste0(nms, collapse=", "), ")")
-        
-    bd <- paste0("\n{ \n", paste0(ee_str, collapse=";\n "), "\n}")
-    ff <- paste0(fun_str, bd)
-    fun <- eval(parse(text=ff))
-    return(fun)
-}
-
 
 ```
-
-
-```{r, eval=FALSE}
-V_    <- get_V(Z_, G_, R_)
-V_fn <- as_func(V_, vec_arg = TRUE)
-
-get_bhat <- function(X, y, Vi) {
-    return(solve(t(X) %*% Vi %*% X, t(X) %*% Vi) %*% y)
-}
-get_bhat(X_, y_, V_)
-
-X. <- as_expr(X_)
-y. <- y
-
-ee <- expression({
-  V. <- V_fn(parm)
-  detV. <- det(V.)
-  Vi. <- solve(V.)
-  b. <- (solve(t(X.) %*% Vi. %*% X., t(X.) %*% Vi.) %*% y.)
-  r. <- y - X. %*% b.
-  Q. <- (t(r.) %*% Vi. %*% r.)
-  logL. <- -0.5 * (log(detV.) + Q.)
-  as.numeric(logL.)
-})
-
-solve(t(X) %*% Vi %*% X, t(X) %*% Vi) %*% y
-
-ee_str <- expr_to_string(ee)
-
-nms <- c("parm", "X.", "y.", "V_fn")
-fun_str <- paste0("function(", paste0(nms, collapse=", "), ")")
-fun_str
-    
-bd <- paste0("\n{ \n", paste0(ee_str, collapse=";\n "), "\n}")
-ff <- paste0(fun_str, bd)
-fun <- eval(parse(text=ff))
-fun
-    
-    out <- optim(c(.1, .1), fun, X.=X., y.=y., V_fn=V_fn, method="L-BFGS-B", 
-#          lower=c(1e-6, 1e-6), upper=c(Inf, Inf),
-              control=list(fnscale=-1), hessian=TRUE)
-
-out$par    
-V. <- V_fn(out$par)    
-Vi. <- solve(V.)
-b. <- (solve(t(X.) %*% Vi. %*% X., t(X.) %*% Vi.) %*% y.)
-b.    
-```
-
-
 
 
 ## Maximizing the profile likelihood
 
 ```{r}
 V_    <- get_V(Z_, G_, R_)
-detV_ <- determinant(V_, log=FALSE)
-Vi_   <- solve(V_)
-bhat_ <- get_bhat(X_, y_, Vi_) 
+bhat_ <- get_bhat(y_, X_, V_) |> simplify()
+b_    <- vector_sym(ncol(X_), "b")
+```
 
-plogL_ <- get_logL(y_, X_, bhat_, V_, Vi_, detV_) |> simplify()
-logL_  <- get_logL(y_, X_, b_,    V_, Vi_, detV_) |> simplify()
+$$
+`r tex_list("b=", b_, ", \\hat b=", bhat_, zero_as_dot=FALSE)`
+$$
+
+Notice that $\hat b$ is a function of $V$ and hence of $\theta$. If $\hat b$ is substituted into the log-likelihood, we get the profile log-likelihood. On the other hand, $b$ is a parameter of fixed effect and the log-likelihood is a function of both $b$ and $\theta$.
 
 
-
-## Or
-## plogL_ <- get_logL(y_, X_, bhat_, V_) |> simplify()
-## logL_  <- get_logL(y_, X_, b_,    V_) |> simplify()
-
-J_ <- get_J(logL_, b_) 
-
+```{r}
+plogL_ <- get_logL0(y_, X_, bhat_, V_) |> simplify()
 out <- optim_sym(c(.1, .1), plogL_, method="L-BFGS-B", 
               control=list(fnscale=-1), hessian=TRUE)
 var_par <- out$par
+var_par
+bhat2_ <- subs(bhat_, as.list(var_par))
+bhat2_
+as_expr(bhat2_)
+```
 
-bhat_ <- subs(bhat_, as.list(var_par))
-J_    <- subs(J_, as.list(var_par))
-Vb_   <- solve(J_)
+A technicality: A caracas symbol can be coerced to an R function. Therefor $\hat b$ can be evaluated at the MLE as a function of $\theta$.
 
-as_expr(bhat_)
+```{r}
+as_func(bhat_, vec_arg=TRUE)(var_par)
+```
+
+
+## Asymptotic variance of the MLE
+
+To obtain the asymptotic variance of $\hat b$, we need to compute the Hessian of the log-likelihood at the MLE. This is done by differentiating the log-likelihood with respect to $b$ and then evaluating at the MLE. The Hessian is then inverted to obtain the asymptotic variance of $\hat b$.
+
+```{r}
+logL_  <- get_logL0(y_, X_, b_,    V_) |> simplify()
+J_     <- get_hessian(logL_, b_) 
+
+J2_    <- subs(J_, as.list(var_par))
+Vb_   <- solve(J2_)
+
+as_expr(bhat2_)
 as_expr(Vb_)
 ```
 
@@ -303,21 +249,18 @@ as_expr(Vb_)
 
 ## Maximizing the full likelihood
 
-To maximize the full likelihood, we need to maximize with respect to
+An alternative is to maximize the full likelihood, we need to maximize with respect to
 both the variance parameters and the fixed effects. For this to work
 we often need to impose restrictions on the parameter space (not
-necessary for this specific example)
-
+necessary for this specific example, though)
 
 ```{r}
+eps <- 1e-6
 out <- optim_sym(c(0, 0, .1, .1), logL_, method="L-BFGS-B", 
-          lower=c(-Inf, -Inf, 1e-6, 1e-6), upper=c(Inf, Inf, Inf, Inf),
+          lower=c(-Inf, -Inf, eps, eps), upper=c(Inf, Inf, Inf, Inf),
               control=list(fnscale=-1), hessian=TRUE)
 out$par
 solve(-out$hessian)[1:2, 1:2] |> round(4)
-## This also works - but is fragile
-## optim_sym(c(0, 0, .1, .1), logL_, method="L-BFGS-B", 
-##               control=list(fnscale=-1), hessian=TRUE)
 ```
 
 
@@ -338,96 +281,139 @@ the parameters. Three typical cases are:
    reparametrize $\alpha = \frac{\exp(w)-1}{\exp(w)+1} = \tanh(w)$ and
    optimize with respect to $w$ which is unconstrained.
 
+
+
 ```{r}
 V2_ <- subs(V_, list(sigma="exp(log_sigma)", tau="exp(log_tau)")) |> simplify()
-detV2_ <- determinant(V2_, log=FALSE)
-V2i_ <- solve(V2_)
-bhat2_ <- get_bhat(X_, y_, V2i_)
+bhat2_ <- get_bhat(y_, X_, V2_)
+```
 
-plogL2_ <- get_logL(y_, X_, bhat_, V2_, V2i_, detV2_) |> simplify()
-logL2_  <- get_logL(y_, X_, b_,    V2_, V2i_, detV2_) |> simplify()
+$$
+`r tex_list("V2=", V2_[1:4,1:4], zero_as_dot=T)`
+$$
 
-## Or
-## plogL2_ <- get_logL(y_, X_, bhat_, V2_) |> simplify()
-## logL2_  <- get_logL(y_, X_, b_,    V2_) |> simplify()
+With this parameterization, the profile log-likelihood is maximized as:
 
+```{r}
+plogL2_ <- get_logL0(y_, X_, bhat2_, V2_) 
 out <- optim_sym(c(.1, .1), plogL2_, method="L-BFGS-B", 
               control=list(fnscale=-1), hessian=TRUE)
 
 var_par <- out$par
 var_par |> exp()
+```
 
+Moreover, with this parameterization, the full log-likelihood can be
+maximized without constraints, and we can obtain the Hessian (and
+hence the asymptotic variance of the MLE) directly:
+
+```{r}
+logL2_  <- get_logL0(y_, X_, b_,    V2_) 
 out <- optim_sym(c(0, 0, .1, .1), logL2_, method="L-BFGS-B", 
               control=list(fnscale=-1), hessian=TRUE)
 
 var_par <- out$par
+var_par
 solve(-out$hessian)[1:2, 1:2]
 ```
 
-```{r, eval=F}
+
+## Reparametrizing $V$ in terms of variance and correlation
+
+An alternative is to write V in terms of a variance and a correlation parameter
+
+```{r}
 def_sym(sigma)
 B <- as_sym(toeplitz(c(1, "rho")))
 V3_ <- sigma^2 * kronecker(diag_(1, ncol(Z)), B)
-V3_
+```
 
-V3i_ <- solve(V3_)
-bhat3_ <- get_bhat(X_, y_, V3i_)
+$$
+`r tex_list("V3=", V3_[1:4,1:4], zero_as_dot=T)`
+$$
 
-plogL3_ <- get_logL(y_, X_, bhat_, V3_) |> simplify()
-logL3_  <- get_logL(y_, X_, b_,    V3_) |> simplify()
+
+```{r}
+bhat3_ <- get_bhat(y_, X_, V3_)
+
+plogL3_ <- get_logL0(y_, X_, bhat3_, V3_)
+logL3_  <- get_logL0(y_, X_, b_,    V3_)
 
 out <- optim_sym(c(.1, .1), plogL3_, method="L-BFGS-B", 
-             lower=c(-1+1e-6, 1e-6), upper=c(1-1e-6, Inf),
+             lower=c(-1+eps, eps), upper=c(1-eps, Inf),
              control=list(fnscale=-1), hessian=TRUE)
 
 var_par <- out$par
 var_par
 
-eps <- 1e-6
-out <- optim_sym(c(0, 0, .1, .1), logL3_, method="L-BFGS-B", 
-          lower=c(-Inf, -Inf, -1+eps, eps), upper=c(Inf, Inf, 1-eps, Inf),
-              control=list(fnscale=-1), hessian=TRUE)
+subs(bhat3_, as.list(var_par))
 
-var_par <- out$par
-var_par
-solve(-out$hessian)[1:2, 1:2]
+J_     <- get_hessian(logL3_, b_) 
+J2_    <- subs(J_, as.list(var_par))
+Vb_   <- solve(J2_)
+Vb_
 
-V3_ <- subs(V3_, list(rho="(exp(2*w)-1)/(exp(2*w)+1)"))
-logL3_  <- get_logL(y_, X_, b_,    V3_) |> simplify()
-
-out <- optim_sym(c(0, 0, .1, .1), logL3_, method="L-BFGS-B", 
-#          lower=c(-Inf, -Inf, -1+eps, eps), upper=c(Inf, Inf, 1-eps, Inf),
-              control=list(fnscale=-1), hessian=TRUE)
-
-var_par <- out$par
-var_par
-tanhinv <- function(z) {
-    return(log((1+z)/(1-z))/2)
-}
-tanh(var_par[4])
 ```
 
+Just for illustration, we note that maximizing the full likelihood fails in this case in the sense that we get wrong results.
+
 ```{r}
-library(nlme)
-gls(wear ~ type, correlation = corCompSymm(form = ~ 1 | boy), 
+out <- optim_sym(c(0, 0, .1, .1), logL3_, method="L-BFGS-B", 
+           lower=c(-Inf, -Inf, -1+eps, eps), upper=c(Inf, Inf, 1-eps, Inf),
+               control=list(fnscale=-1), hessian=TRUE)
+out$par
+solve(-out$hessian)[1:2, 1:2]
+```
+
+To maximize the full likelihood, we need to reparametrize the
+correlation parameter. We can do this by writing $\rho =
+\frac{\exp(2w)-1}{\exp(2w)+1}$ and optimize with respect to $w$ which
+is unconstrained.
+
+```{r}
+V4_ <- subs(V3_, list(rho="(exp(2*w)-1)/(exp(2*w)+1)"))
+```
+
+$$
+`r tex_list("V4=", V4_[1:4,1:4], zero_as_dot=T)`
+$$
+
+
+```{r}
+logL4_  <- get_logL0(y_, X_, b_,    V4_)
+out <- optim_sym(c(0, 0, .1, .1), logL4_, method="L-BFGS-B", 
+                 control=list(fnscale=-1), hessian=TRUE)
+
+var_par <- out$par
+var_par
+tanh(var_par["w"])
+```
+
+
+# Comparison with gls() and lmer()
+
+## Comparison with gls() - if available
+
+```{r}
+if (require(nlme)){
+model <- gls(wear ~ type, correlation = corCompSymm(form = ~ 1 | boy), 
     method="ML",
     data = shoes_long)
 
+sigma2 <- model$sigma^2
+C <- corMatrix(model$modelStruct$corStruct)
+V <- sigma2 * as.matrix(bdiag(C))
+as(V, "sparseMatrix")
+}
 ```
 
 
 
-# Comparison with  with lmer() - if available
+## Comparison with lmer() - if available
 
 ```{r}
-var_par
-as.numeric(as_expr(bhat_))
-as_expr(Vb_)
-
 if (require(lme4)){
     lmm_fit  <- lmer(wear ~ type + (1|boy), data=shoes_long, REML=FALSE)
-    ## X <- getME(lmm_fit, "X") 
-    ## Z <- getME(lmm_fit, "Z") 
     print(VarCorr(lmm_fit))
     print(fixef(lmm_fit))
     print(vcov(lmm_fit))
@@ -435,73 +421,3 @@ if (require(lme4)){
 ```
 
 
-
-
-```{r, echo=FALSE, eval=FALSE}
-## OBSOLETE NOW
-## For known value of variance Var(y), the MLE for b is
-b_hat_ <- solve(t(X_) %*% Vi_ %*% X_, t(X_) %*% Vi_) %*% y_
-b_hat_ <- b_hat_ |> simplify()
-b_hat_
-
-## The profile likelihood
-res0_  <- (y_ - X_ %*% b_hat_) |> simplify()
-Q0_    <- (t(res0_) %*% Vi_ %*% res0_) |> simplify()
-plogL_ <- -0.5 * (log(detV_) + Q0_)
-plogL_func <- as_func(plogL_, vec_arg = T)
-
-## Now optimize
-fit <- optim(c(.1, .1), plogL_func, method="L-BFGS-B", 
-              control=list(fnscale=-1), hessian=TRUE)
-var_par <- fit$par
-names(var_par) <- eval(formals(plogL_func)$names_parm) # 2.27, 0.24
-var_par 
-sqrt(var_par) ## Same as lmer
-
-## Substitute variance parameters into expression for b
-b_hat <- subs(b_hat_, as.list(var_par))
-b_hat ## 11.64 0.04
-
-## The full likelihood
-res1_ <- y_ - X_ %*% b_
-Q1_ <- (t(res1_) %*% Vi_ %*% res1_) |> simplify()
-Q1_
-logL_ <- -0.5 * (log(detV_) + Q1_)
-logL_func <- as_func(logL_, vec_arg = T)
-
-H_ <- der2(logL_, b_) 
-H_  <- subs(H_, as.list(var_par))
-J_  <- solve(-H_)
-as_expr(J_) 
-```
-
-
-
-
-```{r, eval=F, echo=F}
-get_logL <- function(y.c, X.c, b.c, V.c, Vi.c=solve(V.c), detV.c=determinant(V.c, log=FALSE)) {
-    res <- function(y.c, X.c, b.c) {
-        return(y.c - X.c %*% b.c)
-    }
-    
-    qform <- function(res.c, Vi.c) {
-        return(t(res.c) %*% Vi.c %*% res.c)
-    }
-    res.c <- res(y.c, X.c, b.c)
-    Q.c   <- qform(res.c, Vi.c)
-    return(-0.5 * (log(detV.c) + Q.c))
-}
-
-
-get_bhat <- function(X.c, y.c, Vi.c) {
-    return(solve(t(X.c) %*% Vi.c %*% X.c, t(X.c) %*% Vi.c) %*% y.c)
-}
-
-get_V <- function(Z.c, G.c, R.c) {
-    return(Z.c %*% G.c %*% t(Z.c) + R.c)
-}
-
-get_J <- function(logL.c, b.c) {
-    return(-der2(logL.c, b.c))
-}
-```
