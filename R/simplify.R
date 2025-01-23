@@ -17,7 +17,7 @@ simplify <- function(x) {
   
   z <- get_sympy()$simplify(x$pyobj)
   v <- construct_symbol_from_pyobj(z)
-  
+  attributes(v) <- attributes(x) ## FIXME check this
   return(v)
 }
 

@@ -31,10 +31,10 @@ inv_block <- function(x) {
         
         ddd <- mapply(function(s,e){
             seq(s,e)
-        }, 
-        start, end, SIMPLIFY = FALSE)
+        },  start, end, SIMPLIFY = FALSE)
         
         uxx. <- unique(xx.)
+        ## This is only done on the unique elements:
         uai <-lapply(uxx., function(z) as_character_matrix(inv(as_sym(z))))
         
         mmm <- sapply(xx., paste0, collapse=" ")
@@ -43,11 +43,25 @@ inv_block <- function(x) {
         
         for (i in seq_along(ddd)) {
             idx <- ddd[[i]]
-            xx1[idx, idx] <- uai[[ppp[i]]]
-            
+            xx1[idx, idx] <- uai[[ppp[i]]]   
         }
+        
         as_sym(xx1)
     } else {
         solve(x)
     }
+}
+
+
+##' @title Inverse using woodburys matrix identity
+##' @description Computes the inverse of (A+UCV) provided that the inverse of A and C exists.
+##' @param A,U,C,V Either a caracas matrix, or a dense or a sparse matrix.
+##' @return The inverser of (A+UCV)
+##' @author Søren Højsgaard
+##'
+##' @export
+inv_woodbury <- function(A, U, C, V=t(U)) {
+  Ai <- solve(A)
+  out <- Ai - Ai %*% U %*% solve((solve(C) + V %*% Ai %*% U)) %*% V %*% Ai
+  return(out)
 }
