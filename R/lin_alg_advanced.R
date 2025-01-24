@@ -378,7 +378,7 @@ singular_values <- function(x) {
 #'     alternatives are $LU$ decomposition (`lu`), the cofactor
 #'     method (`cf`), and `Ryacas` (`yac`).
 #' @export
-inv <- function(x, method = c("gauss", "lu", "cf", "yac")) {
+inv <- function(x, method = c("ge", "gauss", "lu", "cf", "yac")) {
   method <- match.arg(method)
   
   stopifnot_symbol(x)
@@ -395,14 +395,15 @@ inv <- function(x, method = c("gauss", "lu", "cf", "yac")) {
   ## }
   
   switch(method,
-         gauss = do_la(x, "inv"),
+         ge=, gauss = do_la(x, "inv"),
          lu    = inv_lu(x),
          cf    = inv_cf(x),
          yac   = inv_yac(x))
 }
 
 inv_cf <- function(x) {
-    return(t(sympy_func(x, "cofactor_matrix")) / det(x))
+    return(sympy_func(x, "adjugate") / sympy_func(x, "det"))
+    ## return(t(sympy_func(x, "cofactor_matrix")) / det(x))
 }
 
 inv_lu <- function(x) {

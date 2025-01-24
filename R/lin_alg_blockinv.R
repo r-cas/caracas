@@ -35,7 +35,7 @@ inv_block <- function(x) {
         
         uxx. <- unique(xx.)
         ## This is only done on the unique elements:
-        uai <-lapply(uxx., function(z) as_character_matrix(inv(as_sym(z))))
+        uai <-lapply(uxx., function(z) as_character_matrix(inv_yac(as_sym(z))))
         
         mmm <- sapply(xx., paste0, collapse=" ")
         uuu <- sapply(unique(xx.), paste0, collapse=" ")
@@ -56,12 +56,46 @@ inv_block <- function(x) {
 ##' @title Inverse using woodburys matrix identity
 ##' @description Computes the inverse of (A+UCV) provided that the inverse of A and C exists.
 ##' @param A,U,C,V Either a caracas matrix, or a dense or a sparse matrix.
-##' @return The inverser of (A+UCV)
+##' @param method One of the methods that can be supplied to inv().
+##' @param timing Should timing be printed
+##' @return The inverse of (A+UCV)
 ##' @author Søren Højsgaard
 ##'
+##' @examples
+##' if (has_sympy()) {
+##'
+##' n <- 25
+##' m <- 4
+##' A <- diag_("a", n)
+##' U <- round(10*(matrix(rnorm(n*m), nrow=n)))
+##' U[U < 0] <- 0
+##' U <- as_sym(U)
+##' V <- t(U)
+##' C <- diag_("c", m)
+##'
+##' B <- A + U %*% C %*% V
+##' B
+##'
+##' Bi <- inv_woodbury(A, U, C)
+##' }
 ##' @export
-inv_woodbury <- function(A, U, C, V=t(U)) {
-  Ai <- solve(A)
-  out <- Ai - Ai %*% U %*% solve((solve(C) + V %*% Ai %*% U)) %*% V %*% Ai
-  return(out)
+inv_woodbury <- function(A, U, C, V=t(U), method="ge", timing=FALSE) {
+    t0 <- Sys.time()
+    Ai <- solve(A)
+    Ci <- solve(C)
+    VAiU <- simplify(V %*% Ai %*% U)
+    tmp <- Ci + VAiU
+    tmp <- inv(tmp, method=method)
+    tmp <- simplify(tmp)
+    out <- Ai - Ai %*% U %*% tmp %*% V %*% Ai
+    tt <- Sys.time() - t0
+    if (timing) print(tt)
+    return(out)
 }
+
+
+## inv_fast <- function(x){
+##     ## The transpose of the cofactor matrix
+##     return(sympy_func(x, "adjugate") / sympy_func(x, "det"))
+## }
+
