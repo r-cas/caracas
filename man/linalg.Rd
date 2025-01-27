@@ -40,7 +40,7 @@ leftnullspace(x)
 
 singular_values(x)
 
-inv(x, method = c("gauss", "lu", "cf", "yac"))
+inv(x, method = c("ge", "gauss", "lu", "cf", "yac"))
 
 eigenval(x)
 

@@ -139,7 +139,9 @@ So for this example, $\theta=(\tau, \sigma)$. The variance of $y$ is
 ```{r}
 ## Variance etc of y
 V_  <- Z_ %*% G_ %*% t(Z_) + R_
-Vi_ <- inv_block(V_)
+#Vi_ <- inv_block(V_)
+#Vi_ <- inv(V_)
+Vi_ <- inv_woodbury(R_, Z_, G_)
 detV_ <- determinant(V_, log=FALSE)
 ```
 
