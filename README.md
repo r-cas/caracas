@@ -16,6 +16,20 @@ status](https://github.com/r-cas/caracas/workflows/R-CMD-check/badge.svg)](https
 
     install.packages('caracas')
 
+Two more steps must be completed before `caracas` can be used:
+
+### Installing python
+
+`caracas` uses python (and in particular the python library SymPy).
+Therefore python (version \> 3) must be installed, which can be done as
+follows: Go [here](https://www.python.org/downloads/) and download the
+version for your computer.
+
+For windows users: During installation you can check “add python to the
+computers path” or similar. It is important that you check this box.
+
+### Installing SymPy
+
 Please ensure that you have SymPy installed, or else install it:
 
 ``` r
@@ -23,6 +37,8 @@ if (!caracas::has_sympy()) {
   caracas::install_sympy() 
 }
 ```
+
+## Using development versions of `caracas`
 
 To build and install from Github with vignettes run this command from
 within `R` (please install `remotes` first if not already installed):

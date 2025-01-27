@@ -77,39 +77,6 @@ sum_worker <- function(expr) {
 }
 
 
-## sum.caracas_symbol <- function(..., na.rm = FALSE) {
-##     cat("sum.caracas_symbol\n")
-
-##     expr <- list(...)
-##     if (length(expr) != 1L) {
-##         stop("To be implemented")
-##     }
-
-##     expr <- expr[[1L]]
-##     expr_dim <- dim(expr)
-  
-  
-##     if (is.null(expr_dim)) {
-##         return(expr)
-##     }
-    
-##     if (!symbol_is_matrix(expr)) {
-##         stop("Unexpected")
-##     }
-    
-##     ones1 <- as_sym(matrix(1, nrow = 1L, ncol = expr_dim[1L]))
-##     z1 <- ones1 %*% expr
-    
-##     ones2 <- as_sym(matrix(1, nrow = expr_dim[2L], ncol = 1L))
-##     z2 <- z1 %*% ones2
-    
-##     z <- remove_mat_prefix(z2)
-##     z <- gsub("^\\[\\[(.*)\\]\\]$", "\\1", z)
-##     z <- eval_to_symbol(z)
-    
-##     return(z)
-## }
-
 
 
 #' @export
@@ -174,8 +141,6 @@ rep.caracas_symbol <- function(x, ...) {
   z <- as_sym(z)
   return(z)
 }
-
-
 
 
 
