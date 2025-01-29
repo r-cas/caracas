@@ -12,6 +12,7 @@
 \alias{inv}
 \alias{eigenval}
 \alias{eigenvec}
+\alias{eigen_}
 \alias{GramSchmidt}
 \alias{pinv}
 \alias{QRdecomposition}
@@ -45,6 +46,8 @@ inv(x, method = c("ge", "gauss", "lu", "cf", "yac"))
 eigenval(x)
 
 eigenvec(x)
+
+eigen_(x)
 
 GramSchmidt(x)
 

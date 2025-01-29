@@ -26,7 +26,7 @@ n <- 25
 m <- 4
 A <- diag_("a", n)
 U <- round(10*(matrix(rnorm(n*m), nrow=n)))
-U[U<0] <- 0
+U[U < 0] <- 0
 U <- as_sym(U)
 V <- t(U)
 C <- diag_("c", m)

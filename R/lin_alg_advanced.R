@@ -437,6 +437,24 @@ eigenvec <- function(x) {
 
 #' @rdname linalg
 #' @export
+eigen_ <- function(x){
+  z <- eigenvec(x)
+  a <- lapply(z, function(z.) z.$eigvec)
+  eigvec <- do.call(cbind, a)
+  
+  b <- lapply(z, function(z.) z.$eigval) 
+  eigval <- do.call(rbind, b)
+  
+  eigmult <- sapply(z, function(z.) z.$eigmult) 
+  
+  out <- list(values=eigval, vectors=eigvec, eigmult=eigmult)
+  return(out)
+}
+
+
+
+#' @rdname linalg
+#' @export
 GramSchmidt <- function(x) {
     return(do_la(x, "GramSchmidt"))
 }
