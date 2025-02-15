@@ -335,14 +335,16 @@ setMethod(
 )
 
 
-## diag <- function(x, ...) {
-##   UseMethod("diag")
-## }
 
-## #' @export
-## diag.default <- function(x, ...) {
-##   return(base::diag(x, ...))
-## }
+#' @title Topelitz matrix as caracas matrix.
+#' @concept linalg
+#' @param x The first row of a toeplitz matrix
+#' @param ... Additional arguments passed on to toeplitz
+#' @export
+toeplitz_ <- function(x, ...){
+    as_sym(toeplitz(x, ...))
+}
+
 
 
 #' Replace matrix diagonal
@@ -924,64 +926,26 @@ get_basis <- function(x) {
 }
 
 
+#' @title caracas version of standard R functions
+#' @description a caracas object is returned
+#' @param ... Arguments to be passed on
+#' @name underscore
 
+#' @export
+#' @rdname underscore
+c_ <- function(...){
+    as_sym(c(...))
+}
 
+#' @export
+#' @rdname underscore
+rep_ <- function(...){
+    as_sym(rep(...))
+}
 
+#' @export
+#' @rdname underscore
+seq_ <- function(...){
+    as_sym(seq(...))
+}
 
-
-# Still needed?
-#symbol_is_list_of_lists_matrix <- function(x) {
-#   if (grepl("^\\[\\[", as.character(x))) {
-#     return(TRUE)
-#   } 
-#   
-#   return(FALSE)
-# }
-
-# symbol_is_vector <- function(x) {
-#   xstr <- as.character(x)
-#   
-#   if (grepl("^\\[", xstr)) {
-#     return(TRUE)
-#   }
-#   
-#   return(FALSE)
-# }
-
-
-# ensure_symbol_is_matrix <- function(x) {
-#   if (!inherits(x, "caracas_symbol")) {
-#     stop(paste0("'x' ", TXT_NOT_CARACAS_SYMBOL))
-#   }
-#   
-#   if (!symbol_is_matrix(x)) {
-#     stop(paste0("'x' is not a matrix"))
-#   }
-# }
-
-
-
-
-  # zz <- as_character_matrix(x)
-  # 
-  # uu <- apply(zz, 2, factor, simplify = FALSE)
-  # 
-  # mm <-
-  #   lapply(seq_along(uu),
-  #          function(i){
-  #            vv <- uu[[i]]
-  #            if (length(levels(vv)) == 1) {
-  #              out <- matrix(rep(1, length(vv)))
-  #            }
-  #            else {
-  #              out <- model.matrix(~ 0 + vv)
-  #            }
-  #            colnames(out) <- levels(uu[[i]])
-  #            out
-  #          })
-  # 
-  # x_mat <- do.call(cbind, mm)
-  # zero <- which(colnames(x_mat) == "0")
-  # if (length(zero) > 0)
-  #     x_mat <- x_mat[, -zero]
-  # x_mat

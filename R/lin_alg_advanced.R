@@ -383,19 +383,10 @@ inv <- function(x, method = c("ge", "gauss", "lu", "cf", "yac")) {
   
   stopifnot_symbol(x)
   stopifnot(symbol_is_matrix(x))
-  
-  ## if (FALSE) {
-    ## microbenchmark::microbenchmark(
-      ## inv(A, "lu"),
-      ## inv(A, "gauss"),
-      ## inv(A, "cf"),
-      ## inv(A, "yac"),
-      ## times = 10
-    ## )
-  ## }
-  
+    
   switch(method,
-         ge=, gauss = do_la(x, "inv"),
+         ge = ,
+         gauss = do_la(x, "inv"),
          lu    = inv_lu(x),
          cf    = inv_cf(x),
          yac   = inv_yac(x))
@@ -403,7 +394,6 @@ inv <- function(x, method = c("ge", "gauss", "lu", "cf", "yac")) {
 
 inv_cf <- function(x) {
     return(sympy_func(x, "adjugate") / sympy_func(x, "det"))
-    ## return(t(sympy_func(x, "cofactor_matrix")) / det(x))
 }
 
 inv_lu <- function(x) {

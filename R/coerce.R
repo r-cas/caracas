@@ -205,13 +205,20 @@ vectorfy <- function(x) {
 #'   
 #'   xT <- t(x)
 #'   listify(xT)
+#'
+#'   def_sym(s)
+#'   listify(s)
+#'   listify(c_(s, s))
+#' 
 #' }
 #' 
 #' @concept caracas_symbol
 #' 
 #' @export
 listify <- function(x) {
-  zz <- convert_to_r_mat(x)
+    ## zz <- convert_to_r_mat(x)
+
+    zz <- as_character_matrix(x)    
   dim(zz) <- NULL
   zz <- as.list(zz)
   zz <- lapply(zz, as_sym, declare_symbols = FALSE)

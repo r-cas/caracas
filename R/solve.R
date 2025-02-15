@@ -172,6 +172,7 @@ solve_sys <- function(lhs, rhs, vars) {
 #' 
 #' @param a caracas_symbol
 #' @param b If provided, either a caracas_symbol (if not, `as_sym()` is called on the object)
+#' @param method, See available methods for inv()
 #' @param \dots Not used
 #' 
 #' @examples 
@@ -191,19 +192,19 @@ solve_sys <- function(lhs, rhs, vars) {
 #' @concept solve
 #' 
 #' @export
-solve.caracas_symbol <- function(a, b, ...) {
+solve.caracas_symbol <- function(a, b, method="ge", ...) {
   ensure_sympy()
   stopifnot_symbol(a)
   
   if (missing(b)) {
-    return(inv(a))
+    return(inv(a, method=method))
   } else {
     
     if (!inherits(b, "caracas_symbol")) {
       b <- as_sym(b)
     }
     
-    return(inv(a) %*% b)
+    return(inv(a, method=method) %*% b)
   } 
 }
 
