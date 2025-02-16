@@ -19,6 +19,11 @@ if (has_sympy()) {
   
   xT <- t(x)
   listify(xT)
+
+  def_sym(s)
+  listify(s)
+  listify(c_(s, s))
+
 }
 
 }

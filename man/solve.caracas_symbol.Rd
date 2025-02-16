@@ -4,12 +4,14 @@
 \alias{solve.caracas_symbol}
 \title{Solve a System of Linear Equations}
 \usage{
-\method{solve}{caracas_symbol}(a, b, ...)
+\method{solve}{caracas_symbol}(a, b, method = "ge", ...)
 }
 \arguments{
 \item{a}{caracas_symbol}
 
 \item{b}{If provided, either a caracas_symbol (if not, \code{as_sym()} is called on the object)}
+
+\item{method, }{See available methods for inv()}
 
 \item{\dots}{Not used}
 }

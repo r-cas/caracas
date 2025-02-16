@@ -5,6 +5,7 @@
 * Bug fixed in `rowspace()`
 * `tex_list()` added
 * `QR()`, `QR_Q()` and `QR_R()` added. 
+* `toeplitz_()` added.
 
 # caracas 2.1.1
 

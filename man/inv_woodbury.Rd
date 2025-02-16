@@ -22,7 +22,7 @@ Computes the inverse of (A+UCV) provided that the inverse of A and C exists.
 \examples{
 if (has_sympy()) {
 
-n <- 25
+n <- 8
 m <- 4
 A <- diag_("a", n)
 U <- round(10*(matrix(rnorm(n*m), nrow=n)))
