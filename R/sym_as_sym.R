@@ -107,10 +107,16 @@ as_sym <- function(x,
     y <- construct_symbol_from_pyobj(x)
     return(y)
   }
+
+  if (inherits(x, "sparseMatrix")){
+      x <- as.matrix(x)
+  }
   
   if (is.expression(x)) {
     x <- as.character(x)
   }
+
+
   
   if (declare_symbols) {
     varnames <- extract_vars(x)
