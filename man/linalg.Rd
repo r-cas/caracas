@@ -17,11 +17,11 @@
 \alias{pinv}
 \alias{QRdecomposition}
 \alias{qr,caracas_symbol-method}
+\alias{chol,caracas_symbol-method}
 \alias{qr.Q,QRdecomposition-method}
 \alias{qr.R,QRdecomposition-method}
 \alias{determinant,caracas_symbol,ANY-method}
 \alias{LUdecomposition}
-\alias{chol.caracas_symbol}
 \alias{svd_}
 \alias{det}
 \alias{trace_}
@@ -57,6 +57,8 @@ QRdecomposition(x)
 
 \S4method{qr}{caracas_symbol}(x)
 
+\S4method{chol}{caracas_symbol}(x, ...)
+
 \S4method{qr.Q}{QRdecomposition}(qr)
 
 \S4method{qr.R}{QRdecomposition}(qr)
@@ -64,8 +66,6 @@ QRdecomposition(x)
 \S4method{determinant}{caracas_symbol,ANY}(x, logarithm = TRUE, ...)
 
 LUdecomposition(x)
-
-\method{chol}{caracas_symbol}(x, ...)
 
 svd_(x, ...)
 
@@ -82,11 +82,11 @@ trace_(x)
 alternatives are $LU$ decomposition (\code{lu}), the cofactor
 method (\code{cf}), and \code{Ryacas} (\code{yac}).}
 
+\item{...}{Auxillary arguments.}
+
 \item{qr}{A QRdecomposition object.}
 
 \item{logarithm}{logical.}
-
-\item{...}{Auxillary arguments.}
 }
 \value{
 Returns the requested property of a matrix.

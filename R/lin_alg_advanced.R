@@ -479,6 +479,33 @@ setMethod(
   }
 )
 
+
+#' @importFrom Matrix chol
+#' @method chol caracas_symbol
+#' @export
+#' @rdname linalg
+setMethod(
+  "chol",
+  signature(x = "caracas_symbol"),
+  function(x, ...) {
+      return(do_la(x, "cholesky", ...))
+      ## out <- QRdecomposition(x)
+      ## out$rank <- ncol(out$Q)
+      ## class(out) <- c("QRdecomposition", "list")
+      ## out
+  }
+)
+
+
+## #' @importFrom Matrix chol
+## #' @rdname linalg
+## #' @export
+## chol.caracas_symbol <- function(x, ...) {
+##     print(x)
+##   return(do_la(x, "cholesky", ...))
+## }
+
+
 setOldClass("QRdecomposition")
 
 #' @importFrom Matrix qr.Q
@@ -505,6 +532,8 @@ setMethod(
     qr$R
   }
 )
+
+
 
 #' @importFrom Matrix determinant
 #' @method x caracas_symbol
@@ -555,17 +584,13 @@ setMethod(
 
 
 
+
 #' @rdname linalg
 #' @export
 LUdecomposition <- function(x) {
     return(do_la(x, "LU"))
 }
 
-#' @rdname linalg
-#' @export
-chol.caracas_symbol <- function(x, ...) {
-  return(do_la(x, "cholesky", ...))
-}
 
 #' @rdname linalg
 #' @export
