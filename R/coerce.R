@@ -7,6 +7,8 @@ setOldClass("caracas_symbol")
 setAs("caracas_symbol", "character",    function(from) as.character(from))
 setAs("caracas_symbol", "matrix",       function(from) matrify(from))
 
+## setAs("character", "caracas_symbol",    function(from) as_sym(from))
+
 ## FIXME: vectorfy
 
 
@@ -195,9 +197,7 @@ vectorfy <- function(x) {
 }
 
 #' Convert object to list of elements
-#' 
 #' @param x Object
-#' 
 #' @examples 
 #' if (has_sympy()) {
 #'   x <- as_sym("Matrix([[b1*x1/(b2 + x1)], [b1*x2/(b2 + x2)], [b1*x3/(b2 + x3)]])")
@@ -209,7 +209,6 @@ vectorfy <- function(x) {
 #'   def_sym(s)
 #'   listify(s)
 #'   listify(c_(s, s))
-#' 
 #' }
 #' 
 #' @concept caracas_symbol
@@ -217,13 +216,14 @@ vectorfy <- function(x) {
 #' @export
 listify <- function(x) {
     ## zz <- convert_to_r_mat(x)
-
+    
     zz <- as_character_matrix(x)    
-  dim(zz) <- NULL
-  zz <- as.list(zz)
-  zz <- lapply(zz, as_sym, declare_symbols = FALSE)
-  return(zz)
+    dim(zz) <- NULL
+    zz <- as.list(zz)
+    zz <- lapply(zz, as_sym, declare_symbols = FALSE)
+    return(zz)
 }
+
 
 #' Convert object to tuple
 #' 
@@ -248,4 +248,27 @@ tuplify <- function(x) {
 
 
 
+## #' @concept caracas_symbol
+## #' @export
+## as_sym_list <- function(x) {
+##     listify(x)
+## }
 
+## as_sym_matrix <- function(x) {
+##     if (is_sym(x) || is_sym_list(x)){
+##         matrify(vectorfy(x))            
+##     } else {
+##         stop("'x' is not list of caracas symbols\n")        
+##     }
+## }
+
+##' @title Is list of caracas symbols
+##' @param x Object
+##' @return logical
+##' @author Søren Højsgaard
+##' @export
+is_sym_list <- function(x) {
+    if (!is.list(x))
+        return(FALSE)
+    all(sapply(x, is_sym))
+}

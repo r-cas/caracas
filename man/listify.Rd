@@ -23,7 +23,6 @@ if (has_sympy()) {
   def_sym(s)
   listify(s)
   listify(c_(s, s))
-
 }
 
 }

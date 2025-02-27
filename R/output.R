@@ -333,6 +333,46 @@ tex_list <- function(..., x=NULL, zero_as_dot=FALSE, matstr=NULL){
 }
 
 
+##' @title tex_align
+##' @param x list of caracas symbol
+##' @return latex string
+##' @author Søren Højsgaard
+##' @export
+tex_align <- function(x){
+  aa <-lapply(x, function(z){
+    if (length(z) == 1){
+       rhs <- z[[1]]
+       lhs <- names(z)
+    } else {
+      rhs <- z[[2]]
+      lhs <- z[[1]]
+    }
+    paste0(lhs, "&=", tex(rhs), " \\\\ ")
+  })
+  
+  out <- paste0("\\begin{align}", 
+                paste0(aa, collapse="\n"),
+                "\\end{align}"
+                )
+  return(out)
+}
+
+##' @title tex_eq
+##' @param x caracas symbol
+##' @return latex string
+##' @author Søren Højsgaard
+##' @export
+tex_eq <- function(x){
+
+    out <- paste0("$$", 
+                paste0(tex(x), collapse="\n"),
+                "$$"
+                )
+    return(out)
+}
+
+
+
 
 
 

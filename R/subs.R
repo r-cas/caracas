@@ -107,3 +107,40 @@ list_to_nms_vls <- function(nms) {
   }
   list(nms=nms_, vls=vls_)
 }
+
+
+
+## FIXME : sorenh need example 
+#' Substitute symbol for value
+#' 
+#' @param sym_list Expression
+#' @param nms_list Names of symbols (see Details)
+#' @param vls_list Values that `nms` is substituted with (see Details)
+#'
+#' @export
+subs_list <- function(sym_list, nms_list, vls_list) {
+    if (is_sym(sym_list))
+        sym_list <- listify(sym_list)
+    if (is_sym(nms_list))
+        nms_list <- listify(nms_list)
+    if (!is.null(dim(vls_list)))
+        vls_list  <- byrow(vls_list)
+    
+    ## list(sym_list, nms_list, vls_list) |> lapply(print)
+    mapply(function(sym, nms, vls){
+        ## list(sym, nms, vls) |> lapply(print)
+        subs(sym, nms, vls)
+    }, sym_list, nms_list, vls_list,
+    SIMPLIFY = FALSE)}
+
+
+## FIXME better name
+## FIXME export?
+
+bycol <- function(x) {
+    lapply(seq_len(ncol(x)), function(i) x[,i])
+}
+
+byrow <- function(x) {
+    lapply(seq_len(nrow(x)), function(i) x[i,])
+}
