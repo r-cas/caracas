@@ -41,7 +41,10 @@ leftnullspace(x)
 
 singular_values(x)
 
-inv(x, method = c("ge", "gauss", "lu", "cf", "yac"))
+inv(
+  x,
+  method = c("ge", "gauss", "lu", "cf", "ch", "qr", "adj", "ldl", "block", "yac")
+)
 
 eigenval(x)
 
@@ -78,9 +81,9 @@ trace_(x)
 
 \item{matrix}{When relevant should a matrix be returned.}
 
-\item{method}{The default works by Gaussian elimination.  The
-alternatives are $LU$ decomposition (\code{lu}), the cofactor
-method (\code{cf}), and \code{Ryacas} (\code{yac}).}
+\item{method}{The default works by Gaussian elimination.
+Alternatives are $LU$ decomposition (\code{lu}), the cofactor
+method (\code{cf}), cholesky (\code{ch}), qr (\code{qr}), adjugate (\code{adj}), ldl (\code{ldl}), block (\code{block}) and \code{Ryacas} (\code{yac}).}
 
 \item{...}{Auxillary arguments.}
 

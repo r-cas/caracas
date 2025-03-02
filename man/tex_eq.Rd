@@ -4,10 +4,12 @@
 \alias{tex_eq}
 \title{tex_eq}
 \usage{
-tex_eq(x)
+tex_eq(x, zero_as_dot = FALSE)
 }
 \arguments{
 \item{x}{caracas symbol}
+
+\item{zero_as_dot}{Print zero as dots}
 }
 \value{
 latex string

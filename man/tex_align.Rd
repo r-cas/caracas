@@ -4,10 +4,12 @@
 \alias{tex_align}
 \title{tex_align}
 \usage{
-tex_align(x)
+tex_align(x, zero_as_dot = FALSE)
 }
 \arguments{
 \item{x}{list of caracas symbol}
+
+\item{zero_as_dot}{Print zero as dots}
 }
 \value{
 latex string

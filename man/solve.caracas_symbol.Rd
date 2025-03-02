@@ -4,7 +4,12 @@
 \alias{solve.caracas_symbol}
 \title{Solve a System of Linear Equations}
 \usage{
-\method{solve}{caracas_symbol}(a, b, method = "ge", ...)
+\method{solve}{caracas_symbol}(
+  a,
+  b,
+  method = c("ge", "gauss", "lu", "cf", "qr", "adj", "ldl", "block", "yac"),
+  ...
+)
 }
 \arguments{
 \item{a}{caracas_symbol}

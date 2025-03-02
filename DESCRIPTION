@@ -1,5 +1,5 @@
 Package: caracas
-Version: 2.1.2.9001
+Version: 2.1.2.9004
 Title: Computer Algebra
 Authors@R: c(
     person(given = "Mikkel Meyer", family = "Andersen",
@@ -25,6 +25,7 @@ Suggests:
   Ryacas,
   testthat (>= 2.1.0),
   knitr,
+  nlme,
   lme4,
   rmarkdown,
   tinytex,

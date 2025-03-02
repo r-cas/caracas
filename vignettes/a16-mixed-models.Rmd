@@ -33,10 +33,6 @@ library(Matrix)
 if (!has_sympy()) {
   # SymPy not available, so the chunks shall not be evaluated
   knitr::opts_chunk$set(eval = FALSE)
-  
-  inline_code <- function(x) {
-    deparse(substitute(x))
-  }
 }
 ```
 
@@ -60,11 +56,13 @@ Here, $y$ is a vector of observables, $X$ is a model matrix and $b$ is
 a corresponding vector of regression coefficients. Also $Z$ is a model
 matrix and $u$ is a corresponding vector of random effects. Lastly,
 $e$ is also a vector of random errors. Because there are two random
-effects ($u$ and $e$) such models are often called mixed models. qIt
-is assumed that $u$ and $e$ are independent and that $u \sim N(0, G)$
-and $e \sim N(0, R)$. Typically $G$ and $R$ depend on unknown
-parameters $\theta$, so we may write $G(\theta)$ and $R(\theta)$
-instead.
+effects ($u$ and $e$) such models are often called mixed models or
+variance component models. 
+
+It is assumed that $u$ and $e$ are
+independent and that $u \sim N(0, G)$ and $e \sim N(0, R)$. Typically
+$G$ and $R$ depend on unknown parameters $\theta$, so we may write
+$G(\theta)$ and $R(\theta)$ instead.
  
 Consequently,
 
@@ -72,8 +70,19 @@ $$
 E(y)=\mu=Xb, \quad Var(y) = V(\theta) =ZG(\theta)Z'+R(\theta).
 $$
 
-We illustrate fitting a mixed model based on a subset of the shoes
-data available, e.g. in the MASS and doBy packages. We also compare
+As such, linear mixed model, is just a general model for the normal distribution,
+
+$$
+ y \sim N(Xb, V(\theta))
+$$
+
+where $V=V\theta$ has the special structure given above. 
+In the following
+
+1. We illustrate fitting a mixed model based on a subset of the shoes
+data available, e.g. in the MASS and doBy packages. 
+
+1. We also compare
 the results with the output from lmer() if the lme4 package is
 installed and with gls() if the nlme package is installed.
 
@@ -145,32 +154,30 @@ So for this example, $\theta=(\tau, \sigma)$. The variance of $y$ is
 ## Variance etc of y
 ZGZt_ <- Z_ %*% G_ %*% t(Z_) 
 V_  <- ZGZt_ + R_
+detV_ <- determinant(V_, log=FALSE)
 ```
 
 Various methods are available in `caracas` for inverting such a matrix
 
-```{r}
-Vi_  <- inv(V_, method="block")
-Vi_  <- inv_woodbury(R_, Z_, G_)
-```
-
-```{r}
-detV_ <- determinant(V_, log=FALSE)
-```
 
 `r tex_align(
     list(list("G", G_),
          list("R", R_),
          list("ZGZ^\\top", ZGZt_),
-         list("V", V_)
+         list("V", V_),
+         list("detV", detV_)
          ),
     zero_as_dot=T)`
 
 
 
-The inverse of a block diagonal matrix is block diagonal.
-The first blocks of $V^{-1}$ are:
+The inverse of a block diagonal matrix is block diagonal. The first
+blocks of $V^{-1}$ are:
 
+```{r}
+Vi_  <- inv_woodbury(R_, Z_, G_) |> simplify() ## or
+Vi_  <- inv(V_, method="block") |> simplify()
+```
 
 $$
 `r tex_list("V^{-1}=", Vi_[1:4,1:4], zero_as_dot=T)`
@@ -182,33 +189,46 @@ $$
 
 A programmatic approach is to define a function returning the
 log-likelihood and the profile log-likelihood as a caracas
-symbol. Notice that we supply the both $V$, $V^{-1}$ and $\log|V|$ as
-arguments to the log-likelihood function. There is redundancy in this,
-but it is convenient to be able to supply alternative forms for $V$.
+symbol. 
+
 
 ```{r}
-get_b_est <- function(y, X, V, Vi=inv_block(V)) {
+get_logL0 <- function(y, X, V, b=NULL) {
+    if (is.null(b))
+        b <- vector_sym(ncol(X_), "b")        
+    Vi   <- inv(V, method="block")
+    detV <- determinant(V, log=FALSE)    
+    res  <- y - X %*% b
+    Q    <- t(res) %*% Vi %*% res
+    aux  <- list(b=b, Q=Q)    
+    out  <- -0.5 * (log(detV) + Q)
+    attr(out, "aux") <- aux    
+    return(out)
+}
+
+get_logLp <- function(y, X, V) {
+    Vi   <- inv(V, method="block")
+    detV <- determinant(V, log=FALSE)        
+    b    <- solve(t(X) %*% Vi %*% X, t(X) %*% Vi) %*% y
+    res  <- y - X %*% b
+    Q    <- t(res) %*% Vi %*% res
+    aux  <- list(b=b, Q=Q)
+    out  <- -0.5 * (log(detV) + Q)
+    attr(out, "aux") <- aux
+    return(out)
+}
+```
+
+The following functions also return caracas symbols:
+
+```{r}
+get_b_est <- function(y, X, V) {
+    Vi <- inv(V, method="block")
     return(solve(t(X) %*% Vi %*% X, t(X) %*% Vi) %*% y)
 }
 
 get_V <- function(Z, G, R) {
     return(Z %*% G %*% t(Z) + R)
-}
-
-get_logL0 <- function(y, X, b, V, Vi=inv_block(V), detV=determinant(V, log=FALSE)) {
-    res <- y - X %*% b
-    Q   <- t(res) %*% Vi %*% res
-    return(-0.5 * (log(detV) + Q))
-}
-
-get_logLp <- function(y, X, V, Vi=inv_block(V), detV=determinant(V, log=FALSE)) {
-    b <- solve(t(X) %*% Vi %*% X, t(X) %*% Vi) %*% y
-    res <- y - X %*% b
-    Q   <- t(res) %*% Vi %*% res
-    aux <- list(b=b)
-    out <- -0.5 * (log(detV) + Q)
-    attr(out, "aux") <- aux
-    return(out)
 }
 
 get_hessian <- function(logL, b) {
@@ -233,20 +253,24 @@ $\hat b$ is substituted into the log-likelihood, we get the profile
 log-likelihood. On the other hand, $b$ is a parameter of fixed effect
 and the log-likelihood is a function of both $b$ and $\theta$.
 
+Get logL as a symbol which depends on some variables
 ```{r}
-logLp <- get_logLp(y_, X_, V_)
+logLp <- get_logLp(y_, X_, V_) 
+all_vars(logLp)
 
+logL0 <- get_logL0(y_, X_, V_)
+all_vars(logL0)
+```
+
+```{r}
 out <- optim_sym(c(.1, .1),
                  logLp,
                  method="L-BFGS-B", 
                  control=list(fnscale=-1), hessian=TRUE)
-
-
-
-var_par <- out$par
-var_par
-subs(attr(logLp, "aux")$b, as.list(var_par))
-b_est2_ <- subs(b_est_, as.list(var_par))
+par <- out$par
+par
+subs(attr(logLp, "aux")$b, par)
+b_est2_ <- subs(b_est_, par)
 b_est2_
 as_expr(b_est2_)
 ```
@@ -256,9 +280,9 @@ function. Therefor $\hat b$ can be evaluated at the MLE as a function
 of $\theta$.
 
 ```{r}
-as_func(b_est_, vec_arg=TRUE)(var_par)
+as(b_est_, "function")
+as(b_est_, "function")(par)
 ```
-
 
 ## Asymptotic variance of the MLE
 
@@ -269,10 +293,10 @@ evaluating at the MLE. The Hessian is then inverted to obtain the
 asymptotic variance of $\hat b$.
 
 ```{r}
-logL_  <- get_logL0(y_, X_, b_,    V_) |> simplify()
-J_     <- get_hessian(logL_, b_) 
+logL_ <- get_logL0(y_, X_, V_) |> simplify()
+J_    <- get_hessian(logL_, b_) 
 
-J2_    <- subs(J_, as.list(var_par))
+J2_   <- subs(J_, par)
 Vb_   <- solve(J2_)
 
 as_expr(b_est2_)
@@ -296,7 +320,8 @@ out$par
 solve(-out$hessian)[1:2, 1:2] |> round(4)
 ```
 
-# Comparison with gls() and lmer()
+
+# Comparison with `gls()` and `lmer()`
 
 ## Comparison with gls() - if available
 
@@ -313,15 +338,21 @@ if (require(nlme)) {
 }
 ```
 
-
-
 ## Comparison with lmer() - if available
 
 ```{r}
-if (require(lme4)){
+if (require(lme4)) {
     lmm_fit  <- lmer(wear ~ type + (1|boy), data=shoes_long, REML=FALSE)
     print(VarCorr(lmm_fit))
     print(fixef(lmm_fit))
     print(vcov(lmm_fit))
+
+    var.d <- crossprod(getME(lmm_fit,"Lambdat"))
+    Zt <- getME(lmm_fit, "Zt")
+    vr <- sigma(lmm_fit)^2
+    var.b <- vr*(t(Zt) %*% var.d %*% Zt)
+    sI <- vr * Diagonal(ncol(Zt))
+    var.y <- var.b + sI
+    var.y
 }
 ```

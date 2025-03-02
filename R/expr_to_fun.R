@@ -36,12 +36,6 @@ as_func <- function(x, order=NULL, vec_arg=FALSE){
     stopifnot_symbol(x)
 
     x <- as_expr(x)
-    ## if (vec_arg){
-    ##     doBy::expr_to_fun(x, order=order, vec_arg=TRUE)
-    ## } else {
-    ##     doBy::expr_to_fun(x, order=order, vec_arg=FALSE)
-    ## }
-
     doBy::expr_to_fun(x, order=order, vec_arg=vec_arg)
 }
 
@@ -50,5 +44,5 @@ as_func <- function(x, order=NULL, vec_arg=FALSE){
 #' @param \dots not used
 #' @export
 as.function.caracas_symbol <- function(x, ...) {
-  as_func(x, ...)
+  as_func(x, vec_arg = TRUE)
 }
