@@ -56,14 +56,17 @@ y = Xb + Zu + e
 $$
 
 
-Here, $y$ is a vector of observables, $X$ is a model matrix and $b$ is a corresponding vector of
-regression coefficients. Also $Z$ is a model matrix and $u$ is a
-corresponding vector of random effects. Lastly, $e$ is also a vector
-of random errors. Because there are two random effects ($u$ and $e$)
-such models are often called mixed models. qIt is assumed that $u$ and $e$ are independent and that $u \sim N(0,
-G)$ and $e \sim N(0, R)$. Typically $G$ and $R$ depend on unknown parameters $\theta$, so we may write $G(\theta)$ and $R(\theta)$ instead.
+Here, $y$ is a vector of observables, $X$ is a model matrix and $b$ is
+a corresponding vector of regression coefficients. Also $Z$ is a model
+matrix and $u$ is a corresponding vector of random effects. Lastly,
+$e$ is also a vector of random errors. Because there are two random
+effects ($u$ and $e$) such models are often called mixed models. qIt
+is assumed that $u$ and $e$ are independent and that $u \sim N(0, G)$
+and $e \sim N(0, R)$. Typically $G$ and $R$ depend on unknown
+parameters $\theta$, so we may write $G(\theta)$ and $R(\theta)$
+instead.
  
-Consequently 
+Consequently,
 
 $$
 E(y)=\mu=Xb, \quad Var(y) = V(\theta) =ZG(\theta)Z'+R(\theta).
@@ -72,7 +75,7 @@ $$
 We illustrate fitting a mixed model based on a subset of the shoes
 data available, e.g. in the MASS and doBy packages. We also compare
 the results with the output from lmer() if the lme4 package is
-installed and with gls() if the nlme package is installed. 
+installed and with gls() if the nlme package is installed.
 
 
 ## The likelihood
@@ -89,22 +92,24 @@ $$
 \hat b =\hat b(\theta) = (X'V(\theta)^{-1}X)^{-1}X'V(\theta)^{-1}y.
 $$
 
-Plugging this estimate into the log-likelihood gives the profile log-likelihood which is a function of $\theta$ only:
+Plugging this estimate into the log-likelihood gives the profile
+log-likelihood which is a function of $\theta$ only:
 
 $$
 plogL(\theta) = - \frac 1 2 (\log|V(\theta)| + (y-X\hat b(\theta))'V(\theta)^{-1}(y-X\hat b(\theta))).
 $$
 
+This function must typically be maximized with numerical methods. 
 
 
 ## Shoes data
 
 ```{r}
 shoes_long <- data.frame(
-  stringsAsFactors = FALSE,
-  type = c("A", "B", "A", "B", "A", "B", "A", "B"),
-  wear = c(13.2, 14, 8.2, 8.8, 10.9, 11.2, 14.3, 14.2),
-  boy = as.factor(c("1", "1", "2", "2", "3", "3", "4", "4")))
+    stringsAsFactors = FALSE,
+    type = c("A", "B", "A", "B", "A", "B", "A", "B"),
+    wear = c(13.2, 14, 8.2, 8.8, 10.9, 11.2, 14.3, 14.2),
+    boy = as.factor(c("1", "1", "2", "2", "3", "3", "4", "4")))
 
 y <- shoes_long$wear
 X <- model.matrix(~type, data=shoes_long) |> head(10)
@@ -117,8 +122,8 @@ Z |> head()
 
 # Fitting model with `caracas`
 
-We define the following symbols in caracas. All caracas symbols are postfixed with an underscore.
-
+We define the following symbols in caracas. All caracas symbols are
+postfixed with an underscore.
 
 ```{r}
 y_ <- as_sym(y)
@@ -138,23 +143,34 @@ So for this example, $\theta=(\tau, \sigma)$. The variance of $y$ is
 
 ```{r}
 ## Variance etc of y
-V_  <- Z_ %*% G_ %*% t(Z_) + R_
-#Vi_ <- inv_block(V_)
-#Vi_ <- inv(V_)
-Vi_ <- inv_woodbury(R_, Z_, G_)
+ZGZt_ <- Z_ %*% G_ %*% t(Z_) 
+V_  <- ZGZt_ + R_
+```
+
+Various methods are available in `caracas` for inverting such a matrix
+
+```{r}
+Vi_  <- inv(V_, method="block")
+Vi_  <- inv_woodbury(R_, Z_, G_)
+```
+
+```{r}
 detV_ <- determinant(V_, log=FALSE)
 ```
 
+`r tex_align(
+    list(list("G", G_),
+         list("R", R_),
+         list("ZGZ^\\top", ZGZt_),
+         list("V", V_)
+         ),
+    zero_as_dot=T)`
 
-$$
-`r tex_list("G=", G_, ", R=", R_, zero_as_dot=T)`
-$$
 
-The first blocks of $V$ and $V^{-1}$ are:
 
-$$
-`r tex_list("V=", V_[1:4,1:4], zero_as_dot=T)`
-$$
+The inverse of a block diagonal matrix is block diagonal.
+The first blocks of $V^{-1}$ are:
+
 
 $$
 `r tex_list("V^{-1}=", Vi_[1:4,1:4], zero_as_dot=T)`
@@ -171,20 +187,7 @@ arguments to the log-likelihood function. There is redundancy in this,
 but it is convenient to be able to supply alternative forms for $V$.
 
 ```{r}
-get_logL0 <- function(y, X, b, V, Vi=inv_block(V), detV=determinant(V, log=FALSE)) {
-    res <- function(y, X, b) {
-        return(y - X %*% b)
-    }
-    
-    qform <- function(res, Vi) {
-        return(t(res) %*% Vi %*% res)
-    }
-    res <- res(y, X, b)
-    Q   <- qform(res, Vi)
-    return(-0.5 * (log(detV) + Q))
-}
-
-get_bhat <- function(y, X, V, Vi=inv_block(V)) {
+get_b_est <- function(y, X, V, Vi=inv_block(V)) {
     return(solve(t(X) %*% Vi %*% X, t(X) %*% Vi) %*% y)
 }
 
@@ -192,49 +195,78 @@ get_V <- function(Z, G, R) {
     return(Z %*% G %*% t(Z) + R)
 }
 
+get_logL0 <- function(y, X, b, V, Vi=inv_block(V), detV=determinant(V, log=FALSE)) {
+    res <- y - X %*% b
+    Q   <- t(res) %*% Vi %*% res
+    return(-0.5 * (log(detV) + Q))
+}
+
+get_logLp <- function(y, X, V, Vi=inv_block(V), detV=determinant(V, log=FALSE)) {
+    b <- solve(t(X) %*% Vi %*% X, t(X) %*% Vi) %*% y
+    res <- y - X %*% b
+    Q   <- t(res) %*% Vi %*% res
+    aux <- list(b=b)
+    out <- -0.5 * (log(detV) + Q)
+    attr(out, "aux") <- aux
+    return(out)
+}
+
 get_hessian <- function(logL, b) {
     return(-der2(logL, b))
 }
-
 ```
-
 
 ## Maximizing the profile likelihood
 
 ```{r}
-V_    <- get_V(Z_, G_, R_)
-bhat_ <- get_bhat(y_, X_, V_) |> simplify()
-b_    <- vector_sym(ncol(X_), "b")
+V_     <- get_V(Z_, G_, R_)
+b_     <- vector_sym(ncol(X_), "b")
+b_est_ <- get_b_est(y_, X_, V_) |> simplify()
 ```
 
 $$
-`r tex_list("b=", b_, ", \\hat b=", bhat_, zero_as_dot=FALSE)`
+`r tex_list("b=", b_, ", \\hat b=", b_est_, zero_as_dot=FALSE)`
 $$
 
-Notice that $\hat b$ is a function of $V$ and hence of $\theta$. If $\hat b$ is substituted into the log-likelihood, we get the profile log-likelihood. On the other hand, $b$ is a parameter of fixed effect and the log-likelihood is a function of both $b$ and $\theta$.
-
+Notice that $\hat b$ is a function of $V$ and hence of $\theta$. If
+$\hat b$ is substituted into the log-likelihood, we get the profile
+log-likelihood. On the other hand, $b$ is a parameter of fixed effect
+and the log-likelihood is a function of both $b$ and $\theta$.
 
 ```{r}
-plogL_ <- get_logL0(y_, X_, bhat_, V_) |> simplify()
-out <- optim_sym(c(.1, .1), plogL_, method="L-BFGS-B", 
-              control=list(fnscale=-1), hessian=TRUE)
+logLp <- get_logLp(y_, X_, V_)
+
+out <- optim_sym(c(.1, .1),
+                 logLp,
+                 method="L-BFGS-B", 
+                 control=list(fnscale=-1), hessian=TRUE)
+
+
+
 var_par <- out$par
 var_par
-bhat2_ <- subs(bhat_, as.list(var_par))
-bhat2_
-as_expr(bhat2_)
+subs(attr(logLp, "aux")$b, as.list(var_par))
+b_est2_ <- subs(b_est_, as.list(var_par))
+b_est2_
+as_expr(b_est2_)
 ```
 
-A technicality: A caracas symbol can be coerced to an R function. Therefor $\hat b$ can be evaluated at the MLE as a function of $\theta$.
+A technicality: A caracas symbol can be coerced to an R
+function. Therefor $\hat b$ can be evaluated at the MLE as a function
+of $\theta$.
 
 ```{r}
-as_func(bhat_, vec_arg=TRUE)(var_par)
+as_func(b_est_, vec_arg=TRUE)(var_par)
 ```
 
 
 ## Asymptotic variance of the MLE
 
-To obtain the asymptotic variance of $\hat b$, we need to compute the Hessian of the log-likelihood at the MLE. This is done by differentiating the log-likelihood with respect to $b$ and then evaluating at the MLE. The Hessian is then inverted to obtain the asymptotic variance of $\hat b$.
+To obtain the asymptotic variance of $\hat b$, we need to compute the
+Hessian of the log-likelihood at the MLE. This is done by
+differentiating the log-likelihood with respect to $b$ and then
+evaluating at the MLE. The Hessian is then inverted to obtain the
+asymptotic variance of $\hat b$.
 
 ```{r}
 logL_  <- get_logL0(y_, X_, b_,    V_) |> simplify()
@@ -243,169 +275,41 @@ J_     <- get_hessian(logL_, b_)
 J2_    <- subs(J_, as.list(var_par))
 Vb_   <- solve(J2_)
 
-as_expr(bhat2_)
+as_expr(b_est2_)
 as_expr(Vb_)
 ```
 
 
-
 ## Maximizing the full likelihood
 
-An alternative is to maximize the full likelihood, we need to maximize with respect to
-both the variance parameters and the fixed effects. For this to work
-we often need to impose restrictions on the parameter space (not
-necessary for this specific example, though)
+An alternative is to maximize the full likelihood, we need to maximize
+with respect to both the variance parameters and the fixed
+effects. For this to work we often need to impose restrictions on the
+parameter space (not necessary for this specific example, though)
 
 ```{r}
 eps <- 1e-6
 out <- optim_sym(c(0, 0, .1, .1), logL_, method="L-BFGS-B", 
-          lower=c(-Inf, -Inf, eps, eps), upper=c(Inf, Inf, Inf, Inf),
-              control=list(fnscale=-1), hessian=TRUE)
+                 lower=c(-Inf, -Inf, eps, eps), upper=c(Inf, Inf, Inf, Inf),
+                 control=list(fnscale=-1), hessian=TRUE)
 out$par
 solve(-out$hessian)[1:2, 1:2] |> round(4)
 ```
-
-
-## Reparametrizing
-
-It is often useful to reparametrize the model to avoid constraints on
-the parameters. Three typical cases are:
-
-1. If $\alpha$ must be positive (e.g. a variance), reparametrize
-   $\alpha = \exp(w)$ and optimize with respect to $w$ which is
-   unconstrained.
-
-2. If $\alpha$ must be in $[0, 1]$, (e.g. a probability) reparametrize
-   $\alpha = \frac{\exp(w)}{1+\exp(w)}$ and optimize with respect to
-   $w$ which is unconstrained.
-
-3. If $\alpha$ must be in $[-1, 1]$, (e.g. a correlation)
-   reparametrize $\alpha = \frac{\exp(w)-1}{\exp(w)+1} = \tanh(w)$ and
-   optimize with respect to $w$ which is unconstrained.
-
-
-
-```{r}
-V2_ <- subs(V_, list(sigma="exp(log_sigma)", tau="exp(log_tau)")) |> simplify()
-bhat2_ <- get_bhat(y_, X_, V2_)
-```
-
-$$
-`r tex_list("V2=", V2_[1:4,1:4], zero_as_dot=T)`
-$$
-
-With this parameterization, the profile log-likelihood is maximized as:
-
-```{r}
-plogL2_ <- get_logL0(y_, X_, bhat2_, V2_) 
-out <- optim_sym(c(.1, .1), plogL2_, method="L-BFGS-B", 
-              control=list(fnscale=-1), hessian=TRUE)
-
-var_par <- out$par
-var_par |> exp()
-```
-
-Moreover, with this parameterization, the full log-likelihood can be
-maximized without constraints, and we can obtain the Hessian (and
-hence the asymptotic variance of the MLE) directly:
-
-```{r}
-logL2_  <- get_logL0(y_, X_, b_,    V2_) 
-out <- optim_sym(c(0, 0, .1, .1), logL2_, method="L-BFGS-B", 
-              control=list(fnscale=-1), hessian=TRUE)
-
-var_par <- out$par
-var_par
-solve(-out$hessian)[1:2, 1:2]
-```
-
-
-## Reparametrizing $V$ in terms of variance and correlation
-
-An alternative is to write V in terms of a variance and a correlation parameter
-
-```{r}
-def_sym(sigma)
-B <- as_sym(toeplitz(c(1, "rho")))
-V3_ <- sigma^2 * kronecker(diag_(1, ncol(Z)), B)
-```
-
-$$
-`r tex_list("V3=", V3_[1:4,1:4], zero_as_dot=T)`
-$$
-
-
-```{r}
-bhat3_ <- get_bhat(y_, X_, V3_)
-
-plogL3_ <- get_logL0(y_, X_, bhat3_, V3_)
-logL3_  <- get_logL0(y_, X_, b_,    V3_)
-
-out <- optim_sym(c(.1, .1), plogL3_, method="L-BFGS-B", 
-             lower=c(-1+eps, eps), upper=c(1-eps, Inf),
-             control=list(fnscale=-1), hessian=TRUE)
-
-var_par <- out$par
-var_par
-
-subs(bhat3_, as.list(var_par))
-
-J_     <- get_hessian(logL3_, b_) 
-J2_    <- subs(J_, as.list(var_par))
-Vb_   <- solve(J2_)
-Vb_
-
-```
-
-Just for illustration, we note that maximizing the full likelihood fails in this case in the sense that we get wrong results.
-
-```{r}
-out <- optim_sym(c(0, 0, .1, .1), logL3_, method="L-BFGS-B", 
-           lower=c(-Inf, -Inf, -1+eps, eps), upper=c(Inf, Inf, 1-eps, Inf),
-               control=list(fnscale=-1), hessian=TRUE)
-out$par
-solve(-out$hessian)[1:2, 1:2]
-```
-
-To maximize the full likelihood, we need to reparametrize the
-correlation parameter. We can do this by writing $\rho =
-\frac{\exp(2w)-1}{\exp(2w)+1}$ and optimize with respect to $w$ which
-is unconstrained.
-
-```{r}
-V4_ <- subs(V3_, list(rho="(exp(2*w)-1)/(exp(2*w)+1)"))
-```
-
-$$
-`r tex_list("V4=", V4_[1:4,1:4], zero_as_dot=T)`
-$$
-
-
-```{r}
-logL4_  <- get_logL0(y_, X_, b_,    V4_)
-out <- optim_sym(c(0, 0, .1, .1), logL4_, method="L-BFGS-B", 
-                 control=list(fnscale=-1), hessian=TRUE)
-
-var_par <- out$par
-var_par
-tanh(var_par["w"])
-```
-
 
 # Comparison with gls() and lmer()
 
 ## Comparison with gls() - if available
 
 ```{r}
-if (require(nlme)){
-model <- gls(wear ~ type, correlation = corCompSymm(form = ~ 1 | boy), 
-    method="ML",
-    data = shoes_long)
+if (require(nlme)) {
+    model <- gls(wear ~ type, correlation = corCompSymm(form = ~ 1 | boy), 
+                 method="ML",
+                 data = shoes_long)
 
-sigma2 <- model$sigma^2
-C <- corMatrix(model$modelStruct$corStruct)
-V <- sigma2 * as.matrix(bdiag(C))
-as(V, "sparseMatrix")
+    sigma2 <- model$sigma^2
+    C <- corMatrix(model$modelStruct$corStruct)
+    V <- sigma2 * as.matrix(bdiag(C))
+    as(V, "sparseMatrix")
 }
 ```
 
@@ -421,5 +325,3 @@ if (require(lme4)){
     print(vcov(lmm_fit))
 }
 ```
-
-
