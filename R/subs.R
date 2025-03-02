@@ -35,6 +35,12 @@ subs <- function(sym, nms, vls) {
     ensure_sympy()
     stopifnot_symbol(sym)
 
+    ## FIXME sorenh: is this good
+
+    ## if (is.vector(nms)){
+    ##     nms <- as.list(nms)
+    ## }
+    
     ## subs() from named list
     if (inherits(nms, "list")) {
         if (!missing(vls)) {

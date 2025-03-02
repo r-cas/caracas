@@ -373,23 +373,31 @@ singular_values <- function(x) {
 }
 
 
+
 #' @rdname linalg
-#' @param method The default works by Gaussian elimination.  The
-#'     alternatives are $LU$ decomposition (`lu`), the cofactor
-#'     method (`cf`), and `Ryacas` (`yac`).
+#' @param method The default works by Gaussian elimination.  
+#'     Alternatives are $LU$ decomposition (`lu`), the cofactor
+#'     method (`cf`), cholesky (`ch`), qr (`qr`), adjugate (`adj`), ldl (`ldl`), block (`block`) and `Ryacas` (`yac`).
 #' @export
-inv <- function(x, method = c("ge", "gauss", "lu", "cf", "yac")) {
-  method <- match.arg(method)
+inv <- function(x, method = c("ge", "gauss", "lu", "cf", "ch", "qr", "adj", "ldl", "block", "yac")) {
   
-  stopifnot_symbol(x)
-  stopifnot(symbol_is_matrix(x))
-    
-  switch(method,
-         ge = ,
-         gauss = do_la(x, "inv"),
-         lu    = inv_lu(x),
-         cf    = inv_cf(x),
-         yac   = inv_yac(x))
+    stopifnot_symbol(x)
+    stopifnot(symbol_is_matrix(x))
+
+    method <- match.arg(method)
+      
+    switch(method,
+           ge    = ,
+           gauss = do_la(x, "inv"),
+           lu    = inv_lu(x),
+           cf    = inv_cf(x),
+           ch    = {sympy_func(x, "inverse_CH")}, 
+           qr    = {sympy_func(x, "inverse_QR")},
+           adj   = {sympy_func(x, "inverse_ADJ")},
+           ldl   = {sympy_func(x, "inverse_LDL")},
+           block = {sympy_func(x, "inverse_BLOCK")},         
+           yac   = inv_yac(x)
+           )
 }
 
 inv_cf <- function(x) {
@@ -399,6 +407,12 @@ inv_cf <- function(x) {
 inv_lu <- function(x) {
       construct_symbol_from_pyobj(x$pyobj$inv(method="LU"))
 }
+
+
+
+
+
+
 
 inv_yac <- function(x) {
     if (!requireNamespace("Ryacas", quietly = TRUE)) {

@@ -335,10 +335,11 @@ tex_list <- function(..., x=NULL, zero_as_dot=FALSE, matstr=NULL){
 
 ##' @title tex_align
 ##' @param x list of caracas symbol
+##' @param zero_as_dot Print zero as dots
 ##' @return latex string
 ##' @author Søren Højsgaard
 ##' @export
-tex_align <- function(x){
+tex_align <- function(x, zero_as_dot = FALSE){
   aa <-lapply(x, function(z){
     if (length(z) == 1){
        rhs <- z[[1]]
@@ -347,7 +348,7 @@ tex_align <- function(x){
       rhs <- z[[2]]
       lhs <- z[[1]]
     }
-    paste0(lhs, "&=", tex(rhs), " \\\\ ")
+    paste0(lhs, "&=", tex(rhs, zero_as_dot = zero_as_dot), " \\\\ ")
   })
   
   out <- paste0("\\begin{align}", 
@@ -359,13 +360,14 @@ tex_align <- function(x){
 
 ##' @title tex_eq
 ##' @param x caracas symbol
+##' @param zero_as_dot Print zero as dots
 ##' @return latex string
 ##' @author Søren Højsgaard
 ##' @export
-tex_eq <- function(x){
+tex_eq <- function(x, zero_as_dot = FALSE){
 
     out <- paste0("$$", 
-                paste0(tex(x), collapse="\n"),
+                paste0(tex(x, zero_as_dot = zero_as_dot), collapse="\n"),
                 "$$"
                 )
     return(out)

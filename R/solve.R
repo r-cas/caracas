@@ -192,20 +192,24 @@ solve_sys <- function(lhs, rhs, vars) {
 #' @concept solve
 #' 
 #' @export
-solve.caracas_symbol <- function(a, b, method="ge", ...) {
-  ensure_sympy()
-  stopifnot_symbol(a)
-  
-  if (missing(b)) {
-    return(inv(a, method=method))
-  } else {
+solve.caracas_symbol <- function(a, b,
+                                 method = c("ge", "gauss", "lu", "cf", "qr", "adj", "ldl", "block", "yac"), ...){
     
-    if (!inherits(b, "caracas_symbol")) {
-      b <- as_sym(b)
-    }
-    
-    return(inv(a, method=method) %*% b)
-  } 
+    ensure_sympy()
+    stopifnot_symbol(a)
+
+    method <- match.arg(method)
+
+    if (missing(b)) {
+        return(inv(a, method=method))
+    } else {
+        
+        if (!inherits(b, "caracas_symbol")) {
+            b <- as_sym(b)
+        }
+        
+        return(inv(a, method=method) %*% b)
+    } 
 }
 
 

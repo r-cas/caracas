@@ -50,3 +50,49 @@ length_ <- function(x) {
 
 
 
+##' @title Creates block diagonal caracas matrix
+##' @param ... Elements to be put on diagonals
+##' @return a caracas matrix
+##' @author Søren Højsgaard
+##' @export
+bdiag_ <- function(...){
+
+    args <- list(...)
+    if (is.list(args[[1]]) && length(args)==1){
+        args <- args[[1]]
+    }
+    
+## 1. make all entries caracas matrices
+    lst2 <- lapply(args, function(z){
+        if (inherits(z, "caracas_symbol")){
+            if (symbol_is_matrix(z)){
+                return(z)
+            } else {
+            return(matrify(z))
+            }
+        } else { 
+            return(matrix_(z))
+        }    
+    }
+    )
+
+    ## 2. Where do blocks start and end?
+    rr <- sapply(lst2, nrow)
+    cc <- sapply(lst2, ncol)
+
+    br <- cumsum(c(1, rr))[1:length(rr)]
+    er <- cumsum(rr)
+    
+    bc <- cumsum(c(1, cc))[1:length(cc)]
+    ec <- cumsum(cc)
+
+    ## 3. Insert blocks in B
+    B <- zeros_sym(sum(rr), sum(cc))
+    
+    for (k in seq_along(lst2)){
+        B[br[k]:er[k], bc[k]:ec[k]] <- lst2[[k]]
+    }
+    
+    return(B)
+}
+
