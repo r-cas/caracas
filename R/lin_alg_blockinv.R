@@ -61,7 +61,7 @@ inv_block <- function(x){
 ##' @description Computes the inverse of (A+UCV) provided that the inverse of A and C exists.
 ##' @param A,U,C,V Either a caracas matrix, or a dense or a sparse matrix.
 ##' @param method One of the methods that can be supplied to inv().
-##' @param timing Should timing be printed
+##' ## @param timing Should timing be printed
 ##' @return The inverse of (A+UCV)
 ##' @author Søren Højsgaard
 ##'
@@ -83,17 +83,22 @@ inv_block <- function(x){
 ##' Bi <- inv_woodbury(A, U, C)
 ##' }
 ##' @export
-inv_woodbury <- function(A, U, C, V=t(U), method="ge", timing=FALSE) {
-    t0 <- Sys.time()
-    Ai <- solve(A)
-    Ci <- solve(C)
-    VAiU <- simplify(V %*% Ai %*% U)
+inv_woodbury <- function(A, U, C, V=t(U), method="ge", simplify=TRUE) {
+    ## t0 <- Sys.time()
+    Ai <- inv(A, method=method)
+    Ci <- inv(C, method=method)
+    VAiU <- V %*% Ai %*% U 
+    if (simplify){
+        VAiU <- simplify(VAiU)
+    }
     tmp <- Ci + VAiU
     tmp <- inv(tmp, method=method)
-    tmp <- simplify(tmp)
+    if (simplify){
+        tmp <- simplify(tmp)
+    }
     out <- Ai - Ai %*% U %*% tmp %*% V %*% Ai
-    tt <- Sys.time() - t0
-    if (timing) print(tt)
+    ## tt <- Sys.time() - t0
+    ## if (timing) print(tt)
     return(out)
 }
 

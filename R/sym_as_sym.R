@@ -146,3 +146,26 @@ as_sym <- function(x,
 is_sym <- function(x){
     inherits(x, "caracas_symbol")
 }
+
+#' @title Refresh as symbol
+#' @param x caracas symbol
+#' @return caracas symbol
+#'
+#' @examples 
+#' if (has_sympy()) {
+#' x <- symbol('x', positive=T)
+#' e <- 2*x^2
+#' ## Substitute 2 for x
+#' subs(e, "x", 2) 
+#' ## Fails because of restriction that x is positive
+#'
+#' ## Refresh symbol 
+#' e <- re_sym(e)
+#' ## Works
+#' subs(e, "x", "2") ## OK
+#' }
+##' @export
+re_sym <- function(x){
+    ensure_sympy()    
+    as_sym(as_character(x))
+}

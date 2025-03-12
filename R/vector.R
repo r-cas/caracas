@@ -98,10 +98,10 @@ rbind.caracas_symbol <- function(..., deparse.level = 1) {
   
   col_vecs <- unlist(lapply(z, function(w) ncol(w) == 1L))
   
-  if (isTRUE(all(col_vecs))) {
-    # Transpose:
-    z <- lapply(z, t)
-  }
+  ## if (isTRUE(all(col_vecs))) {
+  ##   # Transpose:
+  ##   z <- lapply(z, t)
+  ## }
   
   z <- do.call(rbind, z)
   z <- as_sym(z)
