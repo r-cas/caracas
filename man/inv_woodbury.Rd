@@ -4,14 +4,14 @@
 \alias{inv_woodbury}
 \title{Inverse using woodburys matrix identity}
 \usage{
-inv_woodbury(A, U, C, V = t(U), method = "ge", timing = FALSE)
+inv_woodbury(A, U, C, V = t(U), method = "ge", simplify = TRUE)
 }
 \arguments{
 \item{A, U, C, V}{Either a caracas matrix, or a dense or a sparse matrix.}
 
-\item{method}{One of the methods that can be supplied to inv().}
-
-\item{timing}{Should timing be printed}
+\item{method}{One of the methods that can be supplied to inv().
+\subsection{@param timing Should timing be printed}{
+}}
 }
 \value{
 The inverse of (A+UCV)

@@ -191,7 +191,6 @@ A programmatic approach is to define a function returning the
 log-likelihood and the profile log-likelihood as a caracas
 symbol. 
 
-
 ```{r}
 get_logL0 <- function(y, X, V, b=NULL) {
     if (is.null(b))
@@ -356,3 +355,5 @@ if (require(lme4)) {
     var.y
 }
 ```
+
+
