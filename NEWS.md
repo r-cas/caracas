@@ -1,5 +1,7 @@
 # caracas 2.1.2
 
+* Now depends on matrix package.
+* Now `==` is handled for caracas symbols. Not sure if perfect, though.
 * `solve_lower_triangular()` and `solve_upper_triangular()` added.
 * `unique()` method added.
 * Bug fixed in `rowspace()`

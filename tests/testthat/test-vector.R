@@ -52,8 +52,15 @@ test_that("cbind/rbind", {
   
   expect_equal(unname(rbind(a, a, a)), 
                as_character_matrix(rbind(t(b), t(b), t(b))))
-  expect_equal(as.character(rbind(b, 2*b, b-1)), 
-               "Matrix([[x, x^2], [2*x, 2*x^2], [x - 1, x^2 - 1]])")
+
+  v1 <- rbind(b, 2*b, b-1)
+  v2 <- as.character(v1)
+  expect_equal(v2, "Matrix([[x], [x^2], [2*x], [2*x^2], [x - 1], [x^2 - 1]])")
+  
+  v1 <- cbind(b, 2*b, b-1)
+  v2 <- as.character(v1)
+  expect_equal(v2, "Matrix([[x, 2*x, x - 1], [x^2, 2*x^2, x^2 - 1]])")
+
   expect_equal(as.character(rbind(t(b), t(2*b), t(b-1))), 
                "Matrix([[x, x^2], [2*x, 2*x^2], [x - 1, x^2 - 1]])")
   expect_equal(as_character_matrix(rbind(t(b), t(2*b), t(b-1))), 

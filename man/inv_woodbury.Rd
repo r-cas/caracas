@@ -9,15 +9,15 @@ inv_woodbury(A, U, C, V = t(U), method = "ge", simplify = TRUE)
 \arguments{
 \item{A, U, C, V}{Either a caracas matrix, or a dense or a sparse matrix.}
 
-\item{method}{One of the methods that can be supplied to inv().
-\subsection{@param timing Should timing be printed}{
-}}
+\item{method}{One of the methods that can be supplied to inv().}
+
+\item{simplify}{Should temporary quantities be simplified?}
 }
 \value{
-The inverse of (A+UCV)
+The inverse of (A + U C V)
 }
 \description{
-Computes the inverse of (A+UCV) provided that the inverse of A and C exists.
+Computes the inverse of (A + U C V) provided that the inverse of A and C exists.
 }
 \examples{
 if (has_sympy()) {

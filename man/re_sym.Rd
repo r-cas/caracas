@@ -17,7 +17,7 @@ Refresh as symbol
 }
 \examples{
 if (has_sympy()) {
-x <- symbol('x', positive=T)
+x <- symbol('x', positive=TRUE)
 e <- 2*x^2
 ## Substitute 2 for x
 subs(e, "x", 2) 

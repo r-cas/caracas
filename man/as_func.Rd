@@ -41,7 +41,7 @@ if (has_sympy()) {
   
   f1a <- as.function(e)
   f1a
-  f1a(1, 2, 3, 4, 5)
+  f1a(c(1, 2, 3, 4, 5))
   f1(1, 2, 3, 4, 5)
 }
 }
