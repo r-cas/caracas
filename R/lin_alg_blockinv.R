@@ -58,11 +58,11 @@ inv_block <- function(x){
 
 
 ##' @title Inverse using woodburys matrix identity
-##' @description Computes the inverse of (A+UCV) provided that the inverse of A and C exists.
+##' @description Computes the inverse of (A + U C V) provided that the inverse of A and C exists.
 ##' @param A,U,C,V Either a caracas matrix, or a dense or a sparse matrix.
 ##' @param method One of the methods that can be supplied to inv().
-##' ## @param timing Should timing be printed
-##' @return The inverse of (A+UCV)
+##' @param simplify Should temporary quantities be simplified?
+##' @return The inverse of (A + U C V)
 ##' @author Søren Højsgaard
 ##'
 ##' @examples

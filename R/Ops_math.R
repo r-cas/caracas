@@ -135,12 +135,16 @@ mat_mult_elementwise <- function(o1, o2) {
 #' @export
 Ops.caracas_symbol = function(e1, e2) {
   ensure_sympy()
+
+  debug <- !TRUE
+  if (debug) str(list(e1=e1, e2=e2))
   
-  if (!(.Generic %in% c("+", "-", "*", "/", "^"))) {
+  if (!(.Generic %in% c("+", "-", "*", "/", "^", "=="))) {
     stop("Function '", .Generic, "' not yet implemented for caracas_symbol")
   }
-  
-  # E.g. -4 etc...
+
+  ## E.g. -4 etc...
+  ## SH: Do we ever get here?
   if (missing(e2)) {
     o1 <- get_pyobj(e1, .Method[1L])
     txt <- paste0(.Generic, "(", as.character(o1), ")")
@@ -153,104 +157,138 @@ Ops.caracas_symbol = function(e1, e2) {
   
   # RHS may be constant, e.g. x*2: e2 is a number 2
   o2 <- get_pyobj(e2, .Method[2L])
+
+  if (debug) str(list(o1=o1, o2=o2))
   
   op <- if (.Generic == "^") {
     "**"
   } else {
     .Generic
   }
+
   
   e1_is_mat <- symbol_is_matrix(as.character(o1))
   e2_is_mat <- symbol_is_matrix(as.character(o2))
-
-  ## str(list(o1=o1, o2=o2))
-  ## str(list(e1_is_mat=e1_is_mat, e2_is_mat=e2_is_mat))
+  if (debug) str(list(e1_is_mat=e1_is_mat, e2_is_mat=e2_is_mat))
   
+  ## SH : This handles elementwise "*" and "/" when dimensions of both are 1xn or nx1  
   if (e1_is_mat && e2_is_mat) {
-    dim_e1 <- dim(e1)
-    ##cat("mat && mat\n")    
-    if (isTRUE(all.equal(dim_e1, dim(e2))) && any(dim_e1 == 1L)) {
-      # Component wise operation
-      if (.Generic == "*") {
-        z <- mat_mult_elementwise(o1, o2)
-        return(z)
+      if (debug) str(list(dim_e1=dim(e1), dim_e2=dim(e2)))      
+      ## dim_e1 <- dim(e1)      
+      if (isTRUE(all.equal(dim(e1), dim(e2))) && any(dim(e1) == 1L)) {
+          if (debug) cat("Both matrices are nx1 or 1xn \n")    
+          if (.Generic == "*") {
+              if (debug) cat("Component wise * \n")
+              z <- mat_mult_elementwise(o1, o2)
+              return(z)
+          }
+          else if (.Generic == "/") {
+              if (debug) cat("Component wise /\n")            
+              e2 <- reciprocal_matrix(e2)
+              o2 <- e2$pyobj        
+              z <- mat_mult_elementwise(o1, o2)
+              return(z)
+          }
       }
-      else if (.Generic == "/") {
-        e2 <- reciprocal_matrix(e2)
-        o2 <- e2$pyobj        
-        z <- mat_mult_elementwise(o1, o2)
-        return(z)
-      }
-    }
   }
-  
   
   if (.Generic %in% c("+", "-", "*", "/")) {
-    if (e1_is_mat && !e2_is_mat) {
-      ##cat("mat || !mat\n")
-      if (.Generic == "/") {
-        e2 <- as_sym(scalar_to_matrix(paste0("1/(", as.character(e2), ")"), dim(e1)), 
-                     # To carry along properties of variables
-                     declare_symbols = FALSE)
-        o2 <- e2$pyobj
-        e2_is_mat  <- TRUE
-        .Generic <- "*"
-      } else {
-        e2 <- as_sym(scalar_to_matrix(as.character(e2), dim(e1)), 
-                     # To carry along properties of variables
-                     declare_symbols = FALSE)
-        o2 <- e2$pyobj
-        e2_is_mat  <- TRUE
-      }
-      
-      # e2 <- as_sym(scalar_to_matrix(as.character(e2), dim(e1)))
-      # o2 <- e2$pyobj
-    } else if (!e1_is_mat && e2_is_mat) {
-      ###cat("!mat && mat\n")
-      e1 <- as_sym(scalar_to_matrix(as.character(e1), dim(e2)),
-                   # To carry along properties of variables
-                   declare_symbols = FALSE)
-      o1 <- e1$pyobj
-      e1_is_mat  <- TRUE
-    } 
+      if (e1_is_mat && !e2_is_mat) {
+          if (debug) cat("mat || !mat\n")
+          if (.Generic == "/") {
+              e2 <- as_sym(scalar_to_matrix(paste0("1/(", as.character(e2), ")"), dim(e1)), 
+                                        # To carry along properties of variables
+                           declare_symbols = FALSE)
+              o2 <- e2$pyobj
+              e2_is_mat  <- TRUE
+              .Generic <- "*"  ## SH Redefine .Generic
+          } else {
+              e2 <- as_sym(scalar_to_matrix(as.character(e2), dim(e1)), 
+                                        # To carry along properties of variables
+                           declare_symbols = FALSE)
+              o2 <- e2$pyobj
+              e2_is_mat  <- TRUE
+          }
+      } else if (!e1_is_mat && e2_is_mat) {
+          ##cat("!mat && mat\n")
+          e1 <- as_sym(scalar_to_matrix(as.character(e1), dim(e2)),
+                                        # To carry along properties of variables
+                       declare_symbols = FALSE)
+          o1 <- e1$pyobj
+          e1_is_mat  <- TRUE
+      } 
+      if (debug) cat("Now, e1 and e2 are both matrices\n")
+      if (debug) str(list(e1=e1, e2=e2))
   }
+  
 
-  ## cat("HERE\n"); str(list(o1=o1, o2=o2)); str(list(e1_is_mat=e1_is_mat, e2_is_mat=e2_is_mat))
   
   # Component-wise * / ^ for matrices
   # +/- is handled with normal operators
   if ((e1_is_mat || e2_is_mat) && .Generic %in% c("*", "/", "^")) {
-     ## cat("mat || mat\n")
-    if (.Generic == "*") {
-
-        ## print(o1)
-        ## print(o2)
-        z <- mat_mult_elementwise(o1, o2)
-      return(z)
-    } else if (.Generic == "/") {
-      e2 <- reciprocal_matrix(e2)
-      o2 <- e2$pyobj
-
-      z <- mat_mult_elementwise(o1, o2)
-      return(z)
-    } else if (.Generic == "^") {
-      #print(e1)
-      #print(e2)
-      w <- matrix_ele_power(e1, e2)
-      return(w) 
-    } else {
-      stop("Unexpected")
-    }
+      if (debug) cat("mat || mat; *, /, ^ \n")
+      if (.Generic == "*") {
+          z <- mat_mult_elementwise(o1, o2)
+          return(z)
+      } else if (.Generic == "/") {
+          e2 <- reciprocal_matrix(e2)
+          o2 <- e2$pyobj
+          z  <- mat_mult_elementwise(o1, o2)
+          return(z)
+      } else if (.Generic == "^") {
+          w <- matrix_ele_power(e1, e2)
+          return(w) 
+      } else {
+          stop("Unexpected")
+      }
   }
 
+  if ((!e1_is_mat && !e2_is_mat) && .Generic %in% c("==")) {
+      out <- are_equal(e1, e2)
+      return(out)
+  }
+  
+
+  ## Handles +, -, ==  
+  if (debug) cat("the end\n")
   cmd <- paste0("(", as.character(o1), ")", op, 
                 "(", as.character(o2), ")")
 
-
   x <- eval_to_symbol(cmd)
+  x <- do_logicals(x)
   return(x)
 }
 
+do_logicals <- function(x){
+
+    if (identical(as_character(x), "True")){
+        return(TRUE)
+    }
+    if (identical(as_character(x), "False")){
+        return(FALSE)
+    }
+    return(x)
+}
+
+
+are_equal <- function(a, b) {
+  # Ensure both are caracas expressions
+  a_expr <- as_expr(a)
+  b_expr <- as_expr(b)
+  
+  # Try equals() first
+  eq_result <- sympy_func(a, "equals", b)
+  
+  if (identical(eq_result, "True")) {
+    return(TRUE)
+  } else {
+    # Try fallback: simplify(a - b) == 0
+    diff <- sympy_func(a - b, "simplify")
+    
+    # Check if the simplified difference is exactly 0
+    return(as.character(diff) == "0")
+  }
+}
 
 
 
