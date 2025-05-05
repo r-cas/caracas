@@ -137,6 +137,7 @@ Ops.caracas_symbol = function(e1, e2) {
   ensure_sympy()
 
   debug <- !TRUE
+  
   if (debug) str(list(e1=e1, e2=e2))
   
   if (!(.Generic %in% c("+", "-", "*", "/", "^", "=="))) {
@@ -254,21 +255,12 @@ Ops.caracas_symbol = function(e1, e2) {
   cmd <- paste0("(", as.character(o1), ")", op, 
                 "(", as.character(o2), ")")
 
+  if (debug) cat(cmd)
   x <- eval_to_symbol(cmd)
-  x <- do_logicals(x)
+  x <- do_logicals(x) ### FIXME Improve here
   return(x)
 }
 
-do_logicals <- function(x){
-
-    if (identical(as_character(x), "True")){
-        return(TRUE)
-    }
-    if (identical(as_character(x), "False")){
-        return(FALSE)
-    }
-    return(x)
-}
 
 
 are_equal <- function(a, b) {

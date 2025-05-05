@@ -1,12 +1,12 @@
 # caracas 2.1.2
 
+* `as_piecewise()` added. 
 * Now depends on matrix package.
 * Now `==` is handled for caracas symbols. Not sure if perfect, though.
 * `solve_lower_triangular()` and `solve_upper_triangular()` added.
 * `unique()` method added.
-* Bug fixed in `rowspace()`
+*  Bug fixed in `rowspace()`
 * `tex_list()` added
-* `QR()`, `QR_Q()` and `QR_R()` added. 
 * `toeplitz_()` added.
 
 # caracas 2.1.1

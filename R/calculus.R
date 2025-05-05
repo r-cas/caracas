@@ -110,14 +110,16 @@ sum_ <- function(f, var, lower, upper, doit = TRUE) {
   upr_str <- bound_to_str(upper)
   
   y <- if (doit) {
-    get_sympy()$summation(f$pyobj, c(var, lwr_str, upr_str))
-  } else {
-    get_sympy()$Sum(f$pyobj, c(var, lwr_str, upr_str))
-  }
-  
-  z <- construct_symbol_from_pyobj(y)
-  
+           get_sympy()$summation(f$pyobj, c(var, lwr_str, upr_str))
+       } else {
+           get_sympy()$Sum(f$pyobj, c(var, lwr_str, upr_str))
+       }
+
+  z <- construct_symbol_from_pyobj(y)  
   return(z)
+  ## out <- as_piecewise(z)
+  ## return(out)
+
 }
 
 #' Product of a function

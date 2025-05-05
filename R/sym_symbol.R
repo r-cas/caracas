@@ -23,11 +23,44 @@ verify_variable_name <- function(x) {
 }
 
 construct_symbol_from_pyobj <- function(pyobj) {
-  y <- list(pyobj = pyobj)
-  class(y) <- "caracas_symbol"
-  return(y)
+    y <- list(pyobj = pyobj)
+    class(y) <- "caracas_symbol"
+    return(y)
 }
 
+
+
+
+
+symbol_from_pyobj <- function(x) {
+    ensure_sympy()
+    x <- if (is.list(x)) {
+             lapply(x, construct_symbol_from_pyobj)
+         } else {
+             construct_symbol_from_pyobj(x)
+         }    
+    return(x)
+}
+
+
+
+do_logicals <- function(x){
+
+    if (identical(as_character(x), "True")){
+        return(TRUE)
+    }
+    if (identical(as_character(x), "False")){
+        return(FALSE)
+    }
+    return(x)
+}
+
+
+## FIXME symbol_from_pyobj -> construct_symbol_from_pyobj
+## FIXME construct_symbol_from_pyobj -> construct_symbol_from_pyobj_worker
+## FIXME perhaps pyobj_to_symbol is better???
+
+## FIXME eval_to_symbol Does what? does not work with eval_to_symbol("x")
 #' Create a symbol from a string
 #'
 #' @param x String to evaluate
@@ -79,8 +112,7 @@ eval_to_symbol <- function(x) {
   }
   
   x <- r_strings_to_python(x)
-  
-  # x <- "a/sqrt(a*conjugate(a))" fail
+  ## x <- "a/sqrt(a*conjugate(a))" fail
   s <- reticulate::py_eval(x, convert = FALSE)
   y <- construct_symbol_from_pyobj(s)
   return(y)
@@ -349,41 +381,25 @@ sympy_func <- function(x, fun, ...) {
   args <- list(...)
   
   args <- lapply(args, function(a) {
-    if (inherits(a, "caracas_symbol")) {
-      return(as.character(a))
-    }
-    
-    return(a)
+      if (inherits(a, "caracas_symbol")) {
+          return(as.character(a))
+      }      
+      return(a)
   })
   
-  convert_res <- function(o) {
-    o <- if (is.list(o)) {
-      lapply(o, construct_symbol_from_pyobj)
-    } else {
-      construct_symbol_from_pyobj(o)
-    }
-    
-    o
-  }
   
   # See if x has fun method
   out <- tryCatch({
       p <- do.call(x$pyobj[[fun]], args)
-      #res <- construct_symbol_from_pyobj(p)
-      res <- convert_res(p)
+      res <- symbol_from_pyobj(p)
       res
-  }, error = function(cond) {
-      
-    # ...it did not, try from global namespace:    
-    s <- get_sympy()
-    args <- c(x$pyobj, args)
-    p <- do.call(s[[fun]], args)
-    
-    #print(p)
-    
-    #res <- construct_symbol_from_pyobj(p)
-    res <- convert_res(p)
-    return(res)
+  }, error = function(cond) {      
+      ## ...it did not, try from global namespace:    
+      sy <- get_sympy()
+      args <- c(x$pyobj, args)
+      p <- do.call(sy[[fun]], args)    
+      res <- symbol_from_pyobj(p)
+      return(res)
   })
   
   return(out)

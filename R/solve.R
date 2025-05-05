@@ -1,12 +1,3 @@
-sol_to_r_symbol_list <- function(x) {
-  ensure_sympy()
-  
-  sols <- lapply(x, function(l) {
-    lapply(l, function(z) construct_symbol_from_pyobj(z))
-  })
-  
-  return(sols)
-}
 
 
 #' Solve a linear system of equations
@@ -114,11 +105,24 @@ rootsolve <- function(lhs, vars) {
     
     y <- get_sympy()$solve(lhs$pyobj, vars, dict = TRUE, set = FALSE)
     solset <- sol_to_r_symbol_list(y)
-    
     class(solset) <- c("caracas_solve_sys_sol", class(solset))
   
   return(solset)
 }
+
+## FIXME: A more general term ???
+sol_to_r_symbol_list <- function(x) {
+  ensure_sympy()
+  
+  sols <- lapply(x, function(l) {
+    lapply(l, function(z) {
+      construct_symbol_from_pyobj(z)
+    })
+  })
+  
+  return(sols)
+}
+
 
 
 #' Solves a system of non-linear equations

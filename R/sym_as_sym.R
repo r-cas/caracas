@@ -95,17 +95,17 @@ declare_symbols_worker <- function(varnames) {
 #' @concept caracas_symbol
 #' 
 #' @export
-as_sym <- function(x, 
-                   declare_symbols = TRUE) {
-  ensure_sympy()
+as_sym <- function(x, declare_symbols = TRUE) {
+    ensure_sympy()
+    ## cat("as_sym:\n"); print(x)
 
   if (is_sym(x)) { 
       return(x)
   }
   
   if (inherits(x, "python.builtin.object")) {
-    y <- construct_symbol_from_pyobj(x)
-    return(y)
+      y <- construct_symbol_from_pyobj(x)
+      return(y)
   }
 
   if (inherits(x, "sparseMatrix")){
@@ -115,8 +115,6 @@ as_sym <- function(x,
   if (is.expression(x)) {
     x <- as.character(x)
   }
-
-
   
   if (declare_symbols) {
     varnames <- extract_vars(x)
@@ -131,10 +129,10 @@ as_sym <- function(x,
       return(y)    
   } 
   
-  # else 
-  cmd <- as_py_string(x)
-  y <- eval_to_symbol(cmd)
-  return(y)
+    ## else 
+    cmd <- as_py_string(x)
+    y <- eval_to_symbol(cmd)
+    return(y)
 }
 
 

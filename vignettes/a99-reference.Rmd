@@ -256,7 +256,7 @@ g <- der(L, list(p, a))
 g
 sol <- solve_sys(g, list(p, a))
 sol
-sol[[1L]]$p1
+str(sol[[1L]]$p1)
 tex(sol[[1L]]$p1)
 ```
 
