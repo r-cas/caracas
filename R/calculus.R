@@ -116,6 +116,11 @@ sum_ <- function(f, var, lower, upper, doit = TRUE) {
        }
 
   z <- construct_symbol_from_pyobj(y)  
+
+  if (as.character(z) |> grepl("Piecewise", x=_)){
+      z <- sympy_func(z, "piecewise_fold")    
+  }
+
   return(z)
   ## out <- as_piecewise(z)
   ## return(out)
