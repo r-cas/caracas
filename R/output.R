@@ -230,8 +230,6 @@ tex <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
 }
 
 
-
-
 #' @export
 tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
     ensure_sympy()
@@ -241,10 +239,9 @@ tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
         o <- get_sympy()$latex(x$pyobj)
         
         if (zero_as_dot) {
-                                        # Matrices
+            ## Matrices
             o <- gsub("([^0-9])0([^0-9])", "\\1.\\2", o)
-                                        # FIXME:
-                                        # Replaces e0 in matrix
+            ## FIXME: Replaces e0 in matrix
         }
         
         if (!is.null(matstr) && is.character(matstr) && length(matstr) >= 1L) { 
@@ -256,21 +253,32 @@ tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
         
         return(o)
     }
-  
-  # if (!is.null(x$pyobj)) {
-  #   py <- get_py()
-  #   o <- reticulate::py_capture_output(py$print_caracas_latex(x$pyobj))
-  #   return(o)
-  # }
+    
   
   stop("Unexpected")
 }
 
 
+    ## if (!is.null(x$pyobj)) {
+    ##   py <- get_py()
+    ##   o <- reticulate::py_capture_output(py$print_caracas_latex(x$pyobj))
+    ##   return(o)
+    ## }
 
 
-#' Export object to TeX
-#'
+## `r tex_align(
+##     list(list("G", G_),
+##          list("R", R_),
+##          list("ZGZ^\\top", ZGZt_),
+##          list("V", V_),
+##          list("detV", detV_)
+##          ),
+##     zero_as_dot=T)`
+
+
+#' Export caracas objects to TeX
+#' @name tex_caracas
+#' 
 #' @param \dots Objects to be put in tex for. Can be `caracas_symbol`s
 #'     and other (simple) R objects (atomics, dataframes, matrices).
 #' @param x A such objects described above.
@@ -278,17 +286,23 @@ tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
 #' @param matstr Replace `\begin{matrix}` with another environment,
 #'     e.g. `pmatrix`.  If vector of length two, the second element is
 #'     an optional argument.
-#' 
+
 #'
 #' @concept output
 #'
 #' @examples
 #' if (has_sympy()) {
-#'   X <- matrix_sym(4,2,"a")
-#'   b <- vector_sym(2,"b")
-#'   y <- vector_sym(4,"y")
+#'   X <- matrix_sym(4, 2, "a")
+#'   b <- vector_sym(2, "b")
+#'   y <- vector_sym(4, "y")
+#'
+#'   tex(X)
+#'   tex_list("X=", X)
 #'   tex_list(y, "=", X, b)
 #'   tex_list(x=list(y, "=", X, b))
+#'   tex_eq(X)
+#'   tex_align(list(list("X", X)))
+#'   tex_align(list(list("X", X), list("b", b)))
 #'
 #'   M <- iris[1:3, 1:2]
 #'   tex_list(M, "+", M, "=", M + M)
@@ -296,6 +310,7 @@ tex.caracas_symbol <- function(x, zero_as_dot = FALSE, matstr = NULL, ...) {
 #' 
 #' }
 #' @importFrom methods as
+#' @rdname tex_carcas
 #' @export
 tex_list <- function(..., x=NULL, zero_as_dot=FALSE, matstr=NULL){
     ensure_sympy()
@@ -338,7 +353,9 @@ tex_list <- function(..., x=NULL, zero_as_dot=FALSE, matstr=NULL){
 ##' @param zero_as_dot Print zero as dots
 ##' @return latex string
 ##' @author Søren Højsgaard
+##' 
 ##' @export
+#' @rdname tex_carcas
 tex_align <- function(x, zero_as_dot = FALSE){
   aa <-lapply(x, function(z){
     if (length(z) == 1){
@@ -364,6 +381,7 @@ tex_align <- function(x, zero_as_dot = FALSE){
 ##' @return latex string
 ##' @author Søren Højsgaard
 ##' @export
+#' @rdname tex_carcas
 tex_eq <- function(x, zero_as_dot = FALSE){
 
     out <- paste0("$$", 
