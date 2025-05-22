@@ -646,7 +646,8 @@ setOldClass("caracas_symbol")
 #' @param X,Y matrices as caracas symbols.
 #' @param FUN a function; it may be a quoted string.
 #' @param make.dimnames Provide dimnames that are the product of the dimnames of
-#' ‘X’ and ‘Y’.
+#' ‘X’ and ‘Y’. NOT IMPLEMENTED
+#' @aliases kronecker
 #' @param ... optional arguments to be passed to ‘FUN’.
 #' 
 #' @return Kronecker product of A and B.
@@ -664,6 +665,15 @@ setOldClass("caracas_symbol")
 #'   kronecker(II, B)
 #'   kronecker(EE, B)
 #'   kronecker(JJ, B)
+#'
+#' Y <- matrix_sym(2, 2)
+#' X1 <- diag_(1, 3)
+#' X2 <- diag_(as_sym(c("a1", "a2", "a3")))
+#' X3 <- matrix_sym(2,2, "u")
+#'
+#' kronecker(X1, Y)
+#' kronecker(X2, Y, FUN="-")
+#' kronecker(X3, Y)
 #' }
 #'
 #' @concept linalg
@@ -672,30 +682,120 @@ setMethod(
   "kronecker", 
   signature = c("caracas_symbol", "caracas_symbol"), 
   definition = function(X, Y, FUN = "*", make.dimnames = FALSE, ...) {
-    
-    stopifnot_matrix(X)
-    stopifnot_matrix(Y)
-    
-    FUN <- match.fun(FUN)
-    
-    do_col <- function(i, X, Y) {
-      rr <-
-        lapply(seq_len(ncol(X)), function(j) {
-          FUN(X[i,j], Y)
-        } 
-        )
-      out <- do.call(cbind, rr)
+      
+      stopifnot_matrix(X)
+      stopifnot_matrix(Y)
+
+      is_diagonal_caracas <- function(X) {
+          mat <- as_character_matrix(X)
+          nr <- nrow(mat)
+          nc <- ncol(mat)
+          if (nr != nc) return(FALSE)  # Must be square
+          
+          ## Check off-diagonal elements are "0"
+          off_diag <- which(row(mat) != col(mat), arr.ind = TRUE)
+          all(mat[off_diag] == "0")
+      }
+
+      if (is_diagonal_caracas(X)){
+          return(kronecker_fast(X, Y, FUN=FUN))
+      }
+      
+      
+      FUN <- match.fun(FUN)
+      
+      do_col <- function(i, X, Y) {
+          rr <-
+              lapply(seq_len(ncol(X)), function(j) {
+                  FUN(X[i,j], Y)
+              } 
+              )
+          out <- do.call(cbind, rr)
+          out
+      }
+      
+      rr <- lapply(seq_len(nrow(X)),
+                   function(i) {
+                       do_col(i, X, Y)
+                   })
+      out <- do.call(rbind, rr)
       out
-    }
-    
-    rr <- lapply(seq_len(nrow(X)),
-                 function(i) {
-                   do_col(i, X, Y)
-                 })
-    out <- do.call(rbind, rr)
-    out
   }
 )
+
+
+
+kronecker_fast <- function(X, Y, FUN = "*") {
+
+    ## cat("fast kronecker\n")
+    
+    ## Convert X to character matrix
+    X_chr <- as_character_matrix(X)
+    diag_vals <- diag(X_chr)  # Assumes X is diagonal
+    
+    n <- length(diag_vals)
+    Y <- as.matrix(as_character_matrix(Y))  # Ensure character matrix
+    ry <- nrow(Y)
+    cy <- ncol(Y)
+    
+    out <- matrix("0", n * ry, n * cy)
+    
+    for (i in seq_len(n)) {
+        ## block <- matrix(paste0("(", diag_vals[i], ")*(", Y, ")"), ry, cy)
+        block <- matrix(paste0("(", diag_vals[i], ")", FUN, "(", Y, ")"), ry, cy)
+        row_idx <- ((i - 1) * ry + 1):(i * ry)
+        col_idx <- ((i - 1) * cy + 1):(i * cy)
+        out[row_idx, col_idx] <- block
+    }
+    
+    out <- as_sym(out)
+    return(out)
+}
+
+
+
+
+
+
+## setMethod(
+##   "kronecker", 
+##   signature = c("caracas_symbol", "caracas_symbol"), 
+##   definition = function(X, Y, FUN = "*", make.dimnames = FALSE, ...) {
+      
+##       stopifnot_matrix(X)
+##       stopifnot_matrix(Y)
+      
+##       FUN <- match.fun(FUN)
+      
+##       do_col <- function(i, X, Y) {
+##           rr <-
+##               lapply(seq_len(ncol(X)), function(j) {
+##                   FUN(X[i,j], Y)
+##               } 
+##               )
+##           out <- do.call(cbind, rr)
+##           out
+##       }
+      
+##       rr <- lapply(seq_len(nrow(X)),
+##                    function(i) {
+##                        do_col(i, X, Y)
+##                    })
+##       out <- do.call(rbind, rr)
+##       out
+##   }
+## )
+
+
+
+
+
+
+
+
+
+
+
 
 
 

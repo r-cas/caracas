@@ -71,3 +71,23 @@ piecewise_expr <- function(pw){
     out
 }
 
+
+
+#' Extract or replace parts of an object
+#' @param x A `caracas_symbol`.
+#' @param i row indices specifying elements to extract or replace
+#' @param j column indices specifying elements to extract or replace
+#' @param \dots Not used
+#' @param drop Simplify dimensions of resulting object
+
+##' @export
+##' @rdname piecewise
+`[.caracas_piecewise` <- function(x, i, j, ..., drop = TRUE) {
+  ensure_sympy()
+#  stopifnot_symbol(x)
+#  stopifnot_matrix(x)
+  
+  out <- x[[i]][[j]]
+  return(out)
+}
+

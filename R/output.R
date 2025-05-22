@@ -351,12 +351,13 @@ tex_list <- function(..., x=NULL, zero_as_dot=FALSE, matstr=NULL){
 ##' @title tex_align
 ##' @param x list of caracas symbol
 ##' @param zero_as_dot Print zero as dots
+##' @param nonumber If `TRUE`, add `\nonumber` to the end of each line
 ##' @return latex string
 ##' @author Søren Højsgaard
 ##' 
 ##' @export
 #' @rdname tex_carcas
-tex_align <- function(x, zero_as_dot = FALSE){
+tex_align <- function(x, zero_as_dot = FALSE, nonumber=TRUE){
   aa <-lapply(x, function(z){
     if (length(z) == 1){
        rhs <- z[[1]]
@@ -365,9 +366,17 @@ tex_align <- function(x, zero_as_dot = FALSE){
       rhs <- z[[2]]
       lhs <- z[[1]]
     }
-    paste0(lhs, "&=", tex(rhs, zero_as_dot = zero_as_dot), " \\\\ ")
+    paste0(lhs, "&=", tex(rhs, zero_as_dot = zero_as_dot))
   })
-  
+
+  if (nonumber){
+    aa <- paste0(aa, "\\nonumber")
+  }
+
+  ## print(aa)
+
+  aa <- paste0(aa, collapse=" \\\\ ")
+
   out <- paste0("\\begin{align}", 
                 paste0(aa, collapse="\n"),
                 "\\end{align}"
