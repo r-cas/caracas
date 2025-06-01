@@ -2,13 +2,10 @@ indent_not_first_line <- function(x, indent = 0) {
   spaces <- paste0(rep(" ", indent), collapse = '')
   
   # If newline, multiple lines:
-  if (grepl("\n", x)) {
-    
+  if (grepl("\n", x)) {    
     x <- gsub("\n", paste0("\n", spaces), x)
   }
-  
   #x <- paste0(spaces, x)
-  
   return(x)
 }
 

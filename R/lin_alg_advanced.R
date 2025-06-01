@@ -607,6 +607,20 @@ det.caracas_symbol <- function(x, ...) {
     return(do_la(x, "det"))
 }
 
+
+#' @export
+det_ <- function(x, ...) {
+    ensure_sympy()
+    stopifnot_symbol(x)
+    stopifnot_matrix(x)    
+    return(do_la(x, "det"))
+}
+
+
+
+
+
+
 #' @rdname linalg
 #' @export
 trace_ <- function(x) {
