@@ -608,6 +608,7 @@ det.caracas_symbol <- function(x, ...) {
 }
 
 
+#' @rdname linalg
 #' @export
 det_ <- function(x, ...) {
     ensure_sympy()

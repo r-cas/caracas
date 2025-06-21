@@ -20,42 +20,6 @@ inv_block <- function(x){
     inv(x, method="block")
 }
 
-## inv_block <- function(x) {
-##     if (!inherits(x, c("caracas_symbol", "matrix", "sparseMatrix")))
-##         stop("'x' must be caracas_symbol, matrix or sparseMatrix")
-##     if (inherits(x, "carcas_symbol")){
-##         stopifnot_symbol(x)
-##         stopifnot(symbol_is_matrix(x))
-        
-##         xx1 <- as_character_matrix(x)
-##         xx. <- as.blockmatrix(xx1)
-##         xx.$value <- NULL
-##         end <- cumsum(sapply(xx., nrow))
-##         start <- c(1, end[-length(end)]+1)
-        
-##         ddd <- mapply(function(s,e){
-##             seq(s,e)
-##         },  start, end, SIMPLIFY = FALSE)
-        
-##         uxx. <- unique(xx.)
-##         ## This is only done on the unique elements:
-##         uai <-lapply(uxx., function(z) as_character_matrix(inv_yac(as_sym(z))))
-        
-##         mmm <- sapply(xx., paste0, collapse=" ")
-##         uuu <- sapply(unique(xx.), paste0, collapse=" ")
-##         ppp <- sapply(mmm, match, uuu)
-        
-##         for (i in seq_along(ddd)) {
-##             idx <- ddd[[i]]
-##             xx1[idx, idx] <- uai[[ppp[i]]]   
-##         }
-        
-##         as_sym(xx1)
-##     } else {
-##         solve(x)
-##     }
-## }
-
 
 ##' @title Inverse using woodburys matrix identity
 ##' @description Computes the inverse of (A + U C V) provided that the inverse of A and C exists.
@@ -101,6 +65,45 @@ inv_woodbury <- function(A, U, C, V=t(U), method="ge", simplify=TRUE) {
     ## if (timing) print(tt)
     return(out)
 }
+
+
+
+
+## inv_block <- function(x) {
+##     if (!inherits(x, c("caracas_symbol", "matrix", "sparseMatrix")))
+##         stop("'x' must be caracas_symbol, matrix or sparseMatrix")
+##     if (inherits(x, "carcas_symbol")){
+##         stopifnot_symbol(x)
+##         stopifnot(symbol_is_matrix(x))
+        
+##         xx1 <- as_character_matrix(x)
+##         xx. <- as.blockmatrix(xx1)
+##         xx.$value <- NULL
+##         end <- cumsum(sapply(xx., nrow))
+##         start <- c(1, end[-length(end)]+1)
+        
+##         ddd <- mapply(function(s,e){
+##             seq(s,e)
+##         },  start, end, SIMPLIFY = FALSE)
+        
+##         uxx. <- unique(xx.)
+##         ## This is only done on the unique elements:
+##         uai <-lapply(uxx., function(z) as_character_matrix(inv_yac(as_sym(z))))
+        
+##         mmm <- sapply(xx., paste0, collapse=" ")
+##         uuu <- sapply(unique(xx.), paste0, collapse=" ")
+##         ppp <- sapply(mmm, match, uuu)
+        
+##         for (i in seq_along(ddd)) {
+##             idx <- ddd[[i]]
+##             xx1[idx, idx] <- uai[[ppp[i]]]   
+##         }
+        
+##         as_sym(xx1)
+##     } else {
+##         solve(x)
+##     }
+## }
 
 
 ## inv_fast <- function(x){
