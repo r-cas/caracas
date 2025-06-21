@@ -1,3 +1,46 @@
+##' @title Head and tail for caracas matrices
+##' @param x A caracas object
+##' @param n Number of rows to be extracted
+##' @param ... Not used
+##' @return An object of same class as x
+##' @author Søren Højsgaard
+##' @name head_tail_caracas
+##' 
+##' @export
+##' @rdname head_tail_caracas
+head.caracas_symbol <- function(x, n=6, ...){
+    symbol_is_matrix(x) ## Needed
+    ii <- 1:n
+    x <- x[ii, ii] ## Surprisingly slow
+    return(x)
+}
+
+##' @importFrom utils head tail
+##' @export
+##' @rdname head_tail_caracas
+tail.caracas_symbol <- function(x, n=6, ...){
+    symbol_is_matrix(x) ## Needed
+    ii <- 1:n
+    ii <- rev(nrow(x)-ii+1)
+    x <- x[ii, ii] ## Surprisingly slow
+    return(x)
+}
+
+
+
+backsol <- function(l, x=NULL) {
+    I <- diag_(1, nrow(l))    
+    z <- do_la_worker(l, "lower_triangular_solve", I)
+    out <- as_sym(z)
+    return(out)
+}
+
+
+## head(V)
+## tail(V)
+
+
+
 ##' @title Create a vector along
 ##' @param x a caracas object 
 ##' @param entry value 
