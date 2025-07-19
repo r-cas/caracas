@@ -1,5 +1,6 @@
 # caracas 2.1.2
 
+* `kronecker(X, Y)` is much faster when X is diagonal matrix
 * `as_piecewise()` added. 
 * Now depends on matrix package.
 * Now `==` is handled for caracas symbols. Not sure if perfect, though.

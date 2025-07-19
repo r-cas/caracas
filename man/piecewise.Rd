@@ -5,6 +5,7 @@
 \alias{as_piecewise}
 \alias{piecewise_cond}
 \alias{piecewise_expr}
+\alias{[.caracas_piecewise}
 \title{Create a piecewise object}
 \usage{
 as_piecewise(pw)
@@ -12,15 +13,29 @@ as_piecewise(pw)
 piecewise_cond(pw)
 
 piecewise_expr(pw)
+
+\method{[}{caracas_piecewise}(x, i, j, ..., drop = TRUE)
 }
 \arguments{
 \item{pw}{A caracas object containg a Piecewise specification}
+
+\item{x}{A \code{caracas_symbol}.}
+
+\item{i}{row indices specifying elements to extract or replace}
+
+\item{j}{column indices specifying elements to extract or replace}
+
+\item{\dots}{Not used}
+
+\item{drop}{Simplify dimensions of resulting object}
 }
 \value{
 A list
 }
 \description{
 Create a piecewise object
+
+Extract or replace parts of an object
 }
 \examples{
 if (has_sympy()) {

@@ -2,6 +2,7 @@
 % Please edit documentation in R/lin_alg_advanced.R
 \name{kronecker,caracas_symbol,caracas_symbol-method}
 \alias{kronecker,caracas_symbol,caracas_symbol-method}
+\alias{kronecker}
 \title{Kronecker product of two matrices}
 \usage{
 \S4method{kronecker}{caracas_symbol,caracas_symbol}(X, Y, FUN = "*", make.dimnames = FALSE, ...)
@@ -12,7 +13,7 @@
 \item{FUN}{a function; it may be a quoted string.}
 
 \item{make.dimnames}{Provide dimnames that are the product of the dimnames of
-‘X’ and ‘Y’.}
+‘X’ and ‘Y’. NOT IMPLEMENTED}
 
 \item{...}{optional arguments to be passed to ‘FUN’.}
 }
@@ -35,6 +36,15 @@ if (has_sympy()) {
   kronecker(II, B)
   kronecker(EE, B)
   kronecker(JJ, B)
+
+Y <- matrix_sym(2, 2)
+X1 <- diag_(1, 3)
+X2 <- diag_(as_sym(c("a1", "a2", "a3")))
+X3 <- matrix_sym(2,2, "u")
+
+kronecker(X1, Y)
+kronecker(X2, Y, FUN="-")
+kronecker(X3, Y)
 }
 
 }

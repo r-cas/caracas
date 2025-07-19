@@ -24,6 +24,7 @@
 \alias{LUdecomposition}
 \alias{svd_}
 \alias{det}
+\alias{det_}
 \alias{trace_}
 \title{Do linear algebra operation}
 \usage{
@@ -73,6 +74,8 @@ LUdecomposition(x)
 svd_(x, ...)
 
 det(x, ...)
+
+det_(x, ...)
 
 trace_(x)
 }
