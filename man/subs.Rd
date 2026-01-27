@@ -2,43 +2,58 @@
 % Please edit documentation in R/subs.R
 \name{subs}
 \alias{subs}
-\title{Substitute symbol for value}
+\title{Substitute symbols in an expression}
 \usage{
 subs(sym, nms, vls)
 }
 \arguments{
-\item{sym}{Expression}
+\item{sym}{A \code{caracas_symbol} expression (scalar, vector, matrix, ...).}
 
-\item{nms}{Names of symbols (see Details)}
+\item{nms}{Symbols to replace. Either:
+\itemize{
+\item a named list \code{list(name = value, ...)} (recommended), or
+\item a character / \code{caracas_symbol} vector of symbols.
+}}
 
-\item{vls}{Values that \code{nms} is substituted with (see Details)}
+\item{vls}{Replacement values (only used when \code{nms} is not a named list).}
+}
+\value{
+A \code{caracas_symbol} object with substitutions applied.
 }
 \description{
-Substitute symbol for value
+Perform symbolic substitution in a \code{caracas_symbol} object.
 }
 \details{
-Two different ways to call this function is supported:
+Two calling styles are supported:
 \enumerate{
-\item Supplying \code{nms} as a named list and omitting \code{vls}.
-If two components have the same name, the behaviour is undefined.
-\item Supplying both \code{nms} and \code{vls}
-See Examples.
+\item \strong{Mapping as a named list:} Supply \code{nms} as a named list and omit \code{vls}.
+Names are the symbols to be replaced; list elements are the replacement values.
+\item \strong{Parallel vectors:} Supply both \code{nms} and \code{vls} of the same length.
 }
+
+Replacements may be numbers, character strings, \code{caracas_symbol} objects,
+or other objects that \pkg{caracas} can convert to SymPy.
+
+If the same symbol is provided more than once, the result depends on evaluation order
+in the backend and should be considered undefined.
 }
 \examples{
 if (has_sympy()) {
-   x <- symbol('x')
-   e <- 2*x^2
-   e
-   subs(e, "x", "2")
-   subs(e, x, 2)
-   subs(e, list(x = 2))
-   
-   A <- matrix_sym(2, 2, "a")
-   B <- matrix_sym(2, 2, "b")
-   e <- A \%*\% A
-   subs(e, A, B)
+  x <- symbol("x")
+  e <- 2*x^2
+  e
+
+  subs(e, "x", "2")
+  subs(e, x, 2)
+  subs(e, list(x = 2))
+
+  A <- matrix_sym(2, 2, "a")
+  B <- matrix_sym(2, 2, "b")
+  e2 <- A \%*\% A
+  subs(e2, A, B)
 }
+
+
 
 }
 \concept{caracas_symbol}

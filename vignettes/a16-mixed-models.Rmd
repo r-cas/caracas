@@ -1,6 +1,5 @@
 ---
 title: "16 - Mixed models with `caracas`"
-author: Mikkel Meyer Andersen and Søren Højsgaard
 date: "`r date()`"
 output: 
   rmarkdown::html_vignette:
@@ -160,16 +159,6 @@ detV_ <- determinant(V_, log=FALSE)
 Various methods are available in `caracas` for inverting such a matrix
 
 
-`r tex_align(
-    list(list("G", G_),
-         list("R", R_),
-         list("ZGZ^\\top", ZGZt_),
-         list("V", V_),
-         list("detV", detV_)
-         ),
-    zero_as_dot=T)`
-
-
 
 The inverse of a block diagonal matrix is block diagonal. The first
 blocks of $V^{-1}$ are:
@@ -178,10 +167,6 @@ blocks of $V^{-1}$ are:
 Vi_  <- inv_woodbury(R_, Z_, G_) |> simplify() ## or
 Vi_  <- inv(V_, method="block") |> simplify()
 ```
-
-$$
-`r tex_list("V^{-1}=", Vi_[1:4,1:4], zero_as_dot=T)`
-$$
 
 
 
@@ -243,9 +228,7 @@ b_     <- vector_sym(ncol(X_), "b")
 b_est_ <- get_b_est(y_, X_, V_) |> simplify()
 ```
 
-$$
-`r tex_list("b=", b_, ", \\hat b=", b_est_, zero_as_dot=FALSE)`
-$$
+
 
 Notice that $\hat b$ is a function of $V$ and hence of $\theta$. If
 $\hat b$ is substituted into the log-likelihood, we get the profile

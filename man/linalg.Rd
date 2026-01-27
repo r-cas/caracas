@@ -20,7 +20,6 @@
 \alias{chol,caracas_symbol-method}
 \alias{qr.Q,QRdecomposition-method}
 \alias{qr.R,QRdecomposition-method}
-\alias{determinant,caracas_symbol,ANY-method}
 \alias{LUdecomposition}
 \alias{svd_}
 \alias{det}
@@ -67,8 +66,6 @@ QRdecomposition(x)
 
 \S4method{qr.R}{QRdecomposition}(qr)
 
-\S4method{determinant}{caracas_symbol,ANY}(x, logarithm = TRUE, ...)
-
 LUdecomposition(x)
 
 svd_(x, ...)
@@ -91,8 +88,6 @@ method (\code{cf}), cholesky (\code{ch}), qr (\code{qr}), adjugate (\code{adj}),
 \item{...}{Auxillary arguments.}
 
 \item{qr}{A QRdecomposition object.}
-
-\item{logarithm}{logical.}
 }
 \value{
 Returns the requested property of a matrix.
