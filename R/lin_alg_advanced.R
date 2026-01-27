@@ -408,12 +408,6 @@ inv_lu <- function(x) {
       construct_symbol_from_pyobj(x$pyobj$inv(method="LU"))
 }
 
-
-
-
-
-
-
 inv_yac <- function(x) {
     if (!requireNamespace("Ryacas", quietly = TRUE)) {
       stop("This method requires Ryacas - please install.packages('Ryacas')")
@@ -549,24 +543,113 @@ setMethod(
 
 
 
-#' @importFrom Matrix determinant
-#' @method x caracas_symbol
-#' @param logarithm logical.
+## #' @importFrom Matrix determinant
+## #' @method x caracas_symbol
+## #' @param logarithm logical.
+## #' @export
+## #' @rdname linalg
+## setMethod(
+##   "determinant",
+##   signature(x = "caracas_symbol", logarithm="ANY"),
+##   function(x, logarithm=TRUE, ...) {
+##       if (logarithm){
+##           return(log(do_la(x, "det")))          
+##       } else {
+##           return(do_la(x, "det"))          
+##       }
+##   }
+## )
+
+
+
+#' Determinant methods for caracas_symbol
+#'
+#' Symbolic determinant (and log-determinant) for \code{caracas_symbol}.
+#'
+#' @param x A \code{caracas_symbol}.
+#' @param logarithm Logical; if \code{TRUE}, return a log-determinant representation.
+#' @param ... Unused.
+#'
+#' @return
+#' An object of class \code{"det"} with components \code{modulus}, \code{sign},
+#' and \code{logarithm}.
+#'
+#' @name determinant-caracas
+#' @rdname determinant-caracas
+#'
+#' @aliases
+#' determinant,caracas_symbol,logical-method
+#' determinant,caracas_symbol,missing-method
+#'
+#' @concept caracas_symbol
+NULL
+
+
+
+#' @rdname determinant-caracas
 #' @export
-#' @rdname linalg
 setMethod(
   "determinant",
-  signature(x = "caracas_symbol", logarithm="ANY"),
-  function(x, logarithm=TRUE, ...) {
-      if (logarithm){
-          return(log(do_la(x, "det")))          
-      } else {
-          return(do_la(x, "det"))          
-      }
+  signature(x = "caracas_symbol", logarithm = "logical"),
+  function(x, logarithm = TRUE, ...) {
+    d <- do_la(x, "det")
+    out <- if (isTRUE(logarithm)) {
+      list(modulus = log(d), sign = 1L, logarithm = TRUE)
+    } else {
+      list(modulus = d, sign = 1L, logarithm = FALSE)
+    }
+    structure(out, class = "det")
+  }
+)
+
+#' @rdname determinant-caracas
+#' @export
+setMethod(
+  "determinant",
+  signature(x = "caracas_symbol", logarithm = "missing"),
+  function(x, logarithm = TRUE, ...) {
+    determinant(x, logarithm = TRUE, ...)
   }
 )
 
 
+## #' @importFrom Matrix determinant
+## #' @method x caracas_symbol
+## #' @param logarithm logical.
+## #' @export
+## #' @rdname linalg
+## #' @importFrom Matrix determinant
+## #' @export
+## setMethod(
+##   "determinant",
+##   signature(x = "caracas_symbol", logarithm = "missing"),
+##   function(x, logarithm = TRUE, ...) {
+##     determinant(x, logarithm = TRUE, ...)
+##   }
+## )
+
+
+
+
+
+## #' @importFrom Matrix determinant
+## #' @export
+## setMethod(
+##   "determinant",
+##   signature(x = "caracas_symbol", logarithm = "logical"),
+##   function(x, logarithm = TRUE, ...) {
+
+##     d <- do_la(x, "det")  # symbolsk determinant
+
+##     if (isTRUE(logarithm)) {
+##       out <- list(modulus = log(d), sign = 1L, logarithm = TRUE)
+##     } else {
+##       out <- list(modulus = d,      sign = 1L, logarithm = FALSE)
+##     }
+
+##     structure(out, class = "det")
+##   }
+## )
 
 
 
