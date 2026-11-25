@@ -371,7 +371,6 @@ tex_align <- function(x, zero_as_dot = FALSE, nonumber=TRUE){
   }
 
   ## print(aa)
-
   aa <- paste0(aa, collapse=" \\\\ ")
 
   out <- paste0("\\begin{align}", 
@@ -394,6 +393,22 @@ tex_eq <- function(x, zero_as_dot = FALSE){
                 paste0(tex(x, zero_as_dot = zero_as_dot), collapse="\n"),
                 "$$"
                 )
+    return(out)
+}
+
+tex_eq <- function(x, name=NULL, rel="=", zero_as_dot = FALSE){
+
+    if (!is.null(name)){
+        name <- paste0(name, rel)
+    } else {
+        name <- ""
+    }
+
+    out <- paste0("$$", 
+                  paste0(name, tex(x, zero_as_dot = zero_as_dot), collapse="\n"),
+                "$$"
+                )
+
     return(out)
 }
 

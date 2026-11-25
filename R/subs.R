@@ -237,10 +237,6 @@ subs_expr <- function(sym, old, new) {
 ## #' 
 
 
-
-
-
-
 update_sym <- function(sym, nms, vls, declare_symbols = TRUE) {
     if (!is.character(nms)) stop("nms must be character - use as.char() first")
     if (!is.character(vls)) stop("vls must be character - use as.char() first")
@@ -255,7 +251,8 @@ update_sym <- function(sym, nms, vls, declare_symbols = TRUE) {
     dict <- paste0("{", paste0(nms, ": ", r_strings_to_python(vls), collapse=", "), "}")
     ## print(dict)
     e <- reticulate::py_eval(dict)
-    construct_symbol_from_pyobj(sym$pyobj$subs(e))
+    out <- construct_symbol_from_pyobj(sym$pyobj$subs(e))
+    return(out)
 }
 
 # Gives character vector (i.e. no dimensions)

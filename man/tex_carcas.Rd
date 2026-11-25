@@ -11,7 +11,7 @@ tex_list(..., x = NULL, zero_as_dot = FALSE, matstr = NULL)
 
 tex_align(x, zero_as_dot = FALSE, nonumber = TRUE)
 
-tex_eq(x, zero_as_dot = FALSE)
+tex_eq(x, name = NULL, rel = "=", zero_as_dot = FALSE)
 }
 \arguments{
 \item{\dots}{Objects to be put in tex for. Can be \code{caracas_symbol}s
